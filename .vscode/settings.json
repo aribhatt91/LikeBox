@@ -1,0 +1,8 @@
+{
+    "jshint.options": {
+        "esversion": 6
+    },
+    "jshint.enable": false,
+    "files.autoGuessEncoding": true,
+    "editor.suggest.showConstructors": false
+}
