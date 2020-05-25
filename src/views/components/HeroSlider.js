@@ -5,7 +5,7 @@ class HeroSlider extends Component {
     ControlledCarousel() {
         return this.props.sliderItems.map((item, index) => {
                   return (
-                  <Carousel.Item>
+                  <Carousel.Item key={index}>
                     <img
                         className="d-block w-100"
                         src={item.slider_image}

@@ -1,4 +1,4 @@
-export default PRODUCTS = [
+const PRODUCTS = [
     {
        "sku":"269232-01",
        "name":"Unisex Black Woven Design Synthetic Mid-Top Troy MU IDP Sneakers",
@@ -583,3 +583,4 @@ export default PRODUCTS = [
     
  }
  ];
+ export default PRODUCTS;

@@ -5,8 +5,9 @@ import AppBody from './views/AppBody';
 
 class App extends Component {
     render() {
-        return ( <div className="App">
-                <Header/>
+        return ( 
+            <div className="App">
+                <Header user={this.state}/>
                 <AppBody/>
             </div>);
     }

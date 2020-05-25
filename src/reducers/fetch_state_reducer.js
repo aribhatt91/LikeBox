@@ -6,7 +6,7 @@ const initialState = {
     error: null
 }
 
-export function fetchStateReducer(state = initialState, action) {
+export function fetchItemsReducer(state = initialState, action) {
     switch(action.type) {
         case FETCH_PENDING: 
             return {
@@ -17,7 +17,7 @@ export function fetchStateReducer(state = initialState, action) {
             return {
                 ...state,
                 pending: false,
-                items: action.payload
+                items: action.items
             }
         case FETCH_ERROR:
             return {
@@ -29,7 +29,3 @@ export function fetchStateReducer(state = initialState, action) {
             return state;
     }
 }
-
-export const getItems = state => state.items;
-export const getItemsPending = state => state.pending;
-export const getItemsError = state => state.error;
