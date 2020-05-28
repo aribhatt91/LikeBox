@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
-import BookList from '../containers/book_list';
-import BookDetail from '../containers/book_detail';
-import Page from './pages/Page';
-import Hero from './components/Hero';
+import Page from './Page';
+import Hero from '../components/Hero';
 
 class Home extends Page {
   render() {

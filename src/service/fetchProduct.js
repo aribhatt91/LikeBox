@@ -14,16 +14,16 @@ filter = {
     search: ()
 }
 */
-function fetchItems(filter) {
+function fetchProduct(sku) {
     return dispatch => {
         dispatch(fetchStatePending());
         simulateNetworkRequest()
         .then(() => {
             var products = PRODUCTS;
-            console.log(products, filter);
+            console.log(products, sku);
             // Filter by category
-            if(filter && filter.category){
-                products = products.filter((product) => {return (product.category.toLowerCase()).split(', ').indexOf(filter.category.toLowerCase()) > -1});
+            if(sku){
+                products = products.filter((product) => {return (product.sku.toLowerCase() === sku)});
             }
             dispatch(fetchStateSuccess(products));
             return products;
@@ -34,4 +34,4 @@ function fetchItems(filter) {
     }
 }
 
-export default fetchItems;
+export default fetchProduct;

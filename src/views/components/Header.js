@@ -4,9 +4,7 @@ import {NavLink, Link} from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faCartPlus, faCartArrowDown, faUser, faBars, faHeart } from '@fortawesome/free-solid-svg-icons'
-import './components.css';
-import Button from 'react-bootstrap/Button';
+import { faCartPlus, faCartArrowDown, faUser, faBars, faHeart } from '@fortawesome/free-solid-svg-icons'
 import Modal from 'react-bootstrap/Modal';
 import LoginModule from './LoginModule';
 import { getAuthToken } from './../../service/loginService';
@@ -14,17 +12,9 @@ import SignupModule from './SignupModule';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import SideNav from './SideNav';
+import HOME_ICON from '../../assets/img/home_icon.png'; 
+import SearchInput from './HeaderSearchBar';
 
-function SearchInput(props){
-  return (
-    <span className="search_input_container">
-      <input type="text" placeholder="Search..." className={('themed_text_input search_input ' + (props.searchExpand?' expanded':''))}></input>
-      <Nav.Link onClick={props.expandSearchInput} className="search_icon">
-        <FontAwesomeIcon icon={faSearch}/>
-      </Nav.Link>
-    </span>
-  )
-}
 class Header extends Component {
   constructor(props){
     super(props);
@@ -35,16 +25,8 @@ class Header extends Component {
     };
     this.setShowModal = this.setShowModal.bind(this);
     this.setHideModal = this.setHideModal.bind(this);
-    this.expandSearch = this.expandSearch.bind(this);
     console.log('props ->',this.props);
     
-  }
-  expandSearch(e){
-    e.preventDefault();
-    console.log('seAarch clicked');
-    this.setState({
-      searchExpand: true
-    })
   }
   setShowModal(){
     this.setState({
@@ -64,20 +46,18 @@ class Header extends Component {
   
             <Navbar.Brand>
               <SideNav loggedIn={this.state.loggedIn} signIn={this.setShowModal}></SideNav>
-              <NavLink activeClassName='active' exact={true} to="/" >Home</NavLink>
+              <NavLink activeClassName='active' exact={true} to="/" >
+                <img className="home_icon" src={HOME_ICON} alt="Home"/>
+              </NavLink>
             </Navbar.Brand>
             
             <Nav className="mr-auto">
-              <NavLink activeClassName='active' to="/products">Men</NavLink>
-              <NavLink activeClassName='active' to="/sellers">Women</NavLink>
-              <NavLink activeClassName='active' to="/about">Kids</NavLink>
+              <NavLink activeClassName='active' to="/products/men">Men</NavLink>
+              <NavLink activeClassName='active' to="/products/women">Women</NavLink>
+              <NavLink activeClassName='active' to="/products/kids">Kids</NavLink>
             </Nav>
             <Nav className="justify-content-end">
-              <SearchInput
-                searchExpand={this.state.searchExpand}
-                expandSearchInput={this.expandSearch}>
-              </SearchInput>
-              
+              <SearchInput></SearchInput>
               <Nav.Link className={this.props.loggedIn ? "hidden-xs-up" : ""} 
                 onClick={() => this.setShowModal()}>
                 <FontAwesomeIcon icon={faUser}/>

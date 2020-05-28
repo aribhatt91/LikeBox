@@ -1,0 +1,168 @@
+.App-header {
+    background: white;
+    z-index: 10;
+    -webkit-box-shadow: 0 4px 12px 0 rgba(0,0,0,.05);
+    box-shadow: 0 4px 12px 0 rgba(0,0,0,.05);
+  }
+  
+  /* accent colour: #285A84
+  #5EA669
+   */
+  /* Add a black background color to the top navigation */
+  .home_icon {
+    max-width: 96px;
+  }
+  .topnav {
+    overflow: hidden;
+    padding: 24px 8px;
+  }
+  
+  /* Style the links inside the navigation bar */
+  
+  .topnav a {
+    float: left;
+    color:  #333;
+    text-align: center;
+    padding: 8px 16px !important;
+    border-radius: 32px !important;
+    text-decoration: none;
+    font-size: 17px;
+    transition: 0.3s ease-in-out;
+  }
+  .topnav .hamburger {
+    float: left;
+    background-color: transparent;
+    border-color: transparent;
+    border-radius: 50%;
+  }
+  .topnav .hamburger:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Change the color of links on hover */
+  
+  .topnav a:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: #333;
+    text-decoration: none;
+  }
+  
+  /* Mobile sideNav */
+  .sideNav {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: -100%;
+    overflow-x: hidden;
+    transition: all 0.4s ease-in-out;
+  }
+  .sideNav.slide-in {
+    left: 0;
+  }
+  .sideNav_wrapper {
+    position: relative;
+    width: 100%;
+    min-height: 100%;
+    overflow: auto;
+    background: white;
+    padding: 32px;
+  }
+  .sideNav_closeIcon {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    font-size: 24px;
+    line-height: 24px;
+    color: black;
+    cursor: pointer;
+  }
+  .sideNav .clean_list {
+    padding-left: 0;
+    margin-bottom: 0;
+  }
+  .sideNav .clean_list li{
+    text-align: left;
+    width: 100%;
+    display: flex;
+    list-style-type: none;
+    justify-content: center;
+  }
+  .sideNav a {
+    padding: 8px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    display: block;
+  }
+  .sideNav a:hover {
+    color: #333 !important;
+  }
+  .divider_small {
+    width: 50px;
+  }
+  
+  .sideNav a:hover {
+    color: #f1f1f1;
+  }
+  
+  .search_input_container {
+    position: relative;
+  }
+  .themed_text_input{
+    border-radius: 32px !important;
+    background-color: rgba(0, 0, 0, 0.1) !important;
+    border: 0 !important;
+    padding: 0 24px;
+    outline: none;
+  }
+  
+  .themed_btn {
+    border-radius: 32px !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+  
+  .themed_text_input:focus, .themed_text_input:active, .themed_btn:focus, .themed_btn:active {
+    outline: none !important;
+    border: none !important;
+  }
+  .search_input_container {
+    position: relative;
+  }
+  .search_input {
+    padding: 0;
+    transition: 0.3s all ease-in-out;
+    width: 0;
+    height: 100%;
+  }
+  .close_icon {
+    position: absolute;
+    top: 50%;
+    margin-top: -12px;
+    height: 24px;
+    width: 24px;
+    left: 4px;
+    font-size: 24px;
+    line-height: 20px;
+    color: #333;
+    cursor: pointer;
+    display: none;
+  }
+  .search_input_container.expanded .close_icon {
+    display: inline;
+  }
+  .search_input_container.expanded .search_input {
+    padding: 0 48px 0 32px;
+    width: 250px;
+    outline: none;
+  }
+  .search_input_container.expanded .search_input + .search_icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  .search_input_container.expanded .search_input + .search_icon:hover {
+    background: transparent;
+  }

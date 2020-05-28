@@ -1,0 +1,52 @@
+@import './header.scss';
+@import './measurement.scss';
+
+.hidden-xs-up {
+  display: none;
+}
+
+.card-white {
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  transition: 0.3s all ease-in-out;
+}
+.card-white:hover, .card-white:focus {
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2)
+}
+.loading_module {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: white;
+  z-index: 9999;
+}
+.loading_module_wrapper {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.loading_text {
+  margin-top: 24px;
+  font-size: 18px;
+}
+.p-8{
+  padding: 8px;
+}
+.float-left {
+  float: left;
+}
+@media only screen and (max-width: 1024px){
+
+}
+@media only screen and (max-width: 768px){
+
+}
+@media only screen and (max-width: 768px) and (orientation: portrait){
+  
+}

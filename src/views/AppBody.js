@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
-import Products from './Products';
-import Home from './Home';
-import Sellers from './Sellers';
-import About from './About';
+import Home from './pages/Home';
+import About from './pages/About';
 import {Route, Switch} from 'react-router-dom';
-import Product from './pages/products/Product';
+import ProductPage from './pages/ProductPage';
 import ListingPage from './pages/ListingPage';
 
 class AppBody extends Component {
@@ -12,8 +10,8 @@ class AppBody extends Component {
     return (<div className="App-body">
       <Switch>
         <Route exact path='/' render={(props) => <Home {...props} pageName="home" />}/>
-        <Route path='/products' render={(props) => <ListingPage {...props} pageName="products" />}/>
-        <Route path='/sellers' render={(props) => <Sellers {...props} pageName="sellers" />}/>
+        <Route path='/products/:category' render={(props) => <ListingPage {...props} pageName="listing" />}/>
+        <Route path='/product/:id' render={(props) => <ProductPage {...props} pageName="product" />}/>
         <Route path='/about' render={(props) => <About {...props} pageName="about" />}/>
       </Switch>
     </div>);

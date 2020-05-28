@@ -2,15 +2,10 @@ import React, {Component, useState, useLocation, useEffect, useParams} from 'rea
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Page from './Page';
-import fetchItems from './../../service/fetchItems';
 import LoadingModule from './../components/LoadingModule';
-import { ProductCard } from './../components/ProductCard';
+import fetchProduct from './../../service/fetchProduct';
 
-function Filters(props){
-
-}
-
-class ListingPage extends Page {
+class ProductPage extends Page {
   constructor(props){
     super(props);
     this.state = {
@@ -21,11 +16,10 @@ class ListingPage extends Page {
   }
 
   getProducts(){
-    const {fetchProducts} = this.props;
-    const cat = this.props.match.params.category;
-    const filter = {'category': cat};
-    console.log('getProducts -> ', filter);
-    fetchProducts(filter);
+    const {fetchProduct} = this.props;
+    const sku = this.props.match.params.id;
+    console.log('getProduct -> ', sku);
+    fetchProduct(sku);
   }
   componentDidMount(){
     this.getProducts();
@@ -35,7 +29,7 @@ class ListingPage extends Page {
     // Adjust scroll so these new items don't push the old ones out of view.
     // (snapshot here is the value returned from getSnapshotBeforeUpdate)
     console.log('componentDidUpdate -> ', prevProps, this.props);
-    if(prevProps.match.params.category !== this.props.match.params.category){
+    if(prevProps.match.params.id !== this.props.match.params.id){
       this.getProducts();
     }
   }
@@ -49,7 +43,7 @@ class ListingPage extends Page {
             <div className="haeder">
               Found {this.props.items.length} products
             </div>
-            {this.props.items.map((item)=>{
+            {/* {this.props.items.map((item)=>{
               return (<ProductCard 
                 key={item.sku}
                 title={item.name}
@@ -59,7 +53,7 @@ class ListingPage extends Page {
                 rating={item.ratings}
                 brand={item.brand}
                 ></ProductCard>)
-            })}
+            })} */}
           </div>}
         {!this.props.pending && this.props.items.length === 0 && <div>No products found</div>} 
       </div>
@@ -75,7 +69,7 @@ const mapStateToProps = state => {
   }
 }
 //Anything returned from this function will end up as props to BookList container
-const mapDispatchToProps = (dispatch) => bindActionCreators({fetchProducts: fetchItems}, dispatch)
+const mapDispatchToProps = (dispatch) => bindActionCreators({'fetchProduct': fetchProduct}, dispatch)
 //Promote BookList from a component to a container
 //It needs to know about this dispatch method selectBook -- Make it available as prop
-export default connect(mapStateToProps, mapDispatchToProps)(ListingPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductPage);
