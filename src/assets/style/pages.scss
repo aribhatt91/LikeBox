@@ -1,0 +1,10 @@
+
+.products-section {
+    .flex_container {
+        display: flex;
+        .product_cards_container {
+            width: 100%;
+            float: left;
+        }
+    }
+}

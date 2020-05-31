@@ -13,15 +13,10 @@ import thunk from 'redux-thunk';
 import logger from './service/logger_middleware';
 // eslint-disable-next-line
 import ReduxPromise from 'redux-promise';
-const initialState = {
-    loggedIn: false,
-    user: null,
-    pending: false,
-    error: null
-}
+
 const middlewares = [logger, thunk];
 const appStore = createStore(rootReducer, applyMiddleware(...middlewares)) //applyMiddleware(ReduxPromise)(createStore);
-console.log('appstore -> ', appStore.getState())
+
 ReactDOM.render(
     <Provider store={appStore}>
         <BrowserRouter>

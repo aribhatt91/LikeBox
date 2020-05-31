@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Header from './views/components/Header';
-import AppBody from './views/AppBody';
+import Header from './ui/components/Header';
+import AppBody from './ui/AppBody';
+import Footer from './ui/components/Footer';
 
 class App extends Component {
     render() {
@@ -8,6 +9,7 @@ class App extends Component {
             <div className="App">
                 <Header user={this.state}/>
                 <AppBody/>
+                <Footer></Footer>
             </div>);
     }
 }

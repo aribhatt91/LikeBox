@@ -52,7 +52,7 @@ export function loginError(response){
     error: response.error
   }
 }
-const fetchUsers = () => {
+export const fetchUser = () => {
   return (dispatch) => {
     axios.get('')
       .then(response => {
@@ -62,13 +62,4 @@ const fetchUsers = () => {
         console.error(error.message);
       })
   }
-}
-
-export const FETCH_WEATHER = "FETCH_WEATHER";
-
-export function fetchWeather(city){
-  console.log("Selected city", city);
-  // return {
-  //   type: FETCH_WEATHER
-  // }
 }

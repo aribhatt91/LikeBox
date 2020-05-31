@@ -5,10 +5,7 @@ import Page from './Page';
 import fetchItems from './../../service/fetchItems';
 import LoadingModule from './../components/LoadingModule';
 import { ProductCard } from './../components/ProductCard';
-
-function Filters(props){
-
-}
+import ProductFilters from './../components/ProductFilters';
 
 class ListingPage extends Page {
   constructor(props){
@@ -42,27 +39,31 @@ class ListingPage extends Page {
 
   render() {
     return (
-      <div className="products-section">
+      <section className="products-section">
         {this.props.pending && <LoadingModule text="Please wait..."></LoadingModule>}
         {!this.props.pending && this.props.items.length > 0 && 
-          <div>
-            <div className="haeder">
-              Found {this.props.items.length} products
+          <div className="flex_container">
+            <ProductFilters></ProductFilters>
+            
+            <div className="product_cards_container">
+              <div className="header">
+                Found {this.props.items.length} products
+              </div>
+              {this.props.items.map((item)=>{
+                return (<ProductCard 
+                  key={item.sku}
+                  title={item.name}
+                  img={item.thumbnail}
+                  price={item.price}
+                  link={"/product/" + item.sku}
+                  rating={item.ratings}
+                  brand={item.brand}
+                  ></ProductCard>)
+              })}
             </div>
-            {this.props.items.map((item)=>{
-              return (<ProductCard 
-                key={item.sku}
-                title={item.name}
-                img={item.thumbnail}
-                price={item.price}
-                link={"/product/" + item.sku}
-                rating={item.ratings}
-                brand={item.brand}
-                ></ProductCard>)
-            })}
           </div>}
         {!this.props.pending && this.props.items.length === 0 && <div>No products found</div>} 
-      </div>
+      </section>
     );
   }
 }
