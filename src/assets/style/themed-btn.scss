@@ -1,0 +1,60 @@
+$primary-color: #285A84;
+$accent-color: #5EA669;
+
+.themed_btn_container {
+    display: inline-block;
+    width: auto;
+    padding: 0;
+    .themed_btn {
+        border: 2px solid #000;
+        padding:16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: transparent;
+        text-decoration: none;
+        transition: all 0.2s ease-in-out;
+        border-radius: 0;
+        .themed_btn_content {
+            font-size: 16px;
+            line-height: 1.2;
+            color: #000;
+            min-width: 120px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .themed_btn_text {
+                margin: 0 8px;
+            }
+        }
+        .theme_accent {
+            background-color: $accent-color;
+            border-color: $accent-color;
+            .themed_btn_content {
+                color: #fff;
+            }
+        }
+        .theme_primary {
+            background-color: $primary-color;
+            border-color: $primary-color;
+            .themed_btn_content {
+                color: #fff;
+            }
+        }
+        &:not([disabled='true']):hover, &:not([disabled='true']):focus, &:not([disabled='true']):active {
+            text-decoration: none;
+            background-color: #000;
+            .themed_btn_content {
+                color: #fff;
+            }
+        }
+        &[disabled='true']{
+            background-color: #e6e6e6;
+            border-color: #e6e6e6;
+            .themed_btn_content {
+                color: #fff;
+            }
+        }
+    }
+}

@@ -15,6 +15,10 @@
   .topnav {
     overflow: hidden;
     padding: 24px 8px;
+    transition: 0.2s all ease-in-out;
+  }
+  .topnav.scrolling {
+    padding: 0 8px;
   }
   
   /* Style the links inside the navigation bar */
@@ -41,7 +45,7 @@
   
   /* Change the color of links on hover */
   
-  .topnav a:hover {
+  .topnav .navbar-nav a:hover {
     background-color: rgba(0, 0, 0, 0.1);
     color: #333;
     text-decoration: none;
@@ -81,6 +85,7 @@
   .sideNav .clean_list {
     padding-left: 0;
     margin-bottom: 0;
+    width: 100%;
   }
   .sideNav .clean_list li{
     text-align: left;
@@ -116,12 +121,6 @@
     border: 0 !important;
     padding: 0 24px;
     outline: none;
-  }
-  
-  .themed_btn {
-    border-radius: 32px !important;
-    padding-left: 24px !important;
-    padding-right: 24px !important;
   }
   
   .themed_text_input:focus, .themed_text_input:active, .themed_btn:focus, .themed_btn:active {

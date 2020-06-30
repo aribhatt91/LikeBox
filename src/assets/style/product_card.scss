@@ -1,3 +1,5 @@
+$pc_order-radius: 0px;
+
 .card_wrapper {
     width: 100%;
     position: relative;
@@ -6,73 +8,79 @@
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.104789);
     font-style: normal;
     font-weight: normal;
-    border-radius: 4px;
+    border-radius: $pc_order-radius;
     text-decoration: none;
     transition: 0.3s ease-in-out;
     display: inline-block;
+    .card_img_wrapper {
+        border-top-left-radius: $pc_order-radius;
+        border-top-right-radius: $pc_order-radius;
+        .card_img {
+            width: 100%;
+            border-top-left-radius: $pc_order-radius;
+            border-top-right-radius: $pc_order-radius;
+        }
+    }
+    
+    .card_text_wrapper {
+        border-bottom-left-radius: $pc_order-radius;
+        border-bottom-right-radius: $pc_order-radius;
+        padding: 0 10px;
+        margin-top: 12px;
+        .card_product_brand {
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1;
+            color: #282c3f;
+            margin-bottom: 6px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            text-align: left;
+        }
+        .card_product_name {
+            color: #535766;
+            font-size: 14px;
+            line-height: 1;
+            margin-bottom: 0;
+            margin-top: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-weight: 400;
+            display: block;
+            text-align: left;
+        }
+        .card_product_price {
+            line-height: 15px;
+            margin: 10px 0 6px;
+            white-space: nowrap;
+            font-size: 14px;
+            color: #282c3f;
+            font-weight: 500;
+            text-align: left;
+            text-decoration: none;
+            .card_product_price_strike {
+                text-decoration: line-through;
+                color: #7e818c;
+                font-weight: 400;
+                margin-left: 5px;
+                font-size: 12px;
+            }
+            .card_product_discountPercentage {
+                color: #ff905a;
+                font-weight: 400;
+                font-size: 12px;
+                margin-left: 5px;
+            }
+        }
+        
+    }
+    &:hover, &:focus {
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.204789);
+    }
 }
-.card_wrapper:hover, .card_wrapper:focus {
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.204789);
-}
-.card_img_wrapper {
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-}
-.card_img {
-    width: 100%;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-}
-.card_text_wrapper {
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    padding: 0 10px;
-    margin-top: 12px;
-}
-.card_product_brand {
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 1;
-    color: #282c3f;
-    margin-bottom: 6px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    text-align: left;
-}
-.card_product_name {
-    color: #535766;
-    font-size: 14px;
-    line-height: 1;
-    margin-bottom: 0;
-    margin-top: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    font-weight: 400;
-    display: block;
-    text-align: left;
-}
-.card_product_price {
-    line-height: 15px;
-    margin: 10px 0 6px;
-    white-space: nowrap;
-    font-size: 14px;
-    color: #282c3f;
-    font-weight: 500;
-    text-align: left;
-    text-decoration: none;
-}
-.card_product_price_strike {
-    text-decoration: line-through;
-    color: #7e818c;
-    font-weight: 400;
-    margin-left: 5px;
-    font-size: 12px;
-}
-.card_product_discountPercentage {
-    color: #ff905a;
-    font-weight: 400;
-    font-size: 12px;
-    margin-left: 5px;
-}
+
+
+
+

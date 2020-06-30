@@ -1,6 +1,7 @@
 @import './header.scss';
 @import './product_card.scss';
 @import './product_filter.scss';
+@import './themed-btn.scss';
 
 .hidden-xs-up {
   display: none;
@@ -41,6 +42,12 @@
 }
 .float-left {
   float: left;
+}
+.flex_row {
+  display: flex;
+}
+.align-center {
+  align-items: center;
 }
 @media only screen and (max-width: 1024px){
 

@@ -21,12 +21,27 @@ class Header extends Component {
     this.state = {
       showModal: false, 
       searchExpand: false,
-      loggedIn: (getAuthToken() !== null)
+      loggedIn: (getAuthToken() !== null),
+      scrolling: false
     };
     this.setShowModal = this.setShowModal.bind(this);
     this.setHideModal = this.setHideModal.bind(this);
     console.log('props ->',this.props);
     
+  }
+  componentDidMount(){
+    let that = this;
+    window.addEventListener('scroll', (e) => {
+      if(window.pageYOffset <= 20 && that.state.scrolling){
+        that.setState({
+          scrolling: false
+        })
+      }else if(window.pageYOffset > 30 && !that.state.scrolling) {
+        that.setState({
+          scrolling: true
+        })
+      }
+    })
   }
   setShowModal(){
     this.setState({
@@ -41,7 +56,7 @@ class Header extends Component {
   render(){
     return (
       <header className="App-header sticky-top">
-        <div className="topnav">
+        <div className={"topnav" + (this.state.scrolling ? ' scrolling' : "")}>
           <Navbar variant="light">
   
             <Navbar.Brand>
@@ -55,6 +70,7 @@ class Header extends Component {
               <NavLink activeClassName='active' to="/products/men">Men</NavLink>
               <NavLink activeClassName='active' to="/products/women">Women</NavLink>
               <NavLink activeClassName='active' to="/products/kids">Kids</NavLink>
+              <NavLink activeClassName='active' to="/products/sale">Sale</NavLink>
             </Nav>
             <Nav className="justify-content-end">
               <SearchInput></SearchInput>
@@ -62,9 +78,9 @@ class Header extends Component {
                 onClick={() => this.setShowModal()}>
                 <FontAwesomeIcon icon={faUser}/>
               </Nav.Link>
-              <Nav.Link>
+              <NavLink activeClassName='active' to="/cart">
                 <FontAwesomeIcon icon={faCartPlus}/>
-              </Nav.Link>
+              </NavLink>
             </Nav>
           </Navbar>
         </div>

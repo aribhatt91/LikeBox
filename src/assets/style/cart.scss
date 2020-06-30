@@ -1,0 +1,86 @@
+.checkout_container{
+    .cart_body{
+        max-width: 960px;
+        margin: auto;
+        .cart_product_wrapper {
+            .container{
+                
+                .thumbnail {
+                    width: 96px;
+                }
+                .desc {
+                    margin-left: 24px;
+                    h4 {
+                        font-size: 18px;
+                    }
+                }
+                .price_wrapper {
+                    .strikeThrough {
+                        text-decoration: line-through;
+                        opacity: 0.8;
+                        font-size: 14px;
+                    }
+                    .price {
+                        font-size: 16px;
+                    }
+                }
+            }
+            &:not(:last-child){
+                .container{
+                    border-bottom: 1px solid #ececec;
+                }
+            }
+        }
+        
+    }
+    .cart_footer {
+        background-color: #ececec;
+        .cart_footer_container {
+            max-width: 960px;
+            margin: auto;
+            padding: 32px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+    .cart_breadcrumbs {
+        background-color: #ececec;
+        .cart_breadcrumbs_container {
+            max-width: 960px;
+            margin: auto;
+            padding: 32px 0;
+            display: flex;
+            justify-content: space-between;
+            .crumb {
+                font-size: 16px;
+                font-weight: 300;
+                opacity: 0.6;
+                text-decoration: none;
+                color: #333;
+                text-align: center;
+                padding-left: 24px;
+                &:not(:last-child) {
+                    &:after {
+                        content: '\203A';
+                        position: absolute;
+                        height: 24px;
+                        right: 0;
+                        top: 50%;
+                        margin-top: -12px;
+                        font-size: 33px;
+                        line-height: 18px;
+                        font-weight: 300;
+                    }
+                }
+                &:hover,&:focus,&:active, &:visited {
+                    text-decoration: none;
+                    color: #333;
+                }
+                &.active {
+                    opacity: 1;
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+}

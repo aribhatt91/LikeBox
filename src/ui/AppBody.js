@@ -4,6 +4,7 @@ import About from './pages/About';
 import {Route, Switch} from 'react-router-dom';
 import ProductPage from './pages/ProductPage';
 import ListingPage from './pages/ListingPage';
+import CartPage from './pages/cart/CartPage';
 
 class AppBody extends Component {
   render() {
@@ -13,6 +14,7 @@ class AppBody extends Component {
         <Route path='/products/:category' render={(props) => <ListingPage {...props} pageName="listing" />}/>
         <Route path='/product/:id' render={(props) => <ProductPage {...props} pageName="product" />}/>
         <Route path='/about' render={(props) => <About {...props} pageName="about" />}/>
+        <Route path='/cart' render={(props) => <CartPage {...props} pageName="cart" />}/>
       </Switch>
     </div>);
   }

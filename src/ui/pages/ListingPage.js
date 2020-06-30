@@ -8,6 +8,7 @@ import { ProductCard } from './../components/ProductCard';
 import ProductFilters from './../components/ProductFilters';
 
 class ListingPage extends Page {
+  //Filter by search keyword, discount, price range, brand
   constructor(props){
     super(props);
     this.state = {
@@ -15,12 +16,16 @@ class ListingPage extends Page {
       items: [],
       error: null
     }
+    this.handleBrandFilter = this.handleBrandFilter.bind(this);
   }
 
   getProducts(){
     const {fetchProducts} = this.props;
     const cat = this.props.match.params.category;
-    const filter = {'category': cat};
+    const filter = {};
+    if(cat){
+      filter.category = cat;
+    }
     console.log('getProducts -> ', filter);
     fetchProducts(filter);
   }
@@ -36,6 +41,18 @@ class ListingPage extends Page {
       this.getProducts();
     }
   }
+  handleBrandFilter(e){
+
+  }
+  handlePriceFilter(el){
+    
+  }
+  handleDiscountFilter(e){
+    
+  }
+  handleSubCategoryFilter(e){
+    
+  }
 
   render() {
     return (
@@ -46,7 +63,7 @@ class ListingPage extends Page {
             <ProductFilters></ProductFilters>
             
             <div className="product_cards_container">
-              <div className="header">
+              <div className="heade col-12">
                 Found {this.props.items.length} products
               </div>
               {this.props.items.map((item)=>{
