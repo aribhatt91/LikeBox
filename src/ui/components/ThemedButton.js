@@ -15,19 +15,19 @@ function ThemedButton(props){
                     {props.iconAfter && <span className='themed_btn_icon'><FontAwesomeIcon icon={props.iconAfter}></FontAwesomeIcon></span>}
                 </span>
             </Link>}
-            {!props.url && <button className={'themed_btn' + (props.type ? (' ' + props.type) : "")} disabled={props.btnState == 'disabled'}>
+            {!props.url && <button className={'themed_btn' + (props.type ? (' ' + props.type) : "")} disabled={props.btnState === 'disabled'}>
                 {(props.btnState === 'disabled' || props.btnState === 'active' || !props.btnState) && <span className="themed_btn_content">
                     {props.iconBefore && <span className='themed_btn_icon'><FontAwesomeIcon icon={props.loadingIcon || props.iconBefore}></FontAwesomeIcon></span>}
                     <span className="themed_btn_text">{props.btnText}</span>
                     {props.iconAfter && <span className='themed_btn_icon'><FontAwesomeIcon icon={props.iconAfter}></FontAwesomeIcon></span>}
                 </span>}
-                {(props.btnState == 'success') && <span className="themed_btn_content">
+                {(props.btnState === 'success') && <span className="themed_btn_content">
                     {(props.iconBefore || props.successIcon) && <span className='themed_btn_icon'>
                         <FontAwesomeIcon icon={props.successIcon || props.iconBefore}></FontAwesomeIcon>
                     </span>}
                     <span className="themed_btn_text">{props.successText || props.btnText}</span>{(!props.successIcon && props.iconAfter) && <span className='themed_btn_icon'><FontAwesomeIcon icon={props.iconAfter}></FontAwesomeIcon></span>}
                 </span>}
-                {(props.btnState == 'loading') && <span className="themed_btn_content">
+                {(props.btnState === 'loading') && <span className="themed_btn_content">
                     {(props.iconBefore || props.loadingIcon) && <span className='themed_btn_icon'>
                         <FontAwesomeIcon icon={props.loadingIcon || props.iconBefore}></FontAwesomeIcon>
                         </span>}

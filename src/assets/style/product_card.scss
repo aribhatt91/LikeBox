@@ -5,7 +5,7 @@ $pc_order-radius: 0px;
     position: relative;
     margin: 0px;
     background: #FFFFFF;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.104789);
+    // box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.104789);
     font-style: normal;
     font-weight: normal;
     border-radius: $pc_order-radius;
@@ -27,6 +27,7 @@ $pc_order-radius: 0px;
         border-bottom-right-radius: $pc_order-radius;
         padding: 0 10px;
         margin-top: 12px;
+        text-decoration: inherit;
         .card_product_brand {
             font-size: 16px;
             font-weight: 500;
@@ -37,6 +38,7 @@ $pc_order-radius: 0px;
             text-overflow: ellipsis;
             white-space: nowrap;
             text-align: left;
+            text-decoration: inherit;
         }
         .card_product_name {
             color: #535766;
@@ -50,6 +52,7 @@ $pc_order-radius: 0px;
             font-weight: 400;
             display: block;
             text-align: left;
+            text-decoration: inherit;
         }
         .card_product_price {
             line-height: 15px;
@@ -59,7 +62,7 @@ $pc_order-radius: 0px;
             color: #282c3f;
             font-weight: 500;
             text-align: left;
-            text-decoration: none;
+            text-decoration: inherit;
             .card_product_price_strike {
                 text-decoration: line-through;
                 color: #7e818c;
@@ -78,6 +81,7 @@ $pc_order-radius: 0px;
     }
     &:hover, &:focus {
         box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.204789);
+        text-decoration: none;
     }
 }
 

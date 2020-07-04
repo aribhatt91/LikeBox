@@ -2,87 +2,119 @@ const PRODUCTS = [
     {
        "sku":"269232-01",
        "name":"Unisex Black Woven Design Synthetic Mid-Top Troy MU IDP Sneakers",
-       "category":"Shoes, Casual, Kids",
+       "category":"Sneakers, Casual, Kids, Men, Women",
        "brand":"Puma",
        "thumbnail":"https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/productimage/2019/12/19/afee4051-1363-40f7-b8dd-4f0a8daeb3b31576708499697-1.jpg",
-       "price":"1999.0",
+       "price":"1999.00",
+       'fullPrice': '3999.00',
+       'discount': 55,
        "rating":"5.0",
-       "reviews":"787.0"
+       "reviews":"7",
+       "tags": 'sneakers',
+       "images": ["https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/productimage/2019/12/19/afee4051-1363-40f7-b8dd-4f0a8daeb3b31576708499697-1.jpg", 'https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/productimage/2019/12/19/dc1c9f37-6846-4fe5-8426-397475a1251a1576708499742-2.jpg', 'https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/productimage/2019/12/19/52b23454-3054-4dff-ae52-9fd8596da5c91576708499785-3.jpg', 'https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/productimage/2019/12/19/4e3ebf81-73f4-43a5-8b6b-4b5d79ee5f6d1576708499825-4.jpg'],
+       'sizes': '7,8,9,10'
     
  },
     {
        "sku":"281477-01",
        "name":"Unisex Grey IMAGINEE Slip-On Sneakers",
-       "category":"Shoes, Casual, Kids",
+       "category":"Sneakers, Casual, Kids",
        "brand":"DIESEL",
        "thumbnail":"https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/8479065/2019/9/17/81ed2431-9093-4c2f-ac13-8a078682aba91568697270971-DIESEL-Unisex-Grey-Slip-On-Sneakers-9461568697270087-1.jpg",
-       "price":"5494.0",
+       "price":"6993.00",
+       'fullPrice': '9990.00',
+       discount: 30,
+       "tags": 'sneakers',
        "rating":"5.0",
-       "reviews":"787.0"
+       "reviews":"12",
+       'images': ['https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/8479065/2019/9/17/81ed2431-9093-4c2f-ac13-8a078682aba91568697270971-DIESEL-Unisex-Grey-Slip-On-Sneakers-9461568697270087-1.jpg', 'https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/8479065/2019/9/17/02a48d2f-80b7-4d7b-bf3d-90f7c25e83ee1568697270949-DIESEL-Unisex-Grey-Slip-On-Sneakers-9461568697270087-2.jpg', 'https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/8479065/2019/9/17/5a594f94-3575-4b27-8a53-cec7ed2752a91568697270928-DIESEL-Unisex-Grey-Slip-On-Sneakers-9461568697270087-3.jpg', 'https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/8479065/2019/9/17/83ec06a8-d294-4e57-96c6-b77d85b66d5b1568697270906-DIESEL-Unisex-Grey-Slip-On-Sneakers-9461568697270087-4.jpg'],
+       'sizes': '1.5,2.5,4.5,5'
     
  },
     {
        "sku":"268804-01",
        "name":"Unisex Cream-Coloured Slip-On Sneakers",
-       "category":"Shoes, Casual, Kids",
+       "category":"Sneakers, Casual, Kids, Men, Women",
        "brand":"DIESEL",
        "thumbnail":"https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/8479069/2019/9/16/b70f7829-b2a2-4126-93c7-f268a5bf59821568631933666-DIESEL-Unisex-Cream-Coloured-Slip-On-Sneakers-25315686319329-1.jpg",
-       "price":"5494.0",
+       "price":"6993.00",
+       'fullPrice': '9990.00',
+       discount: 30,
        "rating":"5.0",
-       "reviews":"787.0"
+       "reviews":"12",
+       "tags": 'sneakers',
+       images: ['https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/8479069/2019/9/16/b70f7829-b2a2-4126-93c7-f268a5bf59821568631933666-DIESEL-Unisex-Cream-Coloured-Slip-On-Sneakers-25315686319329-1.jpg', 'https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/8479069/2019/9/16/9f10e3ac-2aa5-4102-a202-ea637a21a94a1568631933641-DIESEL-Unisex-Cream-Coloured-Slip-On-Sneakers-25315686319329-2.jpg', 'https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/8479069/2019/9/16/71f9ad64-0afd-464d-b828-ce761df30cee1568631933622-DIESEL-Unisex-Cream-Coloured-Slip-On-Sneakers-25315686319329-3.jpg', 'https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/8479069/2019/9/16/295d08e7-d976-4ccf-8b74-da0488d454c01568631933604-DIESEL-Unisex-Cream-Coloured-Slip-On-Sneakers-25315686319329-4.jpg'],
+       'sizes': '1.5,2.5,4.5,5'
     
  },
     {
        "sku":"242441-01",
        "name":"Unisex Off-White & Orange Thunder Disc Sneakers",
-       "category":"Shoes, Casual, Kids",
+       "category":"Sneakers, Casual, Men, Women",
        "brand":"Puma",
        "thumbnail":"https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/10248709/2019/9/12/638586d3-4691-41a0-bdd7-e581aabb2db01568282333493-Puma-Unisex-Casual-Shoes-3611568282331959-1.jpg",
-       "price":"6399.0",
+       "price":"6599.00",
+       'fullPrice': '10990.00',
+       'discount': 40,
        "rating":"5.0",
-       "reviews":"4789.0"
+       "tags": 'sneakers',
+       "reviews":"4789.0",
+       'images': ['https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/10248709/2019/9/12/638586d3-4691-41a0-bdd7-e581aabb2db01568282333493-Puma-Unisex-Casual-Shoes-3611568282331959-1.jpg', 'https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/10248709/2019/9/12/638586d3-4691-41a0-bdd7-e581aabb2db01568282333493-Puma-Unisex-Casual-Shoes-3611568282331959-1.jpg', 'https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/10248709/2019/9/12/cd86743e-93f2-469e-b984-209608453eca1568282333450-Puma-Unisex-Casual-Shoes-3611568282331959-3.jpg', 'https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/10248709/2019/9/12/092feec6-e7dc-489c-bd16-859425c9377e1568282333407-Puma-Unisex-Casual-Shoes-3611568282331959-5.jpg'],
+       sizes: '6,7,8,9,10,11'
     
  },
     {
        "sku":"226372-01",
        "name":"Unisex Blue Troy MU IDP Peacoat Sneakers",
-       "category":"Shoes, Sports, Kids",
+       "category":"Sneakers, Sports, Kids, Men, Women",
        "brand":"Puma",
        "thumbnail":"https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/productimage/2019/12/19/8807261a-e3bb-436d-b87a-cf3f6cb56da41576709300969-1.jpg",
-       "price":"1999.0",
+       "price":"1799.00",
+       'fullPrice': '3999.00',
+       'discount': 55,
        "rating":"5.0",
-       "reviews":"4789.0"
+       "reviews":"4",
+       images: ['https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/productimage/2019/12/19/8807261a-e3bb-436d-b87a-cf3f6cb56da41576709300969-1.jpg', 'https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/productimage/2019/12/19/90bd1150-57d1-4815-b90d-a781e3cee9d41576709301016-2.jpg', 'https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/productimage/2019/12/19/8698f73a-bdf8-4fef-ae6e-48e1cb40caaa1576709301060-3.jpg', 'https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/productimage/2019/12/19/b5a9ade2-bf6a-4f69-8896-8223cbee00ea1576709301099-4.jpg'],
+       sizes: "6,7,8,9,10,11"
     
  },
     {
        "sku":"226364-01",
        "name":"Unisex Silver-Toned & Navy Marathon Tech Colourblocked Sneakers",
-       "category":"Shoes, Casual, Kids",
+       "category":"Sneakers, Casual, Kids, Men, Women",
        "brand":"ADIDAS Originals",
-       "thumbnail":"https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/10394895/2019/11/11/e31b379c-9d59-4168-baad-9d673629f9811573473080144-ADIDAS-Originals-Unisex-Silver-Toned--Navy-Marathon-Tech-Col-1.jpg",
-       "price":"11999.0",
+       "thumbnail":"https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/10394713/2019/11/11/e09d711f-704b-43c6-8e42-cfa41d2fdcfb1573473235849-ADIDAS-Originals-Unisex-Navy-3MC-Suede-Sneakers-645157347323-1.jpg",
+       "price":"11999.00",
+       'fullPrice': '13200.00',
        "rating":"5.0",
-       "reviews":"4789.0"
+       "reviews":"4",
+       images: ['https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/10394713/2019/11/11/e09d711f-704b-43c6-8e42-cfa41d2fdcfb1573473235849-ADIDAS-Originals-Unisex-Navy-3MC-Suede-Sneakers-645157347323-1.jpg', 'https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/10394713/2019/11/11/29ab2e7d-fdcb-41e3-8d99-17b506b69bde1573473235785-ADIDAS-Originals-Unisex-Navy-3MC-Suede-Sneakers-645157347323-2.jpg', 'https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/10394713/2019/11/11/fad61544-acbb-49b9-b560-973b0a0530e61573473235737-ADIDAS-Originals-Unisex-Navy-3MC-Suede-Sneakers-645157347323-3.jpg', 'https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/10394713/2019/11/11/66068f9a-c7e9-4b13-8302-ceb8a9357dbd1573473235691-ADIDAS-Originals-Unisex-Navy-3MC-Suede-Sneakers-645157347323-4.jpg'],
+       sizes: '3,4,5,6,7,8,9,10'
     
  },
     {
        "sku":"164537-01",
        "name":"Unisex Black 3MC Sneakers",
-       "category":"Shoes, Casual, Kids",
+       "category":"Sneakers, Casual, Kids, Men",
        "brand":"ADIDAS Originals",
-       "thumbnail":"https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/10394993/2019/11/8/f9da81a7-c8eb-4990-b831-1b229d4b133a1573213756561-ADIDAS-Originals-Unisex-Casual-Shoes-2681573213755554-1.jpg",
+       "thumbnail":"https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/10394847/2019/9/17/adae5397-547e-42a4-be00-c6834d80219b1568726552945-ADIDAS-Originals-Unisex-Black-3MC-Sneakers-5581568726552284-1.jpg",
        "price":"5999.0",
        "rating":"5.0",
-       "reviews":"1039.0"
+       "reviews":"10",
+       images: ['https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/10394847/2019/9/17/adae5397-547e-42a4-be00-c6834d80219b1568726552945-ADIDAS-Originals-Unisex-Black-3MC-Sneakers-5581568726552284-1.jpg', 'https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/10394847/2019/9/17/38e92868-a6d2-47f3-9250-833f05b883b41568726552924-ADIDAS-Originals-Unisex-Black-3MC-Sneakers-5581568726552284-2.jpg', 'https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/10394847/2019/9/17/16311282-e265-4f30-8411-c489c76674851568726552904-ADIDAS-Originals-Unisex-Black-3MC-Sneakers-5581568726552284-3.jpg', 'https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/10394847/2019/9/17/e31a885f-9ec3-4ee5-9942-17f80a432d301568726552862-ADIDAS-Originals-Unisex-Black-3MC-Sneakers-5581568726552284-4.jpg'],
+       sizes: '4,5,6,8,10,11'
     
  },
     {
        "sku":"330307-01",
        "name":"Unisex Blue Replicat-X Circuit Sneakers",
-       "category":"Shoes, Casual, Kids",
+       "category":"Sneakers, Casual, Kids, Men",
        "brand":"Puma",
        "thumbnail":"https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/10253167/2019/11/11/12b7dcb4-4362-4167-95d3-a00bdf27e25a1573465992919-Puma-Unisex-Blue-Sneakers-7751573465990967-1.jpg",
        "price":"4799.0",
+       fullPrice: '7499.00',
+       discount: 40,
+       images: ['https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/10253167/2020/3/13/bcf15ae4-be16-477b-99c5-d48482a6bc2e1584100312777-Puma-Unisex-Blue-Replicat-X-Circuit-Sneakers-123158410031113-1.jpg', ''],
        "rating":"5.0",
        "reviews":"1961.0"
     

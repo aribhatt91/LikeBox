@@ -1,27 +1,99 @@
 .product_filter_wrapper {
-    width: 250px;
-    float: left;
     .section_heading {
-        font-weight: 700;
+        font-weight: normal;
         text-transform: uppercase;
-        font-size: 22px;
-        padding: 15px 0 15px 25px;
+        font-size: 18px;
+        padding: 16px 12px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        .left_section {
+            display: flex;
+            .collapsible_header {
+                display: inline-flex;
+                align-items: center;
+                padding-right: 64px;
+                border-right: 1px solid #333;
+                cursor: pointer;
+            }
+            .sort_dropdown {
+                display: inline-flex;
+                align-items: center;
+                padding: 0 64px;
+                button {
+                    background-color: transparent;
+                    border: none;
+                    color: #000;
+                    text-transform: uppercase;
+                    padding: 16px 12px;
+                    font-size: inherit;
+                    font-weight: inherit;
+                    border-radius: 0;
+                    padding: 0;
+                    font-size: inherit;
+                    font-weight: inherit;
+                    border-radius: 0;
+                    line-height: inherit;
+                    margin: 0;
+                    box-shadow: none;
+                    &:focus, &:active {
+                        box-shadow: none;
+                    }
+                }
+            }
+        }
+        .right_section {
+            text-align: right;
+        }
     }
     .filter_section {
-        padding: 15px 0 15px 25px;
+        padding: 0 12px 12px 12px;
+        display: flex;
+        flex-wrap: wrap;
+
         p, ul, li {
             padding-left: 0;
         }
         .filter_section_heading {
-            font-weight: 600;
-            font-size: 18px;
+            font-weight: normal;
+            font-size: 16px;
             margin: 8px 0;
+            width: auto;
+            margin-right: 24px;
+            min-width: 100px;
         }
         .filter_list {
+            display: flex;
+            flex-wrap: wrap;
             list-style-type: none;
-            input[type='checkbox'] {
+            margin-bottom: 0;
+            li{
+                display: flex;
+                align-items: center;
+                width: auto;
                 margin-right: 12px;
+                margin-bottom: 0;
+                label {
+                    margin-bottom: 0;
+                    input[type='checkbox'] {
+                        margin-right: 12px;
+                        display: none;
+                    }
+                    input[type='checkbox'] + span {
+                        color: #000;
+                        background-color: rgba(0, 0, 0, 0.2);
+                        padding: 6px 16px;
+                        cursor: pointer;
+                        border-radius: 32px;
+                        font-size: 14px;
+                    }
+                    input[type='checkbox']:checked + span {
+                        background-color: rgba($color: #000000, $alpha: 0.4);
+                    }
+                }
+                
             }
+            
         }
     }
 }

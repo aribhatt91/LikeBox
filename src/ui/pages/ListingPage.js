@@ -9,6 +9,9 @@ import ProductFilters from './../components/ProductFilters';
 
 class ListingPage extends Page {
   //Filter by search keyword, discount, price range, brand
+  selected_brand = []; 
+  selected_price_range = []; 
+  selected_discount = [];
   constructor(props){
     super(props);
     this.state = {
@@ -42,13 +45,24 @@ class ListingPage extends Page {
     }
   }
   handleBrandFilter(e){
-
+    console.log('Dummy Filter event handler ->', e.target.value);
+    var brand = e.value.target
+    if(this.selected_brand.indexOf(brand) > -1){
+      this.selected_brand = this.selected_brand.filter((b)=> {return b!==brand;});
+    }else {
+      this.selected_brand.push(brand)
+    }
   }
-  handlePriceFilter(el){
+  handlePriceFilter(e){
+    console.log('Dummy Filter event handler ->', e.target.value);
     
   }
   handleDiscountFilter(e){
+    console.log('Dummy Filter event handler ->', e.target.value);
     
+  }
+  handleSortBy(e){
+
   }
   handleSubCategoryFilter(e){
     
@@ -59,13 +73,15 @@ class ListingPage extends Page {
       <section className="products-section">
         {this.props.pending && <LoadingModule text="Please wait..."></LoadingModule>}
         {!this.props.pending && this.props.items.length > 0 && 
-          <div className="flex_container">
-            <ProductFilters></ProductFilters>
+          <div className="container-fluid">
+            <ProductFilters 
+            _handleBrandSelect = {this.handleBrandFilter}
+            _handlePriceRangeSelect={this.handlePriceFilter}
+            _handleDiscountSelect={this.handleDiscountFilter}
+            _handleSortBy={this.handleSortBy}
+            products={this.props.items.length}></ProductFilters>
             
-            <div className="product_cards_container">
-              <div className="heade col-12">
-                Found {this.props.items.length} products
-              </div>
+            <div className="product_cards_container page-content-wrapper">
               {this.props.items.map((item)=>{
                 return (<ProductCard 
                   key={item.sku}

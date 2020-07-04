@@ -11,7 +11,7 @@ function SideNav(props){
     props.signIn();
   }
   return (
-    <span className="hidden-md-up">
+    <span className="d-md-none">
       <a href="#" onClick={()=>{setSideNavOpen(true)}} className="hamburger">
         <FontAwesomeIcon icon={faBars}/>
       </a>
