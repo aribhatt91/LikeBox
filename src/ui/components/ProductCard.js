@@ -1,9 +1,6 @@
 import React, {Component, useState, useEffect} from 'react';
-import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+
 function simulateNetworkRequest() {
     return new Promise(resolve => setTimeout(resolve, 2000));
 }

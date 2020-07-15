@@ -13,7 +13,23 @@ filter = {
 }
 */
 function _sortBy(products, key){
+    if(!products || products.length <= 1){
+        return products;
+    }
     //return products.sort()
+    if(key === 'price-asc'){
+        return products.sort(function(a,b){
+            return Number(a.price) - Number(b.price)
+        })
+    }else if(key === 'price-desc'){
+        return products.sort(function(a,b){
+            return Number(b.price) - Number(a.price)
+        })
+    }else if(key === 'popularity'){
+        return products.sort(function(a,b){
+            return Number(b.ratings) - Number(a.ratings)
+        })
+    }
 }
 function fetchItems(filter) {
     return dispatch => {
@@ -31,16 +47,16 @@ function fetchItems(filter) {
                 }
             }
             if(filter && filter.price_range){
-                temp = []; 
+                let temp = []; 
                     
                 filter.price_range.forEach((pair)=>{
                     temp.push(products.filter((product) => {
                             var res = false;
                         if(pair.min){
-                            res = Number(product.price) >= Number(min)
+                            res = Number(product.price) >= Number(pair.min)
                         }
-                        if(pair.min){
-                            res = Number(product.price) <= Number(min)
+                        if(pair.max){
+                            res = Number(product.price) <= Number(pair.max)
                         }
                         return res;
                     }));
@@ -48,7 +64,7 @@ function fetchItems(filter) {
                 products = temp;
             }
             if(filter && filter.discount) {
-                temp = []; 
+                let temp = []; 
                     
                 filter.discount.forEach((d)=>{
                     temp.push(products.filter((product) => {
@@ -58,7 +74,7 @@ function fetchItems(filter) {
                 products = temp;
             }
             if(filter && filter.brands) {
-                temp = []; 
+                let temp = []; 
                     
                 filter.brands.forEach((brand)=>{
                     temp.push(products.filter((product) => {

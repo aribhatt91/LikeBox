@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons'
 import PRODUCTS from './../../../service/products';
 import ThemedButton from './../../components/ThemedButton';
+import { Link } from 'react-router-dom';
 
 function CartProduct(props){
     return (
@@ -52,7 +53,7 @@ function CartPageFooter(props){
         <section className='cart_footer'>
             <div className="cart_footer_container">
                 <div className="left_btn_wrapper d-inline-block float-left">
-                    <ThemedButton url="/" btnText="Continue shopping" ></ThemedButton>
+                    <Link className="themed_link" to='/'><span>&larr; Continue shopping</span></Link>
                 </div>
                 <div className="left_btn_wrapper d-inline-block float-right">
                     <ThemedButton btnText="Checkout" btnState="active"></ThemedButton>
@@ -65,9 +66,10 @@ function CartPageBreadCrumbs(props){
     return (
         <div className='cart_breadcrumbs'>
             <div className='cart_breadcrumbs_container'>
-                <div className='col-4 crumb active'>CART</div>
-                <div className='col-4 crumb'>MAKE PAYMENT</div>
-                <div className='col-4 crumb'>COMPLETE ORDER</div>
+                <div className={'col-3 crumb' + props.checkoutState >= 0 ? ' active' : ''}>Cart</div>
+                <div className={'col-3 crumb' + props.checkoutState >= 1 ? ' active' : ''}>Shipping</div>
+                <div className={'col-3 crumb' + props.checkoutState >= 2 ? ' active' : ''}>Billing</div>
+                <div className={'col-3 crumb' + props.checkoutState >= 3 ? ' active' : ''}>Complete order</div>
             </div>
         </div>
     )
@@ -75,6 +77,8 @@ function CartPageBreadCrumbs(props){
 
 function CartPage(props){
     const [state, dispatch] = useReducer(_reducer, {count: 0});
+
+    const [checkoutState, setCheckoutState] = useState(0);
     let PRODUCTS = [
         {
            "sku":"269232-01",
@@ -115,14 +119,16 @@ function CartPage(props){
      let curr = "Rs."
      return (
          <div className="checkout_container">
-            <CartPageBreadCrumbs></CartPageBreadCrumbs>
+            <CartPageBreadCrumbs checkoutState={checkoutState}></CartPageBreadCrumbs>
             <section className="cart_body">
                 {
                     PRODUCTS.map((element, index) => {
                         return (<CartProduct key={index} name={element.name} thumbnail={element.thumbnail} salePrice={element.salePrice} fullPrice={element.fullPrice} currency={curr}></CartProduct>)
                     })
                 }
-                
+                <div className="cart_total">
+
+                </div>
             </section>
             <CartPageFooter count={state.count}></CartPageFooter>
          </div>

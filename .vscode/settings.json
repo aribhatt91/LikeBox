@@ -4,5 +4,10 @@
     },
     "jshint.enable": false,
     "files.autoGuessEncoding": true,
-    "editor.suggest.showConstructors": false
+    "editor.suggest.showConstructors": false,
+    "emmet.triggerExpansionOnTab": true,
+    "emmet.excludeLanguages": [
+
+        "markdown"
+    ]
 }
