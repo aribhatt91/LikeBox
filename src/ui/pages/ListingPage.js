@@ -2,7 +2,7 @@ import React, {Component, useState, useLocation, useEffect, useParams} from 'rea
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Page from './Page';
-import fetchItems from './../../service/fetchItems';
+import fetchItems from '../../service/fetchAllProducts';
 import LoadingModule from './../components/LoadingModule';
 import { ProductCard } from './../components/ProductCard';
 import ProductFilters from './../components/ProductFilters';

@@ -1,18 +1,29 @@
 <!doctype html>
 <html lang="en">
   <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-175238138-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-175238138-1');
+    </script>
     <!-- <script src="http://localhost:10080/dataLayer.js"></script> -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet"> 
     <script>
-      var dataLayer = {
+      dataLayer.push({
         products: ["Spell Books", "Flying Cars", "Butterbeer", "Magic Wands", "Wizard Robes"],
         sellers: ["Amazon", "eBay", "Flipkart", "ShopClues", "Wallmart", "Ollivanders"]
-      }
+      })
     </script>
-    <script src="//assets.adobedtm.com/a08537c6ca98e7cf5056f4646c643b376e2eb857/satelliteLib-6c1ae075488ec74f92b5ad4ce4ad81ed3058a296.js"></script>
+    <!-- <script src="//assets.adobedtm.com/7cb8109970d1/91e60302cf2a/launch-e9420fd17383-development.min.js"></script> -->
+    <script src="//assets.adobedtm.com/7cb8109970d1/91e60302cf2a/launch-039a7402229f-staging.min.js" async></script>
     <!-- <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script> -->
     <script>
       // Initialize Firebase
@@ -26,6 +37,8 @@
       };
       // firebase.initializeApp(config);
     </script>
+
+
 
     <!--
       manifest.json provides metadata used when your web app is added to the
@@ -45,7 +58,7 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>Plex</title>
   </head>
   <body>
     <noscript>

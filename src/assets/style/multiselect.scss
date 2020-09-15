@@ -1,0 +1,53 @@
+@import './variables.scss';
+
+.selectable_tag {
+    cursor: pointer;
+    border: 1px solid #333;
+    color: #333;
+    border-radius: 50%;
+    padding: 4px 8px;
+    background-color: transparent;
+    width: auto;
+    &.selected {
+        background-color: #333;
+        color: #fff;
+    }
+    &.cancelable {
+        padding-right: 16px;
+    }
+    .tag_name {
+        font-size: 14px;
+        padding: 2px;
+        text-align: center;
+    }
+    .tag_cancel {
+        position: absolute;
+        font-size: 16px;
+        height: 100%;
+        display: inline-flex;
+        align-items: center;
+        right: 8px;
+        color: inherit;
+    }
+    &:hover, &:focus {
+        opacity: 0.9;
+    }
+    &.accent {
+        border-color: $accent-color;
+        &.selected {
+            background-color: $accent-color;
+        }
+    }
+    &.primary {
+        border-color: $primary-color;
+        &.selected {
+            background-color: $primary-color;
+        }
+    }
+    &.blue {
+        border-color: $blue;
+        &.selected {
+            background-color: $blue;
+        }
+    }
+}

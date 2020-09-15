@@ -8,11 +8,11 @@ import { BrowserRouter } from 'react-router-dom';
 // eslint-disable-next-line
 import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
-import rootReducer from './reducers/index';
+import rootReducer from './store/reducers/index';
 import thunk from 'redux-thunk';
-import logger from './service/logger_middleware';
+import logger from './store/middleware/logger';
 // eslint-disable-next-line
-import ReduxPromise from 'redux-promise';
+//import ReduxPromise from 'redux-promise';
 
 const middlewares = [logger, thunk];
 const appStore = createStore(rootReducer, applyMiddleware(...middlewares)) //applyMiddleware(ReduxPromise)(createStore);

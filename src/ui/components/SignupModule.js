@@ -66,9 +66,13 @@ function SignupModule(props){
           {loggedIn && <div>Hi {props.user.userName}, You are now signed up</div>}
           {!loggedIn && <p>Please fill in this form to create an account.</p>}
           {!loggedIn && <Form onSubmit={handleSubmit}>
-            <Form.Group controlId="formBasicName">
+            <Form.Group controlId="formFirstName">
               <Form.Label>Name</Form.Label>
-              <Form.Control className="themed_text_input" type="text" name="name" placeholder="Name" onBlur={(e) => {setUserInput(onUserInput(e.target.name, e.target.value, userinput))}} />
+              <Form.Control className="themed_text_input" type="text" name="name" placeholder="First name" onBlur={(e) => {setUserInput(onUserInput(e.target.name, e.target.value, userinput))}} />
+            </Form.Group>
+            <Form.Group controlId="formFirstName">
+              <Form.Label>Name</Form.Label>
+              <Form.Control className="themed_text_input" type="text" name="name" placeholder="Last name" onBlur={(e) => {setUserInput(onUserInput(e.target.name, e.target.value, userinput))}} />
             </Form.Group>
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Email</Form.Label>
@@ -79,9 +83,7 @@ function SignupModule(props){
               <Form.Label>Password</Form.Label>
               <Form.Control className="themed_text_input" type="password" name="password" placeholder="Password" onBlur={(e) => {setUserInput(onUserInput(e.target.name, e.target.value, userinput))}} />
             </Form.Group>
-            <Form.Group controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Stay signed in" />
-            </Form.Group>
+
             <Button className="themed_btn themed_btn_dark" variant="primary" type="submit" disabled={!formValid}>
               Sign up
             </Button>

@@ -1,4 +1,4 @@
-import { fetchStateError, fetchStateSuccess, fetchStatePending } from './../actions/index';
+import { fetchStateError, fetchStateSuccess, fetchStatePending } from './../store/actions/index';
 import PRODUCTS from './products';
 function simulateNetworkRequest() {
     return new Promise(resolve => setTimeout(resolve, 2000));

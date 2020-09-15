@@ -1,6 +1,7 @@
 .checkout_container{
     .cart_body{
-        max-width: 960px;
+        display: flex;
+        width: 100%;
         margin: auto;
         .cart_product_wrapper {
             .container{
@@ -24,11 +25,58 @@
                         font-size: 16px;
                     }
                 }
+                .qty_container {
+                    > span {
+                        min-width: 40px;
+                        height: 40px;
+                        border: 1px solid #e6e6e6;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        &.decr_icon, 
+                        &.incr_icon {
+                            cursor: pointer;
+                            font-size: 20px;
+                        }
+                        &.decr_icon {
+                            border-right: none;
+                        }
+                        &.incr_icon {
+                            border-left: none;
+                        }
+                    }
+
+                }
+                .delete_product {
+                    font-size: 22px;
+                    cursor: pointer;
+                }
+                .removePanel {
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                    left: 0;
+                    z-index: 9;
+                    background: white;
+                }
             }
             &:not(:last-child){
                 .container{
                     border-bottom: 1px solid #ececec;
                 }
+            }
+        }
+        .cart_sidePanel {
+            padding: 24px 16px;
+            background-color: #333;
+            color: white;
+            width: 320px;
+            .align-text-right {
+                text-align: right;
+            }
+            h2, h3 {
+                color: inherit;
             }
         }
         

@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {signin} from './../../service/loginService';
-import Alert from 'react-bootstrap/Alert';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import {isLoggedIn, getUser, getLoginError, isLoginPending} from './../../reducers/login_reducer';
 
 class LoginModule extends Component{
   constructor(props){
@@ -30,10 +28,6 @@ class LoginModule extends Component{
     console.log(this.props);
     const {signInUser} = this.props;
     signInUser({'email': 'aribhatt@adobe.com', 'password': 'ari'});
-    var that = this; 
-    setTimeout(() => {
-      console.log(that.props, that.state);
-    }, 4000);
   }
   render(){
     const {loggedIn, user, pending, error} = this.props;
@@ -44,7 +38,7 @@ class LoginModule extends Component{
         {!this.props.loggedIn && <Form onSubmit={this.handleSubmit}>
           <Form.Group controlId="formBasicEmail">
             <Form.Label>Email address</Form.Label>
-            <Form.Control className="themed_text_input" type="email" name="email" placeholder="Enter email" onChange={this.onUserInput} />
+            <Form.Control autoFocus className="themed_text_input" type="email" name="email" placeholder="Enter email" onChange={this.onUserInput} />
             <Form.Text className="text-muted">
               We'll never share your email with anyone else.
             </Form.Text>

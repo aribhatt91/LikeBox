@@ -8,14 +8,14 @@ function ThemedButton(props){
     /* props.btnText, props.iconBefore, props.iconAfter, props.iconLoading, props.loadingText, props.successText, props.successIcon, props.url, props.handler, props.btnState */
     return (
         <div className='themed_btn_container'>
-            {props.url && <Link className={'themed_btn' + (props.type ? (' ' + props.type) : "")} to={props.url}>
+            {props.url && <Link className={'themed_btn' + (props.type ? (' theme_' + props.type) : "")  + (props.border === 'false' ? ' no-border' : "") + (props.size ? " btn-" + props.size : "")} to={props.url}>
                 <span className="themed_btn_content">
                     {props.iconBefore && <span className='themed_btn_icon'><FontAwesomeIcon icon={props.iconBefore}></FontAwesomeIcon></span>}
                     <span className="themed_btn_text">{props.btnText}</span>
                     {props.iconAfter && <span className='themed_btn_icon'><FontAwesomeIcon icon={props.iconAfter}></FontAwesomeIcon></span>}
                 </span>
             </Link>}
-            {!props.url && <button className={'themed_btn' + (props.type ? (' ' + props.type) : "")} disabled={props.btnState === 'disabled'}>
+            {!props.url && <button className={'themed_btn' + (props.type ? (' theme_' + props.type) : "")  + (props.border === 'false' ? ' no-border' : "") + (props.size ? " btn-" + props.size : "")} disabled={props.btnState === 'disabled'} onClick={props._click ? props._click : () => {console.log('themed_btn clicked')}}>
                 {(props.btnState === 'disabled' || props.btnState === 'active' || !props.btnState) && <span className="themed_btn_content">
                     {props.iconBefore && <span className='themed_btn_icon'><FontAwesomeIcon icon={props.loadingIcon || props.iconBefore}></FontAwesomeIcon></span>}
                     <span className="themed_btn_text">{props.btnText}</span>

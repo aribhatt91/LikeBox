@@ -4,7 +4,7 @@ import {NavLink, Link} from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartPlus, faCartArrowDown, faUser, faBars, faHeart } from '@fortawesome/free-solid-svg-icons'
+import { faCartPlus, faCartArrowDown, faUser, faBars, faHeart } from '@fortawesome/free-solid-svg-icons';
 import Modal from 'react-bootstrap/Modal';
 import LoginModule from './LoginModule';
 import { getAuthToken } from './../../service/loginService';
