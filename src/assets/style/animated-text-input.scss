@@ -1,0 +1,66 @@
+.animated-text-input {
+    width: 100%;
+    label {
+      position: relative;
+      width: 100%;
+      input {
+        font-size: 14px;
+        width: 100%;
+        min-height: 44px;
+        &:focus, &:active {
+          box-shadow: none !important;
+          background-color: transparent;
+        }
+        &:disabled {
+          background-color: transparent;
+        }
+        
+      }
+      textarea {
+        font-size: 14px;
+        width: 100%;
+        min-height: 96px;
+        &:focus, &:active {
+          box-shadow: none !important;
+          background-color: transparent;
+        }
+        &:disabled {
+          background-color: transparent;
+        }
+      }
+      .text_input_label {
+        position: absolute;
+        font-size: 14px;
+        line-height: 14px;
+        transition: 0.4s all ease-in-out;
+        top: 50%;
+        left: 0.75rem;
+        margin-top: -7px;
+        background-color: #fff;
+        height: auto;
+      }
+    }
+    
+    &.edit-mode {
+      label {
+        .text_input_label {
+          font-size: 12px;
+          padding: 0 4px;
+          top: -7px;
+          margin-top: 0;
+        }
+      }
+    }
+    &.error {
+      label {
+        .text_input_label {
+          color: red;
+        }
+        input, textarea {
+          border-color: red;
+          color: red;
+        }
+      }
+    }
+}
+  

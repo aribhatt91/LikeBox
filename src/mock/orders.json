@@ -1,0 +1,17 @@
+{
+    "orders": [
+        {
+            "order_id": "",
+            "placement_date": "",
+            "delivery_date": "",
+            "shipped_date": "",
+            "order_status": "",
+            "product_ids": "",
+            "order_amount": "",
+            "discount": "",
+            "promo_code": "",
+            "carrier": "",
+            "delivery_address": ""
+        }
+    ]
+}

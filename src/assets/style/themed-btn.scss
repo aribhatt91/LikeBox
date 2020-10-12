@@ -1,4 +1,4 @@
-@import './variables';
+@import './variables.scss';
 
 .themed_btn_container {
     display: inline-block;
@@ -14,8 +14,9 @@
         text-decoration: none;
         transition: all 0.2s ease-in-out;
         border-radius: 0;
+        box-shadow: 0 1px 2px 0 rgba(0,0,0,.1);
         .themed_btn_content {
-            font-size: 16px;
+            font-size: 14px;
             line-height: 1.2;
             color: $light-btn-text;
             min-width: 120px;
@@ -46,6 +47,7 @@
             &:not([disabled='true']):focus, 
             &:not([disabled='true']):active {
                 background-color: $accent-color-hover;
+                border-color: $accent-color-hover;
             }
         }
         &.theme_primary {
@@ -58,6 +60,7 @@
             &:not([disabled='true']):focus, 
             &:not([disabled='true']):active {
                 background-color: $primary-color-hover;
+                border-color: $primary-color-hover;
             }
         }
         &.theme_blue {
@@ -82,6 +85,7 @@
             &:not([disabled='true']):focus, 
             &:not([disabled='true']):active {
                 background-color: grey;
+                border-color: grey;
                 .themed_btn_content {
                     color: $light-btn-text;
                 }
@@ -104,6 +108,7 @@
         &:not([disabled='true']):active {
             text-decoration: none;
             background-color: #000;
+            box-shadow: 0 4px 6px 0 rgba(0,0,0,.12);
             .themed_btn_content {
                 color: $dark-btn-text;
             }

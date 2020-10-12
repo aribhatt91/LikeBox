@@ -5,9 +5,9 @@ const PRODUCTS = [
        "category":"Sneakers, Casual, Kids, Men, Women",
        "brand":"Puma",
        "thumbnail":"https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/productimage/2019/12/19/afee4051-1363-40f7-b8dd-4f0a8daeb3b31576708499697-1.jpg",
-       "price":"1999.00",
+       "price": "1999.00",
        'fullPrice': '3999.00',
-       'discount': 55,
+       'discount': "55",
        "rating":"5.0",
        "reviews":"7",
        "tags": 'sneakers',
@@ -111,12 +111,13 @@ const PRODUCTS = [
        "category":"Sneakers, Casual, Kids, Men",
        "brand":"Puma",
        "thumbnail":"https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/10253167/2019/11/11/12b7dcb4-4362-4167-95d3-a00bdf27e25a1573465992919-Puma-Unisex-Blue-Sneakers-7751573465990967-1.jpg",
-       "price":"4799.0",
-       fullPrice: '7499.00',
-       discount: 40,
-       images: ['https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/10253167/2020/3/13/bcf15ae4-be16-477b-99c5-d48482a6bc2e1584100312777-Puma-Unisex-Blue-Replicat-X-Circuit-Sneakers-123158410031113-1.jpg', ''],
+       "price":"4799.00",
+       "fullPrice": '7499.00',
+       "discount": 40,
+       "images": ['https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/10253167/2020/3/13/bcf15ae4-be16-477b-99c5-d48482a6bc2e1584100312777-Puma-Unisex-Blue-Replicat-X-Circuit-Sneakers-123158410031113-1.jpg', ''],
        "rating":"5.0",
-       "reviews":"1961.0"
+       "reviews":"1961.0",
+       sizes: '4,5,6,8,10,11'
     
  },
     {
@@ -124,10 +125,14 @@ const PRODUCTS = [
        "name":"Boys Navy Blue Slip-On Sneakers",
        "category":"Shoes, Casual, Kids",
        "brand":"Fame Forever by Lifestyle",
-       "thumbnail":"https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/productimage/2020/1/9/1fdbed68-0c62-48f3-b59a-b42ca343f7ac1578535203779-1.jpg",
-       "price":"599.0",
+       "thumbnail":"https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/productimage/2019/4/5/be15fbc3-33b9-4d0d-ae91-d652be6f34d21554463107787-1.jpg",
+       "price":"824.00",
+       "fullPrice": "1499.00",
+       "discount": "45",
+       "images": ["https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/productimage/2019/4/5/be15fbc3-33b9-4d0d-ae91-d652be6f34d21554463107787-1.jpg", "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/productimage/2019/4/5/9a5ad140-598a-4fd9-8611-509161e952561554463107798-2.jpg", "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/productimage/2019/4/5/cb5251c3-1282-4a5f-af6f-32780454c2dc1554463107812-3.jpg"],
        "rating":"4.5",
-       "reviews":"586.0"
+       "reviews":"586.0",
+       sizes: '4,5,6,8,10,11'
     
  },
     {

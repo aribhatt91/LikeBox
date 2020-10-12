@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faWarning, faInfoCircle, faCheckCircle} from '@fortawesome/free-solid-svg-icons';
+//import {faWarning, faInfoCircle, faCheckCircle} from '@fortawesome/free-solid-svg-icons';
+
 /* 
 size: [small, [default]],
 type: [error, success, info, alert],
@@ -13,9 +14,9 @@ const PageMessage = (props) => {
     return (
         <div className={"msg-container" + (props.size === "small" ? " msg-small" : "") + " " + (props.type || "") + (props.border === false ? "" : " no-border") + (!showMsg ? " d-none" : "")}>
             <span className="msg-icon">
-                {(props.type === "error" || props.type === "alert") && <FontAwesomeIcon icon={faWarning}></FontAwesomeIcon>}
-                {props.type === "info" && <FontAwesomeIcon icon={faInfoCircle}></FontAwesomeIcon>}
-                {props.type === "success" && <FontAwesomeIcon icon={faCheckCircle}></FontAwesomeIcon>}
+                {(props.type === "error" || props.type === "alert") && <span>&#9432;</span> }
+                {props.type === "info" && <span>&#9432;</span>}
+                {props.type === "success" && <span>&#10003;</span>}
             </span>
             <span className="msg-text">{props.text}</span>
             {props.dismissable && <span className="msg-close" onClick={()=>setShowMsg(false)}>&times;</span>}

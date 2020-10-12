@@ -6,6 +6,7 @@ import ProductPage from './pages/ProductPage';
 import ListingPage from './pages/ListingPage';
 import CartPage from './pages/cart/CartPage';
 import CheckoutPage from './pages/CheckoutPage';
+import UserDashboard from './pages/UserDashboard';
 
 class AppBody extends Component {
   render() {
@@ -17,6 +18,7 @@ class AppBody extends Component {
         <Route path='/about' render={(props) => <About {...props} pageName="about" />}/>
         <Route path='/cart' render={(props) => <CartPage {...props} pageName="cart" />}/>
         <Route path='/checkout' render={(props) => <CheckoutPage {...props} pageName="checkout" />}/>
+        <Route path='/user/:page?' render={(props) => <UserDashboard {...props} pageName="user-dashboard" />}/>
         <Redirect to="/not-found"/>
       </Switch>
     </div>);

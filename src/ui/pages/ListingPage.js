@@ -46,7 +46,7 @@ class ListingPage extends Page {
   }
   handleBrandFilter(e){
     console.log('Dummy Filter event handler ->', e.target.value);
-    var brand = e.value.target
+    var brand = e.target.value;
     if(this.selected_brand.indexOf(brand) > -1){
       this.selected_brand = this.selected_brand.filter((b)=> {return b!==brand;});
     }else {

@@ -4,20 +4,18 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import CartService from './../../service/cartOperation';
 import ThemedButton from '../components/ThemedButton';
+import AddressForm from '../components/AddressForm';
 
 function LoginModule(props){
 
 }
-function NewAddressForm({}){
 
-}
-function AddressModule({addresses, addNewAddress, selectAddress, editAddress, setDeliverySpeed}){
-    useState(expand, setExpand) = useState(false);
-    useState(expandAddAddress, setExpandAddAddress) = useState(false);
-    useState(dirty, setDirty) = useState(false);
-    useState(expandAddAddress, setExpandAddAddress) = useState(false);
-    useState(expandDeliverySpeed, setExpandDeliverySpeed) = useState(false);
-    useState(deliverySpeed, setDeliverySpeed) = useState(false);
+function AddressModule({addresses, addNewAddress, selectAddress, editAddress, selectDeliverySpeed}){
+    const [expand, setExpand] = useState(false);
+    const [expandAddAddress, setExpandAddAddress] = useState(false);
+    const [dirty, setDirty] = useState(false);
+    const [expandDeliverySpeed, setExpandDeliverySpeed] = useState(false);
+    //const [deliverySpeed, setDeliverySpeed] = useState(false);
 
     let saved_addresses = [];
     for(let i=0; i < (addresses || []).length; i++) {
@@ -41,7 +39,7 @@ function AddressModule({addresses, addNewAddress, selectAddress, editAddress, se
                 dirty && <div className={(expand ? "d-none" : "d-inline-block") + "edit-btn-container"}>
                     <ThemedButton 
                         text="Edit"
-                        type="outline"
+                        theme="outline"
                         size="small"
                         _click={() => {editAddress();setExpand(true);} }
                         ></ThemedButton>
@@ -57,9 +55,9 @@ function AddressModule({addresses, addNewAddress, selectAddress, editAddress, se
                         }
                         <option key={saved_addresses.length} onSelect={() => {setExpandAddAddress(true)}}>
                             <div className={"add-address-wrapper"}>
-                                <NewAddressForm
+                                <AddressForm
                                     addNewAddress={addNewAddress}
-                                ></NewAddressForm>
+                                />
                             </div>
                         </option>
                     </select>
@@ -69,7 +67,7 @@ function AddressModule({addresses, addNewAddress, selectAddress, editAddress, se
                     !expandAddAddress && <div className="container-fluid d-flex justify-content-end submit-button-container">
                         <ThemedButton
                         text="Continue"
-                        type="accent"
+                        theme="accent"
                         border="false"
                         _click={selectAddress}
                         ></ThemedButton>
@@ -83,11 +81,10 @@ function AddressModule({addresses, addNewAddress, selectAddress, editAddress, se
 function NewCardForm(props) {
 
 }
-function PaymentModule({expandModule, editPaymentOption, debit_cards, credit_cards}){
-    useState(expand, setExpand) = useState(expandModule);
-    useState(expandAddCard, setExpandAddCard) = useState(false);
-    useState(dirty, setDirty) = useState(false);
-    useState(expandAddCard, setExpandAddCard) = useState(false);
+function PaymentModule({expandModule, editPaymentOption, debit_cards, selectPaymentOption, credit_cards}){
+    const [expand, setExpand] = useState(expandModule);
+    const [dirty, setDirty] = useState(false);
+    const [expandAddCard, setExpandAddCard] = useState(false);
 
     let saved_debit_cards = [];
     for(let i=0; i < (debit_cards || []).length; i++) {
@@ -108,7 +105,7 @@ function PaymentModule({expandModule, editPaymentOption, debit_cards, credit_car
                     {
                         dirty && <ThemedButton 
                         text="Edit"
-                        type="outline"
+                        theme="outline"
                         size="small"
                         _click={() => {editPaymentOption();setExpand(true);} }
                         ></ThemedButton>
@@ -121,7 +118,7 @@ function PaymentModule({expandModule, editPaymentOption, debit_cards, credit_car
                         {
                             saved_debit_cards
                         }
-                        <option key={saved_debit_cards.length} onSelect={() => {setExpandAddAddress(true)}}>
+                        <option key={saved_debit_cards.length} onSelect={() => {setExpandAddCard(true)}}>
                             <div className={"add-address-wrapper"}>
                                 Cash on Delivery
                             </div>
@@ -129,11 +126,11 @@ function PaymentModule({expandModule, editPaymentOption, debit_cards, credit_car
                     </select>
                 </div>
                     {
-                    expandAddAddress && <div className="container-fluid d-flex justify-content-end submit-button-container">
+                    expandAddCard && <div className="container-fluid d-flex justify-content-end submit-button-container">
                         <ThemedButton
-                        type="accent"
+                        theme="accent"
                         border="false"
-                        _click={selectAddress}
+                        _click={selectPaymentOption}
                         ></ThemedButton>
                     </div>
                     }

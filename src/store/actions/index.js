@@ -119,3 +119,24 @@ export function cartError(param){
     error: param.error
   }
 }
+
+
+export function userAuthenticatePending(){
+  return {
+    type: 'USER_AUTH_PENDING'
+  }
+}
+
+export function userAuthenticateSuccess(user){
+  return {
+    type: 'USER_AUTH_SUCCESS',
+    data: user
+  }
+}
+
+export function userAuthenticateError(e){
+  return {
+    type: 'USER_AUTH_ERROR',
+    error: e
+  }
+}

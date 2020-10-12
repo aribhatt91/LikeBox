@@ -78,6 +78,9 @@ class Header extends Component {
                 onClick={() => this.setShowModal()}>
                 <FontAwesomeIcon icon={faUser}/>
               </Nav.Link>
+              <NavLink activeClassName='active' to="/user">
+                <FontAwesomeIcon icon={faUser}/>
+              </NavLink>
               <NavLink activeClassName='active' to="/cart">
                 <FontAwesomeIcon icon={faCartPlus}/>
               </NavLink>

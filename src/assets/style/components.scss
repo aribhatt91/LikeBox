@@ -1,8 +1,12 @@
+@import './variables.scss';
 @import './header.scss';
 @import './product_card.scss';
 @import './product_filter.scss';
 @import './themed-btn.scss';
 @import './multiselect.scss';
+@import './accordion.scss';
+@import './message.scss';
+@import './animated-text-input.scss';
 
 .hidden-xs-up {
   display: none;
@@ -58,14 +62,15 @@
     color: #000;
   }
 }
+
+//Component - PageMessage
 .msg-container {
   border: 1px solid #000;
   padding: 16px;
-  margin: 16px 0;
   .msg-icon {
-    width: 48px;
-    height: 48px;
-    display: flex;
+    font-size: 20px;
+    line-height: 20px;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     color: inherit;
@@ -78,29 +83,33 @@
   }
   .msg-close {
     font-size: 24px;
-    width: 24px;
-    height: 24px;
-    line-height: 24px;
+    display: inline-flex;
     color: inherit;
     cursor: pointer;
   }
-  &.small {
+  &.msg-small {
     padding: 8px;
     .msg-icon {
-      width: 24px;
-      height: 24px;
+      font-size: 15px;
+      line-height: 14px;
+      height: auto;
+      width: auto;
     }
     .msg-text {
-      font-size: 14px;
+      font-size: 12px;
+      line-height: 14px;
     }
     .msg-close {
-      font-size: 18px;
+      font-size: 16px;
+      line-height: 14px;
     }
   }
   &.no-border {
     border: none;
+    padding: 0 !important;
   }
-  &.error, &.alert {
+  &.error, 
+  &.alert {
     border-color: red;
     color: red;
   }
@@ -112,9 +121,43 @@
     border-color: #0066cc;
     color: #0066cc;
   }
-
 }
 
+//Component - AddressForm
+.address-form-container {
+  .address-form {
+    max-width: 600px;
+    .address-form-header {
+      width: 100%;
+      font-size: 14px;
+      font-weight: bold;
+      color: $primary-color;
+    }
+    .row {
+
+    }
+    select {
+      font-size: 14px;
+      width: 100%;
+      min-height: 44px;
+    }
+  }
+}
+// Component - SelectInput
+.select-wrapper {
+  select {
+    font-size: 14px;
+    width: 100%;
+    min-height: 44px;
+    margin-bottom: .5rem;
+  }
+  &.error {
+    select {
+      border-color: red;
+      color: red;
+    }
+  }
+}
 @media only screen and (max-width: 1024px){
 
 }

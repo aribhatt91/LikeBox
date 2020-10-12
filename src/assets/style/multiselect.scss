@@ -4,31 +4,33 @@
     cursor: pointer;
     border: 1px solid #333;
     color: #333;
-    border-radius: 50%;
-    padding: 4px 8px;
+    padding: 4px 16px;
+    border-radius: 32px;
     background-color: transparent;
     width: auto;
+    margin-right: 12px;
     &.selected {
         background-color: #333;
         color: #fff;
     }
     &.cancelable {
-        padding-right: 16px;
+        padding-right: 24px;
+        position: relative;
+        .tag_cancel {
+            position: absolute;
+            font-size: 16px;
+            height: 100%;
+            display: inline-flex;
+            align-items: center;
+            right: 8px;
+            color: inherit;
+        }
     }
     .tag_name {
-        font-size: 14px;
-        padding: 2px;
+        font-size: 13px;
         text-align: center;
     }
-    .tag_cancel {
-        position: absolute;
-        font-size: 16px;
-        height: 100%;
-        display: inline-flex;
-        align-items: center;
-        right: 8px;
-        color: inherit;
-    }
+    
     &:hover, &:focus {
         opacity: 0.9;
     }
@@ -46,8 +48,37 @@
     }
     &.blue {
         border-color: $blue;
+        color: $blue;
         &.selected {
             background-color: $blue;
         }
+    }
+    &.grey {
+        color: #333;
+        background-color: rgba(0, 0, 0, 0.2);
+        border-color: rgba(0, 0, 0, 0.2);
+        &.selected {
+            color: #333;
+            background-color: rgba(0, 0, 0, 0.4);
+            border-color: rgba(0, 0, 0, 0.4);
+        }
+    }
+}
+.multiselect_tags_container {
+    .tags_label {
+        font-weight: normal;
+        font-size: 16px;
+        margin: 8px 0;
+        width: auto;
+        margin-right: 24px;
+        min-width: 100px;
+    }
+    .tags_container {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        list-style-type: none;
+        margin-bottom: 0;
     }
 }
