@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import CartService from './../../service/cartOperation';
-import ThemedButton from '../components/ThemedButton';
+import ThemedButton from '../components/generic/ThemedButton';
 import AddressForm from '../components/AddressForm';
 
 function LoginModule(props){

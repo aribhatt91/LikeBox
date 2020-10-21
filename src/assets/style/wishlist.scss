@@ -1,0 +1,47 @@
+@import './variables.scss';
+
+.wish-list-instance-container {
+    border: 1px solid #ebebeb;
+    .wish-list-instance-thumb {
+      width: 72px;
+      img {
+        width: 100%;
+      }
+    }
+    .wish-list-instance-text {
+      .wish-list-instance-name {
+        font-size: 14px;
+        font-weight: 500;
+      }
+      .wish-list-instance-brand {
+        text-transform: uppercase;
+        font-weight: 300;
+        font-size: 14px;
+      }
+      .wish-list-instance-price {
+        display: inline-flex;
+        align-items: flex-start;
+        .wish-list-instance-sale-price {
+          font-size: 18px;
+        }
+        .wish-list-instance-full-price {
+          font-size: 14px;
+        }
+        .wish-list-instance-discount {
+          font-size: 14px;
+          color: $success;
+        }
+      }
+      .wish-list-instance-remove-wrapper {
+        top: 1rem;
+        right: 1rem;
+        p {
+          font-size: 14px;
+        }
+        .action-message-tooltip {
+          width: 200px;
+        }
+      }
+    }
+    
+  }

@@ -2,6 +2,7 @@
 @import './cart.scss';
 @import './checkout.scss';
 @import './user-dashboard.scss';
+@import './variables.scss';
 
 .products-section {
     .flex_container {
@@ -15,4 +16,81 @@
 .page-content-wrapper {
     margin: auto;
     max-width: 1200px;
+}
+
+.product-home-page {
+    .product-details {
+        .product-name {
+            font-weight: 500;
+            font-size: 14px;
+        }
+        .product-brand {
+            font-weight: 300;
+            font-size: 15px;
+            text-transform: uppercase;
+        }
+        .product-price {
+            .product-sale-price {
+                font-weight: 500;
+                font-size: 16px;
+            }
+            .product-full-price {
+                font-size: 14px;
+            }
+            .product-discount {
+                color: $success;
+            }
+        }
+        .select-size-wrapper {
+            display: inline-block;
+            width: 100%;
+            .select-size-label {
+                font-size: 14px;
+            }
+            .select-size-input-container {
+                display: flex;
+                flex-wrap: wrap;
+                
+                .square-radio {
+                    display: inline-flex;
+                    position: relative;
+                    cursor: pointer;
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+                    height: 48px;
+                    width: 48px;
+                    input {
+                        position: absolute;
+                        opacity: 0;
+                        cursor: pointer;
+                        &:checked {
+                            &+.square-radio-text {
+                                background-color: $accent-color;
+                                color: $dark-btn-text;
+                            }
+                        }
+                    }
+                    .square-radio-text {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        height: 100%;
+                        width: 100%;
+                        background-color: #eee;
+                        color: #333;
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 14px;
+                    }
+                }
+                &:hover {
+                    .square-radio-text {
+                    }
+                }
+            }
+        }
+    }
 }

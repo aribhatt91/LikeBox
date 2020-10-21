@@ -1,21 +1,50 @@
 import React, { useState } from 'react';
-import ThemedButton from './ThemedButton';
-import TextInput from './TextInput';
+import ThemedButton from './generic/ThemedButton';
+import TextInput from './generic/TextInput';
 import STATES from '../../mock/states.json';
-import SelectInput from './SelectInput';
+import SelectInput from './generic/SelectInput';
+import { validateAddressForm, addAddress, updateAddress } from './../../service/addressMethods';
+import RadioButtonGroup from './generic/RadioButtonGroup';
 //component.scss
-function AddressForm({header, errorObject, errorValidation, addAddress, defaultValue, cancelable, cancelEdit, action, hideHeader}){
+function AddressForm({header, defaultValue, cancelable, cancelEdit, action, hideHeader}){
     const [errorObj, setErrorObj] = useState({});
     const [validated, setValidated] = useState(false);
-    const validateField = (tag, value) => {
-        console.log('validateField -> ', tag, ' - ', value);
-    }
-    const cancelForm = (e) => {
+    let inputObject = defaultValue ? Object.assign({}, defaultValue) || {} : {};
+
+    const address_types = [{
+        label: 'Home',
+        value: 'Home'
+    },
+    {
+        label: 'Work',
+        value: 'Work'
+    }],
+    validateField = (name, value) => {
+        console.log('validateField -> ', name, ' - ', value);
+        if(name === 'state' && value === ""){
+            inputObject.state = "";
+        }
+        if(value && value.trim() !== ""){
+            inputObject[name] = value;
+        }
+        let validation = validateAddressForm(inputObject);
+        setErrorObj(validation.errors);
+        setValidated(Object.keys(validation.errors).length === 0 && Object.keys(validation.required).length === 0);
+    },
+    cancelForm = (e) => {
         e.preventDefault();
         if(cancelEdit) {
             cancelEdit();
         }
-    }
+    },
+    submitForm = (e) => {
+        e.preventDefault();
+        if(action && action === 'update'){
+            updateAddress(inputObject, defaultValue);
+        }else {
+            addAddress(inputObject)
+        }
+    } 
     let btnState = 'disabled';
     if(validated){
         btnState = 'active';
@@ -32,9 +61,10 @@ function AddressForm({header, errorObject, errorValidation, addAddress, defaultV
                             name="name"
                             error={errorObj.name} 
                             type="text"
-                            label="Name"
+                            label="Name*"
                             required="true"
                             handler={validateField}
+                            defvalue={inputObject.name}
                         />
                     </div>
                     <div className="col-md-6 float-left pl-2 pr-2">
@@ -42,9 +72,10 @@ function AddressForm({header, errorObject, errorValidation, addAddress, defaultV
                             name="mobile"
                             error={errorObj.mobile} 
                             type="number"
-                            label="Mobile"
+                            label="Mobile*"
                             required="true"
                             handler={validateField}
+                            defvalue={inputObject.mobile}
                         />
                     </div>
                 </div>
@@ -54,9 +85,10 @@ function AddressForm({header, errorObject, errorValidation, addAddress, defaultV
                             name="pincode"
                             error={errorObj.pincode}
                             type="number"
-                            label="Pincode"
+                            label="Pincode*"
                             required="true"
                             handler={validateField}
+                            defvalue={inputObject.pincode}
                         />
                     </div>
                     <div className="col-md-6 float-left pl-2 pr-2">
@@ -67,6 +99,7 @@ function AddressForm({header, errorObject, errorValidation, addAddress, defaultV
                             required="true"
                             type="text"
                             handler={validateField}
+                            defvalue={inputObject.locality}
                         />
                     </div>
                 </div>
@@ -75,10 +108,11 @@ function AddressForm({header, errorObject, errorValidation, addAddress, defaultV
                         <TextInput
                             name="address"
                             error={errorObj.address} 
-                            label="Address (Area and Street)"
+                            label="Address (Area and Street)*"
                             type="textarea"
                             required="true"
                             handler={validateField}
+                            defvalue={inputObject.address}
                         />
                     </div>
                 </div>
@@ -88,9 +122,10 @@ function AddressForm({header, errorObject, errorValidation, addAddress, defaultV
                             name="city"
                             error={errorObj.city} 
                             type="text"
-                            label="City/District/Town"
+                            label="City/District/Town*"
                             required="true"
                             handler={validateField}
+                            defvalue={inputObject.city}
                         />
                     </div>
                     <div className="col-md-6 float-left pl-2 pr-2">
@@ -99,6 +134,7 @@ function AddressForm({header, errorObject, errorValidation, addAddress, defaultV
                             options={STATES.states}
                             error={errorObj.state}
                             handler={validateField}
+                            defvalue={inputObject.state}
                         />
                     </div>
                 </div>
@@ -109,13 +145,26 @@ function AddressForm({header, errorObject, errorValidation, addAddress, defaultV
                             label="Landmark (Optional)"
                             type="text"
                             handler={validateField}
+                            defvalue={inputObject.landmark}
+                        />
+                    </div>
+                </div>
+                <div className="row m-0">
+                    <div className="col-md-6 float-left pl-2 pr-2">
+                        <RadioButtonGroup
+                            title="Address type"
+                            handler={validateField}
+                            options={address_types}
+                            name="adtype"
+                            orientation="row"
+                            defvalue={inputObject.adtype}
                         />
                     </div>
                 </div>
                 <div className="row m-0">
 
                 </div>
-                <div className="row m-0 d-flex justify-content-start">
+                <div className="row m-0 mt-3 d-flex justify-content-start">
                     <div className="pl-2 pr-2">
                         <div className="d-inline-block pr-4">
                             <ThemedButton
@@ -123,6 +172,7 @@ function AddressForm({header, errorObject, errorValidation, addAddress, defaultV
                                 btnText="Save"
                                 theme="accent"
                                 size="medium"
+                                _click={submitForm}
                             />
                         </div>
                         

@@ -11,7 +11,10 @@
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
 }
-
+.App-body {
+  max-width: 1200px;
+  margin: auto;
+}
 .App-title {
   font-size: 1.5em;
 }

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import ThemedButton from './../../components/ThemedButton';
+import ThemedButton from './../../components/generic/ThemedButton';
 import CartService from './../../../service/cartOperation';
 import Page from './../Page';
 import CartProduct from './../../components/CartProduct'; 

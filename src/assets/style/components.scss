@@ -7,6 +7,8 @@
 @import './accordion.scss';
 @import './message.scss';
 @import './animated-text-input.scss';
+@import './orders.scss';
+@import './wishlist.scss';
 
 .hidden-xs-up {
   display: none;
@@ -63,65 +65,6 @@
   }
 }
 
-//Component - PageMessage
-.msg-container {
-  border: 1px solid #000;
-  padding: 16px;
-  .msg-icon {
-    font-size: 20px;
-    line-height: 20px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    color: inherit;
-  }
-  .msg-text {
-    font-size: 16px;
-    width: 100%;
-    color: inherit;
-    padding: 0 8px;
-  }
-  .msg-close {
-    font-size: 24px;
-    display: inline-flex;
-    color: inherit;
-    cursor: pointer;
-  }
-  &.msg-small {
-    padding: 8px;
-    .msg-icon {
-      font-size: 15px;
-      line-height: 14px;
-      height: auto;
-      width: auto;
-    }
-    .msg-text {
-      font-size: 12px;
-      line-height: 14px;
-    }
-    .msg-close {
-      font-size: 16px;
-      line-height: 14px;
-    }
-  }
-  &.no-border {
-    border: none;
-    padding: 0 !important;
-  }
-  &.error, 
-  &.alert {
-    border-color: red;
-    color: red;
-  }
-  &.success {
-    border-color: green;
-    color: green;
-  }
-  &.info {
-    border-color: #0066cc;
-    color: #0066cc;
-  }
-}
 
 //Component - AddressForm
 .address-form-container {
@@ -143,6 +86,71 @@
     }
   }
 }
+.address-instance-container {
+  border: 1px solid #ebebeb;
+  .address-instance-display, .address-instance-edit {
+    font-size: 14px;
+    position: relative;
+    
+  }
+  .address-instance-edit-btn, .address-instance-cancel-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    color: #0066cc;
+  }
+}
+.card-instance-container {
+  border: 1px solid #ebebeb;
+  .card-instance-display, .card-instance-edit {
+    font-size: 14px;
+    position: relative;
+    
+  }
+  .card-instance-edit-btn, .card-instance-cancel-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    color: #0066cc;
+  }
+}
+
+.tooltip-wrapper {
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  flex-direction: column;
+  top: 0;
+  right: 0;
+  .action-icon {
+
+  }
+  .action-message-tooltip {
+    margin-top: 8px;
+    padding: 16px;
+    position: relative;
+    background-color: #fff;
+    box-shadow: 0 4px 6px 0 rgba(0,0,0,.12);
+    &::after {
+      content: "";
+      position: absolute;
+      top: -16px;
+      right: 8px;
+      margin-left: -8px;
+      border-width: 8px;
+      border-style: solid;
+      border-color:  transparent transparent #fff transparent;
+    }
+  }
+}
+
 // Component - SelectInput
 .select-wrapper {
   select {
@@ -153,8 +161,24 @@
   }
   &.error {
     select {
-      border-color: red;
-      color: red;
+      border-color: $error;
+      color: $error;
+    }
+  }
+}
+.product-thumb-gallery {
+  .product-zoomed-image {
+    img {
+      width: 100%;
+    }
+  }
+  .product-image-thumbnails {
+    .thumb-image {
+      height: 50%;
+      min-height: 50%;
+      img {
+        width: 100%;
+      }
     }
   }
 }

@@ -6,14 +6,14 @@ option -> {
     value: ''
 }
 */
-export default function RadioButtonGroup({title, name, options, handler, disabled, defaultValue}){
-    let radios = [], d = defaultValue;
-    console.log('Radio -> ', defaultValue);
+export default function RadioButtonGroup({title, name, options, handler, disabled, defvalue}){
+    let radios = [], d = defvalue;
+    console.log('Radio -> ', defvalue);
     (options || []).forEach((item, index) => {
         radios.push(
             <div className="d-inline-flex radio-button mr-3">
                 <label key={index} for={name}>
-                    <input key={index} type="radio" name={name} value={item.value} onChange={handler} checked={defaultValue ? defaultValue === item.value : index === 0}  disabled={disabled ? " disabled" : ""}/>
+                    <input key={index} type="radio" name={name} value={item.value} onChange={handler} checked={defvalue ? defvalue === item.value : false}  disabled={disabled ? " disabled" : ""}/>
                     <span className="ml-1">{item.label}</span>
                 </label>
             </div>

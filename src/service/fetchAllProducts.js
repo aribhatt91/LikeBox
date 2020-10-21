@@ -1,5 +1,5 @@
 import { fetchStateError, fetchStateSuccess, fetchStatePending } from '../store/actions/index';
-import PRODUCTS from './products';
+import PRODUCTS from '../mock/products.js';
 import simulateNetworkRequest from './simulateNetworkRequest';
 /*
 filter = {

@@ -1,9 +1,10 @@
 {
-    "user_id": "",
-    "first_name": "",
-    "middle_name": "",
-    "last_name": "",
-    "prefix": "",
-    "joining_date": "",
-    "user_type": ""
+    "fname": "Aritra",
+    "lname": "Bhattacharyya",
+    "email": "aribhatt91@gmail.com",
+    "contact": "+919836592425",
+    "gender": "m",
+    "addressIds": ["ad0001", "ad0002"],
+    "joining_date": "01-01-2020",
+    "user_type": "prime"
 }

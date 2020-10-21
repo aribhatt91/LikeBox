@@ -1,0 +1,60 @@
+@import './variables.scss';
+
+.order-container {
+    border: 1px solid #ebebeb;
+    .order-id {
+        color: grey;
+        font-size: 14px;
+        font-weight: 500;
+        .order-id-text {
+            color: $primary-color;
+            text-transform: uppercase;
+        }
+    }
+    .order-instances {
+        .order-instance-product {
+            .order-summary-container {
+                .order-instance-thumb {
+                    width: 72px;
+                    img {
+                        width: 100%;
+                    }
+                }
+                .order-instance-text {
+                    flex: 1.5;
+                    .order-instance-name{
+                        font-size: 14px;
+                        font-weight: 500;
+                    }
+                    .order-instance-brand {
+                        font-weight: 300;
+                        text-transform: uppercase;
+                    }
+                    .order-instance-price {
+                        font-size: 14px;
+                        font-weight: 500;
+                    }
+                    .order-instance-size-qty {
+                        font-size: 14px;
+                    }
+                }
+                .order-instance-status {
+                    flex: 1;
+                    .order-instance-status-text {
+                        text-transform: uppercase;
+                        font-weight: 500;
+                        &.green {
+                            color: $success;
+                        }
+                        &.red {
+                            color: $error;
+                        }
+                    }
+                    .order-instance-status-date {
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+}

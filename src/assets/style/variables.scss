@@ -4,6 +4,15 @@ $primary-color-hover: #285A84;
 $accent-color-hover: #5EA669;
 $dark-btn-text: #fff;
 $light-btn-text: #000;
-$btn-disabled-color: #e6e6e6;
+$btn-disabled-color: #ebebeb;
+$btn-disabled-text: #333;
 $blue: #06c;
 $disabled-color: lightgrey;
+$success: #28a745;
+$error: #cc0000;
+
+// Breakpoints
+$breakpoint-tablet: 768px;
+$breakpoint-tablet-large: 1024px;
+$breakpoint-desktop: 1200px;
+$breakpoint-desktop-large: 1600px;

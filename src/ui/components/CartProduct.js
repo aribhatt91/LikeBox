@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import ThemedButton from './ThemedButton';
+import ThemedButton from './generic/ThemedButton';
 
 function CartProduct({item, _incrementItemCount, _decrementItemCount, _removeItem, currency}){
     const [showRemove, setShowRemove] = useState(false);

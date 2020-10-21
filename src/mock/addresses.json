@@ -1,0 +1,26 @@
+{
+    "addresses": [
+        {
+            "id": "ad00001",
+            "name": "Aritra Bhattacharyya",
+            "pincode": "700008",
+            "mobile": "9836592425",
+            "locality": "Behala",
+            "address": "2/1 Nrishingha Dutta Road",
+            "city": "Calcutta",
+            "state": "West Bengal",
+            "adtype": "Home"
+        },
+        {
+            "id": "ad00002",
+            "name": "Aritra Bhattacharyya",
+            "pincode": "560103",
+            "mobile": "9836592425",
+            "locality": "Ambedkar Statue",
+            "address": "Prestige Trinity Center - 6th floor, Doddakannelli, Gear Rd, Adarsh Palm Retreat",
+            "city": "Bangalore",
+            "state": "Karnataka",
+            "adtype": "Work"
+        }
+    ]
+}

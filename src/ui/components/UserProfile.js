@@ -1,26 +1,15 @@
 import React, {useState } from 'react';
 
-import RadioButtonGroup from '../components/RadioButtonGroup';
-import TextInput from '../components/TextInput';
-import ThemedButton from '../components/ThemedButton';
+import RadioButtonGroup from '../components/generic/RadioButtonGroup';
+import TextInput from '../components/generic/TextInput';
+import ThemedButton from './generic/ThemedButton';
+import USER from '../../mock/user.json';
 
 function UserProfile({profile, _profileUpdateHandler}){
     const [piEditMode, setPiEditMode] = useState(false);//Edit Personal Information
     const [ciEditMode, setCiEditMode] = useState(false);//Edit Personal Information
-    const [fieldState, setFieldState] = useState({
-        fname: 'Aritra',
-        lname: 'Bhattacharyya',
-        email: 'aribhatt91@gmail.com',
-        contact: '+919836592425',
-        gender: 'm'
-    });
-    /* let fieldState = {
-        fname: 'Aritra',
-        lname: 'Bhattacharyya',
-        email: 'aribhatt91@gmail.com',
-        contact: '+919836592425',
-        gender: 'm'
-    }; */
+    const [fieldState, setFieldState] = useState(USER);
+
     const gender_options = [{
         label: 'Male',
         value: 'm',
@@ -77,7 +66,7 @@ function UserProfile({profile, _profileUpdateHandler}){
     
     return (
         <div className={"account-section editable-section"}>
-            <h1 className="editable-section-header mb-4">My Account</h1>
+            <h1 className="editable-section-header mb-5">My Account</h1>
             <div className={"editable-form"  +  (piEditMode ? " edit-mode" : "")}>
                 <div className="field-group-header mb-3">Personal information <span className="field-edit" onClick={() => {
                     if(piEditMode){
@@ -111,7 +100,7 @@ function UserProfile({profile, _profileUpdateHandler}){
                             <RadioButtonGroup
                                 title="Gender"
                                 disabled={!piEditMode}
-                                defaultValue={fieldState.gender}
+                                defvalue={fieldState.gender}
                                 handler={handleRadioButton}
                                 options={gender_options}
                                 name="gender"

@@ -10,7 +10,7 @@ dismissable: Boolean
 */
 
 const PageMessage = (props) => {
-    const {showMsg, setShowMsg} = useState(true);
+    const [showMsg, setShowMsg] = useState(true);
     return (
         <div className={"msg-container" + (props.size === "small" ? " msg-small" : "") + " " + (props.type || "") + (props.border === false ? "" : " no-border") + (!showMsg ? " d-none" : "")}>
             <span className="msg-icon">

@@ -1,11 +1,17 @@
 import React, { Component, useState } from 'react';
 import { BrowserRouter, Link, Route, Switch, Redirect, NavLink } from 'react-router-dom';
-import RadioButtonGroup from '../components/RadioButtonGroup';
-import TextInput from '../components/TextInput';
-import ThemedButton from '../components/ThemedButton';
-import AddressForm from '../components/AddressForm';
+import RadioButtonGroup from '../components/generic/RadioButtonGroup';
+import TextInput from '../components/generic/TextInput';
+import ThemedButton from '../components/generic/ThemedButton';
 import UserProfile from './../components/UserProfile';
-import Accordion from './../components/Accordion';
+import Accordion from './../components/generic/Accordion';
+import UserAddressBook from '../components/UserAddressBook';
+import UserPaymentOptions from './../components/UserPaymentOptions';
+import UserWishList from './../components/UserWishList';
+
+//Mock data
+import USER from '../../mock/user.json';
+import UserOrdersList from './../components/UserOrdersList';
 
 
 function Order(props) {
@@ -16,58 +22,7 @@ function MyOrders(props){
         <div>MyOrders</div>
     )
 }
-function MyWishlists(props){
-    return (
-        <div>MyWishlists</div>
-    )
-}
-function PaymentOptions(props){
-    return (
-        <div>PaymentOptions</div>
-    )
-}
 
-function Address({instance, deleteAddress, editAddress}){
-
-}
-function AddressBook({addresses, deleteAddress, editAddress}){
-    let saved_addresses = [];
-    if(addresses && addresses.length > 0){
-        addresses.forEach((item, index) => {
-            saved_addresses.push(
-                <Address
-                    instance={item}
-                    deleteAddress={deleteAddress}
-                    editAddress={editAddress}
-                />
-            )
-        })
-        
-    }
-    return (
-        <div className={"address-section editable-section"}>
-            <h1 className="editable-section-header mb-4">My addresses</h1>
-            <div className="add-address-container mb-3">
-                <Accordion
-                    label="Add new address"
-                    openBtn="true"
-                    // hideHeaderOnOpen={true}
-                    children={
-                        <AddressForm
-                            hideHeader={true}
-                        />
-                    }
-                />
-            </div>
-            {saved_addresses.length > 0 && <div className="saved-address-container">
-                {
-                    saved_addresses
-                }
-            </div>}
-
-        </div>
-    )
-}
 function DashboardNavigation({userFirstName, logoSrc}){
     return (
         <div className="dashboard-navigation">
@@ -112,10 +67,10 @@ class UserDashboard extends Component {
                     <div className="dashboard-body">
                         <Switch>
                             <Route exact path="/" component={UserProfile} />
-                            <Route path="/orders" component={MyOrders} />
-                            <Route path="/wishlists" component={MyWishlists} />
-                            <Route path="/payment-options" component={PaymentOptions} />
-                            <Route path="/address-book" component={AddressBook} />
+                            <Route path="/orders" component={UserOrdersList} />
+                            <Route path="/wishlists" component={UserWishList} />
+                            <Route path="/payment-options" component={UserPaymentOptions} />
+                            <Route path="/address-book" component={UserAddressBook} />
                             <Redirect to="/"/>
                         </Switch>
                     </div>

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import PageMessage from './PageMessage';
 
-function SelectInput({name, options, handler, error, defaultVal, disabled}) {
+function SelectInput({name, options, handler, error, defvalue, disabled}) {
     let optionsArray = [];
     (options || []).forEach((item, index) => {
         optionsArray.push(
@@ -9,7 +9,7 @@ function SelectInput({name, options, handler, error, defaultVal, disabled}) {
         );
     });
     optionsArray.unshift(
-        <option key={-1} value={"Select " + (name || "")}>Select {name || ""}</option>
+        <option key={-1} value="">Select {name || ""}</option>
     );
     let selectHandler = (e) => {
         if(handler && typeof handler === 'function'){
