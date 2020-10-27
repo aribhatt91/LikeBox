@@ -2,16 +2,22 @@ import React, {Component, useState, useLocation, useEffect, useParams} from 'rea
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Page from './Page';
-import fetchItems from '../../service/fetchAllProducts';
+import { fetchAllProducts } from '../../service/productMethods';
 import LoadingModule from './../components/LoadingModule';
 import { ProductCard } from './../components/ProductCard';
 import ProductFilters from './../components/ProductFilters';
+import EMPTY from '../../assets/img/no-search-result.png';
+import ErrorModule from './../components/ErrorModule';
+
+const EMPTY_TEXT = "Sorry, no results found!",
+EMPTY_SUBTEXT = "Please check the spelling or try searching for something else";
 
 class ListingPage extends Page {
   //Filter by search keyword, discount, price range, brand
   selected_brand = []; 
   selected_price_range = []; 
   selected_discount = [];
+  
   constructor(props){
     super(props);
     this.state = {
@@ -95,7 +101,11 @@ class ListingPage extends Page {
               })}
             </div>
           </div>}
-        {!this.props.pending && this.props.items.length === 0 && <div>No products found</div>} 
+        {!this.props.pending && this.props.items.length === 0 && <ErrorModule
+          error_image={EMPTY}
+          error_text={EMPTY_TEXT}
+          error_subtext={EMPTY_SUBTEXT}
+        />} 
       </section>
     );
   }
@@ -109,7 +119,7 @@ const mapStateToProps = state => {
   }
 }
 //Anything returned from this function will end up as props to BookList container
-const mapDispatchToProps = (dispatch) => bindActionCreators({fetchProducts: fetchItems}, dispatch)
+const mapDispatchToProps = (dispatch) => bindActionCreators({fetchProducts: fetchAllProducts}, dispatch)
 //Promote BookList from a component to a container
 //It needs to know about this dispatch method selectBook -- Make it available as prop
 export default connect(mapStateToProps, mapDispatchToProps)(ListingPage);

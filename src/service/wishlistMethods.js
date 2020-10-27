@@ -1,8 +1,8 @@
-export const addItemToWishList = (item) => {
+export const addItemToWishList = (itemid) => {
 
 }
 
-export const removeItemFromWishList = (item) => {
+export const removeItemFromWishList = (itemid) => {
 
 }
 

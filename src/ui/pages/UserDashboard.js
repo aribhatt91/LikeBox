@@ -42,6 +42,10 @@ function DashboardNavigation({userFirstName, logoSrc}){
                 <li><NavLink to='/address-book' activeclassName='active'>Address book</NavLink></li>
                 <li><NavLink to='/payment-options' activeclassName='active'>Payment options</NavLink></li>
             </ul>
+            <ul>
+                <li><NavLink to='/login' activeclassName='active'>Login</NavLink></li>
+                <li><NavLink to='/signup' activeclassName='active'>Signup</NavLink></li>
+            </ul>
         </div>
     )
 }

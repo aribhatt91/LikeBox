@@ -3,9 +3,19 @@ import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-
+/* 
+props.btnText, 
+props.iconBefore, 
+props.iconAfter, 
+props.iconLoading, 
+props.loadingText, 
+props.successText, 
+props.successIcon, 
+props.url, 
+props.handler, 
+props.btnState 
+*/
 function ThemedButton(props){
-    /* props.btnText, props.iconBefore, props.iconAfter, props.iconLoading, props.loadingText, props.successText, props.successIcon, props.url, props.handler, props.btnState */
     return (
         <div className='themed_btn_container'>
             {props.url && <Link className={'themed_btn' + (props.theme ? (' theme_' + props.theme) : "")  + (props.border === 'false' ? ' no-border' : "") + (props.size ? " btn-" + props.size : "")} to={props.url}>

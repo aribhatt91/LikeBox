@@ -2,7 +2,9 @@ import React, {useState, useRef} from 'react';
 import PageMessage from './PageMessage';
 
 //{type='text', name, error, value, label, _onChange, _onBlur, disabled}
-const TextInput = ({name, error, label, disabled, defvalue, handler, type, ...rest}) => {
+//TODO - Create actionable text input 
+
+const TextInput = ({name, error, label, disabled, defvalue, handler, type, actionable, actionText, ...rest}) => {
     const [dirty, setDirty] = useState(defvalue && defvalue.trim() !== "");
     const tinput = useRef(null);
     const resetEditMode = (e) => {

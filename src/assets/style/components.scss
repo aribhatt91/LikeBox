@@ -9,6 +9,7 @@
 @import './animated-text-input.scss';
 @import './orders.scss';
 @import './wishlist.scss';
+@import './counter.scss';
 
 .hidden-xs-up {
   display: none;
@@ -23,6 +24,7 @@
 .card-white:hover, .card-white:focus {
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2)
 }
+// Component - LoadingModule.js
 .loading_module {
   position: fixed;
   width: 100%;
@@ -31,19 +33,46 @@
   left: 0;
   background: white;
   z-index: 9999;
+  .loading_module_wrapper {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .loading_icon {
+      font-size: 20px;
+      .spinner-border {
+        width: 3rem;
+        height: 3rem;
+      }
+    }
+    .loading_text {
+      margin-top: 24px;
+      font-size: 15px;
+      font-weight: 500;
+      color: #17a2b8;
+    }
+  }
 }
-.loading_module_wrapper {
-  display: flex;
-  height: 100%;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+
+.error-module {
+  padding: 50px;
+  .error-image {
+    
+  }
+  .error-text {
+    font-size: 24px;
+    font-weight: 500;
+    margin: 20px 0 10px;
+  }
+  .error-subtext {
+    color: #878787;
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
 }
-.loading_text {
-  margin-top: 24px;
-  font-size: 18px;
-}
+
 .p-8{
   padding: 8px;
 }
@@ -166,8 +195,10 @@
     }
   }
 }
+/* ProductHeroGallery */
 .product-thumb-gallery {
   .product-zoomed-image {
+    position: relative;
     img {
       width: 100%;
     }
@@ -179,6 +210,26 @@
       img {
         width: 100%;
       }
+    }
+  }
+  .product-add-wishlist-icon {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid #f0f0f0;
+    box-shadow: 0 1px 4px 0 rgba(0,0,0,.1);
+    background: #fff;
+    color: #c2c2c2;
+    font-size: 15px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    &.wished {
+      color: #ff3e6c;
     }
   }
 }

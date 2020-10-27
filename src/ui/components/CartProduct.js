@@ -21,8 +21,8 @@ function CartProduct({item, _incrementItemCount, _decrementItemCount, _removeIte
                             <span className="incr_icon" onClick={() => _incrementItemCount(item)}>+</span>
                         </span>
                         <span className="price_wrapper d-flex flex-column align-center justify-content-center">
-                            {item.fullPrice && <span className="strikeThrough">{currency} {item.fullPrice}</span>}
-                            <span className="price">{currency} {item.salePrice}</span>
+                            {item.fullPrice && <span className="strikeThrough">&#x20B9;{item.fullPrice}</span>}
+                            <span className="price">&#x20B9;{item.salePrice}</span>
                         </span>
                         <span className="delete_product d-flex align-center" onClick={() => setShowRemove(true)}>
                             &times;

@@ -1,4 +1,7 @@
 import { addToCartSuccess, addToCartPending, removeFromCartPending, removeFromCartSuccess, fetchCartPending, fetchCartSuccess, cartError } from '../store/actions/index';
+import { MockGetCart } from './../mock/api/mock-cart-api';
+import { fetchCartError } from './../store/actions/index';
+
 /*
 // Cart
 {
@@ -76,7 +79,7 @@ let CartService = {
                 'total': total
             });
             /*
-            Make a post request with the product as a parameter
+            TODO - Make a post request with the product as a parameter
             */
             dispatch(addToCartSuccess(CartService.getCart()));
         }
@@ -124,7 +127,7 @@ let CartService = {
                 'total': total
             });
             /*
-            Make a post request with the product as a parameter
+            TODO - Make a post request with the product as a parameter
             */
             dispatch(removeFromCartSuccess(CartService.getCart()));
         }
@@ -136,14 +139,22 @@ let CartService = {
             var cart = CartService.readCartFromCookie();
             console.log('fetchCart: cart from cookie', cart);
             if(!cart){
-                CartService.setCart(EMPTY_CART);
+                console.log('fetchCart: calling MockGetCart()');
+                //CartService.setCart(EMPTY_CART);
+                MockGetCart().then( res => {
+                    CartService.setCart(CartService.parseCart(res));
+                    console.log('fetchCart: MockGetCart() parsed cart', CartService.active_cart);
+                    dispatch(fetchCartSuccess(CartService.active_cart));
+                }).catch( error => {
+                    console.log('fetchCart: MockGetCart: error', error);
+                    dispatch(fetchCartError())
+                })
             }else {
                 CartService.setCart(CartService.parseCart(cart));
                 console.log('fetchCart: parsed cart', CartService.active_cart);
                 dispatch(fetchCartSuccess(CartService.active_cart));
             }
-        }
-        
+        }  
     },
     parseCart: (cartString) => {
         try{
@@ -162,9 +173,10 @@ let CartService = {
             });
             return cart;
         }catch(e){
+            console.log('parseCart Error', e);
             cartError({error: CART_FETCH_ERROR, cart: CartService.active_cart});
         }
-        return null;
+        return EMPTY_CART;
     },
     getCart: () => {
         return CartService.active_cart;

@@ -7,6 +7,8 @@ state
 country
 zipcode
 */
+import simulateNetworkRequest from './simulateNetworkRequest';
+
 const ERROR_TEXT = {
     name: 'Please fill out this field',
     mobile: 'Please enter 10-digit mobile number',
@@ -27,6 +29,17 @@ export const deleteAddress = (inputObj) => {
 
 }
 
+export const checkDeliveryAvailability = (pincode) => {
+    if(validatePincode(pincode)){
+        return new Promise((resolve, reject) => {
+            setTimeout(() => resolve({valid: true, msg: 'We deliver at this location!'}), 2000)
+          });
+    }else {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => resolve({valid: false, msg: 'Please enter a valid pincode'}), 500)
+          });
+    }
+}
 export const validateAddressForm = (inputObj) => {
     let errorObj = {},
     /* inputObj = inputObj || {},  */keys = Object.keys(inputObj),

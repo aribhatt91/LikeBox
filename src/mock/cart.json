@@ -1,0 +1,36 @@
+{
+    "count": "3",
+    "subTotal": "7997.00",
+    "total": "3997.00",
+    "savings": "4000.00",
+    "products": [
+        {
+            "productId": "269232-01",
+            "productName": "Unisex Black Woven Design Synthetic Mid-Top Troy MU IDP Sneakers",
+            "productImg": "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/productimage/2019/12/19/afee4051-1363-40f7-b8dd-4f0a8daeb3b31576708499697-1.jpg",
+            "fullPrice": "3999.00",
+            "salePrice": "1999.00",
+            "quantity": "1",
+            "size": "6"
+        },
+        {
+            "productId": "281477-01",
+            "productName": "Unisex Grey IMAGINEE Slip-On Sneakers",
+            "productImg": "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/8479065/2019/9/17/81ed2431-9093-4c2f-ac13-8a078682aba91568697270971-DIESEL-Unisex-Grey-Slip-On-Sneakers-9461568697270087-1.jpg",
+            "fullPrice": "1999.00",
+            "salePrice": "999.00",
+            "quantity": "1",
+            "size": "8"
+        },
+        {
+            "productId": "268804-01",
+            "productName": "Unisex Cream-Coloured Slip-On Sneakers",
+            "productImg": "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/8479069/2019/9/16/b70f7829-b2a2-4126-93c7-f268a5bf59821568631933666-DIESEL-Unisex-Cream-Coloured-Slip-On-Sneakers-25315686319329-1.jpg",
+            "fullPrice": "1999.0",
+            "salePrice": "999.0",
+            "quantity": "1",
+            "size": "8"
+        }],
+    "promoCode": "XYZ",
+    "promoApplied": "true"
+}

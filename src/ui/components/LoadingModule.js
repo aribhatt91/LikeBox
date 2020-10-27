@@ -6,10 +6,7 @@ function LoadingModule(props){
     <div className='loading_module'>
         <div className='loading_module_wrapper'>
             <span className='loading_icon'>
-                <Spinner animation="grow" variant="primary" />
-                <Spinner animation="grow" variant="secondary" />
-                <Spinner animation="grow" variant="success" />
-                <Spinner animation="grow" variant="danger" />
+                <Spinner animation="border" variant="info" size="lg"/>
             </span>
             <span className='loading_text'>{props.text}</span>
         </div>

@@ -87,7 +87,7 @@ const PRODUCTS = [
        "price":"11999.00",
        'fullPrice': '13200.00',
        "discount": "10",
-       "rating":"5.0",
+       "rating":"3.5",
        "reviews":"4",
        images: ['https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/10394713/2019/11/11/e09d711f-704b-43c6-8e42-cfa41d2fdcfb1573473235849-ADIDAS-Originals-Unisex-Navy-3MC-Suede-Sneakers-645157347323-1.jpg', 'https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/10394713/2019/11/11/29ab2e7d-fdcb-41e3-8d99-17b506b69bde1573473235785-ADIDAS-Originals-Unisex-Navy-3MC-Suede-Sneakers-645157347323-2.jpg', 'https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/10394713/2019/11/11/fad61544-acbb-49b9-b560-973b0a0530e61573473235737-ADIDAS-Originals-Unisex-Navy-3MC-Suede-Sneakers-645157347323-3.jpg', 'https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/10394713/2019/11/11/66068f9a-c7e9-4b13-8302-ceb8a9357dbd1573473235691-ADIDAS-Originals-Unisex-Navy-3MC-Suede-Sneakers-645157347323-4.jpg'],
        sizes: '3,4,5,6,7,8,9,10'

@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import {signin} from './../../service/loginService';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import TextInput from './generic/TextInput';
 
 class LoginModule extends Component{
   constructor(props){
@@ -17,11 +18,11 @@ class LoginModule extends Component{
     const {signInUser} = this.props;
     //signInUser({'email': 'aribhatt@adobe.com', 'password': 'ari'});
   }
-  onUserInput(event){
+  onUserInput(tag, value){
     this.setState({
-      [event.target.name]: event.target.value
+      [tag]: value
     });
-    console.log('state -> ', this.state);
+    //console.log('state -> ', this.state);
   }
   handleSubmit(event){
     event.preventDefault();
@@ -36,18 +37,25 @@ class LoginModule extends Component{
       <div>
         {this.props.loggedIn && <div>Hi {this.props.user.userName}, You are now logged in</div>}
         {!this.props.loggedIn && <Form onSubmit={this.handleSubmit}>
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control autoFocus className="themed_text_input" type="email" name="email" placeholder="Enter email" onChange={this.onUserInput} />
-            <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
+          <div className="col-md-10 col-lg-8 clearfix">
+            <TextInput
+              name="email"
+              label="Email"
+              type="email"
+              error={error ? error.email : null}
+              handler={this.onUserInput}
+            />
+          </div>
+          <div className="col-md-10 col-lg-8 clearfix">
+            <TextInput
+              name="password"
+              label="Password"
+              type="password"
+              error={error ? error.password : null}
+              handler={this.onUserInput}
+            />
+          </div>
 
-          <Form.Group controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control className="themed_text_input" type="password" name="password" placeholder="Password" onChange={this.onUserInput} />
-          </Form.Group>
           <Form.Group controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Stay signed in" />
           </Form.Group>
