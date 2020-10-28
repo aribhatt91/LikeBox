@@ -1,5 +1,5 @@
-import React, {Component, useState} from 'react';
-import {Link} from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 
@@ -11,7 +11,7 @@ function SideNav(props){
     props.signIn();
   }
   return (
-    <span className="d-md-none">
+    <div className="d-sm-inline-block sideNav-container d-md-none">
       <a href="#" onClick={()=>{setSideNavOpen(true)}} className="hamburger">
         <FontAwesomeIcon icon={faBars}/>
       </a>
@@ -33,24 +33,33 @@ function SideNav(props){
             </li>
           </ul>
           <hr className="divider_small"></hr>
-          <ul className="clean_list personal_list_items">
-            {props.loggedIn && <li  key="0">
-              <Link to="/my-account"> Your account</Link>
-            </li>}
-            {props.loggedIn && <li key="1">
-              <Link to="/wishlist">Wishlist</Link>
-            </li>}
-            {!props.loggedIn && <li key="2">
-              <a href="#" onClick={signInPopup}>Sign in</a>
-            </li>}
+          {props.loggedIn && <ul className="clean_list personal_list_items">
+            <li  key="0">
+              <Link to="/user"> My account</Link>
+            </li>
+            <li key="1">
+              <Link to="/user/wishlist">Wishlist</Link>
+            </li>
+            <li key="2">
+              <Link to="/user/orders">My orders</Link>
+            </li>
             <li key="3">
-              <Link to="/orders">Your orders</Link>
+              <Link to="/user/payment-options">Payment options</Link>
             </li>
             <li key="4">
+              <Link to="/user/address-book">Address book</Link>
+            </li>
+          </ul>
+          }
+          <ul className="clean_list">
+            <li key="0">
               <Link to="/cart">
                 Cart
               </Link>
             </li>
+            {!props.loggedIn && <li key="1">
+              <a href="#" onClick={signInPopup}>Login</a>
+            </li>}
           </ul>
           <hr className="divider_small"></hr>
           <ul className="clean_list">
@@ -64,7 +73,7 @@ function SideNav(props){
           <span className='sideNav_closeIcon' onClick={(event)=> {setSideNavOpen(false)}}>&times;</span>
         </div>
       </div>
-    </span>
+    </div>
   )
 }
 

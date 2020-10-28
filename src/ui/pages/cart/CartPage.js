@@ -6,7 +6,11 @@ import CartService from './../../../service/cartOperation';
 import Page from './../Page';
 import CartProduct from './../../components/CartProduct'; 
 import LoadingModule from '../../components/LoadingModule';
+import ErrorModule from '../../components/ErrorModule';
+import EMPTY from '../../../assets/img/empty-cart.png';
 
+const EMPTY_TEXT = "You have no items in your cart!",
+EMPTY_SUBTEXT = "Please check the spelling or try searching for something else";
 function CartPageSidePanel(props) {
     return (
         <div className="float-left cart_sidePanel">
@@ -49,7 +53,11 @@ class CartPage extends Page {
             
             <div className="checkout_container">
                 {this.props.fetch_pending && <LoadingModule text="Please wait..."></LoadingModule>}
-                {!this.props.fetch_pending && !this.props.error && 
+                {!this.props.fetch_pending && (this.props.error || (this.props.cart.products || []).length <= 0) && <ErrorModule
+                    error_image={EMPTY}
+                    error_text={EMPTY_TEXT}
+                />}
+                {!this.props.fetch_pending && !this.props.error && (this.props.cart.products || []).length > 0 &&
                     <section className="cart_body">
                         <div className="float-left pl-4 pr-4">
                             {

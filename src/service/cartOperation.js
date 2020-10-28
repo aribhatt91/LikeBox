@@ -1,6 +1,5 @@
 import { addToCartSuccess, addToCartPending, removeFromCartPending, removeFromCartSuccess, fetchCartPending, fetchCartSuccess, cartError } from '../store/actions/index';
-import { MockGetCart } from './../mock/api/mock-cart-api';
-import { fetchCartError } from './../store/actions/index';
+import { MockGetCart, MockAddItemToCart, MockRemoveItemFromCart } from './../mock/api/mock-cart-api';
 
 /*
 // Cart
@@ -50,38 +49,20 @@ let CartService = {
         return dispatch => {
             dispatch(addToCartPending(CartService.active_cart));
             if(!CartService.validateProduct(product)){
-                console.error(INVALID_PRODUCT, product);
+                console.log('addToCart: ', INVALID_PRODUCT, product);
                 //DISPATCH ERROR
                 dispatch(cartError({error: CART_ADD_ERROR, cart: CartService.active_cart}));
                 return;
             }
             
-            let cart = CartService.getCart(),
-            products = cart.products || [],
-            present = false, itemCount = 0, subTotal = 0, total = 0;
-            for(let p in products){
-                if(products[p].productId === product.productId && products[p].size === product.size){
-                    products[p].quantity = Number(products[p].quantity) + 1;
-                    present = true;
-                }
-                itemCount += products[p].quantity;
-                subTotal += (products[p].fullPrice || products[p].salePrice) * products[p].quantity;
-                total += products[p].salePrice * products[p].quantity; 
-            }
-            if(!present){
-                products.push(product);
-            }
-            CartService.setCart({
-                ...cart,
-                'products': products,
-                'count': itemCount,
-                'subTotal': subTotal,
-                'total': total
+            MockAddItemToCart(product).then( res => {
+                CartService.setCart(CartService.parseCart(res));
+                console.log('addToCart: MockGetCart: parsed cart', CartService.active_cart);
+                dispatch(addToCartSuccess(CartService.getCart()));
+            }).catch( error => {
+                console.log('addToCart: MockGetCart: error', error);
+                dispatch(cartError({error: CART_ADD_ERROR, cart: CartService.active_cart}));
             });
-            /*
-            TODO - Make a post request with the product as a parameter
-            */
-            dispatch(addToCartSuccess(CartService.getCart()));
         }
         
     },
@@ -89,76 +70,51 @@ let CartService = {
         return (dispatch) => {
             dispatch(removeFromCartPending(CartService.active_cart));
             if(!CartService.validateProduct(product)){
-                console.error('Product is not valid', product);
+                console.log('removeFromCart: ', INVALID_PRODUCT, product);
                 //DISPATCH ERROR
                 if(decrement){
                     dispatch(cartError({error: CART_DECR_ERROR, cart: CartService.active_cart}));
                 }else {
                     dispatch(cartError({error: CART_REMOVE_ERROR, cart: CartService.active_cart}));
                 }
-                
                 return;
             }
             
-           let cart = CartService.getCart(),
-           products = cart.products || [],
-           itemCount = cart.count, subTotal = cart.subTotal, total = cart.total;
-            for(let p in products){
-                if(products[p].productId === product.productId){
-                    var q = 1;
-                    if(decrement && products[p].quantity > 1){
-                        products[p].quantity = Number(products[p].quantity) - 1;
-                    }else {
-                        q = products[p].quantity;
-                        products.splice(p, 1);
-                    }
-                    itemCount -= q;
-                    subTotal -= (products[p].fullPrice || products[p].salePrice)  * q;
-                    total -= products[p].salePrice * q;
-                    break;
-                }
-                
-            }
-            CartService.setCart({
-                ...cart,
-                'products': products,
-                'count': itemCount,
-                'subTotal': subTotal,
-                'total': total
-            });
-            /*
-            TODO - Make a post request with the product as a parameter
-            */
-            dispatch(removeFromCartSuccess(CartService.getCart()));
+           
+            MockRemoveItemFromCart(product, decrement).then( res => {
+                CartService.setCart(CartService.parseCart(res));
+                console.log('removeFromCart: MockGetCart: parsed cart', CartService.active_cart);
+                dispatch(removeFromCartSuccess(CartService.getCart()));
+            }).catch( error => {
+                console.log('removeFromCart: MockGetCart: error', error);
+                dispatch(cartError({error: CART_REMOVE_ERROR, cart: CartService.active_cart}));
+            })
+            
         }
         
     },
     fetchCart: () => {
         return (dispatch) => {
             dispatch(fetchCartPending(EMPTY_CART));
-            var cart = CartService.readCartFromCookie();
-            console.log('fetchCart: cart from cookie', cart);
-            if(!cart){
-                console.log('fetchCart: calling MockGetCart()');
-                //CartService.setCart(EMPTY_CART);
-                MockGetCart().then( res => {
-                    CartService.setCart(CartService.parseCart(res));
-                    console.log('fetchCart: MockGetCart() parsed cart', CartService.active_cart);
-                    dispatch(fetchCartSuccess(CartService.active_cart));
-                }).catch( error => {
-                    console.log('fetchCart: MockGetCart: error', error);
-                    dispatch(fetchCartError())
-                })
-            }else {
-                CartService.setCart(CartService.parseCart(cart));
-                console.log('fetchCart: parsed cart', CartService.active_cart);
+
+            MockGetCart().then( res => {
+                CartService.setCart(CartService.parseCart(res));
+                console.log('MockGetCart: parsed cart', CartService.active_cart);
                 dispatch(fetchCartSuccess(CartService.active_cart));
-            }
+            }).catch( error => {
+                console.log('fetchCart: MockGetCart: error', error);
+                dispatch(cartError({error: CART_FETCH_ERROR, cart: CartService.active_cart}));
+            })
         }  
     },
     parseCart: (cartString) => {
         try{
-            let cart = JSON.parse(cartString);
+            let cart = null; 
+            if(typeof cartString === 'string'){
+                cart = JSON.parse(cartString);
+            }else {
+                cart = cartString || {};
+            }
             cart.count = cart.count ? Number(cart.count) || 0 : 0;
             cart.total = cart.total ? Number(cart.total) || 0 : 0;
             cart.subTotal = cart.subTotal ? Number(cart.subTotal) || 0 : 0;
@@ -166,7 +122,7 @@ let CartService = {
             cart.promoApplied = cart.promoApplied === 'true';
             cart.products = cart.products || [];
             cart.products.forEach((item, index) => {
-                item.size = item.quantity ? Number(item.quantity) || 0 : 0;
+                item.size = item.size ? Number(item.size) || 0 : 0;
                 item.quantity = item.quantity ? Number(item.quantity) || 0 : 0;
                 item.fullPrice = item.fullPrice ? Number(item.fullPrice) || 0 : 0;
                 item.salePrice = item.salePrice ? Number(item.salePrice) || 0 : 0;
@@ -184,7 +140,7 @@ let CartService = {
     setCart: (cart) => {
         CartService.active_cart = cart;
         CartService.calculateSavings();
-        CartService.writeCartToCookie();
+        //CartService.writeCartToCookie();
     },
     calculateSavings: () => {
         let that = CartService;
@@ -201,27 +157,6 @@ let CartService = {
     },
     getCartSubTotal: () => {
         return CartService.active_cart.subTotal|| 0;
-    },
-    writeCartToCookie: () => {
-        var d = new Date();
-        d.setTime(d.getTime() + (30*24*60*60*1000));
-        var expires = "expires="+ d.toUTCString();
-        document.cookie = "active_cart=" + JSON.stringify(CartService.active_cart) + ";" + expires + ";path=/";
-    },
-    readCartFromCookie: () => {
-        let name = "active_cart=",
-        decodedCookie = decodeURIComponent(document.cookie),
-        ca = decodedCookie.split(';');
-        for(var i = 0; i <ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0) == ' ') {
-                c = c.substring(1);
-            }
-            if (c.indexOf(name) == 0) {
-                return c.substring(name.length, c.length);
-            }
-        }
-        return null;
     },
     validateProduct: (product) => {
         if(!product || !product.hasOwnProperty('productId') || !product.hasOwnProperty('productName') || !product.hasOwnProperty('salePrice') || !product.hasOwnProperty('quantity') || !product.hasOwnProperty('size')){

@@ -12,7 +12,7 @@
        "rating":"5.0",
        "reviews":"7",
        "tags": "sneakers",
-       "images": ["https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/productimage/2019/12/19/afee4051-1363-40f7-b8dd-4f0a8daeb3b31576708499697-1.jpg", "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/productimage/2019/12/19/dc1c9f37-6846-4fe5-8426-397475a1251a1576708499742-2.jpg", 'https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/productimage/2019/12/19/52b23454-3054-4dff-ae52-9fd8596da5c91576708499785-3.jpg', 'https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/productimage/2019/12/19/4e3ebf81-73f4-43a5-8b6b-4b5d79ee5f6d1576708499825-4.jpg'],
+       "images": ["https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/productimage/2019/12/19/afee4051-1363-40f7-b8dd-4f0a8daeb3b31576708499697-1.jpg", "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/productimage/2019/12/19/dc1c9f37-6846-4fe5-8426-397475a1251a1576708499742-2.jpg", "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/productimage/2019/12/19/52b23454-3054-4dff-ae52-9fd8596da5c91576708499785-3.jpg", "https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/productimage/2019/12/19/4e3ebf81-73f4-43a5-8b6b-4b5d79ee5f6d1576708499825-4.jpg"],
        "sizes": [7,8,9,10]
     
  },
@@ -23,12 +23,12 @@
        "brand":"DIESEL",
        "thumbnail":"https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/8479065/2019/9/17/81ed2431-9093-4c2f-ac13-8a078682aba91568697270971-DIESEL-Unisex-Grey-Slip-On-Sneakers-9461568697270087-1.jpg",
        "price":"6993.00",
-       'fullPrice': '9990.00',
-       discount: 30,
-       "tags": 'sneakers',
+       "fullPrice": "9990.00",
+       "discount": "30",
+       "tags": "sneakers",
        "rating":"5.0",
        "reviews":"12",
-       'images': ['https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/8479065/2019/9/17/81ed2431-9093-4c2f-ac13-8a078682aba91568697270971-DIESEL-Unisex-Grey-Slip-On-Sneakers-9461568697270087-1.jpg', 'https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/8479065/2019/9/17/02a48d2f-80b7-4d7b-bf3d-90f7c25e83ee1568697270949-DIESEL-Unisex-Grey-Slip-On-Sneakers-9461568697270087-2.jpg', 'https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/8479065/2019/9/17/5a594f94-3575-4b27-8a53-cec7ed2752a91568697270928-DIESEL-Unisex-Grey-Slip-On-Sneakers-9461568697270087-3.jpg', 'https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/8479065/2019/9/17/83ec06a8-d294-4e57-96c6-b77d85b66d5b1568697270906-DIESEL-Unisex-Grey-Slip-On-Sneakers-9461568697270087-4.jpg'],
+       "images": ['https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/8479065/2019/9/17/81ed2431-9093-4c2f-ac13-8a078682aba91568697270971-DIESEL-Unisex-Grey-Slip-On-Sneakers-9461568697270087-1.jpg', 'https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/8479065/2019/9/17/02a48d2f-80b7-4d7b-bf3d-90f7c25e83ee1568697270949-DIESEL-Unisex-Grey-Slip-On-Sneakers-9461568697270087-2.jpg', 'https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/8479065/2019/9/17/5a594f94-3575-4b27-8a53-cec7ed2752a91568697270928-DIESEL-Unisex-Grey-Slip-On-Sneakers-9461568697270087-3.jpg', 'https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/8479065/2019/9/17/83ec06a8-d294-4e57-96c6-b77d85b66d5b1568697270906-DIESEL-Unisex-Grey-Slip-On-Sneakers-9461568697270087-4.jpg'],
        "sizes": [1.5,2.5,4.5,5]
     
    },

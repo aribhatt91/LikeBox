@@ -66,7 +66,7 @@ class Header extends Component {
               </NavLink>
             </Navbar.Brand>
             
-            <Nav className="mr-auto">
+            <Nav className="mr-auto d-none d-md-flex navbar-nav">
               <NavLink activeClassName='active' to="/products/men">Men</NavLink>
               <NavLink activeClassName='active' to="/products/women">Women</NavLink>
               <NavLink activeClassName='active' to="/products/kids">Kids</NavLink>
@@ -74,11 +74,11 @@ class Header extends Component {
             </Nav>
             <Nav className="justify-content-end">
               <SearchInput></SearchInput>
-              <Nav.Link className={this.props.loggedIn ? "hidden-xs-up" : ""} 
+              <Nav.Link className={"d-none" + (this.props.loggedIn ? "" : " d-md-flex")} 
                 onClick={() => this.setShowModal()}>
                 <FontAwesomeIcon icon={faUser}/>
               </Nav.Link>
-              <NavLink activeClassName='active' to="/user">
+              <NavLink className={"d-none" + (this.props.loggedIn ? "" : " d-md-flex")} activeClassName='active' to="/user">
                 <FontAwesomeIcon icon={faUser}/>
               </NavLink>
               <NavLink activeClassName='active' to="/cart">
@@ -92,8 +92,7 @@ class Header extends Component {
             onHide={this.setHideModal}
             size="md"
             aria-labelledby="contained-modal-title-vcenter"
-            centered
-          >
+            centered>
             <Modal.Body>
               
               <Tabs defaultActiveKey="login" id="user_signup_popup">

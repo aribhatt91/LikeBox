@@ -788,6 +788,8 @@
 
 .error-module {
   padding: 50px; }
+  .error-module .error-image {
+    max-width: 250px; }
   .error-module .error-text {
     font-size: 24px;
     font-weight: 500;
