@@ -1,4 +1,4 @@
-import { loginError, loginSuccess, loginPending } from './../store/actions/index';
+import { loginError, loginSuccess, loginPending } from '../store/actions/index';
 import { useState } from 'react';
 
 function simulateNetworkRequest() {

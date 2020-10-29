@@ -82,7 +82,7 @@ export function MockRemoveItemFromCart(product, decrement) {
         products = cart.products || [],
         itemCount = cart.count, subTotal = cart.subTotal, total = cart.total;
         for(let p in products){
-            if(products[p].productId === product.productId){
+            if(products[p].productId === product.productId && Number(products[p].size) === Number(product.size)){
                 var q = 1;
                 if(decrement && products[p].quantity > 1){
                     products[p].quantity = Number(products[p].quantity) - 1;

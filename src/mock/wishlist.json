@@ -9,7 +9,7 @@
             "price":"1199.00",
             "fullPrice":"1399.00",
             "discount": "25",
-            "saved": "20-09-2020"
+            "saved": "Thu Oct 8 2020"
         },
         {
             "sku":"65009-01",
@@ -19,7 +19,7 @@
             "price":"5699.00",
             "fullPrice": "7000.00",
             "discount": "10",
-            "saved": "14-09-2020"
+            "saved": "Wed Oct 7 2020"
         },
         {
             "sku":"305959-01",
@@ -27,7 +27,7 @@
             "brand":"Mast & Harbour",
             "thumbnail":"https://assets.myntassets.com/h_720,q_90,w_540/v1/assets/images/9135921/2019/9/3/7b44f285-c9bc-4e3f-b839-45ebdccc4c5a1567501125535-Mast--Harbour-Women-Casual-Shoes-8971567501124601-1.jpg",
             "price":"804.00",
-            "saved": "02-09-2020"
+            "saved": "Wed Oct 7 2020"
         }
     ]
 }

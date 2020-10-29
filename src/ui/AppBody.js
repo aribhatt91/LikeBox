@@ -7,7 +7,33 @@ import ListingPage from './pages/ListingPage';
 import CartPage from './pages/cart/CartPage';
 import CheckoutPage from './pages/CheckoutPage';
 import UserDashboard from './pages/UserDashboard';
+import FourZeroFour from './components/FourZeroFour';
 
+const ProtectedRoute = ({component: Component, ...res}) => {
+  return (
+    <Route
+      {...rest}
+      render={
+        props => {
+          if(true){
+            return <Component {...props}/>;
+          }else {
+            return <Redirect
+              to={
+                {
+                  pathname: '/login',
+                  state: {
+                    from: props.location
+                  }
+                }
+              }
+            />
+          }
+        }
+      }
+    />
+  )
+}
 class AppBody extends Component {
   render() {
     return (<div className="App-body">
@@ -18,8 +44,10 @@ class AppBody extends Component {
         <Route path='/about' render={(props) => <About {...props} pageName="about" />}/>
         <Route path='/cart' render={(props) => <CartPage {...props} pageName="cart" />}/>
         <Route path='/checkout' render={(props) => <CheckoutPage {...props} pageName="checkout" />}/>
-        <Route path='/user/:page?' render={(props) => <UserDashboard {...props} pageName="user-dashboard" />}/>
-        <Redirect to="/not-found"/>
+        
+        <ProtectedRoute path='/user/:page?' component={UserDashboard}/>
+        {/* <Route path='/user/:page?' render={(props) => <UserDashboard {...props} pageName="user-dashboard" />}/> */}
+        <Route path="*" render={props => <FourZeroFour {...props} />}/>
       </Switch>
     </div>);
   }
