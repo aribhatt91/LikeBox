@@ -5,7 +5,7 @@ import Hero from '../components/Hero';
 class Home extends Page {
   render() {
     return (
-    <div className="home-section">
+    <div className="page home-section">
       <Hero></Hero>
       <p className="home-title">Home</p>
       <p>Default Home Page content. No target offer is active.</p>

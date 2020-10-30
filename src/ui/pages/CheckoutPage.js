@@ -150,11 +150,13 @@ class CheckoutPage extends Page {
     }
     render(){
         return (
+            <div className="page">
                 <section className="checkout_container">
                     <div className="container-fluid">
 
                     </div>
                 </section>
+            </div>
         )
     }
 }

@@ -7,15 +7,16 @@ import ListingPage from './pages/ListingPage';
 import CartPage from './pages/cart/CartPage';
 import CheckoutPage from './pages/CheckoutPage';
 import UserDashboard from './pages/UserDashboard';
-import FourZeroFour from './components/FourZeroFour';
+import FourZeroFour from './pages/FourZeroFour';
+import LoginPage from './pages/LoginPage';
 
-const ProtectedRoute = ({component: Component, ...res}) => {
+const ProtectedRoute = ({component: Component, ...rest}) => {
   return (
     <Route
       {...rest}
       render={
         props => {
-          if(true){
+          if(false){
             return <Component {...props}/>;
           }else {
             return <Redirect
@@ -46,6 +47,7 @@ class AppBody extends Component {
         <Route path='/checkout' render={(props) => <CheckoutPage {...props} pageName="checkout" />}/>
         
         <ProtectedRoute path='/user/:page?' component={UserDashboard}/>
+        <Route path="/login/:page?" component={LoginPage} />
         {/* <Route path='/user/:page?' render={(props) => <UserDashboard {...props} pageName="user-dashboard" />}/> */}
         <Route path="*" render={props => <FourZeroFour {...props} />}/>
       </Switch>

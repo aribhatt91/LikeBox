@@ -1,3 +1,5 @@
+@import './variables.scss';
+
 .animated-text-input {
     width: 100%;
     label {
@@ -7,12 +9,18 @@
         font-size: 14px;
         width: 100%;
         min-height: 44px;
+        border-radius: 1px;
+        background-color: transparent;
         &:focus, &:active {
           box-shadow: none !important;
           background-color: transparent;
         }
         &:disabled {
           background-color: transparent;
+        }
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+          -webkit-appearance: none;
         }
         
       }
@@ -38,6 +46,7 @@
         margin-top: -7px;
         background-color: #fff;
         height: auto;
+        z-index: -1;
       }
     }
     
@@ -48,17 +57,18 @@
           padding: 0 4px;
           top: -7px;
           margin-top: 0;
+          z-index: 1;
         }
       }
     }
     &.error {
       label {
         .text_input_label {
-          color: red;
+          color: $error;
         }
         input, textarea {
-          border-color: red;
-          color: red;
+          border-color: $error;
+          color: $error;
         }
       }
     }

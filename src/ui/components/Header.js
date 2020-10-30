@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus, faCartArrowDown, faUser, faBars, faHeart } from '@fortawesome/free-solid-svg-icons';
 import Modal from 'react-bootstrap/Modal';
 import LoginModule from './LoginModule';
-import { getAuthToken } from './../../service/loginService';
+import { getAuthToken } from '../../service/authService';
 import SignupModule from './SignupModule';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
@@ -74,11 +74,11 @@ class Header extends Component {
             </Nav>
             <Nav className="justify-content-end">
               <SearchInput></SearchInput>
-              <Nav.Link className={"d-none" + (this.props.loggedIn ? "" : " d-md-flex")} 
+              <Nav.Link className={"d-none" + (this.props.loggedIn ? "" : " d-md-flex align-items-center")} 
                 onClick={() => this.setShowModal()}>
                 <FontAwesomeIcon icon={faUser}/>
               </Nav.Link>
-              <NavLink className={"d-none" + (this.props.loggedIn ? "" : " d-md-flex")} activeClassName='active' to="/user">
+              <NavLink className={"d-none" + (this.props.loggedIn ? "" : " d-md-flex align-items-center")} activeClassName='active' to="/user">
                 <FontAwesomeIcon icon={faUser}/>
               </NavLink>
               <NavLink activeClassName='active' to="/cart">

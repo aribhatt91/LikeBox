@@ -47,6 +47,14 @@ export function MockGetCart(){
     }));
 }
 
+export function MockGetCartItemCount() {
+    return (new Promise( (resolve, reject) => {
+        let cart = getCartLocal() || {}, products = cart.products || [];
+        console.log('MockGetCartItemCount: ', products);
+        setTimeout(() => resolve(products.length), 2000);
+    }));
+}
+
 export function MockAddItemToCart(product) {
     return (new Promise( (resolve, reject) => {
         let cart = getCartLocal(),

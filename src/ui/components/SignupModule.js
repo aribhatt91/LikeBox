@@ -1,31 +1,22 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {signin} from '../../service/authService';
-import Alert from 'react-bootstrap/Alert';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
+import ThemedButton from './generic/ThemedButton';
+import TextInput from './generic/TextInput';
+import { validateAlpha, validateEmail, validatePassword, validateMobileNumber } from './../../service/validation';
 
-function validateName(name){
-  return name && name.trim() !== "" && /^[a-zA-Z]+\s{0,1}[a-zA-Z]+$/.test(name.trim());
-}
-function validateEmail(email){
-  return email && /^[a-zA-Z0-9.! #$%&'*+/=? ^_`{|}~-]+@[a-zA-Z0-9-]+(?:\. [a-zA-Z0-9-]+)*$/.test(email);
-}
-function validatePassword(pword){
-  return pword && pword.trim().length >=8;
-}
 const PWORD_ERROR = 'Please enter a password with atleast 8 characters',
 EMAIL_ERROR = 'Please enter a valid email id',
 FNAME_ERROR = 'Please enter your first name',
-LNAME_ERROR = 'Please enter your lirst name';
-
-const validateSignupForm = inputObj => {
+LNAME_ERROR = 'Please enter your last name', 
+MOBILE_ERROR = 'Please enter 10-digit mobile number', 
+validateSignupForm = inputObj => {
   let validation = {};
   validation.error = {};
   validation.required ={};
-  ['fname', 'lname', 'email', 'password'].forEach(item => {
+  ['fname', 'lname', 'email', 'mobile', 'password'].forEach(item => {
     if(Object.keys((inputObj || {})).indexOf(item === -1)){
       validation.required[item] = true;
     }
@@ -33,66 +24,72 @@ const validateSignupForm = inputObj => {
   if(!inputObj || Object.keys(inputObj) === 0){
     return validation;
   }
-  if(inputObj.hasOwnProperty('fname') && !validateName(inputObj.fname)){
+  if(inputObj.hasOwnProperty('fname') && !validateAlpha(inputObj.fname)){
     validation.error.fname = FNAME_ERROR;
   }
-  if(inputObj.hasOwnProperty('lname') && !validateName(inputObj.lname)){
+  if(inputObj.hasOwnProperty('lname') && !validateAlpha(inputObj.lname)){
     validation.error.lname = LNAME_ERROR;
   }
-  if(inputObj.hasOwnProperty('email') && !validateName(inputObj.email)){
+  if(inputObj.hasOwnProperty('email') && !validateEmail(inputObj.email)){
     validation.error.email = EMAIL_ERROR;
   }
-  if(inputObj.hasOwnProperty('fname') && !validateName(inputObj.password)){
+  if(inputObj.hasOwnProperty('mobile') && !validateMobileNumber(inputObj.mobile)){
+    validation.error.mobile = EMAIL_ERROR;
+  }
+  if(inputObj.hasOwnProperty('password') && !validatePassword(inputObj.password)){
     validation.error.password = PWORD_ERROR;
   }
   return validation;
 }
 
 function SignupModule(props){
-
+    console.log('SignupModule', props);
     const [loggedIn, setLoggedIn] = useState(false);
     const [formValid, setFormValid] = useState(false);
-    const [errorObj, setErrorObj] = useState({});
-    let inputObj = {};
-    validateField = (name, value) => {
-        console.log('validateField -> ', name, ' - ', value);
+    //const [errorObj, setErrorObj] = useState({});
+    let inputObj = {}, errorObj = {};
+    const validateField = (name, value) => {
+        
         if(value && value.trim() !== ""){
-            inputObject[name] = value;
+            inputObj[name] = value;
         }else {
           delete inputObj[name];
         }
-        let validation = validateSignupForm(inputObject) || {};
-        setErrorObj(validation.errors || {});
-        setFormValid(Object.keys(validation.errors || {}).length === 0 && Object.keys(validation.required || {}).length === 0);
-    }
+        let validation = validateSignupForm(inputObj) || {};
+        console.log('validateField -> ', name, ' - ', value, validation);
+        errorObj = validation.error || {};
+        setFormValid(Object.keys(errorObj || {}).length === 0 && Object.keys(validation.required || {}).length === 0);
+    },
     submitForm = () => {
 
     }
     return (
-        <div>
+        <div className="col-12 p-0 m-0">
           {loggedIn && <div>Hi {props.user.userName}, You are now signed up</div>}
-          {!loggedIn && <div className={"signup-form-container p-3"}>
-            <div className="signup-form-header mb-4 pl-2 pr-2 h3">{header ? header : "Create an account"}</div>
+          {!loggedIn && <div className={"signup-form-container p-4"}>
+            <div className="signup-form-header mb-4 pl-2 pr-2 h3">Create an account</div>
             <form className={"signup-form"}>
                 <div className="row m-0">
                     <div className="col-md-6 float-left pl-2 pr-2">
                         <TextInput
                             name="fname"
-                            error={errorObj.fname} 
+                            error={FNAME_ERROR} 
                             type="text"
                             label="First name*"
-                            required="true"
+                            required={true}
                             handler={validateField}
+                            validate={validateAlpha}
                         />
                     </div>
                     <div className="col-md-6 float-left pl-2 pr-2">
                         <TextInput
                             name="lname"
-                            error={errorObj.lname} 
+                            error={LNAME_ERROR} 
                             type="text"
                             label="Last name*"
-                            required="true"
+                            required={true}
                             handler={validateField}
+                            validate={validateAlpha}
                         />
                     </div>
                 </div>
@@ -100,21 +97,34 @@ function SignupModule(props){
                     <div className="col-md-6 float-left pl-2 pr-2">
                         <TextInput
                             name="email"
-                            error={errorObj.email} 
+                            error={EMAIL_ERROR} 
                             type="email"
                             label="Email*"
-                            required="true"
+                            required={true}
                             handler={validateField}
+                            validate={validateEmail}
+                        />
+                    </div>
+                    <div className="col-md-6 float-left pl-2 pr-2">
+                        <TextInput
+                            name="mobile"
+                            error={MOBILE_ERROR} 
+                            type="number"
+                            label="Mobile*"
+                            required={true}
+                            handler={validateField}
+                            validate={validateMobileNumber}
                         />
                     </div>
                     <div className="col-md-12 float-left pl-2 pr-2">
                         <TextInput
                             name="password"
-                            error={errorObj.password} 
+                            error={PWORD_ERROR} 
                             type="password"
                             label="Password*"
-                            required="true"
+                            required={true}
                             handler={validateField}
+                            validate={validatePassword}
                         />
                     </div>
                 </div>
@@ -128,7 +138,7 @@ function SignupModule(props){
                     <div className="pl-2 pr-2">
                         <div className="d-inline-block pr-4">
                             <ThemedButton
-                                btnState={formValid ? "disabled" : "active"}
+                                btnState={!formValid ? "disabled" : "active"}
                                 btnText="Register"
                                 theme="accent"
                                 size="medium"
@@ -138,9 +148,9 @@ function SignupModule(props){
                     </div>
                 </div>
             </form>
-            <div className="row mt-2">
+            <div className="row m-0 mt-2">
               <div className="col-xs-12 pl-2 pr-2">
-                  <Link to="/login">Already have an account?</Link>
+                  <Link to="login">Already have an account?</Link>
               </div>
             </div>
         </div>}

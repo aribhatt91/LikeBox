@@ -51,7 +51,7 @@ function CardForm({header, defaultValue, cancelable, cancelEdit, action, hideHea
                             error={errorObj.name} 
                             type="number"
                             label="Card number*"
-                            required="true"
+                            required={true}
                             handler={validateField}
                             defvalue={inputObject.cnumber}
                         />
@@ -67,7 +67,7 @@ function CardForm({header, defaultValue, cancelable, cancelEdit, action, hideHea
                             error={errorObj.cname}
                             type="number"
                             label="Name on card*"
-                            required="true"
+                            required={true}
                             handler={validateField}
                             defvalue={inputObject.cname}
                         />

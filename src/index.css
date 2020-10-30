@@ -414,7 +414,8 @@
       border-color: #ebebeb !important;
       cursor: not-allowed;
       opacity: 0.8;
-      color: #333; }
+      color: #333;
+      box-shadow: none; }
       .themed_btn_container .themed_btn[disabled] .themed_btn_content {
         color: #333; }
       .themed_btn_container .themed_btn[disabled]:hover, .themed_btn_container .themed_btn[disabled]:focus, .themed_btn_container .themed_btn[disabled]:active {
@@ -559,7 +560,8 @@
     color: inherit;
     cursor: pointer; }
   .msg-container.msg-small {
-    padding: 8px; }
+    padding: 8px;
+    line-height: 1; }
     .msg-container.msg-small .msg-icon {
       font-size: 15px;
       line-height: 14px;
@@ -592,12 +594,16 @@
     .animated-text-input label input {
       font-size: 14px;
       width: 100%;
-      min-height: 44px; }
+      min-height: 44px;
+      border-radius: 1px;
+      background-color: transparent; }
       .animated-text-input label input:focus, .animated-text-input label input:active {
         box-shadow: none !important;
         background-color: transparent; }
       .animated-text-input label input:disabled {
         background-color: transparent; }
+      .animated-text-input label input::-webkit-outer-spin-button, .animated-text-input label input::-webkit-inner-spin-button {
+        -webkit-appearance: none; }
     .animated-text-input label textarea {
       font-size: 14px;
       width: 100%;
@@ -616,17 +622,19 @@
       left: 0.75rem;
       margin-top: -7px;
       background-color: #fff;
-      height: auto; }
+      height: auto;
+      z-index: -1; }
   .animated-text-input.edit-mode label .text_input_label {
     font-size: 12px;
     padding: 0 4px;
     top: -7px;
-    margin-top: 0; }
+    margin-top: 0;
+    z-index: 1; }
   .animated-text-input.error label .text_input_label {
-    color: red; }
+    color: #cc0000; }
   .animated-text-input.error label input, .animated-text-input.error label textarea {
-    border-color: red;
-    color: red; }
+    border-color: #cc0000;
+    color: #cc0000; }
 
 .order-container {
   border: 1px solid #ebebeb; }
@@ -1189,6 +1197,11 @@
         align-items: center;
         justify-content: center;
         font-size: 14px; }
+
+.login-body {
+  width: 90%;
+  max-width: 480px;
+  box-shadow: 0 1px 8px 1px rgba(0, 0, 0, 0.12); }
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;

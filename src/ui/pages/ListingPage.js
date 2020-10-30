@@ -10,7 +10,8 @@ import EMPTY from '../../assets/img/no-search-result.png';
 import ErrorModule from './../components/ErrorModule';
 
 const EMPTY_TEXT = "Sorry, no results found!",
-EMPTY_SUBTEXT = "Please check the spelling or try searching for something else";
+EMPTY_SUBTEXT = "Please check the spelling or try searching for something else",
+LOADING_TEXT = "";
 
 class ListingPage extends Page {
   //Filter by search keyword, discount, price range, brand
@@ -79,7 +80,7 @@ class ListingPage extends Page {
       <section className="products-section">
         {this.props.pending && <LoadingModule text="Please wait..."></LoadingModule>}
         {!this.props.pending && this.props.items.length > 0 && 
-          <div className="container-fluid">
+          <div className="page container-fluid">
             <ProductFilters 
             _handleBrandSelect = {this.handleBrandFilter}
             _handlePriceRangeSelect={this.handlePriceFilter}

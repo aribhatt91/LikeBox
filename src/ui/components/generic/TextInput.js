@@ -3,9 +3,10 @@ import PageMessage from './PageMessage';
 
 //{type='text', name, error, value, label, _onChange, _onBlur, disabled}
 //TODO - Create actionable text input 
-
-const TextInput = ({name, error, label, disabled, defvalue, handler, type, actionable, actionText, ...rest}) => {
+//TODO - Create inbuilt validation
+const TextInput = ({name, error, label, disabled, defvalue, handler, type, validate, ...rest}) => {
     const [dirty, setDirty] = useState(defvalue && defvalue.trim() !== "");
+    const [err, setErr] = useState(false);
     const tinput = useRef(null);
     const resetEditMode = (e) => {
         setDirty(((e.target.value || "").trim() !== ""));
@@ -14,6 +15,9 @@ const TextInput = ({name, error, label, disabled, defvalue, handler, type, actio
         }else {
             console.log("TextInput: onBlur: ", e.target.name, (e.target.value || "").trim());
         }
+        if(typeof validate === 'function'){
+            setErr(!validate(e.target.value));
+        }
     }
     console.log('Ref', tinput);
     if(tinput && tinput.current && defvalue){
@@ -21,7 +25,7 @@ const TextInput = ({name, error, label, disabled, defvalue, handler, type, actio
         tinput.current.value = defvalue || "";
     }
     return (
-        <div className={"form-group animated-text-input d-inline-block" + (error ? " error" : "") + (dirty ? " edit-mode" : "")+ (disabled ? " disabled" : "")}>
+        <div className={"form-group animated-text-input d-inline-block" + (err ? " error" : "") + (dirty ? " edit-mode" : "")+ (disabled ? " disabled" : "")}>
             <label className="d-flex position-relative" htmlFor={name}>
                 <span className={"text_input_label"}>{label}</span>
                 {
@@ -52,7 +56,7 @@ const TextInput = ({name, error, label, disabled, defvalue, handler, type, actio
                 }
             </label>
             
-            {error && <PageMessage type="error" size="small" text={error}/>}
+            {err && <PageMessage type="error" size="small" text={error}/>}
         </div>
     )
 }

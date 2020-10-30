@@ -65,7 +65,7 @@ class UserDashboard extends Component {
 
     render() {
         return (
-            <div className="user-dashboard d-flex">
+            <div className="page user-dashboard d-flex">
                 <BrowserRouter basename="/user">
                     <DashboardNavigation></DashboardNavigation>
                     <div className="dashboard-body">

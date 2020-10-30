@@ -3,7 +3,9 @@ import ThemedButton from './generic/ThemedButton';
 import TextInput from './generic/TextInput';
 import STATES from '../../mock/states.json';
 import SelectInput from './generic/SelectInput';
-import { validateAddressForm, addAddress, updateAddress } from './../../service/addressMethods';
+import { validateAlpha, validateAlphaNumeric, validateMobileNumber, validatePincode, validateEmpty } from '../../service/validation';
+
+import { validateAddressForm, addAddress, updateAddress, ERROR_TEXT } from './../../service/addressMethods';
 import RadioButtonGroup from './generic/RadioButtonGroup';
 //component.scss
 function AddressForm({header, defaultValue, cancelable, cancelEdit, action, hideHeader}){
@@ -59,23 +61,23 @@ function AddressForm({header, defaultValue, cancelable, cancelEdit, action, hide
                     <div className="col-md-6 float-left pl-2 pr-2">
                         <TextInput
                             name="name"
-                            error={errorObj.name} 
+                            error={ERROR_TEXT.name} 
                             type="text"
                             label="Name*"
-                            required="true"
                             handler={validateField}
                             defvalue={inputObject.name}
+                            validate={validateAlpha}
                         />
                     </div>
                     <div className="col-md-6 float-left pl-2 pr-2">
                         <TextInput
                             name="mobile"
-                            error={errorObj.mobile} 
+                            error={ERROR_TEXT.mobile} 
                             type="number"
                             label="Mobile*"
-                            required="true"
                             handler={validateField}
                             defvalue={inputObject.mobile}
+                            validate={validateMobileNumber}
                         />
                     </div>
                 </div>
@@ -83,23 +85,23 @@ function AddressForm({header, defaultValue, cancelable, cancelEdit, action, hide
                     <div className="col-md-6 float-left pl-2 pr-2">
                         <TextInput
                             name="pincode"
-                            error={errorObj.pincode}
+                            error={ERROR_TEXT.pincode}
                             type="number"
                             label="Pincode*"
-                            required="true"
                             handler={validateField}
                             defvalue={inputObject.pincode}
+                            validate={validatePincode}
                         />
                     </div>
                     <div className="col-md-6 float-left pl-2 pr-2">
                         <TextInput
                             name="locality"
-                            error={errorObj.locality} 
+                            error={ERROR_TEXT.locality} 
                             label="Locality"
-                            required="true"
                             type="text"
                             handler={validateField}
                             defvalue={inputObject.locality}
+                            validate={validateAlphaNumeric}
                         />
                     </div>
                 </div>
@@ -107,12 +109,12 @@ function AddressForm({header, defaultValue, cancelable, cancelEdit, action, hide
                     <div className="col-md-12 float-left pl-2 pr-2">
                         <TextInput
                             name="address"
-                            error={errorObj.address} 
+                            error={ERROR_TEXT.address} 
                             label="Address (Area and Street)*"
                             type="textarea"
-                            required="true"
                             handler={validateField}
                             defvalue={inputObject.address}
+                            validate={validateAlphaNumeric}
                         />
                     </div>
                 </div>
@@ -120,19 +122,19 @@ function AddressForm({header, defaultValue, cancelable, cancelEdit, action, hide
                     <div className="col-md-6 float-left pl-2 pr-2">
                         <TextInput
                             name="city"
-                            error={errorObj.city} 
+                            error={ERROR_TEXT.city} 
                             type="text"
                             label="City/District/Town*"
-                            required="true"
                             handler={validateField}
                             defvalue={inputObject.city}
+                            validate={validateAlpha}
                         />
                     </div>
                     <div className="col-md-6 float-left pl-2 pr-2">
                         <SelectInput
                             name="state"
                             options={STATES.states}
-                            error={errorObj.state}
+                            error={ERROR_TEXT.state}
                             handler={validateField}
                             defvalue={inputObject.state}
                         />

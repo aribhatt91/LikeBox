@@ -160,7 +160,7 @@ class ProductPage extends Page {
     }
 
     return (
-      <div className="product-home-page">
+      <div className="page product-home-page">
         {this.props.pending && <LoadingModule text="Please wait..."></LoadingModule>}
         {!this.props.pending && this.props.items.length > 0 && 
           <div className="d-block">

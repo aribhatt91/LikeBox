@@ -1,87 +1,115 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {signin} from '../../service/authService';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
 import TextInput from './generic/TextInput';
+import ThemedButton from './generic/ThemedButton';
+import { validateEmail, validatePassword } from './../../service/validation';
 
-class LoginModule extends Component{
-  constructor(props){
-    super(props);
-    //const {loggedIn, user, pending, error, signInUser} = this.props;
-    this.state = {email: '', password: '', loggedIn: false, user: null, pending: false};
-    this.onUserInput = this.onUserInput.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+const PWORD_ERROR = 'Please enter a password with atleast 8 characters',
+EMAIL_ERROR = 'Please enter a valid email id',  
+validateLoginForm = inputObj => {
+  let validation = {};
+  validation.error = {};
+  validation.required ={};
+  ['email', 'password'].forEach(item => {
+    if(Object.keys((inputObj || {})).indexOf(item === -1)){
+      validation.required[item] = true;
+    }
+  });
+  if(!inputObj || Object.keys(inputObj) === 0){
+    return validation;
   }
-  componentWillMount(){
-    const {signInUser} = this.props;
-    //signInUser({'email': 'aribhatt@adobe.com', 'password': 'ari'});
+  if(inputObj.hasOwnProperty('email') && !validateEmail(inputObj.email)){
+    validation.error.email = EMAIL_ERROR;
   }
-  onUserInput(tag, value){
-    this.setState({
-      [tag]: value
-    });
-    //console.log('state -> ', this.state);
+  if(inputObj.hasOwnProperty('password') && !validatePassword(inputObj.password)){
+    validation.error.password = PWORD_ERROR;
   }
-  handleSubmit(event){
-    event.preventDefault();
-    console.log(this.props);
-    const {signInUser} = this.props;
+  return validation;
+}
+const LoginModule = (props) => {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [formValid, setFormValid] = useState(false);
+  const [errorObj, setErrorObj] = useState({});
+  let inputObj = {};
+  const validate = (name, value) =>{
+    
+    if(value && value.trim() !== ""){
+        inputObj[name] = value;
+    }else {
+      delete inputObj[name];
+    }
+    let validation = validateLoginForm(inputObj) || {};
+    console.log('validateField -> ', name, ' - ', value, validation);
+    setErrorObj(validation.error || {});
+    setFormValid(Object.keys(validation.errors || {}).length === 0 && Object.keys(validation.required || {}).length === 0);
+  },
+  submitForm = (e) => {
+    e.preventDefault();
+    //console.log(props);
+    const {signInUser} = props;
     signInUser({'email': 'aribhatt@adobe.com', 'password': 'ari'});
   }
-  render(){
-    const {loggedIn, user, pending, error} = this.props;
-
-    return(
-      <div>
-        {this.props.loggedIn && <div>Hi {this.props.user.userName}, You are now logged in</div>}
-        {!this.props.loggedIn && <Form onSubmit={this.handleSubmit}>
-          <div className="col-md-10 col-lg-8 clearfix">
-            <TextInput
-              name="email"
-              label="Email"
-              type="email"
-              error={error ? error.email : null}
-              handler={this.onUserInput}
-            />
+  return (
+    <div className="col-12 p-0 m-0">
+        {props.loggedIn && <div>Hi {props.user.userName}, You are now logged in</div>}
+        {!props.loggedIn && 
+        <div className={"login-form-container p-4"}>
+          <div className="login-form-header mb-4 pl-2 pr-2 h3">Log in</div>
+          <form className={"login-form"}>
+            <div className="row m-0">
+              <div className="col-md-10 col-lg-8 pl-2 pr-2 clearfix float-none">
+                <TextInput
+                  name="email"
+                  label="Email"
+                  required={true}
+                  type="email"
+                  error={EMAIL_ERROR}
+                  handler={validate}
+                  validate={validateEmail}
+                />
+              </div>
+              <div className="col-md-10 col-lg-8 pl-2 pr-2 clearfix float-none">
+                <TextInput
+                  name="password"
+                  label="Password"
+                  required={true}
+                  type="password"
+                  error={PWORD_ERROR}
+                  handler={validate}
+                  validate={validatePassword}
+                />
+              </div>
+              <div className="col-12 clearfix float-none pl-2 pr-2">
+                <label className="p-0 mt-2">
+                  <input className="mr-2" type="checkbox" onChange={() => {inputObj.keepSigned = this.checked}}/>
+                  Keep me signed in
+                </label>
+              </div>
+            </div>
+            
+          
+          <div className="row m-0 mt-3 d-flex justify-content-start">
+              <div className="pl-2 pr-2">
+                  <div className="d-inline-block pr-4">
+                      <ThemedButton
+                          btnState={!formValid ? "disabled" : "active"}
+                          btnText="Login"
+                          theme="accent"
+                          size="medium"
+                          _click={submitForm}
+                      />
+                  </div>
+              </div>
           </div>
-          <div className="col-md-10 col-lg-8 clearfix">
-            <TextInput
-              name="password"
-              label="Password"
-              type="password"
-              error={error ? error.password : null}
-              handler={this.onUserInput}
-            />
-          </div>
-
-          <Form.Group controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Stay signed in" />
-          </Form.Group>
-          <Button className="themed_btn" variant="primary" type="submit">
-            Login
-          </Button>
-        </Form>}
+        </form>
+        </div>}
         
       </div>
-    );
-  }
+  )
 }
-// function onUserInput(event){
-//   this.setState({
-//     [event.target.name]: event.target.value
-//   });
-// }
-// function handleSubmit(event, fun){
-//   event.preventDefault();
-//   console.log(this.props);
-//   const {signInUser} = fun;
-//   signInUser({'email': 'aribhatt@adobe.com', 'password': 'ari'});
-// }
-// function LoginModule({loggedIn, pending, user, error, signInUser}){
 
-// }
 
 const mapStateToProps = state => {
   console.log('mapStateToProps called', state);
