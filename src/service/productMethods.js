@@ -1,5 +1,7 @@
 import { fetchStateError, fetchStateSuccess, fetchStatePending } from '../store/actions/index';
 import { MockFetchAllProducts, MockFetchProduct } from './../mock/api/mock-products-api';
+import { debounce, throttle } from 'lodash';
+import { _debounce } from './helper';
 /*
 filter = {
     category: (MEN, WOMEN, KIDS, TRENDING),
@@ -81,6 +83,13 @@ export const filterProducts = (filter, _products) => {
         products = temp;
     }
     return products;
+}
+const logme = (obj) => {
+    console.log('Logging', obj);
+}
+export const applyOptimisedFilter = (filterObj) => {
+    let optimised = _debounce(logme, 1000);
+    optimised(filterObj);
 }
 export const fetchAllProducts = (filter) => {
     return dispatch => {

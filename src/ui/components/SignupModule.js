@@ -67,7 +67,7 @@ function SignupModule(props){
         <div className="col-12 p-0 m-0">
           {loggedIn && <div>Hi {props.user.userName}, You are now signed up</div>}
           {!loggedIn && <div className={"signup-form-container p-4"}>
-            <div className="signup-form-header mb-4 pl-2 pr-2 h3">Create an account</div>
+            <div className="signup-form-header mb-4 pl-2 pr-2 h3 font-weight-normal">Create an account</div>
             <form className={"signup-form"}>
                 <div className="row m-0">
                     <div className="col-md-6 float-left pl-2 pr-2">
@@ -147,12 +147,12 @@ function SignupModule(props){
                         </div>
                     </div>
                 </div>
+                {/* <div className="row m-0 mt-3 switch-link">
+                    <div className="col-xs-12 pl-2 pr-2">
+                        <Link to={props.altLink ? props.altLink : "/login/signup"}>Already have an account?</Link>
+                    </div>
+                </div> */}
             </form>
-            <div className="row m-0 mt-2">
-              <div className="col-xs-12 pl-2 pr-2">
-                  <Link to="login">Already have an account?</Link>
-              </div>
-            </div>
         </div>}
           
         </div>

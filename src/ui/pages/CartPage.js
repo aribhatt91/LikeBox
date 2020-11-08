@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import ThemedButton from './../../components/generic/ThemedButton';
-import CartService from './../../../service/cartOperation';
-import Page from './../Page';
-import CartProduct from './../../components/CartProduct'; 
-import LoadingModule from '../../components/LoadingModule';
-import ErrorModule from '../../components/ErrorModule';
-import EMPTY from '../../../assets/img/empty-cart.png';
+import ThemedButton from '../components/generic/ThemedButton';
+import CartService from '../../service/cartOperation';
+import Page from './Page';
+import CartProduct from '../components/CartProduct'; 
+import LoadingModule from '../components/LoadingModule';
+import ErrorModule from '../components/ErrorModule';
+import EMPTY from '../../assets/img/empty-cart.png';
 
 const EMPTY_TEXT = "You have no items in your cart!",
 EMPTY_SUBTEXT = "Please check the spelling or try searching for something else";

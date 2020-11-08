@@ -9,15 +9,17 @@ const TextInput = ({name, error, label, disabled, defvalue, handler, type, valid
     const [err, setErr] = useState(false);
     const tinput = useRef(null);
     const resetEditMode = (e) => {
+        
         setDirty(((e.target.value || "").trim() !== ""));
+        if(typeof validate === 'function'){
+            setErr(!validate(e.target.value));
+        }
         if(typeof handler === 'function'){
             handler(e.target.name, (e.target.value || "").trim());
         }else {
             console.log("TextInput: onBlur: ", e.target.name, (e.target.value || "").trim());
         }
-        if(typeof validate === 'function'){
-            setErr(!validate(e.target.value));
-        }
+        
     }
     console.log('Ref', tinput);
     if(tinput && tinput.current && defvalue){

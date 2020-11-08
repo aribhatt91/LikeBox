@@ -9,11 +9,26 @@ getLocalUser = () => {
         return obj || {};
     }
 }
-export function MockGetUser(){
+export function MockGetUser(token){
     return (new Promise( (resolve, reject) => {
-        let user = getLocalUser();
-        writeToCookie(CNAME, user);
-        setTimeout(() => resolve(user), 2000);
+        let user = {};
+        //writeToCookie(CNAME, user);
+        if(token === 'aribhatt'){
+            user = getLocalUser();
+        }else {
+            user = {error: 'user not found'}
+        }
+        setTimeout(() => resolve(JSON.stringify(user)), 2000);
+    }));
+}
+export function MockAuthenticate(email, password) {
+    return (new Promise( (resolve, reject) => {
+        let token = {access_token: null};
+        //writeToCookie(CNAME, user);
+        if(email.indexOf('aribhatt') > -1){
+            token.access_token = "aribhatt";
+        }
+        setTimeout(() => resolve(JSON.stringify(token)), 2000);
     }));
 }
 export function MockUpdateUser(obj){

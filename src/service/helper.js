@@ -29,3 +29,17 @@ export const numberWithCommas = (x) => {
     let parts = x.toString().split(".");
     return Number(parts[0]).toLocaleString() + "." + ((parts[1] || "") + "00").slice(0,2);
 }
+export const simulateNetworkRequest = () => {
+    return new Promise(resolve => setTimeout(resolve, 2000));
+}
+export const _debounce = (fn, delay) => {
+    let timer;
+    return function() {
+        let context = this,
+        args = arguments;
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+            fn.apply(context, args);
+        }, delay);
+    }
+}

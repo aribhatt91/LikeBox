@@ -2,7 +2,7 @@ import React, {Component, useState, useLocation, useEffect, useParams} from 'rea
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Page from './Page';
-import { fetchAllProducts } from '../../service/productMethods';
+import { fetchAllProducts, filterProducts, applyOptimisedFilter } from '../../service/productMethods';
 import LoadingModule from './../components/LoadingModule';
 import { ProductCard } from './../components/ProductCard';
 import ProductFilters from './../components/ProductFilters';
@@ -26,15 +26,19 @@ class ListingPage extends Page {
       items: [],
       error: null
     }
-    this.handleBrandFilter = this.handleBrandFilter.bind(this);
+    this.applyFilter = this.applyFilter.bind(this);
+    this.applySort = this.applySort.bind(this);
   }
 
   getProducts(){
     const {fetchProducts} = this.props;
-    const cat = this.props.match.params.category;
-    const filter = {};
-    if(cat){
-      filter.category = cat;
+    const category = this.props.match.params.category,
+    price_range = this.props.match.params.price_range,
+    brands = this.props.match.params.brands;
+
+    let filter = {};
+    if(category && ['men', 'women', 'kids', 'sale'].indexOf(category.toLowerCase()) > -1){
+      filter.category = category;
     }
     console.log('getProducts -> ', filter);
     fetchProducts(filter);
@@ -51,28 +55,12 @@ class ListingPage extends Page {
       this.getProducts();
     }
   }
-  handleBrandFilter(e){
-    console.log('Dummy Filter event handler ->', e.target.value);
-    var brand = e.target.value;
-    if(this.selected_brand.indexOf(brand) > -1){
-      this.selected_brand = this.selected_brand.filter((b)=> {return b!==brand;});
-    }else {
-      this.selected_brand.push(brand)
-    }
+  applyFilter(filterObj){
+    console.log('ListingPage:applyFilter ->', filterObj);
+    this.props.fetchProducts(filterObj);
   }
-  handlePriceFilter(e){
-    console.log('Dummy Filter event handler ->', e.target.value);
-    
-  }
-  handleDiscountFilter(e){
-    console.log('Dummy Filter event handler ->', e.target.value);
-    
-  }
-  handleSortBy(e){
+  applySort(sortOrder){
 
-  }
-  handleSubCategoryFilter(e){
-    
   }
 
   render() {
@@ -82,10 +70,8 @@ class ListingPage extends Page {
         {!this.props.pending && this.props.items.length > 0 && 
           <div className="page container-fluid">
             <ProductFilters 
-            _handleBrandSelect = {this.handleBrandFilter}
-            _handlePriceRangeSelect={this.handlePriceFilter}
-            _handleDiscountSelect={this.handleDiscountFilter}
-            _handleSortBy={this.handleSortBy}
+            filterHandler={this.applyFilter}
+            sortHandler={this.applySort}
             products={this.props.items.length}></ProductFilters>
             
             <div className="product_cards_container page-content-wrapper">

@@ -11,9 +11,12 @@
         min-height: 44px;
         border-radius: 1px;
         background-color: transparent;
+        &:-internal-autofill-selected {
+          background-color: transparent !important;
+        }
         &:focus, &:active {
           box-shadow: none !important;
-          background-color: transparent;
+          background-color: transparent !important;
         }
         &:disabled {
           background-color: transparent;

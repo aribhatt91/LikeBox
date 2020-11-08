@@ -1,6 +1,7 @@
 @import './variables.scss';
 
 .selectable_tag {
+    display: inline-flex;
     cursor: pointer;
     border: 1px solid #333;
     color: #333;
@@ -63,11 +64,16 @@
             border-color: rgba(0, 0, 0, 0.4);
         }
     }
+    &.disabled {
+        opacity: 0.7;
+        user-select: none;
+        cursor: none;
+    }
 }
 .multiselect_tags_container {
     .tags_label {
         font-weight: normal;
-        font-size: 16px;
+        font-size: 14px;
         margin: 8px 0;
         width: auto;
         margin-right: 24px;

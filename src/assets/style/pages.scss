@@ -4,7 +4,14 @@
 @import './user-dashboard.scss';
 @import './variables.scss';
 
+.page {
+    width: 100%;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
 .products-section {
+    width: 100%;
     .flex_container {
         display: flex;
         .product_cards_container {
@@ -154,5 +161,23 @@
 .login-body {
     width: 90%;
     max-width: 480px;
-    box-shadow: 0 1px 8px 1px rgba(0,0,0,.12);
+    // box-shadow: 0 1px 8px 1px rgba(0,0,0,.12);
+    .switch-link {
+        a {
+            font-size: 14px;
+            color: $blue;
+        }
+    }
+    .login-signup-container {
+        flex-wrap: nowrap;
+        transition: 0.3s all;
+        transform: translateX(0);
+        .module {
+            flex: 1;
+            min-width: 100%;
+        }
+        &.slide-signup {
+            transform: translateX(-100%);
+        }
+    }
 }

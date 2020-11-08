@@ -4,19 +4,22 @@ import About from './pages/About';
 import {Route, Switch, Redirect} from 'react-router-dom';
 import ProductPage from './pages/ProductPage';
 import ListingPage from './pages/ListingPage';
-import CartPage from './pages/cart/CartPage';
+import CartPage from './pages/CartPage';
 import CheckoutPage from './pages/CheckoutPage';
 import UserDashboard from './pages/UserDashboard';
 import FourZeroFour from './pages/FourZeroFour';
 import LoginPage from './pages/LoginPage';
+import { getUserObject } from '../service/rx-store/dataStore';
 
 const ProtectedRoute = ({component: Component, ...rest}) => {
+  console.log('ProtectedRoute',getUserObject(), Component);
   return (
+
     <Route
       {...rest}
       render={
         props => {
-          if(false){
+          if(getUserObject()){
             return <Component {...props}/>;
           }else {
             return <Redirect
