@@ -43,3 +43,17 @@ export const _debounce = (fn, delay) => {
         }, delay);
     }
 }
+
+export const writeToLocalStorage = (key, value) => {
+    if(window.localStorage){
+        localStorage.setItem(key, value);
+        return true;
+    }
+    return false;
+}
+export const readFromLocalStorage = (key) => {
+    if(window.localStorage){
+        return localStorage.getItem(key);
+    }
+    return null;
+}

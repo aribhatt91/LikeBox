@@ -18,13 +18,16 @@ function SearchInput(props){
     const [searchExpand, setExpandSearch] = useState(false);
     
     return (
-      <span className={"search_input_container" + (searchExpand ? ' expanded' : '')}>
-        <span className="close_icon" onClick={()=>{setExpandSearch(false)}}>&times;</span>
-        <input type="text" placeholder="Search..." className='themed_text_input search_input' onKeyPress={_keyPress}></input>
-        <Nav.Link onClick={searchExpand ? handleSearch : (() => {setExpandSearch(true)})} className="search_icon">
-          <FontAwesomeIcon icon={faSearch}/>
-        </Nav.Link>
-      </span>
+      <div className="suggested_search_bar">
+        <div className={"search_input_container" + (searchExpand ? ' expanded' : '')}>
+          <span className="close_icon" onClick={()=>{setExpandSearch(false)}}>&times;</span>
+          <input type="text" placeholder="Search..." className='themed_text_input search_input' onKeyPress={_keyPress}></input>
+          <Nav.Link onClick={searchExpand ? handleSearch : (() => {setExpandSearch(true)})} className="search_icon">
+            <FontAwesomeIcon icon={faSearch}/>
+          </Nav.Link>
+        </div>
+      </div>
+      
     )
 }
 

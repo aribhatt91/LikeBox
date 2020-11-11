@@ -112,62 +112,11 @@
     color: #f1f1f1;
   }
   
-  .search_input_container {
-    position: relative;
-  }
-  .themed_text_input{
-    border-radius: 32px !important;
-    background-color: rgba(0, 0, 0, 0.1) !important;
-    border: 0 !important;
-    padding: 0 24px;
-    outline: none;
-  }
-  
-  .themed_text_input:focus, .themed_text_input:active, .themed_btn:focus, .themed_btn:active {
-    outline: none !important;
-    border: none !important;
-  }
-  .search_input_container {
-    position: relative;
-  }
-  .search_input {
-    padding: 0;
-    transition: 0.3s all ease-in-out;
-    width: 0;
-    height: 100%;
-  }
-  .close_icon {
-    position: absolute;
-    top: 50%;
-    margin-top: -12px;
-    height: 24px;
-    width: 24px;
-    left: 8px;
-    font-size: 24px;
-    line-height: 20px;
-    color: #333;
-    cursor: pointer;
-    display: none;
-  }
-  .search_input_container.expanded .close_icon {
-    display: inline;
-  }
-  .search_input_container.expanded .search_input {
-    padding: 0 48px 0 32px;
-    width: 400px;
-    outline: none;
-  }
-  .search_input_container.expanded .search_input + .search_icon {
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
-  .search_input_container.expanded .search_input + .search_icon:hover {
-    background: transparent;
-  }
-
   .modal-dialog.modal-dialog-centered{
     max-width: 720px;
+    .modal-content {
+      border: none !important;
+    }
     .modal-body {
       padding: 0;
       display: inline-flex;

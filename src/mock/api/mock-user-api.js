@@ -9,7 +9,7 @@ getLocalUser = () => {
         return obj || {};
     }
 }
-export function MockGetUser(token){
+export const MockGetUser = (token) => {
     return (new Promise( (resolve, reject) => {
         let user = {};
         //writeToCookie(CNAME, user);
@@ -21,7 +21,7 @@ export function MockGetUser(token){
         setTimeout(() => resolve(JSON.stringify(user)), 2000);
     }));
 }
-export function MockAuthenticate(email, password) {
+export const MockAuthenticate = (email, password) => {
     return (new Promise( (resolve, reject) => {
         let token = {access_token: null};
         //writeToCookie(CNAME, user);
@@ -31,7 +31,7 @@ export function MockAuthenticate(email, password) {
         setTimeout(() => resolve(JSON.stringify(token)), 2000);
     }));
 }
-export function MockUpdateUser(obj){
+export const  MockUpdateUser = (obj) => {
     return (new Promise( (resolve, reject) => {
         let user = getLocalUser(), present = false;
         Object.keys((obj || {})).forEach(key => {
@@ -50,4 +50,8 @@ export function MockUpdateUser(obj){
         writeToCookie(CNAME, user);
         setTimeout(() => resolve(user), 2000);
     }));
+}
+
+export const MockSignupUser = (data) => {
+
 }
