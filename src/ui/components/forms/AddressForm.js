@@ -4,11 +4,14 @@ import TextInput from '../generic/TextInput';
 import STATES from '../../../mock/states.json';
 import SelectInput from '../generic/SelectInput';
 import { validateAlpha, validateAlphaNumeric, validateMobileNumber, validatePincode, validateEmpty } from '../../../service/validation';
-
+import * as Yup from 'yup';
 import { validateAddressForm, addAddress, updateAddress, ERROR_TEXT } from '../../../service/addressMethods';
 import RadioButtonGroup from '../generic/RadioButtonGroup';
 //component.scss
-function AddressForm({header, defaultValue, cancelable, cancelEdit, action, hideHeader}){
+const validationSchema = Yup.object().shape({
+
+})
+const AddressForm = ({header, defaultValue, cancelable, cancelEdit, action, hideHeader}) => {
     const [errorObj, setErrorObj] = useState({});
     const [validated, setValidated] = useState(false);
     let inputObject = defaultValue ? Object.assign({}, defaultValue) || {} : {};
@@ -58,7 +61,7 @@ function AddressForm({header, defaultValue, cancelable, cancelEdit, action, hide
             <form className={"address-form"}>
                 <div className="row m-0">
                     {!hideHeader && <div className="address-form-header mb-4 pl-2 pr-2">{header ? header : "Add new address"}</div>}
-                    <div className="col-md-6 float-left pl-2 pr-2">
+                    <div className="col-md-6 float-left pl-md-0 pr-md-2">
                         <TextInput
                             name="name"
                             error={ERROR_TEXT.name} 
@@ -69,7 +72,7 @@ function AddressForm({header, defaultValue, cancelable, cancelEdit, action, hide
                             validate={validateAlpha}
                         />
                     </div>
-                    <div className="col-md-6 float-left pl-2 pr-2">
+                    <div className="col-md-6 float-left pl-md-2 pr-md-0">
                         <TextInput
                             name="mobile"
                             error={ERROR_TEXT.mobile} 
@@ -82,7 +85,7 @@ function AddressForm({header, defaultValue, cancelable, cancelEdit, action, hide
                     </div>
                 </div>
                 <div className="row m-0">
-                    <div className="col-md-6 float-left pl-2 pr-2">
+                    <div className="col-md-6 float-left pl-md-0 pr-md-2">
                         <TextInput
                             name="pincode"
                             error={ERROR_TEXT.pincode}
@@ -93,7 +96,7 @@ function AddressForm({header, defaultValue, cancelable, cancelEdit, action, hide
                             validate={validatePincode}
                         />
                     </div>
-                    <div className="col-md-6 float-left pl-2 pr-2">
+                    <div className="col-md-6 float-left pl-md-2 pr-md-0">
                         <TextInput
                             name="locality"
                             error={ERROR_TEXT.locality} 
@@ -106,7 +109,7 @@ function AddressForm({header, defaultValue, cancelable, cancelEdit, action, hide
                     </div>
                 </div>
                 <div className="row m-0">
-                    <div className="col-md-12 float-left pl-2 pr-2">
+                    <div className="col-md-12 float-left pl-md-0 pr-md-0">
                         <TextInput
                             name="address"
                             error={ERROR_TEXT.address} 
@@ -119,7 +122,7 @@ function AddressForm({header, defaultValue, cancelable, cancelEdit, action, hide
                     </div>
                 </div>
                 <div className="row m-0">
-                    <div className="col-md-6 float-left pl-2 pr-2">
+                    <div className="col-md-6 float-left pl-md-0 pr-md-2">
                         <TextInput
                             name="city"
                             error={ERROR_TEXT.city} 
@@ -130,7 +133,7 @@ function AddressForm({header, defaultValue, cancelable, cancelEdit, action, hide
                             validate={validateAlpha}
                         />
                     </div>
-                    <div className="col-md-6 float-left pl-2 pr-2">
+                    <div className="col-md-6 float-left pl-md-2 pr-md-0">
                         <SelectInput
                             name="state"
                             options={STATES.states}
@@ -141,7 +144,7 @@ function AddressForm({header, defaultValue, cancelable, cancelEdit, action, hide
                     </div>
                 </div>
                 <div className="row m-0">
-                    <div className="col-md-12 float-left pl-2 pr-2">
+                    <div className="col-md-12 float-left pl-md-0 pr-md-0">
                         <TextInput
                             name="landmark"
                             label="Landmark (Optional)"
@@ -152,7 +155,7 @@ function AddressForm({header, defaultValue, cancelable, cancelEdit, action, hide
                     </div>
                 </div>
                 <div className="row m-0">
-                    <div className="col-md-6 float-left pl-2 pr-2">
+                    <div className="col-md-6 float-left pl-md-0 pr-md-0">
                         <RadioButtonGroup
                             title="Address type"
                             handler={validateField}
@@ -167,7 +170,7 @@ function AddressForm({header, defaultValue, cancelable, cancelEdit, action, hide
 
                 </div>
                 <div className="row m-0 mt-3 d-flex justify-content-start">
-                    <div className="pl-2 pr-2">
+                    <div className="pl-md-0 pr-md-0">
                         <div className="d-inline-block pr-4">
                             <ThemedButton
                                 btnState={btnState}

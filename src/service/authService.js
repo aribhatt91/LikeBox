@@ -54,12 +54,12 @@ export const signin = (data, setSubmitting) => {
                     localStorage.setItem('access_token', token);
                     return MockGetUser(token);
                 }else {
-                    dispatch(loginError({error: 'Invalid token. Authentication failed!'}));
-                    throw new Error("Invalid token");
+                    dispatch(loginError({error: 'Incorrect email or password!'}));
+                    throw new Error("MockAuthenticate: Invalid token");
                 }
             }catch(err){
-                dispatch(loginError({error: 'Authentication failed!'}));
-                throw new Error("Error occurred while parsing token")
+                dispatch(loginError({error: 'Incorrect email or password!'}));
+                throw new Error("MockAuthenticate: Error occurred while parsing token")
             }
         }).then (res => {
             try {
@@ -69,21 +69,20 @@ export const signin = (data, setSubmitting) => {
                     setUserObject(user);
                     dispatch(loginSuccess(user));
                 }else {
-                    dispatch(loginError({error: 'In valid credentials. Authentication failed!'}));
+                    dispatch(loginError({error: 'Incorrect email or password!'}));
                     localStorage.removeItem('access_token');
                 }
-                if(typeof setSubmitting === "function") {
-                    setSubmitting(false);
-                }
             }catch(err){
-                dispatch(loginError({error: 'Failed to sign in!'}));
+                dispatch(loginError({error: 'Incorrect email or password!'}));
+                
+            } finally {
                 if(typeof setSubmitting === "function") {
                     setSubmitting(false);
                 }
             }
         }).catch(err => {
             console.error(err);
-            dispatch(loginError({error: 'Failed to sign in!'}));
+            dispatch(loginError({error: 'Incorrect email or password!'}));
             if(typeof setSubmitting === "function") {
                 setSubmitting(false);
             }

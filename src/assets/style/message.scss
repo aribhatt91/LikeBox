@@ -2,8 +2,9 @@
 
 //Component - PageMessage
 .msg-container {
-  border: 1px solid #000;
-  padding: 16px;
+  // border: 1px solid #000;
+  border: none;
+  padding: 8px 16px;
   .msg-icon {
     font-size: 20px;
     line-height: 20px;
@@ -13,7 +14,7 @@
     color: inherit;
   }
   .msg-text {
-    font-size: 16px;
+    font-size: 14px;
     width: 100%;
     color: inherit;
     padding: 0 8px;
@@ -48,15 +49,18 @@
   }
   &.error, 
   &.alert {
+    background-color: rgba($error, 0.2);
     border-color: $error;
     color:$error;
   }
   &.success {
-    border-color: $error;
-    color: $error;
+    background-color: rgba($success, 0.2);
+    border-color: $success;
+    color: $success;
   }
   &.info {
-    border-color: $blue;
-    color: $blue;
+    background-color: rgba($info, 0.2);
+    border-color: $info;
+    color: $info;
   }
 }
