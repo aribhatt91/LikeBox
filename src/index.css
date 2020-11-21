@@ -785,6 +785,14 @@
   left: 0;
   background: white;
   z-index: 9999; }
+  .loading_module.block {
+    position: relative;
+    min-height: 400px;
+    top: auto;
+    left: auto; }
+  .loading_module.overlay {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.3); }
   .loading_module .loading_module_wrapper {
     display: flex;
     height: 100%;

@@ -3,7 +3,12 @@ import { readFromLocalStorage, writeToLocalStorage } from './../../service/helpe
 const CNAME = "orders",
 getLocalOrders = () => {
     try{
-        let orders = (JSON.parse(readFromLocalStorage(CNAME) || "{}")).orders || [];
+        let orders = null;
+        if(readFromLocalStorage(CNAME)){
+            orders = (JSON.parse(readFromLocalStorage(CNAME) || "{}")).orders || [];
+        }else {
+            orders = obj.orders;
+        }
         return orders.sort((a, b) => {
             if(a.order_date && b.order_date) {
                 try{
@@ -16,13 +21,14 @@ getLocalOrders = () => {
             }
         })
     }catch(e){
-        return obj || {};
-    }
+        return obj.orders || [];
+    }      
 }
 export const MockGetAllOrders = () => {
     return (new Promise( (resolve, reject) => {
         let orders = getLocalOrders();
-        writeToLocalStorage(CNAME, orders);
+        console.log('Orders ', orders);
+        //writeToLocalStorage(CNAME, {orders});
         setTimeout(() => resolve(orders), 2000);
     }));
 }

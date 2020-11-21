@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import ORDERS from '../../../mock/orders.json';
+import LoadingModule from '../../components/LoadingModule';
+import { fetchOrders } from './../../../service/ordersMethods';
 
 const ORDER_STATUS = {
     "1": "Order placed",
@@ -86,11 +88,18 @@ function OrderInstance({instance}){
     )
 }
 function UserOrdersFragment(){
-    let orders = ORDERS.orders || [],
-    ordersItems = [];
+    //let orders = ORDERS.orders || [],
+    const [orders, setOrders] = useState([]),
+    [pending, setPending] = useState(false);
+    let ordersItems = [];
 
     useEffect(() => {
-        
+        setPending(true);
+        fetchOrders().then(res => {
+            console.log(res); 
+            setOrders(res);
+            setPending(false);
+        });
     }, [])
 
     orders.forEach((item, index) => {
@@ -106,6 +115,14 @@ function UserOrdersFragment(){
             <div className="orders-list-container">
                 {
                     ordersItems
+                }
+                {
+                    pending && <div className="col-12">
+                        <LoadingModule
+                            type="block"
+                            text="Please wait while we fetch your orders"
+                        />
+                    </div>
                 }
             </div>
         </div>

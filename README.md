@@ -43,7 +43,7 @@ Throughout the project, I have covered these concepts, tools and techniques (The
 - joi
 - redux-dev-tools-extension
 
-Plese feel free to fork the code and suggest improvements.
+Please feel free to fork the code and suggest improvements.
 
 Thanks,
 Aritra

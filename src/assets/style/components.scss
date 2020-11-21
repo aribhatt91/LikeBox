@@ -39,6 +39,16 @@
   left: 0;
   background: white;
   z-index: 9999;
+  &.block {
+    position: relative;
+    min-height: 400px;
+    top: auto;
+    left: auto;
+  }
+  &.overlay {
+    position: absolute;
+    background: rgba(#fff, 0.3);
+  }
   .loading_module_wrapper {
     display: flex;
     height: 100%;

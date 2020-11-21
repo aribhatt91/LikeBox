@@ -3,10 +3,15 @@ import { readFromCookie, writeToCookie } from './../../service/helper';
 const CNAME = "wishlist",
 getLocalWishList = () => {
     try{
-        let wlist = JSON.parse(readFromCookie(CNAME) || "{}");
-        return wlist
+        let wlist = null;
+        if(readFromCookie(CNAME)){
+            wlist = JSON.parse(readFromCookie(CNAME) || "{}");
+        }else {
+            wlist = obj || {};
+        }
+        return wlist.items || [];
     }catch(e){
-        return obj || {};
+        return (obj || {}).items || [];
     }
 }
 export function MockGetWishlist(){
@@ -41,7 +46,7 @@ export function MockRemoveFromWishlist(product){
             }
         })
         if(index > -1){
-            wlist.items = wlist.items.splice(i, 1);
+            wlist.items = wlist.items.splice(index, 1);
         }
         writeToCookie(CNAME, wlist);
         setTimeout(() => resolve(wlist), 2000);

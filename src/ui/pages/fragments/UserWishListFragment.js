@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ThemedButton from '../../components/generic/ThemedButton';
-import WISHLIST from '../../../mock/wishlist.json';
 import { fetchWishList, removeItemFromWishList } from '../../../service/wishlistMethods';
+import LoadingModule from './../../components/LoadingModule';
 function WishListInstance({instance, deleteWishListInstance}){
     const [showDeletePop, setShowDeletePop] = useState(false);
     const wishListId = instance.sku, 
@@ -63,8 +63,20 @@ function WishListInstance({instance, deleteWishListInstance}){
     )
 }
 function UserWishListFragment({wishListObj}){
-    let wishList = WISHLIST.items || [],
-    wishListItems = [];
+    const [wishList, setWishList] = useState([]),
+    [pending, setPending] = useState(false);
+
+    let wishListItems = [];
+    
+
+    useEffect(() => {
+        setPending(true);
+        fetchWishList().then(res => {
+            console.log(res); 
+            setWishList(res);
+            setPending(false);
+        });
+    }, [])
 
     wishList.forEach((item, index) => {
         wishListItems.push(
@@ -80,6 +92,14 @@ function UserWishListFragment({wishListObj}){
             <div className="wish-list-container">
                 {
                     wishListItems
+                }
+                {
+                    pending && <div className="col-12">
+                        <LoadingModule
+                            type="block"
+                            text="Please wait while we fetch your wish list"
+                        />
+                    </div>
                 }
             </div>
         </div>
