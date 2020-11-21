@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import ThemedButton from './generic/ThemedButton';
-import TextInput from './generic/TextInput';
-import STATES from '../../mock/states.json';
-import SelectInput from './generic/SelectInput';
-import { validateAlpha, validateAlphaNumeric, validateMobileNumber, validatePincode, validateEmpty } from '../../service/validation';
+import ThemedButton from '../generic/ThemedButton';
+import TextInput from '../generic/TextInput';
+import STATES from '../../../mock/states.json';
+import SelectInput from '../generic/SelectInput';
+import { validateAlpha, validateAlphaNumeric, validateMobileNumber, validatePincode, validateEmpty } from '../../../service/validation';
 
-import { validateAddressForm, addAddress, updateAddress, ERROR_TEXT } from './../../service/addressMethods';
-import RadioButtonGroup from './generic/RadioButtonGroup';
+import { validateAddressForm, addAddress, updateAddress, ERROR_TEXT } from '../../../service/addressMethods';
+import RadioButtonGroup from '../generic/RadioButtonGroup';
 //component.scss
 function AddressForm({header, defaultValue, cancelable, cancelEdit, action, hideHeader}){
     const [errorObj, setErrorObj] = useState({});

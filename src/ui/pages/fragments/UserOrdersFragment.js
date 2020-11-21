@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import ORDERS from '../../mock/orders.json';
+import React, {useState, useEffect} from 'react';
+import ORDERS from '../../../mock/orders.json';
 
 const ORDER_STATUS = {
     "1": "Order placed",
@@ -85,9 +85,13 @@ function OrderInstance({instance}){
         </div>
     )
 }
-function UserOrdersList(){
+function UserOrdersFragment(){
     let orders = ORDERS.orders || [],
     ordersItems = [];
+
+    useEffect(() => {
+        
+    }, [])
 
     orders.forEach((item, index) => {
         ordersItems.push(
@@ -108,4 +112,4 @@ function UserOrdersList(){
     )
 }
 
-export default UserOrdersList;
+export default UserOrdersFragment;

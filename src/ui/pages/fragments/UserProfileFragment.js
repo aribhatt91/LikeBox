@@ -1,11 +1,11 @@
 import React, {useState } from 'react';
 
-import RadioButtonGroup from '../components/generic/RadioButtonGroup';
-import TextInput from '../components/generic/TextInput';
-import ThemedButton from './generic/ThemedButton';
-import USER from '../../mock/user.json';
+import RadioButtonGroup from '../../components/generic/RadioButtonGroup';
+import TextInput from '../../components/generic/TextInput';
+import ThemedButton from '../../components/generic/ThemedButton';
+import USER from '../../../mock/user.json';
 
-function UserProfile({profile, _profileUpdateHandler}){
+function UserProfileFragment({profile, _profileUpdateHandler}){
     const [piEditMode, setPiEditMode] = useState(false);//Edit Personal Information
     const [ciEditMode, setCiEditMode] = useState(false);//Edit Personal Information
     const [fieldState, setFieldState] = useState(USER);
@@ -162,4 +162,4 @@ function UserProfile({profile, _profileUpdateHandler}){
     )
 }
 
-export default UserProfile;
+export default UserProfileFragment;

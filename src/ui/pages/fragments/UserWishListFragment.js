@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import ThemedButton from './generic/ThemedButton';
-import WISHLIST from '../../mock/wishlist.json';
-import { fetchWishList, removeItemFromWishList } from './../../service/wishlistMethods';
+import ThemedButton from '../../components/generic/ThemedButton';
+import WISHLIST from '../../../mock/wishlist.json';
+import { fetchWishList, removeItemFromWishList } from '../../../service/wishlistMethods';
 function WishListInstance({instance, deleteWishListInstance}){
     const [showDeletePop, setShowDeletePop] = useState(false);
     const wishListId = instance.sku, 
@@ -62,7 +62,7 @@ function WishListInstance({instance, deleteWishListInstance}){
         </div>
     )
 }
-function UserWishList({wishListObj}){
+function UserWishListFragment({wishListObj}){
     let wishList = WISHLIST.items || [],
     wishListItems = [];
 
@@ -87,4 +87,4 @@ function UserWishList({wishListObj}){
 
 }
 
-export default UserWishList;
+export default UserWishListFragment;

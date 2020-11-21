@@ -3,8 +3,8 @@ import { readFromCookie, writeToCookie } from './../../service/helper';
 const CNAME = "user",
 getLocalUser = () => {
     try{
-        let user = JSON.parse(readFromCookie(CNAME) || "{}");
-        return user
+        let user = readFromCookie(CNAME);
+        return user ? JSON.parse(user) : obj;
     }catch(e){
         return obj || {};
     }

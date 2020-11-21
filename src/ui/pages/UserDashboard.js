@@ -1,17 +1,11 @@
 import React, { Component, useState } from 'react';
 import { BrowserRouter, Link, Route, Switch, Redirect, NavLink } from 'react-router-dom';
-import RadioButtonGroup from '../components/generic/RadioButtonGroup';
-import TextInput from '../components/generic/TextInput';
-import ThemedButton from '../components/generic/ThemedButton';
-import UserProfile from './../components/UserProfile';
-import Accordion from './../components/generic/Accordion';
-import UserAddressBook from '../components/UserAddressBook';
-import UserPaymentOptions from './../components/UserPaymentOptions';
-import UserWishList from './../components/UserWishList';
 
-//Mock data
-import USER from '../../mock/user.json';
-import UserOrdersList from './../components/UserOrdersList';
+import UserProfileFragment from './fragments/UserProfileFragment';
+import UserAddressFragment from './fragments/UserAddressFragment';
+import UserPaymentOptionsFragment from './fragments/UserPaymentOptionsFragment';
+import UserWishListFragment from './fragments/UserWishListFragment';
+import UserOrdersFragment from './fragments/UserOrdersFragment';
 
 
 function Order(props) {
@@ -34,17 +28,17 @@ function DashboardNavigation({userFirstName, logoSrc}){
                 </div>
             </div>        
             <ul>
-                <li><NavLink exact to='/' activeclassName='active'>My account</NavLink></li>
-                <li><NavLink to='/orders' activeclassName='active'>My orders</NavLink></li>
-                <li><NavLink to='/wishlists' activeclassName='active'>My wishlists</NavLink></li>
+                <li><NavLink exact to='/' activeClassName='active'>My account</NavLink></li>
+                <li><NavLink to='/orders' activeClassName='active'>My orders</NavLink></li>
+                <li><NavLink to='/wishlists' activeClassName='active'>My wishlists</NavLink></li>
             </ul>
             <ul>
-                <li><NavLink to='/address-book' activeclassName='active'>Address book</NavLink></li>
-                <li><NavLink to='/payment-options' activeclassName='active'>Payment options</NavLink></li>
+                <li><NavLink to='/address-book' activeClassName='active'>Address book</NavLink></li>
+                <li><NavLink to='/payment-options' activeClassName='active'>Payment options</NavLink></li>
             </ul>
             <ul>
-                <li><NavLink to='/login' activeclassName='active'>Login</NavLink></li>
-                <li><NavLink to='/signup' activeclassName='active'>Signup</NavLink></li>
+                <li><NavLink to='/login' activeClassName='active'>Login</NavLink></li>
+                <li><NavLink to='/signup' activeClassName='active'>Signup</NavLink></li>
             </ul>
         </div>
     )
@@ -70,11 +64,11 @@ class UserDashboard extends Component {
                     <DashboardNavigation></DashboardNavigation>
                     <div className="dashboard-body">
                         <Switch>
-                            <Route exact path="/" component={UserProfile} />
-                            <Route path="/orders" component={UserOrdersList} />
-                            <Route path="/wishlists" component={UserWishList} />
-                            <Route path="/payment-options" component={UserPaymentOptions} />
-                            <Route path="/address-book" component={UserAddressBook} />
+                            <Route exact path="/" component={UserProfileFragment} />
+                            <Route path="/orders" component={UserOrdersFragment} />
+                            <Route path="/wishlists" component={UserWishListFragment} />
+                            <Route path="/payment-options" component={UserPaymentOptionsFragment} />
+                            <Route path="/address-book" component={UserAddressFragment} />
                             <Redirect to="/"/>
                         </Switch>
                     </div>

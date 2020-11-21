@@ -31,6 +31,6 @@ export const getSuggestions = (searchTerm) => {
         ['Men', 'Women', 'Kids'].forEach(item => {
             suggestions.push(searchTerm + ' in ' + item);
         });
-        setTimeout(() => resolve(suggestions), 500);
+        setTimeout(() => resolve(suggestions), 200);
     }));
 }

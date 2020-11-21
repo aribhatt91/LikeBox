@@ -51,7 +51,7 @@ export function loginPending(response){
 }
 export function loginError(response){
   return {
-    type: LOGIN_PENDING,
+    type: LOGIN_ERROR,
     error: response.error
   }
 }

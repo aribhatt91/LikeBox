@@ -1,7 +1,4 @@
 import React, { useState } from 'react';
-import { BrowserRouter, Link, Route, Switch, Redirect, NavLink } from 'react-router-dom';
-import LoginModule from './../components/LoginModule';
-import SignupModule from './../components/SignupModule';
 import UserLoginSignupModule from './../components/UserLoginSignupModule';
 
 const LoginPage = (props) => {

@@ -34,22 +34,27 @@ export const authenticate = () => {
         }
     }
 }
-export const signin = (data) => {
+export const signin = (data, setSubmitting) => {
     return dispatch => {
         dispatch(loginPending());
         if(!data.email || !data.password){
-            dispatch(loginError({error: 'Username or password invalid'}))
+            dispatch(loginError({error: 'Username or password invalid'}));
+            if(typeof setSubmitting === "function") {
+                setSubmitting(false);
+            }
         }
         MockAuthenticate(data.email, data.password).then( res => {
             try{
                 let r = JSON.parse(res) || {}, 
                 token = r.access_token || null;
                 console.log('MockAuthenticate: res -> ', token);
+                
                 if(token) {
+                    console.log('calling MockGetUser');
                     localStorage.setItem('access_token', token);
                     return MockGetUser(token);
                 }else {
-                    dispatch(loginError({error: 'In valid credentials. Authentication failed!'}));
+                    dispatch(loginError({error: 'Invalid token. Authentication failed!'}));
                     throw new Error("Invalid token");
                 }
             }catch(err){
@@ -67,12 +72,21 @@ export const signin = (data) => {
                     dispatch(loginError({error: 'In valid credentials. Authentication failed!'}));
                     localStorage.removeItem('access_token');
                 }
+                if(typeof setSubmitting === "function") {
+                    setSubmitting(false);
+                }
             }catch(err){
                 dispatch(loginError({error: 'Failed to sign in!'}));
+                if(typeof setSubmitting === "function") {
+                    setSubmitting(false);
+                }
             }
         }).catch(err => {
             console.error(err);
             dispatch(loginError({error: 'Failed to sign in!'}));
+            if(typeof setSubmitting === "function") {
+                setSubmitting(false);
+            }
         });
     }
 }

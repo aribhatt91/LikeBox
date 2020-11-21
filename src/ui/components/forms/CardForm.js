@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import ThemedButton from './generic/ThemedButton';
-import TextInput from './generic/TextInput';
+import ThemedButton from '../generic/ThemedButton';
+import TextInput from '../generic/TextInput';
 //import SelectInput from './generic/SelectInput';
 //import { validateAddressForm, addAddress, updateAddress } from './../../service/addressMethods';
 //import RadioButtonGroup from './generic/RadioButtonGroup';

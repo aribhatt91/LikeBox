@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {signin} from '../../service/authService';
+import {signin} from '../../../service/authService';
 import { Link } from 'react-router-dom';
-import ThemedButton from './generic/ThemedButton';
-import TextInput from './generic/TextInput';
-import { validateAlpha, validateEmail, validatePassword, validateMobileNumber } from './../../service/validation';
+import ThemedButton from '../generic/ThemedButton';
+import TextInput from '../generic/TextInput';
+import { validateAlpha, validateEmail, validatePassword, validateMobileNumber } from '../../../service/validation';
 
 const PWORD_ERROR = 'Please enter a password with atleast 8 characters',
 EMAIL_ERROR = 'Please enter a valid email id',
@@ -42,7 +42,7 @@ validateSignupForm = inputObj => {
   return validation;
 }
 
-function SignupModule(props){
+function SignupForm(props){
     console.log('SignupModule', props);
     const [loggedIn, setLoggedIn] = useState(false);
     const [formValid, setFormValid] = useState(false);
@@ -171,4 +171,4 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => bindActionCreators({signInUser: signin}, dispatch)
 //Promote BookList from a component to a container
 //It needs to know about this dispatch method selectBook -- Make it available as prop
-export default connect(mapStateToProps, mapDispatchToProps)(SignupModule);
+export default connect(mapStateToProps, mapDispatchToProps)(SignupForm);

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import CardForm from './CardForm';
-import Accordion from './generic/Accordion';
-import PAYMENT from '../../mock/payment.json';
+import CardForm from '../../components/forms/CardForm';
+import Accordion from '../../components/generic/Accordion';
+import PAYMENT from '../../../mock/payment.json';
 
 function formatCardNumber(cardNumber) {
 
@@ -16,10 +16,11 @@ function SavedCard({instance, deleteCard, editCard}){
                 <div className="card-instance-number"><span>{formatCardNumber(instance.cnumber)}</span></div>
                 <span className="card-instance-edit-btn" onClick={() => setEditMode(true)}>Edit</span>
             </div>
+            
         </div>
     )
 }
-function UserPaymentOptions({saved_cards, deleteCard, editCard}){
+function UserPaymentOptionsFragment({saved_cards, deleteCard, editCard}){
     let saved_payments = [],
     cards = PAYMENT.cards; //(saved_cards ? saved_cards || []: PAYMENT.saved_cards);
 
@@ -59,4 +60,4 @@ function UserPaymentOptions({saved_cards, deleteCard, editCard}){
     )
 }
 
-export default UserPaymentOptions;
+export default UserPaymentOptionsFragment;

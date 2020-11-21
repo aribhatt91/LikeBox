@@ -25,6 +25,7 @@ export function loginStateReducer(state = initialState, action) {
                 user: action.user
             }
         case LOGIN_ERROR:
+            console.log('LOGIN_ERROR', action);
             return {
                 ...state,
                 pending: false,

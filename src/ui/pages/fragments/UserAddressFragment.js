@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import AddressForm from '../components/AddressForm';
-import Accordion from './../components/generic/Accordion';
-import ADDRESSES from '../../mock/addresses.json';
+import AddressForm from '../../components/forms/AddressForm';
+import Accordion from '../../components/generic/Accordion';
+import ADDRESSES from '../../../mock/addresses.json';
 
 function Address({instance, deleteAddress, editAddress}){
     const [editMode, setEditMode] = useState(false);
@@ -25,7 +25,7 @@ function Address({instance, deleteAddress, editAddress}){
         </div>
     )
 }
-function UserAddressBook({addresses, deleteAddress, editAddress}){
+function UserAddressFragment({addresses, deleteAddress, editAddress}){
     let saved_addresses = [];
     if(ADDRESSES.addresses && ADDRESSES.addresses.length > 0){
         ADDRESSES.addresses.forEach((item, index) => {
@@ -64,4 +64,4 @@ function UserAddressBook({addresses, deleteAddress, editAddress}){
     )
 }
 
-export default UserAddressBook;
+export default UserAddressFragment;

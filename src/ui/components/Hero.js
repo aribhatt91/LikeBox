@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import Carousel from 'react-bootstrap/Carousel';
 import C2 from '../../assets/img/c2.png';
 import C3 from '../../assets/img/c3.png';
 import C4 from '../../assets/img/c4.png';
-import HeroSlider from './HeroSlider';
+import HeroSlider from './generic/HeroSlider';
 
 class Hero extends Component {
   HERO = [{
