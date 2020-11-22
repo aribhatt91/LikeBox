@@ -1,13 +1,13 @@
 import { readFromLocalStorage, writeToLocalStorage } from './../../service/helper';
 
 const search_history = 'search_history';
-export const getSearchHistory = () => {
+export const MockGetSearchHistory = () => {
     return (new Promise( (resolve, reject) => {
         let suggestions = (readFromLocalStorage(search_history) || "").split(',');
         setTimeout(() => resolve(suggestions), 500);
     }));
 }
-export const updateSearchHistory = (searchTerm) => {
+export const MockUpdateSearchHistory = (searchTerm) => {
     if(!searchTerm){
         return [];
     }
@@ -22,7 +22,7 @@ export const updateSearchHistory = (searchTerm) => {
     }));
 }
 
-export const getSuggestions = (searchTerm) => {
+export const MockGetSuggestions = (searchTerm) => {
     if(!searchTerm){
         return [];
     }
