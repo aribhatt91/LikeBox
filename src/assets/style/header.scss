@@ -132,3 +132,41 @@
   
     }
   }
+
+  .user-account-wrapper {
+    position: relative;
+    .user-account-icon {
+      height: 100%;
+    }
+    .user-account-dropdown {
+      width: 150px;
+      padding: 8px;
+      position: absolute;
+      top: 45px;
+      right: 0;
+      background-color: #fff;
+      box-shadow: 0 4px 6px 0 rgba(0,0,0,.12);
+      border-radius: 3px;
+      ul {
+        width: 100%;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        li {
+          width: 100%;
+          display: inline-flex;
+          &:not(:last-child) {
+            border-bottom: 1px solid #ececec;
+          }
+          a {
+            width: 100%;
+            text-align: left;
+            font-size: 14px;
+            &:hover, &:focus, &:active {
+              background-color: transparent;
+            }
+          }
+        }
+      }
+    }
+  }

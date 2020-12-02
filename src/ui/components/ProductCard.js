@@ -1,28 +1,4 @@
 import React, {Component, useState, useEffect} from 'react';
-import Button from 'react-bootstrap/Button';
-
-function simulateNetworkRequest() {
-    return new Promise(resolve => setTimeout(resolve, 2000));
-}
-function LoadingButton(props) {
-    const [isLoading, setLoading] = useState(false);
-    
-    useEffect(() => {
-        if (isLoading) {
-        simulateNetworkRequest().then(() => {
-            setLoading(false);
-        });
-        }
-    }, [isLoading]);
-    
-    const handleClick = (e) => setLoading(true);
-    
-    return (
-        <Button className="btn-primary" variant="primary" disabled={isLoading} onClick={!isLoading ? handleClick : null}>
-            {isLoading ? props.loadingText : props.text}
-        </Button>
-    );
-}
 export const ProductCard = (props) => {
     return (
         <div className="col-xs-12 col-sm-6 col-md-3 p-8 float-left">

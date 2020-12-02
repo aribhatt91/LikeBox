@@ -31,6 +31,12 @@
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2)
 }
 // Component - LoadingModule.js
+@keyframes bounce {
+  0% {transform: scale(0.5);}
+  25% {transform: scale(0.8);}
+  50% {transform: scale(0.7);}
+  100% {transform: scale(1);}
+}
 .loading_module {
   position: fixed;
   width: 100%;
@@ -62,15 +68,46 @@
         width: 3rem;
         height: 3rem;
       }
+      .tick-wrapper {
+        width: 75px;
+        height: 75px;
+        border-radius: 50%;
+        background-color: ($accent-color, 0.2);
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        .tick-background {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          background-color: $accent-color;
+          display: inline-flex;
+          justify-content: center;
+          align-items: center;
+          animation: bounce 0.5s;
+          .tick {
+            width: 24px;
+            height: 32px;
+            border: 3px solid #333;
+            background: transparent;
+            transform: rotate(30deg);
+          }
+        }
+      }
     }
     .loading_text {
       margin-top: 24px;
       font-size: 15px;
       font-weight: 500;
       color: #17a2b8;
+      &.success {
+        color: #333;
+        font-size: 16px;
+      }
     }
   }
 }
+
 
 .error-module {
   padding: 50px;

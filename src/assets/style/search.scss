@@ -62,7 +62,7 @@
         border: 1px solid #ececec;
         border-bottom-right-radius: 4px;
         border-bottom-left-radius: 4px;
-        padding: 8px 24px;
+        padding: 8px;
         box-shadow: 0 4px 6px 0 rgba(0,0,0,.12);
         width: 100%;
         ul {
@@ -78,9 +78,20 @@
                 text-overflow: ellipsis;
                 height: 40px;
                 width: 100%;
-                cursor: pointer;
+                display: inline-flex;
+                align-items: center;
                 &:not(:last-child) {
                     border-bottom: 1px solid #ececec;
+                }
+                a {
+                    font-size: 14px;
+                    text-decoration: none !important;
+                    width: 100%;
+                    text-align: left;
+                    &:hover, &:focus, &:active {
+                        border-radius: 0 !important;
+                        background-color: transparent;
+                    }
                 }
             }
         }

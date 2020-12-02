@@ -15,7 +15,7 @@ const UserLoginSignupModule = (props) => {
             </div>
             <div className="row m-0 switch-link p-4">
             <div className="col-xs-12 pl-2 pr-2">
-                <a href="javascript:void(0)" onClick={() => {setSwitchSignup(!switchSignup)}}>{switchSignup ? "Already have an account?" : "Or create an account?"}</a>
+                <a onClick={() => {setSwitchSignup(!switchSignup)}}>{switchSignup ? "Already have an account?" : "Or create an account?"}</a>
             </div>
             </div>
         </div>

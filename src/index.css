@@ -125,6 +125,36 @@
       border-top-left-radius: 0.3rem;
       border-bottom-left-radius: 0.3rem; }
 
+.user-account-wrapper {
+  position: relative; }
+  .user-account-wrapper .user-account-icon {
+    height: 100%; }
+  .user-account-wrapper .user-account-dropdown {
+    width: 150px;
+    padding: 8px;
+    position: absolute;
+    top: 45px;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 3px; }
+    .user-account-wrapper .user-account-dropdown ul {
+      width: 100%;
+      list-style-type: none;
+      padding: 0;
+      margin: 0; }
+      .user-account-wrapper .user-account-dropdown ul li {
+        width: 100%;
+        display: inline-flex; }
+        .user-account-wrapper .user-account-dropdown ul li:not(:last-child) {
+          border-bottom: 1px solid #ececec; }
+        .user-account-wrapper .user-account-dropdown ul li a {
+          width: 100%;
+          text-align: left;
+          font-size: 14px; }
+          .user-account-wrapper .user-account-dropdown ul li a:hover, .user-account-wrapper .user-account-dropdown ul li a:focus, .user-account-wrapper .user-account-dropdown ul li a:active {
+            background-color: transparent; }
+
 .card_wrapper {
   width: 100%;
   position: relative;
@@ -744,7 +774,7 @@
     border: 1px solid #ececec;
     border-bottom-right-radius: 4px;
     border-bottom-left-radius: 4px;
-    padding: 8px 24px;
+    padding: 8px;
     box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.12);
     width: 100%; }
     .suggested_search_bar .search_suggestions ul {
@@ -760,9 +790,18 @@
         text-overflow: ellipsis;
         height: 40px;
         width: 100%;
-        cursor: pointer; }
+        display: inline-flex;
+        align-items: center; }
         .suggested_search_bar .search_suggestions ul li:not(:last-child) {
           border-bottom: 1px solid #ececec; }
+        .suggested_search_bar .search_suggestions ul li a {
+          font-size: 14px;
+          text-decoration: none !important;
+          width: 100%;
+          text-align: left; }
+          .suggested_search_bar .search_suggestions ul li a:hover, .suggested_search_bar .search_suggestions ul li a:focus, .suggested_search_bar .search_suggestions ul li a:active {
+            border-radius: 0 !important;
+            background-color: transparent; }
 
 .hidden-xs-up {
   display: none; }
@@ -780,6 +819,16 @@
 
 .card-white:hover, .card-white:focus {
   box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2); }
+
+@keyframes bounce {
+  0% {
+    transform: scale(0.5); }
+  25% {
+    transform: scale(0.8); }
+  50% {
+    transform: scale(0.7); }
+  100% {
+    transform: scale(1); } }
 
 .loading_module {
   position: fixed;
@@ -809,11 +858,37 @@
       .loading_module .loading_module_wrapper .loading_icon .spinner-border {
         width: 3rem;
         height: 3rem; }
+      .loading_module .loading_module_wrapper .loading_icon .tick-wrapper {
+        width: 75px;
+        height: 75px;
+        border-radius: 50%;
+        background-color: #5EA669, 0.2;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center; }
+        .loading_module .loading_module_wrapper .loading_icon .tick-wrapper .tick-background {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          background-color: #5EA669;
+          display: inline-flex;
+          justify-content: center;
+          align-items: center;
+          animation: bounce 0.5s; }
+          .loading_module .loading_module_wrapper .loading_icon .tick-wrapper .tick-background .tick {
+            width: 24px;
+            height: 32px;
+            border: 3px solid #333;
+            background: transparent;
+            transform: rotate(30deg); }
     .loading_module .loading_module_wrapper .loading_text {
       margin-top: 24px;
       font-size: 15px;
       font-weight: 500;
       color: #17a2b8; }
+      .loading_module .loading_module_wrapper .loading_text.success {
+        color: #333;
+        font-size: 16px; }
 
 .error-module {
   padding: 50px; }

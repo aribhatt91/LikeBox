@@ -18,7 +18,7 @@ Throughout the project, I have covered these concepts, tools and techniques (The
 ## What's planned?
 
 - Mock data currently used to be replaced with a Node.js API that is under construction
-- Integrate push notifications using Firebase
+- Turn this into a Progressive Web App - implement push notification, app shell, geolocation etc.
 - Explore possibility of Facebook/Google log in.
 
 ## External libraries used:

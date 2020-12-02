@@ -19,9 +19,27 @@ const ProtectedRoute = ({component: Component, ...rest}) => {
       {...rest}
       render={
         props => {
+          
           if(getUserObject()){
+            if(Component === LoginPage){
+              console.log('User is logged in: Redirecting from LoginPage to Home', getUserObject());
+              return <Redirect
+                to={
+                  {
+                    pathname: '/',
+                    // state: {
+                    //   from: props.location
+                    // }
+                  }
+                }
+              />
+            }
             return <Component {...props}/>;
           }else {
+            if(Component === LoginPage){
+              console.log('User is logged in: Redirecting from LoginPage to Home', getUserObject());
+              return <Component {...props}/>;
+            }
             return <Redirect
               to={
                 {
@@ -45,12 +63,12 @@ class AppBody extends Component {
         <Route exact path='/' render={(props) => <Home {...props} pageName="home" />}/>
         <Route path='/products/:category?' render={(props) => <ListingPage {...props} pageName="listing" />}/>
         <Route path='/product/:id' render={(props) => <ProductPage {...props} pageName="product" />}/>
-        <Route path='/about' render={(props) => <About {...props} pageName="about" />}/>
+        {/* <Route path='/about' render={(props) => <About {...props} pageName="about" />}/> */}
         <Route path='/cart' render={(props) => <CartPage {...props} pageName="cart" />}/>
         <Route path='/checkout' render={(props) => <CheckoutPage {...props} pageName="checkout" />}/>
         
-        <ProtectedRoute path='/user/:page?' component={UserDashboard}/>
-        <Route path="/login/:page?" component={LoginPage} />
+        <ProtectedRoute path='/user/:page?' component={UserDashboard} />
+        <ProtectedRoute path="/login/:page?" component={LoginPage} />
         {/* <Route path='/user/:page?' render={(props) => <UserDashboard {...props} pageName="user-dashboard" />}/> */}
         <Route path="*" render={props => <FourZeroFour {...props} />}/>
       </Switch>

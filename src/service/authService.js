@@ -89,3 +89,11 @@ export const signin = (data, setSubmitting) => {
         });
     }
 }
+
+export const signout = () => {
+    localStorage.removeItem('access_token');
+    setTimeout(() => {
+        window.location.reload();
+    }, 400);
+    
+}

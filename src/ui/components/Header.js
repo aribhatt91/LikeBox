@@ -1,7 +1,7 @@
-import React, {Component, useState} from 'react';
+import React, {Component, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,12 +9,41 @@ import { faCartPlus, faUser, faHeart } from '@fortawesome/free-solid-svg-icons';
 import Modal from 'react-bootstrap/Modal';
 import SideNav from './SideNav';
 import HOME_ICON from '../../assets/img/home_icon.png'; 
-import SearchInput from './HeaderSearchBar';
+import SearchBar from './SearchBar';
 import { authenticate } from './../../service/authService';
 import { getUserObject } from '../../service/rx-store/dataStore';
 import UserLoginSignupModule from './UserLoginSignupModule';
 import LI from '../../assets/img/login.jpg';
 
+const UserProfileDropDown = ({classes}) => {
+  const [expand, setExpand] = useState(false);
+  useEffect(() => {
+    document.body.addEventListener('click', () => {setExpand(false)})
+  }, [])
+  return (
+    <span className={"user-account-wrapper d-md-flex align-items-center"} onClick={(e) => {e.stopPropagation()}}>
+      <a className={"user-account-icon d-md-flex align-items-center"} href="#" onClick={() => setExpand(!expand)}>
+        <FontAwesomeIcon icon={faUser}/>
+      </a>
+      <div className={"user-account-dropdown" + (expand ? " d-inline-block" : " d-none")}>
+        <ul>
+          <li>
+            <Link to="/user">My account</Link>
+          </li>
+          <li>
+            <Link to="/user/orders">My orders</Link>
+          </li>
+          <li>
+            <Link to="/user/wishlists">My wishlist</Link>
+          </li>
+          <li>
+            <a>Sign out</a>
+          </li>
+        </ul>
+      </div>
+    </span>
+  )
+}
 class Header extends Component {
   constructor(props){
     super(props);
@@ -76,17 +105,19 @@ class Header extends Component {
               <NavLink activeClassName='active' to="/products/sale">Sale</NavLink>
             </Nav>
             <Nav className="justify-content-end">
-              <SearchInput></SearchInput>
-              <Nav.Link className={"d-none" + (this.state.loggedIn ? "" : " d-md-flex align-items-center")} 
+            
+              <SearchBar/>
+
+              {!this.props.loggedIn && <Nav.Link className={"d-md-flex align-items-center"} 
                 onClick={() => this.setShowModal()}>
                 <FontAwesomeIcon icon={faUser}/>
-              </Nav.Link>
-              <NavLink className={"d-none" + (this.state.loggedIn ? "" : " d-md-flex align-items-center")} activeClassName='active' to="/user">
-                <FontAwesomeIcon icon={faUser}/>
-              </NavLink>
+              </Nav.Link>}
+              {this.props.loggedIn && <UserProfileDropDown/>}
+
               <NavLink activeClassName='active' to="/cart">
                 <FontAwesomeIcon icon={faCartPlus}/>
               </NavLink>
+
             </Nav>
           </Navbar>
         </div>

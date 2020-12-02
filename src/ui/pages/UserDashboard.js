@@ -30,15 +30,14 @@ function DashboardNavigation({userFirstName, logoSrc}){
             <ul>
                 <li><NavLink exact to='/' activeClassName='active'>My account</NavLink></li>
                 <li><NavLink to='/orders' activeClassName='active'>My orders</NavLink></li>
-                <li><NavLink to='/wishlists' activeClassName='active'>My wishlists</NavLink></li>
+                <li><NavLink to='/wishlists' activeClassName='active'>My wishlist</NavLink></li>
             </ul>
             <ul>
                 <li><NavLink to='/address-book' activeClassName='active'>Address book</NavLink></li>
                 <li><NavLink to='/payment-options' activeClassName='active'>Payment options</NavLink></li>
             </ul>
             <ul>
-                <li><NavLink to='/login' activeClassName='active'>Login</NavLink></li>
-                <li><NavLink to='/signup' activeClassName='active'>Signup</NavLink></li>
+                <li><a>Sign out</a></li>
             </ul>
         </div>
     )

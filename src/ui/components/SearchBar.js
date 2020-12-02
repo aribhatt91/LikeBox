@@ -1,13 +1,37 @@
-import React, {useState, useEffect, useReducer} from 'react';
+import React, {useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch} from '@fortawesome/free-solid-svg-icons';
 import Nav from 'react-bootstrap/Nav';
-import { fetchSuggestions } from '../../service/search';
-import { _debounce } from './../../service/helper';
+import { fetchSuggestions, saveSeachHistory, fetchSearchHistory } from '../../service/search';
+import { _debounce } from '../../service/helper';
+import { Link } from 'react-router-dom';
 
+const SearchItem = ({item}) => {
+  const type = item.type,
+  brand = item.brand,
+  product = item.product,
+  category = item.category;
+  let link = "";
 
+  if(type === 'brand') {
+    link = 'products/all?brand=' + brand;
+  }
+  if(type === 'product') {
+    link = 'products/' + category + '?category=' + product;
+  }
+  if(type === 'category') {
+    link = '/products/' + category;
+  }
 
-function SearchInput(props){
+  return(
+    <Link to={link}>
+      {type === 'brand' && <span>Brand: <span className="text-uppercase"><strong>{brand}</strong> </span> </span>}
+      {(type === 'product' || type === 'category') && <span><span className="text-uppercase">{category}</span>'s <span className="font-weight-bold">{product + 's'}</span></span>}
+    </Link>
+  )
+}
+
+const SearchBar = (props) => {
     const [searchExpand, setExpandSearch] = useState(false);
     const [showSuggestions, setShowSuggestions] = useState(false);
     const [suggestions, setSuggestions] = useState([]);
@@ -27,9 +51,13 @@ function SearchInput(props){
           s.push(
             <li key={index} onClick={(e) => {
               e.stopPropagation();
-              search_term = e.target.innerHTML; 
-              _search();
-            }}>{item}</li>
+              //search_term = e.target.innerHTML; 
+              //_search();
+            }}>
+              <SearchItem
+                item={item}
+              />
+            </li>
           )
         })
         setSuggestions(s);
@@ -38,7 +66,7 @@ function SearchInput(props){
     },
     _keyPress = (e) => {
       var code = (e.keyCode ? e.keyCode : e.which); 
-      if(code == 13) {
+      if(code === 13) {
         search_term = e.target.value;
         _search();
       }else {
@@ -80,4 +108,4 @@ function SearchInput(props){
     )
 }
 
-export default SearchInput;
+export default SearchBar;

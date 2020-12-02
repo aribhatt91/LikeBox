@@ -9,3 +9,4 @@ export const LOGIN_FORM_SCHEMA = Yup.object().shape({
     password: PASSWORD.required()
 })
 
+export const SIGNUP_FORM_SCHEMA = Yup.object().shape({});
