@@ -14,6 +14,7 @@ import { authenticate } from './../../service/authService';
 import { getUserObject } from '../../service/rx-store/dataStore';
 import UserLoginSignupModule from './UserLoginSignupModule';
 import LI from '../../assets/img/login.jpg';
+import CartLink from './CartLink';
 
 const UserProfileDropDown = ({classes}) => {
   const [expand, setExpand] = useState(false);
@@ -115,7 +116,8 @@ class Header extends Component {
               {this.props.loggedIn && <UserProfileDropDown/>}
 
               <NavLink activeClassName='active' to="/cart">
-                <FontAwesomeIcon icon={faCartPlus}/>
+                {/* <FontAwesomeIcon icon={faCartPlus}/> */}
+                <CartLink/>
               </NavLink>
 
             </Nav>

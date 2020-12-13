@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import Home from './pages/Home';
-import About from './pages/About';
 import {Route, Switch, Redirect} from 'react-router-dom';
 import ProductPage from './pages/ProductPage';
 import ListingPage from './pages/ListingPage';
@@ -9,53 +8,8 @@ import CheckoutPage from './pages/CheckoutPage';
 import UserDashboard from './pages/UserDashboard';
 import FourZeroFour from './pages/FourZeroFour';
 import LoginPage from './pages/LoginPage';
-import { getUserObject } from '../service/rx-store/dataStore';
+import ProtectedRoute from './../service/middleware/ProtectedRoute';
 
-const ProtectedRoute = ({component: Component, ...rest}) => {
-  console.log('ProtectedRoute',getUserObject(), Component);
-  return (
-
-    <Route
-      {...rest}
-      render={
-        props => {
-          
-          if(getUserObject()){
-            if(Component === LoginPage){
-              console.log('User is logged in: Redirecting from LoginPage to Home', getUserObject());
-              return <Redirect
-                to={
-                  {
-                    pathname: '/',
-                    // state: {
-                    //   from: props.location
-                    // }
-                  }
-                }
-              />
-            }
-            return <Component {...props}/>;
-          }else {
-            if(Component === LoginPage){
-              console.log('User is logged in: Redirecting from LoginPage to Home', getUserObject());
-              return <Component {...props}/>;
-            }
-            return <Redirect
-              to={
-                {
-                  pathname: '/login',
-                  state: {
-                    from: props.location
-                  }
-                }
-              }
-            />
-          }
-        }
-      }
-    />
-  )
-}
 class AppBody extends Component {
   render() {
     return (<div className="App-body">

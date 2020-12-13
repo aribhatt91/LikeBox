@@ -155,6 +155,21 @@
           .user-account-wrapper .user-account-dropdown ul li a:hover, .user-account-wrapper .user-account-dropdown ul li a:focus, .user-account-wrapper .user-account-dropdown ul li a:active {
             background-color: transparent; }
 
+.cart-count {
+  background: #28a745;
+  font-size: 10px;
+  height: 16px;
+  width: 16px;
+  line-height: 1;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  color: #FFF;
+  position: absolute;
+  top: -4px;
+  right: -8px; }
+
 .card_wrapper {
   width: 100%;
   position: relative;

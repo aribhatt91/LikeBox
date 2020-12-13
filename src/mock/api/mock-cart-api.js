@@ -61,6 +61,7 @@ export function MockAddItemToCart(product) {
         products = cart.products || [],
         present = false, itemCount = 0, subTotal = 0, total = 0;
         for(let p in products){
+            /* Check product id and size - if product with different size exists, add a new instance, else increment */
             if(products[p].productId === product.productId && Number(products[p].size) === Number(product.size)){
                 products[p].quantity = Number(products[p].quantity) + 1;
                 present = true;

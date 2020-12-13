@@ -1,3 +1,5 @@
+@import './variables.scss';
+
 .App-header {
     background: white;
     z-index: 10;
@@ -147,6 +149,14 @@
       background-color: #fff;
       box-shadow: 0 4px 6px 0 rgba(0,0,0,.12);
       border-radius: 3px;
+      .user-profile-summary {
+        .user-logo {
+
+        }
+        .user-name {
+          
+        }
+      }
       ul {
         width: 100%;
         list-style-type: none;
@@ -169,4 +179,20 @@
         }
       }
     }
+  }
+
+  .cart-count {
+    background: $success;
+    font-size: 10px;
+    height: 16px;
+    width: 16px;
+    line-height: 1;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color: #FFF;
+    position: absolute;
+    top: -4px;
+    right: -8px;
   }

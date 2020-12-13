@@ -30,7 +30,7 @@ function Counter({handler, limit, limit_msg, name, label, initial_count, size}){
         <div className="counter-label mb-2">{label}</div>
         <div className="counter-input-wrapper d-inline-flex clearfix">
           <button type="button" className="decrement" disabled={val <= 0} onClick={decrement}>-</button>
-          <input type="number" value={val}/>
+          <input type="number" value={val} onChange={()=>{}}/>
           <button type="button" className="increment" disabled={limitReached} onClick={increment}>+</button>
         </div>
         {limitReached && <PageMessage type="error" size="small" text={limit_msg || `You may not add more units of this item`}/>}
