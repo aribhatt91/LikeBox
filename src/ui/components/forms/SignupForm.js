@@ -6,6 +6,8 @@ import { SIGNUP_FORM_SCHEMA } from './../../../service/validationSchema';
 import AppForm from './AppForm';
 import AppTextInput from '../generic/AppTextInput';
 import AppSubmitButton from './../generic/AppSubmitButton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 const validationSchema = SIGNUP_FORM_SCHEMA;
 function SignupForm(props){
@@ -18,8 +20,13 @@ function SignupForm(props){
     }
     return (
         <div className="col-12 p-0 m-0">
-          {loggedIn && <div>Hi {user.userName}, You are now signed up</div>}
-          {!loggedIn && <div className={"signup-form-container p-4"}>
+          {loggedIn && <div className="login-success-container d-flex flex-column justify-content-center align-items-center">
+            <div className="green-tick mb-3">
+                <FontAwesomeIcon icon={faCheck} size="2x"></FontAwesomeIcon>
+            </div>
+            <h2 className="font-weight-light">You are logged in!</h2>
+            </div>}
+          {!loggedIn && <div className={"signup-form-container"}>
             <div className="signup-form-header mb-4 pl-2 pr-2 h3 font-weight-normal">Create an account</div>
             <form className={"signup-form"}>
               <AppForm
@@ -74,7 +81,7 @@ function SignupForm(props){
                     <div className="pl-2 pr-2">
                         <div className="d-inline-block pr-4">
                             <AppSubmitButton
-                                btnText="Create account"
+                                text="Create account"
                                 theme="accent"
                                 size="medium"
                             />

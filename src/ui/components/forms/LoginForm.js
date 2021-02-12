@@ -7,6 +7,8 @@ import AppTextInput from './../generic/AppTextInput';
 import AppForm from './AppForm';
 import { LOGIN_FORM_SCHEMA } from './../../../service/validationSchema';
 import AppSubmitButton from './../generic/AppSubmitButton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 const validationSchema = LOGIN_FORM_SCHEMA;
 
@@ -20,9 +22,14 @@ const LoginForm = (props) => {
   }
   return (
     <div className="col-12 p-0 m-0">
-        {loggedIn && <div>Hi {user.userName}, You are now logged in</div>}
+        {loggedIn && <div className="login-success-container d-flex flex-column justify-content-center align-items-center">
+          <div className="green-tick mb-3">
+            <FontAwesomeIcon icon={faCheck} size="2x"></FontAwesomeIcon>
+          </div>
+          <h2 className="font-weight-light">You are logged in!</h2>
+        </div>}
 
-        <div className={"login-form-container p-4" + (loggedIn ? " d-none": "")}>
+        <div className={"login-form-container" + (loggedIn ? " d-none": "")}>
           <div className="login-form-header mb-4 pl-2 pr-2 h3 font-weight-normal">Log in</div>
           <form className={"login-form"}>
 
@@ -66,7 +73,7 @@ const LoginForm = (props) => {
                   <div className="pl-2 pr-2">
                     <div className="d-inline-block pr-4">
                       <AppSubmitButton
-                        btnText="Login"
+                        text="Login"
                         theme="accent"
                         size="medium"
                       />

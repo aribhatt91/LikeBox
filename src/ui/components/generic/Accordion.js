@@ -1,6 +1,15 @@
 import React, {useState} from 'react';
 
-function Accordion({label, openBtn, openBtnAlign, openBtnStyle, children, defDisabled, defOpen, hideHeaderOnOpen}){
+function Accordion({
+    label, 
+    openBtn, 
+    openBtnAlign, 
+    openBtnStyle, 
+    children, 
+    defDisabled, 
+    defOpen, 
+    hideHeaderOnOpen
+}){
     const [open, setOpen] = useState((typeof defOpen !== "undefined" && (defOpen === true || defOpen === "true") ? true : false));
     const [disabled, setDisabled] = useState((typeof defDisabled !== "undefined" && (defDisabled === true || defDisabled === "true") ? true : false));
     const [hideHeader, setHideHeader] = useState(typeof hideHeaderOnOpen !== "undefined" && (hideHeaderOnOpen === true || hideHeaderOnOpen === 'true') && open);

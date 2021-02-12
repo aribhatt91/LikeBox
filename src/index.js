@@ -15,7 +15,7 @@ import logger from './store/middleware/logger';
 //import ReduxPromise from 'redux-promise';
 
 const middlewares = [logger, thunk];
-const appStore = createStore(rootReducer, applyMiddleware(...middlewares)) //applyMiddleware(ReduxPromise)(createStore);
+const appStore = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), applyMiddleware(...middlewares)) //applyMiddleware(ReduxPromise)(createStore);
 
 ReactDOM.render(
     <Provider store={appStore}>

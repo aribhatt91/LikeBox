@@ -6,10 +6,10 @@ const UserLoginSignupModule = (props) => {
     return (
         <div className="login-body d-flex flex-column justify-content-center overflow-hidden m-auto">
             <div className={"d-flex login-signup-container" + (switchSignup ? " slide-signup" : " slide-login")}>
-                <div className={"d-flex module login-module"} >
+                <div className={"d-flex module login-module p-4"} >
                     <LoginForm/>
                 </div>
-                <div className={"d-flex module signup-module"} >
+                <div className={"d-flex module signup-module p-4"} >
                     <SignupForm/>
                 </div>
             </div>

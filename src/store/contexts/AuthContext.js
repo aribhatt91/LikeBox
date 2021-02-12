@@ -11,6 +11,9 @@ export const AuthProvider = ({children}) => {
     const [loading, setLoading] = useState(true);
     const signup = (email, password) => {
         auth.createUserWithEmailAndPassword(email, password);
+    },
+    login = (email, password) => {
+        auth.signInWithEmailAndPassword(email, password);
     }
 
     useEffect(() => {

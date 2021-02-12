@@ -1,4 +1,4 @@
-import React, {Component, useState, useLocation, useEffect, useParams} from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Page from './Page';

@@ -32,10 +32,10 @@ function CartProduct({item, _incrementItemCount, _decrementItemCount, _removeIte
                         <h5 className="mb-1">Are you sure you want to remove this item from your cart?</h5>
                         <div className="mt-4 mb-1">
                             <div className="left_btn_wrapper d-inline-block align-center float-right">
-                                <ThemedButton btnText="Yes" btnState="active" _click={() => _removeItem(item, false)}></ThemedButton>
+                                <ThemedButton text="Yes" btnState="active" _click={() => _removeItem(item, false)}></ThemedButton>
                             </div>
                             <div className="left_btn_wrapper d-inline-block float-right mr-3">
-                                <ThemedButton  btnText="Cancel" btnState="active" _click={() => setShowRemove(false)} border="false"></ThemedButton>
+                                <ThemedButton  text="Cancel" btnState="active" _click={() => setShowRemove(false)} border="false"></ThemedButton>
                             </div>
 
                         </div>

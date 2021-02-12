@@ -88,7 +88,7 @@ function CardForm({header, defaultValue, cancelable, cancelEdit, action, hideHea
                         <div className="d-inline-block pr-4">
                             <ThemedButton
                                 btnState={btnState}
-                                btnText="Save card"
+                                text="Save card"
                                 theme="accent"
                                 size="medium"
                                 _click={submitForm}
@@ -97,7 +97,7 @@ function CardForm({header, defaultValue, cancelable, cancelEdit, action, hideHea
                         
                         {cancelable && (typeof cancelEdit === 'function') && <div className="d-inline-block">
                             <ThemedButton
-                                btnText="Cancel"
+                                text="Cancel"
                                 theme="grey"
                                 size="medium"
                                 _click={cancelForm}

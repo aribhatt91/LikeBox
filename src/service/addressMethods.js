@@ -9,6 +9,7 @@ zipcode
 */
 import simulateNetworkRequest from './simulateNetworkRequest';
 import { validateAlpha, validateAlphaNumeric, validateMobileNumber, validatePincode, validateEmpty } from './validation';
+import { MockGetAddresses } from './../mock/api/mock-address-api';
 export const ERROR_TEXT = {
     name: 'Please fill out this field',
     mobile: 'Please enter 10-digit mobile number',
@@ -28,6 +29,10 @@ const requiredFieldsFilled = (inputObj) => {
     return {'required': res}
 }
 
+export const fetchAddresses = () => {
+    return MockGetAddresses()
+}
+
 export const addAddress = (inputObj) => {
 
 }
@@ -42,11 +47,11 @@ export const checkDeliveryAvailability = (pincode) => {
     if(validatePincode(pincode)){
         return new Promise((resolve, reject) => {
             setTimeout(() => resolve({valid: true, msg: 'We deliver at this location!'}), 2000)
-          });
+        });
     }else {
         return new Promise((resolve, reject) => {
             setTimeout(() => resolve({valid: false, msg: 'Please enter a valid pincode'}), 500)
-          });
+        });
     }
 }
 export const validateAddressForm = (inputObj) => {

@@ -25,11 +25,11 @@ function CartPageSidePanel(props) {
             <div className="col-6 float-left mt-4 align-text-right"><h4>&#x20B9;{props.total}</h4></div>
             <div className="cart_sidePanel-buttons">
                 <div className="d-inline-block align-center float-left col-sm-12 col-md-4 col-lg-12 mt-3 mb-1">
-                    <ThemedButton url="/checkout" btnText="Checkout" theme="accent" btnState="active"></ThemedButton>
+                    <ThemedButton url="/checkout" text="Checkout" theme="accent" btnState="active"></ThemedButton>
                 </div>
                 <div className="col-sm-12 col-lg-12 col-md-4 d-flex justify-content-center align-items-center pt-1 pb-1">Or</div>
                 <div className="left_btn_wrapper d-inline-block float-left col-sm-12 col-md-6 col-lg-12 mt-1 mb-3">
-                    <ThemedButton className="col-lg-12" url="/" btnText="Continue shopping" theme="grey" btnState="active"></ThemedButton>
+                    <ThemedButton className="col-lg-12" url="/" text="Continue shopping" theme="grey" btnState="active"></ThemedButton>
                 </div>
             </div>
         </div>

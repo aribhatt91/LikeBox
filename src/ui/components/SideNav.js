@@ -54,7 +54,7 @@ function SideNav(props){
           <ul className="clean_list">
             <li key="0">
               <Link to="/cart">
-                Cart
+                My Cart
               </Link>
             </li>
             {!props.loggedIn && <li key="1">

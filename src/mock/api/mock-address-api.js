@@ -1,6 +1,6 @@
 import obj from '../addresses.json';
 import { readFromCookie, writeToCookie } from './../../service/helper';
-import { MockUdateUser } from './mock-user-api';
+import { MockUpdateUser } from './mock-user-api';
 const CNAME = "addresses",
 getLocalAddresses = () => {
     try{
@@ -12,7 +12,7 @@ getLocalAddresses = () => {
 }
 export function MockGetAddresses(){
     return (new Promise( (resolve, reject) => {
-        let ads = getLocalUser();
+        let ads = getLocalAddresses();
         writeToCookie(CNAME, ads);
         setTimeout(() => resolve(ads), 2000);
     }));
@@ -46,7 +46,7 @@ export function MockDeleteAddress(id){
         }
         add_obj.addresses = addrs;
         writeToCookie(CNAME, add_obj);
-        MockUdateUser({'addrId': id, 'removeAdr': true}).then( res => {
+        MockUpdateUser({'addrId': id, 'removeAdr': true}).then( res => {
             resolve(add_obj)
         });
     }));
@@ -57,8 +57,8 @@ export function MockAddAddress(id, obj){
         obj.id = "ad0000" + (addrs.length + 1);
         addrs.unshift(obj);
         add_obj.addresses = addrs;
-        writeToCookie(CNAME, user);
-        MockUdateUser({'addrId': obj.id, 'addAdr': true}).then( res => {
+        writeToCookie(CNAME, add_obj);
+        MockUpdateUser({'addrId': obj.id, 'addAdr': true}).then( res => {
             resolve(add_obj)
         });
     }));

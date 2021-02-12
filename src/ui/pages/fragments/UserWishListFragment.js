@@ -41,7 +41,7 @@ function WishListInstance({instance, deleteWishListInstance}){
                     <div className="d-flex align-items-end">
                         <div className="d-inline-block mr-2">
                             <ThemedButton
-                                btnText="Cancel"
+                                text="Cancel"
                                 _click={() => setShowDeletePop(false)}
                                 size="sm"
                                 theme="nobg"
@@ -49,7 +49,7 @@ function WishListInstance({instance, deleteWishListInstance}){
                         </div>
                         <div className="d-inline-block">
                             <ThemedButton
-                                btnText="Remove"
+                                text="Remove"
                                 _click={deleteWishListAction}
                                 size="sm"
                                 theme="red"

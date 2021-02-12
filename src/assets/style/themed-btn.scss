@@ -2,15 +2,15 @@
 
 .themed_btn_container {
     display: inline-block;
-    width: 100%;
+    /* width: 100%; */
     padding: 0;
     .themed_btn {
-        border: 2px solid #000;
-        padding:16px;
+        border: none;
+        padding: 12px 16px;
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: transparent;
+        background-color: $dark;
         text-decoration: none;
         transition: all 0.2s ease-in-out;
         border-radius: 0;
@@ -18,7 +18,7 @@
         .themed_btn_content {
             font-size: 14px;
             line-height: 1.2;
-            color: $light-btn-text;
+            color: $dark-btn-text;
             min-width: 120px;
             text-align: center;
             display: flex;
@@ -28,8 +28,19 @@
                 margin: 0 8px;
             }
         }
-        &.no-border {
-            border: 2px solid transparent;
+        
+        &:not([disabled='true']):hover, 
+        &:not([disabled='true']):focus, 
+        &:not([disabled='true']):active {
+            text-decoration: none;
+            box-shadow: 0 4px 6px 0 rgba(0,0,0,.12);
+            outline: none !important;
+        }
+        &[disabled]{
+            pointer-events: none;
+            cursor: not-allowed;
+            opacity: 0.8;
+            box-shadow: none;
         }
         &.btn-medium {
             padding: 8px 12px;
@@ -39,123 +50,82 @@
         }
         &.theme_accent {
             background-color: $accent-color;
-            border-color: $accent-color;
             .themed_btn_content {
                 color: $dark-btn-text;
-            }
-            &:not([disabled='true']):hover, 
-            &:not([disabled='true']):focus, 
-            &:not([disabled='true']):active {
-                background-color: $accent-color-hover;
-                border-color: $accent-color-hover;
             }
         }
         &.theme_primary {
             background-color: $primary-color;
-            border-color: $primary-color;
             .themed_btn_content {
                 color: $dark-btn-text;
-            }
-            &:not([disabled='true']):hover, 
-            &:not([disabled='true']):focus, 
-            &:not([disabled='true']):active {
-                background-color: $primary-color-hover;
-                border-color: $primary-color-hover;
             }
         }
         &.theme_blue {
             background-color: $blue;
-            border-color: $blue;
             .themed_btn_content {
                 color: $dark-btn-text;
-            }
-            &:not([disabled='true']):hover, 
-            &:not([disabled='true']):focus, 
-            &:not([disabled='true']):active {
-                background-color: $blue;
             }
         }
         &.theme_grey {
             background-color: lightgrey;
-            border-color: lightgrey;
             .themed_btn_content {
                 color: $light-btn-text;
-            }
-            &:not([disabled='true']):hover, 
-            &:not([disabled='true']):focus, 
-            &:not([disabled='true']):active {
-                background-color: grey;
-                border-color: grey;
-                .themed_btn_content {
-                    color: $light-btn-text;
-                }
             }
         }
         &.theme_light {
             background-color: white;
-            border-color: white;
             .themed_btn_content {
                 color: $light-btn-text;
-            }
-            &:not([disabled='true']):hover, 
-            &:not([disabled='true']):focus, 
-            &:not([disabled='true']):active {
-                background-color: #ececec;
-                border-color: #ececec;
             }
         }
         &.theme_nobg {
             background-color: transparent;
-            border-color: transparent;
             box-shadow: none;
             .themed_btn_content {
                 color: $light-btn-text;
             }
-            &:not([disabled='true']):hover, 
-            &:not([disabled='true']):focus, 
-            &:not([disabled='true']):active {
-                background-color: transparent;
-                border-color: transparent;
+            &:hover, &:focus, &:active {
                 box-shadow: none;
-                opacity: 0.9;
             }
         }
         &.themed_red {
-            background-color: #cc0000;
-            border-color: #cc0000;
-            &:not([disabled='true']):hover, 
-            &:not([disabled='true']):focus, 
-            &:not([disabled='true']):active {
-                background-color: #cc0000;
-            }
+            background-color: $red;
         }
-        &:not([disabled='true']):hover, 
-        &:not([disabled='true']):focus, 
-        &:not([disabled='true']):active {
-            text-decoration: none;
-            background-color: #000;
-            box-shadow: 0 4px 6px 0 rgba(0,0,0,.12);
-            outline: none !important;
-            .themed_btn_content {
-                color: $dark-btn-text;
-            }
-        }
-        &[disabled]{
-            /* background-color: $btn-disabled-color!important;
-            border-color: $btn-disabled-color !important; */
-            cursor: not-allowed;
-            opacity: 0.8;
-            /* color: $btn-disabled-text; */
-            box-shadow: none;
-            .themed_btn_content {
-                /* color: $btn-disabled-text; */
-            }
-            &:hover, &:focus, &:active {
-                box-shadow: none;
-                .themed_btn_content {
-                    /* color: $btn-disabled-text; */
-                }
-            }
+    }
+}
+
+.app-btn {
+    border: 0;
+    outline: 0;
+    transition: 0.3s;
+    min-height: 48px;
+    width: auto;
+    border-radius: 24px;
+    background-color: $dark;
+    padding: 6px 24px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    outline: none;
+    &.lg {
+        height: 80px;
+    }
+    .app-btn-text {
+
+        transition: inherit;
+        font-size: 15px;
+        line-height: 22px;
+        color: $dark-btn-text;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+    &:hover, &:focus, &:active {
+        outline: none;
+        text-decoration: none;
+        background-color: #fd2c56;
+        .app-btn-text {
+            font-size: 12px;
         }
     }
 }

@@ -111,7 +111,7 @@ function UserProfileFragment({profile, _profileUpdateHandler}){
                     <div className={"save-btn-container col-md-4" + (piEditMode ? "" : " d-none")}>
                         <ThemedButton
                             theme="accent"
-                            btnText="Save"
+                            text="Save"
                             size="medium"
                             handler={updateProfile}
                         />
@@ -152,7 +152,7 @@ function UserProfileFragment({profile, _profileUpdateHandler}){
                         <ThemedButton
                             theme="accent"
                             size="medium"
-                            btnText="Save"
+                            text="Save"
                             _click={updateProfile}
                         />
                     </div>

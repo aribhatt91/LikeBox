@@ -1,6 +1,6 @@
 import { fetchStateError, fetchStateSuccess, fetchStatePending } from '../store/actions/index';
 import { MockFetchAllProducts, MockFetchProduct } from './../mock/api/mock-products-api';
-import { debounce, throttle } from 'lodash';
+//import { debounce, throttle } from 'lodash';
 import { _debounce } from './helper';
 /*
 filter = {

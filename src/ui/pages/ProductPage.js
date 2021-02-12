@@ -97,6 +97,10 @@ function ProductDelivery({handler}){
     </div>
   )
 }
+
+function PinCodeChecker (props) {
+  
+}
 class ProductPage extends Page {
   constructor(props){
     super(props);
@@ -136,6 +140,7 @@ class ProductPage extends Page {
     })
   }
   componentDidMount(){
+    //super();
     this.getProducts();
   }
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -199,7 +204,7 @@ class ProductPage extends Page {
               </div>
               <div className="product-cta-container col-md-10 clearfix mt-2 mb-2 p-0">
                 <ThemedButton
-                  btnText="Add to cart"
+                  text="Add to cart"
                   theme="accent"
                   btnState={disable_cta ? 'disabled' : 'active'}
                 />
