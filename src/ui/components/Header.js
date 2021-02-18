@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus, faUser, faHeart } from '@fortawesome/free-solid-svg-icons';
 import Modal from 'react-bootstrap/Modal';
 import SideNav from './SideNav';
-import HOME_ICON from '../../assets/img/home_icon.png'; 
+import HOME_ICON from '../../assets/img/logo.png'; 
 import SearchBar from './SearchBar';
 import { authenticate } from './../../service/authService';
 import { getUserObject } from '../../service/rx-store/dataStore';
@@ -93,7 +93,7 @@ class Header extends Component {
           <Navbar variant="light">
   
             <Navbar.Brand>
-              <SideNav loggedIn={this.state.loggedIn} signIn={this.setShowModal}></SideNav>
+              <SideNav loggedIn={this.props.loggedIn} signIn={this.setShowModal}></SideNav>
               <NavLink activeClassName='active' exact={true} to="/" >
                 <img className="home_icon" src={HOME_ICON} alt="Home"/>
               </NavLink>

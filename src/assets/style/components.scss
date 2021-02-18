@@ -301,7 +301,65 @@
     color: $success;
   }
 }
+.like-box {
+  max-width: 750px;
+  margin: auto;
+  .like-box-header-1 {
+    text-align: center;
+    letter-spacing: 2.5px;
+    font-size: 50px;
+    line-height: 53px;
+  }
+  .like-box-subheader-p {
+    letter-spacing: 1.3px;
+    text-align: center;
+  }
+}
+.like-box-home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 
+  
+  .like-box-stm-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2rem auto;
+    width: 100%;
+    .like-box-stm {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      .like-box-header-1 {
+        line-height: 50px;
+      }
+    }
+  }
+  .like-box-email-form-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem auto;
+    flex-direction: column;
+    .email-reg-form {
+      input {
+        height: 48px;
+        width: 100%;
+        padding: 8px 20px;
+      }
+      button {
+        min-width: 200px;
+      }
+    }
+  }
+  .like-box-home-section {
+    max-width: 100%;
+  }
+}
 .like-box-preference {
   h2 {
     font-size: 30px;
@@ -373,6 +431,57 @@
       background: #707070;
     }
   }
+}
+.like-box-preference-carousel {
+  margin: 60px auto;
+  .like-box-btn {
+    width: 120px;
+    height: 120px;
+    border: 2px solid #424B54;
+    font-size: 2.5rem;
+    font-weight: 100;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    &.like-box-left-btn {
+      color: #FF6969;
+    }
+    &.like-box-right-btn {
+      color: #2F97C1;
+    }
+  }
+  .card-stack {
+    position: relative;
+    margin: 2rem;
+    height: 250px;
+    width: calc(100% - 300px);
+    overflow: hidden;
+    .card-stack-item {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      border: 1px solid #393020;
+      border-radius: 45px;
+      transition: 0.3s all;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      background: #ececec;
+      &.rejected {
+        left: -100%;
+      }
+      &.liked {
+        left: 100%;
+      }
+    }
+  }
+}
+.border-radius-0 {
+  border-radius: 0 !important;
 }
 @media only screen and (max-width: 1024px){
 

@@ -361,7 +361,7 @@
   border: 0;
   outline: 0;
   transition: 0.3s;
-  min-height: 48px;
+  height: 48px;
   width: auto;
   border-radius: 24px;
   background-color: #000;
@@ -1045,6 +1045,52 @@
   .green-tick * {
     color: #28a745; }
 
+.like-box {
+  max-width: 750px;
+  margin: auto; }
+  .like-box .like-box-header-1 {
+    text-align: center;
+    letter-spacing: 2.5px;
+    font-size: 50px;
+    line-height: 53px; }
+  .like-box .like-box-subheader-p {
+    letter-spacing: 1.3px;
+    text-align: center; }
+
+.like-box-home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 3rem;
+  padding-bottom: 3rem; }
+  .like-box-home .like-box-stm-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2rem auto;
+    width: 100%; }
+    .like-box-home .like-box-stm-container .like-box-stm {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 8px; }
+      .like-box-home .like-box-stm-container .like-box-stm .like-box-header-1 {
+        line-height: 50px; }
+  .like-box-home .like-box-email-form-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem auto;
+    flex-direction: column; }
+    .like-box-home .like-box-email-form-container .email-reg-form input {
+      height: 48px;
+      width: 100%;
+      padding: 8px 20px; }
+    .like-box-home .like-box-email-form-container .email-reg-form button {
+      min-width: 200px; }
+  .like-box-home .like-box-home-section {
+    max-width: 100%; }
+
 .like-box-preference h2 {
   font-size: 30px;
   text-align: center; }
@@ -1105,39 +1151,77 @@
 .like-box-slider-wrapper .like-box-slider-container input[type=range]:focus::-webkit-slider-runnable-track {
   background: #707070; }
 
+.like-box-preference-carousel {
+  margin: 60px auto; }
+  .like-box-preference-carousel .like-box-btn {
+    width: 120px;
+    height: 120px;
+    border: 2px solid #424B54;
+    font-size: 2.5rem;
+    font-weight: 100;
+    border-radius: 50%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer; }
+    .like-box-preference-carousel .like-box-btn.like-box-left-btn {
+      color: #FF6969; }
+    .like-box-preference-carousel .like-box-btn.like-box-right-btn {
+      color: #2F97C1; }
+  .like-box-preference-carousel .card-stack {
+    position: relative;
+    margin: 2rem;
+    height: 250px;
+    width: calc(100% - 300px);
+    overflow: hidden; }
+    .like-box-preference-carousel .card-stack .card-stack-item {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      border: 1px solid #393020;
+      border-radius: 45px;
+      transition: 0.3s all;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      background: #ececec; }
+      .like-box-preference-carousel .card-stack .card-stack-item.rejected {
+        left: -100%; }
+      .like-box-preference-carousel .card-stack .card-stack-item.liked {
+        left: 100%; }
+
+.border-radius-0 {
+  border-radius: 0 !important; }
+
 .checkout_container .cart_body {
   display: flex;
   width: 100%;
   margin: auto; }
   .checkout_container .cart_body .cart_product_wrapper .container .thumbnail {
-    width: 96px; }
+    width: 200px;
+    border: 1px solid #707070; }
   .checkout_container .cart_body .cart_product_wrapper .container .desc {
-    margin-left: 24px; }
+    margin-left: 54px; }
     .checkout_container .cart_body .cart_product_wrapper .container .desc h4 {
-      font-size: 18px; }
+      font-size: 27px;
+      line-height: 36px; }
   .checkout_container .cart_body .cart_product_wrapper .container .price_wrapper .strikeThrough {
     text-decoration: line-through;
-    opacity: 0.8;
-    font-size: 14px; }
+    opacity: 0.6;
+    font-size: 18px; }
   .checkout_container .cart_body .cart_product_wrapper .container .price_wrapper .price {
-    font-size: 16px; }
-  .checkout_container .cart_body .cart_product_wrapper .container .qty_container > span {
-    min-width: 40px;
-    height: 40px;
-    border: 1px solid #e6e6e6;
-    display: flex;
-    justify-content: center;
-    align-items: center; }
-    .checkout_container .cart_body .cart_product_wrapper .container .qty_container > span.decr_icon, .checkout_container .cart_body .cart_product_wrapper .container .qty_container > span.incr_icon {
-      cursor: pointer;
-      font-size: 20px; }
-    .checkout_container .cart_body .cart_product_wrapper .container .qty_container > span.decr_icon {
-      border-right: none; }
-    .checkout_container .cart_body .cart_product_wrapper .container .qty_container > span.incr_icon {
-      border-left: none; }
-  .checkout_container .cart_body .cart_product_wrapper .container .delete_product {
+    font-size: 21px;
+    line-height: 36px;
+    font-weight: bold; }
+  .checkout_container .cart_body .cart_product_wrapper .container .delete-product {
     font-size: 22px;
+    margin-left: 54px;
     cursor: pointer; }
+    .checkout_container .cart_body .cart_product_wrapper .container .delete-product .delete-product-icon {
+      font-size: 26px;
+      line-height: 22px; }
   .checkout_container .cart_body .cart_product_wrapper .container .removePanel {
     width: 100%;
     height: 100%;
@@ -1146,14 +1230,17 @@
     z-index: 9;
     background: white; }
   .checkout_container .cart_body .cart_product_wrapper:not(:last-child) .container {
-    border-bottom: 1px solid #ececec; }
+    /* border-bottom: 1px solid #ececec; */ }
   .checkout_container .cart_body .cart_sidePanel {
     padding: 24px 16px;
-    background-color: #333;
-    color: white;
+    /* background-color: #333;
+            color: white; */
     width: 320px; }
     .checkout_container .cart_body .cart_sidePanel .align-text-right {
       text-align: right; }
+    .checkout_container .cart_body .cart_sidePanel h2 {
+      font-size: 27px;
+      line-height: 36px; }
     .checkout_container .cart_body .cart_sidePanel h2, .checkout_container .cart_body .cart_sidePanel h3 {
       color: inherit; }
 
@@ -1428,6 +1515,11 @@
       min-width: 100%; }
     .login-body .login-signup-container.slide-signup {
       transform: translateX(-100%); }
+
+.App * {
+  font-family: neusa-next-std,sans-serif;
+  font-weight: 400;
+  font-style: normal; }
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;

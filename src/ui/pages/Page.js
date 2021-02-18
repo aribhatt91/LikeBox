@@ -10,6 +10,7 @@ class Page extends Component {
             window.dataLayer.pageName = this.props.pageName;
             window.dataLayer.pageMbox = "mbox-" + this.props.pageName + "-page";
         }
+        document.title = 'Likebox | ' + this.props.pageName;
         var event = new CustomEvent("react-view-change", {detail: {view: window.dataLayer.pageName, mbox: window.dataLayer.pageMbox}});
         document.dispatchEvent(event);
     }

@@ -8,29 +8,26 @@ import CartProduct from '../components/CartProduct';
 import LoadingModule from '../components/LoadingModule';
 import ErrorModule from '../components/ErrorModule';
 import EMPTY from '../../assets/img/empty-cart.png';
+import AppButton from './../components/generic/AppButton';
 
 const EMPTY_TEXT = "You have no items in your cart!",
 EMPTY_SUBTEXT = "Please check the spelling or try searching for something else";
 function CartPageSidePanel(props) {
     return (
         <div className="float-left cart_sidePanel">
-            <h2 className="col-12 mb-5">Summary</h2>
-            <div className="col-6 float-left">Subtotal</div>
-            <div className="col-6 float-left align-text-right">&#x20B9;{props.subTotal}</div>
-            <div className="col-6 float-left">Savings</div>
-            <div className="col-6 float-left align-text-right">&#x20B9;{props.savings}</div>
-            {props.promoApplied && <div className="col-6 float-left">Promo code</div>}
-            {props.promoApplied && <div className="col-6 float-left align-text-right">{props.promoCode}</div>}
-            <div className="col-6 float-left mt-4"><h4>Total</h4></div>
-            <div className="col-6 float-left mt-4 align-text-right"><h4>&#x20B9;{props.total}</h4></div>
+            <h2 className="col-12 mb-3">Summary</h2>
+
+            <div className="col-12 float-left mb-3 d-flex justify-content-between"><span>Subtotal</span> <span>&#x20B9;{props.subTotal}</span></div>
+            <div className="col-12 float-left mb-3 d-flex justify-content-between"><span>You saved</span> <span>&#x20B9;{props.savings}</span></div>
+
+            <div className="col-12 float-left mb-3 d-flex justify-content-between"><span>Delivery</span> <span>&#x20B9;{0}</span></div>
+
+            <div className="col-12 float-left mb-3 border-top border-bottom pt-3 pb-3 d-flex justify-content-between">
+                <span>Total</span> <span>&#x20B9;{props.total}</span>
+            </div>
+
             <div className="cart_sidePanel-buttons">
-                <div className="d-inline-block align-center float-left col-sm-12 col-md-4 col-lg-12 mt-3 mb-1">
-                    <ThemedButton url="/checkout" text="Checkout" theme="accent" btnState="active"></ThemedButton>
-                </div>
-                <div className="col-sm-12 col-lg-12 col-md-4 d-flex justify-content-center align-items-center pt-1 pb-1">Or</div>
-                <div className="left_btn_wrapper d-inline-block float-left col-sm-12 col-md-6 col-lg-12 mt-1 mb-3">
-                    <ThemedButton className="col-lg-12" url="/" text="Continue shopping" theme="grey" btnState="active"></ThemedButton>
-                </div>
+                <AppButton href="/checkout" label="Checkout" className="mt-3 w-100" ></AppButton>
             </div>
         </div>
     )
@@ -51,7 +48,7 @@ class CartPage extends Page {
         const {removeFromCart} = this.props;
         return (
             
-            <div className="checkout_container">
+            <div className="checkout_container container">
                 {this.props.fetch_pending && <LoadingModule text="Please wait..."></LoadingModule>}
                 {!this.props.fetch_pending && (this.props.error || (this.props.cart.products || []).length <= 0) && <ErrorModule
                     error_image={EMPTY}
@@ -67,8 +64,6 @@ class CartPage extends Page {
                                     key={index} 
                                     item={item}
                                     currency={this.props.cart.currency}
-                                    _incrementItemCount={addToCart}
-                                    _decrementItemCount={removeFromCart}
                                     _removeItem={removeFromCart}
                                     ></CartProduct>)
                             })

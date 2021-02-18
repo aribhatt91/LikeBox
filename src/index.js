@@ -11,6 +11,7 @@ import { applyMiddleware, createStore } from 'redux';
 import rootReducer from './store/reducers/index';
 import thunk from 'redux-thunk';
 import logger from './store/middleware/logger';
+import { AuthProvider, AuthContext } from './store/contexts/AuthContext';
 // eslint-disable-next-line
 //import ReduxPromise from 'redux-promise';
 

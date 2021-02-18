@@ -10,8 +10,8 @@ import FourZeroFour from './pages/FourZeroFour';
 import LoginPage from './pages/LoginPage';
 import ProtectedRoute from './../service/middleware/ProtectedRoute';
 
-class AppBody extends Component {
-  render() {
+function AppBody (){
+
     return (<div className="App-body">
       <Switch>
         <Route exact path='/' render={(props) => <Home {...props} pageName="home" />}/>
@@ -27,7 +27,7 @@ class AppBody extends Component {
         <Route path="*" render={props => <FourZeroFour {...props} />}/>
       </Switch>
     </div>);
-  }
+  
 }
 
 export default AppBody;

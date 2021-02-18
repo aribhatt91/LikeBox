@@ -7,50 +7,36 @@
             .container{
                 
                 .thumbnail {
-                    width: 96px;
+                    width: 200px;
+                    border: 1px solid #707070;
                 }
                 .desc {
-                    margin-left: 24px;
+                    margin-left: 54px;
                     h4 {
-                        font-size: 18px;
+                        font-size: 27px;
+                        line-height: 36px;
                     }
                 }
                 .price_wrapper {
                     .strikeThrough {
                         text-decoration: line-through;
-                        opacity: 0.8;
-                        font-size: 14px;
+                        opacity: 0.6;
+                        font-size: 18px;
                     }
                     .price {
-                        font-size: 16px;
+                        font-size: 21px;
+                        line-height: 36px;
+                        font-weight: bold;
                     }
                 }
-                .qty_container {
-                    > span {
-                        min-width: 40px;
-                        height: 40px;
-                        border: 1px solid #e6e6e6;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-
-                        &.decr_icon, 
-                        &.incr_icon {
-                            cursor: pointer;
-                            font-size: 20px;
-                        }
-                        &.decr_icon {
-                            border-right: none;
-                        }
-                        &.incr_icon {
-                            border-left: none;
-                        }
-                    }
-
-                }
-                .delete_product {
+                .delete-product {
                     font-size: 22px;
+                    margin-left: 54px;
                     cursor: pointer;
+                    .delete-product-icon {
+                        font-size: 26px;
+                        line-height: 22px;
+                    }
                 }
                 .removePanel {
                     width: 100%;
@@ -63,17 +49,21 @@
             }
             &:not(:last-child){
                 .container{
-                    border-bottom: 1px solid #ececec;
+                    /* border-bottom: 1px solid #ececec; */
                 }
             }
         }
         .cart_sidePanel {
             padding: 24px 16px;
-            background-color: #333;
-            color: white;
+            /* background-color: #333;
+            color: white; */
             width: 320px;
             .align-text-right {
                 text-align: right;
+            }
+            h2 {
+                font-size: 27px;
+                line-height: 36px;
             }
             h2, h3 {
                 color: inherit;

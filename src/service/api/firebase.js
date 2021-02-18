@@ -3,12 +3,13 @@ import 'firebase/auth';
 
 const app = firebase.initializeApp(
     {
-        apiKey: "AIzaSyBYOdKnJRiZZJ9d6a4SFqVDHRS1AooLviA",
-        authDomain: "spa-aribhatt.firebaseapp.com",
-        databaseURL: "https://spa-aribhatt.firebaseio.com",
-        projectId: "spa-aribhatt",
-        storageBucket: "spa-aribhatt.appspot.com",
-        messagingSenderId: "331228169107"
+        apiKey: "AIzaSyAG6MR9BYDyLM5hTfuvzGoVpRj3pKh76nE",
+        authDomain: "webapp-470b3.firebaseapp.com",
+        projectId: "webapp-470b3",
+        storageBucket: "webapp-470b3.appspot.com",
+        messagingSenderId: "503191097763",
+        appId: "1:503191097763:web:871ca4c3ee0e57dab0ca16",
+        databaseURL: "https://webapp-470b3-default-rtdb.firebaseio.com/"
     }
 )
 

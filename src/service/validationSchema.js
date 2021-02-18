@@ -10,6 +10,10 @@ export const LOGIN_FORM_SCHEMA = Yup.object().shape({
     password: PASSWORD.required()
 })
 
+export const EMAIL_FORM_SCHEMA = Yup.object().shape({
+    email: EMAIL.required()
+})
+
 export const SIGNUP_FORM_SCHEMA = Yup.object().shape({
     email: EMAIL.required(),
     password: PASSWORD.required(),

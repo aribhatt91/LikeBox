@@ -96,7 +96,7 @@ export default function LikeBoxPreference() {
             onChange={(val) => onInputChange('show', val)}
         />
 
-        <AppButton label="Submit" className="mt-5 mb-5 lg w-100" onClick={submit}/>
+        <AppButton label="Submit" className="mt-5 mb-5 w-100" onClick={submit}/>
             
         </div>
     )

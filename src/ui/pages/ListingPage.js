@@ -31,7 +31,10 @@ class ListingPage extends Page {
   }
 
   getProducts(){
-    const {fetchProducts} = this.props;
+    this.setState({
+      pending: true
+    });
+    //const {fetchProducts} = this.props;
     const category = this.props.match.params.category,
     price_range = this.props.match.params.price_range,
     brands = this.props.match.params.brands;
@@ -41,7 +44,16 @@ class ListingPage extends Page {
       filter.category = category;
     }
     console.log('getProducts -> ', filter);
-    fetchProducts(filter);
+    //fetchProducts(filter)
+    fetchAllProducts(filter).then(
+      products => {
+        this.setState({
+          items: products,
+          pending: false
+        })
+      }
+    )
+
   }
   componentDidMount(){
     this.getProducts();
@@ -57,7 +69,7 @@ class ListingPage extends Page {
   }
   applyFilter(filterObj){
     console.log('ListingPage:applyFilter ->', filterObj);
-    this.props.fetchProducts(filterObj);
+    //fetchAllProducts(filterObj);
   }
   applySort(sortOrder){
 
@@ -66,16 +78,16 @@ class ListingPage extends Page {
   render() {
     return (
       <section className="products-section">
-        {this.props.pending && <LoadingModule text="Please wait..."></LoadingModule>}
-        {!this.props.pending && this.props.items.length > 0 && 
+        {this.state.pending && <LoadingModule text="Please wait..."></LoadingModule>}
+        {!this.state.pending && this.state.items.length > 0 && 
           <div className="page container-fluid">
             <ProductFilters 
             filterHandler={this.applyFilter}
             sortHandler={this.applySort}
-            products={this.props.items.length}></ProductFilters>
+            products={this.state.items.length}></ProductFilters>
             
             <div className="product_cards_container page-content-wrapper">
-              {this.props.items.map((item)=>{
+              {this.state.items.map((item)=>{
                 return (<ProductCard 
                   key={item.sku}
                   title={item.name}
@@ -88,7 +100,7 @@ class ListingPage extends Page {
               })}
             </div>
           </div>}
-        {!this.props.pending && this.props.items.length === 0 && <ErrorModule
+        {!this.state.pending && this.state.items.length === 0 && <ErrorModule
           error_image={EMPTY}
           error_text={EMPTY_TEXT}
           error_subtext={EMPTY_SUBTEXT}
@@ -97,16 +109,6 @@ class ListingPage extends Page {
     );
   }
 }
-const mapStateToProps = state => {
-  console.log('mapStateToProps called', state);
-  return {
-    pending: state.itemsReducer.pending,
-    items: state.itemsReducer.items,
-    error: state.itemsReducer.error
-  }
-}
-//Anything returned from this function will end up as props to BookList container
-const mapDispatchToProps = (dispatch) => bindActionCreators({fetchProducts: fetchAllProducts}, dispatch)
-//Promote BookList from a component to a container
-//It needs to know about this dispatch method selectBook -- Make it available as prop
-export default connect(mapStateToProps, mapDispatchToProps)(ListingPage);
+
+
+export default ListingPage;

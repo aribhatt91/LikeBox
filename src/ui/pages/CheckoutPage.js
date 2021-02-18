@@ -10,6 +10,7 @@ import LoginForm from './../components/forms/LoginForm';
 import { transform } from 'lodash';
 import { fetchAddresses } from '../../service/addressMethods';
 import { addAddress } from './../../service/addressMethods';
+import AppButton from '../components/generic/AppButton';
 
 
 
@@ -20,8 +21,9 @@ function UserModule({onClickContinue}){
         </div>
         <div className="d-flex justify-content-center align-items-center p-2 flex-grow-1">
             <ThemedButton
-                text="Continue as guest"
-                _click={onClickContinue}
+                className="border-0"
+                label="Continue as guest"
+                onClick={onClickContinue}
             />
         </div>
     </div>)
@@ -48,13 +50,22 @@ function AddressModule({
             let addresses = res.addresses;
             for(let i=0; i < (addresses || []).length; i++) {
                 saved_addresses.push(
-                    <div key={i} className={"select-address-item p-2 col-12 col-md-3" + (i === addressSelected ? " selected" : "")}>
-                        <h6 className="text-center text-uppercase mb-1">{addresses[i].adtype}</h6>
-                        <p className="addr_line1">{addresses[i].address}</p>
-                        <p className="addr_line2">{addresses[i].locality}</p>
-                        <p className="addr_city">{addresses[i].city}</p>
-                        <p className="addr_city">{addresses[i].state}</p>
-                        <p className="addr_zipcode">{addresses[i].zipcode}</p>
+                    <div key={i} className={"select-address-item d-flex flex-column justify-content-between p-4 col-12 col-md-3" + (i === addressSelected ? " selected" : "")}>
+                        <div>
+                            <h6 className="text-center text-uppercase mb-1">{addresses[i].adtype}</h6>
+                            <p className="name">{addresses[i].name}</p>
+                            <p className="addr_line1">{addresses[i].address}</p>
+                            <p className="addr_line2">{addresses[i].locality}</p>
+                            <p className="addr_city">{addresses[i].city}</p>
+                            {/* <p className="addr_city">{addresses[i].state}</p> */}
+                            <p className="addr_zipcode">{addresses[i].pincode}</p>
+                        </div>
+                        <AppButton
+                            label="Select"
+                            className="w-100 mt-3"
+                            onClick={() => {}}
+                        />
+
                     </div>);
             }
             console.log('Addresses ->', saved_addresses);
@@ -91,21 +102,21 @@ function AddressModule({
                         addNewAddress={addAddress}/>
                     }
                     <div className={"justify-content-start submit-button-container" + (expandAddAddress ? " d-none": " d-flex")}>
-                        <ThemedButton
-                        text="Add new address"
-                        border="false"
-                        _click={() => setExpandAddAddress(true)}
-                        ></ThemedButton>
+                        <AppButton
+                        label="Add new address"
+                        className="w-50"
+                        onClick={() => setExpandAddAddress(true)}
+                        ></AppButton>
                     </div>
                 </div>
             </div>
             <div className="d-flex justify-content-end submit-button-container mt-5">
-                <ThemedButton
-                text="Continue"
-                border="false"
-                btnState={saved_addresses.length === 0 ? 'disabled' : 'active'}
-                _click={selectAddress}
-                ></ThemedButton>
+                <AppButton
+                label="Continue"
+                className="border-0"
+                disabled={saved_addresses.length === 0}
+                onClick={selectAddress}
+                ></AppButton>
             </div>
             
         </div>

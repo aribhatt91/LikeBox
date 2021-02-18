@@ -27,7 +27,7 @@ const AppTextInput = ({name, label, disabled, defvalue, type='text', ...rest}) =
     return (
         <div className={"form-group animated-text-input d-inline-block" /*+ (errors[name] && touched ? " error" : "")*/ + (dirty ? " edit-mode" : "")+ (disabled ? " disabled" : "")}>
             <label className="d-flex position-relative" htmlFor={name}>
-                <span className={"text_input_label"}>{label}</span>
+                {/* <span className={"text_input_label"}>{label}</span> */}
                 {
                     (!type || type !== 'textarea') && <input
                         {...rest}
@@ -38,6 +38,7 @@ const AppTextInput = ({name, label, disabled, defvalue, type='text', ...rest}) =
                         onBlur={resetEditMode}
                         onChange={handleChange(name)}
                         defaultValue={defvalue}
+                        placeholder={label}
                         disabled={disabled ? " disabled" : ""}
                     />
                 }

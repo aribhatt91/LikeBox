@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {signin} from '../../../service/authService';
@@ -9,18 +9,32 @@ import AppSubmitButton from './../generic/AppSubmitButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
+import { useAuth, AuthContext } from './../../../store/contexts/AuthContext';
+//import signup from './../../../service/signupService';
+
 const validationSchema = SIGNUP_FORM_SCHEMA;
 function SignupForm(props){
     console.log('SignupModule', props);
     const { error, pending, user, loggedIn } = props;
     const [ submitted, setSubmitted] = useState(false);
 
-    const submitForm = (userInput, {setSubmitting}) => {
-
+    const {signup, currentUser} = useContext(AuthContext);//useAuth();
+    console.log('SignupForm', currentUser);
+    async function submitForm(userInput, {setSubmitting}){
+        setSubmitting(true);
+        console.log(userInput, setSubmitting);
+        try{
+            await signup(userInput);
+            console.log('after await', currentUser);
+        }catch(err){
+            console.error(err);
+        }
+        
+        setSubmitting(false);
     }
     return (
         <div className="col-12 p-0 m-0">
-          {loggedIn && <div className="login-success-container d-flex flex-column justify-content-center align-items-center">
+          {currentUser && <div className="login-success-container d-flex flex-column justify-content-center align-items-center">
             <div className="green-tick mb-3">
                 <FontAwesomeIcon icon={faCheck} size="2x"></FontAwesomeIcon>
             </div>

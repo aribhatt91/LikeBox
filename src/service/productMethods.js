@@ -92,7 +92,7 @@ export const applyOptimisedFilter = (filterObj) => {
     optimised(filterObj);
 }
 export const fetchAllProducts = (filter) => {
-    return dispatch => {
+    /* return dispatch => {
         dispatch(fetchStatePending());
         MockFetchAllProducts(filter, filterProducts)
         .then((products) => {
@@ -103,7 +103,8 @@ export const fetchAllProducts = (filter) => {
         .catch(error => {
             dispatch(fetchStateError(error));
         })
-    }
+    } */
+    return MockFetchAllProducts(filter, filterProducts)
 }
 
 export const fetchSingleProduct = (sku) => {
