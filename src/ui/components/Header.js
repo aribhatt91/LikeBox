@@ -1,4 +1,4 @@
-import React, {Component, useState, useEffect } from 'react';
+import React, {Component, useState, useContext, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Link, NavLink } from 'react-router-dom';
@@ -15,8 +15,11 @@ import { getUserObject } from '../../service/rx-store/dataStore';
 import UserLoginSignupModule from './UserLoginSignupModule';
 import LI from '../../assets/img/login.jpg';
 import CartLink from './CartLink';
+import { AuthContext } from './../../store/contexts/AuthContext';
+import AppButton from './generic/AppButton';
+import HeaderNavigation from './HeaderNavigation';
 
-const UserProfileDropDown = ({classes}) => {
+const UserProfileDropDown = ({classes, logout}) => {
   const [expand, setExpand] = useState(false);
   useEffect(() => {
     document.body.addEventListener('click', () => {setExpand(false)})
@@ -38,15 +41,29 @@ const UserProfileDropDown = ({classes}) => {
             <Link to="/user/wishlists">My wishlist</Link>
           </li>
           <li>
-            <a>Sign out</a>
+            <a href="#" onClick={logout}>Log out</a>
           </li>
         </ul>
       </div>
     </span>
   )
 }
-class Header extends Component {
-  constructor(props){
+function Header (props) {
+  const [showModal, setShowModal] = useState(false);
+  const [searchExpand, setSearchExpand] = useState(false);
+  const [scrolling, setScrolling] = useState(false);
+
+  const {currentUser, logout} = useContext(AuthContext);
+
+  const signout = async () => {
+    try{
+      let res = await logout();
+      console.log('signout -> ', res);
+    }catch(err){
+      console.error(err);
+    }
+  }
+  /* constructor(props){
     super(props);
     this.state = {
       showModal: false, 
@@ -59,8 +76,21 @@ class Header extends Component {
     this.setHideModal = this.setHideModal.bind(this);
     console.log('Header props ->',this.props);
     
-  }
-  componentDidMount(){
+  } */
+
+  useEffect(()=>{
+    window.addEventListener('scroll', (e) => {
+      if(window.pageYOffset <= 20 && setScrolling && scrolling){
+        setScrolling(false);
+      }else if(window.pageYOffset > 30 && setScrolling && !scrolling) {
+        setScrolling(true)
+      }
+    })
+  }, [])
+
+  
+
+  /* componentDidMount(){
     let that = this;
     this.props.authenticate();
     console.log('componentDidMount: called authenticate');
@@ -75,25 +105,15 @@ class Header extends Component {
         })
       }
     })
-  }
-  setShowModal(){
-    this.setState({
-      showModal: true
-    })
-  }
-  setHideModal(){
-    this.setState({
-      showModal: false
-    })
-  }
-  render(){
+  } */
+  
     return (
       <header className="App-header sticky-top">
-        <div className={"topnav" + (this.state.scrolling ? ' scrolling' : "")}>
+        <div className={"topnav" + (scrolling ? ' scrolling' : "")}>
           <Navbar variant="light">
   
             <Navbar.Brand>
-              <SideNav loggedIn={this.props.loggedIn} signIn={this.setShowModal}></SideNav>
+              <SideNav loggedIn={currentUser} signIn={setShowModal}></SideNav>
               <NavLink activeClassName='active' exact={true} to="/" >
                 <img className="home_icon" src={HOME_ICON} alt="Home"/>
               </NavLink>
@@ -101,31 +121,36 @@ class Header extends Component {
             
             <Nav className="mr-auto d-none d-md-flex navbar-nav">
               <NavLink activeClassName='active' to="/products/men">Men</NavLink>
-              <NavLink activeClassName='active' to="/products/women">Women</NavLink>
-              <NavLink activeClassName='active' to="/products/kids">Kids</NavLink>
               <NavLink activeClassName='active' to="/products/sale">Sale</NavLink>
+              <HeaderNavigation/>
             </Nav>
             <Nav className="justify-content-end">
             
-              <SearchBar/>
+              {/* <SearchBar/> */}
 
-              {!this.props.loggedIn && <Nav.Link className={"d-md-flex align-items-center"} 
-                onClick={() => this.setShowModal()}>
-                <FontAwesomeIcon icon={faUser}/>
-              </Nav.Link>}
-              {this.props.loggedIn && <UserProfileDropDown/>}
+              {!currentUser && <AppButton label="Register" className={"d-md-flex sm align-items-center pl-5 pr-5"} 
+                onClick={() => setShowModal(true)}>
+              </AppButton>}
+              {currentUser && 
+              <React.Fragment>
+                <AppButton label="Your account" className={"d-md-flex sm align-items-center pl-5 pr-5"} 
+                  href="/user">
+                </AppButton>
+                <NavLink activeClassName='active' to="/cart">
+                  {/* <FontAwesomeIcon icon={faCartPlus}/> */}
+                  <CartLink user={currentUser}/>
+                </NavLink>
+              </React.Fragment>
+              }
 
-              <NavLink activeClassName='active' to="/cart">
-                {/* <FontAwesomeIcon icon={faCartPlus}/> */}
-                <CartLink/>
-              </NavLink>
+              
 
             </Nav>
           </Navbar>
         </div>
         <Modal
-            show={this.state.showModal}
-            onHide={this.setHideModal}
+            show={showModal}
+            onHide={() => {setShowModal(false)}}
             size="md"
             aria-labelledby="contained-modal-title-vcenter"
             centered>
@@ -136,9 +161,9 @@ class Header extends Component {
           </Modal>
       </header>
     );
-  }
+  
 }
-const mapStateToProps = state => {
+/* const mapStateToProps = state => {
   return {
     loggedIn: state.loginReducer.loggedIn,
     user: state.loginReducer.user
@@ -146,4 +171,6 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = (dispatch) => bindActionCreators({authenticate: authenticate}, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header); */
+
+export default Header;

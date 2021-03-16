@@ -15,13 +15,13 @@ const AppTextInput = ({name, label, disabled, defvalue, type='text', ...rest}) =
     const resetEditMode = (e) => {
         setDirty(((e.target.value || "").trim() !== ""));
         if(typeof setFieldTouched === 'function'){
-            console.log('blurrr');
+            //console.log('blurrr');
             setFieldTouched(name);
         }
     }
-    console.log('Ref', tinput, {name, touched, errors});
+    //console.log('Ref', tinput, {name, touched, errors});
     if(tinput && tinput.current && defvalue){
-        console.log(name, defvalue);
+        //console.log(name, defvalue);
         tinput.current.value = defvalue || "";
     }
     return (
@@ -31,6 +31,7 @@ const AppTextInput = ({name, label, disabled, defvalue, type='text', ...rest}) =
                 {
                     (!type || type !== 'textarea') && <input
                         {...rest}
+                        type={type}
                         name={name}
                         ref={tinput}
                         className="form-control"

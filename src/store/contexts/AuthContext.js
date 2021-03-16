@@ -35,6 +35,25 @@ export function AuthProvider({children}){
         return auth.fetchSignInMethodsForEmail(email);
     }
 
+    function updateName(displayName){
+        currentUser.updateProfile({
+            displayName
+        }).then(()=>{
+            console.log("Updated user's Display Name");
+        }, error => {
+            console.log("Error while updating user's Display Name", error);
+        })
+    }
+    function updatePhotoUrl(photoURL){
+        currentUser.updateProfile({
+            photoURL
+        }).then(()=>{
+            console.log("Updated user's Display Name");
+        }, error => {
+            console.log("Error while updating user's Display Name", error);
+        })
+    }
+
     function signInWithToken(){
         if(localStorage.getItem('user_token')){
             let token = localStorage.getItem('user_token');
@@ -61,9 +80,10 @@ export function AuthProvider({children}){
                 user.getIdToken().then(token => {
                     console.log('received token', token);
                     localStorage.setItem('user_token', token);
-                })
+                });
+                console.log('onAuthStateChanged', user, user.uid);
             }
-            console.log('onAuthStateChanged', user, user.uid);
+            
             setLoading(false);
         })
         return unsubscribe;
@@ -77,7 +97,9 @@ export function AuthProvider({children}){
         fetchSignInMethods,
         resetPassword,
         updateEmail,
-        updatePassword
+        updatePassword,
+        updateName,
+        updatePhotoUrl
     };
     return (
         <AuthContext.Provider value={value}>

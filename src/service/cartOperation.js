@@ -1,11 +1,12 @@
 import { addToCartSuccess, addToCartPending, removeFromCartPending, removeFromCartSuccess, fetchCartPending, fetchCartSuccess, cartError } from '../store/actions/index';
 import { MockGetCart, MockAddItemToCart, MockRemoveItemFromCart } from './../mock/api/mock-cart-api';
+import { CURRENCY } from './constants';
+import { getUserCart, addProductToCart, removeProductFromCart, getCartCount } from './api/firestore/cart';
 
 /*
 // Cart
 {
     count: Number,
-    loggedIn: Boolean,
     subTotal: Number,
     total: Number,
     savings: Number,
@@ -16,11 +17,11 @@ import { MockGetCart, MockAddItemToCart, MockRemoveItemFromCart } from './../moc
 }
 // Product
 {
-    productId: String,
-    productName: String,
-    productImg: String,
-    fullPrice: Number,
-    salePrice: Number,
+    sku: String,
+    name: String,
+    thumbnail: String,
+    full_price: Number,
+    price: Number,
     quantity: Number,
     size: Number
 }
@@ -34,18 +35,15 @@ INVALID_PRODUCT = "Product is not valid";
 
 const EMPTY_CART = {
     count: 0,
-    loggedIn: false,
     subTotal: 0,
     total: 0,
     savings: 0,
-    currency: "&#8377;",
-    products: [],
-    promoCode: null,
-    promoApplied: false
+    currency: CURRENCY,
+    products: []
 }
 let CartService = {
     active_cart: EMPTY_CART,
-    addToCart: (product) => {
+    addToCart: (email, product) => {
         return dispatch => {
             dispatch(addToCartPending(CartService.active_cart));
             if(!CartService.validateProduct(product)){
@@ -54,8 +52,8 @@ let CartService = {
                 dispatch(cartError({error: CART_ADD_ERROR, cart: CartService.active_cart}));
                 return;
             }
-            
-            MockAddItemToCart(product).then( res => {
+            //TODO - Switch to Firestore
+            addProductToCart(email, product).then( res => {
                 CartService.setCart(CartService.parseCart(res));
                 console.log('addToCart: MockGetCart: parsed cart', CartService.active_cart);
                 dispatch(addToCartSuccess(CartService.getCart()));
@@ -63,10 +61,18 @@ let CartService = {
                 console.log('addToCart: MockGetCart: error', error);
                 dispatch(cartError({error: CART_ADD_ERROR, cart: CartService.active_cart}));
             });
+            /* MockAddItemToCart(product).then( res => {
+                CartService.setCart(CartService.parseCart(res));
+                console.log('addToCart: MockGetCart: parsed cart', CartService.active_cart);
+                dispatch(addToCartSuccess(CartService.getCart()));
+            }).catch( error => {
+                console.log('addToCart: MockGetCart: error', error);
+                dispatch(cartError({error: CART_ADD_ERROR, cart: CartService.active_cart}));
+            }); */
         }
         
     },
-    removeFromCart: (product, decrement) => {
+    removeFromCart: (email, product, decrement=false) => {
         return (dispatch) => {
             dispatch(removeFromCartPending(CartService.active_cart));
             if(!CartService.validateProduct(product)){
@@ -80,31 +86,50 @@ let CartService = {
                 return;
             }
             
-           
-            MockRemoveItemFromCart(product, decrement).then( res => {
+           //TODO - Switch to Firestore
+           removeProductFromCart(email, product, decrement).then( res => {
+                CartService.setCart(CartService.parseCart(res));
+                console.log('removeFromCart: removeProductFromCart: parsed cart', CartService.active_cart);
+                dispatch(removeFromCartSuccess(CartService.getCart()));
+            }).catch( error => {
+                console.log('removeFromCart: removeProductFromCart: error', error);
+                dispatch(cartError({error: CART_REMOVE_ERROR, cart: CartService.active_cart}));
+            })
+            /* MockRemoveItemFromCart(product, decrement).then( res => {
                 CartService.setCart(CartService.parseCart(res));
                 console.log('removeFromCart: MockGetCart: parsed cart', CartService.active_cart);
                 dispatch(removeFromCartSuccess(CartService.getCart()));
             }).catch( error => {
                 console.log('removeFromCart: MockGetCart: error', error);
                 dispatch(cartError({error: CART_REMOVE_ERROR, cart: CartService.active_cart}));
-            })
+            }) */
             
         }
         
     },
-    fetchCart: () => {
+    fetchCart: (email) => {
         return (dispatch) => {
             dispatch(fetchCartPending(EMPTY_CART));
-
-            MockGetCart().then( res => {
+            //TODO - Replace with Firestore
+            
+            getUserCart(email).then(res => {
+                CartService.setCart(CartService.parseCart(res));
+                console.log('getUserCart: parsed cart', CartService.active_cart);
+                dispatch(fetchCartSuccess(CartService.active_cart));
+            })
+            .catch(err => {
+                console.log('fetchCart: getUserCart: error', err);
+                dispatch(cartError({error: CART_FETCH_ERROR, cart: CartService.active_cart}));
+            }) 
+            
+            /* MockGetCart().then( res => {
                 CartService.setCart(CartService.parseCart(res));
                 console.log('MockGetCart: parsed cart', CartService.active_cart);
                 dispatch(fetchCartSuccess(CartService.active_cart));
             }).catch( error => {
                 console.log('fetchCart: MockGetCart: error', error);
                 dispatch(cartError({error: CART_FETCH_ERROR, cart: CartService.active_cart}));
-            })
+            }) */
         }  
     },
     parseCart: (cartString) => {
@@ -118,14 +143,13 @@ let CartService = {
             cart.count = cart.count ? Number(cart.count) || 0 : 0;
             cart.total = cart.total ? Number(cart.total) || 0 : 0;
             cart.subTotal = cart.subTotal ? Number(cart.subTotal) || 0 : 0;
-            cart.loggedIn = cart.loggedIn === 'true';
-            cart.promoApplied = cart.promoApplied === 'true';
             cart.products = cart.products || [];
             cart.products.forEach((item, index) => {
                 item.size = item.size ? Number(item.size) || 0 : 0;
                 item.quantity = item.quantity ? Number(item.quantity) || 0 : 0;
-                item.fullPrice = item.fullPrice ? Number(item.fullPrice) || 0 : 0;
-                item.salePrice = item.salePrice ? Number(item.salePrice) || 0 : 0;
+                item.full_price = item.full_price ? Number(item.full_price) || 0 : 0;
+                item.price = item.price ? Number(item.price) || 0 : 0;
+                item.full_price = item.full_price === 0 ? item.price : item.full_price;
             });
             return cart;
         }catch(e){
@@ -138,7 +162,7 @@ let CartService = {
         return CartService.active_cart;
     },
     setCart: (cart) => {
-        CartService.active_cart = cart;
+        CartService.active_cart = cart || EMPTY_CART;
         CartService.calculateSavings();
         //CartService.writeCartToCookie();
     },
@@ -146,7 +170,7 @@ let CartService = {
         let that = CartService;
         CartService.active_cart.savings = 0;
         (CartService.active_cart.products || []).forEach((item, index) => {
-            that.active_cart.savings += (item.fullPrice - item.salePrice)*item.quantity;
+            that.active_cart.savings += (item.full_price - item.price)*item.quantity;
         });
     },
     getCartItemCount: () => {
@@ -159,7 +183,7 @@ let CartService = {
         return CartService.active_cart.subTotal|| 0;
     },
     validateProduct: (product) => {
-        if(!product || !product.hasOwnProperty('productId') || !product.hasOwnProperty('productName') || !product.hasOwnProperty('salePrice') || !product.hasOwnProperty('quantity') || !product.hasOwnProperty('size')){
+        if(!product || !product.hasOwnProperty('sku') || !product.hasOwnProperty('name') || !product.hasOwnProperty('price') || !product.hasOwnProperty('quantity') || !product.hasOwnProperty('size')){
             return false;
         }
         if(product.quantity <= 0){

@@ -5,19 +5,21 @@ import AppButton from './generic/AppButton';
 function CartProduct({item, _removeItem, currency}){
     const [showRemove, setShowRemove] = useState(false);
     return (
-        <div className="cart_product_wrapper pt-4 pb-5">
+        <div className="cart-product pt-4 pb-5">
             <div className="container">
                 <div className="row position-relative">
                     <div className="col-sm-12 d-flex align-items-start">
-                        <img className="thumbnail" src={item.productImg}/>
+                        <div className="thumbnail">
+                            <img className="thumbnail-img" src={item.thumbnail}/>
+                        </div>
+                        
                         <div className="h-100 d-flex flex-column justify-content-between">
                             <div className="desc">
                             
-                                <h4>{item.productName}</h4>
+                                <h4>{item.name}</h4>
                                 <p>Size: {item.size}</p>
                                 <div className="price_wrapper d-flex flex-column justify-content-center">
-                                    {item.fullPrice && <span className="strikeThrough">&#x20B9;{item.fullPrice}</span>}
-                                    <span className="price">&#x20B9;{item.salePrice}</span>
+                                    <span className="currency">{currency}</span><span className="price">{item.price}</span>
                                 </div>
                             </div>
                             <div className="delete-product" onClick={() => setShowRemove(true)}>

@@ -1,7 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import ThemedButton from '../components/generic/ThemedButton';
 import CartService from '../../service/cartOperation';
 import Page from './Page';
 import CartProduct from '../components/CartProduct'; 
@@ -9,6 +8,8 @@ import LoadingModule from '../components/LoadingModule';
 import ErrorModule from '../components/ErrorModule';
 import EMPTY from '../../assets/img/empty-cart.png';
 import AppButton from './../components/generic/AppButton';
+import { getUserCart } from './../../service/api/firestore/cart';
+import { AuthContext } from './../../store/contexts/AuthContext';
 
 const EMPTY_TEXT = "You have no items in your cart!",
 EMPTY_SUBTEXT = "Please check the spelling or try searching for something else";
@@ -18,8 +19,8 @@ function CartPageSidePanel(props) {
             <h2 className="col-12 mb-3">Summary</h2>
 
             <div className="col-12 float-left mb-3 d-flex justify-content-between"><span>Subtotal</span> <span>&#x20B9;{props.subTotal}</span></div>
-            <div className="col-12 float-left mb-3 d-flex justify-content-between"><span>You saved</span> <span>&#x20B9;{props.savings}</span></div>
-
+{/*             <div className="col-12 float-left mb-3 d-flex justify-content-between"><span>You saved</span> <span>&#x20B9;{props.savings}</span></div>
+ */}
             <div className="col-12 float-left mb-3 d-flex justify-content-between"><span>Delivery</span> <span>&#x20B9;{0}</span></div>
 
             <div className="col-12 float-left mb-3 border-top border-bottom pt-3 pb-3 d-flex justify-content-between">
@@ -32,16 +33,25 @@ function CartPageSidePanel(props) {
         </div>
     )
 }
+function CartModule({removeProduct, }){
+    //const [pending, setPending] = useState()
+    const {currentUser} = useContext(AuthContext);
 
+}
 class CartPage extends Page {
     constructor(props){
         super(props);
-        
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         const {fetchCart} = this.props;
         fetchCart();
+        /* try{
+            let cart = await getUserCart('z@f.com');
+            console.log('CartPage: result -> ',cart);
+        }catch(err){
+            console.error('CartPage: error -> ', err);
+        } */
     }
     render() {
         const {addToCart} = this.props;
@@ -56,7 +66,7 @@ class CartPage extends Page {
                 />}
                 {!this.props.fetch_pending && !this.props.error && (this.props.cart.products || []).length > 0 &&
                     <section className="cart_body">
-                        <div className="float-left pl-4 pr-4">
+                        <div className="float-left pl-4 pr-4 flex-grow-1">
                             {
                             (this.props.cart.products || []).map((item, index) => {
                                 return (
@@ -73,8 +83,6 @@ class CartPage extends Page {
                             subTotal={this.props.cart.subTotal}
                             total={this.props.cart.total}
                             savings={this.props.cart.savings}
-                            promoApplied={this.props.cart.promoApplied}
-                            promoCode={this.props.cart.promoCode}
                             curr={this.props.cart.currency}
                         ></CartPageSidePanel>
                     </section>

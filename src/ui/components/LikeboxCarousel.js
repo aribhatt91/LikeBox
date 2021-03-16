@@ -21,7 +21,7 @@ function CardStack({cards, cardsState}) {
     )
 }
 
-export default function LikeboxCarousel({items}) {
+export default function LikeboxCarousel({slideIn, slideOut, items}) {
     const [stackTop, setStackTop] = useState(-1);
     const [disable, setDisable] = useState(false);
     const [cardsState, setCardsState] = useState({});
@@ -59,20 +59,23 @@ export default function LikeboxCarousel({items}) {
     }
     return (
         <React.Fragment>
-            <div className="like-box-preference-carousel d-flex align-items-center justify-content-between">
-                <div className="like-box-btn like-box-left-btn" onClick={rejectItem}>
-                    <FontAwesomeIcon icon={faArrowLeft} />
+            <div className={"like-box-preference-carousel" + (!slideIn && !slideOut ? " slide-hold" : "") + (slideOut ? " slide-out" : "") + (slideIn ? " slide-in" : "")}>
+                <div className="d-flex align-items-center justify-content-between">
+                    <div className="like-box-btn like-box-left-btn" onClick={rejectItem}>
+                        <FontAwesomeIcon icon={faArrowLeft} />
+                    </div>
+                    <CardStack
+                        cards={items}
+                        stackTop={stackTop}
+                        cardsState={cardsState}
+                    />
+                    <div className="like-box-btn like-box-right-btn" onClick={likeItem}>
+                        <FontAwesomeIcon icon={faArrowRight} />
+                    </div>
                 </div>
-                <CardStack
-                    cards={items}
-                    stackTop={stackTop}
-                    cardsState={cardsState}
-                />
-                <div className="like-box-btn like-box-right-btn" onClick={likeItem}>
-                    <FontAwesomeIcon icon={faArrowRight} />
-                </div>
+                <AppButton label="Start shopping" className="w-100 mb-5" />
             </div>
-            <AppButton label="Start shopping" className="w-100 mb-5" />
+            
         </React.Fragment>
     )
 }

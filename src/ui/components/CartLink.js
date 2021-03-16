@@ -6,9 +6,12 @@ import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import CartService from './../../service/cartOperation';
 function CartLink(props) {
     const { cart, fetchCart } = props;
+    
     useEffect(() => {
-        fetchCart();
-    }, [])
+        if(props.user){
+            fetchCart(props.user.email);
+        }
+    }, [props.user])
     return (
         <React.Fragment>
             <span className="d-sm-inline-block d-md-none">My Cart</span>

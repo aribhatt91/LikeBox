@@ -19,12 +19,18 @@
             float: left;
         }
     }
+    .listing-page-header {
+        font-size: 36px;
+    }
 }
 .page-content-wrapper {
     margin: auto;
     max-width: 1200px;
 }
-
+.product-cards-container, .wish-list-container {
+    max-width: 950px;
+    margin: auto;
+}
 .product-home-page {
     .product-details {
         .product-name {

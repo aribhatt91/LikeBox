@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-export default function AppButton({label, href, onClick, className, ...rest}) {
+export default function AppButton({label, href, onClick, className, type="button", ...rest}) {
     return (
         <React.Fragment>
             {
@@ -10,7 +10,7 @@ export default function AppButton({label, href, onClick, className, ...rest}) {
                 </Link>
             }
             {
-                !href && <button {...rest} className={"app-btn" + (className ? " " + className : "")} type="button" onClick={onClick ? onClick : ()=>{}}>
+                !href && <button {...rest} className={"app-btn" + (className ? " " + className : "")} type={type} onClick={onClick ? onClick : ()=>{}}>
                     <span className="app-btn-text">{label}</span>
                 </button>
             }

@@ -1,58 +1,70 @@
+@import './mixins.scss';
+
+.cart-product {
+    .container{
+        
+        .thumbnail {
+            width: 200px;
+            height: 200px;
+            border: 1px solid #707070;
+            background-color: #ececec;
+            .thumbnail-img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+        .desc {
+            margin-left: 54px;
+            h4 {
+                font-size: 27px;
+                line-height: 36px;
+            }
+        }
+        .price_wrapper {
+            .strikeThrough {
+                text-decoration: line-through;
+                opacity: 0.6;
+                font-size: 18px;
+            }
+            .price {
+                font-size: 21px;
+                line-height: 36px;
+                font-weight: bold;
+            }
+        }
+        .delete-product {
+            font-size: 14px;
+            display: flex;
+            align-items:  center;
+            margin-left: 54px;
+            cursor: pointer;
+            .delete-product-icon {
+                font-size: 26px;
+                line-height: 14px;
+            }
+        }
+        .removePanel {
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 9;
+            background: white;
+        }
+    }
+    &:not(:last-child){
+        .container{
+            /* border-bottom: 1px solid #ececec; */
+        }
+    }
+}
 .checkout_container{
     .cart_body{
         display: flex;
         width: 100%;
         margin: auto;
-        .cart_product_wrapper {
-            .container{
-                
-                .thumbnail {
-                    width: 200px;
-                    border: 1px solid #707070;
-                }
-                .desc {
-                    margin-left: 54px;
-                    h4 {
-                        font-size: 27px;
-                        line-height: 36px;
-                    }
-                }
-                .price_wrapper {
-                    .strikeThrough {
-                        text-decoration: line-through;
-                        opacity: 0.6;
-                        font-size: 18px;
-                    }
-                    .price {
-                        font-size: 21px;
-                        line-height: 36px;
-                        font-weight: bold;
-                    }
-                }
-                .delete-product {
-                    font-size: 22px;
-                    margin-left: 54px;
-                    cursor: pointer;
-                    .delete-product-icon {
-                        font-size: 26px;
-                        line-height: 22px;
-                    }
-                }
-                .removePanel {
-                    width: 100%;
-                    height: 100%;
-                    top: 0;
-                    left: 0;
-                    z-index: 9;
-                    background: white;
-                }
-            }
-            &:not(:last-child){
-                .container{
-                    /* border-bottom: 1px solid #ececec; */
-                }
-            }
-        }
+        
         .cart_sidePanel {
             padding: 24px 16px;
             /* background-color: #333;

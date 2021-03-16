@@ -9,6 +9,7 @@ import UserDashboard from './pages/UserDashboard';
 import FourZeroFour from './pages/FourZeroFour';
 import LoginPage from './pages/LoginPage';
 import ProtectedRoute from './../service/middleware/ProtectedRoute';
+import WishListPage from './pages/WishListPage';
 
 function AppBody (){
 
@@ -22,6 +23,7 @@ function AppBody (){
         <Route path='/checkout' render={(props) => <CheckoutPage {...props} pageName="checkout" />}/>
         
         <ProtectedRoute path='/user/:page?' component={UserDashboard} />
+        <ProtectedRoute path='/wishlist' component={WishListPage} />
         <ProtectedRoute path="/login/:page?" component={LoginPage} />
         {/* <Route path='/user/:page?' render={(props) => <UserDashboard {...props} pageName="user-dashboard" />}/> */}
         <Route path="*" render={props => <FourZeroFour {...props} />}/>

@@ -3,7 +3,7 @@ import RangeSlider from 'react-bootstrap-range-slider';
 import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
 import AppButton from './generic/AppButton';
 
-function LikeBoxSlider({label, min=0, max=100, onChange}) {
+function LikeBoxSlider({label, min=0, max=100, onChange, slideIn, slideOut}) {
     const [value, setValue] = useState(0)
     //const [displayValue, setDisplayValue] = useState(0)
     const [unit, setUnit] = useState('cm') 
@@ -28,7 +28,7 @@ function LikeBoxSlider({label, min=0, max=100, onChange}) {
         setUnit(new_unit)
     }
     return (
-        <div className="like-box-slider-wrapper d-flex flex-column">
+        <div className={"like-box-slider-wrapper d-flex flex-column"}>
             <div className="like-box-slider-text-container d-flex justify-content-between align-items-center">
                 <div className="like-box-slider-label align-items-center">{label}</div>
                 <div className="like-box-slider-unit-container d-inline-flex align-items-center">
@@ -54,7 +54,7 @@ function LikeBoxSlider({label, min=0, max=100, onChange}) {
     )
 }
 
-export default function LikeBoxPreference() {
+export default function LikeBoxPreference({slideIn, slideOut, onChange, onComplete}) {
     const [ value, setValue ] = useState(25);
     const onInputChange = (name, val) => {
         console.log(name, val)
@@ -63,40 +63,40 @@ export default function LikeBoxPreference() {
 
     }
     return (
-        <div className="like-box-preference">
-        <h2 className="align-text-center pl-3 pr-3 mb-4">Add your sizes so that we can ensure that everything you order will fit you perfectly</h2>
-        <LikeBoxSlider
-            min={0}
-            max={100}
-            label="Head circumference"
-            onChange={(val) => onInputChange('head', val)}
-        />
-        <LikeBoxSlider
-            min={0}
-            max={100}
-            label="Neck"
-            onChange={(val) => onInputChange('neck', val)}
-        />
-        <LikeBoxSlider
-            min={0}
-            max={100}
-            label="Chest"
-            onChange={(val) => onInputChange('chest', val)}
-        />
-        <LikeBoxSlider
-            min={0}
-            max={100}
-            label="Waist"
-            onChange={(val) => onInputChange('waist', val)}
-        />
-        <LikeBoxSlider
-            min={0}
-            max={100}
-            label="Shoe size"
-            onChange={(val) => onInputChange('show', val)}
-        />
+        <div className={"like-box-preference" + (!slideIn && !slideOut ? " slide-hold" : "") + (slideOut ? " slide-out" : "") + (slideIn ? " slide-in" : "")}>
+            <h2 className="align-text-center pl-3 pr-3 mt-5 mb-4">Add your sizes so that we can ensure that everything you order will fit you perfectly</h2>
+            <LikeBoxSlider
+                min={0}
+                max={100}
+                label="Head circumference"
+                onChange={(val) => onInputChange('head', val)}
+            />
+            <LikeBoxSlider
+                min={0}
+                max={100}
+                label="Neck"
+                onChange={(val) => onInputChange('neck', val)}
+            />
+            <LikeBoxSlider
+                min={0}
+                max={100}
+                label="Chest"
+                onChange={(val) => onInputChange('chest', val)}
+            />
+            <LikeBoxSlider
+                min={0}
+                max={100}
+                label="Waist"
+                onChange={(val) => onInputChange('waist', val)}
+            />
+            <LikeBoxSlider
+                min={0}
+                max={100}
+                label="Shoe size"
+                onChange={(val) => onInputChange('show', val)}
+            />
 
-        <AppButton label="Submit" className="mt-5 mb-5 w-100" onClick={submit}/>
+            <AppButton label="Submit" className="mt-5 mb-5 w-100" onClick={submit}/>
             
         </div>
     )

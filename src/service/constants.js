@@ -1,4 +1,6 @@
+import  React from 'react';
 export const INDIAN_STATES =  [ "Andhra Pradesh",
+
 "Arunachal Pradesh",
 "Assam",
 "Bihar",
@@ -42,3 +44,5 @@ EMAIL_ERROR = 'Please enter a valid email id',
 FNAME_ERROR = 'Please enter your first name',
 LNAME_ERROR = 'Please enter your last name', 
 MOBILE_ERROR = 'Please enter 10-digit mobile number';
+
+export const CURRENCY = <React.Fragment>&pound;</React.Fragment>;

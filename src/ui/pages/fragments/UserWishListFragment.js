@@ -1,59 +1,80 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import ThemedButton from '../../components/generic/ThemedButton';
 import { fetchWishList, removeItemFromWishList } from '../../../service/wishlistMethods';
 import LoadingModule from './../../components/LoadingModule';
+import { AuthContext } from './../../../store/contexts/AuthContext';
+import { CURRENCY } from './../../../service/constants';
+import AppButton from '../../components/generic/AppButton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt, faTrash } from '@fortawesome/free-solid-svg-icons';
 function WishListInstance({instance, deleteWishListInstance}){
     const [showDeletePop, setShowDeletePop] = useState(false);
     const wishListId = instance.sku, 
     deletePopAlert = (e) => {
-        e.stopImmediatePropagation();
+        //e.stopImmediatePropagation();
         setShowDeletePop(true);
     },
-    deleteWishListAction = () => {
+    deleteWishListAction = (e) => {
         setShowDeletePop(false);
-        if(deleteWishListInstance && typeof deleteWishListInstance === 'function'){
+        /* if(deleteWishListInstance && typeof deleteWishListInstance === 'function'){
             deleteWishListInstance(wishListId);
-        }
+        } */
     }
 
     return (
-        <div className="wish-list-instance-container mb-3 d-flex p-3 pr-5 position-relative">
-            <a href={instance.url} className="wish-list-instance-thumb mr-3">
+        <div className="wish-list-instance-container mb-3 position-relative">
+            <a href={instance.url} className="wish-list-instance-thumb">
                 <img src={instance.thumbnail}/>
             </a>
-            <div className="wish-list-instance-text pl-3">
+            <div className="wish-list-instance-text pt-2 pb-2">
+                <div className="wish-list-instance-price">
+                    <span className="currency">{CURRENCY}</span>
+                    <span className="wish-list-instance-sale-price">
+                        {instance.price}
+                    </span>
+                </div>
                 <div className="wish-list-instance-name">
                     {instance.name}
-                </div>
+                </div>{/* 
                 <div className="wish-list-instance-brand">
                     {instance.brand}
-                </div>
-                <div className="wish-list-instance-price">
-                    <span className="wish-list-instance-sale-price">&#x20B9;{instance.price}</span>
-                    <span className="wish-list-instance-full-price ml-2"><strike className={instance.fullPrice && instance.fullPrice !== "" ? "" : " d-none"}>&#x20B9;{instance.fullPrice}</strike></span>
-                    <span className="wish-list-instance-discount ml-2">{instance.discount && instance.discount !== "" ? instance.discount + "%" : ""}</span>
+                </div> */}
+                <div className="wish-list-cta w-100 mt-1">
+                    <AppButton className="w-100 sm" onClick={() => {}} label="Buy now" />
                 </div>
             </div>
-            <div className="wish-list-instance-remove-wrapper tooltip-wrapper d-flex flex-column align-items-end">
-                <span className="action-icon" onClick={deletePopAlert}>Remove</span>
+            <div className="wish-list-instance-remove-wrapper tooltip-wrapper d-flex flex-column align-items-end mt-1 mr-1">
+                <span className="action-icon" onClick={deletePopAlert}>
+                    <FontAwesomeIcon icon={faTrashAlt} />
+                </span>
                 <div className={"action-message-tooltip p-3" + (showDeletePop ? "" : " d-none")}>
                     <p className="mb-2">Are you sure you want to remove this item?</p>
                     <div className="d-flex align-items-end">
                         <div className="d-inline-block mr-2">
-                            <ThemedButton
+                            <AppButton 
+                                label="Cancel" 
+                                className="w-100 btn-white sm" 
+                                onClick={(e) => {setShowDeletePop(false)}}
+                                />
+                            {/* <ThemedButton
                                 text="Cancel"
                                 _click={() => setShowDeletePop(false)}
                                 size="sm"
                                 theme="nobg"
-                            />
+                            /> */}
                         </div>
                         <div className="d-inline-block">
-                            <ThemedButton
+                            <AppButton 
+                                label="Remove" 
+                                className="w-100 sm" 
+                                onClick={deleteWishListAction}
+                                />
+                            {/* <ThemedButton
                                 text="Remove"
                                 _click={deleteWishListAction}
                                 size="sm"
                                 theme="red"
-                            />
+                            /> */}
                         </div>
                     </div>
                 </div>
@@ -62,36 +83,41 @@ function WishListInstance({instance, deleteWishListInstance}){
         </div>
     )
 }
-function UserWishListFragment({wishListObj}){
+function UserWishListFragment(){
+    const {currentUser} = useContext(AuthContext)
     const [wishList, setWishList] = useState([]),
-    [pending, setPending] = useState(false);
-
-    let wishListItems = [];
-    
+    [pending, setPending] = useState(false);    
 
     useEffect(() => {
-        setPending(true);
-        fetchWishList().then(res => {
-            console.log(res); 
-            setWishList(res);
-            setPending(false);
-        });
-    }, [])
-
-    wishList.forEach((item, index) => {
-        wishListItems.push(
-            <WishListInstance
-                instance={item}
-                deleteWishListInstance={(itemId)=>{console.log('Deleting ', itemId)}}
-            />
-        )
-    });
+        if(currentUser){
+            setPending(true);
+            fetchWishList(currentUser.email).then(res => {
+                console.log('UserWishListFragment', res); 
+                setWishList(res); 
+            }).catch(err => {
+                console.error(err);
+            }).finally(() => {
+                setPending(false);
+            })
+        }else {
+        }
+    }, [currentUser])
+    console.log('wishList', wishList);
     return (
-        <div className={"wish-list-section editable-section"}>
-            <h1 className="editable-section-header mb-5">My wishlist</h1>
-            <div className="wish-list-container">
+        <div className={"wish-list-section mt-5 mb-5"}>
+            <h1 className="text-center mb-5 text-uppercase">Wishlist</h1>
+            <div className="wish-list-container d-flex flex-wrap justify-content-between">
                 {
-                    wishListItems
+                    wishList.map((item, index) => 
+                        <WishListInstance
+                            key={index}
+                            instance={item}
+                            deleteWishListInstance={(itemId)=>{console.log('Deleting ', itemId)}}
+                        />
+                    )
+                }
+                {
+                    (!pending && wishList.length === 0) && <div></div>
                 }
                 {
                     pending && <div className="col-12">

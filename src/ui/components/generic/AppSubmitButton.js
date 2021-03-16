@@ -9,8 +9,9 @@ function AppSubmitButton({text,...rest}) {
             <AppButton
                 label={text}
                 disabled={isSubmitting}
-                className="border-radius-0"
                 onClick={handleSubmit}
+                type="submit"
+                {...rest}
             />{/* 
             <ThemedButton
                 {...rest}

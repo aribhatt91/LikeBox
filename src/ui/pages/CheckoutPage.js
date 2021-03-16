@@ -20,8 +20,8 @@ function UserModule({onClickContinue}){
             <LoginForm/>
         </div>
         <div className="d-flex justify-content-center align-items-center p-2 flex-grow-1">
-            <ThemedButton
-                className="border-0"
+            <AppButton
+                className="border-radius-0"
                 label="Continue as guest"
                 onClick={onClickContinue}
             />
@@ -113,7 +113,7 @@ function AddressModule({
             <div className="d-flex justify-content-end submit-button-container mt-5">
                 <AppButton
                 label="Continue"
-                className="border-0"
+                className="border-radius-0"
                 disabled={saved_addresses.length === 0}
                 onClick={selectAddress}
                 ></AppButton>
@@ -148,12 +148,11 @@ function PaymentModule({expandModule, editPaymentOption, debit_cards, selectPaym
                 </div>
                 <div className={(expand ? "d-none" : "d-inline-block") + "edit-btn-container"}>
                     {
-                        dirty && <ThemedButton 
-                        text="Edit"
-                        theme="outline"
-                        size="small"
-                        _click={() => {editPaymentOption();setExpand(true);} }
-                        ></ThemedButton>
+                        dirty && <AppButton 
+                        label="Edit"
+                        className="border-radius-0"
+                        onClick={() => {editPaymentOption();setExpand(true);} }
+                        ></AppButton>
                     }
                 </div>
             </div>
@@ -172,11 +171,11 @@ function PaymentModule({expandModule, editPaymentOption, debit_cards, selectPaym
                 </div>
                     {
                     expandAddCard && <div className="container-fluid d-flex justify-content-end submit-button-container">
-                        <ThemedButton
-                        theme="accent"
-                        border="false"
-                        _click={selectPaymentOption}
-                        ></ThemedButton>
+                        <AppButton 
+                        label="Add"
+                        className="border-radius-0"
+                        onClick={() => {selectPaymentOption();setExpand(true);} }
+                        ></AppButton>
                     </div>
                     }
             </div>
@@ -209,7 +208,7 @@ function CheckoutSection({
     console.log(`${label} open -> ${slideBy}`)
     return (
         <div style={style} className={"checkout-section-container d-flex flex-column p-5"}>
-            <h2 className="checkout-section-header mb-5 font-weight-lighter">{label}</h2>
+            <h2 className="checkout-section-header mb-5 font-weight-bold text-uppercase">{label}</h2>
             <div className={"checkout-section"}>
                 {
                     children

@@ -14,9 +14,9 @@ function Tag({item, _click, cancelable, selected, _cancel, index}) {
     }
 
     return (
-            <span key={index} className={"selectable_tag" + (_selected ? " selected" : "") + (show ? "" : " d-none") + (cancelable ? " cancelable" : "")} onClick={toggle}>
-            <span className="tag_name">{name}</span>
-            {cancelable && <span className="tag_cancel" onClick={() => {
+            <span key={index} className={"selectable-tag" + (_selected ? " selected" : "") + (show ? "" : " d-none") + (cancelable ? " cancelable" : "")} onClick={toggle}>
+            <span className="tag-name">{name}</span>
+            {cancelable && <span className="tag-cancel" onClick={() => {
                 setShow(false);
                 if(_cancel){
                     _cancel(name);
@@ -34,6 +34,7 @@ handler - function that takes updated array of items as argument
 //TODO - Implement All option
 const MultiSelectTag = ({label, items, handler}) => {
     const [selectAll, setSelectAll] = useState(true);
+    const [open, setOpen] = useState(false);
     
     // Initiate result object
     let result = {}, list_items = [];
@@ -66,6 +67,9 @@ const MultiSelectTag = ({label, items, handler}) => {
         if(typeof handler === 'function'){
             handler(label, result);
         }
+    },
+    toggle = () => {
+        setOpen(!open);
     }
     
     items.forEach((item, index) => {
@@ -80,9 +84,9 @@ const MultiSelectTag = ({label, items, handler}) => {
     })
 
     return (
-        <div className="d-inline-block multiselect_tags_container">
-            <div className="d-block d-md-inline-block tags_label">{label}</div>
-            <div className="tags_container d-inline-block">
+        <div className={"d-inline-block select-dropdown multiselect_tags_container" + (open ? " open" : "")}>
+            <div className="d-flex d-md-inline-flex select-label tags_label" onClick={toggle}>{label}</div>
+            <div className="select-dropdown-items tags_container">
                 {/* <Tag
                     item="All"
                     selected={selectAll}

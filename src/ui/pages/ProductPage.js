@@ -1,18 +1,20 @@
-import React, {Component, useState, useLocation, useEffect, useParams} from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React, {Component, useState, useContext, useLocation, useEffect, useParams} from 'react';
 import Page from './Page';
 import LoadingModule from './../components/LoadingModule';
-import { fetchSingleProduct } from './../../service/productMethods';
 import ProductHeroGallery from '../components/ProductHeroGallery';
 import PageMessage from '../components/generic/PageMessage';
-import ThemedButton from '../components/generic/ThemedButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStarOfLife, faStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
 import TextInput from '../components/generic/TextInput';
 import { checkDeliveryAvailability } from '../../service/addressMethods';
 import { addItemToWishList, removeItemFromWishList } from '../../service/wishlistMethods';
 import Counter from '../components/generic/Counter';
+import AppButton from './../components/generic/AppButton';
+import { Tabs } from 'react-bootstrap';
+import Tab from 'react-bootstrap/Tab'
+import { fetchProduct } from './../../service/api/firestore/product';
+import { addUser } from './../../service/api/firestore/user';
+import { AuthContext } from './../../store/contexts/AuthContext';
 function SizeSelector({sizes, handler, label, name}){
   let size_radios = [];
   const handleSelect = (e) => {
@@ -101,16 +103,78 @@ function ProductDelivery({handler}){
 function PinCodeChecker (props) {
   
 }
+
+function ProductDescComponent({description, sizing, shipping, returns}){
+  const [key, setKey] = useState('desc');
+  return (
+    <div className="app-tab-layout">
+      <Tabs
+        activeKey={key}
+        onSelect={k => setKey(k)}
+      >
+        <Tab eventKey="desc" title="Description">
+          <div>
+            {description || "100% Original Products"}
+          </div>
+        </Tab>
+        <Tab eventKey="size" title="Sizing">
+          <div>Sizing</div>
+        </Tab>
+        <Tab eventKey="ship" title="Shipping">
+          <div>
+            <p>Pay on delivery available</p>
+            <p>Get it by Fri, Mar 05</p>
+            <p>Free Delivery on order above ₹799</p>
+          </div>
+        </Tab>
+        <Tab eventKey="ret" title="Returns">
+          <div>
+          Easy 30 days return & exchange available
+          </div>
+        </Tab>
+      </Tabs>
+
+
+    </div>
+  )
+}
+
+function ProductForm(){
+  const {currentUser} = useContext(AuthContext);
+  const [quantity, setQuantity] = useState()
+
+  const buyNow = () => {
+    if(this.state.qty > 0){
+
+    }else {
+
+    }
+  }
+  const addToCart = () => {
+    if(this.state.qty > 0){
+
+    }else {
+      
+    }
+  }
+
+  return (
+    <div></div>
+  )
+}
 class ProductPage extends Page {
   constructor(props){
     super(props);
     this.state = {
       pending: true,
-      items: [],
+      product: null,
       error: null,
       pincode_error: false
     }
     this.handleInput = this.handleInput.bind(this);
+    this.buyNow = this.buyNow.bind(this);
+    this.addToCart = this.addToCart.bind(this);
+
   }
 
   async checkPincode(pincode) {
@@ -127,17 +191,37 @@ class ProductPage extends Page {
       addItemToWishList(id);
     }
   }
-  getProducts(){
-    const {fetchProduct} = this.props;
+  async getProducts(){
     const sku = this.props.match.params.id;
     console.log('getProduct -> ', sku);
-    fetchProduct(sku);
+    let product = await fetchProduct(sku);
+    this.setState(
+      {
+        ...this.state,
+        pending: false,
+        product
+      }
+    )
   }
   handleInput(tag, val) {
     this.setState({
       ...this.state,
       [tag]: val
     })
+  }
+  buyNow(){
+    if(this.state.qty > 0){
+
+    }else {
+
+    }
+  }
+  addToCart(){
+    if(this.state.qty > 0){
+
+    }else {
+      
+    }
   }
   componentDidMount(){
     //super();
@@ -153,24 +237,32 @@ class ProductPage extends Page {
   }
 
   render() {
-    let product = this.props.items.length > 0 ? this.props.items[0] : {}, sizes = [],
+    let product = this.state.product ? this.state.product : {}, sizes = [], images = [],
     disable_cta = !this.state.size || !(this.state.qty && this.state.qty > 0);
     console.log(this.state.size, this.state.qty);
     if(typeof product.sizes !== 'undefined'){
       if(typeof product.sizes === 'string'){
-        sizes = (product.sizes || "").split(",") || [];
+        sizes = JSON.parse(product.sizes || "");
       }else if( product.sizes instanceof Array){
         sizes = product.sizes || [];
       }
     }
 
+    if(typeof product.images !== 'undefined'){
+      if(typeof product.images === 'string'){
+        images = JSON.parse(product.images || "");
+      }else if( product.images instanceof Array){
+        images = product.images || [];
+      }
+    }
+
     return (
-      <div className="page product-home-page">
-        {this.props.pending && <LoadingModule text="Please wait..."></LoadingModule>}
-        {!this.props.pending && this.props.items.length > 0 && 
+      <div className="page product-home-page pt-5 pb-5">
+        {this.state.pending && <LoadingModule text="Please wait..."></LoadingModule>}
+        {!this.state.pending && this.state.product && 
           <div className="d-block">
             <ProductHeroGallery
-              images={product.images}
+              images={images}
               product_name={product.name}
               product_id={product.sku}
             />
@@ -178,11 +270,8 @@ class ProductPage extends Page {
               <div className="product-brand">{product.brand}</div>
               <div className="product-name mb-3">{product.name}</div>
               <div className="product-price">
-                <div className="product-sale-price">&#x20B9;{product.price}
-                  {product.fullPrice && product.fullPrice !== "" && product.fullPrice !== product.price && <span>
-                    <span className="product-full-price ml-2"><strike>&#x20B9;{product.fullPrice}</strike></span>
-                    {product.discount && <span className="product-discount ml-2">{product.discount}% discount</span>}
-                  </span>}
+                <div className="product-sale-price">
+                  &pound;{product.price}
                 </div>
                 <div className="price-tax-info mt-1 mb-3">Inclusive of all taxes</div>
               </div>
@@ -203,32 +292,31 @@ class ProductPage extends Page {
                 />
               </div>
               <div className="product-cta-container col-md-10 clearfix mt-2 mb-2 p-0">
-                <ThemedButton
-                  text="Add to cart"
-                  theme="accent"
-                  btnState={disable_cta ? 'disabled' : 'active'}
+                <AppButton
+                  label="Buy now"
+                  className="w-100"
+                  disabled={disable_cta}
+                  onClick={this.buyNow}
                 />
               </div>
-              <ProductDelivery/>
+              <div className="product-cta-container col-md-10 clearfix mt-2 mb-5 p-0">
+                <AppButton
+                  label="Add to cart"
+                  className="btn-white w-100"
+                  onClick={this.addToCart}
+                  //disabled={disable_cta}
+                />
+              </div>
+              {/* <ProductDelivery/> */}
+              <ProductDescComponent description={product.description}/>
             </div>
           </div>}
-        {!this.props.pending && this.props.items.length === 0 && <div>No products found</div>} 
+        {!this.state.pending && !this.state.product && <div>No products found</div>} 
       </div>
     );
   }
 }
-const mapStateToProps = state => {
-  console.log('mapStateToProps called', state);
-  return {
-    pending: state.itemsReducer.pending,
-    items: state.itemsReducer.items,
-    error: state.itemsReducer.error
-  }
-}
-//Anything returned from this function will end up as props to BookList container
-const mapDispatchToProps = (dispatch) => bindActionCreators({'fetchProduct': fetchSingleProduct}, dispatch)
-//Promote BookList from a component to a container
-//It needs to know about this dispatch method selectBook -- Make it available as prop
-export default connect(mapStateToProps, mapDispatchToProps)(ProductPage);
+
+export default ProductPage;
 
 
