@@ -15,6 +15,13 @@ export default function HeaderNavigation() {
         }
         
     }, [open])
+    useEffect(() => {
+        window.addEventListener('click', (e) => {
+            if(open){
+                setOpen(false);
+            }
+        })
+    })
     const menuItems = {
         'Clothes': [
             {
@@ -63,19 +70,65 @@ export default function HeaderNavigation() {
                 name: 'Slippers',
                 link: '/products/slippers',
                 img: ''
+            },
+            {
+                name: 'Trainers',
+                link: '/products/trainers',
+                img: ''
+            },
+            {
+                name: 'Sandals, Sliders & Flip flops',
+                link: '/products/sandals',
+                img: ''
+            },
+            {
+                name: 'Flat shoes',
+                link: '/products/flat-shoes',
+                img: ''
             }
         ], 
-        'Accessories': []
+        'Accessories': [
+            {
+                name: 'Bags',
+                link: '/products/bags',
+                img: ''
+            },
+            {
+                name: 'Scarves',
+                link: '/products/scarves',
+                img: ''
+            },
+            {
+                name: 'Belts',
+                link: '/products/belts',
+                img: ''
+            },
+            {
+                name: 'Caps & Hats',
+                link: '/products/caps-hats',
+                img: ''
+            },
+            {
+                name: 'Gloves',
+                link: '/products/gloves',
+                img: ''
+            },
+            {
+                name: 'Socks',
+                link: '/products/socks',
+                img: ''
+            }
+        ]
     };
     return (
-        <div className={"primary-nav-dropdown" + (open ? " open" : "")}>
+        <div className={"primary-nav-dropdown" + (open ? " open" : "")} onClick={(e) => {e.stopPropagation()}}>
             <a href="#" className={"nav-anchor"} onClick={() => setOpen(!open)}>Categories</a>
             <div className={"nav-dropdown-container"}>
                 <div className="nav-dropdown">
                     <div className="nav-menu">
                         <ul className="nav-menu-list">
                             {
-                                Object.keys(menuItems).map((item, index) => <li key={index} onClick={() => setActive(index)} className={(index === active ? "active" : "")}>{item}</li>)
+                                Object.keys(menuItems).map((item, index) => <li key={index} onClick={() => {setActive(index)}} className={(index === active ? "active" : "")}>{item}</li>)
 
                             }
                         </ul>
@@ -85,7 +138,7 @@ export default function HeaderNavigation() {
                             Object.keys(menuItems).map((item, index) => <ul className={"nav-items-list" + (active === index ? "" : " d-none")} key={index}>
                             {
                                 ([].concat(menuItems[item])).map((obj, i) => <li key={i} className={"nav-item"}>
-                                    <Link className="nav-item-link" to={obj.link}>
+                                    <Link className="nav-item-link" to={obj.link} onClick={() => {setOpen(false)}}>
                                         <div className="nav-item-box" >
                                             <div className="nav-item-title">{obj.name}</div>
                                         </div>

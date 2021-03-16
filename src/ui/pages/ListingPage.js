@@ -24,8 +24,9 @@ function Listing({type, filter, sortBy}){
   const [maxReached, setMaxReached] = useState(false);
 
   const getProducts = async () => {
+    console.log('getProducts called');
     setLoading(true);
-    let data = await fetchProducts('shoes');
+    let data = await fetchProducts(category);
     setProducts(data);
     setLoading(false);
   }
@@ -53,9 +54,8 @@ function Listing({type, filter, sortBy}){
 
   return (
     <div className="product-cards-container">
-      <ProductCardPlaceholder/>
       {
-        products && products.map((item, index) => <ProductCard 
+        !loading && products && products.length > 0 && products.map((item, index) => <ProductCard 
                   key={index}
                   sku={item.sku}
                   title={item.name}
@@ -71,8 +71,14 @@ function Listing({type, filter, sortBy}){
         loading && <div className="loading-state">
           <ProductCardPlaceholder/>
           <ProductCardPlaceholder/>
+          <ProductCardPlaceholder/>
         </div>
       }
+      {!loading && products.length === 0 && <ErrorModule
+          error_image={EMPTY}
+          error_text={EMPTY_TEXT}
+          error_subtext={EMPTY_SUBTEXT}
+        />} 
     </div>
   )
 }
@@ -120,7 +126,7 @@ class ListingPage extends Page {
         
           <div className="page container-fluid">
             <div className="listing-page-header m-3 text-center text-uppercase">
-              {"Shoes"}
+              {(this.props.match.params.category || "").replace('-', ' & ')}
             </div>
             <ProductFilters 
             filterHandler={this.applyFilter}
@@ -142,11 +148,7 @@ class ListingPage extends Page {
             </div> */}
             <Listing />
           </div>
-        {!this.state.pending && this.state.items.length === 0 && <ErrorModule
-          error_image={EMPTY}
-          error_text={EMPTY_TEXT}
-          error_subtext={EMPTY_SUBTEXT}
-        />} 
+        
       </section>
     );
   }

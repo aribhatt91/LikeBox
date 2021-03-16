@@ -120,8 +120,6 @@ function Header (props) {
             </Navbar.Brand>
             
             <Nav className="mr-auto d-none d-md-flex navbar-nav">
-              <NavLink activeClassName='active' to="/products/men">Men</NavLink>
-              <NavLink activeClassName='active' to="/products/sale">Sale</NavLink>
               <HeaderNavigation/>
             </Nav>
             <Nav className="justify-content-end">
