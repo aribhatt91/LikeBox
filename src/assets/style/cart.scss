@@ -43,7 +43,10 @@
             top: 0;
             left: 0;
             z-index: 9;
-            background: white;
+            background: rgba($color: #fff, $alpha: 0.9);
+            button {
+                width: 120px;
+            }
         }
     }
     &:not(:last-child){

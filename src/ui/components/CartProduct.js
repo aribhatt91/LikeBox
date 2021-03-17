@@ -4,7 +4,7 @@ import AppButton from './generic/AppButton';
 import AppImage from './generic/AppImage';
 import { CURRENCY } from './../../service/constants';
 
-function CartProduct({item, _removeItem, currency}){
+function CartProduct({item, _removeItem, user={}}){
     const [showRemove, setShowRemove] = useState(false);
     return (
         <div className="cart-product pt-4 pb-5">
@@ -36,14 +36,14 @@ function CartProduct({item, _removeItem, currency}){
                         
                         
                     </div>
-                    <div className={'col-12 removePanel position-absolute pt-2 pb-2' + (showRemove ? "" : " d-none")}>
-                        <h5 className="mb-1">Are you sure you want to remove this item from your cart?</h5>
-                        <div className="mt-4 mb-1">
+                    <div className={'col-12 removePanel position-absolute flex-column justify-content-center pl-5 pr-5 pt-2 pb-2' + (showRemove ? " d-flex" : " d-none")}>
+                        <h5 className="mb-1 text-center">Are you sure you want to remove this item from your cart?</h5>
+                        <div className="mt-3 mb-1 d-flex justify-content-center">
                             <div className="left_btn_wrapper d-inline-block align-center float-right">
-                                <AppButton label="Yes" onClick={() => _removeItem(item, false)}></AppButton>
+                                <AppButton label="Yes" className="border-radius-0 border-0" onClick={() => _removeItem(user.email, item, false)} />
                             </div>
                             <div className="left_btn_wrapper d-inline-block float-right mr-3">
-                                <ThemedButton  text="Cancel" btnState="active" _click={() => setShowRemove(false)} border="false"></ThemedButton>
+                                <AppButton label="Cancel" className="border-0 border-radius-0 btn-white" onClick={() => setShowRemove(false)}/>
                             </div>
 
                         </div>

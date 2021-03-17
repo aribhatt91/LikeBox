@@ -64,6 +64,7 @@ function CartModule({pending, error, removeFromCart, fetchCart, addToCart, cart=
                                 key={index} 
                                 item={item}
                                 _removeItem={removeFromCart}
+                                user={currentUser}
                                 ></CartProduct>)
                         })
                         }

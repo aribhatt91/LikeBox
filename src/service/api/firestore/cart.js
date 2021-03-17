@@ -118,32 +118,50 @@ export const removeProductFromCart = async (email, product, decrement=false) => 
     let cart = null;
     try {
         cart = await getUserCart(email);
+        if(!cart){
+            console.log('No cart found');
+        }
         if(cart){
             let products = cart.products || [],
-            itemCount = cart.count, 
-            subTotal = cart.subTotal, 
-            total = cart.total;
+            itemCount = Number(cart.count) || 0, 
+            subTotal = Number(cart.subTotal) || 0, 
+            total = Number(cart.total) || 0;
+            let q = 1, price = 0, full_price = 0, index = -1;
 
             for(let p in products){
                 if(products[p].sku === product.sku && (Number(products[p].size) === Number(product.size) || (!product.size && !products[p].size))){
-                    var q = 1;
+                    q = 1, 
+                    price = products[p].price, 
+                    full_price = products[p].full_price || products[p].price;
+
                     if(decrement && products[p].quantity > 1){
                         products[p].quantity = Number(products[p].quantity) - 1;
                     }else {
                         q = Number(products[p].quantity);
-                        products.splice(p, 1);
+                        index = p;
+                        
                     }
-                    itemCount -= q;
-                    subTotal -= (products[p].full_price || products[p].price)  * q;
-                    total -= products[p].price * q;
+                    
+                    console.log()
                     break;
                 }
                 
+            }
+
+            if(index > -1){
+                products.splice(index, 1);
+                itemCount -= q;
+                subTotal -= (Number(full_price)  * q);
+                total -= (Number(price) * q);
             }
             cart.products = products;
             cart.count = itemCount;
             cart.subTotal = subTotal;
             cart.total = total;
+            console.log(cart);
+
+            let update = await updateUserByEmail(email, {cart})
+            console.log(update);
         }
         
 
