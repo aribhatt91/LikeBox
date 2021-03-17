@@ -22,16 +22,9 @@
             }
         }
         .price_wrapper {
-            .strikeThrough {
-                text-decoration: line-through;
-                opacity: 0.6;
-                font-size: 18px;
-            }
-            .price {
-                font-size: 21px;
-                line-height: 36px;
-                font-weight: bold;
-            }
+            font-size: 21px;
+            line-height: 36px;
+            font-weight: bold;
         }
         .delete-product {
             font-size: 14px;

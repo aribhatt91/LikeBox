@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import ThemedButton from './generic/ThemedButton';
 import AppButton from './generic/AppButton';
 import AppImage from './generic/AppImage';
+import { CURRENCY } from './../../service/constants';
 
 function CartProduct({item, _removeItem, currency}){
     const [showRemove, setShowRemove] = useState(false);
@@ -18,9 +19,9 @@ function CartProduct({item, _removeItem, currency}){
                             <div className="desc">
                             
                                 <h4>{item.name}</h4>
-                                <p>Size: {item.size}</p>
-                                <div className="price_wrapper d-flex flex-column justify-content-center">
-                                    <span className="currency">{currency}</span><span className="price">{item.price}</span>
+                                <p>Quanity: {item.quantity}</p>
+                                <div className="price_wrapper d-flex">
+                                    <span className="currency">{CURRENCY}</span><span className="price">{item.price}</span>
                                 </div>
                             </div>
                             <div className="delete-product" onClick={() => setShowRemove(true)}>

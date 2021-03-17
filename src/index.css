@@ -1748,12 +1748,7 @@
     font-size: 27px;
     line-height: 36px; }
 
-.cart-product .container .price_wrapper .strikeThrough {
-  text-decoration: line-through;
-  opacity: 0.6;
-  font-size: 18px; }
-
-.cart-product .container .price_wrapper .price {
+.cart-product .container .price_wrapper {
   font-size: 21px;
   line-height: 36px;
   font-weight: bold; }
