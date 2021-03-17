@@ -15,6 +15,8 @@ import Tab from 'react-bootstrap/Tab'
 import { fetchProduct } from './../../service/api/firestore/product';
 import { addUser } from './../../service/api/firestore/user';
 import { AuthContext } from './../../store/contexts/AuthContext';
+import { counter } from '@fortawesome/fontawesome-svg-core';
+import CartService from './../../service/cartOperation';
 function SizeSelector({sizes, handler, label, name}){
   let size_radios = [];
   const handleSelect = (e) => {
@@ -139,27 +141,99 @@ function ProductDescComponent({description, sizing, shipping, returns}){
   )
 }
 
-function ProductForm(){
+function ProductForm({product, sizes}){
   const {currentUser} = useContext(AuthContext);
-  const [quantity, setQuantity] = useState()
+  const [quantity, setQuantity] = useState(0);
+  const [size, setSize] = useState('');
 
-  const buyNow = () => {
-    if(this.state.qty > 0){
-
-    }else {
-
-    }
+  
+  const counter = (tag, val) => {
+    setQuantity(val)
+  }
+  const sizeSelect = (tag, val) => {
+    setSize(val)
   }
   const addToCart = () => {
-    if(this.state.qty > 0){
-
+    if(!currentUser){
+      console.log('User not logged in');
+      return;
+    }
+    if(quantity > 0){
+      console.log('Add products');
+      //Raise error
+    }if(sizes.length > 0 && size === ''){
+      console.log('Select size');
+      //Raise error
+    }else {
+      console.log('Ready to add to cart');
+      try {
+        let p = {
+          sku: product.sku,
+          thumbnail: product.thumbnail,
+          name: product.name,
+          price: product.price,
+          quantity: quantity
+        }
+        if(size !== ''){
+          p.size = size;
+        }
+        let cartOp = CartService.addToCart(currentUser.email, p);
+        //console.log()
+      }catch(err){
+        console.error('CartService error -> ', err);
+      }
+    }
+  }
+  const buyNow = () => {
+    if(!currentUser){
+      console.log('User not logged in');
+      return;
+    }
+    if(quantity > 0){
+      console.log('Add products');
+      //Raise error
+    }if(sizes.length > 0 && size === ''){
+      console.log('Select size');
+      //Raise error
     }else {
       
     }
   }
 
   return (
-    <div></div>
+    <React.Fragment>
+      {sizes.length > 0 && <div className="product-size-options mb-2 mt-3">
+        <SizeSelector
+          sizes={sizes}
+          name="size"
+          label="Select size"
+          handler={sizeSelect}
+        />
+      </div>}
+      <div className="product-quantity mb-3">
+        <Counter
+          handler={counter}
+          name="qty"
+          label="Quantity"
+        />
+      </div>
+      <div className="product-cta-container col-md-10 clearfix mt-2 mb-2 p-0">
+        <AppButton
+          label="Buy now"
+          className="w-100"
+          disabled={!currentUser || quantity === 0 || (sizes.length > 0 && size === '')}
+          onClick={buyNow}
+        />
+      </div>
+      <div className="product-cta-container col-md-10 clearfix mt-2 mb-5 p-0">
+        <AppButton
+          label="Add to cart"
+          className="btn-white w-100"
+          onClick={addToCart}
+          disabled={!currentUser || quantity === 0 || (sizes.length > 0 && size === '')}
+        />
+      </div>
+    </React.Fragment>
   )
 }
 class ProductPage extends Page {
@@ -171,10 +245,6 @@ class ProductPage extends Page {
       error: null,
       pincode_error: false
     }
-    this.handleInput = this.handleInput.bind(this);
-    this.buyNow = this.buyNow.bind(this);
-    this.addToCart = this.addToCart.bind(this);
-
   }
 
   async checkPincode(pincode) {
@@ -203,26 +273,6 @@ class ProductPage extends Page {
       }
     )
   }
-  handleInput(tag, val) {
-    this.setState({
-      ...this.state,
-      [tag]: val
-    })
-  }
-  buyNow(){
-    if(this.state.qty > 0){
-
-    }else {
-
-    }
-  }
-  addToCart(){
-    if(this.state.qty > 0){
-
-    }else {
-      
-    }
-  }
   componentDidMount(){
     //super();
     this.getProducts();
@@ -237,20 +287,34 @@ class ProductPage extends Page {
   }
 
   render() {
-    let product = this.state.product ? this.state.product : {}, sizes = [], images = [],
-    disable_cta = !this.state.size || !(this.state.qty && this.state.qty > 0);
+    let product = this.state.product ? this.state.product : {}, sizes = [], images = [];
     console.log(this.state.size, this.state.qty);
-    if(typeof product.sizes !== 'undefined'){
-      if(typeof product.sizes === 'string'){
-        sizes = JSON.parse(product.sizes || "");
-      }else if( product.sizes instanceof Array){
-        sizes = product.sizes || [];
+    try{
+      if(typeof product.sizes !== 'undefined' && product.sizes !== "-"){
+        if(typeof product.sizes === 'string'){
+          if(product.sizes.indexOf('[') === -1 && product.sizes.indexOf(']') === -1){
+            sizes = product.sizes.split(',');
+          }else {
+            sizes = JSON.parse(product.sizes || "");
+          }
+        }else if( product.sizes instanceof Array){
+          sizes = product.sizes || [];
+        }else {
+
+        }
       }
+    }catch(err){
+      console.error('error while parsing sizes', err, product.sizes);
     }
+    
 
     if(typeof product.images !== 'undefined'){
       if(typeof product.images === 'string'){
-        images = JSON.parse(product.images || "");
+        if(product.images.indexOf('[') === -1 && product.images.indexOf(']') === -1){
+          images = product.images.split(',');
+        }else{
+          images = JSON.parse(product.images || "");
+        }
       }else if( product.images instanceof Array){
         images = product.images || [];
       }
@@ -258,7 +322,7 @@ class ProductPage extends Page {
 
     return (
       <div className="page product-home-page pt-5 pb-5">
-        {this.state.pending && <LoadingModule text="Please wait..."></LoadingModule>}
+        {this.state.pending && <LoadingModule />}
         {!this.state.pending && this.state.product && 
           <div className="d-block">
             <ProductHeroGallery
@@ -276,38 +340,9 @@ class ProductPage extends Page {
                 <div className="price-tax-info mt-1 mb-3">Inclusive of all taxes</div>
               </div>
               {product.rating && RatingStars((product.rating || ""))}
-              <div className="product-size-options mb-2 mt-3">
-                <SizeSelector
-                  sizes={sizes}
-                  name="size"
-                  label="Select size"
-                  handler={this.handleInput}
-                />
-              </div>
-              <div className="product-quantity mb-3">
-                <Counter
-                  handler={this.handleInput}
-                  name="qty"
-                  label="Quantity"
-                />
-              </div>
-              <div className="product-cta-container col-md-10 clearfix mt-2 mb-2 p-0">
-                <AppButton
-                  label="Buy now"
-                  className="w-100"
-                  disabled={disable_cta}
-                  onClick={this.buyNow}
-                />
-              </div>
-              <div className="product-cta-container col-md-10 clearfix mt-2 mb-5 p-0">
-                <AppButton
-                  label="Add to cart"
-                  className="btn-white w-100"
-                  onClick={this.addToCart}
-                  //disabled={disable_cta}
-                />
-              </div>
-              {/* <ProductDelivery/> */}
+              
+              <ProductForm product={this.state.product} sizes={sizes} />
+
               <ProductDescComponent description={product.description}/>
             </div>
           </div>}

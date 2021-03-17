@@ -1,7 +1,7 @@
 import React, {Component, useState, useContext, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -19,6 +19,7 @@ import { AuthContext } from './../../store/contexts/AuthContext';
 import AppButton from './generic/AppButton';
 import HeaderNavigation from './HeaderNavigation';
 import heart_icon from '../../assets/img/heart.png';
+import LoadingModule from './LoadingModule';
 const UserProfileDropDown = ({classes, logout}) => {
   const [expand, setExpand] = useState(false);
   useEffect(() => {
@@ -52,6 +53,8 @@ function Header (props) {
   const [showModal, setShowModal] = useState(false);
   const [searchExpand, setSearchExpand] = useState(false);
   const [scrolling, setScrolling] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const location = useLocation();
 
   const {currentUser, logout} = useContext(AuthContext);
 
@@ -79,6 +82,8 @@ function Header (props) {
   } */
 
   useEffect(()=>{
+    document.body.style.height = '100vh';
+    document.body.style.overflow = 'hidden';
     window.addEventListener('scroll', (e) => {
       if(window.pageYOffset <= 20 && setScrolling && scrolling){
         setScrolling(false);
@@ -86,26 +91,12 @@ function Header (props) {
         setScrolling(true)
       }
     })
+    setTimeout(() => {
+      setLoading(false);
+      document.body.style.height = 'auto';
+      document.body.style.overflow = 'auto';
+    }, 2500);
   }, [])
-
-  
-
-  /* componentDidMount(){
-    let that = this;
-    this.props.authenticate();
-    console.log('componentDidMount: called authenticate');
-    window.addEventListener('scroll', (e) => {
-      if(window.pageYOffset <= 20 && that.state.scrolling){
-        that.setState({
-          scrolling: false
-        })
-      }else if(window.pageYOffset > 30 && !that.state.scrolling) {
-        that.setState({
-          scrolling: true
-        })
-      }
-    })
-  } */
   
     return (
       <header className="App-header sticky-top">
@@ -126,8 +117,11 @@ function Header (props) {
             
               {/* <SearchBar/> */}
 
-              {!currentUser && <AppButton label="Register" className={"d-md-flex sm align-items-center pl-5 pr-5"} 
-                onClick={() => setShowModal(true)}>
+              {!currentUser && location.pathname.indexOf('login') === -1 && <AppButton label="Sign in" className={"d-md-flex sm align-items-center pl-5 pr-5"} 
+                href="/login">
+              </AppButton>}
+              {!currentUser && location.pathname.indexOf('login') > -1 && <AppButton label="Register" className={"d-md-flex sm align-items-center pl-5 pr-5"} 
+                href="/register">
               </AppButton>}
               {currentUser && 
               <React.Fragment>
@@ -160,6 +154,7 @@ function Header (props) {
               <UserLoginSignupModule/>
             </Modal.Body>
           </Modal>
+          {loading && <LoadingModule />}
       </header>
     );
   

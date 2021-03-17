@@ -24,7 +24,8 @@ function AppBody (){
         
         <ProtectedRoute path='/user/:page?' component={UserDashboard} />
         <ProtectedRoute path='/wishlist' component={WishListPage} />
-        <ProtectedRoute path="/login/:page?" component={LoginPage} />
+        <ProtectedRoute path="/login" component={LoginPage} />
+        <ProtectedRoute path="/register" component={LoginPage} />
         {/* <Route path='/user/:page?' render={(props) => <UserDashboard {...props} pageName="user-dashboard" />}/> */}
         <Route path="*" render={props => <FourZeroFour {...props} />}/>
       </Switch>

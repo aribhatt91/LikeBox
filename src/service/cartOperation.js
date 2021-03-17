@@ -44,7 +44,22 @@ const EMPTY_CART = {
 let CartService = {
     active_cart: EMPTY_CART,
     addToCart: (email, product) => {
-        return dispatch => {
+        if(!CartService.validateProduct(product)){
+            console.log('addToCart: ', INVALID_PRODUCT, product);
+            //DISPATCH ERROR
+            //dispatch(cartError({error: CART_ADD_ERROR, cart: CartService.active_cart}));
+            return;
+        }
+        //Firestore
+        addProductToCart(email, product).then( res => {
+            CartService.setCart(CartService.parseCart(res));
+            console.log('addToCart: MockGetCart: parsed cart', CartService.active_cart);
+            //dispatch(addToCartSuccess(CartService.getCart()));
+        }).catch( error => {
+            console.log('addToCart: MockGetCart: error', error);
+            //dispatch(cartError({error: CART_ADD_ERROR, cart: CartService.active_cart}));
+        });
+        /*return dispatch => {
             dispatch(addToCartPending(CartService.active_cart));
             if(!CartService.validateProduct(product)){
                 console.log('addToCart: ', INVALID_PRODUCT, product);
@@ -52,7 +67,7 @@ let CartService = {
                 dispatch(cartError({error: CART_ADD_ERROR, cart: CartService.active_cart}));
                 return;
             }
-            //TODO - Switch to Firestore
+            //Firestore
             addProductToCart(email, product).then( res => {
                 CartService.setCart(CartService.parseCart(res));
                 console.log('addToCart: MockGetCart: parsed cart', CartService.active_cart);
@@ -61,15 +76,7 @@ let CartService = {
                 console.log('addToCart: MockGetCart: error', error);
                 dispatch(cartError({error: CART_ADD_ERROR, cart: CartService.active_cart}));
             });
-            /* MockAddItemToCart(product).then( res => {
-                CartService.setCart(CartService.parseCart(res));
-                console.log('addToCart: MockGetCart: parsed cart', CartService.active_cart);
-                dispatch(addToCartSuccess(CartService.getCart()));
-            }).catch( error => {
-                console.log('addToCart: MockGetCart: error', error);
-                dispatch(cartError({error: CART_ADD_ERROR, cart: CartService.active_cart}));
-            }); */
-        }
+        }*/
         
     },
     removeFromCart: (email, product, decrement=false) => {
@@ -182,7 +189,7 @@ let CartService = {
         return CartService.active_cart.subTotal|| 0;
     },
     validateProduct: (product) => {
-        if(!product || !product.hasOwnProperty('sku') || !product.hasOwnProperty('name') || !product.hasOwnProperty('price') || !product.hasOwnProperty('quantity') || !product.hasOwnProperty('size')){
+        if(!product || !product.hasOwnProperty('sku') || !product.hasOwnProperty('name') || !product.hasOwnProperty('price') || !product.hasOwnProperty('quantity') /*|| !product.hasOwnProperty('size')*/){
             return false;
         }
         if(product.quantity <= 0){

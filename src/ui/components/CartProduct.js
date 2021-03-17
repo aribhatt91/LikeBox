@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import ThemedButton from './generic/ThemedButton';
 import AppButton from './generic/AppButton';
+import AppImage from './generic/AppImage';
 
 function CartProduct({item, _removeItem, currency}){
     const [showRemove, setShowRemove] = useState(false);
@@ -10,7 +11,7 @@ function CartProduct({item, _removeItem, currency}){
                 <div className="row position-relative">
                     <div className="col-sm-12 d-flex align-items-start">
                         <div className="thumbnail">
-                            <img className="thumbnail-img" src={item.thumbnail}/>
+                            <AppImage className="thumbnail-img" src={item.thumbnail}/>
                         </div>
                         
                         <div className="h-100 d-flex flex-column justify-content-between">

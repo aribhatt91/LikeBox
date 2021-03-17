@@ -737,7 +737,13 @@
     margin-top: 0%;
   }
 }
-
+.app-image{
+  opacity: 0;
+  transition: 0.3s all ease-in-out;
+  &.img-loaded {
+    opacity: 1;
+  }
+}
 @media only screen and (max-width: 1024px){
 
 }

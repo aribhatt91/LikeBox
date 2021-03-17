@@ -337,11 +337,7 @@
 .nav_icon {
   max-height: 24px;
 }
-  @keyframes grow {
-    from {
-      width: 0;
-    }
-    to {
-      width: 100%;
-    }
-  }
+.home_icon {
+  width: 240px;
+  height: auto;
+}

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { AuthProvider } from '../../store/contexts/AuthContext';
 import LoginForm from './forms/LoginForm';
 import SignupForm from './forms/SignupForm';
 const UserLoginSignupModule = (props) => {

@@ -75,6 +75,7 @@ const MultiSelectTag = ({label, items, handler}) => {
     items.forEach((item, index) => {
         list_items.push(
             <Tag
+                key={index}
                 item={item}
                 // selected={!selectAll}
                 _click={_handleSelect}

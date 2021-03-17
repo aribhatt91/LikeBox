@@ -1,10 +1,11 @@
 import React, {useContext} from 'react';
 import { getUserObject } from '../rx-store/dataStore';
-import { Redirect, Route } from 'react-router-dom';
+import { Redirect, Route, useLocation } from 'react-router-dom';
 import LoginPage from './../../ui/pages/LoginPage';
 import { AuthContext } from './../../store/contexts/AuthContext';
 
 const ProtectedRoute = ({component: Component, path, ...rest}) => {
+  let location = useLocation();
   
   const {currentUser} = useContext(AuthContext)
     //console.log('ProtectedRoute',getUserObject(), Component);
@@ -23,7 +24,7 @@ const ProtectedRoute = ({component: Component, path, ...rest}) => {
                     {
                       pathname: redirectUrl,
                       state: {
-                        from: '/login'
+                        from: location.pathname
                       }
                     }
                   }

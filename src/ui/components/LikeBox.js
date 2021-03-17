@@ -72,7 +72,7 @@ function LikeBoxSignup({slideOut, slideIn, registered, email, onComplete}) {
         <div className={"like-box-signup mb-5 mt-5" + (!slideIn && !slideOut ? " slide-hold" : "") + (slideOut ? " slide-out" : "") + (slideIn ? " slide-in" : "")}>
         
             {
-                registered && <LoginForm onComplete={onComplete} />
+                registered && <LoginForm email={email} onComplete={onComplete} />
                 
             }
             {
@@ -149,7 +149,7 @@ export default function LikeBox() {
             setShow(4);
         }
     }, [currentUser])
-    
+
     return (
         <div className="container">
             {!currentUser && <div className="like-box">

@@ -53,7 +53,7 @@ const LoginForm = (props) => {
           <form className={"login-form"}>
 
             <AppForm
-              initialValues={{email: '', password: ''}}
+              initialValues={{email: props.email ? props.email : '', password: ''}}
               onSubmit={submitForm}
               validationSchema={validationSchema}>
                 {submitted && error && 
@@ -69,6 +69,7 @@ const LoginForm = (props) => {
                       name="email"
                       label="Email"
                       type="email"
+                      // defvalue={props.email ? props.email : ''}
                     />
                   </div>
 

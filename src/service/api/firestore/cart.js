@@ -25,6 +25,13 @@ const collection = db.collection('users');
     colour: String //optional
 }
 */
+const EMPTY_CART = {
+    count: 0,
+    subTotal: 0,
+    total: 0,
+    savings: 0,
+    products: []
+}
 export const getUserCart = async (email) => {
     let cart = null;
     
@@ -66,13 +73,16 @@ export const addProductToCart = async (email, product) => {
     let cart = null;
     try {
         cart = await getUserCart(email);
+        if(!cart){
+            cart = {};
+        }
         if(cart){
             let products = cart.products || [],
             present = false, itemCount = 0, subTotal = 0, total = 0;
             for(let p in products){
                 /* Check product id and size - if product with different size exists, add a new instance, else increment */
-                if(products[p].sku === product.sku && (Number(products[p].size) === Number(product.size) || (!product.size && !products[p].size))){
-                    products[p].quantity = Number(products[p].quantity) + 1;
+                if(products[p].sku === product.sku && ((!product.size && !products[p].size) || (products[p].size === product.size))){
+                    products[p].quantity = Number(products[p].quantity) + Number(product.quantity);
                     present = true;
                 }
                 itemCount += Number(products[p].quantity);
@@ -92,6 +102,8 @@ export const addProductToCart = async (email, product) => {
             cart.total = total;
             //writeToCookie(CNAME, cart, 30);
             //setTimeout(() => resolve(JSON.stringify(cart)), 2000);
+            let update = await updateUserByEmail(email, {cart})
+            console.log(update);
         }
         
 

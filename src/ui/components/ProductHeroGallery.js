@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import AppImage from './generic/AppImage';
 
 function ProductHeroGallery({images, product_name, product_id, addWishList, inWishList}) {
     const [wished, setWished] = useState(inWishList ? inWishList : false);
@@ -19,7 +20,7 @@ function ProductHeroGallery({images, product_name, product_id, addWishList, inWi
                 {
                     (images || []).map((item, index) => (
                         <div key={index} className={"thumb-image pb-md-2" + (selected === index ? " selected" : "")} onClick={() => {setSelected(index)}}>
-                            <img src={item} alt={product_name} title={product_name}/>
+                            <AppImage src={item} alt={product_name} title={product_name}/>
                         </div>
                     ))
                 }
@@ -33,7 +34,7 @@ function ProductHeroGallery({images, product_name, product_id, addWishList, inWi
             <div className="product-zoomed-image col-md-10 float-left p-0">
                 {
                     (images || []).map((item, index) => (
-                        <img className={"m-2" + (selected === index ? " selected" : "")} src={item} alt={product_name} title={product_name}/>
+                        <AppImage key={index} className={"m-2" + (selected === index ? " selected" : "")} src={item} alt={product_name} title={product_name}/>
                     ))
                 }
                 <img src={images[0]} alt={product_name} title={product_name}/>

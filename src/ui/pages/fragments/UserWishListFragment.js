@@ -5,6 +5,7 @@ import { CURRENCY } from './../../../service/constants';
 import AppButton from '../../components/generic/AppButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import AppImage from './../../components/generic/AppImage';
 
 function WishListInstancePlaceholder() {
     return (
@@ -45,7 +46,7 @@ function WishListInstance({instance, removeItem}){
     return (
         <div className="wish-list-instance-container mb-3 position-relative">
             <a href={instance.url} className="wish-list-instance-thumb">
-                <img src={instance.thumbnail}/>
+                <AppImage src={instance.thumbnail}/>
             </a>
             <div className="wish-list-instance-text pt-2 pb-2">
                 <div className="wish-list-instance-price">
