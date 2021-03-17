@@ -29,7 +29,10 @@ export const fetchProducts = (path, filter) => {
                 if(!comparator || comparator === "-" || category === "shoes" || category === "clothes" || category === "accessories"){
                     comparator = item.category
                 }
-                return (comparator || "").toLowerCase().indexOf(category) > -1
+                comparator = comparator.toLowerCase();
+                let shirt = category === 'shirt' || category === 'shirts';
+                shirt = !shirt || (shirt && comparator.indexOf('sweat') === -1 && comparator.indexOf('polo') === -1);
+                return shirt && (comparator || "").toLowerCase().indexOf(category) > -1
             })
             /* Filter products */
     

@@ -77,12 +77,6 @@ function WishListInstance({instance, removeItem}){
                                 className="w-100 btn-white sm border-0" 
                                 onClick={(e) => {setShowDeletePop(false)}}
                                 />
-                            {/* <ThemedButton
-                                text="Cancel"
-                                _click={() => setShowDeletePop(false)}
-                                size="sm"
-                                theme="nobg"
-                            /> */}
                         </div>
                         <div className="d-inline-block">
                             <AppButton 
@@ -90,12 +84,6 @@ function WishListInstance({instance, removeItem}){
                                 className="w-100 sm border-0 border-radius-0" 
                                 onClick={deleteWishListAction}
                                 />
-                            {/* <ThemedButton
-                                text="Remove"
-                                _click={deleteWishListAction}
-                                size="sm"
-                                theme="red"
-                            /> */}
                         </div>
                     </div>
                 </div>

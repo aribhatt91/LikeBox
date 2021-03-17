@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useState, useEffect } from 'react'
 import LikeBoxPreference from './LikeBoxPreference'
 import {EMAIL_FORM_SCHEMA, LOGIN_FORM_SCHEMA} from '../../service/validationSchema';
 import AppForm from './forms/AppForm';
@@ -9,7 +9,7 @@ import LikeboxCarousel from './LikeboxCarousel';
 import AppRadioInput from './generic/AppRadioInput';
 import SignupForm from './forms/SignupForm';
 import LoginForm from './forms/LoginForm';
-
+import LikeBoxHomePage from './LikeboxHomePage';
 function LikeBoxEmailForm({onComplete, setRegistered}) {
     const {fetchSignInMethods} = useContext(AuthContext);
     const validationSchema = EMAIL_FORM_SCHEMA;
@@ -82,11 +82,11 @@ function LikeBoxSignup({slideOut, slideIn, registered, email, onComplete}) {
     )
 }
 
-function LikeBoxHome({slideIn, slideOut, onComplete, setRegistered}) {
+function LikeBoxLandingPage({slideIn, slideOut, onComplete, setRegistered}) {
     return (
         <div className={"like-box-home" + (!slideIn && !slideOut ? " slide-hold" : "") + (slideOut ? " slide-out" : "") + (slideIn ? " slide-in" : "")}>
         
-            <div className="like-box-home-section d-flex flex-column mr-auto ml-auto">
+            <section className="like-box-home-section d-flex flex-column mr-auto ml-auto">
                 <h1 className="like-box-header-1 font-weight-bold">Clothes shopping has never been easier</h1>
                 <p className="like-box-subheader-p">Likebox is your own personal shopping assistant</p>
                 <div className="like-box-stm-container">
@@ -130,10 +130,11 @@ function LikeBoxHome({slideIn, slideOut, onComplete, setRegistered}) {
                         <div className="like-box-subheader-p text-center">Buy from your favourite stores all in one place</div>
                     </div>
                 </div>
-            </div>
+            </section>
         </div>
     )
 }
+
 
 export default function LikeBox() {
     const {currentUser} = useContext(AuthContext);
@@ -142,10 +143,17 @@ export default function LikeBox() {
     const [show, setShow] = useState(0);
 
     let items = ['item-1', 'item-2', 'item-3', 'item-4', 'item-5'];
+    console.log('LikeBox show', show);
+    useEffect(() => {
+        if(currentUser){
+            setShow(4);
+        }
+    }, [currentUser])
+    
     return (
         <div className="container">
-            <div className="like-box">
-                <LikeBoxHome
+            {!currentUser && <div className="like-box">
+                <LikeBoxLandingPage
                     slideOut={show > 0}
                     slideIn={show === 0}
                     setRegistered={(reg, em) => {
@@ -175,7 +183,11 @@ export default function LikeBox() {
                     slideIn={show === 3}
                     onComplete={() => {setShow(4)}}
                 />
-            </div>
+                
+            </div>}
+            {currentUser && <LikeBoxHomePage 
+                    slideIn={show === 4}
+                />}
         </div>
     )
 }

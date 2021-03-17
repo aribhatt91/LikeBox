@@ -86,7 +86,8 @@ $thumb-dimen-xs: 240px;
     }
     .wish-list-instance-remove-wrapper {
       top: 0.5rem;
-      right: 0.5rem;
+      right: 0;
+      width: 100%;
       
       p {
         font-size: 0.875rem;
@@ -96,9 +97,7 @@ $thumb-dimen-xs: 240px;
       }
       .action-icon {
         cursor: pointer;
-        svg {
-          cursor: pointer;
-        }
+        margin-right: 0.5rem;
       }
     }
     

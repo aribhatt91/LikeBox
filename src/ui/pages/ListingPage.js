@@ -33,19 +33,6 @@ function Listing({type, filter, sortBy}){
 
   useEffect(()=>{
     getProducts();
-    let user = {
-      email: 'a@f.com',
-      name: {
-        first: 'A',
-        middle: '',
-        last: 'B'
-      }
-    }
-    let update = {
-      'name.first': 'Zorro'
-    }
-    //addUser(user);
-    //updateUserByEmail('z@f.com', update);
   }, [category])
 
   useEffect(()=> {
@@ -125,27 +112,13 @@ class ListingPage extends Page {
       <section className="products-section">
         
           <div className="page container-fluid">
-            <div className="listing-page-header m-3 text-center text-uppercase">
+            <h1 className="listing-page-header m-3 mt-5 mb-5 text-center text-uppercase">
               {(this.props.match.params.category || "").replace('-', ' & ')}
-            </div>
+            </h1>
             <ProductFilters 
-            filterHandler={this.applyFilter}
-            sortHandler={this.applySort}
-            products={this.state.items.length}></ProductFilters>
-            
-            {/* <div className="product-cards-container">
-              {this.state.items.map((item)=>{
-                return (<ProductCard 
-                  key={item.sku}
-                  title={item.name}
-                  img={item.thumbnail}
-                  price={item.price}
-                  link={"/product/" + item.sku}
-                  rating={item.ratings}
-                  brand={item.brand}
-                  ></ProductCard>)
-              })}
-            </div> */}
+              filterHandler={this.applyFilter}
+              sortHandler={this.applySort}
+              products={this.state.items.length} />
             <Listing />
           </div>
         

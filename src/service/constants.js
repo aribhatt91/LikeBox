@@ -220,5 +220,21 @@ export const CATEGORY_URL_MAPPING = {
     'tights': {
         subcategory: 'socks & tights',
         category: 'clothes'
+    },
+    'shirts': {
+        subcategory: 'shirts',
+        category: 'clothes'
+    },
+    'shirt': {
+        subcategory: 'shirts',
+        category: 'clothes'
+    },
+    'polo': {
+        subcategory: 'polo',
+        category: 'clothes'
+    },
+    'polos': {
+        subcategory: 'polo',
+        category: 'clothes'
     }
 }

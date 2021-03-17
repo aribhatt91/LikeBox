@@ -12,6 +12,7 @@
 @import './counter.scss';
 @import './search.scss';
 @import './tablayout.scss';
+@import './appimage.scss';
 
 .hidden-xs-up {
   display: none;
@@ -594,7 +595,130 @@
   transform: translateY(300%);
   position: absolute;
 }
-
+.likebox-home-section {
+  h1 {
+    margin: 2rem 0.25rem;
+    font-weight: bold;
+    position: relative;
+    color: #000;
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -0.5rem;
+      left: 0;
+      height: 4px;
+      width: 48px;
+      transition: 0.3s all;
+      background-color: #000;
+    }
+    &.text-right {
+      &::after {
+        left: auto;
+        right: 0;
+      }
+    }
+    &:hover {
+      &::after{
+        
+      }
+    }
+  }
+  .staggered-grid {
+    .grid-item {
+      position: relative;
+      padding: 0.25rem;
+      
+      .position-relative {
+        background-color: $placeholder-bg;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        
+        &:hover {
+          img {
+            transform: scale(1.25);
+          }
+          h3 {
+            &::after{
+              width: 48px;
+            }
+          }
+        }
+        &:after {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: 0;
+          content: "";
+          background-color: rgba(0, 0, 0, 0.2);
+        }
+      }
+      h3 {
+        position: absolute;
+        left: 2rem;
+        bottom: 1rem;
+        color: #fff;
+        z-index: 3;
+        font-weight: bold;
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: -0.5rem;
+          left: 0;
+          height: 4px;
+          width: 0;
+          transition: 0.3s all;
+          background-color: #fff;
+        }
+      }
+      a, img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        text-decoration: none;
+      }
+      a {
+        z-index: 5;
+        background-color: transparent;
+      }
+      img {
+        object-fit: cover;
+        transition: 0.3s all;
+      }
+      img:after {
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        content: "";
+        background-color: rgba(0, 0, 0, 0.2);
+      }
+      &.col-md-6, &.col-md-7, &.col-md-5, &.col-md-12 {
+        height: 200px;
+        @include media-min(1024px) {
+          height: 300px;
+        }
+        @include media-min(768px) {
+          height: 240px;
+        }
+      }
+      &.col-md-4 {
+        height: 200px;
+        @include media-min(1024px) {
+          height: 220px;
+        }
+        @include media-min(768px) {
+          height: 200px;
+        }
+      }
+      
+    }
+    
+  }
+}
 @keyframes slideout {
   0% {
     top: 0%;
