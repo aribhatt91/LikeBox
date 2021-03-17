@@ -18,7 +18,7 @@ import CartLink from './CartLink';
 import { AuthContext } from './../../store/contexts/AuthContext';
 import AppButton from './generic/AppButton';
 import HeaderNavigation from './HeaderNavigation';
-
+import heart_icon from '../../assets/img/heart.png';
 const UserProfileDropDown = ({classes, logout}) => {
   const [expand, setExpand] = useState(false);
   useEffect(() => {
@@ -131,13 +131,16 @@ function Header (props) {
               </AppButton>}
               {currentUser && 
               <React.Fragment>
-                <AppButton label="Your account" className={"d-md-flex sm align-items-center pl-5 pr-5"} 
-                  href="/user">
-                </AppButton>
+                <NavLink activeClassName="active" to="/wishlist">
+                  <img src={heart_icon} className="nav_icon" />
+                </NavLink>
                 <NavLink activeClassName='active' to="/cart">
                   {/* <FontAwesomeIcon icon={faCartPlus}/> */}
                   <CartLink user={currentUser}/>
                 </NavLink>
+                <AppButton label="Your account" className={"d-md-flex sm align-items-center pl-5 pr-5"} 
+                  href="/user">
+                </AppButton>
               </React.Fragment>
               }
 

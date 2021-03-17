@@ -24,7 +24,7 @@ function Listing({type, filter, sortBy}){
   const [maxReached, setMaxReached] = useState(false);
 
   const getProducts = async () => {
-    console.log('getProducts called');
+    console.log('getProducts called', category);
     setLoading(true);
     let data = await fetchProducts(category);
     setProducts(data);

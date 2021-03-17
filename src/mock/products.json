@@ -14,7 +14,7 @@
       "sizes":"-",
       "sale":"N",
       "colour":"Black",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/black-carhartt-wip-payton-kit-bag/16077869/",
@@ -31,7 +31,7 @@
       "sizes":"-",
       "sale":"N",
       "colour":"Black",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/black-the-north-face-steep-tech-backpack/16052691/",
@@ -48,7 +48,7 @@
       "sizes":"-",
       "sale":"N",
       "colour":"Black",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.ellesse.com/uk/en/waccessories/p/regent-backpack-navy",
@@ -65,7 +65,7 @@
       "sizes":"-",
       "sale":"Y",
       "colour":"Navy",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://oliverspencer.co.uk/collections/bags/products/porter-flex-2way-duffle-bag-navy",
@@ -82,7 +82,7 @@
       "sizes":"-",
       "sale":"N",
       "colour":"Navy",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.lacoste.com/gb/lacoste/men/leather-goods/backpack/men%27s-neocroc-canvas-backpack/NH2677NE.html?color=991&size=00",
@@ -99,7 +99,7 @@
       "sizes":"-",
       "sale":"N",
       "colour":"Black",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.houseoffraser.co.uk/brand/hugo/gellot-belt-945229#colcode=94522903",
@@ -116,7 +116,7 @@
       "sizes":"80, 85, 90, 95, 100, 105",
       "sale":"Y",
       "colour":"Black",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.houseoffraser.co.uk/brand/levis/hebron-belt-771018#colcode=77101869",
@@ -133,7 +133,7 @@
       "sizes":"75, 80,  85, 90, 95, 100, 105",
       "sale":"Y",
       "colour":"Black",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.houseoffraser.co.uk/brand/boss/jeeko-leather-belt-945162#colcode=94516290",
@@ -150,7 +150,7 @@
       "sizes":"80, 85, 90, 95, 100, 105",
       "sale":"Y",
       "colour":"Tan",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://oliverspencer.co.uk/collections/belts/products/one-size-belt-pebble-leather-black",
@@ -167,7 +167,7 @@
       "sizes":"-",
       "sale":"N",
       "colour":"Black",
-      "gender":""
+      "gender":"m"
    },
    {
       "link":"https://jeanstore.co.uk/collections/belts/products/wrangler-easy-leather-belt-brown",
@@ -184,7 +184,7 @@
       "sizes":"80, 85, 90, 95, 100, 105",
       "sale":"N",
       "colour":"Brown",
-      "gender":""
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/orange-new-era-mlb-9forty-new-york-yankees-cap/16077872/",
@@ -201,7 +201,7 @@
       "sizes":"-",
       "sale":"N",
       "colour":"Orange",
-      "gender":"Male, Female"
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/black-columbia-roc-ii-cap/15981141/",
@@ -218,7 +218,7 @@
       "sizes":"-",
       "sale":"N",
       "colour":"Black",
-      "gender":"Male, Female"
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/yellow-adidas-originals-samstag-vintage-ball-cap/16009885/",
@@ -235,7 +235,7 @@
       "sizes":"-",
       "sale":"Y",
       "colour":"Yellow",
-      "gender":"Male, Female"
+      "gender":"m"
    },
    {
       "link":"https://www.ellesse.com/uk/en/womens-hats/p/ragusa-cap-black",
@@ -252,7 +252,7 @@
       "sizes":"-",
       "sale":"N",
       "colour":"Black",
-      "gender":"Male, Female"
+      "gender":"m"
    },
    {
       "link":"https://www.nike.com/gb/t/nikecourt-heritage86-logo-tennis-cap-NCLdjH/852184-010",
@@ -269,7 +269,7 @@
       "sizes":"-",
       "sale":"N",
       "colour":"Black",
-      "gender":"Male, Female"
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/black-the-north-face-etip-recycled-gloves/16033225/",
@@ -286,7 +286,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"N",
       "colour":"Black",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/green-the-north-face-etip-recycled-gloves/16033596/",
@@ -303,7 +303,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"Y",
       "colour":"Green",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/black-nike-nocta-superbad-50-footbal-gloves/16067107/",
@@ -320,7 +320,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"N",
       "colour":"Black",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.houseoffraser.co.uk/brand/barbour/tartan-lambswool-scarf-902084#colcode=90208429",
@@ -337,7 +337,7 @@
       "sizes":"-",
       "sale":"Y",
       "colour":"Tartan",
-      "gender":"Male, Female"
+      "gender":"m"
    },
    {
       "link":"https://www.houseoffraser.co.uk/brand/mcm/mcm-mono-jacq-scarf-03-902890#colcode=90289005",
@@ -354,7 +354,7 @@
       "sizes":"-",
       "sale":"Y",
       "colour":"Cognac",
-      "gender":"Male, Female"
+      "gender":"m"
    },
    {
       "link":"https://www.houseoffraser.co.uk/brand/tommy-hilfiger/tommy-pimacottnscarf-sn94-902256#colcode=90225603",
@@ -371,7 +371,7 @@
       "sizes":"-",
       "sale":"Y",
       "colour":"Black",
-      "gender":"Male, Female"
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/grey-tommy-jeans-heavyweight-knit-badge-crew-sweatshirt/16079324/",
@@ -388,7 +388,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"N",
       "colour":"Grey",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/yellow-adidas-originals-adventure-half-zip-fleece/16065696/",
@@ -405,7 +405,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"N",
       "colour":"Yellow",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/black-nike-club-crew-sweatshirt/149913/",
@@ -422,7 +422,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"N",
       "colour":"Black",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/black-pleasures-freaks-crew-sweatshirt/16046634/",
@@ -439,7 +439,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"Y",
       "colour":"Black",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/orange-tommy-jeans-badge-overhead-hoodie/16079456/",
@@ -456,7 +456,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"N",
       "colour":"Orange",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.ellesse.com/uk/en/mclothing/p/fierro-sweatshirt-navy",
@@ -473,7 +473,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"N",
       "colour":"Navy",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.dickieslife.com/uk_en/dickies-aitkin-sweatshirt-0a4xab-light-grey",
@@ -490,7 +490,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"N",
       "colour":"Grey",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/yellow-the-north-face-nuptse-1996-down-jacket/16026832/",
@@ -507,7 +507,7 @@
       "sizes":"[S, M, L]",
       "sale":"N",
       "colour":"Yellow",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/green-levis-14-zip-polar-fleece/16032824/",
@@ -524,7 +524,7 @@
       "sizes":"[XS, M, L]",
       "sale":"N",
       "colour":"Green",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/black-fred-perry-woven-panel-track-jacket/16026546/",
@@ -541,7 +541,7 @@
       "sizes":"[S, M, L]",
       "sale":"Y",
       "colour":"Black",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/black-berghaus-ski-smock-86-lightweight-jacket/172026/",
@@ -558,7 +558,7 @@
       "sizes":"[S, M, XL]",
       "sale":"Y",
       "colour":"Black",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.dickieslife.com/uk_en/dickies-halma-eisenhower-0a4xap-ecru-0a4xap-ecru",
@@ -575,7 +575,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"N",
       "colour":"Cream",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.nike.com/gb/t/sb-skate-jacket-GkpVBm/CV4305-010",
@@ -592,7 +592,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"N",
       "colour":"Black",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.debenhams.com/webapp/wcs/stores/servlet/prod_10701_10001_280010722343_-1",
@@ -609,7 +609,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"Y",
       "colour":"Navy",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.houseoffraser.co.uk/brand/diesel/diesel-d-luster-jeans-649028#colcode=64902803",
@@ -626,7 +626,7 @@
       "sizes":"[30W S, 30W R, 30W L, 32W S, 32W R, 32W L, 34W S, 34W R, 34W L, 36W S, 36W R, 36W L, 38W S, 38W R, 38W L]",
       "sale":"Y",
       "colour":"Black",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.houseoffraser.co.uk/brand/polo-ralph-lauren/sullivan-jeans-640133#colcode=64013318",
@@ -643,7 +643,7 @@
       "sizes":"[30W S, 30W R, , 32W S, 32W R, 32W L, 34W S, 34W R, 34W L, 36W S, 36W R, 36W L, 38W R, 38W L]",
       "sale":"Y",
       "colour":"Wash",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.zalando.co.uk/only-and-sons-onsloom-slim-fit-jeans-blue-denim-os322g0af-k11.html",
@@ -660,7 +660,7 @@
       "sizes":"[28x30, 28x32, 28x34, 29x30, 29x32, 30x30, 31x30, 33x34, 32x34, 34x34]",
       "sale":"N",
       "colour":"Blue Denim",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.zalando.co.uk/wrangler-texas-stretch-straight-leg-jeans-wr122e00t-k14.html",
@@ -677,7 +677,7 @@
       "sizes":"[28x30, 28x32, 28x34, 29x30, 29x32, 30x30, 31x30, 33x34, 32x34, 34x34]",
       "sale":"N",
       "colour":"Worn Broke",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.debenhams.com/webapp/wcs/stores/servlet/prod_10701_10001_280010722152_-1",
@@ -694,7 +694,7 @@
       "sizes":"[28x30, 28x32, 28x34, 29x30, 29x32, 30x30, 31x30, 33x34, 32x34, 34x34]",
       "sale":"Y",
       "colour":"Blue Denim",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.debenhams.com/webapp/wcs/stores/servlet/prod_10701_10001_280010500160_-1",
@@ -711,7 +711,7 @@
       "sizes":"[28x30, 28x32, 28x34, 29x30, 29x32, 30x30, 31x30, 33x34, 32x34, 34x34]",
       "sale":"Y",
       "colour":"Black",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.zalando.co.uk/mango-royal-jumper-hellgrau-meliert-m9122q0oc-c11.html",
@@ -728,7 +728,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"N",
       "colour":"Grey",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.zalando.co.uk/pier-one-jumper-mottled-blue-pi922q023-k11.html",
@@ -745,7 +745,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"N",
       "colour":"Blue",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.zalando.co.uk/polo-ralph-lauren-sweatshirt-andover-heather-po222s03j-c12.html",
@@ -762,7 +762,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"N",
       "colour":"Grey",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.zalando.co.uk/tommy-hilfiger-v-neck-jumper-to122q047-k11.html",
@@ -779,7 +779,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"Y",
       "colour":"Black",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://oliverspencer.co.uk/collections/knitwear/products/blenheim-jumper-hereford-beige-multi",
@@ -796,7 +796,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"Y",
       "colour":"Grey",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.lacoste.com/gb/lacoste/men/clothing/knitwear/men%E2%80%99s-crew-neck-textured-striped-wool-blend-sweater/AH9018-00.html?color=HDE",
@@ -813,7 +813,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"N",
       "colour":"Black",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.lacoste.com/gb/lacoste/men/clothing/knitwear/men%27s-organic-cotton-crew-neck-sweater/AH1985-00.html?color=HJM",
@@ -830,7 +830,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"N",
       "colour":"Blue",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.zalando.co.uk/tommy-hilfiger-polo-shirt-sky-captain-to122p03i-k11.html",
@@ -847,7 +847,7 @@
       "sizes":"[S, M, L, XL, XXL ]",
       "sale":"Y",
       "colour":"Black",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.zalando.co.uk/polo-ralph-lauren-oxford-polo-shirt-freshwaterwhite-po222p0fx-a11.html",
@@ -864,7 +864,7 @@
       "sizes":"[S, M, L, XL, XXL ]",
       "sale":"N",
       "colour":"Blue/White",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.zalando.co.uk/pier-one-polo-shirt-red-pi922d01q-g12.html",
@@ -881,7 +881,7 @@
       "sizes":"[S, M, L, XL, XXL ]",
       "sale":"N",
       "colour":"Bordeaux",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.lacoste.com/gb/lacoste/men/clothing/polo-shirts/short-sleeves/men%27s-slim-fit-lacoste-polo-shirt-in-petit-pique/PH4012-00.html?color=L61",
@@ -898,7 +898,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"N",
       "colour":"Blue",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.ellesse.com/uk/en/mens-polos/p/montura-polo-shirt-dark-grey",
@@ -915,7 +915,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"N",
       "colour":"Grey",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.nike.com/gb/t/sportswear-polo-9Txqrg/CJ4456-410",
@@ -932,7 +932,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"N",
       "colour":"Navy",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.zalando.co.uk/michael-kors-parma-slim-fit-formal-shirt-navy-1mi22d04m-k11.html",
@@ -949,7 +949,7 @@
       "sizes":"[XS, S, M, L, XL]",
       "sale":"N",
       "colour":"Navy",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.zalando.co.uk/polo-ralph-lauren-shirt-cabana-blue-po222d0od-k12.html",
@@ -966,7 +966,7 @@
       "sizes":"[XS, S, M, L, XL]",
       "sale":"N",
       "colour":"Blue",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.zalando.co.uk/the-kooples-formal-shirt-white-tha22d04h-a11.html",
@@ -983,7 +983,7 @@
       "sizes":"[XS, S, M, L, XL]",
       "sale":"Y",
       "colour":"White",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.zalando.co.uk/tommy-hilfiger-formal-shirt-shirt-blue-to122d0b8-k12.html",
@@ -1000,7 +1000,7 @@
       "sizes":"[XS, S, M, L, XL]",
       "sale":"N",
       "colour":"Blue",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.next.co.uk/style/st774126/559654#559654",
@@ -1017,7 +1017,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"N",
       "colour":"Sky Blue",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.lacoste.com/gb/lacoste/men/clothing/shirts/long-sleeves/men%27s-snap-button-denim-shirt/CH6301-00.html?color=CDZ",
@@ -1034,7 +1034,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"Y",
       "colour":"Denim",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.lacoste.com/gb/lacoste/men/clothing/shirts/short-sleeves/men%E2%80%99s-regular-fit-short-sleeved-striped-poplin-shirt/CH0955-00.html?color=3YD",
@@ -1051,7 +1051,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"N",
       "colour":"White/Blue",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.zalando.co.uk/timberland-prem-rust-boots-brown-ti1-fzw-0033-99.html",
@@ -1068,7 +1068,7 @@
       "sizes":"[6, 7 , 8, 8.5, 9, 9.5, 10]",
       "sale":"N",
       "colour":"Brown",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.zalando.co.uk/dr-martens-2976-classic-ankle-boots-oxblood-do215k01k-g11.html",
@@ -1085,7 +1085,7 @@
       "sizes":"[6, 7 , 8, 8.5, 9, 9.5, 10]",
       "sale":"N",
       "colour":"Oxblood",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.zalando.co.uk/hkt-by-hackett-work-boot-lace-up-ankle-boots-navy-hk612k000-k11.html",
@@ -1102,7 +1102,7 @@
       "sizes":"[6, 7 , 8, 8.5, 9, 9.5, 10]",
       "sale":"Y",
       "colour":"Navy",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.zalando.co.uk/puma-mules-white-pu115g00f-c11.html",
@@ -1119,7 +1119,7 @@
       "sizes":"[3, 4, 5, 7, 9]",
       "sale":"N",
       "colour":"White",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.zalando.co.uk/tommy-hilfiger-signature-beach-t-bar-sandals-to112g01h-c11.html",
@@ -1136,7 +1136,7 @@
       "sizes":"[5, 6, 7, 7.5, 9]",
       "sale":"Y",
       "colour":"Grey",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.zalando.co.uk/cotton-on-mules-khakiblack-c1q12g006-n11.html",
@@ -1153,7 +1153,7 @@
       "sizes":"[5, 6, 7, 7.5, 9]",
       "sale":"N",
       "colour":"Khaki",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.zalando.co.uk/nike-sportswear-benassi-jdi-sandals-black-ni242a001-q11.html",
@@ -1170,7 +1170,7 @@
       "sizes":"[5, 6, 7, 7.5, 9, 10, 11]",
       "sale":"N",
       "colour":"Black",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.zalando.co.uk/pier-one-smart-lace-ups-black-pi912m09n-q11.html",
@@ -1187,7 +1187,7 @@
       "sizes":"[5, 6, 7, 8, 8.5, 9.5, 10, 11]",
       "sale":"N",
       "colour":"Black",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.zalando.co.uk/florsheim-picasso-slip-ons-fl312c000-g11.html",
@@ -1204,7 +1204,7 @@
       "sizes":"[5, 6, 7, 8, 8.5, 9.5, 10, 11]",
       "sale":"N",
       "colour":"Wine",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.zalando.co.uk/bugatti-morino-lace-ups-cognac-bu112m06h-o11.html",
@@ -1221,7 +1221,7 @@
       "sizes":"[5, 6, 7, 8, 8.5, 9.5, 10, 11]",
       "sale":"Y",
       "colour":"Cognac",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.zalando.co.uk/madden-by-steve-madden-nytro-lace-ups-cognac-m2y12m013-o11.html",
@@ -1238,7 +1238,7 @@
       "sizes":"[5, 6, 7, 8, 8.5, 9.5, 10, 11]",
       "sale":"Y",
       "colour":"Cognac",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.zalando.co.uk/ugg-ascot-slippers-ug112i00i-o12.html",
@@ -1255,7 +1255,7 @@
       "sizes":"[5, 6, 7, 8, 8.5, 9.5, 10, 11]",
       "sale":"N",
       "colour":"Cognac",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.zalando.co.uk/crocs-slippers-nautical-navy-oatmeal-cr415i000-k12.html",
@@ -1272,7 +1272,7 @@
       "sizes":"[5, 6, 7, 8, 8.5, 9.5, 10, 11]",
       "sale":"N",
       "colour":"Navy",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.zalando.co.uk/andres-machado-unisex-slippers-gris-a3215i00t-c11.html",
@@ -1289,7 +1289,7 @@
       "sizes":"[5, 6, 7, 8, 8.5, 9.5, 10, 11]",
       "sale":"N",
       "colour":"Grey",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/grey-new-balance-1500-made-in-uk/16085693/",
@@ -1306,7 +1306,7 @@
       "sizes":"[5, 6.5, 7, 8, 8.5, 9.5, 10, 11, 11.5, 12]",
       "sale":"N",
       "colour":"Grey",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/white-nike-sb-blazer-mid-edge/16079406/",
@@ -1323,7 +1323,7 @@
       "sizes":"[5, 6.5, 7, 8, 8.5, 9.5, 10, 11, 11.5, 12]",
       "sale":"N",
       "colour":"White",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/white-nike-sb-blazer-court/16080288/",
@@ -1340,7 +1340,7 @@
       "sizes":"[5, 6.5, 7, 8, 8.5, 9.5, 10, 11, 11.5, 12]",
       "sale":"N",
       "colour":"White",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/black-nike-air-presto/16070653/",
@@ -1357,7 +1357,7 @@
       "sizes":"[5, 6.5, 7, 8, 8.5, 9.5, 10, 11, 11.5, 12]",
       "sale":"N",
       "colour":"Black",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/black-adidas-originals-3-stripes-fleece-shorts/1176904/",
@@ -1374,7 +1374,7 @@
       "sizes":"[XS, S, M, L, XL]",
       "sale":"N",
       "colour":"Blue",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/yellow-adidas-originals-adiplore-woven-shorts/15991687/",
@@ -1391,7 +1391,7 @@
       "sizes":"[XS, S, M, L, XL]",
       "sale":"N",
       "colour":"Yellow",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.zalando.co.uk/jack-and-jones-jjirick-jjicon-denim-shorts-blue-denim-ja222f0ml-k11.html",
@@ -1408,7 +1408,7 @@
       "sizes":"[XS, S, M, L, XL]",
       "sale":"N",
       "colour":"Denim",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.zalando.co.uk/gant-relaxed-shorts-ga322f03l-n11.html",
@@ -1425,7 +1425,7 @@
       "sizes":"[XS, S, M, L, XL]",
       "sale":"N",
       "colour":"Khaki",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://oliverspencer.co.uk/products/house-jersey-shorts-milner-midnight",
@@ -1442,7 +1442,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"N",
       "colour":"Navy",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.next.co.uk/style/st774130/566115#566115",
@@ -1459,7 +1459,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"N",
       "colour":"Sky Blue",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/multi-adidas-originals-crew-socks-3-pairs/16080205/",
@@ -1476,7 +1476,7 @@
       "sizes":"[2.5-5, 5.5-8, 8.5-11]",
       "sale":"N",
       "colour":"Multi",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/white-nike-3-pack-everyday-essential-socks/342125/",
@@ -1493,7 +1493,7 @@
       "sizes":"[2.5-5, 5.5-8, 8.5-11]",
       "sale":"N",
       "colour":"White",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/white-nike-3-pack-quarter-low-socks/1027369/",
@@ -1510,7 +1510,7 @@
       "sizes":"[2.5-5, 5.5-8, 8.5-11]",
       "sale":"N",
       "colour":"White",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.ellesse.com/uk/en/womens-underwear-socks/p/pullo-3-pack-socks-white",
@@ -1527,7 +1527,7 @@
       "sizes":"[2.5-5, 5.5-8, 8.5-11]",
       "sale":"N",
       "colour":"White",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.zalando.co.uk/oneill-mini-palms-swimming-shorts-blueyellow-on582h02m-k11.html",
@@ -1544,7 +1544,7 @@
       "sizes":"[XS, S, M, L, XL, XXL]",
       "sale":"Y",
       "colour":"Blue",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.zalando.co.uk/adidas-originals-swimming-shorts-red-ad182h00m-g11.html",
@@ -1561,7 +1561,7 @@
       "sizes":"[XS, S, M, L, XL, XXL]",
       "sale":"N",
       "colour":"Red",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.zalando.co.uk/hollister-co-solid-guard-swimming-shorts-navy-h0482h007-k11.html",
@@ -1578,7 +1578,7 @@
       "sizes":"[XS, S, M, L, XL, XXL]",
       "sale":"N",
       "colour":"Navy",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.zalando.co.uk/quiksilver-swimming-shorts-fjord-blue-qu182h06t-k11.html",
@@ -1595,7 +1595,7 @@
       "sizes":"[XS, S, M, L, XL, XXL]",
       "sale":"N",
       "colour":"Multi",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.next.co.uk/style/st462151/383403#383403",
@@ -1612,7 +1612,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"N",
       "colour":"Navy",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.next.co.uk/style/st543366/755290#755290",
@@ -1629,7 +1629,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"N",
       "colour":"Navy",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/black-nike-sb-dragon-t-shirt/16085659/",
@@ -1646,7 +1646,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"N",
       "colour":"Black",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/white-nike-court-tennis-slam-t-shirt/16070904/",
@@ -1663,7 +1663,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"N",
       "colour":"White",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/black-carhartt-denton-t-shirt/16072708/",
@@ -1680,7 +1680,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"N",
       "colour":"Black",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/purple-nike-sportswear-club-t-shirt/16080489/",
@@ -1697,7 +1697,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"N",
       "colour":"Purple",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.ellesse.com/uk/en/mclothing/p/tonaca-ls-tee-shirt-white",
@@ -1714,7 +1714,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"Y",
       "colour":"White",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.dickieslife.com/uk_en/dickies-porterdale-men-s-short-sleeved-t-shirt-0a4tmo-coral-blue",
@@ -1731,7 +1731,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"Y",
       "colour":"Blue",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/yellow-nike-nocta-fleece-pant/16077887/",
@@ -1748,7 +1748,7 @@
       "sizes":"[XS, S, M, L, X, XL]",
       "sale":"N",
       "colour":"Yellow",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/black-adidas-originals-ss-track-pants-mens/15991764/",
@@ -1765,7 +1765,7 @@
       "sizes":"[XS, S, M, L, X, XL]",
       "sale":"N",
       "colour":"Black",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/red-jordan-flight-joggers/16077881/",
@@ -1782,7 +1782,7 @@
       "sizes":"[XS, S, M, L, X, XL]",
       "sale":"N",
       "colour":"Red",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/grey-nike-foundation-fleece-joggers/149946/",
@@ -1799,7 +1799,7 @@
       "sizes":"[XS, S, M, L, X, XL]",
       "sale":"N",
       "colour":"Grey",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.dickieslife.com/uk_en/dickies-bienville-sweatpant-0a4x5g-navy-blue",
@@ -1816,7 +1816,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"Y",
       "colour":"Navy",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.lacoste.com/gb/lacoste/men/clothing/trousers-shorts/men%27s-lacoste-sport-cotton-fleece-tennis-sweatpants/XH9507-00.html?color=QPT",
@@ -1833,7 +1833,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"N",
       "colour":"Blue",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/green-dickies-874-work-pant/16066822/",
@@ -1850,7 +1850,7 @@
       "sizes":"[28R, 30R, 32R, 36R]",
       "sale":"N",
       "colour":"Brown",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/brown-carhartt-wip-abbott-pant/15679461/",
@@ -1867,7 +1867,7 @@
       "sizes":"[28R, 30R, 32R, 36R]",
       "sale":"N",
       "colour":"Brown",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.zalando.co.uk/selected-homme-shhyard-chinos-dark-sapphire-se622e02o-k11.html",
@@ -1884,7 +1884,7 @@
       "sizes":"[28R, 30R, 32R, 36R]",
       "sale":"N",
       "colour":"Navy",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.zalando.co.uk/tommy-hilfiger-denton-chinos-to122e01w-q11.html",
@@ -1901,7 +1901,7 @@
       "sizes":"[28R, 30R, 32R, 34R]",
       "sale":"N",
       "colour":"Grey",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.lacoste.com/gb/lacoste/men/clothing/trousers-shorts/chinos/men%27s-slim-fit-stretch-gabardine-chino-pants/HH9553-00.html?color=031",
@@ -1918,7 +1918,7 @@
       "sizes":"[28R, 30R, 32R, 34R]",
       "sale":"N",
       "colour":"Blue",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://oliverspencer.co.uk/collections/trousers-and-chinos/products/judo-trousers-rushmore-navy",
@@ -1935,7 +1935,7 @@
       "sizes":"[S, M, L, XL]",
       "sale":"N",
       "colour":"Navy",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.ralphlauren.co.uk/en/stretch-straight-fit-chino-trouser-407010.html?dwvar407010_colorname=Aviator%20Navy&cgid=men-clothing-trousers&webcat=search#prefn1=CategoryCode&prefv1=Chino&start=1&cgid=men-clothing-trousers",
@@ -1952,7 +1952,7 @@
       "sizes":"[28R, 30R, 32R, 34R]",
       "sale":"N",
       "colour":"Navy",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/grey-calvin-klein-underwear-3-pack-trunks/044657/",
@@ -1969,7 +1969,7 @@
       "sizes":"[XS, S, M, L, XL, XXL]",
       "sale":"N",
       "colour":"White",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/blue-nike-3-pack-boxers/16033172/",
@@ -1986,7 +1986,7 @@
       "sizes":"[XS, S, M, L, XL, XXL]",
       "sale":"N",
       "colour":"Multi",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.size.co.uk/product/grey-stance-og-boxer-brief/16067006/",
@@ -2003,7 +2003,7 @@
       "sizes":"[XS, S, M, L, XL, XXL]",
       "sale":"N",
       "colour":"Grey",
-      "gender":"Male"
+      "gender":"m"
    },
    {
       "link":"https://www.ralphlauren.co.uk/en/cotton-boxer-3-pack-573853.html?dwvar573853_colorname=Mad%20Strp%2FRay%20Pld%2FCrs%20Nvy&webcat=search#lang=en_GB&q=underwear&start=1",
@@ -2020,6 +2020,1434 @@
       "sizes":"[S, M, L, XL]",
       "sale":"N",
       "colour":"Multi",
-      "gender":"Male"
+      "gender":"m"
+   },
+   {
+      "link":"https://www.zalando.co.uk/valentino-by-mario-valentino-filippo-briefcase-5va52h00e-o12.html",
+      "sku":"p0120",
+      "name":"FILIPPO - Briefcase",
+      "category":"Accessories",
+      "sub_category":"Bags & Purses",
+      "brand":"Valentino Bags",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/97e7644a60093c5b8517a2c2dc9560e7/bba61b57758e412ebd08b51c4053f223.jpg?imwidth=1800",
+      "price":99.99,
+      "full_price":99.99,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/97e7644a60093c5b8517a2c2dc9560e7/bba61b57758e412ebd08b51c4053f223.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/c75ea9dac75134db99db36651816304d/95ffb2aedaf249c2bcaa3133e78f7dbe.jpg?imwidth=762&filter=packshot\", \"https://img01.ztat.net/article/spp-media-p1/bbc706125fee3d33a03a9ad60be893e5/f8a056f8e9c545178e971f74c5783b0e.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/42a4263c69fe38b4b43b6d2f725c7beb/c2b573c48fad4e2a92b8b20df1b2f05d.jpg?imwidth=1800\"]",
+      "sizes":"-",
+      "sale":"N",
+      "colour":"Brown",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/aldo-weevils-handbag-black-a0151h0mv-q11.html",
+      "sku":"p0121",
+      "name":"WEEVILS - Handbag",
+      "category":"Accessories",
+      "sub_category":"Bags & Purses",
+      "brand":"Aldo",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/c4b9a98bf55d3fb298c26ea5acff8f7a/890b3fb92fe34997b808dac8e166c8f7.jpg?imwidth=1800&filter=packshot",
+      "price":43.99,
+      "full_price":43.99,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/c4b9a98bf55d3fb298c26ea5acff8f7a/890b3fb92fe34997b808dac8e166c8f7.jpg?imwidth=1800&filter=packshot\", \"https://img01.ztat.net/article/spp-media-p1/dc477b25b4e73a0cbcbf82187e84f43d/b2266f5d39334393a1e81d36df23ae44.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/63064325d5e23ea3b781042f0fae60b1/ee74f2231e064ec381e0e2907c59213a.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/78ec45fc3fe23a8792068a832c7e38b4/3c63c6e85d654bad81413b9ddbfde272.jpg?imwidth=1800\"]",
+      "sizes":"-",
+      "sale":"N",
+      "colour":"Black",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/coach-excl-rexy-and-carriage-mini-id-wallet-black-coh51f04l-q11.html",
+      "sku":"p0122",
+      "name":"EXCL REXY AND CARRIAGE MINI ID - Wallet",
+      "category":"Accessories",
+      "sub_category":"Bags & Purses",
+      "brand":"Coach",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/60e9a5ec69b53761994466b12723783f/f43b6eda833846d2ab13b6f090a7dce0.jpg?imwidth=1800&filter=packshot",
+      "price":74.99,
+      "full_price":74.99,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/60e9a5ec69b53761994466b12723783f/f43b6eda833846d2ab13b6f090a7dce0.jpg?imwidth=1800&filter=packshot\", \"https://img01.ztat.net/article/spp-media-p1/5e8cb314d4d83518bbb502bc6de19955/dae1eeef1fb345899cc00cb502459c41.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/e7525862fa113e20a060784708f30ccb/59d624ffd3124308b0ddac6cb5be699f.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/47d8e52306363ec29d5a59c5346efca1/f9fc2f892c2e48c482fe7f1318c764f7.jpg?imwidth=1800\"]",
+      "sizes":"-",
+      "sale":"N",
+      "colour":"Black",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/pieces-pcmatty-cross-body-key-handbag-mint-pe351h0zh-m11.html",
+      "sku":"p0123",
+      "name":"PCMATTY CROSS BODY KEY - Across body bag",
+      "category":"Accessories",
+      "sub_category":"Bags & Purses",
+      "brand":"Pieces",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/1ea41c8ceba63bff9c1a8ae9a4229cc3/74f5ce6d01ff42adae3772c4d8a140a6.jpg?imwidth=1800",
+      "price":19.0,
+      "full_price":37.99,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/1ea41c8ceba63bff9c1a8ae9a4229cc3/74f5ce6d01ff42adae3772c4d8a140a6.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/c11422709c4d343cb1756f2a14b012fe/a96c0d13d3b84f268f0eb64d677f8aef.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/eb98b673f6973ff09d25e87f73d88bb5/6e781681e72a4d17a08f1dd2939510a3.jpg?imwidth=1800&filter=packshot\", \"https://img01.ztat.net/article/spp-media-p1/bbeb4c5a6c023f60a4a440c5a0e109d2/0091d0b8bd5747a1848ea84d10302ba6.jpg?imwidth=1800\"]",
+      "sizes":"-",
+      "sale":"Y",
+      "colour":"Mint",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/pieces-pcanie-waist-belt-belt-bright-white-pe351d086-a11.html",
+      "sku":"p0124",
+      "name":"PCANIE WAIST BELT - Belt",
+      "category":"Accessories",
+      "sub_category":"Belts",
+      "brand":"Pieces",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/2b0e3ac2f8ef3ffaa6c62108b5a0e9ef/cafb73aac9df47c4bdf0f81ccab8e2ba.jpg?imwidth=1800&filter=packshot",
+      "price":12.99,
+      "full_price":12.99,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/2b0e3ac2f8ef3ffaa6c62108b5a0e9ef/cafb73aac9df47c4bdf0f81ccab8e2ba.jpg?imwidth=1800&filter=packshot\", \"https://img01.ztat.net/article/spp-media-p1/ac5b77032aa63af9ad28b18e0d126023/370a801a49284df7846abd3f12b04832.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/f496812726423dddaeef391aad8bb9d8/bdcd70f153594842871ddfaf2d53950c.jpg?imwidth=1800\"]",
+      "sizes":"[28, 30, 32]",
+      "sale":"N",
+      "colour":"White",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/the-kooples-waist-belt-black-tha51d01o-q11.html",
+      "sku":"p0125",
+      "name":"Waist belt",
+      "category":"Accessories",
+      "sub_category":"Belts",
+      "brand":"The Kooples",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/6769e6823bf73a43b900fba1b2cb79b6/e9d22678d74c493ea039878e3ef484c7.jpg?imwidth=1800",
+      "price":129.99,
+      "full_price":129.99,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/6769e6823bf73a43b900fba1b2cb79b6/e9d22678d74c493ea039878e3ef484c7.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/742fb8e2abff351ea18e64ebe53d2afe/6c32b4477c094092a1a703b67c7725b1.jpg?imwidth=1800&filter=packshot\", \"https://img01.ztat.net/article/spp-media-p1/bd052cd51b5b30c3bed8673a3e1576be/8f45e5c3e14c40bf8119b881c86e9b55.jpg?imwidth=1800\"]",
+      "sizes":"[28, 30, 32]",
+      "sale":"N",
+      "colour":"Black",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/pieces-pckarin-waist-belt-belt-black-pe351d08e-q11.html",
+      "sku":"p0126",
+      "name":"PCKARIN WAIST BELT - Belt",
+      "category":"Accessories",
+      "sub_category":"Belts",
+      "brand":"Pieces",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/e29d6ad3a3d5395d92493e66b97e40c9/6ac6769a554042cd8ab53bb5f67285b2.jpg?imwidth=1800&filter=packshot",
+      "price":11.04,
+      "full_price":12.99,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/e29d6ad3a3d5395d92493e66b97e40c9/6ac6769a554042cd8ab53bb5f67285b2.jpg?imwidth=1800&filter=packshot\", \"https://img01.ztat.net/article/spp-media-p1/f7855564c1e23093802fa9c907274387/86b860e7dd084cc885a7379b1aaef9d2.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/28a83b64b67a3bf89c4f56d29a145708/8ed6446e3af74524908f6989dc1dca3a.jpg?imwidth=1800\"]",
+      "sizes":"[28, 30, 32]",
+      "sale":"N",
+      "colour":"Black",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.farfetch.com/uk/shopping/women/npeal-short-leather-gloves-item-14457746.aspx?storeid=9969",
+      "sku":"p0127",
+      "name":"short leather gloves",
+      "category":"Accessories",
+      "sub_category":"Gloves",
+      "brand":"N.Peal",
+      "thumbnail":"https://cdn-images.farfetch-contents.com/14/45/77/46/14457746_22541109_480.jpg",
+      "price":129.0,
+      "full_price":129.0,
+      "description":"Brown leather short leather gloves from N.Peal featuring a slip-on style and a knitted cashmere lining",
+      "images":"[\"https://cdn-images.farfetch-contents.com/14/45/77/46/14457746_22541109_480.jpg\", \"https://cdn-images.farfetch-contents.com/14/45/77/46/14457746_22541111_1000.jpg\"]",
+      "sizes":"[7, 7.5, 8]",
+      "sale":"N",
+      "colour":"Brown",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.houseoffraser.co.uk/brand/ugg/shorty-trim-gloves-907386#colcode=90738605",
+      "sku":"p0128",
+      "name":"Shorty Trim Gloves",
+      "category":"Accessories",
+      "sub_category":"Gloves",
+      "brand":"UGG",
+      "thumbnail":"https://images.houseoffraser.co.uk/images/imgzoom/90/90738605_xxl.jpg",
+      "price":110.0,
+      "full_price":110.0,
+      "description":"These UGG Shorty Trim Gloves have been crafted with a shearling lining for maximum warmth, whilst the smooth suede leather outer with fur trim delivers a luxurious look.",
+      "images":"[\"https://images.houseoffraser.co.uk/images/imgzoom/90/90738605_xxl.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/90/90738605_xxl_a1.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/90/90738605_xxl_a2.jpg\"]",
+      "sizes":"[7, 7.5, 8]",
+      "sale":"N",
+      "colour":"Chestnut",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.houseoffraser.co.uk/brand/the-north-face/e-tip-recycled-gloves-760103#colcode=76010303",
+      "sku":"p0129",
+      "name":"E tip Recycled Gloves",
+      "category":"Accessories",
+      "sub_category":"Gloves",
+      "brand":"The North Face",
+      "thumbnail":"https://images.houseoffraser.co.uk/images/imgzoom/76/76010303_xxl.jpg",
+      "price":35.0,
+      "full_price":35.0,
+      "description":"Made from sustainable stretchy fabric, the Etip Gloves are ideal for everyday use, perfect for on the go people and out door lovers. The e-tips enable you to still use your smart phones meaning your hands will remain warm and cosy throughout the day without being exposed to the cold temperatures. Finished with The North Face branding for brand recognition.",
+      "images":"[\"https://images.houseoffraser.co.uk/images/imgzoom/76/76010303_xxl.jpg\"]",
+      "sizes":"[7, 7.5, 8]",
+      "sale":"N",
+      "colour":"Black",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.farfetch.com/uk/shopping/women/moncler-knitted-logo-patch-beanie-item-15520928.aspx?storeid=12448",
+      "sku":"p0130",
+      "name":"knitted logo patch beanie",
+      "category":"Accessories",
+      "sub_category":"Hats",
+      "brand":"Moncler",
+      "thumbnail":"https://cdn-images.farfetch-contents.com/15/52/09/28/15520928_27890905_1000.jpg",
+      "price":431.0,
+      "full_price":431.0,
+      "description":"Have you got a close relationship with anything knitted? We completely relate. Boasting a compelling logo patch to its front, this Moncler beanie will make your outfit that extra special. From what we're seeing, it worked.",
+      "images":"[\"https://cdn-images.farfetch-contents.com/15/52/09/28/15520928_27890905_1000.jpg\", \"https://cdn-images.farfetch-contents.com/15/52/09/28/15520928_27890904_1000.jpg\"]",
+      "sizes":"-",
+      "sale":"N",
+      "colour":"Pink",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.houseoffraser.co.uk/brand/fred-perry/pique-classic-cap-ym2019#colcode=ym201901",
+      "sku":"p0131",
+      "name":"Pique Classic Cap",
+      "category":"Accessories",
+      "sub_category":"Hats",
+      "brand":"Fred Perry",
+      "thumbnail":"https://images.houseoffraser.co.uk/images/imgzoom/ym/ym201901_xxl.jpg",
+      "price":30.0,
+      "full_price":30.0,
+      "description":"Bring extra style to your accessories repertoire with this pique classic cap from Fred Perry. Punctuated with eyelets and a signature logo, its classic streamlined profile bolsters a curved peak and back strap that can be adjusted to fit. Wear it with a baseball t-shirt and a trainer to complement the daytime look.",
+      "images":"[\"https://images.houseoffraser.co.uk/images/imgzoom/ym/ym201901_xxl.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/ym/ym201901_xxl_a1.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/ym/ym201901_xxl_a2.jpg\"]",
+      "sizes":"-",
+      "sale":"N",
+      "colour":"Navy",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.houseoffraser.co.uk/brand/james-lakeland/fedora-hat-ak1146#colcode=ak114600",
+      "sku":"p0132",
+      "name":"Fedora Hat",
+      "category":"Accessories",
+      "sub_category":"Hats",
+      "brand":"James Lakeland",
+      "thumbnail":"https://images.houseoffraser.co.uk/images/imgzoom/ak/ak114600_xxl.jpg",
+      "price":25.0,
+      "full_price":25.0,
+      "description":"A perfect addition to your accessories collection, this hat will keep you looking cool and chic on the beach or city break and will transcend the seasons with ease.",
+      "images":"[\"https://images.houseoffraser.co.uk/images/imgzoom/ak/ak114600_xxl.jpg\"]",
+      "sizes":"-",
+      "sale":"N",
+      "colour":"Tan",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.houseoffraser.co.uk/brand/barbour/plain-lambswool-scarf-902716#colcode=90271609",
+      "sku":"p0133",
+      "name":"Plain Lambswool Scarf",
+      "category":"Accessories",
+      "sub_category":"Scarves",
+      "brand":"Barbour",
+      "thumbnail":"https://images.houseoffraser.co.uk/images/imgzoom/90/90271609_xxl.jpg",
+      "price":21.0,
+      "full_price":21.0,
+      "description":"This Plain Lambswool Scarf has been crafted with a super soft wool for optimum warmth and comfort. Complete with tassel edges, this scarf is finished with Barbour branding and would make a welcome addition to your winter wardrobe.",
+      "images":"[\"https://images.houseoffraser.co.uk/images/imgzoom/90/90271609_xxl.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/90/90271609_xxl_a1.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/90/90271609_xxl_a3.jpg\"]",
+      "sizes":"-",
+      "sale":"N",
+      "colour":"Burgundy",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.houseoffraser.co.uk/brand/barbour/bli-isla-scarf-ld04-900724#colcode=90072406",
+      "sku":"p0134",
+      "name":"B.Li Isla Scarf Ld04",
+      "category":"Accessories",
+      "sub_category":"Scarves",
+      "brand":"Barbour",
+      "thumbnail":"https://images.houseoffraser.co.uk/images/imgzoom/90/90072406_xxl.jpg",
+      "price":33.0,
+      "full_price":33.0,
+      "description":"[Insert product details]",
+      "images":"[\"https://images.houseoffraser.co.uk/images/imgzoom/90/90072406_xxl.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/90/90072406_xxl_a1.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/90/90072406_xxl_a2.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/90/90072406_xxl_a3.jpg\"]",
+      "sizes":"-",
+      "sale":"N",
+      "colour":"Pink",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.houseoffraser.co.uk/brand/ugg/ugg-boucle-scarf-ld04-902146#colcode=90214604",
+      "sku":"p0135",
+      "name":"UGG Boucle Scarf Ld04",
+      "category":"Accessories",
+      "sub_category":"Scarves",
+      "brand":"UGG",
+      "thumbnail":"https://images.houseoffraser.co.uk/images/imgzoom/90/90214604_xxl.jpg",
+      "price":55.0,
+      "full_price":75.0,
+      "description":"[Insert product details]",
+      "images":"[\"https://images.houseoffraser.co.uk/images/imgzoom/90/90214604_xxl.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/90/90214604_xxl_a1.jpg\"]",
+      "sizes":"-",
+      "sale":"Y",
+      "colour":"Oatmeal",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.houseoffraser.co.uk/brand/ray-ban/havana-rb4380n-phantos-sunglasses-ab1430#colcode=ab143000",
+      "sku":"p0136",
+      "name":"Havana Rb4380N Phantos Sunglasses",
+      "category":"Accessories",
+      "sub_category":"Sunglasses",
+      "brand":"Ray-Ban",
+      "thumbnail":"https://images.houseoffraser.co.uk/images/imgzoom/ab/ab143000_xxl.jpg",
+      "price":149.0,
+      "full_price":149.0,
+      "description":"Ray-Ban unisex havana sunglasses RB4380N featuring phantos frame and brown gradient lenses.",
+      "images":"[\"https://images.houseoffraser.co.uk/images/imgzoom/ab/ab143000_xxl.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/ab/ab143000_xxl_a1.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/ab/ab143000_xxl_a2.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/ab/ab143000_xxl_a3.jpg\"]",
+      "sizes":"-",
+      "sale":"N",
+      "colour":"Bordeaux",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.houseoffraser.co.uk/brand/sunday-somewhere/sunday-somewhere-sunglasses-962160#colcode=96216090",
+      "sku":"p0137",
+      "name":"Sunday Somewhere Sunglasses",
+      "category":"Accessories",
+      "sub_category":"Sunglasses",
+      "brand":"Sunday Somewhere",
+      "thumbnail":"https://images.houseoffraser.co.uk/images/imgzoom/96/96216090_xxl.jpg",
+      "price":85.0,
+      "full_price":85.0,
+      "description":"[Insert product details]",
+      "images":"[\"https://images.houseoffraser.co.uk/images/imgzoom/96/96216090_xxl.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/96/96216090_xxl_a1.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/96/96216090_xxl_a2.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/96/96216090_xxl_a3.jpg\"]",
+      "sizes":"-",
+      "sale":"N",
+      "colour":"Multi",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.houseoffraser.co.uk/brand/hackett/sunglasses-963212#colcode=96321222",
+      "sku":"p0138",
+      "name":"Sunglasses",
+      "category":"Accessories",
+      "sub_category":"Sunglasses",
+      "brand":"Hackett",
+      "thumbnail":"https://images.houseoffraser.co.uk/images/imgzoom/96/96321222_xxl.jpg",
+      "price":70.0,
+      "full_price":70.0,
+      "description":"The lenses, the spring hinges, the acetates; every gram of each Hackett Bespoke Sunglasses has been carefully handcrafted using only the finest parts, materials and techniques. Whilst colouration is classical, the styling is never old fashioned. The fit is immaculate, the finishes impeccable; this is great British eyewear at its most authentic.",
+      "images":"[\"https://images.houseoffraser.co.uk/images/imgzoom/96/96321222_xxl.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/96/96321222_xxl_a1.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/96/96321222_xxl_a2.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/96/96321222_xxl_a3.jpg\"]",
+      "sizes":"-",
+      "sale":"N",
+      "colour":"Navy",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.houseoffraser.co.uk/brand/ray-ban/black-rb2448nm-square-sunglasses-yl8542#colcode=yl854200",
+      "sku":"p0139",
+      "name":"Black RB2448NM square sunglasses",
+      "category":"Accessories",
+      "sub_category":"Sunglasses",
+      "brand":"Ray-Ban",
+      "thumbnail":"https://images.houseoffraser.co.uk/images/imgzoom/yl/yl854200_xxl.jpg",
+      "price":212.0,
+      "full_price":212.0,
+      "description":"Elegantly round-off any look with these black Rb2448nm square sunglasses by Ray-Ban. Boasting blue gradient lenses and contrast arms, they are finished with branded detailing for instant recognition. Encased in a sleek case, they will keep the mid-day sun at bay without compromising on style.",
+      "images":"[\"https://images.houseoffraser.co.uk/images/imgzoom/yl/yl854200_xxl.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/yl/yl854200_xxl_a1.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/yl/yl854200_xxl_a2.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/yl/yl854200_xxl_a3.jpg\"]",
+      "sizes":"-",
+      "sale":"N",
+      "colour":"Black",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.houseoffraser.co.uk/brand/barbour/nelson-quilted-jacket-662447#colcode=66244715",
+      "sku":"p0140",
+      "name":"Nelson Quilted Jacket",
+      "category":"Jackets & Coats",
+      "sub_category":"-",
+      "brand":"Barbour",
+      "thumbnail":"https://images.houseoffraser.co.uk/images/imgzoom/66/66244715_xxl_a1.jpg",
+      "price":169.0,
+      "full_price":169.0,
+      "description":"Cut from a lightweight quilted fabric, this tailored style jacket is perfect to add a classic look to any casual outfit. Styled with oversized button fastenings, bound edges and side pockets, the jacket boasts tabs to the sides for easy adjustment.",
+      "images":"[\"https://images.houseoffraser.co.uk/images/imgzoom/66/66244715_xxl_a1.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/66/66244715_xxl_a2.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/66/66244715_xxl_a3.jpg\"]",
+      "sizes":"[XS, S, M, L, XL]",
+      "sale":"N",
+      "colour":"Olive",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.houseoffraser.co.uk/brand/michael-michael-kors/belted-puffer-jacket-668740#colcode=66874003",
+      "sku":"p0141",
+      "name":"Belted Puffer Jacket",
+      "category":"Jackets & Coats",
+      "sub_category":"-",
+      "brand":"Michael Kors",
+      "thumbnail":"https://images.houseoffraser.co.uk/images/imgzoom/66/66874003_xxl_a1.jpg",
+      "price":200.0,
+      "full_price":250.0,
+      "description":"[Insert product details]",
+      "images":"[\"https://images.houseoffraser.co.uk/images/imgzoom/66/66874003_xxl_a1.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/66/66874003_xxl_a2.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/66/66874003_xxl_a3.jpg\"]",
+      "sizes":"[XS, S, M, L, XL]",
+      "sale":"Y",
+      "colour":"Black",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.houseoffraser.co.uk/brand/barbour/murrelet-quilted-jacket-666325#colcode=66632508",
+      "sku":"p0142",
+      "name":"Murrelet Quilted Jacket",
+      "category":"Jackets & Coats",
+      "sub_category":"-",
+      "brand":"Barbour",
+      "thumbnail":"https://images.houseoffraser.co.uk/images/imgzoom/66/66632508_xxl_a1.jpg",
+      "price":119.0,
+      "full_price":169.0,
+      "description":"[Insert product details]",
+      "images":"[\"https://images.houseoffraser.co.uk/images/imgzoom/66/66632508_xxl_a1.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/66/66632508_xxl_a2.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/66/66632508_xxl_a3.jpg\"]",
+      "sizes":"[XS, S, M, L, XL]",
+      "sale":"Y",
+      "colour":"Red",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/massimo-dutti-light-jacket-red-m3i21g09l-g11.html",
+      "sku":"p0143",
+      "name":"Winter jacket",
+      "category":"Jackets & Coats",
+      "sub_category":"-",
+      "brand":"Massimo Dutti",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/9cd9d8c549283b05a0aee8941d1a71bd/fc58b6a764a741c68bd176f385097b5b.jpg?imwidth=762",
+      "price":89.95,
+      "full_price":129.0,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/9cd9d8c549283b05a0aee8941d1a71bd/fc58b6a764a741c68bd176f385097b5b.jpg?imwidth=762\", \"https://img01.ztat.net/article/spp-media-p1/99818123042c33d99d912a07e4a34df0/f146e0fc99854aa9a8472dfdd8348fc6.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/1f0795250a693dd3bb3818746b6d75f7/875d07be0167453a9332cd106108a527.jpg?imwidth=1800\"]",
+      "sizes":"[XS, S, M, L, XL]",
+      "sale":"Y",
+      "colour":"Red",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/kaffe-sara-shift-dress-ka321c06c-k11.html",
+      "sku":"p0144",
+      "name":"SARA DRESS - Shift dress",
+      "category":"Dresses",
+      "sub_category":"-",
+      "brand":"Kaffe",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/097ed5dc0f4c3095bb7ba32f37977ebd/7812461ac75f469caff167519a97f00e.jpg?imwidth=1800",
+      "price":58.49,
+      "full_price":64.99,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/097ed5dc0f4c3095bb7ba32f37977ebd/7812461ac75f469caff167519a97f00e.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/04e237c87b8e3f988f6f70e45520ebaa/629b8d1b560d4408a69be34f90eb931c.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/d98c45d98c0d32b8b87e0bf3c9c82dae/3776a423b9a7479ea6d1bc99bcc37d8a.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/f8ca3264cd963b64b6b99f1908622e45/f8cb3f80157b4ada93baa659b14e91fc.jpg?imwidth=1800\"]",
+      "sizes":"[XS, S, M, L, XL]",
+      "sale":"Y",
+      "colour":"Navy",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/massimo-dutti-day-dress-dark-grey-m3i21c0dd-c11.html",
+      "sku":"p0145",
+      "name":"Day dress",
+      "category":"Dresses",
+      "sub_category":"-",
+      "brand":"Massimo Dutti",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/cfd88f24c0db429b9fb812cffd9cbd8f/220d0abab773433190ff78f9dc9f8953.jpg?imwidth=1800",
+      "price":99.95,
+      "full_price":99.95,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/cfd88f24c0db429b9fb812cffd9cbd8f/220d0abab773433190ff78f9dc9f8953.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/8c885071f98c415393992d1398a58726/7a1fcc7b4e2a478fa8da40c51881d302.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/f4d7f5ef0f4e48d8a4662f9e6772fddd/98f08075eb4c4175b497e90cce98e5c7.jpg?imwidth=1800&filter=packshot\"]",
+      "sizes":"[XS, S, M, L, XL]",
+      "sale":"N",
+      "colour":"Grey",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.houseoffraser.co.uk/brand/lauren-by-ralph-lauren/lrl-jaden-ss-dress-ld12-659249#colcode=65924903",
+      "sku":"p0146",
+      "name":"LRL Jaden SS Dress Ld12",
+      "category":"Dresses",
+      "sub_category":"-",
+      "brand":"Ralph Lauren",
+      "thumbnail":"https://images.houseoffraser.co.uk/images/imgzoom/65/65924903_xxl_a1.jpg",
+      "price":149.0,
+      "full_price":149.0,
+      "description":"[Insert product details]",
+      "images":"[\"https://images.houseoffraser.co.uk/images/imgzoom/65/65924903_xxl_a1.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/65/65924903_xxl_a2.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/65/65924903_xxl_a3.jpg\"]",
+      "sizes":"[XS, S, M, L, XL]",
+      "sale":"N",
+      "colour":"Black",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.houseoffraser.co.uk/brand/ted-baker/faustaa-tie-waist-knit-midi-dress-al7408#colcode=al740800",
+      "sku":"p0147",
+      "name":"Faustaa Tie Waist Knit Midi Dress",
+      "category":"Dresses",
+      "sub_category":"-",
+      "brand":"Ted Baker",
+      "thumbnail":"https://images.houseoffraser.co.uk/images/imgzoom/al/al740800_xxl_a1.jpg",
+      "price":149.0,
+      "full_price":149.0,
+      "description":"[Insert product details]",
+      "images":"[\"https://images.houseoffraser.co.uk/images/imgzoom/al/al740800_xxl_a1.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/al/al740800_xxl_a2.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/al/al740800_xxl_a3.jpg\"]",
+      "sizes":"[XS, S, M, L, XL]",
+      "sale":"N",
+      "colour":"Black",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.size.co.uk/product/black-adidas-originals-polar-fleece-track-top/16035935/",
+      "sku":"p0148",
+      "name":"adidas Originals Polar Fleece Track Top",
+      "category":"Hoodies & Sweatshirts",
+      "sub_category":"-",
+      "brand":"Adidas",
+      "thumbnail":"https://i8.amplience.net/i/jpl/sz_375021_a?qlt=92&w=750&h=580&v=1%201x,%20https://i8.amplience.net/i/jpl/sz_375021_a?qlt=92&w=950&h=735&v=1%202x,%20https://i8.amplience.net/i/jpl/sz_375021_a?qlt=92&w=1200&h=929&v=1%203x",
+      "price":75.0,
+      "full_price":75.0,
+      "description":"This jacket is ideal for winter sports or for wearing on casual getups; crafted with premium recycled fleece, the track top is perfect for chilly days, and classic Trefoil branding on the front and reverse lets you represent this classic logo in style. A zip closure at the front allows you to alter the style of the jacket and ribbed cuffs trap heat to keep you nice and toasty.",
+      "images":"[\"https://i8.amplience.net/i/jpl/sz_375021_a?qlt=92&w=750&h=580&v=1%201x,%20https://i8.amplience.net/i/jpl/sz_375021_a?qlt=92&w=950&h=735&v=1%202x,%20https://i8.amplience.net/i/jpl/sz_375021_a?qlt=92&w=1200&h=929&v=1%203x\", \"https://i8.amplience.net/i/jpl/sz_375021_b?qlt=92&w=750&h=580&v=1\", \"https://i8.amplience.net/i/jpl/sz_375021_c?qlt=92&w=750&h=580&v=1\"]",
+      "sizes":"[S, M, L, XL]",
+      "sale":"N",
+      "colour":"Black",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.size.co.uk/product/black-stussy-basic-logo-hoodie-womens/16045692/",
+      "sku":"p0149",
+      "name":"Stussy Basic Logo Hoodie Women's",
+      "category":"Hoodies & Sweatshirts",
+      "sub_category":"-",
+      "brand":"Stussy",
+      "thumbnail":"https://i8.amplience.net/i/jpl/sz_375621_a?qlt=92&w=750&h=580&v=1%201x,%20https://i8.amplience.net/i/jpl/sz_375621_a?qlt=92&w=950&h=735&v=1%202x,%20https://i8.amplience.net/i/jpl/sz_375621_a?qlt=92&w=1200&h=929&v=1%203x",
+      "price":90.0,
+      "full_price":90.0,
+      "description":"This Stussy hoodie is effortlessly stylish with its simple approach, with its bold black colourway and vibrant blue branding to the chest. Ideal for layering and matching with other apparel, it is also highly comfortable with a toasty adjustable hood and premium cotton fabric.",
+      "images":"[\"https://i8.amplience.net/i/jpl/sz_375621_a?qlt=92&w=750&h=580&v=1%201x,%20https://i8.amplience.net/i/jpl/sz_375621_a?qlt=92&w=950&h=735&v=1%202x,%20https://i8.amplience.net/i/jpl/sz_375621_a?qlt=92&w=1200&h=929&v=1%203x\", \"https://i8.amplience.net/i/jpl/sz_375621_b?qlt=92&w=750&h=580&v=1\", \"https://i8.amplience.net/i/jpl/sz_375621_d?qlt=92&w=750&h=580&v=1\"]",
+      "sizes":"[S, M, L, XL]",
+      "sale":"N",
+      "colour":"Black",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.size.co.uk/product/black-carhartt-wip-carhartt-sweatshirt/15987888/",
+      "sku":"p0150",
+      "name":"Carhartt WIP Carhartt Sweatshirt",
+      "category":"Hoodies & Sweatshirts",
+      "sub_category":"-",
+      "brand":"Carhartt",
+      "thumbnail":"https://i8.amplience.net/i/jpl/sz_377265_a?qlt=92&w=750&h=580&v=1%201x,%20https://i8.amplience.net/i/jpl/sz_377265_a?qlt=92&w=950&h=735&v=1%202x,%20https://i8.amplience.net/i/jpl/sz_377265_a?qlt=92&w=1200&h=929&v=1%203x",
+      "price":80.0,
+      "full_price":80.0,
+      "description":"This everyday sweatshirt from Carhartt WIP is spun from 9.1oz cotton to wrap your upper in cosy comfort all day long. It's rounded off with branding across the chest for a signature finish.",
+      "images":"[\"https://i8.amplience.net/i/jpl/sz_377265_a?qlt=92&w=750&h=580&v=1%201x,%20https://i8.amplience.net/i/jpl/sz_377265_a?qlt=92&w=950&h=735&v=1%202x,%20https://i8.amplience.net/i/jpl/sz_377265_a?qlt=92&w=1200&h=929&v=1%203x\", \"https://i8.amplience.net/i/jpl/sz_377265_b?qlt=92&w=750&h=580&v=1\", \"https://i8.amplience.net/i/jpl/sz_377265_c?qlt=92&w=750&h=580&v=1\"]",
+      "sizes":"[S, M, L, XL]",
+      "sale":"N",
+      "colour":"Black",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/pepe-jeans-holly-straight-leg-jeans-pe121n0g2-k13.html",
+      "sku":"p0151",
+      "name":"HOLLY - Straight leg jeans",
+      "category":"Jeans",
+      "sub_category":"-",
+      "brand":"Pepe Jeans",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/13d5d0af736d36cda873e21ab894e709/beecf73b5ef24bb0913dfa21e2c4efdc.jpg?imwidth=1800",
+      "price":64.99,
+      "full_price":64.99,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/13d5d0af736d36cda873e21ab894e709/beecf73b5ef24bb0913dfa21e2c4efdc.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/3c4b57cef7b13e168fd043f3a39e52c9/5093a9bc89b14a51b4b322c900c801a6.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/efed3ee85c573687815513da867f5a0e/bdc671de817f435aac05d9daabafb9a4.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/72ef32f6cea43ebbb1fd6aaa9bf80cb8/aa435891cc9b469aa33c0e585e90b73d.jpg?imwidth=1800&filter=packshot\"]",
+      "sizes":"[24x30, 25x32, 28x30, 29x34]",
+      "sale":"N",
+      "colour":"Denim",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/tommy-hilfiger-como-doreen-jeans-skinny-fit-doreen-to121n07g-k11.html",
+      "sku":"p0152",
+      "name":"COMO DOREEN - Jeans Skinny Fit",
+      "category":"Jeans",
+      "sub_category":"-",
+      "brand":"Tommy Hilfiger",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/dddd5ffc440634ffb852fc008123b785/d01613d65c184984836006a950e6705c.jpg?imwidth=1800",
+      "price":82.49,
+      "full_price":109.99,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/dddd5ffc440634ffb852fc008123b785/d01613d65c184984836006a950e6705c.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/a2e9799bf53939abbf5133da3b142c7b/e929b2a70cb14a758db491d713476007.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/5a466478716c3a2486ba9937247d62db/abb60ecb44914b21a17fb2746a022be0.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/2776462850433b6daf368ff8bc00197d/b364ca90c3f049108cab7676aec28fc2.jpg?imwidth=1800&filter=packshot\"]",
+      "sizes":"[24x30, 25x32, 28x30, 29x34]",
+      "sale":"Y",
+      "colour":"Denim",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/levis-501-crop-straight-leg-jeans-sansome-breeze-stone-le221n081-k12.html",
+      "sku":"p0153",
+      "name":"501® CROP - Slim fit jeans",
+      "category":"Jeans",
+      "sub_category":"-",
+      "brand":"Levi's",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/0841bdc51224324c863d032d3632f5e1/b34dd365cd8540ab82b4bed043f0f498.jpg?imwidth=1800",
+      "price":84.99,
+      "full_price":84.99,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/0841bdc51224324c863d032d3632f5e1/b34dd365cd8540ab82b4bed043f0f498.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/2314d453feb735a183ffd4b087ddcf9f/a49eb7789bf34a43a3aa09ffc02a6ee7.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/4ffe3738f852368cbe7c3ac28d62cbe8/a15a6b883a224eedae7b65bba879e52d.jpg?imwidth=762\", \"https://img01.ztat.net/article/spp-media-p1/b575604381053241b3c56bfa558946c2/32a40adde7284602944576cb0715a672.jpg?imwidth=1800&filter=packshot\"]",
+      "sizes":"[24x30, 25x32, 28x30, 29x34]",
+      "sale":"N",
+      "colour":"Denim",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/mango-chair-cardigan-grey-m9121i1x7-c11.html",
+      "sku":"p0154",
+      "name":"CHAIR - Cardigan",
+      "category":"Jumpers & Cardigans",
+      "sub_category":"-",
+      "brand":"Mango",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/d706ef2286783c239c5cb528d19a77e8/d877a3abe35e405baff65ce4a62f586b.jpg?imwidth=1800",
+      "price":35.99,
+      "full_price":35.99,
+      "description":"[Insert product description]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/d706ef2286783c239c5cb528d19a77e8/d877a3abe35e405baff65ce4a62f586b.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/53ee60fa8cad3c7cb44285cb22df1e15/c6adb5072d5248a5a0ce34112195b207.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/08583bca3a8233229a4c7a9f41443e6c/7aaa9a1bb836485ebc725fd93ec57993.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/8bb461a35379321ab56534b5fb0e8971/f4a9fd5dff79462ba4ad79b4e9e48bf5.jpg?imwidth=1800&filter=packshot\"]",
+      "sizes":"[XS, S, M, L, XL]",
+      "sale":"N",
+      "colour":"Grey",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/mango-nati-cardigan-braun-m9121i1xy-o11.html",
+      "sku":"p0155",
+      "name":"NATI - Cardigan",
+      "category":"Jumpers & Cardigans",
+      "sub_category":"-",
+      "brand":"Mango",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/4fa6abbd4a623afaad18e93eb3db1f1c/ae4ad4f38b2c4d87b0fa512a3e955638.jpg?imwidth=1800",
+      "price":35.99,
+      "full_price":35.99,
+      "description":"[Insert product description]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/4fa6abbd4a623afaad18e93eb3db1f1c/ae4ad4f38b2c4d87b0fa512a3e955638.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/0b6b1e1e9415320c924eaeb807a1f7f7/b3eef9cf07594485a5917bbbaaf5930b.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/e1d92ea5656c3f1da2788cf8552a81f8/fbc77de9e835479b8ddececbefba8e15.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/b8de90b280ac3968ba13c3b11f6114ce/bcb0399f833248658126103e387c0ac8.jpg?imwidth=1800&filter=packshot\"]",
+      "sizes":"[XS, S, M, L, XL]",
+      "sale":"N",
+      "colour":"Brown",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/mango-jumper-rosa-pastel-m9121i1yl-c11.html",
+      "sku":"p0156",
+      "name":"Jumper",
+      "category":"Jumpers & Cardigans",
+      "sub_category":"-",
+      "brand":"Mango",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/4ce6eb9fe9304a25a3cd7c2edec290ee/c3a6ca6c2dfe408f8532ed9e919deb2e.jpg?imwidth=1800",
+      "price":35.99,
+      "full_price":35.99,
+      "description":"[Insert product description]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/4ce6eb9fe9304a25a3cd7c2edec290ee/c3a6ca6c2dfe408f8532ed9e919deb2e.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/826a164a1744413d9e14fc88d3b1af0c/6f9d3783b5b44a1f9c0682e453567380.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/121c2e6a6b6a42cd9ea950129f0ddf5e/28993a2211884340ac334a216bd0ab4a.jpg?imwidth=1800\"]",
+      "sizes":"[XS, S, M, L, XL]",
+      "sale":"N",
+      "colour":"Multi",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.houseoffraser.co.uk/brand/yumi/tie-knot-jumpsuit-ab2532#colcode=ab253200",
+      "sku":"p0157",
+      "name":"Tie Knot Jumpsuit",
+      "category":"Jumpsuits & Playsuits",
+      "sub_category":"-",
+      "brand":"Yumi",
+      "thumbnail":"https://images.houseoffraser.co.uk/images/imgzoom/ab/ab253200_xxl_a1.jpg",
+      "price":20.0,
+      "full_price":50.0,
+      "description":"Whether you re off to a summer party or out for cocktails with the girls, always look the part with this sleeveless jumpsuit. In the flattering shape you know and love, this versatile jumpsuit has a bow detail and zip fastening. The fitted waistline highlights your curves, while the wide legs are a modern design. Add a retro twist, pair with embroidered heels.",
+      "images":"[\"https://images.houseoffraser.co.uk/images/imgzoom/ab/ab253200_xxl_a1.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/ab/ab253200_xxl_a2.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/ab/ab253200_xxl_a3.jpg\"]",
+      "sizes":"[XS, S, M, L, XL]",
+      "sale":"Y",
+      "colour":"Navy",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.houseoffraser.co.uk/brand/forever-new/cassandra-one-shoulder-jumpsuit-al2614#colcode=al261400",
+      "sku":"p0158",
+      "name":"Cassandra One Shoulder Jumpsuit",
+      "category":"Jumpsuits & Playsuits",
+      "sub_category":"-",
+      "brand":"Forever New",
+      "thumbnail":"https://images.houseoffraser.co.uk/images/imgzoom/al/al261400_xxl_a1.jpg",
+      "price":59.99,
+      "full_price":110.0,
+      "description":"Feminine design meets trending style. The Cassandra One-Shoulder Jumpsuit from Forever New is the piece your wardrobe's been waiting for.",
+      "images":"[\"https://images.houseoffraser.co.uk/images/imgzoom/al/al261400_xxl_a1.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/al/al261400_xxl_a2.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/al/al261400_xxl_a3.jpg\"]",
+      "sizes":"[XS, S, M, L, XL]",
+      "sale":"Y",
+      "colour":"Black",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.houseoffraser.co.uk/brand/phase-eight/linda-frill-wrap-jumpsuit-ad4458#colcode=ad445800",
+      "sku":"p0159",
+      "name":"Linda Frill Wrap Jumpsuit",
+      "category":"Jumpsuits & Playsuits",
+      "sub_category":"-",
+      "brand":"Phase Eight",
+      "thumbnail":"https://images.houseoffraser.co.uk/images/imgzoom/ad/ad445800_xxl_a1.jpg",
+      "price":49.0,
+      "full_price":120.0,
+      "description":"Give your occasional styling a fashionable boost with this Linda jumpsuit by Phase Eight. A one-piece solution to all your styling woes, this lightweight construction features a bold V-neckline that extends to contemporary frill at the bodice for a feminine appeal. Boasts of a straight leg composition, this jumpsuit is accented with a flattering matching waistband and secures at the back with zip closure. Team this with high heels and a clutch for a refined evening look.",
+      "images":"[\"https://images.houseoffraser.co.uk/images/imgzoom/ad/ad445800_xxl_a1.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/ad/ad445800_xxl_a2.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/ad/ad445800_xxl_a3.jpg\"]",
+      "sizes":"[XS, S, M, L, XL]",
+      "sale":"Y",
+      "colour":"Royal Blue",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.houseoffraser.co.uk/brand/by-malene-birger/editha-jumpsuit-657263#colcode=65726303",
+      "sku":"p0160",
+      "name":"Editha Jumpsuit",
+      "category":"Jumpsuits & Playsuits",
+      "sub_category":"-",
+      "brand":"By Malene Birger",
+      "thumbnail":"https://images.houseoffraser.co.uk/images/imgzoom/65/65726303_xxl_a1.jpg",
+      "price":245.0,
+      "full_price":245.0,
+      "description":"Revive your outwear selection with the Editha Jumpsuit brought to you by By Malene Birger. The jumpsuit is crafted to a regular fit from a lightweight yet stretchable fabric with long sleeves, elasticated cuffs, a slim leg design and a wrap around style. This piece features a plunge v neckline with a central belt and block colour throughout for a sleek all in one piece.",
+      "images":"[\"https://images.houseoffraser.co.uk/images/imgzoom/65/65726303_xxl_a1.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/65/65726303_xxl_a2.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/65/65726303_xxl_a3.jpg\"]",
+      "sizes":"[XS, S, M, L, XL]",
+      "sale":"N",
+      "colour":"Black",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.houseoffraser.co.uk/brand/dune-london/riker-2-boots-232765#colcode=23276503",
+      "sku":"p0161",
+      "name":"Riker 2 Boots",
+      "category":"Shoes",
+      "sub_category":"Boots",
+      "brand":"Dune London",
+      "thumbnail":"https://images.houseoffraser.co.uk/images/imgzoom/23/23276503_xxl.jpg",
+      "price":60.0,
+      "full_price":120.0,
+      "description":"[Insert product details]",
+      "images":"[\"https://images.houseoffraser.co.uk/images/imgzoom/23/23276503_xxl.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/23/23276503_xxl_a1.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/23/23276503_xxl_a3.jpg\"]",
+      "sizes":"[3, 4, 5, 6, 8]",
+      "sale":"Y",
+      "colour":"Black",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.houseoffraser.co.uk/brand/dune-london/tildas-buckle-strap-block-heel-boots-ak6819#colcode=AK681901",
+      "sku":"p0162",
+      "name":"Tildas Buckle Strap Block Heel Boots",
+      "category":"Shoes",
+      "sub_category":"Boots",
+      "brand":"Dune London",
+      "thumbnail":"https://images.houseoffraser.co.uk/images/imgzoom/ak/ak681901_xxl.jpg",
+      "price":125.0,
+      "full_price":130.0,
+      "description":"Get ready for winter with Dune London's Tildas boots. They're cut to a calf length and detailed with metallic buckles. A low block heel completes the design.",
+      "images":"[\"https://images.houseoffraser.co.uk/images/imgzoom/ak/ak681901_xxl.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/ak/ak681901_xxl_a1.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/ak/ak681901_xxl_a2.jpg\"]",
+      "sizes":"[3, 4, 5, 6, 8]",
+      "sale":"Y",
+      "colour":"Brown",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.houseoffraser.co.uk/brand/allsaints/tan-rolene-ankle-boot-232718#colcode=23271805",
+      "sku":"p0163",
+      "name":"Tan Rolene Ankle Boot",
+      "category":"Shoes",
+      "sub_category":"Boots",
+      "brand":"All Saints",
+      "thumbnail":"https://images.houseoffraser.co.uk/images/imgzoom/23/23271805_xxl.jpg",
+      "price":160.0,
+      "full_price":228.0,
+      "description":"[Insert product details]",
+      "images":"[\"https://images.houseoffraser.co.uk/images/imgzoom/23/23271805_xxl.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/23/23271805_xxl_a1.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/23/23271805_xxl_a3.jpg\"]",
+      "sizes":"[3, 4, 5, 6, 8]",
+      "sale":"Y",
+      "colour":"Tan",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/tamaris-espadrilles-taupe-ta111e0dx-b11.html",
+      "sku":"p0164",
+      "name":"Espadrilles",
+      "category":"Shoes",
+      "sub_category":"Flat shoes",
+      "brand":"Tamaris",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/6ec4cd95312933209375ea450fd806c1/8f915eb2ef7d4cf8846051a19fd591de.jpg?imwidth=762",
+      "price":49.99,
+      "full_price":49.99,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/6ec4cd95312933209375ea450fd806c1/8f915eb2ef7d4cf8846051a19fd591de.jpg?imwidth=762\", \"https://img01.ztat.net/article/spp-media-p1/d5d993f22ac73566bcba58387a567352/825bfc65300c4cfabb695249722b6421.jpg?imwidth=1800&filter=packshot\", \"https://img01.ztat.net/article/spp-media-p1/81117befd4253eb39c3257fa198a5a7d/acac22d677de4b7fb441e3fb5b068fa2.jpg?imwidth=762\"]",
+      "sizes":"[3.5, 4, 5, 6, 7.5, 8]",
+      "sale":"N",
+      "colour":"Brown",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/dr-martens-1461-casual-lace-ups-black-smooth-do215m00l-q11.html",
+      "sku":"p0165",
+      "name":"1461 - Casual lace-ups",
+      "category":"Shoes",
+      "sub_category":"Flat shoes",
+      "brand":"Dr Martens",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/7a03b2d789033c248fcd75586386307a/e9e893ac8f2c4a94b763de2350ec456a.jpg?imwidth=1800",
+      "price":109.99,
+      "full_price":109.99,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/7a03b2d789033c248fcd75586386307a/e9e893ac8f2c4a94b763de2350ec456a.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/81230a4b9f993b0395ee41c3995632d9/8654c65fe7524405ac6adef7d9347faa.jpg?imwidth=1800&filter=packshot\", \"https://img01.ztat.net/article/spp-media-p1/b1f10be838953b15ba0d3c0bd50e97cc/fdd3cc0ee7b54578a2bf8b3a66583aec.jpg?imwidth=1800\"]",
+      "sizes":"[3.5, 4, 5, 6, 7.5, 8]",
+      "sale":"N",
+      "colour":"Black",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/chatelles-francois-slip-ons-beige-chu11a00e-b11.html",
+      "sku":"p0166",
+      "name":"FRANÇOIS - Slip-ons",
+      "category":"Shoes",
+      "sub_category":"Flat shoes",
+      "brand":"Chatalles",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/03e93a09b1243850bd59ee401ebcf936/2bded825947f46a99ffcd8489039a1fa.jpg?imwidth=762",
+      "price":149.99,
+      "full_price":149.99,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/03e93a09b1243850bd59ee401ebcf936/2bded825947f46a99ffcd8489039a1fa.jpg?imwidth=762\", \"https://img01.ztat.net/article/spp-media-p1/2ba2ae138ef436a19f1b9ec771ed2697/40e28c6fabb246f6a81a4da5c4eb9651.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/2a7aaa911df63d31b61e7fb176263534/8c43ffe4bb5c4a559f24cb940e4ef6ac.jpg?imwidth=762\"]",
+      "sizes":"[3.5, 4, 5, 6, 7.5, 8]",
+      "sale":"N",
+      "colour":"Beige",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.houseoffraser.co.uk/brand/aldo/trerraniel-courts-ag0720#colcode=ag072000",
+      "sku":"p0167",
+      "name":"Trerraniel Courts",
+      "category":"Shoes",
+      "sub_category":"Heels",
+      "brand":"Aldo",
+      "thumbnail":"https://images.houseoffraser.co.uk/images/imgzoom/ag/ag072000_xxl_a3.jpg",
+      "price":24.0,
+      "full_price":85.0,
+      "description":"Trerraniel by ALDO is a d'Orsay court shoe with nubuck uppers and a slim 3 inch heel.",
+      "images":"[\"https://images.houseoffraser.co.uk/images/imgzoom/ag/ag072000_xxl_a3.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/ag/ag072000_xxl_a2.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/ag/ag072000_xxl.jpg\"]",
+      "sizes":"[3, 4, 5, 6, 7]",
+      "sale":"Y",
+      "colour":"Beige",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/hugo-exclusive-ines-chunky-classic-heels-nude-hu711b01s-j11.html",
+      "sku":"p0168",
+      "name":"EXCLUSIVE INES CHUNKY - High heels",
+      "category":"Shoes",
+      "sub_category":"Heels",
+      "brand":"Hugo",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/b084c0f3ee7c3a91b4e94b096e530994/143f646e14f8469f83da3041ececa669.jpg?imwidth=762",
+      "price":179.0,
+      "full_price":179.0,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/b084c0f3ee7c3a91b4e94b096e530994/143f646e14f8469f83da3041ececa669.jpg?imwidth=762\", \"https://img01.ztat.net/article/spp-media-p1/3d8edfd19b203433a43bdde69c2ba3b8/da308778cad54775982003317f3c47be.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/e6bb3d155de53d79a1dc79677edab1b2/0da325e2ecb54eddad91c856c7c44cfc.jpg?imwidth=762\"]",
+      "sizes":"[3, 4, 5, 6, 7]",
+      "sale":"N",
+      "colour":"Nude",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/only-shoes-onlchloe-classic-heels-black-os411b008-q11.html",
+      "sku":"p0169",
+      "name":"ONLCHLOE - High heels",
+      "category":"Shoes",
+      "sub_category":"Heels",
+      "brand":"Only Shoes",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/e90793963f52399ea82018990127b627/bdc4738c20884ada96af2695c8072d14.jpg?imwidth=1800",
+      "price":34.99,
+      "full_price":34.99,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/e90793963f52399ea82018990127b627/bdc4738c20884ada96af2695c8072d14.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/aebc0777bc393a4a9e37b91ad7c9e548/cfd17be579624519a85ffa0118448875.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/e6b96929b89433baa83267a928fccda9/25206bd9d7aa4f32a365d4590f8e5b64.jpg?imwidth=1800\"]",
+      "sizes":"[3, 4, 5, 6, 7]",
+      "sale":"N",
+      "colour":"Black",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/anna-field-t-bar-sandals-brown-an611a0vh-o11.html",
+      "sku":"p0170",
+      "name":"LEATHER - T-bar sandals - brown",
+      "category":"Shoes",
+      "sub_category":"Sandals, Sliders & Flip flops",
+      "brand":"Anna Field",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/69a0a9d2b9d9310a9d4c3f3288e0d1b6/d18f781230bc4d55817184262207b371.jpg?imwidth=762",
+      "price":43.99,
+      "full_price":43.99,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/69a0a9d2b9d9310a9d4c3f3288e0d1b6/d18f781230bc4d55817184262207b371.jpg?imwidth=762\", \"https://img01.ztat.net/article/spp-media-p1/bae7f28c046338cfa3c024a123f2e827/31473be889bf4ec79984bed828cd2714.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/13159ad31b163df38b8ed90683c9a661/57e57df731334f45b0382c07b76fd5fe.jpg?imwidth=762&filter=packshot\"]",
+      "sizes":"[3.5, 4, 4.5, 5, 6, 7]",
+      "sale":"N",
+      "colour":"Brown",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.houseoffraser.co.uk/brand/steve-madden/oceana-sm-flat-raffia-sliders-ae3513#colcode=AE351301",
+      "sku":"p0171",
+      "name":"Oceana Sm Flat Raffia Sliders",
+      "category":"Shoes",
+      "sub_category":"Flat sandals",
+      "brand":"Steve Madden",
+      "thumbnail":"https://images.houseoffraser.co.uk/images/imgzoom/ae/ae351301_xxl_a1.jpg",
+      "price":27.0,
+      "full_price":55.0,
+      "description":"Upgrade your holiday essentials with the Steve Madden Oceana SM sandal. Showcasing a woven raffia foot strap it has an open toe and flat sole. Perfect for teaming with summer dresses or tailored trousers.",
+      "images":"[\"https://images.houseoffraser.co.uk/images/imgzoom/ae/ae351301_xxl_a1.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/ae/ae351301_xxl.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/ae/ae351301_xxl_a3.jpg\"]",
+      "sizes":"[3.5, 4, 4.5, 5, 6, 7]",
+      "sale":"Y",
+      "colour":"Natural",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/tommy-hilfiger-loves-beach-t-bar-sandals-blue-to111a06i-k11.html",
+      "sku":"p0172",
+      "name":"LOVES BEACH - T-bar sandals",
+      "category":"Shoes",
+      "sub_category":"Flat sandals",
+      "brand":"Tommy Hilfiger",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/5d5935bdb19d3051bb8abc8f1e428c10/aa782a5d8eed48f49b22e6b157fa5399.jpg?imwidth=1800",
+      "price":29.99,
+      "full_price":29.99,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/5d5935bdb19d3051bb8abc8f1e428c10/aa782a5d8eed48f49b22e6b157fa5399.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/98690adbe1b23c98ba60e0c605c8dd26/9f10938e26384291aa536849b9e9da6a.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/2137072b38e53a2390d4e691f5b4968e/9bfd66faab1c43adad8b2239458fb0a6.jpg?imwidth=1800\"]",
+      "sizes":"[3.5, 4, 4.5, 5, 6, 7]",
+      "sale":"N",
+      "colour":"Blue",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/redfoot-mules-chestnut-1rf11d000-o11.html",
+      "sku":"p0173",
+      "name":"ANN TAN - Mules",
+      "category":"Shoes",
+      "sub_category":"Slippers",
+      "brand":"Redfoot",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/88357cacbe343b869f2090b9e8cd0543/ad86dcae5aa34320ac5715478c9c7ccf.jpg?imwidth=1800",
+      "price":34.99,
+      "full_price":34.99,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/88357cacbe343b869f2090b9e8cd0543/ad86dcae5aa34320ac5715478c9c7ccf.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/7d5a8d546d233c89bc70da9e63a2ab2a/1c6048f210354040ac47b1ca898f6f00.jpg?imwidth=1800&filter=packshot\", \"https://img01.ztat.net/article/spp-media-p1/d4e0b71f15e334e0bc380ff5b53bed49/cacc257a72d841f59ea471a0ce8f7246.jpg?imwidth=1800\"]",
+      "sizes":"[5, 6, 7, 8, 9]",
+      "sale":"N",
+      "colour":"Chestnut",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.houseoffraser.co.uk/brand/ugg/oh-yeah-slide-on-slippers-238010#colcode=23801003",
+      "sku":"p0174",
+      "name":"Oh Yeah Slide On Slippers",
+      "category":"Shoes",
+      "sub_category":"Slippers",
+      "brand":"UGG",
+      "thumbnail":"https://images.houseoffraser.co.uk/images/imgzoom/23/23801003_xxl.jpg",
+      "price":80.0,
+      "full_price":80.0,
+      "description":"Refresh your collection with these Ugg Oh Yeah Slide On Slippers. Constructed in a slip on style with wide straps, they feature a cushioned insole and a thick foam sole for a classic look. These slippers are designed with a signature logo and are complete with Ugg branding.",
+      "images":"[\"https://images.houseoffraser.co.uk/images/imgzoom/23/23801003_xxl.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/23/23801003_xxl_a1.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/23/23801003_xxl_a3.jpg\"]",
+      "sizes":"[5, 6, 7, 8, 9]",
+      "sale":"N",
+      "colour":"Black",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.houseoffraser.co.uk/brand/barbour/lydia-mules-102692#colcode=10269202",
+      "sku":"p0175",
+      "name":"Lydia Mules",
+      "category":"Shoes",
+      "sub_category":"Slippers",
+      "brand":"Barbour",
+      "thumbnail":"https://images.houseoffraser.co.uk/images/imgzoom/10/10269202_xxl_a2.jpg",
+      "price":54.95,
+      "full_price":54.95,
+      "description":"Treat yourself or someone special to a new pair of slippers this winter. These premium Mules by Barbour style a classic silhouette and food hugging finish. The Lydia Mule is crafted with a faux fur trim and lining to ensure maximum warmth and comfort is guaranteed, finished with subtle Barbour branding.",
+      "images":"[\"https://images.houseoffraser.co.uk/images/imgzoom/10/10269202_xxl_a2.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/10/10269202_xxl_a3.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/10/10269202_xxl.jpg\"]",
+      "sizes":"[5, 6, 7, 8, 9]",
+      "sale":"N",
+      "colour":"Grey",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.size.co.uk/product/brown-nike-lahar-low-qs-womens/16085764/",
+      "sku":"p0176",
+      "name":"Nike Lahar Low QS Women's",
+      "category":"Shoes",
+      "sub_category":"Trainers",
+      "brand":"Nike",
+      "thumbnail":"https://i8.amplience.net/i/jpl/sz_450808_b?qlt=92&w=750&h=580&v=1",
+      "price":115.0,
+      "full_price":115.0,
+      "description":"The Nike Lahar takes inspiration from an archival trail shoe from '89 and elevates it with more modernised detailing, making it just as suited to your urban escapades. Still highly durable, this boot has heavyweight leather uppers with a thick lacing system and metal eyelets for a sturdy fit. To finish, a high-rising chunky sole unit sits beneath with a lightly speckled design while a textured rubber outsole offers grippy support all-day long.",
+      "images":"[\"https://i8.amplience.net/i/jpl/sz_450808_b?qlt=92&w=750&h=580&v=1\", \"https://i8.amplience.net/i/jpl/sz_450808_c?qlt=92&w=750&h=580&v=1\", \"https://i8.amplience.net/i/jpl/sz_450808_d?qlt=92&w=750&h=580&v=1\"]",
+      "sizes":"[3, 4, 4.5, 6, 6.5, 7, 8]",
+      "sale":"N",
+      "colour":"Brown",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.size.co.uk/product/white-converse-chuck-taylor-all-star-high-lugged-womens/15961682/",
+      "sku":"p0177",
+      "name":"Converse Chuck Taylor All Star High Lugged Women's",
+      "category":"Shoes",
+      "sub_category":"Trainers",
+      "brand":"Converse",
+      "thumbnail":"https://i8.amplience.net/i/jpl/sz_334012_b?qlt=92&w=750&h=580&v=1",
+      "price":70.0,
+      "full_price":70.0,
+      "description":"Converse's iconic Chuck Taylor All Star gets reworked for winter with a heavy-lugged platform midsole. Up top, Converse keeps things traditional with a classic canvas upper.",
+      "images":"[\"https://i8.amplience.net/i/jpl/sz_334012_b?qlt=92&w=750&h=580&v=1\", \"https://i8.amplience.net/i/jpl/sz_334012_c?qlt=92&w=750&h=580&v=1\", \"https://i8.amplience.net/i/jpl/sz_334012_d?qlt=92&w=750&h=580&v=1\"]",
+      "sizes":"[3, 4, 4.5, 6, 6.5, 7, 8]",
+      "sale":"N",
+      "colour":"White",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.size.co.uk/product/black-adidas-originals-campus-80s-womens/16085731/",
+      "sku":"p0178",
+      "name":"adidas Originals Campus 80s Women's",
+      "category":"Shoes",
+      "sub_category":"Trainers",
+      "brand":"Adidas",
+      "thumbnail":"https://i8.amplience.net/i/jpl/sz_397309_b?qlt=92&w=750&h=580&v=1",
+      "price":75.0,
+      "full_price":75.0,
+      "description":"A minimal casual classic, the Campus 80s is an archive wonder with a real vintage setup. Keeping things laid-back, this pair comes with black suede uppers with smooth white leather serrated 3-Stripes and a Trefoil-branded heel patch on the reverse. Further down, an off-white sole offers grip and complements the colours above.",
+      "images":"[\"https://i8.amplience.net/i/jpl/sz_397309_b?qlt=92&w=750&h=580&v=1\", \"https://i8.amplience.net/i/jpl/sz_397309_c?qlt=92&w=750&h=580&v=1\", \"https://i8.amplience.net/i/jpl/sz_397309_d?qlt=92&w=750&h=580&v=1\"]",
+      "sizes":"[3, 4, 4.5, 6, 6.5, 7, 8]",
+      "sale":"N",
+      "colour":"Black",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.houseoffraser.co.uk/brand/jack-wills/bea-sweatshorts-572192#colcode=57219299",
+      "sku":"p0179",
+      "name":"Bea Sweatshorts",
+      "category":"Shorts",
+      "sub_category":"-",
+      "brand":"Jack Wills",
+      "thumbnail":"https://images.houseoffraser.co.uk/images/imgzoom/57/57219299_xxl_a2.jpg",
+      "price":18.0,
+      "full_price":24.99,
+      "description":"Keep it short and sweet with the Bea sweat shorts. Cute and comfortable, the shorts feature an elasticated waistband and drawstring fastening plus two handy pockets.",
+      "images":"[\"https://images.houseoffraser.co.uk/images/imgzoom/57/57219299_xxl_a2.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/57/57219299_xxl.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/57/57219299_xxl_a1.jpg\"]",
+      "sizes":"[XS, S, M, L, XL]",
+      "sale":"Y",
+      "colour":"Tie Dye",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.houseoffraser.co.uk/brand/jack-wills/bibden-cargo-shorts-574282#colcode=57428203",
+      "sku":"p0180",
+      "name":"Bibden Cargo Shorts",
+      "category":"Shorts",
+      "sub_category":"-",
+      "brand":"Jack Wills",
+      "thumbnail":"https://images.houseoffraser.co.uk/images/imgzoom/57/57428203_xxl_a3.jpg",
+      "price":20.0,
+      "full_price":39.99,
+      "description":"Enhance your collection with these Jack Wills Bibden Cargo Shorts. Constructed with a button fastening waist and zip up fly, they feature 4 pockets for a classic look. These shorts are designed with a signature logo and are complete with Jack Wills branding.",
+      "images":"[\"https://images.houseoffraser.co.uk/images/imgzoom/57/57428203_xxl_a3.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/57/57428203_xxl_a2.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/57/57428203_xxl.jpg\"]",
+      "sizes":"[XS, S, M, L, XL]",
+      "sale":"Y",
+      "colour":"Black",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.houseoffraser.co.uk/brand/levis/501-logo-shorts-647103#colcode=64710318",
+      "sku":"p0181",
+      "name":"501 Logo Shorts",
+      "category":"Shorts",
+      "sub_category":"-",
+      "brand":"Levi's",
+      "thumbnail":"https://images.houseoffraser.co.uk/images/imgzoom/64/64710318_xxl_a3.jpg",
+      "price":35.0,
+      "full_price":50.0,
+      "description":"Elevate your collection with these Levis 501 Logo Shorts. Crafted with a button fastening waist and zip up fly, they feature belt loops and are a classic 5 pocket style. These shorts are an all over print design with a signature logo and are complete with Levis branding.",
+      "images":"[\"https://images.houseoffraser.co.uk/images/imgzoom/64/64710318_xxl_a3.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/64/64710318_xxl_a1.jpg\", \"https://images.houseoffraser.co.uk/images/imgzoom/64/64710318_xxl_a2.jpg\"]",
+      "sizes":"[XS, S, M, L, XL]",
+      "sale":"Y",
+      "colour":"Denim",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/evenandodd-pencil-skirt-blackwhite-ev421b09d-q13.html",
+      "sku":"p0182",
+      "name":"Pencil skirt",
+      "category":"Skirts",
+      "sub_category":"-",
+      "brand":"Even&Odd",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/b6fd1e5198bd4498b7d148d24faa6567/62abf55deaea465e8d03dd5019489d32.jpg?imwidth=762",
+      "price":19.99,
+      "full_price":19.99,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/b6fd1e5198bd4498b7d148d24faa6567/62abf55deaea465e8d03dd5019489d32.jpg?imwidth=762\", \"https://img01.ztat.net/article/spp-media-p1/09521df5a00947a4bc2a3e39004f4141/6c6ba11de2fd49c0a27e890783b0080a.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/33d847af7b7c4b69b2fe00bb6e34f6c7/2605b40761ca41018302d85a5cce4081.jpg?imwidth=1800\"]",
+      "sizes":"[XS, S, M, L, XL]",
+      "sale":"N",
+      "colour":"Black",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/anna-field-petite-pleated-skirt-olive-night-ani21b00d-n11.html",
+      "sku":"p0183",
+      "name":"A-line skirt",
+      "category":"Skirts",
+      "sub_category":"-",
+      "brand":"Anna Field Petite",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/7ee8d0ea1ff93bc2800541bcaf6e3ace/17473b3dcc764597b40430bd72427696.jpg?imwidth=1800",
+      "price":34.99,
+      "full_price":34.99,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/7ee8d0ea1ff93bc2800541bcaf6e3ace/17473b3dcc764597b40430bd72427696.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/8db4c5a97a1534519cc6549c0e36c595/75881d7c32494db183fe06717cd5ce73.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/85de5e9dfa623c849208057fd6013772/159c880f1b114a52867f9836f125d518.jpg?imwidth=1800\"]",
+      "sizes":"[XS, S, M, L, XL]",
+      "sale":"N",
+      "colour":"Olive",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/moves-kia-mini-skirt-mod21b000-n11.html",
+      "sku":"p0184",
+      "name":"KIA - A-line skirt",
+      "category":"Skirts",
+      "sub_category":"-",
+      "brand":"Moves",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/1c48f8692cec355ba9dc9fddb4938800/0399732a750d405d8000a5ebe2bae12f.jpg?imwidth=1800",
+      "price":35.99,
+      "full_price":44.99,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/1c48f8692cec355ba9dc9fddb4938800/0399732a750d405d8000a5ebe2bae12f.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/7dc2633aa7e531538d904340fe2f11d2/0c156db5ef6349e89dce57554a645be2.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/1ac1198986f03a709cbcab64fcb611f7/c953a1ba72f345ab8db2f4e8b57837d5.jpg?imwidth=762\"]",
+      "sizes":"[XS, S, M, L, XL]",
+      "sale":"Y",
+      "colour":"Olive",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/nike-performance-everyday-cush-crew-3-pack-sports-socks-whiteblack-n1244d06l-a11.html",
+      "sku":"p0185",
+      "name":"EVERYDAY CUSH CREW 3 PACK - Sports socks",
+      "category":"Accessories",
+      "sub_category":"Socks & Tights",
+      "brand":"Nike",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/61af5ef973313caa84bd0eab4448c480/fa7bc32354504183b91b4485f5b1a515.jpg?imwidth=1800",
+      "price":10.99,
+      "full_price":10.99,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/61af5ef973313caa84bd0eab4448c480/fa7bc32354504183b91b4485f5b1a515.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/480f49870743376eb712dd9cf34db2ca/d10b4cdbbab64d4eb2c7319457506442.jpg?imwidth=1800&filter=packshot\", \"https://img01.ztat.net/article/spp-media-p1/4bb002ef173d35b7b05911c1eb080939/55aea48247944fbba237e717f411f520.jpg?imwidth=1800\"]",
+      "sizes":"[2-5, 5-8, 8-11, 11-14.5]",
+      "sale":"N",
+      "colour":"White",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/champion-6-pack-sports-socks-c7644d001-a12.html",
+      "sku":"p0186",
+      "name":"6 PACK - Sports socks",
+      "category":"Accessories",
+      "sub_category":"Socks & Tights",
+      "brand":"Champion",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/9e028b7e7da13ebfa4850f0cbb9a201f/66c56e23010d4a25bf46273acf2ad956.jpg?imwidth=1800&filter=packshot",
+      "price":12.99,
+      "full_price":12.99,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/9e028b7e7da13ebfa4850f0cbb9a201f/66c56e23010d4a25bf46273acf2ad956.jpg?imwidth=1800&filter=packshot\", \"https://img01.ztat.net/article/spp-media-p1/d63617ade468374abc67c4a0389c66eb/9c70939886464fc99d79a71ac24e1bcb.jpg?imwidth=1800\"]",
+      "sizes":"[2-5, 5-8, 8-11, 11-14.5]",
+      "sale":"N",
+      "colour":"White",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/nike-performance-everyday-cush-3-pack-sports-socks-blackwhite-n1244d06e-q11.html",
+      "sku":"p0187",
+      "name":"EVERYDAY CUSH 3 PACK - Sports socks",
+      "category":"Accessories",
+      "sub_category":"Socks & Tights",
+      "brand":"Nike",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/5e2eecdfbec53744ac29186d17dda463/34884b94553549fcad1c4ce82c563696.jpg?imwidth=1800",
+      "price":10.99,
+      "full_price":10.99,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/5e2eecdfbec53744ac29186d17dda463/34884b94553549fcad1c4ce82c563696.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/3202c079a6f93318aaf1b59c58fd9f6a/2b212ecce30a4cd4b36387b18ecacc2c.jpg?imwidth=1800&filter=packshot\", \"https://img01.ztat.net/article/spp-media-p1/171d3e91b72e35bf9288376c1343d82d/c0b4bb665a3e40008b9c74702bb56462.jpg?imwidth=1800\"]",
+      "sizes":"[2-5, 5-8, 8-11, 11-14.5]",
+      "sale":"N",
+      "colour":"Black",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/camano-8-pack-socks-c5154c00p-c11.html",
+      "sku":"p0188",
+      "name":"8 PACK - Sports socks",
+      "category":"Accessories",
+      "sub_category":"Socks & Tights",
+      "brand":"Camano",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/45e855bad9663b7ca76b048e6d0639f7/d80cefc9101d4b11a9e1bf07b3b459ca.jpg?imwidth=1800&filter=packshot",
+      "price":12.99,
+      "full_price":12.99,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/45e855bad9663b7ca76b048e6d0639f7/d80cefc9101d4b11a9e1bf07b3b459ca.jpg?imwidth=1800&filter=packshot\", \"https://img01.ztat.net/article/spp-media-p1/c8526dc3a8aa338f8f0d73f393ac3278/91444878c697462ba00b95508fa4415b.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/b9ee48b266d6353bac094f69a1830e73/fc4011a8f8b6408aab676fa7ff479920.jpg?imwidth=1800\"]",
+      "sizes":"[2-5, 5-8, 8-11, 11-14.5]",
+      "sale":"N",
+      "colour":"Grey",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/mango-cofi7-blazer-rouge-m9121g0z1-g12.html",
+      "sku":"p0189",
+      "name":"COFI7 - Blazer",
+      "category":"Blazers",
+      "sub_category":"-",
+      "brand":"Mango",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/144d3fbb01aa395eab1745686a999d5a/5e1844243e4c4a21b4c93089cf6b4f0b.jpg?imwidth=1800",
+      "price":35.99,
+      "full_price":49.99,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/144d3fbb01aa395eab1745686a999d5a/5e1844243e4c4a21b4c93089cf6b4f0b.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/ad1a11f5fda03846a26c1056c9bbaa91/c6c1e1834afb49f994cb30f7c4f093d4.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/863ed8bd8cc834cd9bf9ec647fe7f1c3/ee539fd0ee9446ee800eceb0a3edbf52.jpg?imwidth=1800\"]",
+      "sizes":"[XS, S, M, L, XL]",
+      "sale":"Y",
+      "colour":"Red",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/mango-olivia-blazer-schwarz-m9121g0zb-q11.html",
+      "sku":"p0190",
+      "name":"OLIVIA - Blazer",
+      "category":"Blazers",
+      "sub_category":"-",
+      "brand":"Mango",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/26946c78cf633f61903ed16af1c89eb6/5bc94f77c4cc4715af4519951c2338a7.jpg?imwidth=1800",
+      "price":69.99,
+      "full_price":69.99,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/26946c78cf633f61903ed16af1c89eb6/5bc94f77c4cc4715af4519951c2338a7.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/672e2ac76a4c3dc0bb6728101668c14a/8befb745a3014df38dcdd34f8f473ba0.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/105bce505d773737a4cc891b78b5dcae/e1ef923888444db18e1d8fcba37bf004.jpg?imwidth=1800\"]",
+      "sizes":"[XS, S, M, L, XL]",
+      "sale":"N",
+      "colour":"Black",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/hugo-atikas-blazer-dark-blue-hu721g04j-k11.html",
+      "sku":"p0191",
+      "name":"ATIKAS - Blazer",
+      "category":"Blazers",
+      "sub_category":"-",
+      "brand":"Hugo",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/aa2e1c1640153ea0b1f218b5937ee9bf/0c19991b6aa74b81b7f1c295229029a5.jpg?imwidth=1800",
+      "price":179.0,
+      "full_price":299.0,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/aa2e1c1640153ea0b1f218b5937ee9bf/0c19991b6aa74b81b7f1c295229029a5.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/9ac65f066e4330128654da17b99e0127/381c4e549bd4453b97ba92fcdaf627f1.jpg?imwidth=762\", \"https://img01.ztat.net/article/spp-media-p1/54df1e1920af31d9a2a75ac705d9f00f/04abb65d9f8243e3b684eee403e42c58.jpg?imwidth=1800\"]",
+      "sizes":"[XS, S, M, L, XL]",
+      "sale":"Y",
+      "colour":"Blue",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/seafolly-swimsuit-indigo-s1981d05i-k11.html",
+      "sku":"p0192",
+      "name":"Swimsuit",
+      "category":"Swimwear & Beachwear",
+      "sub_category":"-",
+      "brand":"Seafolly",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/2eda45ed360a3bb3a760117f6b98aa39/8e419ca2b0cd48c7be932d9ce9e336d0.jpg?imwidth=1800",
+      "price":85.49,
+      "full_price":94.99,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/2eda45ed360a3bb3a760117f6b98aa39/8e419ca2b0cd48c7be932d9ce9e336d0.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/110f009d733e3f11b90785b30100fc7a/d530df66e17541bc91c1294c4b829978.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/f3fd1a70036435f287606329cb34d425/0fea4b6bb6b34f52a78927dbdb23f9be.jpg?imwidth=1800\"]",
+      "sizes":"[XS, S, M, L, XL]",
+      "sale":"Y",
+      "colour":"Indigo",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/mango-baby-swimsuit-svart-m9181g01h-q11.html",
+      "sku":"p0193",
+      "name":"BABY - Swimsuit",
+      "category":"Swimwear & Beachwear",
+      "sub_category":"-",
+      "brand":"Mango",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/88e10f06c58640589f22fd2932dc1af2/ecd346e981e6465f9f35a6d2bf51ba75.jpg?imwidth=1800",
+      "price":49.99,
+      "full_price":49.99,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/88e10f06c58640589f22fd2932dc1af2/ecd346e981e6465f9f35a6d2bf51ba75.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/23691243cd884ebbbcc7b37ebe57feaf/5eb16566621843ae81941ba4472ea5d6.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/c0f6ea57a779461d8cff515c6aff5fa5/bea23f142ab745818555716b27760085.jpg?imwidth=1800\"]",
+      "sizes":"[XS, S, M, L, XL]",
+      "sale":"N",
+      "colour":"Black",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/buffalo-triangle-set-bikini-bordeaux-bu381l00l-g11.html",
+      "sku":"p0194",
+      "name":"TRIANGLE SET - Bikini",
+      "category":"Swimwear & Beachwear",
+      "sub_category":"-",
+      "brand":"Buffalo",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/8d20f7605bd637c3bf7e76675f62c90c/56bfe52e84994440ab867ea73db694c8.jpg?imwidth=1800",
+      "price":35.19,
+      "full_price":43.99,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/8d20f7605bd637c3bf7e76675f62c90c/56bfe52e84994440ab867ea73db694c8.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/bed860774f0b37c884855c20b7659813/ea99fec1393740deb6743581bfe6d607.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/686f94f6b17d39339b7b1dba04bdd0f2/a616998481ad4573983c7cd73d5e0052.jpg?imwidth=1800\"]",
+      "sizes":"[XS, S, M, L, XL]",
+      "sale":"Y",
+      "colour":"Bordeaux",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/anna-field-long-sleeved-top-dark-blue-an621d0pw-k11.html",
+      "sku":"p0195",
+      "name":"Long sleeved top",
+      "category":"Tops",
+      "sub_category":"-",
+      "brand":"Anna Field",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/bbe7c1fe840830b8b55cc14715163101/89193a83cd74460bbd86d90b1126f880.jpg?imwidth=1800",
+      "price":9.99,
+      "full_price":9.99,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/bbe7c1fe840830b8b55cc14715163101/89193a83cd74460bbd86d90b1126f880.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/03da8276f0293376ae418587d942930f/7317476a042349289b35ad1640e1f36a.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/b7beb338ade331fe8c1c93bf1331b207/0c6c3a4f758840ca99ea340e694a909a.jpg?imwidth=1800\"]",
+      "sizes":"[XS, S, M, L, XL]",
+      "sale":"N",
+      "colour":"Blue",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/the-north-face-zumu-tee-basic-t-shirt-th321d00i-q11.html",
+      "sku":"p0196",
+      "name":"ZUMU TEE - Basic T-shirt",
+      "category":"Tops",
+      "sub_category":"-",
+      "brand":"The North Face",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/bc90ab98e5a13b55b08ea5bc52c0f5ce/30164123399947df8f2247d0fce37c71.jpg?imwidth=1800",
+      "price":29.99,
+      "full_price":29.99,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/bc90ab98e5a13b55b08ea5bc52c0f5ce/30164123399947df8f2247d0fce37c71.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/23c6582c69ea383385456fe4c89c7a41/fbcb9c2028d54f9b9dc471eab9d00058.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/fc52d3b388643cf1bb15e5ed86920781/ae6a751b37f24d77a36f8f3334cf9ebf.jpg?imwidth=1800\"]",
+      "sizes":"[XS, S, M, L, XL]",
+      "sale":"N",
+      "colour":"Black",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/abercrombie-and-fitch-long-sleeved-top-cozy-grey-a0f21d0fs-c11.html",
+      "sku":"p0197",
+      "name":"COZY HENLEY - Long sleeved top",
+      "category":"Tops",
+      "sub_category":"-",
+      "brand":"Abercrombie & Fitch",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/c61cf49b492d3846af97466ee845c0b9/92e53db051fa4083a4e1f80b93352d84.jpg?imwidth=1800",
+      "price":28.99,
+      "full_price":28.99,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/c61cf49b492d3846af97466ee845c0b9/92e53db051fa4083a4e1f80b93352d84.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/b8609ff6be513fd895b3950709fd704b/614eb40c4e8741ba9fd05b7db3bc5503.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/6ca0256b0ecf30b8acb9c9c410c95def/d2012d4868554ed0b13082c01477c897.jpg?imwidth=1800\"]",
+      "sizes":"[XS, S, M, L, XL]",
+      "sale":"N",
+      "colour":"Grey",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.size.co.uk/product/black-adidas-originals-ss-track-pants/15964745/",
+      "sku":"p0198",
+      "name":"adidas Originals SS Track Pants",
+      "category":"Tracksuits & Sweatpants",
+      "sub_category":"-",
+      "brand":"Adidas",
+      "thumbnail":"https://i8.amplience.net/i/jpl/sz_342892_a?qlt=92&w=750&h=580&v=1%201x,%20https://i8.amplience.net/i/jpl/sz_342892_a?qlt=92&w=950&h=735&v=1%202x,%20https://i8.amplience.net/i/jpl/sz_342892_a?qlt=92&w=1200&h=929&v=1%203x",
+      "price":30.0,
+      "full_price":43.0,
+      "description":"A true '70s staple here, adidas Originals Superstar Track Pants have been doing the rounds for decades. They're cut from a cotton and recycled polyester blend, boast zips at the pockets and 3-Striped down each leg for a timeless finish.",
+      "images":"[\"https://i8.amplience.net/i/jpl/sz_342892_a?qlt=92&w=750&h=580&v=1%201x,%20https://i8.amplience.net/i/jpl/sz_342892_a?qlt=92&w=950&h=735&v=1%202x,%20https://i8.amplience.net/i/jpl/sz_342892_a?qlt=92&w=1200&h=929&v=1%203x\", \"https://i8.amplience.net/i/jpl/sz_342892_b?qlt=92&w=750&h=580&v=1\", \"https://i8.amplience.net/i/jpl/sz_342892_c?qlt=92&w=750&h=580&v=1\", \"https://i8.amplience.net/i/jpl/sz_342892_d?qlt=92&w=750&h=580&v=1\"]",
+      "sizes":"[XS, S, M, L, XL]",
+      "sale":"Y",
+      "colour":"Black",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/nike-sportswear-pant-tight-tracksuit-bottoms-ni121a09p-c11.html",
+      "sku":"p0199",
+      "name":"Tracksuit bottoms",
+      "category":"Tracksuits & Sweatpants",
+      "sub_category":"-",
+      "brand":"Nike",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/f2632c640576339189cf859aea4f5ba2/568950f71dc648fd9e4969858a1c74ec.jpg?imwidth=1800",
+      "price":34.99,
+      "full_price":34.99,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/f2632c640576339189cf859aea4f5ba2/568950f71dc648fd9e4969858a1c74ec.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/235faa796d1531e3ac513c47a51243fa/ef01177108a44fa89e67584855bd66f3.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/d1a8b712b4543b65a70db3bd64c48bfe/c2a1503097674908911f7a0b909bad9c.jpg?imwidth=1800\"]",
+      "sizes":"[XS, S, M, L, XL]",
+      "sale":"N",
+      "colour":"Grey",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/pieces-petite-pcchilli-wide-pants-tracksuit-bottoms-light-grey-melange-pit21a00n-c11.html",
+      "sku":"p0200",
+      "name":"PCCHILLI WIDE PANTS - Tracksuit bottoms",
+      "category":"Tracksuits & Sweatpants",
+      "sub_category":"-",
+      "brand":"Pieces Petite",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/3966b9f2e36c41afa9c1157a553e8a5d/3101cd90e58b4c4a84ab325769eb1d13.jpg?imwidth=1800&filter=packshot",
+      "price":21.99,
+      "full_price":21.99,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/3966b9f2e36c41afa9c1157a553e8a5d/3101cd90e58b4c4a84ab325769eb1d13.jpg?imwidth=1800&filter=packshot\", \"https://img01.ztat.net/article/spp-media-p1/9c0bf16be60e40e5ac51171dd70635dc/8c16612b84cd40ae92b8d97e21bce5aa.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/14e20ef10ad1478181395030b79de1b1/041a5315a172497285930cbe3b4e69cf.jpg?imwidth=1800\"]",
+      "sizes":"[XS, S, M, L, XL]",
+      "sale":"N",
+      "colour":"Grey",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.size.co.uk/product/black-jordan-essential-78-leggings/16087969/",
+      "sku":"p0201",
+      "name":"Jordan Essential 7/8 Leggings",
+      "category":"Trousers & Leggings",
+      "sub_category":"-",
+      "brand":"Nike",
+      "thumbnail":"https://i8.amplience.net/i/jpl/sz_398075_a?qlt=92&w=750&h=580&v=1%201x,%20https://i8.amplience.net/i/jpl/sz_398075_a?qlt=92&w=950&h=735&v=1%202x,%20https://i8.amplience.net/i/jpl/sz_398075_a?qlt=92&w=1200&h=929&v=1%203x",
+      "price":55.0,
+      "full_price":55.0,
+      "description":"Sporty and comfortable, these Jordan 7/8 Leggings are made for workouts and casual getups. They are made with long-lasting stretch-knit fabric to ease you through the day and an elastic waistband provides the perfect fit.",
+      "images":"[\"https://i8.amplience.net/i/jpl/sz_398075_a?qlt=92&w=750&h=580&v=1%201x,%20https://i8.amplience.net/i/jpl/sz_398075_a?qlt=92&w=950&h=735&v=1%202x,%20https://i8.amplience.net/i/jpl/sz_398075_a?qlt=92&w=1200&h=929&v=1%203x\", \"https://i8.amplience.net/i/jpl/sz_398075_b?qlt=92&w=750&h=580&v=1\", \"https://i8.amplience.net/i/jpl/sz_398075_c?qlt=92&w=750&h=580&v=1\", \"https://i8.amplience.net/i/jpl/sz_398075_d?qlt=92&w=750&h=580&v=1\"]",
+      "sizes":"[XS, S, M, L, XL]",
+      "sale":"N",
+      "colour":"Black",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/south-beach-leggings-blue-spruce-soh41e03e-m11.html",
+      "sku":"p0202",
+      "name":"SEAMLESS OMBRE LEGGINGS - Leggings",
+      "category":"Trousers & Leggings",
+      "sub_category":"-",
+      "brand":"South Beach",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/3d25174ea2dc3471ad394dafccca81e5/f58702664b8b40cc9791a552fb6e26b7.jpg?imwidth=1800",
+      "price":24.99,
+      "full_price":24.99,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/3d25174ea2dc3471ad394dafccca81e5/f58702664b8b40cc9791a552fb6e26b7.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/38527b3189673d79baaf02d9864bc7d3/3ba4b222c8ef4adf95d4497cfb1afc2e.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/48355b4b79093de9ace3950d07a6e11a/7c42cad8aeeb4423848b8ac4dde2a92c.jpg?imwidth=1800\"]",
+      "sizes":"[XS, S, M, L, XL]",
+      "sale":"N",
+      "colour":"Green",
+      "gender":"f"
+   },
+   {
+      "link":"https://www.zalando.co.uk/under-armour-armour-tights-black-un241e07f-q11.html",
+      "sku":"p0203",
+      "name":"HEATGEAR CAPRI - 3/4 sports trousers",
+      "category":"Trousers & Leggings",
+      "sub_category":"-",
+      "brand":"Under Armour",
+      "thumbnail":"https://img01.ztat.net/article/spp-media-p1/89da9f9c48613e38bf97c6f75c0054e2/599cac700fa14848a54cc52af65eae16.jpg?imwidth=1800",
+      "price":19.97,
+      "full_price":34.0,
+      "description":"[Insert product details]",
+      "images":"[\"https://img01.ztat.net/article/spp-media-p1/89da9f9c48613e38bf97c6f75c0054e2/599cac700fa14848a54cc52af65eae16.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/273f2ba8d11439008e7c3f14ace67a4b/82746af065c24be1a3613fd4338c004c.jpg?imwidth=1800\", \"https://img01.ztat.net/article/spp-media-p1/123d9b176e7935808793fbab880040ad/ab5292576f44494ead1aa204705d2e76.jpg?imwidth=1800\"]",
+      "sizes":"[XS, S, M, L, XL]",
+      "sale":"Y",
+      "colour":"Black",
+      "gender":"f"
    }
 ]

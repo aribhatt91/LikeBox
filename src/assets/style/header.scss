@@ -334,7 +334,9 @@
       }
     }
   }
-
+.nav_icon {
+  max-height: 24px;
+}
   @keyframes grow {
     from {
       width: 0;

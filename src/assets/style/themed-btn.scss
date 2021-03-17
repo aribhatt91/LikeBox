@@ -121,12 +121,12 @@
         font-weight: bold;
     }
     &:hover, &:focus, &:active {
-        outline: none;
-        text-decoration: none;
+        /* outline: none;
         background-color: #fd2c56;
-        color: #fff;
+        color: #fff; */
+        text-decoration: none;
         .app-btn-text {
-            font-size: 12px;
+            font-size: 80%;
         }
     }
     &.btn-white {

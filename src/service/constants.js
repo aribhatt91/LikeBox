@@ -89,6 +89,14 @@ export const CATEGORY_URL_MAPPING = {
         category: 'accessories',
         subcategory: 'bags & purses'
     },
+    'bags': {
+        category: 'accessories',
+        subcategory: 'bags & purses'
+    },
+    'purses': {
+        category: 'accessories',
+        subcategory: 'bags & purses'
+    },
     'belts': {
         category: 'accessories',
         subcategory: 'belts'

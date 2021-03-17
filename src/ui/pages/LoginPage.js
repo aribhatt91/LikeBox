@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useParams, useLocation } from 'react-router-dom';
 import UserLoginSignupModule from './../components/UserLoginSignupModule';
 
 const LoginPage = (props) => {
+
     console.log('LoginPage', props);
     let redirectTo = props.location.state && props.location.state.from ? props.location.state.from.pathname || "/" : "/",
     page = props.match.params.page;

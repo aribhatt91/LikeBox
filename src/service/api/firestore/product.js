@@ -17,6 +17,7 @@ Filter Schema
     sort_by
 } */
 export const fetchProducts = (path, filter) => {
+    console.log('Product category ->', path);
     path = path.toLowerCase() || "";
     let obj = CATEGORY_URL_MAPPING[path], category = null;
     if(obj){

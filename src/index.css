@@ -286,6 +286,9 @@
   .primary-nav-dropdown.open .nav-anchor:after {
     width: 100%; }
 
+.nav_icon {
+  max-height: 24px; }
+
 @keyframes grow {
   from {
     width: 0; }
@@ -560,12 +563,12 @@
     text-transform: uppercase;
     font-weight: bold; }
   .app-btn:hover, .app-btn:focus, .app-btn:active {
-    outline: none;
-    text-decoration: none;
-    background-color: #fd2c56;
-    color: #fff; }
+    /* outline: none;
+        background-color: #fd2c56;
+        color: #fff; */
+    text-decoration: none; }
     .app-btn:hover .app-btn-text, .app-btn:focus .app-btn-text, .app-btn:active .app-btn-text {
-      font-size: 12px; }
+      font-size: 80%; }
   .app-btn.btn-white {
     border: 2px solid #000;
     color: #000;
