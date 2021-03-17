@@ -19,7 +19,7 @@ function ProductHeroGallery({images, product_name, product_id, addWishList, inWi
             <div className="product-image-thumbnails clearfix col-md-2 d-flex flex-column justify-content-start float-left p-2">
                 {
                     (images || []).map((item, index) => (
-                        <div key={index} className={"thumb-image pb-md-2" + (selected === index ? " selected" : "")} onClick={() => {setSelected(index)}}>
+                        <div key={index} className={"thumb-image mb-md-2" + (selected === index ? " selected" : "")} onClick={() => {setSelected(index)}}>
                             <AppImage src={item} alt={product_name} title={product_name}/>
                         </div>
                     ))

@@ -1,4 +1,4 @@
-import React, {Component, useState, useContext, useLocation, useEffect, useParams} from 'react';
+import React, { useState, useContext, useLocation, useEffect, useParams} from 'react';
 import Page from './Page';
 import LoadingModule from './../components/LoadingModule';
 import ProductHeroGallery from '../components/ProductHeroGallery';
@@ -13,10 +13,10 @@ import AppButton from './../components/generic/AppButton';
 import { Tabs } from 'react-bootstrap';
 import Tab from 'react-bootstrap/Tab'
 import { fetchProduct } from './../../service/api/firestore/product';
-import { addUser } from './../../service/api/firestore/user';
 import { AuthContext } from './../../store/contexts/AuthContext';
-import { counter } from '@fortawesome/fontawesome-svg-core';
 import CartService from './../../service/cartOperation';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 function SizeSelector({sizes, handler, label, name}){
   let size_radios = [];
   const handleSelect = (e) => {
@@ -141,7 +141,7 @@ function ProductDescComponent({description, sizing, shipping, returns}){
   )
 }
 
-function ProductForm({product, sizes}){
+function ProductForm({product, sizes, addToCart}){
   const {currentUser} = useContext(AuthContext);
   const [quantity, setQuantity] = useState(0);
   const [size, setSize] = useState('');
@@ -153,7 +153,7 @@ function ProductForm({product, sizes}){
   const sizeSelect = (tag, val) => {
     setSize(val)
   }
-  const addToCart = () => {
+  const _addToCart = () => {
     if(!currentUser){
       console.log('User not logged in');
       return;
@@ -177,7 +177,7 @@ function ProductForm({product, sizes}){
         if(size !== ''){
           p.size = size;
         }
-        let cartOp = CartService.addToCart(currentUser.email, p);
+        addToCart(currentUser.email, p);
         //console.log()
       }catch(err){
         console.error('CartService error -> ', err);
@@ -229,7 +229,7 @@ function ProductForm({product, sizes}){
         <AppButton
           label="Add to cart"
           className="btn-white w-100"
-          onClick={addToCart}
+          onClick={_addToCart}
           disabled={!currentUser || quantity === 0 || (sizes.length > 0 && size === '')}
         />
       </div>
@@ -288,6 +288,7 @@ class ProductPage extends Page {
 
   render() {
     let product = this.state.product ? this.state.product : {}, sizes = [], images = [];
+    const {addToCart} = this.props;
     console.log(this.state.size, this.state.qty);
     try{
       if(typeof product.sizes !== 'undefined' && product.sizes !== "-"){
@@ -341,7 +342,7 @@ class ProductPage extends Page {
               </div>
               {product.rating && RatingStars((product.rating || ""))}
               
-              <ProductForm product={this.state.product} sizes={sizes} />
+              <ProductForm addToCart={addToCart} product={this.state.product} sizes={sizes} />
 
               <ProductDescComponent description={product.description}/>
             </div>
@@ -352,6 +353,13 @@ class ProductPage extends Page {
   }
 }
 
-export default ProductPage;
+//export default ProductPage;
 
 
+const mapStateToProps = state => {
+  return {
+      cart: state.cartReducer.cart
+  }
+}
+const mapDispatchToProps = (dispatch) => bindActionCreators({addToCart: CartService.addToCart}, dispatch);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductPage);

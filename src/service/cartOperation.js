@@ -44,7 +44,7 @@ const EMPTY_CART = {
 let CartService = {
     active_cart: EMPTY_CART,
     addToCart: (email, product) => {
-        if(!CartService.validateProduct(product)){
+        /* if(!CartService.validateProduct(product)){
             console.log('addToCart: ', INVALID_PRODUCT, product);
             //DISPATCH ERROR
             //dispatch(cartError({error: CART_ADD_ERROR, cart: CartService.active_cart}));
@@ -58,8 +58,8 @@ let CartService = {
         }).catch( error => {
             console.log('addToCart: MockGetCart: error', error);
             //dispatch(cartError({error: CART_ADD_ERROR, cart: CartService.active_cart}));
-        });
-        /*return dispatch => {
+        }); */
+        return dispatch => {
             dispatch(addToCartPending(CartService.active_cart));
             if(!CartService.validateProduct(product)){
                 console.log('addToCart: ', INVALID_PRODUCT, product);
@@ -76,7 +76,7 @@ let CartService = {
                 console.log('addToCart: MockGetCart: error', error);
                 dispatch(cartError({error: CART_ADD_ERROR, cart: CartService.active_cart}));
             });
-        }*/
+        }
         
     },
     removeFromCart: (email, product, decrement=false) => {
