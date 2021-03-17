@@ -108,10 +108,9 @@ let CartService = {
         
     },
     fetchCart: (email) => {
+        console.log('fetchCart: email -> ', email);
         return (dispatch) => {
-            dispatch(fetchCartPending(EMPTY_CART));
-            //TODO - Replace with Firestore
-            
+            dispatch(fetchCartPending(EMPTY_CART));            
             getUserCart(email).then(res => {
                 CartService.setCart(CartService.parseCart(res));
                 console.log('getUserCart: parsed cart', CartService.active_cart);

@@ -1,10 +1,15 @@
 @import './variables.scss';
 @import './mixins.scss';
+@import './animations.scss';
+
 $thumb-dimen-lg: 280px;
 $thumb-dimen-md: 220px;
 $thumb-dimen-sm: 200px;
 $thumb-dimen-xs: 240px;
 
+.wish-list-instance-container-placeholder {
+  animation: anim-placeholder 1.5s infinite;
+}
 .wish-list-instance-container {
     max-width: $thumb-dimen-lg;
     @include media(768px){
@@ -20,7 +25,7 @@ $thumb-dimen-xs: 240px;
       width: $thumb-dimen-lg;
       height: $thumb-dimen-lg;
       display: inline-block;
-      background-color: #ececec;
+      background-color: $placeholder-bg;
       border: 1px solid #ebebeb;
 
       @include media(768px){
@@ -47,6 +52,19 @@ $thumb-dimen-xs: 240px;
         font-size: 14px;
         font-weight: 500;
       }
+      .wish-list-instance-price-placeholder {
+        height: 18px;
+        margin-bottom: 6px;
+        background-color: $placeholder-bg;
+      }
+      .wish-list-instance-name-placeholder {
+        height: 20px;
+        background-color: $placeholder-bg;
+      }
+      .wish-list-instance-cta-placeholder {
+        height: 32px;
+        background-color: $placeholder-bg;
+      }
       .wish-list-instance-brand {
         text-transform: uppercase;
         font-weight: 300;
@@ -55,26 +73,31 @@ $thumb-dimen-xs: 240px;
       .wish-list-instance-price {
         display: inline-flex;
         align-items: flex-start;
+        font-weight: 600;
+        font-size: 18px;
+        * {
+          font-weight: inherit;
+        }
         .wish-list-instance-sale-price {
-          font-size: 18px;
-          font-weight: 600;
-        }
-        .wish-list-instance-full-price {
-          font-size: 14px;
-        }
-        .wish-list-instance-discount {
-          font-size: 14px;
-          color: $success;
+          
         }
       }
-      .wish-list-instance-remove-wrapper {
-        top: 1rem;
-        right: 1rem;
-        p {
-          font-size: 14px;
-        }
-        .action-message-tooltip {
-          width: 200px;
+      
+    }
+    .wish-list-instance-remove-wrapper {
+      top: 0.5rem;
+      right: 0.5rem;
+      
+      p {
+        font-size: 0.875rem;
+      }
+      .action-message-tooltip {
+        width: 100%;
+      }
+      .action-icon {
+        cursor: pointer;
+        svg {
+          cursor: pointer;
         }
       }
     }

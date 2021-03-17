@@ -1,11 +1,24 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { fetchWishList, removeItemFromWishList } from '../../../service/wishlistMethods';
-import LoadingModule from './../../components/LoadingModule';
 import { AuthContext } from './../../../store/contexts/AuthContext';
 import { CURRENCY } from './../../../service/constants';
 import AppButton from '../../components/generic/AppButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+
+function WishListInstancePlaceholder() {
+    return (
+        <div className="wish-list-instance-container wish-list-instance-container-placeholder mb-3 position-relative">
+            <div className="wish-list-instance-thumb">
+            </div>
+            <div className="wish-list-instance-text pt-2 pb-2">
+                <div className="wish-list-instance-price-placeholder w-100"></div>
+                <div className="wish-list-instance-name-placeholder w-100"></div>
+                <div className="wish-list-cta-placeholder w-100 mt-1"></div>
+            </div>
+        </div>
+    )
+}
 function WishListInstance({instance, removeItem}){
     const [showDeletePop, setShowDeletePop] = useState(false);
     const sku = instance.sku, 
@@ -19,6 +32,15 @@ function WishListInstance({instance, removeItem}){
             removeItem(sku);
         }
     }
+
+    useEffect(()=>{
+        console.log('adding event listener..')
+        window.addEventListener('click', (e)=>{
+            //if(showDeletePop){
+                setShowDeletePop(false);
+            //}
+        })
+    }, [])
 
     return (
         <div className="wish-list-instance-container mb-3 position-relative">
@@ -42,7 +64,7 @@ function WishListInstance({instance, removeItem}){
                     <AppButton className="w-100 sm" onClick={() => {}} label="Buy now" />
                 </div>
             </div>
-            <div className="wish-list-instance-remove-wrapper tooltip-wrapper d-flex flex-column align-items-end mt-1 mr-1">
+            <div className="wish-list-instance-remove-wrapper tooltip-wrapper d-flex flex-column align-items-end" onClick={(e)=>{e.stopPropagation()}}>
                 <span className="action-icon" onClick={deletePopAlert}>
                     <FontAwesomeIcon icon={faTrashAlt} />
                 </span>
@@ -130,12 +152,14 @@ function UserWishListFragment(){
                     (!pending && wishList.length === 0) && <div></div>
                 }
                 {
-                    pending && <div className="col-12">
-                        <LoadingModule
-                            type="block"
-                            text="Please wait while we fetch your wish list"
-                        />
-                    </div>
+                    pending && <React.Fragment>
+                        <WishListInstancePlaceholder/>
+                        <WishListInstancePlaceholder/>
+                        <WishListInstancePlaceholder/>
+                        <WishListInstancePlaceholder/>
+                        <WishListInstancePlaceholder/>
+                        <WishListInstancePlaceholder/>
+                    </React.Fragment>
                 }
             </div>
         </div>

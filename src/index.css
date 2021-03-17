@@ -881,6 +881,21 @@
     .order-container .order-instances .order-instance-product .order-summary-container .order-instance-status .order-instance-status-date {
       font-size: 14px; }
 
+@keyframes anim-placeholder {
+  0% {
+    opacity: 0.4; }
+  25% {
+    opacity: 0.7; }
+  50% {
+    opacity: 1; }
+  75% {
+    opacity: 0.7; }
+  100% {
+    opacity: 0.5; } }
+
+.wish-list-instance-container-placeholder {
+  animation: anim-placeholder 1.5s infinite; }
+
 .wish-list-instance-container {
   max-width: 280px; }
   @media only screen and (max-width: 768px) {
@@ -917,28 +932,38 @@
   .wish-list-instance-container .wish-list-instance-text .wish-list-instance-name {
     font-size: 14px;
     font-weight: 500; }
+  .wish-list-instance-container .wish-list-instance-text .wish-list-instance-price-placeholder {
+    height: 18px;
+    margin-bottom: 6px;
+    background-color: #ececec; }
+  .wish-list-instance-container .wish-list-instance-text .wish-list-instance-name-placeholder {
+    height: 20px;
+    background-color: #ececec; }
+  .wish-list-instance-container .wish-list-instance-text .wish-list-instance-cta-placeholder {
+    height: 32px;
+    background-color: #ececec; }
   .wish-list-instance-container .wish-list-instance-text .wish-list-instance-brand {
     text-transform: uppercase;
     font-weight: 300;
     font-size: 14px; }
   .wish-list-instance-container .wish-list-instance-text .wish-list-instance-price {
     display: inline-flex;
-    align-items: flex-start; }
-    .wish-list-instance-container .wish-list-instance-text .wish-list-instance-price .wish-list-instance-sale-price {
-      font-size: 18px;
-      font-weight: 600; }
-    .wish-list-instance-container .wish-list-instance-text .wish-list-instance-price .wish-list-instance-full-price {
-      font-size: 14px; }
-    .wish-list-instance-container .wish-list-instance-text .wish-list-instance-price .wish-list-instance-discount {
-      font-size: 14px;
-      color: #28a745; }
-  .wish-list-instance-container .wish-list-instance-text .wish-list-instance-remove-wrapper {
-    top: 1rem;
-    right: 1rem; }
-    .wish-list-instance-container .wish-list-instance-text .wish-list-instance-remove-wrapper p {
-      font-size: 14px; }
-    .wish-list-instance-container .wish-list-instance-text .wish-list-instance-remove-wrapper .action-message-tooltip {
-      width: 200px; }
+    align-items: flex-start;
+    font-weight: 600;
+    font-size: 18px; }
+    .wish-list-instance-container .wish-list-instance-text .wish-list-instance-price * {
+      font-weight: inherit; }
+  .wish-list-instance-container .wish-list-instance-remove-wrapper {
+    top: 0.5rem;
+    right: 0.5rem; }
+    .wish-list-instance-container .wish-list-instance-remove-wrapper p {
+      font-size: 0.875rem; }
+    .wish-list-instance-container .wish-list-instance-remove-wrapper .action-message-tooltip {
+      width: 100%; }
+    .wish-list-instance-container .wish-list-instance-remove-wrapper .action-icon {
+      cursor: pointer; }
+      .wish-list-instance-container .wish-list-instance-remove-wrapper .action-icon svg {
+        cursor: pointer; }
 
 .counter-container .counter-label {
   font-size: 14px;
