@@ -7,6 +7,7 @@ import PRODUCTS from '../../mock/products.json';
 import AppImage from './generic/AppImage';
 import { CURRENCY } from '../../service/constants';
 import { fetchProductsByPage } from '../../service/api/firestore/product';
+import { useHistory } from 'react-router';
 function CardStack({cards, cardsState, loading}) {
     useEffect(() => {}, [cards])
     return (
@@ -51,6 +52,7 @@ export default function LikeBoxCarousel({slideIn, slideOut}) {
     const [cardsState, setCardsState] = useState({loading: true});
     const [items, setItems] = useState([]);
     const [update, setUpdate] = useState(true);
+    const history = useHistory();
 
 
     useEffect(()=>{
@@ -134,7 +136,7 @@ export default function LikeBoxCarousel({slideIn, slideOut}) {
     }
     return (
         <React.Fragment>
-            {!reachedMax && <div className={"like-box-preference-carousel" + (!slideIn && !slideOut ? " slide-hold" : "") + (slideOut ? " slide-out" : "") + (slideIn ? " slide-in" : "")}>
+            {!reachedMax && <div className="like-box"><div className={"like-box-preference-carousel slide-in"}>
                 <div className="d-flex align-items-center justify-content-between">
                     <div className="like-box-btn like-box-left-btn" onClick={rejectItem}>
                         <FontAwesomeIcon icon={faArrowLeft} />
@@ -147,7 +149,8 @@ export default function LikeBoxCarousel({slideIn, slideOut}) {
                         <FontAwesomeIcon icon={faArrowRight} />
                     </div>
                 </div>
-                <AppButton label="Start shopping" className="w-100 mb-5" />
+                <AppButton label="Start shopping" className="w-100 mb-5" onClick={() => {history.push('/')}} />
+            </div>
             </div>}
             {
                 reachedMax && <div className=""></div>

@@ -10,6 +10,7 @@ import { db } from './../firebase';
             street
         }
     },
+    status,
     total,
     date_placed,
     date_delivered,

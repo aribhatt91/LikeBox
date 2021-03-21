@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import RangeSlider from 'react-bootstrap-range-slider';
 import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
 import AppButton from './generic/AppButton';
+import { AuthContext } from './../../store/contexts/AuthContext';
+import { setUserSizing } from './../../service/api/firestore/user';
 
 function LikeBoxSlider({label, min=0, max=100, onChange, slideIn, slideOut}) {
     const [value, setValue] = useState(0)
@@ -54,13 +56,35 @@ function LikeBoxSlider({label, min=0, max=100, onChange, slideIn, slideOut}) {
     )
 }
 
-export default function LikeBoxPreference({slideIn, slideOut, onChange, onComplete}) {
+ 
+export default function LikeBoxPreference({slideIn, slideOut, onChange, onComplete, skip}) {
     const [ value, setValue ] = useState(25);
+    const {currentUser} = useContext(AuthContext)
     const onInputChange = (name, val) => {
         console.log(name, val)
     }
-    const submit = () => {
+    useEffect(()=>{
+        try{
+            (async ()=>{
 
+            })()
+        }catch(err){
+
+        }
+    }, [currentUser])
+    const submit = async () => {
+        try {
+            if(currentUser){
+                let res = setUserSizing(currentUser.email, )
+            }
+            
+        }catch(err) {
+
+        }finally{
+            if(typeof onComplete === 'function'){
+                onComplete();
+            }
+        }
     }
     return (
         <div className={"like-box-preference" + (!slideIn && !slideOut ? " slide-hold" : "") + (slideOut ? " slide-out" : "") + (slideIn ? " slide-in" : "")}>
@@ -93,10 +117,20 @@ export default function LikeBoxPreference({slideIn, slideOut, onChange, onComple
                 min={0}
                 max={100}
                 label="Shoe size"
-                onChange={(val) => onInputChange('show', val)}
+                onChange={(val) => onInputChange('shoe', val)}
             />
 
-            <AppButton label="Submit" className="mt-5 mb-5 w-100" onClick={submit}/>
+            <div className="row m-0 mt-5 mb-5 ">
+                <div className={skip? "col-6" : "w-100"}>
+                    <AppButton label="Submit" className="w-100" onClick={submit}/>
+                </div>
+                {skip &&<div className="col-6">
+                    <AppButton label="Skip" className="btn-white border-0 border-radius-0 w-100" onClick={onComplete}/>
+                </div>}
+            </div>
+
+
+            
             
         </div>
     )

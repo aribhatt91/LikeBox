@@ -1,5 +1,5 @@
 import { db, auth } from './../firebase';
-import { fetchUser, updateUserByEmail } from './user';
+import { getUser, updateUserByEmail } from './user';
 
 const collection = db.collection('users');
 /*
@@ -36,18 +36,8 @@ export const getUserCart = async (email) => {
     let cart = null;
     
     try {
-        let querySnapshot = await fetchUser(email);
-        console.log(querySnapshot, querySnapshot.size);
-        if(querySnapshot.size === 1){
-            querySnapshot.forEach((doc) => {
-                // doc.data() is never undefined for query doc snapshots
-                console.log(doc.id, " => ", doc.data());
-                let data = doc.data() || {};
-                cart = data.cart || null;
-            });
-        }else {
-            throw new Error('User not found');
-        }
+        let user = await getUser(email);
+        cart = user.cart || null;
     }catch(err){
         console.error('getUserCart:Error ', err);
         //return new Promise((resolve, reject) => reject(err));

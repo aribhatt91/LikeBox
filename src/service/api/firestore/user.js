@@ -47,14 +47,44 @@ function stringToHash(string) {
     return hash; 
 } 
 
-export const fetchUser = (email) => {
+export const fetchUserQuery = (email) => {
     return collection.where("email", "==", email).get();
 }
-export const addUser = async (user) => {
-    if(user.email){
+
+export const getUser = async (email) => {
+    let user = null;
+    try {
+        let queries = await fetchUserQuery(email);
+        if(queries.size > 0){
+            user = queries.docs[0].data();
+        }else {
+            throw new Error('Unique user not found');
+        }
+    }catch(err){
+        console.error('user:getUser:', err);
+    }
+    return new Promise(resolve => resolve(user));
+}
+
+export const isFirstLoad = async (email) => {
+    let user = null, res = true;
+    try {
+        user = await getUser(email);
+        console.log('isFirstLoad', user);
+        res = !(user && user.showedPrefs);
+        if(res){
+            await updateUserByEmail(email, {showedPrefs: true})
+        }
+    }catch(err){
+
+    }
+    return new Promise(resolve => resolve(res));
+}
+export const addUser = async (newUser) => {
+    if(newUser.email){
         try{
-            let queries = await fetchUser(user.email);
-            if(queries.size > 0){
+            let user = await getUser(newUser.email);
+            if(user){
                 throw new Error('Email address is already registered');
             }
         }catch(err) {
@@ -64,8 +94,8 @@ export const addUser = async (user) => {
     
         try {
             let date = (new Date()).getTime();
-            user.date_joined = date;
-            collection.add(user).then( docRef => {
+            newUser.date_joined = date;
+            collection.add(newUser).then( docRef => {
                 console.log("Document written with ID: ", docRef);
             }).catch((error) => {
                 console.error("Error adding document: ", error);
@@ -82,7 +112,7 @@ const validateUpdateObject = (update) => {
 export const updateUserByEmail = async (email, update) => {
     let res = null;
     try {
-        let querySnapshot = await fetchUser(email);
+        let querySnapshot = await fetchUserQuery(email);
         
         console.log(querySnapshot);
         if(querySnapshot.size === 1){
@@ -106,16 +136,30 @@ export const updateUserByEmail = async (email, update) => {
 export const getUserSizing = async (email) => {
     let sizing = null;
     try {
-        let querySnapshot = await fetchUser(email);
-        console.log(querySnapshot);
-        if(querySnapshot.size === 1){
-            querySnapshot.forEach((doc) => {
-                //console.log(doc.id, " => ", doc.data());
-                sizing = doc.data().sizing || null;
-            });
-        }
+        let user = await getUser(email);
+        sizing = user.sizing;
     }catch(err){
-        console.error("updateUser: error -> ", err);
+        console.error("getUserSizing: error -> ", err);
     }   
     return new Promise(resolve => resolve(sizing));
+}
+export const setUserSizing = async (email, update) => {
+    let res = null;
+    try {
+        //console.log(doc.id, " => ", doc.data());
+        let sizing = await getUserSizing(email);;
+        
+        if(!sizing){
+            sizing = {
+                ...sizing,
+                update
+            };
+        }
+        res = await updateUserByEmail(email, {sizing});
+        res = res.sizing;
+        console.log('updated sizing', res);
+    }catch(err){
+        console.error("setUserSizing: error -> ", err);
+    }   
+    return new Promise(resolve => resolve(res));
 }

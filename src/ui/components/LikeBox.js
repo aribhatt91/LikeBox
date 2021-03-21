@@ -10,7 +10,7 @@ import AppRadioInput from './generic/AppRadioInput';
 import SignupForm from './forms/SignupForm';
 import LoginForm from './forms/LoginForm';
 import LikeBoxHomePage from './LikeBoxHomePage';
-import { fetchUser, getUserSizing } from './../../service/api/firestore/user';
+import { getUserSizing, isFirstLoad } from './../../service/api/firestore/user';
 import { useHistory } from 'react-router';
 function LikeBoxEmailForm({onComplete, setRegistered}) {
     const {fetchSignInMethods} = useContext(AuthContext);
@@ -146,13 +146,11 @@ export default function LikeBox() {
     useEffect(() => {
         if(currentUser){
             (async () => {
-                let sizing = await getUserSizing(currentUser.email);
-                if(sizing){
-                    setShow(4);
-                }else {
+                let firstLoad = await isFirstLoad(currentUser.email);
+                if(firstLoad){
                     setShow(2);
-                    //history.push('/likebox');
-                    
+                }else {
+                    setShow(4);                    
                 }
             })()
         }
@@ -165,28 +163,32 @@ export default function LikeBox() {
     return (
         <div className="container">
             {show !== 4 && <div className="like-box">
-                <LikeBoxLandingPage
-                    slideOut={show > 0}
-                    slideIn={show === 0}
-                    setRegistered={(reg, em) => {
-                            setRegistered(reg);
-                            if(em){
-                                setEmail(em);
+                {!currentUser && 
+                <React.Fragment>
+                    <LikeBoxLandingPage
+                        slideOut={show > 0}
+                        slideIn={show === 0}
+                        setRegistered={(reg, em) => {
+                                setRegistered(reg);
+                                if(em){
+                                    setEmail(em);
+                                }
                             }
                         }
-                    }
-                    onComplete={() => {setShow(1)}}
-                />
-                <LikeBoxSignup 
-                    registered={registered} 
-                    slideOut={show > 1}
-                    slideIn={show === 1}
-                    onComplete={() => {setShow(2)}}
-                    email={email}
-                />
+                        onComplete={() => {setShow(1)}}
+                    />
+                    <LikeBoxSignup 
+                        registered={registered} 
+                        slideOut={show > 1}
+                        slideIn={show === 1}
+                        onComplete={() => {setShow(2)}}
+                        email={email}
+                    />
+                </React.Fragment>}
                 <LikeBoxPreference
                     slideOut={show > 2}
                     slideIn={show === 2}
+                    skip={true}
                     onComplete={goToLikeBox}
                 />
                 {/* <LikeBoxCarousel

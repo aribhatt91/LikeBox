@@ -122,7 +122,7 @@ export default function HeaderNavigation() {
     };
     return (
         <div className={"primary-nav-dropdown" + (open ? " open" : "")} onClick={(e) => {e.stopPropagation()}}>
-            <a href="#" className={"nav-anchor"} onClick={() => setOpen(!open)}>Categories</a>
+            <a href="#" className={"nav-anchor text-uppercase"} onClick={() => setOpen(!open)}>Categories</a>
             <div className={"nav-dropdown-container"}>
                 <div className="nav-dropdown">
                     <div className="nav-menu">

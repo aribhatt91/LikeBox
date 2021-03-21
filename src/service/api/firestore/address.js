@@ -1,5 +1,5 @@
 import { db } from './../firebase';
-import { fetchUser, updateUserByEmail } from './user';
+import { getUser, updateUserByEmail } from './user';
 
 /* {
     housenum,
@@ -20,15 +20,10 @@ const validateAddressFields = (address={}) => {
 export const getUserAddressBook = async (email) => {
     let addressBook = [];
     try {
-        let querySnapshot = await fetchUser(email);
+        let user = await getUser(email);
         //console.log(querySnapshot);
-        if(querySnapshot.size === 1){
-            let doc = querySnapshot.docs[0];
-                // doc.data() is never undefined for query doc snapshots
-            let data = doc.data() || {};
-            addressBook = data.addresses || [];
-            console.log(doc.id, " => ", doc.data(), addressBook);
-
+        if(user){
+            addressBook = user.addresses || [];
         }else {
             throw new Error('User not found');
         }
