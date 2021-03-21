@@ -10,6 +10,7 @@ import FourZeroFour from './pages/FourZeroFour';
 import LoginPage from './pages/LoginPage';
 import ProtectedRoute from './../service/middleware/ProtectedRoute';
 import WishListPage from './pages/WishListPage';
+import LikeBoxCarousel from './components/LikeBoxCarousel';
 
 function AppBody (){
 
@@ -26,6 +27,7 @@ function AppBody (){
         <ProtectedRoute path='/wishlist' component={WishListPage} />
         <ProtectedRoute path="/login" component={LoginPage} />
         <ProtectedRoute path="/register" component={LoginPage} />
+        <ProtectedRoute path="/likebox" component={LikeBoxCarousel} />
         {/* <Route path='/user/:page?' render={(props) => <UserDashboard {...props} pageName="user-dashboard" />}/> */}
         <Route path="*" render={props => <FourZeroFour {...props} />}/>
       </Switch>

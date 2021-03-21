@@ -1,64 +1,129 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import AddressForm from '../../components/forms/AddressForm';
 import Accordion from '../../components/generic/Accordion';
 import ADDRESSES from '../../../mock/addresses.json';
+import { AuthContext } from './../../../store/contexts/AuthContext';
+import { fetchAddresses, updateExistingAddress, deleteAddress } from '../../../service/addressMethods';
+import AppButton from '../../components/generic/AppButton';
 
-function Address({instance, deleteAddress, editAddress}){
+function Address({user, instance, onAddressOp }){
     const [editMode, setEditMode] = useState(false);
     return (
         <div className="address-instance-container mb-3">
             <div className={"address-instance-display p-3" + (editMode ? " d-none": "")}>
-                <div className="address-instance-name font-weight-bold mb-1"><span className="pr-3">{instance.name}</span><span>{instance.mobile}</span></div>
-                <div className="address-instance-street"><span>{instance.address}</span><span>{instance.locality ? ", " + instance.locality : ""}</span></div>
-                <div className="address-instance-city"><span>{instance.city}</span><span>{ ", " + instance.state + "-" + instance.pincode}</span></div>
+                <div className="address-instance-name font-weight-bold mb-2"><span className="pr-3">{instance.name}</span></div>
+                <div className="address-instance-street">{instance.housenum}</div>
+                <div className="address-instance-street">{instance.street}</div>
+                <div className="address-instance-city">{instance.city}</div>
+                <div className="address-instance-postcode">{ instance.postcode}</div>
                 <span className="address-instance-edit-btn" onClick={() => setEditMode(true)}>Edit</span>
             </div>
-            <div className={"address-instance-edit p-3" + (!editMode ? " d-none": "")}>
+            {editMode && <div className={"address-instance-edit p-3"}>
                 <AddressForm
-                    hideHeader={true}
-                    defaultValue={instance}
-                    action="update"
+                    user={user}
+                    address={instance}
+                    update={true}
+                    onComplete={onAddressOp}
+                    cancelable={true}
+                    cancelEdit={() => setEditMode(false)}
                 />
-                <span className="address-instance-cancel-btn" onClick={() => setEditMode(false)}>Cancel</span>
-            </div>
+            </div>}
             
         </div>
     )
 }
-function UserAddressFragment({addresses, deleteAddress, editAddress}){
-    let saved_addresses = [];
-    if(ADDRESSES.addresses && ADDRESSES.addresses.length > 0){
-        ADDRESSES.addresses.forEach((item, index) => {
-            saved_addresses.push(
-                <Address
-                    instance={item}
-                    deleteAddress={deleteAddress}
-                    editAddress={editAddress}
-                />
-            )
-        })
-        
-    }
-    return (
-        <div className={"address-section editable-section"}>
-            <h1 className="editable-section-header mb-5">My addresses</h1>
-            <div className="add-address-container mb-4">
-                <Accordion
-                    label="Add new address"
-                    openBtn="true"
-                    // hideHeaderOnOpen={true}
-                    children={
-                        <AddressForm
-                            hideHeader={true}
-                        />
+function UserAddressFragment(){
+    const [loading, setLoading] = useState(true);
+    const [addresses, setAddresses] = useState([]);
+    const [openNewAddressForm, setOpenNewAddressForm] = useState(false);
+    const {currentUser} = useContext(AuthContext);
+
+    useEffect(() => {
+        try{
+            if(!loading){
+                setLoading(true);
+            }
+            if(currentUser){
+                (async()=>{
+                    let res = await fetchAddresses(currentUser.email);
+                    res = res || [];
+                    if(res.length > 0){
+                        setAddresses(res);
                     }
-                />
-            </div>
-            {saved_addresses.length > 0 && <div className="saved-address-container">
+                })()
+            }
+            
+        }catch(err){
+            console.error('UserAddressFragment:useEffect:', err);
+        }finally{
+            if(loading){
+                setLoading(false);
+            }
+        }
+    }, [currentUser])
+
+    const onAddressOp = (result) => {
+        try {
+            console.log('onAddressOp:', result);
+            if(!loading){
+                setLoading(true);
+            }
+            if(result.length > 0){
+                
+                setOpenNewAddressForm(false);
+                setLoading(false);
+                setAddresses(result);
+            }
+        }catch(err){
+            console.error('UserAddressFragment:update:', err);
+            setLoading(false);
+        }finally{
+        }
+    }
+
+    const remove = async (addressId) => {
+        try {
+            let res = deleteAddress(currentUser.email, addressId);
+            res = res || [];
+            if(res.length > 0){
+                setAddresses(res);
+            }
+        }catch(err){
+            console.error('UserAddressFragment:update:', err);
+        }finally {
+
+        }
+    }
+
+    return (
+        <div className={"address-section editable-section w-100"}>
+            <h1 className="editable-section-header mb-5">My addresses</h1>
+            
+            {<div className={"saved-address-container" + (openNewAddressForm ? ' d-none' : "")}>
                 {
-                    saved_addresses
+                    (addresses || []).map((item, index) => 
+                    <Address
+                        user={currentUser}
+                        key={index}
+                        instance={item}
+                        deleteAddress={remove}
+                        onAddressOp={onAddressOp}
+                    />)
                 }
             </div>}
+            <div className="add-address-container w-100 mb-4">
+                <div className={"w-100" + (openNewAddressForm ? ' d-none' : "")}>
+                    <AppButton label="Add new address" className="w-100"  onClick={()=>setOpenNewAddressForm(true)} />
+                </div>
+                {openNewAddressForm && <div className="w-100">
+                    <AddressForm
+                        user={currentUser}
+                        onComplete={onAddressOp}
+                        cancelable={true}
+                        cancelEdit={()=>setOpenNewAddressForm(false)}
+                    />
+                </div>}
+            </div>
 
         </div>
     )

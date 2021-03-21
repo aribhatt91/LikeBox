@@ -1,0 +1,107 @@
+@import './variables.scss';
+@import './mixins.scss';
+@import './animations.scss';
+$width: $thumb-dimen-lg;
+@include media(768px){
+    $width: $thumb-dimen-md;
+}
+@include media(660px){
+    $width: $thumb-dimen-sm;
+}
+@include media(320px){
+    $width: $thumb-dimen-xs;
+}
+.like-box-preference-carousel {
+    margin: 60px auto;
+    .like-box-btn {
+      width: 120px;
+      height: 120px;
+      border: 2px solid #424B54;
+      font-size: 2.5rem;
+      font-weight: 100;
+      border-radius: 50%;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      &.like-box-left-btn {
+        color: #FF6969;
+      }
+      &.like-box-right-btn {
+        color: #2F97C1;
+      }
+    }
+    .card-stack {
+      position: relative;
+      margin: 2rem;
+      height: calc((#{$width} + 2rem + 2.4rem));;
+      width: calc(100% - 300px);
+      overflow: hidden;
+
+      .card-stack-item, .card-item-placeholder {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        height: auto;
+        padding: 1rem;
+        border-radius: 4px;
+        transition: 0.5s all;
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: #fbfbfb;
+        margin-left: calc(-1 * (#{$width}/2 + 1rem));
+        .card-container {
+            width: $width;
+        }
+        .card-thumb {
+            width: $width;
+            height: $width;
+            display: inline-block;
+            background-color: $placeholder-bg;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+        .card-title {
+            margin-top: 1rem;
+            margin-bottom: 0;
+            font-size: 1.2rem;
+            line-height: 1.2;
+            font-weight: bold;
+            text-align: center;
+
+        }
+        .card-title-placeholder {
+            margin-top: 1rem;
+            height: 1.44rem;
+            width: 50%;
+            background-color: $placeholder-bg;
+        }
+        .card-price {
+            font-size: 18px;
+            line-height: 24px;
+            font-weight: bold;
+            text-align: start;
+            .currency {
+                font-weight: bold;
+            }
+        }
+        &.rejected {
+          left: -300%;
+          transform: scale(0.2);
+        }
+        &.liked {
+          left: 300%;
+          transform: scale(0.2);
+        }
+
+      }
+      .card-item-placeholder {
+          animation: anim-placeholder 1.5s infinite;
+      }
+    }
+  }

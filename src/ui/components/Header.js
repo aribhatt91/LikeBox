@@ -50,61 +50,32 @@ const UserProfileDropDown = ({classes, logout}) => {
   )
 }
 function Header (props) {
-  const [showModal, setShowModal] = useState(false);
+  /* const [showModal, setShowModal] = useState(false);
   const [searchExpand, setSearchExpand] = useState(false);
   const [scrolling, setScrolling] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true); */
   const location = useLocation();
 
   const {currentUser, logout} = useContext(AuthContext);
 
-  const signout = async () => {
-    try{
-      let res = await logout();
-      console.log('signout -> ', res);
-    }catch(err){
-      console.error(err);
-    }
-  }
-  /* constructor(props){
-    super(props);
-    this.state = {
-      showModal: false, 
-      searchExpand: false,
-      loggedIn: (getUserObject() !== null),
-      user: null,
-      scrolling: false
-    };
-    this.setShowModal = this.setShowModal.bind(this);
-    this.setHideModal = this.setHideModal.bind(this);
-    console.log('Header props ->',this.props);
-    
-  } */
 
   useEffect(()=>{
-    document.body.style.height = '100vh';
-    document.body.style.overflow = 'hidden';
-    window.addEventListener('scroll', (e) => {
+    /* window.addEventListener('scroll', (e) => {
       if(window.pageYOffset <= 20 && setScrolling && scrolling){
         setScrolling(false);
       }else if(window.pageYOffset > 30 && setScrolling && !scrolling) {
         setScrolling(true)
       }
-    })
-    setTimeout(() => {
-      setLoading(false);
-      document.body.style.height = 'auto';
-      document.body.style.overflow = 'auto';
-    }, 2500);
+    }) */
   }, [])
   
     return (
       <header className="App-header sticky-top">
-        <div className={"topnav" + (scrolling ? ' scrolling' : "")}>
+        <div className={"topnav" /*Add scrolling functionality if needed*/}>
           <Navbar variant="light">
   
             <Navbar.Brand>
-              <SideNav loggedIn={currentUser} signIn={setShowModal}></SideNav>
+              <SideNav loggedIn={currentUser}></SideNav>
               <NavLink activeClassName='active' exact={true} to="/" >
                 <img className="home_icon" src={HOME_ICON} alt="Home"/>
               </NavLink>
@@ -125,16 +96,26 @@ function Header (props) {
               </AppButton>}
               {currentUser && 
               <React.Fragment>
+                {
+                  /* Hide wishlist icon for cart page */
+                location.pathname.indexOf('wishlist') === -1 && 
                 <NavLink activeClassName="active" to="/wishlist">
                   <img src={heart_icon} className="nav_icon" />
                 </NavLink>
+                }
+                {
+                /* Hide cart icon for cart page */
+                location.pathname.indexOf('cart') === -1 && 
                 <NavLink activeClassName='active' to="/cart">
-                  {/* <FontAwesomeIcon icon={faCartPlus}/> */}
                   <CartLink user={currentUser}/>
                 </NavLink>
-                <AppButton label="Your account" className={"d-md-flex sm align-items-center pl-5 pr-5"} 
+                }
+                {
+                location.pathname.indexOf('user') === -1 &&
+                <AppButton label="Your account" className={"d-md-flex no-anim sm align-items-center pl-5 pr-5"} 
                   href="/user">
                 </AppButton>
+                }
               </React.Fragment>
               }
 
@@ -143,7 +124,7 @@ function Header (props) {
             </Nav>
           </Navbar>
         </div>
-        <Modal
+        {/* <Modal
             show={showModal}
             onHide={() => {setShowModal(false)}}
             size="md"
@@ -153,8 +134,8 @@ function Header (props) {
               <div className="d-none d-md-inline-flex login-img" style={{backgroundImage: "url(" + LI + ")"}}></div>
               <UserLoginSignupModule/>
             </Modal.Body>
-          </Modal>
-          {loading && <LoadingModule />}
+          </Modal> */}
+          
       </header>
     );
   

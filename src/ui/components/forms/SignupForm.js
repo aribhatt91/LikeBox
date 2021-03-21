@@ -11,6 +11,8 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 import { useAuth, AuthContext } from './../../../store/contexts/AuthContext';
 import AppRadioInput from '../generic/AppRadioInput';
+import { addUser } from '../../../service/api/firestore/user';
+import { SuccessMessage } from '../generic/PageMessage';
 //import signup from './../../../service/signupService';
 
 const validationSchema = SIGNUP_FORM_SCHEMA;
@@ -24,41 +26,51 @@ function SignupForm(props){
     console.log('SignupForm', currentUser);
     const submitForm =  async (userInput, {setSubmitting}) => {
         setSubmitting(true);
-        //console.log(userInput, setSubmitting);
+        console.log(userInput, setSubmitting);
         if(error){
             setError(null);
         }
         try{
             console.log('Logging', userInput);
-            /* await signup(userInput);
+            await signup(userInput);
             console.log('after await', currentUser);
-            updateName(userInput.fname); */
+            let user = {}
+            user.email = userInput.email;
+            user.name = {};
+            user.name.fname = userInput.fname;
+            user.name.lname = userInput.lname;
+            let d = new Date();
+            d.setDate(Number(userInput.date))
+            d.setMonth((Number(userInput.month) - 1))
+            d.setYear(Number(userInput.year))
+            user.dob = d.toDateString();
+            user.gender = userInput.gender;
+            await addUser(user)
+            //updateName(userInput.fname);
             if(typeof props.onComplete === 'function'){
                 props.onComplete();
             }
         }catch(err){
             console.error(err);
+        }finally{
+            setSubmitting(false);
+            setSubmitted(true);
         }
         
-        setSubmitting(false);
-        setSubmitted(true);
+        
     }
     return (
         <div className="col-12 p-0 m-0">
-          {currentUser && <div className="login-success-container d-flex flex-column justify-content-center align-items-center">
-            <div className="green-tick mb-3">
-                <FontAwesomeIcon icon={faCheck} size="2x"></FontAwesomeIcon>
-            </div>
-            <h2 className="font-weight-light">You are logged in!</h2>
-            </div>
+          {
+              currentUser && <SuccessMessage message={"You are logged in!"} />
           }
         <div className={"signup-form-container" + (currentUser ? ' d-none' : "")}>
             <div className="signup-form-header mb-4 pl-2 pr-2 h3 font-weight-normal w-100 text-center">Sign up for free to start shopping</div>
-            <form className={"signup-form"}>
+            <div className={"signup-form"}>
               <AppForm
                 onSubmit={submitForm}
-                validationSchema={validationSchema}
-                initialValues={{email: '', password: '', confirmpassword: '', fname: '', date: '', month: '', year: '', lname: '', gender: ''}} >
+                // validationSchema={validationSchema}
+                initialValues={{email: (props.email || ""), password: '', confirmpassword: '', fname: '', date: '', month: '', year: '', lname: '', gender: ''}} >
                 
 
                 <div className="row m-0">
@@ -68,8 +80,8 @@ function SignupForm(props){
                             type="number"
                             name="date"
                             label="DD*"
-                            min="1"
-                            max="31"
+                            min={1}
+                            max={31}
                             />
                     </div>
                     <div className="col-md-4 float-left pl-2 pr-2">
@@ -77,8 +89,8 @@ function SignupForm(props){
                             type="number"
                             name="month"
                             label="MM*"
-                            min="1"
-                            max="12"
+                            min={1}
+                            max={12}
                             />
                     </div>
                     <div className="col-md-4 float-left pl-2 pr-2">
@@ -86,8 +98,8 @@ function SignupForm(props){
                             type="number"
                             name="year"
                             label="YYYY*"
-                            min="1900"
-                            max="2021"
+                            min={1900}
+                            max={2021}
                             />
                     </div>
                 </div>
@@ -166,7 +178,7 @@ function SignupForm(props){
                     </div>
                 </div>
                 </AppForm>
-            </form>
+            </div>
         </div>
           
         </div>

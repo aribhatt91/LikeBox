@@ -2,27 +2,33 @@ import { db } from './../firebase';
 import { fetchUser, updateUserByEmail } from './user';
 
 /* {
-    housenumber,
+    housenum,
     street,
-    pincode,
+    postcode,
     name,
-    contact
+    city
 } */
 
 const collection = db.collection('users');
 
+const validateAddressFields = (address={}) => {
+    if(!address || !address.name || !address.postcode || !address.street || !address.housenum || !address.city){
+        return false;
+    }
+    return true;
+}
 export const getUserAddressBook = async (email) => {
     let addressBook = [];
     try {
         let querySnapshot = await fetchUser(email);
-        console.log(querySnapshot);
+        //console.log(querySnapshot);
         if(querySnapshot.size === 1){
-            querySnapshot.forEach((doc) => {
+            let doc = querySnapshot.docs[0];
                 // doc.data() is never undefined for query doc snapshots
-                console.log(doc.id, " => ", doc.data());
-                let data = doc.data() || {};
-                addressBook = data.addresses || [];
-            });
+            let data = doc.data() || {};
+            addressBook = data.addresses || [];
+            console.log(doc.id, " => ", doc.data(), addressBook);
+
         }else {
             throw new Error('User not found');
         }
@@ -32,19 +38,90 @@ export const getUserAddressBook = async (email) => {
     return new Promise((resolve, reject) => resolve(addressBook));
 }
 
-export const addNewAddress = async (email, address) => {
-    let addressBook = [];
+export const addNewAddress = async (email="", address={}) => {
+    let addressBook = [], isPresent = false;
     try {
         addressBook = await getUserAddressBook(email);
+        addressBook = addressBook || [];
+        if(!validateAddressFields(address)){
+            throw new Error('Address not valid');
+        }
+        addressBook.forEach((item, index) => {
+            if(!isPresent){
+                isPresent = (address.name || "").toLowerCase() === (item.name || "").toLowerCase()
+                && (address.postcode || "").toLowerCase() === (item.postcode || "").toLowerCase()
+                && (address.street || "").toLowerCase() === (item.street || "").toLowerCase()
+                && (address.housenum || "").toLowerCase() === (item.housenum || "").toLowerCase();
+            }
+        });
+
+        if(isPresent){
+            throw new Error('Address is already present');
+        }else {
+            address.id = (addressBook.length + 1);
+            addressBook.push(address);
+            let res = await updateUserByEmail(email, {'addresses': addressBook});
+            console.log(res);
+        }
         
     }catch(err){
-
+        console.log('AddAddressError:', err);
     }
     return new Promise((resolve, reject) => resolve(addressBook));
 }
 
-export const updateAddress = (address) => {}
+export const updateAddress = async (email="", address) => {
+    let addressBook = [], i = -1;
+    try {
+        addressBook = await getUserAddressBook(email);
+        addressBook = addressBook || [];
+        if(!validateAddressFields(address)){
+            throw new Error('Address not valid');
+        }
+        addressBook.forEach((item, index) => {
+            if((address.id || "").toLowerCase() === (item.id || "").toLowerCase()){
+                i = index;
+            }
+        });
+        if(i === -1){
+            throw new Error('Address is not present');
+        }else {
+            addressBook[i] = address;
+            let res = await updateUserByEmail(email, {'addresses': addressBook});
+            console.log(res);
+        }
+        
+    }catch(err){
+        console.log('UpdateAddressError:', err);
+    }
+    return new Promise((resolve, reject) => resolve(addressBook));
+}
 
-export const removeAddress = (address) => {}
+export const removeAddressById = async (email, addressId) => {
+    let addressBook = [], i = -1;
+    try {
+        addressBook = await getUserAddressBook(email);
+        addressBook = addressBook || [];
+        if(!addressId){
+            throw new Error('Address not valid');
+        }
+        addressBook.forEach((item, index) => {
+            if(addressId === (item.id || "").toLowerCase()){
+                i = index;
+            }
+        });
+        if(i === -1){
+            throw new Error('Address is not present');
+        }else {
+            addressBook.splice(i,1)
+            let res = await updateUserByEmail(email, {'addresses': addressBook});
+            console.log(res);
+        }
+        
+    }catch(err){
+        console.log('UpdateAddressError:', err);
+    }
+    return new Promise((resolve, reject) => resolve(addressBook));
+}
 
 

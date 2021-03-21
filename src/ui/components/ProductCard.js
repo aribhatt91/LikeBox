@@ -34,7 +34,7 @@ const ProductCard = (props) => {
     const addToWishList = async () => {
         if(currentUser){
           let res = await addItemToWishList(currentUser.email, props.sku);
-          console.log(res);
+          console.log('ProductCard', res);
         }else {
             console.log('User not authenticated');
         }

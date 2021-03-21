@@ -1,3 +1,4 @@
+import { max, reject } from 'lodash';
 import products from '../../../mock/products.json';
 import { CATEGORY_URL_MAPPING } from '../../constants';
 
@@ -45,6 +46,18 @@ export const fetchProducts = (path, filter) => {
         return new Promise(resolve => resolve([]));
     }
     
+}
+
+export const fetchProductsByPage = (page, max) => {
+    return new Promise((resolve, reject) => {
+        if(page >= 0 && max > 0) {
+            setTimeout(() => {
+                resolve(products.slice(page*max, page*max + max))
+            }, 1000);
+        }else {
+            reject([]);
+        }
+    })
 }
 export const fetchProductsByIds = (productIds=[]) => {
     return new Promise((resolve, reject) => {

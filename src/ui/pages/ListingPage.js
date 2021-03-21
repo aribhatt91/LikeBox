@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Page from './Page';
-import LoadingModule from './../components/LoadingModule';
 import ProductCard, { ProductCardPlaceholder } from './../components/ProductCard';
 import ProductFilters from './../components/ProductFilters';
 import EMPTY from '../../assets/img/no-search-result.png';
 import ErrorModule from './../components/ErrorModule';
 import { useParams } from 'react-router-dom';
 import { fetchProducts } from './../../service/api/firestore/product';
-import { addUser, updateUserByEmail } from './../../service/api/firestore/user';
-import { AuthContext } from './../../store/contexts/AuthContext';
-import { addItemToWishList } from '../../service/wishlistMethods';
 
 const EMPTY_TEXT = "Sorry, no results found!",
 EMPTY_SUBTEXT = "Please check the spelling or try searching for something else",

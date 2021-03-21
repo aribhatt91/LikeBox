@@ -1,23 +1,24 @@
 import React, { useState, useContext } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {signin} from '../../../service/authService';
-import PageMessage from './../generic/PageMessage';
+import PageMessage, { SuccessMessage } from './../generic/PageMessage';
 import AppTextInput from './../generic/AppTextInput';
 import AppForm from './AppForm';
 import { LOGIN_FORM_SCHEMA } from './../../../service/validationSchema';
 import AppSubmitButton from './../generic/AppSubmitButton';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { AuthContext } from './../../../store/contexts/AuthContext';
 
 const validationSchema = LOGIN_FORM_SCHEMA;
 
-const LoginForm = (props) => {
+const LoginForm = ({email="", onComplete}) => {
   //const { signInUser, pending, user, loggedIn } = props;
   const [ submitted, setSubmitted] = useState(false);
   const [ error, setError ] = useState(null);
   const {login, currentUser} = useContext(AuthContext);
+  const initialValues = {
+    email,
+    password: ""
+  }
   //https://firebase.google.com/docs/reference/js/firebase.User
   //https://firebase.google.com/docs/reference/js/firebase.User#updateprofile
   const submitForm = async (userInput, {setSubmitting}) => {
@@ -27,33 +28,32 @@ const LoginForm = (props) => {
     //signInUser(userInput, () => {setSubmitting(false); setSubmitted(true)});
     try {
       let response = await login(userInput.email, userInput.password);
-      setSubmitting(false);
       setSubmitted(true);
       console.log('Response ->', response);
-      if(typeof props.onComplete === 'function'){
-          setTimeout(props.onComplete, 750);
+      if(typeof onComplete === 'function'){
+          setTimeout(onComplete, 750);
       }
     }catch({code, message}){
-      setSubmitted(true);
+      
       setError('Username or Password is invalid');
       console.log('Login error ->', code, message);
+    }finally {
+      setSubmitting(false);
+      setSubmitted(true);
     }
   }
   return (
     <div className="col-12 p-0 m-0">
-        {currentUser && <div className="login-success-container d-flex flex-column justify-content-center align-items-center">
-          <div className="green-tick mb-3">
-            <FontAwesomeIcon icon={faCheck} size="2x"></FontAwesomeIcon>
-          </div>
-          <h2 className="font-weight-light">You are logged in!</h2>
-        </div>}
+        {
+          currentUser && <SuccessMessage message={"You are logged in!"} />
+        }
 
         <div className={"login-form-container" + (currentUser ? " d-none": "")}>
           <div className="login-form-header mb-4 pl-2 pr-2 h3 font-weight-normal text-center">Sign into your account</div>
           <form className={"login-form"}>
 
             <AppForm
-              initialValues={{email: props.email ? props.email : '', password: ''}}
+              initialValues={initialValues}
               onSubmit={submitForm}
               validationSchema={validationSchema}>
                 {submitted && error && 

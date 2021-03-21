@@ -22,7 +22,7 @@ import { db } from './../firebase';
      wishlist,
      orders,
      payments,
-     preferences: {
+     sizing: {
          shoesize,
          neck,
          chest,
@@ -76,34 +76,46 @@ export const addUser = async (user) => {
     }
 }
 
-
-export const updateUserByEmail = async (email, update, postUpdate) => {
+const validateUpdateObject = (update) => {
+    return update && typeof update === 'object' && (update.hasOwnProperty('name') || update.hasOwnProperty('cart') || update.hasOwnProperty('addresses') || update.hasOwnProperty('wishlist') || update.hasOwnProperty('orders') || update.hasOwnProperty('payments') || update.hasOwnProperty('sizing') || update.hasOwnProperty('mobile'));
+}
+export const updateUserByEmail = async (email, update) => {
+    let res = null;
     try {
         let querySnapshot = await fetchUser(email);
         
         console.log(querySnapshot);
         if(querySnapshot.size === 1){
-            querySnapshot.forEach((doc) => {
+            let doc = querySnapshot.docs[0];
                 // doc.data() is never undefined for query doc snapshots
-                console.log(doc.id, " => ", doc.data());
-                collection.doc(doc.id)
-                .update(update)
-                .then(data => {
-                    console.log('Successfully updated user', data);
-                    if(postUpdate && typeof postUpdate === 'function'){
-                        postUpdate();
-                    }
-                }).catch(err => {
-                    console.error('Ran into error', err);
-                })
+            console.log(doc.id, " => ", doc.data());
+            res = collection.doc(doc.id).update(update);
+        }else {
+            throw new Error('Update Aborted! More than one user found with same email');
+        }
+    }catch(err){
+        console.error("updateUser:error:", err);
+    }   
+    if(res){
+        return new Promise(resolve => resolve(res));
+    }else {
+        return new Promise((resolve, reject) => reject(res));
+    }
+}
+
+export const getUserSizing = async (email) => {
+    let sizing = null;
+    try {
+        let querySnapshot = await fetchUser(email);
+        console.log(querySnapshot);
+        if(querySnapshot.size === 1){
+            querySnapshot.forEach((doc) => {
+                //console.log(doc.id, " => ", doc.data());
+                sizing = doc.data().sizing || null;
             });
         }
-        /* ref.update(update).then( docRef => {
-            console.log("Document written with ID: ", docRef);
-        }).catch((error) => {
-            console.error("Error adding document: ", error);
-        }); */
     }catch(err){
         console.error("updateUser: error -> ", err);
     }   
+    return new Promise(resolve => resolve(sizing));
 }

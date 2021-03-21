@@ -7,25 +7,25 @@ import { useFormikContext } from 'formik';
     name: String
 };
  */
-const AppTextInput = ({name, label, disabled, defvalue, type='text', ...rest}) => {
-    const {setFieldTouched, handleChange, errors, touched} = useFormikContext();
-    const [dirty, setDirty] = useState(defvalue && defvalue.trim() !== "");
+const AppTextInput = ({name, label, disabled, type='text', ...rest}) => {
+    const {setFieldTouched, handleChange, errors, touched, values, initialValues } = useFormikContext();
+    //const [dirty, setDirty] = useState(defvalue && defvalue.trim() !== "");
     //const [err, setErr] = useState(false);
-    const tinput = useRef(null);
+    //const tinput = useRef(null);
     const resetEditMode = (e) => {
-        setDirty(((e.target.value || "").trim() !== ""));
+        //setDirty(((e.target.value || "").trim() !== ""));
         if(typeof setFieldTouched === 'function'){
             //console.log('blurrr');
             setFieldTouched(name);
         }
     }
     //console.log('Ref', tinput, {name, touched, errors});
-    if(tinput && tinput.current && defvalue){
+    /* if(tinput && tinput.current && defvalue){
         //console.log(name, defvalue);
         tinput.current.value = defvalue || "";
-    }
+    } */
     return (
-        <div className={"form-group animated-text-input d-inline-block" /*+ (errors[name] && touched ? " error" : "")*/ + (dirty ? " edit-mode" : "")+ (disabled ? " disabled" : "")}>
+        <div className={"form-group animated-text-input d-inline-block" /*+ (errors[name] && touched ? " error" : "")*/ + /*(dirty ? " edit-mode" : "")*/+ (disabled ? " disabled" : "")}>
             <label className="d-flex position-relative" htmlFor={name}>
                 {/* <span className={"text_input_label"}>{label}</span> */}
                 {
@@ -33,12 +33,12 @@ const AppTextInput = ({name, label, disabled, defvalue, type='text', ...rest}) =
                         {...rest}
                         type={type}
                         name={name}
-                        ref={tinput}
+                        /*ref={tinput}*/
                         className="form-control"
-                        onFocus={() => setDirty(true)}
+                        /*onFocus={() => setDirty(true)}*/
                         onBlur={resetEditMode}
                         onChange={handleChange(name)}
-                        defaultValue={defvalue}
+                        defaultValue={initialValues[name] || ""}
                         placeholder={label}
                         disabled={disabled ? " disabled" : ""}
                     />
@@ -47,13 +47,13 @@ const AppTextInput = ({name, label, disabled, defvalue, type='text', ...rest}) =
                     type && type === 'textarea' && <textarea
                     {...rest}
                         name={name}
-                        ref={tinput}
+                        /*ref={tinput}*/
                         type={type}
                         className="form-control"
-                        onFocus={() => setDirty(true)}
+                        /*onFocus={() => setDirty(true)}*/
                         onBlur={resetEditMode}
                         onChange={handleChange(name)}
-                        defaultValue={defvalue}
+                        defaultValue={initialValues[name]}
                         disabled={disabled ? " disabled" : ""}
                     />
                 }

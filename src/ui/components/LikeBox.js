@@ -5,11 +5,13 @@ import AppForm from './forms/AppForm';
 import AppTextInput from './generic/AppTextInput';
 import AppSubmitButton from './generic/AppSubmitButton';
 import { AuthContext } from './../../store/contexts/AuthContext';
-import LikeboxCarousel from './LikeboxCarousel';
+import LikeBoxCarousel from './LikeBoxCarousel';
 import AppRadioInput from './generic/AppRadioInput';
 import SignupForm from './forms/SignupForm';
 import LoginForm from './forms/LoginForm';
-import LikeBoxHomePage from './LikeboxHomePage';
+import LikeBoxHomePage from './LikeBoxHomePage';
+import { fetchUser, getUserSizing } from './../../service/api/firestore/user';
+import { useHistory } from 'react-router';
 function LikeBoxEmailForm({onComplete, setRegistered}) {
     const {fetchSignInMethods} = useContext(AuthContext);
     const validationSchema = EMAIL_FORM_SCHEMA;
@@ -40,7 +42,7 @@ function LikeBoxEmailForm({onComplete, setRegistered}) {
     return (
         <React.Fragment>
             <p className="like-box-subheader-p">Ready to start shopping? Enter your email to create your FREE account</p>
-            <form className={"email-reg-form"}>
+            <div className={"email-reg-form"}>
                 <AppForm
                 initialValues={{email: ''}}
                 onSubmit= {submitForm}
@@ -51,32 +53,28 @@ function LikeBoxEmailForm({onComplete, setRegistered}) {
                             label="Enter your email address"
                             type="email"
                         />
-{/*                         <input type="text" name="email" className="flex-grow-1" placeholder="Enter your email address"/>
- */}                        <AppSubmitButton
-                                type="submit"
-                                text="Get started"
-                                className="border-radius-0"
+                        <AppSubmitButton
+                            text="Get started"
+                            className="border-radius-0"
                         />
                     </div>
                 </AppForm>
-            
-            
-            
-            </form>
+            </div>
         </React.Fragment>
     )
 }
 
 function LikeBoxSignup({slideOut, slideIn, registered, email, onComplete}) {
+    //console.log('LikeBoxSignup', email);
     return (
         <div className={"like-box-signup mb-5 mt-5" + (!slideIn && !slideOut ? " slide-hold" : "") + (slideOut ? " slide-out" : "") + (slideIn ? " slide-in" : "")}>
         
             {
-                registered && <LoginForm email={email} onComplete={onComplete} />
+                registered && email !== '' && <LoginForm email={email} onComplete={onComplete} />
                 
             }
             {
-                !registered && <SignupForm onComplete={onComplete} email={email}/>
+                !registered && email !== '' && <SignupForm onComplete={onComplete} email={email}/>
             }
         </div>
     )
@@ -141,18 +139,32 @@ export default function LikeBox() {
     const [registered, setRegistered] = useState(false);
     const [email, setEmail] = useState('');
     const [show, setShow] = useState(0);
+    const history = useHistory();
 
     let items = ['item-1', 'item-2', 'item-3', 'item-4', 'item-5'];
     console.log('LikeBox show', show);
     useEffect(() => {
         if(currentUser){
-            setShow(4);
+            (async () => {
+                let sizing = await getUserSizing(currentUser.email);
+                if(sizing){
+                    setShow(4);
+                }else {
+                    setShow(2);
+                    //history.push('/likebox');
+                    
+                }
+            })()
         }
     }, [currentUser])
 
+    const goToLikeBox = () => {
+        history.push('/likebox');
+    }
+
     return (
         <div className="container">
-            {!currentUser && <div className="like-box">
+            {show !== 4 && <div className="like-box">
                 <LikeBoxLandingPage
                     slideOut={show > 0}
                     slideIn={show === 0}
@@ -175,19 +187,18 @@ export default function LikeBox() {
                 <LikeBoxPreference
                     slideOut={show > 2}
                     slideIn={show === 2}
-                    onComplete={() => {setShow(3)}}
+                    onComplete={goToLikeBox}
                 />
-                <LikeboxCarousel
-                    items={items}
+                {/* <LikeBoxCarousel
                     slideOut={show > 3}
-                    slideIn={show === 3}
+                    slideIn={true || show === 3}
                     onComplete={() => {setShow(4)}}
-                />
+                /> */}
                 
             </div>}
-            {currentUser && <LikeBoxHomePage 
-                    slideIn={show === 4}
-                />}
+            {show === 4 && <LikeBoxHomePage 
+                slideIn={show === 4}
+            />}
         </div>
     )
 }

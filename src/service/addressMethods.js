@@ -10,6 +10,8 @@ zipcode
 import simulateNetworkRequest from './simulateNetworkRequest';
 import { validateAlpha, validateAlphaNumeric, validateMobileNumber, validatePincode, validateEmpty } from './validation';
 import { MockGetAddresses } from './../mock/api/mock-address-api';
+import { addNewAddress, updateAddress, getUserAddressBook, removeAddressById } from './api/firestore/address';
+
 export const ERROR_TEXT = {
     name: 'Please fill out this field',
     mobile: 'Please enter 10-digit mobile number',
@@ -29,18 +31,19 @@ const requiredFieldsFilled = (inputObj) => {
     return {'required': res}
 }
 
-export const fetchAddresses = () => {
-    return MockGetAddresses()
+export const fetchAddresses = (email) => {
+    //return MockGetAddresses()
+    return getUserAddressBook(email);
 }
 
-export const addAddress = (inputObj) => {
-
+export const addAddress = (email, inputObj) => {
+    return addNewAddress(email, inputObj)
 }
-export const updateAddress = (inputObj) => {
-
+export const updateExistingAddress = (email, inputObj) => {
+    return updateAddress(email, inputObj)
 }
-export const deleteAddress = (inputObj) => {
-
+export const deleteAddress = (email, addressId) => {
+    return removeAddressById(email, addressId);
 }
 
 export const checkDeliveryAvailability = (pincode) => {

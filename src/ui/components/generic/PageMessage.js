@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+
 //import {faWarning, faInfoCircle, faCheckCircle} from '@fortawesome/free-solid-svg-icons';
 
 /* 
@@ -21,6 +23,17 @@ const PageMessage = ({text, type, size, inline=true, icon=false, dismissable=fal
             </span>}
             <span className="msg-text">{text}</span>
             {dismissable && <span className="msg-close" onClick={()=>setShowMsg(false)}>&times;</span>}
+        </div>
+    )
+}
+
+export const SuccessMessage = ({message}) => {
+    return (
+        <div className="d-flex flex-column justify-content-center align-items-center">
+          <div className="green-tick mb-3">
+            <FontAwesomeIcon icon={faCheck} size="2x"></FontAwesomeIcon>
+          </div>
+          <h2 className="font-weight-light">{message}</h2>
         </div>
     )
 }

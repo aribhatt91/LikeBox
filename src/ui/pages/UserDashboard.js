@@ -29,7 +29,7 @@ function UserSettings(props){
             </div>
             <div className="user-settings-detail">
                 <div className="back" onClick={() => setShowDetail("")}>Back to settings</div>
-                <ul>
+                <ul className="col-12 p-0">
                     <li key="0" className={showDetail === "profile" ? "d-flex" : "d-none"}>
                         <UserProfileFragment/>
                     </li>

@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import ORDERS from '../../../mock/orders.json';
 import LoadingModule from '../../components/LoadingModule';
 import { fetchOrders } from './../../../service/ordersMethods';
 
@@ -68,6 +67,7 @@ function OrderInstance({instance}){
             <ProductInstance
                 instance={item}
                 order_placed={instance.order_date}
+                key={index}
             />
         )
     })
@@ -106,6 +106,7 @@ function UserOrdersFragment(){
         ordersItems.push(
             <OrderInstance
                 instance={item}
+                key={index}
             />
         )
     });
