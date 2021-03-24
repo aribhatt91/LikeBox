@@ -12,6 +12,7 @@ import rootReducer from './store/reducers/index';
 import thunk from 'redux-thunk';
 import logger from './store/middleware/logger';
 import { AuthProvider, AuthContext } from './store/contexts/AuthContext';
+import NotificationProvider from './store/contexts/NotificationProvider';
 // eslint-disable-next-line
 //import ReduxPromise from 'redux-promise';
 
@@ -20,9 +21,11 @@ const appStore = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ &&
 
 ReactDOM.render(
     <Provider store={appStore}>
-        <BrowserRouter>
-            <App/>
-        </BrowserRouter>
+        <NotificationProvider>
+            <BrowserRouter>
+                <App/>
+            </BrowserRouter>
+        </NotificationProvider>
     </Provider>, 
     document.getElementById('root'));
 

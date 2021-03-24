@@ -88,10 +88,10 @@ function Header (props) {
             
               {/* <SearchBar/> */}
 
-              {!currentUser && location.pathname.indexOf('login') === -1 && <AppButton label="Sign in" className={"d-md-flex sm align-items-center pl-5 pr-5"} 
+              {!currentUser && location.pathname.indexOf('login') === -1 && <AppButton label="Sign in" className={"d-md-flex sm align-items-center pl-5 pr-5 no-anim"} 
                 href="/login">
               </AppButton>}
-              {!currentUser && location.pathname.indexOf('login') > -1 && <AppButton label="Register" className={"d-md-flex sm align-items-center pl-5 pr-5"} 
+              {!currentUser && location.pathname.indexOf('login') > -1 && <AppButton label="Register" className={"d-md-flex sm align-items-center pl-5 pr-5 no-anim"} 
                 href="/register">
               </AppButton>}
               {currentUser && 
@@ -112,7 +112,7 @@ function Header (props) {
                 }
                 {
                 location.pathname.indexOf('user') === -1 &&
-                <AppButton label="Your account" className={"d-md-flex no-anim sm align-items-center pl-5 pr-5"} 
+                <AppButton label="Your account" className={"d-md-flex no-anim sm align-items-center pl-5 pr-5 no-anim"} 
                   href="/user">
                 </AppButton>
                 }

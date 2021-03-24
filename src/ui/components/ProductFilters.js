@@ -34,35 +34,14 @@ const ProductFilters = (props) => {
         }
     },
     optimisedFilter = debounce(filterHandler, 1000),
-    sortHandler = (e) => {
+    sortHandler = (name, obj) => {
     },
     optimisedSort = debounce(sortHandler, 500);
     
     return (
         <div className="product_filter_wrapper page-content-wrapper">
-            {(brands.length > 0 || priceRanges.length > 0 || discounts.length > 0) &&
-            <div className="section_heading">
-                <div className="left_section">
-                    <span className="collapsible_header" onClick={()=>setCollapseFilters(!collapseFilters)}>Filters</span>
-                    <span className="sort_dropdown">
-                        <Dropdown>
-                            <Dropdown.Toggle id="dropdown-basic">
-                                Sort by
-                            </Dropdown.Toggle>
-
-                            <Dropdown.Menu>
-                                <Dropdown.Item onClick={sortHandler}>Price: Low to High</Dropdown.Item>
-                                <Dropdown.Item onClick={sortHandler}>Price: High to Low</Dropdown.Item>
-                                <Dropdown.Item onClick={sortHandler}>Popularity</Dropdown.Item>
-                            </Dropdown.Menu>
-                        </Dropdown>
-                    </span>
-                </div>
-                <div className="right_section">
-                    {props.products + " products"}
-                </div>
-            </div>}
-            <div className="collapsible_filter_container" hidden={collapseFilters}>
+            
+            <div className="d-flex justify-content-between">
                 {categories.length > 0 && 
                     <div className="filter_section">
                         <MultiSelectTag
@@ -99,6 +78,13 @@ const ProductFilters = (props) => {
                         />
                     </div>
                 }
+                <div className="filter_section">
+                    <MultiSelectTag
+                        label="Sort by"
+                        items={discounts}
+                        handler={optimisedSort}
+                    />
+                </div>
             </div>
         </div>
     )

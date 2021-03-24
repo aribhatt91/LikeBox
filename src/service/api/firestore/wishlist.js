@@ -146,27 +146,22 @@ export const addToWishList = async (email, sku) => {
                     data.type = 'error';
                     data.msg = 'Product is already present in your wish list';
                     console.log('Product already present');
-                    res = new Promise((resolve, reject) => resolve({
+                    res = new Promise((resolve, reject) => reject({
                         type: 'error', 
-                        msg: 'Product is already present in your wish list',
-                        items: products
+                        msg: 'Product is already present in your wish list'
                     }))
                 }else {/* If not add it and update */
                     products.push({sku: sku, date_added: (new Date()).getTime()});
                     //let updateQuery = await updateWishlistQuery(doc.id, {'items': products});
-                    try {
-                        let docRef = await updateWishlistQuery(doc.id, {'items': products});
-                        doc = await collection.doc(docId).get();
-                        doc = doc || {};
-                        console.log('addToWishList', docId, doc.data());
-                        res = new Promise(resolve => resolve({
-                            type: 'success',
-                            items:(doc.data().items || [])
-                        }))
-                    }catch(err){
-                        console.error(err);
-                        res = new Promise(resolve => resolve([]))
-                    }
+                    
+                    let docRef = await updateWishlistQuery(doc.id, {'items': products});
+                    doc = await collection.doc(docId).get();
+                    doc = doc || {};
+                    console.log('addToWishList', docId, doc.data());
+                    res = new Promise(resolve => resolve({
+                        type: 'success',
+                        msg: 'Item added to your wishlist!'
+                    }))
                 }
             }
         }
@@ -174,7 +169,10 @@ export const addToWishList = async (email, sku) => {
             /* let data = {};
             data.type = 'error';
             data.msg = 'Product is already present in your wish list'; */
-            res = new Promise((resolve, reject) => reject(err));
+            res = new Promise(resolve => resolve({
+                type: 'error',
+                msg: 'An error occurred!'
+            }))
         }
         return res; 
     }
@@ -210,19 +208,14 @@ export const removeFromWishList = async (email, sku) => {
                     console.log('removeFromWishList', docId, doc.data());
                     res = new Promise(resolve => resolve({
                         type: 'success',
+                        msg: 'Item removed from your Wishlist!',
                         items:(doc.data().items || [])
                     }))
                 }else {/* If not add it and update */
                     let data = {};
                     data.type = 'error';
-                    data.msg = 'Product is not present in your wish list';
-                    res = new Promise((resolve, reject) => resolve(
-                        {
-                            type: 'error', 
-                            msg: 'Product is not present in your wish list',
-                            items: products
-                        }
-                        ))
+                    data.msg = 'Item is not present in your wish list';
+                    res = new Promise((resolve, reject) => reject(data))
                 }
             }
         }
@@ -230,7 +223,10 @@ export const removeFromWishList = async (email, sku) => {
             /* let data = {};
             data.type = 'error';
             data.msg = 'Product is already present in your wish list'; */
-            res = new Promise((resolve, reject) => reject(err));
+            let data = {};
+            data.type = 'error';
+            data.msg = 'An error occurred!';
+            res = new Promise((resolve, reject) => reject(data))
         }
         return res; 
     }

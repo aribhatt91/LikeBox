@@ -6,6 +6,7 @@ import AppButton from '../../components/generic/AppButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import AppImage from './../../components/generic/AppImage';
+import { useNotification } from './../../../store/contexts/NotificationProvider';
 
 function WishListInstancePlaceholder() {
     return (
@@ -97,7 +98,7 @@ function UserWishListFragment(){
     const {currentUser} = useContext(AuthContext)
     const [wishList, setWishList] = useState([]),
     [pending, setPending] = useState(false);    
-
+    const dispatch = useNotification();
     useEffect(() => {
         if(currentUser){
             setPending(true);
@@ -116,9 +117,25 @@ function UserWishListFragment(){
         try {
             setPending(true);
             let res = await removeItemFromWishList(currentUser.email, sku);
-            setWishList(res);
+            if(res.items){
+                setWishList(res.items);
+                dispatch({
+                    type: res.type,
+                    message: res.msg,
+                    title: 'Success'
+                })
+            }
+            
         }catch(err) {
             console.error(err)
+            if(err.msg){
+                dispatch({
+                    type: err.type,
+                    message: err.msg,
+                    title: 'Error'
+                })
+            }
+            
         }finally {
             setPending(false);
         }

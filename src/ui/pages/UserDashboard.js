@@ -8,6 +8,7 @@ import UserWishListFragment from './fragments/UserWishListFragment';
 import UserOrdersFragment from './fragments/UserOrdersFragment';
 import { Tabs } from 'react-bootstrap';
 import Tab from 'react-bootstrap/Tab';
+import LikeBoxPreference from '../components/LikeBoxPreference';
 
 function Order(props) {
 
@@ -19,7 +20,7 @@ function UserSettings(props){
         <div className={"user-settings w-100" + (showDetail !== "" ? " detail-open" : "")}>
             <div className="user-settings-menu">
                 <ul>
-                    <li key="0" onClick={() => setShowDetail('profile')}>Profile</li>
+                    <li key="0" onClick={() => setShowDetail('sizing')}>Sizing</li>
                     <li key="1" onClick={() => setShowDetail('pay')}>Payment method</li>
                     <li key="2" onClick={() => setShowDetail('addr')}>Addresses</li>
                     <li key="3" onClick={() => setShowDetail('contact')}>Contact preferences </li>
@@ -30,8 +31,8 @@ function UserSettings(props){
             <div className="user-settings-detail">
                 <div className="back" onClick={() => setShowDetail("")}>Back to settings</div>
                 <ul className="col-12 p-0">
-                    <li key="0" className={showDetail === "profile" ? "d-flex" : "d-none"}>
-                        <UserProfileFragment/>
+                    <li key="0" className={showDetail === "sizing" ? "d-flex" : "d-none"}>
+                        <LikeBoxPreference/>
                     </li>
                     <li key="1" className={showDetail === "pay" ? "d-flex" : "d-none"}>
                         <UserPaymentOptionsFragment />
@@ -64,10 +65,8 @@ function DashboardNavigation({userFirstName, logoSrc}){
                 <Tab eventKey="box" title="Your box">
                     <div></div>
                 </Tab>
-                <Tab eventKey="size" title="Sizing">
-                    <div>
-                        
-                    </div>
+                <Tab eventKey="size" title="Profile">
+                    <UserProfileFragment/>
                 </Tab>
                 <Tab eventKey="orders" title="Orders">
                     <div>

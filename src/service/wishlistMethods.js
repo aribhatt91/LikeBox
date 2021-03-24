@@ -7,7 +7,7 @@ export const itemInWishList = (email, sku) => {
     return isItemInWishList(email, sku);
 }
 export const addItemToWishList = async (email, sku) => {
-    let items = [], ids = [], data = null;
+    /* let items = [], ids = [], data = null;
     try{
         data = await addToWishList(email, sku);
         //ids = ids;
@@ -23,7 +23,8 @@ export const addItemToWishList = async (email, sku) => {
     items = await fetchProductsByIds(ids);
     console.log(items);
     
-    return new Promise(resolve => resolve(items));
+    return new Promise(resolve => resolve(items)); */
+    return addToWishList(email, sku);
 }
 export const removeItemFromWishList = async (email, sku) => {
     let items = [], ids = [], data = null;
@@ -31,10 +32,13 @@ export const removeItemFromWishList = async (email, sku) => {
         data = await removeFromWishList(email, sku);
         if(data.type === 'success'){
             ids = (data.items || []).map(item => item.sku);
+        }else {
+            return new Promise((resolve, reject) => reject(data));
         }
         //ids = ids || [];
     }catch(err){
         console.log('fetchWishList:error', err);
+        return new Promise((resolve, reject) => reject(err));
     }
     items = await fetchProductsByIds(ids);
     if(data){
@@ -45,9 +49,10 @@ export const removeItemFromWishList = async (email, sku) => {
             }
             
         }
+        data.items = items;
     }
     console.log(items);
-    return new Promise(resolve => resolve(items));
+    return new Promise(resolve => resolve(data));
 }
 
 export const fetchWishList = async (email) => {

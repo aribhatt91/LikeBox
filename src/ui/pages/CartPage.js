@@ -85,17 +85,6 @@ class CartPage extends Page {
     constructor(props){
         super(props);
     }
-
-    async componentDidMount() {
-        const {fetchCart} = this.props;
-        //fetchCart();
-        /* try{
-            let cart = await getUserCart('z@f.com');
-            console.log('CartPage: result -> ',cart);
-        }catch(err){
-            console.error('CartPage: error -> ', err);
-        } */
-    }
     render() {
         const {addToCart, removeFromCart, fetchCart} = this.props;
         return (

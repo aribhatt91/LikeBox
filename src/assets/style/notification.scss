@@ -1,0 +1,136 @@
+@import './mixins.scss';
+@import './variables.scss';
+
+$nav-height: $nav-height-lg;
+$width: 360px;
+@include media(1024px){
+  $nav-height: $nav-height-md;
+}
+@include media(767px){
+  $nav-height: $nav-height-sm;
+}
+@include media(660px){
+  $nav-height: $nav-height-xs;
+  $width: 300px;
+}
+
+.notification-wrapper {
+    position: fixed;
+    top: calc(#{$nav-height} + 1rem);
+    right: 10px;
+    width: $width;
+    z-index: 9999999;
+}
+
+.notification-item {
+    box-shadow: 0 0 10px rgba(0,0,0, 0.3);
+    border-radius: 0px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    color: #333;
+    background-color: #fff;
+    animation: SlideLeft 0.4s;
+    animation-fill-mode: forwards;
+    min-width: 300px;
+    min-height: 4rem;
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    position: relative;
+
+    .bar {
+        background-color: #2e86de;
+        position: absolute;
+        height: 100%;
+        width: 4px;
+        left: 0;
+        top: 0;
+        /* display: none; */
+
+    }
+    .notification-text {
+        margin: 0;
+        font-weight: 500;
+        font-size: 1rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        color: inherit;
+        width: 100%;
+    }
+    .notification-icon {
+        height: 1.35rem;
+        width: 1.5rem;
+        border-radius: 50%;
+        font-size: 1.35rem;
+        display: inline-flex;
+        align-items: center;
+        color: #2e86de;
+    }
+    &.error {
+        /* background-color: #ff6b6b; */
+        .notification-icon {
+            color: #ff6b6b;
+        }
+        .bar {
+            background-color: #ff6b6b;
+        }
+    }
+    &.success {
+        /* background-color: #1dd1a1; */
+        .notification-icon {
+            color: #1dd1a1;
+        }
+        .bar {
+            background-color: #1dd1a1;
+        }
+    }
+    &.warning {
+        /* background-color: #feca57; */
+        .notification-icon {
+            color: #feca57;
+        }
+        .bar {
+            background-color: #feca57;
+        }
+    }
+}
+
+@keyframes SlideLeft {
+    0% {
+        margin-left: 120%;
+    }
+
+    100% {
+        margin-left: 0;
+    }
+}
+
+@keyframes SlideRight {
+    0% {
+        margin-left: 0;
+    }
+
+    100% {
+        margin-left: 120%;
+    }
+}
+
+.notification-item.exit {
+    animation: SlideRight 0.4s;
+    animation-fill-mode: forwards;
+}
+
+
+.notification-item .notification-close {
+    height: 1.6rem;
+    width: 1rem;
+    color: lightgrey;
+    font-size: 1.6rem;
+    cursor: pointer;
+    text-decoration: none !important;
+    /* align-items: center; */
+    text-align: center;
+    line-height: 1.6rem;
+}
+

@@ -12,6 +12,7 @@ import LoginForm from './forms/LoginForm';
 import LikeBoxHomePage from './LikeBoxHomePage';
 import { getUserSizing, isFirstLoad } from './../../service/api/firestore/user';
 import { useHistory } from 'react-router';
+import { useNotification } from './../../store/contexts/NotificationProvider';
 function LikeBoxEmailForm({onComplete, setRegistered}) {
     const {fetchSignInMethods} = useContext(AuthContext);
     const validationSchema = EMAIL_FORM_SCHEMA;
@@ -140,6 +141,7 @@ export default function LikeBox() {
     const [email, setEmail] = useState('');
     const [show, setShow] = useState(0);
     const history = useHistory();
+    const dispatch = useNotification();
 
     let items = ['item-1', 'item-2', 'item-3', 'item-4', 'item-5'];
     console.log('LikeBox show', show);
@@ -154,11 +156,20 @@ export default function LikeBox() {
                 }
             })()
         }
+        //setTimeout(handleNewNotification, 5000);
     }, [currentUser])
 
     const goToLikeBox = () => {
         history.push('/likebox');
     }
+    const handleNewNotification = () => {
+        console.log('handleNewNotification called');
+        dispatch({
+          type: "ERROR",
+          message: 'Heelooo',
+          title: "Successful Request"
+        })
+      }
 
     return (
         <div className="container">

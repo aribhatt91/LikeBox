@@ -3,6 +3,7 @@ import AppButton from './generic/AppButton';
 import { AuthContext } from './../../store/contexts/AuthContext';
 import { addItemToWishList } from '../../service/wishlistMethods';
 import AppImage from './generic/AppImage';
+import { useNotification } from './../../store/contexts/NotificationProvider';
 
 
 export function ProductCardPlaceholder () {
@@ -31,10 +32,34 @@ export function ProductCardPlaceholder () {
 }
 const ProductCard = (props) => {
     const {currentUser} = useContext(AuthContext);
+    const dispatch = useNotification();
     const addToWishList = async () => {
         if(currentUser){
-          let res = await addItemToWishList(currentUser.email, props.sku);
-          console.log('ProductCard', res);
+            try{
+                let res = await addItemToWishList(currentUser.email, props.sku);
+                console.log('ProductCard:addToWishList', res);
+                dispatch(
+                    {
+                        type: 'success',
+                        message: 'Item added to your wishlist!',
+                        title: 'Success!'
+                    }
+                )
+                
+                
+            }catch(err){
+                console.log('addToWishList', err);
+                if(err.msg){
+                    dispatch(
+                        {
+                            type: 'error',
+                            message: err.msg,
+                            title: 'Error!'
+                        }
+                    )
+                }
+            }
+          
         }else {
             console.log('User not authenticated');
         }
@@ -43,8 +68,7 @@ const ProductCard = (props) => {
     return (
         <div className="product-card row mr-0 ml-0 mt-5 mb-5" key={props.sku}>
             <div className="card-thumb-wrapper p-0 col-xs-12 col-md-4 col-lg-3">
-{/*                 <img className="card-thumb" src={props.img} alt={props.title}></img>
- */}                <AppImage className="card-thumb" src={props.img} alt={props.title} />
+                <AppImage className="card-thumb" src={props.img} alt={props.title} />
             </div>
             <div className="card-text-wrapper col-xs-12 col-md-4 col-lg-5 p-4 pt-md-0 pb-md-0 d-flex flex-column justify-content-between align-center">
                 <div className="product-description">
@@ -55,13 +79,14 @@ const ProductCard = (props) => {
                     </div>
                 </div>
                 <div className="action-buttons w-100">
-                    <AppButton href={props.link} label="View product" className="w-100"/>
-                    <AppButton onClick={addToWishList} label="Add to wishlist" className="btn-white w-100 mt-2"/>
+                    <AppButton href={props.link} label="View product" className="w-100 btn-grey"/>
+                    <AppButton disabled={!currentUser} onClick={addToWishList} label="Add to wishlist" className="btn-white w-100 mt-2"/>
                 </div>
             </div>
             <div className="card-desc-wrapper col-xs-12 col-md-4 col-lg-4 p-4 pt-md-0 pb-md-0">
                 {
-                    (props.desc || "").substr(0, 100).concat("...")
+                    (props.desc || "")
+                    //.substr(0, 100).concat("...")
                 }
             </div>
         </div>

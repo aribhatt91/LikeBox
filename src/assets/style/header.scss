@@ -1,4 +1,17 @@
 @import './variables.scss';
+@import './mixins.scss';
+
+$nav-height: $nav-height-lg;
+
+@include media(1024px){
+  $nav-height: $nav-height-md;
+}
+@include media(767px){
+  $nav-height: $nav-height-sm;
+}
+@include media(660px){
+  $nav-height: $nav-height-xs;
+}
 
 .App-header {
     background: white;
@@ -51,6 +64,7 @@
   /* Change the color of links on hover */
   .topnav .navbar {
     width: 100%;
+    height: $nav-height;
   }
   .topnav .navbar-nav a:hover {
     /* background-color: rgba(0, 0, 0, 0.1); */

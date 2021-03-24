@@ -1,13 +1,11 @@
-import Carousel from 'react-bootstrap/Carousel';
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import AppButton from './generic/AppButton';
-import PRODUCTS from '../../mock/products.json';
 import AppImage from './generic/AppImage';
-import { CURRENCY } from '../../service/constants';
 import { fetchProductsByPage } from '../../service/api/firestore/product';
 import { useHistory } from 'react-router';
+import { AuthContext } from './../../store/contexts/AuthContext';
 function CardStack({cards, cardsState, loading}) {
     useEffect(() => {}, [cards])
     return (
@@ -45,7 +43,7 @@ function CardStack({cards, cardsState, loading}) {
         </div>
     )
 }
-let currentPos = -1, SEEN = [], PAGE = 0, LIMIT = 6;
+let currentPos = -1, SEEN = [], PAGE = 0, LIMIT = 6, gender = "";
 export default function LikeBoxCarousel({slideIn, slideOut}) {
     //const [loading, setLoading] = useState(true);
     const [reachedMax, setReachedMax] = useState(false);
@@ -53,7 +51,11 @@ export default function LikeBoxCarousel({slideIn, slideOut}) {
     const [items, setItems] = useState([]);
     const [update, setUpdate] = useState(true);
     const history = useHistory();
+    const {currentUser} = useContext(AuthContext);
 
+    useEffect(()=>{
+        //Find gender and other preferences
+    }, [currentUser])
 
     useEffect(()=>{
         console.log('useEffectCalled');
