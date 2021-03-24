@@ -1,4 +1,5 @@
 @import './variables.scss';
+@import './animations.scss';
 
 .themed_btn_container {
     display: inline-block;
@@ -109,6 +110,8 @@
     align-items: center;
     text-decoration: none;
     outline: none;
+    position: relative;
+    overflow: hidden;
     
     
     .app-btn-text {
@@ -124,14 +127,25 @@
         opacity: 0.5;
         text-decoration: none !important;
     }
+    &::after{
+        content: "";
+        position: absolute;
+        /* z-index: -1; */
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        border-radius: 50%;
+        height: 0;
+    }
     &:hover:not([disabled])/* , &:focus:not([disabled]), &:active:not([disabled]) */ {
-        /* outline: none;
-        background-color: #fd2c56;
-        color: #fff; */
         text-decoration: none;
         .app-btn-text {
-            font-size: 80%;
-        }
+            /* font-size: 80%; */
+            z-index: 2;
+        }  
+        &::after {
+            @include ripple-hover(#333, 'base')
+        }      
     }
     &.btn-white {
         border: 2px solid $dark;
@@ -141,10 +155,18 @@
         box-sizing: border-box;
         &:hover:not([disabled]) {
             background-color: #fff;
+            &::after {
+                @include ripple-hover(#ececec, 'white')
+            }
         }
     }
     &.btn-grey {
         background-color: #424B54;
+        &:hover:not([disabled]) {
+            &::after {
+                @include ripple-hover(#000, 'grey')
+            }
+        }
     }
     &.lg {
         height: 80px;
@@ -154,13 +176,6 @@
         .app-btn-text {
             font-size: 14px;
             font-weight: normal;
-        }
-    }
-    &.no-anim {
-        &:hover:not([disabled]) {
-            .app-btn-text {
-                font-size: inherit;
-            }
         }
     }
 }

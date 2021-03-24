@@ -23,4 +23,27 @@
     to {
       width: 100%;
     }
-  }
+}
+
+@mixin ripple-hover($bgcolor, $name){
+    @keyframes hover-in-interactive-#{$name}{
+        0.00% {
+            background-color:$bgcolor;
+            padding-top:0;
+            width:0
+        }
+        to {
+            background-color:$bgcolor;
+            padding-top:90rem;
+            width:90rem
+        }
+    }
+    animation: hover-in-interactive-#{$name} 0.6s cubic-bezier(.6,.1,.9,.6) forwards;
+    background-color: $bgcolor;
+}
+
+.button--interactive:not([disabled]):hover:active:before{background-color:#000}
+.button--interactive:active{-webkit-animation:clicked-on-interactive .3s ease-in;animation:clicked-on-interactive .3s ease-in}
+@keyframes clicked-on-interactive{50%{-webkit-transform:scale(.9);transform:scale(.9);color:#fff;background-color:#000 !important;border-color:#000}
+to{-webkit-transform:scale(1);transform:scale(1);color:#fff;background-color:#000 !important;border-color:#000}
+}

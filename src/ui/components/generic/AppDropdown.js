@@ -1,17 +1,19 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
-export default function AppDropdown() {
+export default function AppDropdown({children}) {
     const [open, setOpen] = useState(false);
+    useEffect(()=>{
+
+    }, [])
     return (
-        <div className={"d-inline-block select-dropdown multiselect_tags_container" + (open ? " open" : "")}>
-            <div className="d-flex d-md-inline-flex select-label tags_label" onClick={toggle}>{label}</div>
-            <div className="select-dropdown-items tags_container">
-                {/* <Tag
-                    item="All"
-                    selected={selectAll}
-                    _click={_selectAll}
-                ></Tag> */}
-                {list_items}
+        <div className={"d-inline-block select-dropdown multiselect_tags_container" + (open ? " open" : "")} onClick={(e)=>{e.stopPropagation()}}>
+            <div className="d-flex d-md-inline-flex dropdown-label-container" onClick={toggle}>
+                {label}            
+            </div>
+            <div className="select-dropdown-items">
+                {
+                    children
+                }
             </div>
         </div>
     )
