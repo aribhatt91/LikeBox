@@ -1,8 +1,7 @@
 const initialState = {
-    success: false,
-    pending: true,
-    user: null,
-    error: null
+    fname: null,
+    lname: null,
+    signedIn: false
 }
 
 export function userAuthReducer(state = initialState, action) {

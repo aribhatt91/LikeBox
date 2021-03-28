@@ -81,28 +81,23 @@ function CartModule({pending, error, removeFromCart, fetchCart, addToCart, cart=
     )
 
 }
-class CartPage extends Page {
-    constructor(props){
-        super(props);
-    }
-    render() {
-        const {addToCart, removeFromCart, fetchCart} = this.props;
-        return (
+function CartPage(props) {
+    const {addToCart, removeFromCart, fetchCart} = props;
+
+    return (
+        
+        <Page className="checkout_container container" pageName={"Cart"}>
+            <CartModule 
+                pending={props.fetch_pending} 
+                error={props.error}
+                fetchCart={fetchCart} 
+                removeFromCart={removeFromCart}
+                addToCart={addToCart}
+                cart={props.cart}
+                />
             
-            <div className="page checkout_container container">
-                <CartModule 
-                    pending={this.props.fetch_pending} 
-                    error={this.props.error}
-                    fetchCart={fetchCart} 
-                    removeFromCart={removeFromCart}
-                    addToCart={addToCart}
-                    cart={this.props.cart}
-                    />
-                
-            </div>
-        );
-    }
-     
+        </Page>
+    ); 
 }
 
 const mapStateToProps = state => {
@@ -114,6 +109,12 @@ const mapStateToProps = state => {
         error: state.cartReducer.error
     }
 }
-const mapDispatchToProps = (dispatch) => bindActionCreators({fetchCart: CartService.fetchCart, addToCart: CartService.addToCart, removeFromCart: CartService.removeFromCart, isCartEmpty: CartService.isEmpty()}, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators(
+    {
+        fetchCart: CartService.fetchCart, 
+        addToCart: CartService.addToCart, 
+        removeFromCart: CartService.removeFromCart, 
+        isCartEmpty: CartService.isEmpty()
+    }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartPage);

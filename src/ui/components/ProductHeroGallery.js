@@ -20,7 +20,7 @@ function ProductHeroGallery({images, product_name, product_id, addWishList, inWi
                 {
                     (images || []).map((item, index) => (
                         <div key={index} className={"thumb-image mb-md-2" + (selected === index ? " selected" : "")} onClick={() => {setSelected(index)}}>
-                            <AppImage src={item} alt={product_name} title={product_name}/>
+                            <AppImage src={(decodeURI(item) || "").trim()} alt={product_name} title={product_name}/>
                         </div>
                     ))
                 }
@@ -34,10 +34,10 @@ function ProductHeroGallery({images, product_name, product_id, addWishList, inWi
             <div className="product-zoomed-image col-md-10 float-left p-0">
                 {
                     (images || []).map((item, index) => (
-                        <AppImage key={index} className={"m-2" + (selected === index ? " selected" : "")} src={item} alt={product_name} title={product_name}/>
+                        <AppImage key={index} className={"m-2" + (selected === index ? " selected" : "")} src={(decodeURI(item) || "").trim()} alt={product_name} title={product_name}/>
                     ))
                 }
-                <img src={images[0]} alt={product_name} title={product_name}/>
+                <img src={(decodeURI(images[0]) || "").trim()} alt={product_name} title={product_name}/>
                 <div className={"product-add-wishlist-icon" + (wished ? " wished" : "")} onClick={toggleWished}>
                     <FontAwesomeIcon icon={faHeart} />
                 </div>

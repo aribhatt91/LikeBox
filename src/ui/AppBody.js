@@ -14,14 +14,14 @@ import LikeBoxCarousel from './components/LikeBoxCarousel';
 
 function AppBody (){
 
-    return (<div className="App-body">
+    return (<main className="App-body">
       <Switch>
-        <Route exact path='/' render={(props) => <Home {...props} pageName="home" />}/>
-        <Route path='/products/:category?' render={(props) => <ListingPage {...props} pageName="listing" />}/>
-        <Route path='/product/:id' render={(props) => <ProductPage {...props} pageName="product" />}/>
+        <Route exact path='/' render={(props) => <Home {...props}/>}/>
+        <Route path='/products/:category?' render={(props) => <ListingPage {...props}/>}/>
+        <Route path='/product/:id' render={(props) => <ProductPage {...props}/>}/>
         {/* <Route path='/about' render={(props) => <About {...props} pageName="about" />}/> */}
-        <Route path='/cart' render={(props) => <CartPage {...props} pageName="cart" />}/>
-        <Route path='/checkout' render={(props) => <CheckoutPage {...props} pageName="checkout" />}/>
+        <ProtectedRoute path='/cart' component={CartPage}/>
+        <ProtectedRoute path='/checkout' component={CheckoutPage}/>
         
         <ProtectedRoute path='/user/:page?' component={UserDashboard} />
         <ProtectedRoute path='/wishlist' component={WishListPage} />
@@ -31,7 +31,7 @@ function AppBody (){
         {/* <Route path='/user/:page?' render={(props) => <UserDashboard {...props} pageName="user-dashboard" />}/> */}
         <Route path="*" render={props => <FourZeroFour {...props} />}/>
       </Switch>
-    </div>);
+    </main>);
   
 }
 

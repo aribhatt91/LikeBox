@@ -1,9 +1,8 @@
 import Page from './Page';
-import React, {useState, useEffect} from 'react';
+import React, { Component, useState, useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import CartService from './../../service/cartOperation';
-import ThemedButton from '../components/generic/ThemedButton';
 import AddressForm from '../components/forms/AddressForm';
 import Accordion from '../components/generic/Accordion';
 import LoginForm from './../components/forms/LoginForm';
@@ -11,6 +10,7 @@ import { transform } from 'lodash';
 import { fetchAddresses } from '../../service/addressMethods';
 import { addAddress } from './../../service/addressMethods';
 import AppButton from '../components/generic/AppButton';
+import { AuthContext } from './../../store/contexts/AuthContext';
 
 
 
@@ -33,12 +33,13 @@ function AddressModule({
     addNewAddress, 
     selectAddress, 
     loggedIn
-}){
+    }){
     const [expandAddAddress, setExpandAddAddress] = useState(false);
     const [addressSelected, setAddressSelected] = useState(-1)
     const [addressList, setAddressList] = useState([])
     const [fetchAddressFlag, setFetchAddressFlag] = useState(false)
     const [dirty, setDirty] = useState(true);
+    const {currentUser} = useContext(AuthContext);
     //const [deliverySpeed, setDeliverySpeed] = useState(false);
 
     //console.log('Addresses ->', addresses);
@@ -217,7 +218,57 @@ function CheckoutSection({
         </div>
     )
 }
-class CheckoutPage extends Page {
+
+/* function CheckoutPage({fetchCart, cart}){
+    const [activeSlide, setActiveSlide] = useState(0);
+    const [addresses, setAddresses] = useState([]);
+    const {currentUser} = useContext(AuthContext);
+
+    useEffect(()=>{
+        if(currentUser){
+            fetchCart(currentUser.email);
+            let res = await fetchAddresses(currentUser.email);
+            res = res || [];
+            setAddresses(res);
+            setActiveSlide(1);
+        }
+    }, [currentUser])
+
+    return (
+        <Page className="checkout-page" pageName={"Checkout"}>
+            <section className="container checkout-container">
+
+                <CheckoutSection
+                    label="Delivery address"
+                    slideBy={activeSlide}>
+
+                    <AddressModule
+                        user={currentUser}
+                        addresses={addresses}
+                    />
+
+                </CheckoutSection>
+                <CheckoutSection
+                    label="Payment options"
+                    slideBy = {activeSlide}>
+
+                    <div className="dummydiv"></div>
+
+                </CheckoutSection>
+                <CheckoutSection
+                    label="Order Confirmed"
+                    slideBy = {activeSlide}>
+
+                    <div className="dummydiv"></div>
+
+                </CheckoutSection>
+                
+            </section>
+            <section className="cart_summary"></section>
+        </Page>
+    )
+} */
+class CheckoutPage extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -263,9 +314,6 @@ class CheckoutPage extends Page {
         console.log('Calling render', activeSlide);
         return (
             <div className="page">
-                <section className="container checkout-flow-indicator-container">
-
-                </section>
                 <section className="container checkout-container">
                     <CheckoutSection
                         label=" "

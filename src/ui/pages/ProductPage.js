@@ -1,4 +1,4 @@
-import React, { useState, useContext, useLocation, useEffect, useParams} from 'react';
+import React, { Component, useState, useContext, useLocation, useEffect } from 'react';
 import Page from './Page';
 import LoadingModule from './../components/LoadingModule';
 import ProductHeroGallery from '../components/ProductHeroGallery';
@@ -17,6 +17,8 @@ import { AuthContext } from './../../store/contexts/AuthContext';
 import CartService from './../../service/cartOperation';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { useParams } from 'react-router-dom';
+import FourZeroFour from './FourZeroFour';
 function SizeSelector({sizes, handler, label, name}){
   let size_radios = [];
   const handleSelect = (e) => {
@@ -143,7 +145,7 @@ function ProductDescComponent({description, sizing, shipping, returns}){
 
 function ProductForm({product, sizes, addToCart}){
   const {currentUser} = useContext(AuthContext);
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState('');
 
   
@@ -158,7 +160,7 @@ function ProductForm({product, sizes, addToCart}){
       console.log('User not logged in');
       return;
     }
-    if(quantity > 0){
+    if(quantity <= 0){
       console.log('Add products');
       //Raise error
     }if(sizes.length > 0 && size === ''){
@@ -196,7 +198,7 @@ function ProductForm({product, sizes, addToCart}){
       console.log('Select size');
       //Raise error
     }else {
-      
+      //Show snackbar message
     }
   }
 
@@ -210,17 +212,22 @@ function ProductForm({product, sizes, addToCart}){
           handler={sizeSelect}
         />
       </div>}
-      <div className="product-quantity mb-3">
+      {/* <div className="product-quantity mb-3">
         <Counter
           handler={counter}
           name="qty"
           label="Quantity"
         />
-      </div>
+      </div> */}
+      {
+        !currentUser && <div className="col-12 m-2">
+          <PageMessage inline={false} type="info" text="You are not signed in. Sign in to purchase this product" />
+        </div>  
+      }
       <div className="product-cta-container col-md-10 clearfix mt-2 mb-2 p-0">
         <AppButton
           label="Buy now"
-          className="w-100"
+          className="w-100 btn-grey"
           disabled={!currentUser || quantity === 0 || (sizes.length > 0 && size === '')}
           onClick={buyNow}
         />
@@ -236,7 +243,115 @@ function ProductForm({product, sizes, addToCart}){
     </React.Fragment>
   )
 }
-class ProductPage extends Page {
+
+ 
+function ProductPage(props) {
+  const [deliverable, setDeliverable] = useState(true);
+  const [pending, setPending] = useState(true);
+  const [product, setProduct] = useState(null);
+  const { id } = useParams();
+  const checkPincode = async (pincode) => {
+    try {
+      let res = await checkDeliveryAvailability(pincode);
+      setDeliverable(res);
+    }catch(err){
+      setDeliverable(false);
+    }
+  }
+  const toggleProductWishList = async (id, wishStatus) => {
+    if(wishStatus){
+      removeItemFromWishList(id);
+    }else {
+      addItemToWishList(id);
+    }
+  }
+  const parseProduct = (product) => {
+    let sizes = [], images = [];
+    try{
+      if(typeof product.sizes !== 'undefined' && product.sizes !== "-"){
+        if(typeof product.sizes === 'string'){
+          sizes = product.sizes.replace('[', '').replace(']', '').replace(/\"/g, '').replace(/\'/g, '');
+          sizes = sizes.split(',') || [];
+          
+        }else if( product.sizes instanceof Array){
+          sizes = product.sizes || [];
+        } 
+      }
+      product.sizes = sizes;
+    }catch(err){
+      console.error('error while parsing product sizes', err, product.sizes);
+    }
+    try {
+      if(typeof product.images !== 'undefined'){
+        if(typeof product.images === 'string'){
+          images = product.images.replace('[', '').replace(']', '').replace(/\"/g, '').replace(/\'/g, '');
+          images = images.split(',') || [];
+        }else if( product.images instanceof Array){
+          images = product.images || [];
+        }
+      }
+      product.images = images;
+    }catch(err){
+      console.error('error while parsing product', err, product.images);
+    }
+    
+    return product;
+  }
+  const getProducts = async () => {
+    const sku = id;
+    try {
+      if(!pending){
+        setPending(true);
+      }
+      console.log('getProduct -> ', sku);
+      let product = await fetchProduct(sku);
+      setProduct(parseProduct(product));
+      document.title = product.name;
+    }catch(err){
+      console.err('ProductPage', err);
+    }finally {
+      setPending(false);
+    }
+  }
+  
+  useEffect(()=> {
+    getProducts();
+  }, [id])
+
+  return (
+    <Page className={"product-home-page pt-5 pb-5"} pageName={!pending && product ? product.title : "LikeBox" }>
+        {pending && <LoadingModule />}
+        {!pending && product && 
+          <div className="d-block">
+            <ProductHeroGallery
+              images={product.images}
+              product_name={product.name}
+              product_id={product.sku}
+            />
+            <div className="product-details p-2 col-lg-5 float-left">
+              <div className="product-brand">{product.brand}</div>
+              <div className="product-name mb-3">{product.name}</div>
+              <div className="product-price">
+                <div className="product-sale-price">
+                  &pound;{product.price}
+                </div>
+                <div className="price-tax-info mt-1 mb-3">Inclusive of all taxes</div>
+              </div>
+              {product.rating && RatingStars((product.rating || ""))}
+              
+              <ProductForm addToCart={props.addToCart} product={product} sizes={product.sizes} />
+
+              <ProductDescComponent description={product.description}/>
+            </div>
+          </div>
+        }
+        {!pending && !product && <FourZeroFour/>} 
+      </Page>
+    )
+} 
+
+
+/* class ProductPage extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -347,11 +462,11 @@ class ProductPage extends Page {
               <ProductDescComponent description={product.description}/>
             </div>
           </div>}
-        {!this.state.pending && !this.state.product && <div>No products found</div>} 
+        {!this.state.pending && !this.state.product && <FourZeroFour/>} 
       </div>
     );
   }
-}
+} */
 
 //export default ProductPage;
 

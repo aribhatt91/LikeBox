@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import AppDropdown from './AppDropdown';
 
-function Tag({item, _click, cancelable, selected, _cancel, index}) {
+function Tag({item, onClick, cancelable, selected, _cancel, index}) {
     const [_selected, setSelected] = useState(selected ? selected === true : false);
     const [show, setShow] = useState(true);
     const name = item,
@@ -8,8 +9,8 @@ function Tag({item, _click, cancelable, selected, _cancel, index}) {
         e.preventDefault();
         let val = !_selected;
         setSelected(val); 
-        if(typeof _click === 'function'){
-            _click(name, val);
+        if(typeof onClick === 'function'){
+            onClick(name, val);
         }
     }
 
@@ -34,7 +35,6 @@ handler - function that takes updated array of items as argument
 //TODO - Implement All option
 const MultiSelectTag = ({label, items, handler}) => {
     const [selectAll, setSelectAll] = useState(true);
-    const [open, setOpen] = useState(false);
     
     // Initiate result object
     let result = {}, list_items = [];
@@ -67,9 +67,6 @@ const MultiSelectTag = ({label, items, handler}) => {
         if(typeof handler === 'function'){
             handler(label, result);
         }
-    },
-    toggle = () => {
-        setOpen(!open);
     }
     
     items.forEach((item, index) => {
@@ -78,24 +75,16 @@ const MultiSelectTag = ({label, items, handler}) => {
                 key={index}
                 item={item}
                 // selected={!selectAll}
-                _click={_handleSelect}
+                onClick={_handleSelect}
                 index={index}
             ></Tag>
         )
     })
 
     return (
-        <div className={"d-inline-block select-dropdown multiselect_tags_container" + (open ? " open" : "")}>
-            <div className="d-flex d-md-inline-flex select-label tags_label" onClick={toggle}>{label}</div>
-            <div className="select-dropdown-items tags_container">
-                {/* <Tag
-                    item="All"
-                    selected={selectAll}
-                    _click={_selectAll}
-                ></Tag> */}
-                {list_items}
-            </div>
-        </div>
+        <AppDropdown label={label}>
+            {list_items}
+        </AppDropdown>
     )
 }
 

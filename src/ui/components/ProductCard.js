@@ -68,7 +68,7 @@ const ProductCard = (props) => {
     return (
         <div className="product-card row mr-0 ml-0 mt-5 mb-5" key={props.sku}>
             <div className="card-thumb-wrapper p-0 col-xs-12 col-md-4 col-lg-3">
-                <AppImage className="card-thumb" src={props.img} alt={props.title} />
+                <AppImage className="card-thumb" src={(decodeURI(props.img) || "").trim()} alt={props.title} aria-label={props.title} />
             </div>
             <div className="card-text-wrapper col-xs-12 col-md-4 col-lg-5 p-4 pt-md-0 pb-md-0 d-flex flex-column justify-content-between align-center">
                 <div className="product-description">

@@ -1,4 +1,6 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, {useState} from 'react';
+import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
 function Accordion({
     label, 
@@ -6,9 +8,9 @@ function Accordion({
     openBtnAlign, 
     openBtnStyle, 
     children, 
-    defDisabled, 
-    defOpen, 
-    hideHeaderOnOpen
+    defDisabled=false, 
+    defOpen=false, 
+    hideHeaderOnOpen=false
 }){
     const [open, setOpen] = useState((typeof defOpen !== "undefined" && (defOpen === true || defOpen === "true") ? true : false));
     const [disabled, setDisabled] = useState((typeof defDisabled !== "undefined" && (defDisabled === true || defDisabled === "true") ? true : false));
@@ -22,10 +24,12 @@ function Accordion({
         }
     }
     return (
-        <div className="accordion-container">
-            <div className={"accordion-header " + (open ? "open" : "")  + (hideHeader ? " d-none" : "") + (openBtnStyle ? " " + openBtnStyle : " plus") + (disabled ? " disabled" : "")} onClick={toggleAccordion}>
+        <div className={"accordion-container" + (open ? " open" : "")}>
+            <div className={"accordion-header " + (hideHeader ? " d-none" : "") + (disabled ? " disabled" : "")} onClick={toggleAccordion}>
                 <span className="accordion-header-label">{label}</span>
-                {openBtn && <span className={"accordion-btn" + ((!openBtnAlign || openBtnAlign == "right") ? " right" : " left")}>{}</span>}
+                {<span className={"accordion-btn"}>
+                    <FontAwesomeIcon icon={open ? faChevronUp : faChevronDown }/>
+                </span>}
             </div>
             <div className={"accordion-body " + (open ? "d-inline-block" : "d-none")}>
                 {

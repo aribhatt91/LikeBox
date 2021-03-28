@@ -1,25 +1,21 @@
-import React, {Component, useState, useContext, useEffect } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartPlus, faUser, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 import Modal from 'react-bootstrap/Modal';
-import SideNav from './SideNav';
+import HeaderMobileNav from './HeaderMobileNav.js';
 import HOME_ICON from '../../assets/img/logo.png'; 
 import SearchBar from './SearchBar';
 import { authenticate } from './../../service/authService';
 import { getUserObject } from '../../service/rx-store/dataStore';
-import UserLoginSignupModule from './UserLoginSignupModule';
-import LI from '../../assets/img/login.jpg';
 import CartLink from './CartLink';
 import { AuthContext } from './../../store/contexts/AuthContext';
 import AppButton from './generic/AppButton';
 import HeaderNavigation from './HeaderNavigation';
 import heart_icon from '../../assets/img/heart.png';
-import LoadingModule from './LoadingModule';
+
 const UserProfileDropDown = ({classes, logout}) => {
   const [expand, setExpand] = useState(false);
   useEffect(() => {
@@ -73,9 +69,9 @@ function Header (props) {
       <header className="App-header sticky-top">
         <div className={"topnav" /*Add scrolling functionality if needed*/}>
           <Navbar variant="light">
-  
+            <HeaderMobileNav user={currentUser} logout={logout} />
+
             <Navbar.Brand>
-              <SideNav loggedIn={currentUser}></SideNav>
               <NavLink activeClassName='active' exact={true} to="/" >
                 <img className="home_icon" src={HOME_ICON} alt="Home"/>
               </NavLink>
@@ -84,7 +80,7 @@ function Header (props) {
             <Nav className="mr-auto d-none d-md-flex navbar-nav">
               <HeaderNavigation/>
             </Nav>
-            <Nav className="justify-content-end">
+            <Nav className="justify-content-end d-none d-md-flex">
             
               {/* <SearchBar/> */}
 

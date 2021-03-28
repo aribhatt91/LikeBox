@@ -1,21 +1,18 @@
 import React, {useContext, useState, useEffect } from 'react'
 import LikeBoxPreference from './LikeBoxPreference'
-import {EMAIL_FORM_SCHEMA, LOGIN_FORM_SCHEMA} from '../../service/validationSchema';
-import AppForm from './forms/AppForm';
-import AppTextInput from './generic/AppTextInput';
-import AppSubmitButton from './generic/AppSubmitButton';
 import { AuthContext } from './../../store/contexts/AuthContext';
-import LikeBoxCarousel from './LikeBoxCarousel';
-import AppRadioInput from './generic/AppRadioInput';
+
 import SignupForm from './forms/SignupForm';
 import LoginForm from './forms/LoginForm';
 import LikeBoxHomePage from './LikeBoxHomePage';
-import { getUserSizing, isFirstLoad } from './../../service/api/firestore/user';
+import { getUserSizing } from './../../service/api/firestore/user';
 import { useHistory } from 'react-router';
 import { useNotification } from './../../store/contexts/NotificationProvider';
+import { isFirstSession } from '../../service/userProfile';
+import SubscriptionForm from './forms/SubscriptionForm';
 function LikeBoxEmailForm({onComplete, setRegistered}) {
     const {fetchSignInMethods} = useContext(AuthContext);
-    const validationSchema = EMAIL_FORM_SCHEMA;
+    //const validationSchema = EMAIL_FORM_SCHEMA;
     async function submitForm (userInput, {setSubmitting}){
         setSubmitting(true);
         if(userInput.email){
@@ -35,7 +32,7 @@ function LikeBoxEmailForm({onComplete, setRegistered}) {
                     setTimeout(onComplete, 750);
                 }
             }catch(err){
-                console.error(err);
+                console.error('fetchSignInMethods', err);
             }
         }
         setSubmitting(false);
@@ -44,22 +41,7 @@ function LikeBoxEmailForm({onComplete, setRegistered}) {
         <React.Fragment>
             <p className="like-box-subheader-p">Ready to start shopping? Enter your email to create your FREE account</p>
             <div className={"email-reg-form"}>
-                <AppForm
-                initialValues={{email: ''}}
-                onSubmit= {submitForm}
-                validationSchema={validationSchema}>
-                    <div className="d-flex">
-                        <AppTextInput
-                            name="email"
-                            label="Enter your email address"
-                            type="email"
-                        />
-                        <AppSubmitButton
-                            text="Get started"
-                            className="border-radius-0"
-                        />
-                    </div>
-                </AppForm>
+                <SubscriptionForm subscribe={submitForm} />
             </div>
         </React.Fragment>
     )
@@ -148,7 +130,7 @@ export default function LikeBox() {
     useEffect(() => {
         if(currentUser){
             (async () => {
-                let firstLoad = await isFirstLoad(currentUser.email);
+                let firstLoad = await isFirstSession(currentUser.email);
                 if(firstLoad){
                     setShow(2);
                 }else {
@@ -162,14 +144,6 @@ export default function LikeBox() {
     const goToLikeBox = () => {
         history.push('/likebox');
     }
-    const handleNewNotification = () => {
-        console.log('handleNewNotification called');
-        dispatch({
-          type: "ERROR",
-          message: 'Heelooo',
-          title: "Successful Request"
-        })
-      }
 
     return (
         <div className="container">

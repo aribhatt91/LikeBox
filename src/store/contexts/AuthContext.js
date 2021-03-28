@@ -9,6 +9,7 @@ export function useAuth() {
 }
 export function AuthProvider({children}){
     const [currentUser, setUser] = useState(null);
+    const [userProfile, setUserProfile] = useState(null);
     const [loading, setLoading] = useState(true);
     function signup({email, password, fname, lname, mobile}){ 
         return auth.createUserWithEmailAndPassword(email, password)
@@ -36,21 +37,13 @@ export function AuthProvider({children}){
     }
 
     function updateName(displayName){
-        currentUser.updateProfile({
+        return currentUser.updateProfile({
             displayName
-        }).then(()=>{
-            console.log("Updated user's Display Name");
-        }, error => {
-            console.log("Error while updating user's Display Name", error);
         })
     }
     function updatePhotoUrl(photoURL){
-        currentUser.updateProfile({
+        return currentUser.updateProfile({
             photoURL
-        }).then(()=>{
-            console.log("Updated user's Display Name");
-        }, error => {
-            console.log("Error while updating user's Display Name", error);
         })
     }
 

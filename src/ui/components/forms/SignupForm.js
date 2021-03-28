@@ -1,21 +1,13 @@
 import React, { useState, useContext } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import {signin} from '../../../service/authService';
 import { SIGNUP_FORM_SCHEMA } from './../../../service/validationSchema';
 import AppForm from './AppForm';
 import AppTextInput from '../generic/AppTextInput';
 import AppSubmitButton from './../generic/AppSubmitButton';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
-
-import { useAuth, AuthContext } from './../../../store/contexts/AuthContext';
+import { AuthContext } from './../../../store/contexts/AuthContext';
 import AppRadioInput from '../generic/AppRadioInput';
-import { addUser } from '../../../service/api/firestore/user';
 import { SuccessMessage } from '../generic/PageMessage';
-//import signup from './../../../service/signupService';
+import { addUserProfile } from './../../../service/userProfile';
 
-const validationSchema = SIGNUP_FORM_SCHEMA;
 function SignupForm(props){
     console.log('SignupModule', props);
     //const { error, pending, user, loggedIn } = props;
@@ -45,8 +37,9 @@ function SignupForm(props){
             d.setYear(Number(userInput.year))
             user.dob = d.toDateString();
             user.gender = userInput.gender;
-            await addUser(user)
-            //updateName(userInput.fname);
+            //await addUser(user);
+            await addUserProfile(user);
+            await updateName(userInput.fname);
             if(typeof props.onComplete === 'function'){
                 props.onComplete();
             }
@@ -69,7 +62,7 @@ function SignupForm(props){
             <div className={"signup-form"}>
               <AppForm
                 onSubmit={submitForm}
-                // validationSchema={validationSchema}
+                validationSchema={SIGNUP_FORM_SCHEMA}
                 initialValues={{email: (props.email || ""), password: '', confirmpassword: '', fname: '', date: '', month: '', year: '', lname: '', gender: ''}} >
                 
 
@@ -80,8 +73,6 @@ function SignupForm(props){
                             type="number"
                             name="date"
                             label="DD*"
-                            min={1}
-                            max={31}
                             />
                     </div>
                     <div className="col-md-4 float-left pl-2 pr-2">
@@ -89,8 +80,6 @@ function SignupForm(props){
                             type="number"
                             name="month"
                             label="MM*"
-                            min={1}
-                            max={12}
                             />
                     </div>
                     <div className="col-md-4 float-left pl-2 pr-2">
@@ -98,8 +87,6 @@ function SignupForm(props){
                             type="number"
                             name="year"
                             label="YYYY*"
-                            min={1900}
-                            max={2021}
                             />
                     </div>
                 </div>

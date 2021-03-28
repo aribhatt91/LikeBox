@@ -27,42 +27,22 @@
         margin-right: 0;
         margin-left: 16px;
         position: relative;
-        &:after {
-            content: "+";
-            background-position: center;
-            font-size: 20px;
-            background-repeat: no-repeat;
-            background-size: contain;
-            width: 100%;
-            line-height: 1;
-        }
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #333;
   
         &.left {
           order: -1;
           margin-right: 16px;
           margin-left: 0;
         }
-        &.arrow{
-            &:after {
-                content: "\203A";
-                transform: rotate(-90deg);
-            }
-        }
       }
-      &.open {
-        .accordion-btn {
-            &:after {
-                content: "-";
-                transform: rotate(-90deg);
-            }
-            
-            &.arrow{
-                &:after {
-                    transform: rotate(90deg);
-                    cursor: auto;
-                }
-            }
-        }
+    }
+    
+    &.open {
+      .accordion-header-label {
+        font-weight: bold;
       }
     }
     .accordion-body {

@@ -10,6 +10,7 @@ STREET = Yup.string().label('Street'),
 CITY = Yup.string().label('City/Town'),
 POSTCODE = Yup.string().min(6).max(7).label('postcode'),
 NAME = Yup.string().min(2),
+GENDER = Yup.string(),
 MOBILE = Yup.string().matches(/^[6-9]\d{9}$/, {message: "Please enter valid mobile number", excludeEmptyString: false}),
 CONFIRMPASSWORD = Yup.string().min(6).label('Confirm password').when("password", {
     is: val => (val && val.length > 0 ? true : false),
@@ -51,3 +52,16 @@ export const SIGNUP_FORM_SCHEMA = Yup.object().shape({
     lname: NAME.required().label('Last name')/* ,
     mobile: MOBILE.required().label('Mobile number') */
 });
+
+/* ProfileUpdateForm */
+
+export const PERSONAL_INFORMATION_SCHEMA = {
+    fname: NAME,
+    lname: NAME,
+    gender: GENDER
+}
+
+export const CONTACT_INFORMATION_SCHEMA = {
+    mobile: MOBILE,
+    email: EMAIL
+}

@@ -6,16 +6,23 @@ class Page extends Component {
     componentWillMount(){}
     componentDidUpdate(){}
     componentDidMount(){
+        console.log('Mounted Page ->', this.props.pageName);
         if(window.dataLayer){
             window.dataLayer.pageName = this.props.pageName;
             window.dataLayer.pageMbox = "mbox-" + this.props.pageName + "-page";
         }
-        document.title = 'Likebox | ' + this.props.pageName;
+        
         var event = new CustomEvent("react-view-change", {detail: {view: window.dataLayer.pageName, mbox: window.dataLayer.pageMbox}});
         document.dispatchEvent(event);
+        document.title = this.props.pageName;
     }
     render(){
-        return "";
+        let {className} = this.props;
+        return (
+            <div className={"page" + (className ? " " + className : "")}>
+                { this.props.children }
+            </div>
+        );
     }
 }
 

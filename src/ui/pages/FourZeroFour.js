@@ -1,9 +1,10 @@
 import React from 'react';
+import Page from './Page';
 const FourZeroFour = (props) => {
     return (
-        <div class="page d-flex align-items-center justify-content-center pt-5 pb-5">
+        <Page class="d-flex align-items-center justify-content-center pt-5 pb-5" pageName={"404"}>
             <img src={require('../../assets/img/404.png')}/>
-        </div>
+        </Page>
     )
 }
 export default FourZeroFour;

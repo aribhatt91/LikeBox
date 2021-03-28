@@ -1,16 +1,29 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 
-export default function AppDropdown({children}) {
+export default function AppDropdown({label, children, className}) {
     const [open, setOpen] = useState(false);
+    const selectLabel = useRef(null); 
     useEffect(()=>{
-
+        window.addEventListener('click', e => {
+            //console.log(e.target, selectLabel);
+            if(selectLabel && e.target !== selectLabel.current){
+                setOpen(false);
+            }
+        })
     }, [])
+     const toggle = () => {
+         if(open){
+             setOpen(false);
+         }else {
+             setOpen(true);
+         }
+     }
     return (
-        <div className={"d-inline-block select-dropdown multiselect_tags_container" + (open ? " open" : "")} onClick={(e)=>{e.stopPropagation()}}>
-            <div className="d-flex d-md-inline-flex dropdown-label-container" onClick={toggle}>
+        <div className={"d-inline-block app-dropdown" + (className ? " " + className : "") + (open ? " open" : "")}>
+            <div className="d-flex d-md-inline-flex app-dropdown-label" onClick={toggle} ref={selectLabel}>
                 {label}            
             </div>
-            <div className="select-dropdown-items">
+            <div className="app-dropdown-items" onClick={(e)=>{e.stopPropagation()}}>
                 {
                     children
                 }

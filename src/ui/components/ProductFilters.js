@@ -41,7 +41,7 @@ const ProductFilters = (props) => {
     return (
         <div className="product_filter_wrapper page-content-wrapper">
             
-            <div className="d-flex justify-content-between">
+            <div className="d-flex justify-content-between flex-wrap">
                 {categories.length > 0 && 
                     <div className="filter_section">
                         <MultiSelectTag

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import Page from './Page';
 import ProductCard, { ProductCardPlaceholder } from './../components/ProductCard';
 import ProductFilters from './../components/ProductFilters';
@@ -36,7 +36,7 @@ function Listing({type, filter, sortBy}){
   }, [page])
 
   return (
-    <div className="product-cards-container">
+    <div className="product-cards-container d-flex flex-column">
       {
         !loading && products && products.length > 0 && products.map((item, index) => <ProductCard 
                   key={index}
@@ -65,62 +65,34 @@ function Listing({type, filter, sortBy}){
     </div>
   )
 }
-class ListingPage extends Page {
-  //Filter by search keyword, discount, price range, brand
-  selected_brand = []; 
-  selected_price_range = []; 
-  selected_discount = [];
-  
-  constructor(props){
-    super(props);
-    this.state = {
-      pending: true,
-      items: [],
-      error: null
-    }
-    this.applyFilter = this.applyFilter.bind(this);
-    this.applySort = this.applySort.bind(this);
-  }
+function ListingPage(props) {
+  const {category} = useParams();
 
-  
-  componentDidMount(){
-    //this.getProducts();
-  }
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // If we have a snapshot value, we've just added new items.
-    // Adjust scroll so these new items don't push the old ones out of view.
-    // (snapshot here is the value returned from getSnapshotBeforeUpdate)
-    console.log('componentDidUpdate -> ', prevProps, this.props);
-    if(prevProps.match.params.category !== this.props.match.params.category){
-      //this.getProducts();
-    }
-  }
-  applyFilter(filterObj){
+  const applyFilter = async (filterObj) => {
     console.log('ListingPage:applyFilter ->', filterObj);
     //fetchAllProducts(filterObj);
   }
-  applySort(sortOrder){
+  const applySort = async (sortOrder) => {
 
   }
 
-  render() {
-    return (
-      <section className="products-section">
-        
-          <div className="page container-fluid">
-            <h1 className="listing-page-header m-3 mt-5 mb-5 text-center text-uppercase">
-              {(this.props.match.params.category || "").replace('-', ' & ')}
-            </h1>
-            <ProductFilters 
-              filterHandler={this.applyFilter}
-              sortHandler={this.applySort}
-              products={this.state.items.length} />
-            <Listing />
-          </div>
-        
-      </section>
-    );
-  }
+  return (
+    <Page pageName={(category|| "").replace('-', ' & ').toUpperCase()}>
+        <section className="products-section">
+            <div className="page container-fluid">
+              <h1 className="listing-page-header m-3 mt-5 mb-5 text-center text-uppercase">
+                {(category|| "").replace('-', ' & ')}
+              </h1>
+              <ProductFilters 
+                filterHandler={applyFilter}
+                sortHandler={applySort}
+                products={0} />
+              <Listing/>
+            </div>
+        </section>
+    </Page>
+  );
+  
 }
 
 

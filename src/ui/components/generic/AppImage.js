@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 
-export default function AppImage({className, src, ...rest}) {
+export default function AppImage({className, src, label="", ...rest}) {
     const [loaded, setLoaded] = useState(false);
     const imgRef = useRef(null);
     useEffect(()=> {
