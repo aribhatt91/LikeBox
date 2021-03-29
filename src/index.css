@@ -360,6 +360,12 @@
   to {
     width: 100%; } }
 
+@keyframes spin {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+
 .button--interactive:not([disabled]):hover:active:before {
   background-color: #000; }
 
@@ -558,6 +564,12 @@
   to {
     width: 100%; } }
 
+@keyframes spin {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+
 .button--interactive:not([disabled]):hover:active:before {
   background-color: #000; }
 
@@ -675,7 +687,7 @@
   .app-btn[disabled] {
     opacity: 0.5;
     text-decoration: none !important; }
-  .app-btn::after {
+  .app-btn:not(.loading)::after {
     content: "";
     position: absolute;
     /* z-index: -1; */
@@ -684,12 +696,12 @@
     transform: translate(-50%, -50%);
     border-radius: 50%;
     height: 0; }
-  .app-btn:hover:not([disabled]) {
+  .app-btn:hover:not([disabled]):not(.loading) {
     text-decoration: none; }
-    .app-btn:hover:not([disabled]) .app-btn-text {
+    .app-btn:hover:not([disabled]):not(.loading) .app-btn-text {
       /* font-size: 80%; */
       z-index: 2; }
-    .app-btn:hover:not([disabled])::after {
+    .app-btn:hover:not([disabled]):not(.loading)::after {
       animation: hover-in-interactive-base 0.6s cubic-bezier(0.6, 0.1, 0.9, 0.6) forwards;
       background-color: #333; }
 
@@ -708,9 +720,9 @@
     background-color: #fff;
     color: #000 !important;
     box-sizing: border-box; }
-    .app-btn.btn-white:hover:not([disabled]) {
+    .app-btn.btn-white:hover:not([disabled]):not(.loading) {
       background-color: #fff; }
-      .app-btn.btn-white:hover:not([disabled])::after {
+      .app-btn.btn-white:hover:not([disabled]):not(.loading)::after {
         animation: hover-in-interactive-white 0.6s cubic-bezier(0.6, 0.1, 0.9, 0.6) forwards;
         background-color: #ececec; }
 
@@ -725,7 +737,7 @@
     width: 90rem; } }
   .app-btn.btn-grey {
     background-color: #424B54; }
-    .app-btn.btn-grey:hover:not([disabled])::after {
+    .app-btn.btn-grey:hover:not([disabled]):not(.loading)::after {
       animation: hover-in-interactive-grey 0.6s cubic-bezier(0.6, 0.1, 0.9, 0.6) forwards;
       background-color: #000; }
 
@@ -745,6 +757,25 @@
     .app-btn.sm .app-btn-text {
       font-size: 14px;
       font-weight: normal; }
+  .app-btn.loading {
+    position: relative; }
+    .app-btn.loading .app-btn-text {
+      opacity: 0; }
+    .app-btn.loading::after {
+      position: absolute;
+      top: 50%;
+      margin-top: -13px;
+      left: 50%;
+      margin-left: -13px;
+      content: "";
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      border-bottom-color: transparent !important;
+      animation: 0.75s linear infinite spin; }
+    .app-btn.loading.btn-white::after {
+      border-color: #000; }
 
 .selectable-tag {
   display: flex;
@@ -937,9 +968,9 @@
     border-color: #28a745;
     color: #28a745; }
   .msg-container.info {
-    background-color: rgba(3, 166, 133, 0.2);
-    border-color: #03a685;
-    color: #03a685; }
+    background-color: rgba(0, 102, 204, 0.2);
+    border-color: #06c;
+    color: #06c; }
 
 .animated-text-input {
   width: 100%; }
@@ -1048,6 +1079,12 @@
     width: 0; }
   to {
     width: 100%; } }
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
 
 .button--interactive:not([disabled]):hover:active:before {
   background-color: #000; }
@@ -1335,6 +1372,12 @@ $thumb-dimen-xs: 240px; */
     width: 0; }
   to {
     width: 100%; } }
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
 
 .button--interactive:not([disabled]):hover:active:before {
   background-color: #000; }
@@ -2385,16 +2428,19 @@ $thumb-dimen-xs: 240px; */
 
 .product-home-page .product-details .product-name {
   font-weight: 500;
-  font-size: 14px; }
+  font-size: 16px;
+  line-height: 36px; }
 
 .product-home-page .product-details .product-brand {
   font-weight: 300;
-  font-size: 16px;
+  font-size: 27px;
+  line-height: 36px;
+  font-weight: 500;
   text-transform: uppercase; }
 
 .product-home-page .product-details .product-price .product-sale-price {
   font-weight: 500;
-  font-size: 22px; }
+  font-size: 21px; }
 
 .product-home-page .product-details .product-price .product-full-price {
   font-size: 14px; }
@@ -2405,7 +2451,7 @@ $thumb-dimen-xs: 240px; */
 
 .product-home-page .product-details .product-price .price-tax-info {
   font-size: 12px;
-  color: #03a685;
+  color: #28a745;
   font-weight: 500; }
 
 .product-home-page .product-details .product-rating {

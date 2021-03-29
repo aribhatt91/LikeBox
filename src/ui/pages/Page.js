@@ -4,7 +4,9 @@ import createTargetComponent from '@adobe/target-react-component';
 let Target = createTargetComponent(React);
 class Page extends Component {
     componentWillMount(){}
-    componentDidUpdate(){}
+    componentDidUpdate(){
+        //Implement updates to data layer and meta data
+    }
     componentDidMount(){
         console.log('Mounted Page ->', this.props.pageName);
         if(window.dataLayer){

@@ -9,6 +9,7 @@ function AppSubmitButton({text,...rest}) {
                 label={text}
                 disabled={isSubmitting}
                 onClick={handleSubmit}
+                loading={isSubmitting}
                 type="submit"
                 {...rest}
             />

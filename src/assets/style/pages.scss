@@ -36,17 +36,20 @@
     .product-details {
         .product-name {
             font-weight: 500;
-            font-size: 14px;
+            font-size: 16px;
+            line-height: 36px;
         }
         .product-brand {
             font-weight: 300;
-            font-size: 16px;
+            font-size: 27px;
+            line-height: 36px;
+            font-weight: 500;
             text-transform: uppercase;
         }
         .product-price {
             .product-sale-price {
                 font-weight: 500;
-                font-size: 22px;
+                font-size: 21px;
             }
             .product-full-price {
                 font-size: 14px;
@@ -57,7 +60,7 @@
             }
             .price-tax-info {
                 font-size: 12px;
-                color: $info;
+                color: $success;
                 font-weight: 500;
             }
         }

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import AppButton from './generic/AppButton';
 import { AuthContext } from './../../store/contexts/AuthContext';
 import { addItemToWishList } from '../../service/wishlistMethods';
@@ -32,10 +32,12 @@ export function ProductCardPlaceholder () {
 }
 const ProductCard = (props) => {
     const {currentUser} = useContext(AuthContext);
+    const [ctaLoading, setCtaLoading] = useState(false);
     const dispatch = useNotification();
     const addToWishList = async () => {
         if(currentUser){
             try{
+                setCtaLoading(true);
                 let res = await addItemToWishList(currentUser.email, props.sku);
                 console.log('ProductCard:addToWishList', res);
                 dispatch(
@@ -58,10 +60,19 @@ const ProductCard = (props) => {
                         }
                     )
                 }
+            }finally {
+                setCtaLoading(false);
             }
           
         }else {
             console.log('User not authenticated');
+            dispatch(
+                {
+                    type: 'error',
+                    message: 'You need to be signed in!',
+                    title: 'Error!'
+                }
+            )
         }
     }
 
@@ -80,7 +91,7 @@ const ProductCard = (props) => {
                 </div>
                 <div className="action-buttons w-100">
                     <AppButton href={props.link} label="View product" className="w-100 btn-grey"/>
-                    <AppButton disabled={!currentUser} onClick={addToWishList} label="Add to wishlist" className="btn-white w-100 mt-2"/>
+                    <AppButton disabled={!currentUser} onClick={addToWishList} loading={ctaLoading} label="Add to wishlist" className="btn-white w-100 mt-2"/>
                 </div>
             </div>
             <div className="card-desc-wrapper col-xs-12 col-md-4 col-lg-4 p-4 pt-md-0 pb-md-0">
