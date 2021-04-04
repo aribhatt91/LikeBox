@@ -17,7 +17,7 @@ function AppBody (){
     return (<main className="App-body">
       <Switch>
         <Route exact path='/' render={(props) => <Home {...props}/>}/>
-        <Route path='/products/:category?' render={(props) => <ListingPage {...props}/>}/>
+        <Route path='/products/:category/:page?' render={(props) => <ListingPage {...props}/>}/>
         <Route path='/product/:id' render={(props) => <ProductPage {...props}/>}/>
         {/* <Route path='/about' render={(props) => <About {...props} pageName="about" />}/> */}
         <ProtectedRoute path='/cart' component={CartPage}/>

@@ -2,12 +2,29 @@
 import { addUser, isFirstLoad, updateUserByEmail } from './api/firestore/user';
 import { getUser } from './../store/reducers/login_reducer';
 
-export const addUserProfile = async (user) => {
+export const addUserProfile = (user) => {
     return addUser(user);
 }
 
 export const fetchUserProfile = async (email) => {
-    return getUser(email);
+    /* let res = {};
+    try {
+        let user = await getUser(email);
+        
+        res = {
+            name: (user.name || {}),
+            mobile: (user.mobile || ""),
+            email: user.email,
+            gender: (user.gender || "")
+        }
+        console.log('fetchUserProfile:getUser: res', res);
+    }catch(err){
+
+    }
+    return new Promise(resolve => resolve(res)) */
+    let res = getUser(email);
+    console.log('fetchUserProfile:getUser: res', res);
+    return res;
 }
 
 export const updateUserProfile = (email, update) => {

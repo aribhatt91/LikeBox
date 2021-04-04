@@ -63,7 +63,7 @@ function WishListInstance({instance, removeItem}){
                     {instance.brand}
                 </div> */}
                 <div className="wish-list-cta w-100 mt-1">
-                    <AppButton className="w-100 sm" onClick={() => {}} label="Buy now" />
+                    <AppButton className="w-100 sm" href={`/product/${instance.sku}`} label="Buy now" />
                 </div>
             </div>
             <div className="wish-list-instance-remove-wrapper tooltip-wrapper d-flex flex-column align-items-end" onClick={(e)=>{e.stopPropagation()}}>
@@ -114,16 +114,24 @@ function UserWishListFragment(){
         }
     }, [currentUser])
     const removeItem = async (sku) => {
+        if(!currentUser){
+            return;
+        }
         try {
             setPending(true);
-            let res = await removeItemFromWishList(currentUser.email, sku);
-            if(res.items){
-                setWishList(res.items);
+            let rem = await removeItemFromWishList(currentUser.email, sku);
+            console.log(rem);
+            let res = await fetchWishList(currentUser.email);
+            console.log('updated wishlist', res);
+            if(rem.type === 'success'){
                 dispatch({
-                    type: res.type,
-                    message: res.msg,
-                    title: 'Success'
+                    type: rem.type,
+                    message: rem.msg,
+                    title: 'Success!'
                 })
+            }
+            if(res){
+                setWishList(res);
             }
             
         }catch(err) {
@@ -144,14 +152,16 @@ function UserWishListFragment(){
     return (
         <div className={"wish-list-section mt-5 mb-5"}>
             <h1 className="text-center mb-5 text-uppercase">Wishlist</h1>
-            <div className="wish-list-container d-flex flex-wrap justify-content-between">
+            <div className="wish-list-container d-flex flex-wrap">
                 {
                     wishList.map((item, index) => 
-                        <WishListInstance
-                            key={index}
-                            instance={item}
-                            removeItem={removeItem}
-                        />
+                        <div className="d-flex justify-content-center col-md-4 p-0">
+                            <WishListInstance
+                                key={index}
+                                instance={item}
+                                removeItem={removeItem}
+                            />
+                        </div>
                     )
                 }
                 {

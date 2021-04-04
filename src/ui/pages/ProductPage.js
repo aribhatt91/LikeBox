@@ -1,13 +1,13 @@
-import React, { Component, useState, useContext, useLocation, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Page from './Page';
 import LoadingModule from './../components/LoadingModule';
 import ProductHeroGallery from '../components/ProductHeroGallery';
 import PageMessage from '../components/generic/PageMessage';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStarOfLife, faStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
+import { faStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
 import TextInput from '../components/generic/TextInput';
 import { checkDeliveryAvailability } from '../../service/addressMethods';
-import { addItemToWishList, removeItemFromWishList } from '../../service/wishlistMethods';
+import { addItemToWishList, removeItemFromWishList, itemInWishList } from '../../service/wishlistMethods';
 import Counter from '../components/generic/Counter';
 import AppButton from './../components/generic/AppButton';
 import { Tabs } from 'react-bootstrap';
@@ -19,6 +19,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { useParams } from 'react-router-dom';
 import FourZeroFour from './FourZeroFour';
+import { useNotification } from './../../store/contexts/NotificationProvider';
+import { fetchAwinProduct } from '../../service/api/firestore/awin';
+
 function SizeSelector({sizes, handler, label, name}){
   let size_radios = [];
   const handleSelect = (e) => {
@@ -143,10 +146,10 @@ function ProductDescComponent({description, sizing, shipping, returns}){
   )
 }
 
-function ProductForm({product, sizes, addToCart}){
-  const {currentUser} = useContext(AuthContext);
+function ProductForm({currentUser, product, sizes, addToCart}){
   const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState('');
+  const [cta1Loading, setCta1Loading] = useState(false);
 
   
   const counter = (tag, val) => {
@@ -249,7 +252,27 @@ function ProductPage(props) {
   const [deliverable, setDeliverable] = useState(true);
   const [pending, setPending] = useState(true);
   const [product, setProduct] = useState(null);
+  const [inWishList, setInWishList] = useState(false);
   const { id } = useParams();
+  const { currentUser } = useContext(AuthContext);
+  const dispatch = useNotification();
+
+  useEffect(()=>{
+    if(currentUser && id){
+      try{
+        if(id){
+          
+          (async ()=>{
+            let res = await itemInWishList(currentUser.email, id);
+            setInWishList(res);
+          })()
+        }
+        
+      }catch(err){
+        console.error(err);
+      }
+    }
+  }, [id, currentUser])
   const checkPincode = async (pincode) => {
     try {
       let res = await checkDeliveryAvailability(pincode);
@@ -258,11 +281,43 @@ function ProductPage(props) {
       setDeliverable(false);
     }
   }
-  const toggleProductWishList = async (id, wishStatus) => {
-    if(wishStatus){
-      removeItemFromWishList(id);
-    }else {
-      addItemToWishList(id);
+  const toggleInWishList = async () => {
+    if(currentUser && id){
+      try {
+        if(inWishList){
+          (async ()=>{
+            let res = await removeItemFromWishList(currentUser.email, id);
+            //let res = await itemInWishList(currentUser.email, id);
+            if(res.type === 'success'){
+              setInWishList(false);
+              dispatch({
+                type: res.type,
+                title: 'Success!',
+                message: res.msg
+              })
+            }
+          })()
+        }else {
+          (async ()=>{
+            let res = await addItemToWishList(currentUser.email, id);
+            if(res.type === 'success'){
+              setInWishList(true);
+              dispatch({
+                type: res.type,
+                title: 'Success!',
+                message: res.msg
+              })
+            }
+          })()
+        }
+      }catch(err){
+        console.log('toggleWishList', err);
+        dispatch({
+          type: 'error',
+          title: 'Error!',
+          message: 'Something went wrong!'
+        })
+      }
     }
   }
   const parseProduct = (product) => {
@@ -304,7 +359,8 @@ function ProductPage(props) {
         setPending(true);
       }
       console.log('getProduct -> ', sku);
-      let product = await fetchProduct(sku);
+      //let product = await fetchProduct(sku);
+      let product = await fetchAwinProduct(sku);
       setProduct(parseProduct(product));
       document.title = product.name;
     }catch(err){
@@ -319,7 +375,7 @@ function ProductPage(props) {
   }, [id])
 
   return (
-    <Page className={"product-home-page pt-5 pb-5"} pageName={!pending && product ? product.title : "LikeBox" }>
+    <Page className={"product-home-page pt-5 pb-5"} product={product} pageName={"pdp"}>
         {pending && <LoadingModule />}
         {!pending && product && 
           <div className="d-block">
@@ -327,6 +383,8 @@ function ProductPage(props) {
               images={product.images}
               product_name={product.name}
               product_id={product.sku}
+              inWishList={inWishList}
+              toggleInWishList={toggleInWishList}
             />
             <div className="product-details p-2 col-lg-5 float-left">
               <div className="product-brand">{product.brand}</div>
@@ -339,7 +397,7 @@ function ProductPage(props) {
               </div>
               {product.rating && RatingStars((product.rating || ""))}
               
-              <ProductForm addToCart={props.addToCart} product={product} sizes={product.sizes} />
+              <ProductForm currentUser={currentUser} addToCart={props.addToCart} product={product} sizes={product.sizes} />
 
               <ProductDescComponent description={product.description}/>
             </div>

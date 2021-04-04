@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import MultiSelectTag from './generic/MultiSelectTag';
 import { debounce, throttle } from 'lodash';
+import AppDropdown from './generic/AppDropdown';
+import AppDualRangeSlider from './generic/AppDualRangeSlider';
 
 //_handleBrandChange(e)
 const ProductFilters = (props) => {
@@ -62,11 +64,9 @@ const ProductFilters = (props) => {
                 }
                 {priceRanges.length > 0 &&
                     <div className="filter_section">
-                        <MultiSelectTag
-                            label="Price range"
-                            items={priceRanges}
-                            handler={optimisedFilter}
-                        />
+                        <AppDropdown label="Price range">
+                            <AppDualRangeSlider />
+                        </AppDropdown>
                     </div>
                 }
                 {discounts.length > 0 &&
@@ -84,6 +84,7 @@ const ProductFilters = (props) => {
                         items={discounts}
                         handler={optimisedSort}
                     />
+                    
                 </div>
             </div>
         </div>

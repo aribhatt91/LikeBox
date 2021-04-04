@@ -9,8 +9,7 @@ zipcode
 */
 import simulateNetworkRequest from './simulateNetworkRequest';
 import { validateAlpha, validateAlphaNumeric, validateMobileNumber, validatePincode, validateEmpty } from './validation';
-import { MockGetAddresses } from './../mock/api/mock-address-api';
-import { addNewAddress, updateAddress, getUserAddressBook, removeAddressById } from './api/firestore/address';
+import { addNewAddress, updateAddress, getUserAddressBook /* , removeAddressById */ } from './api/firestore/address';
 
 export const ERROR_TEXT = {
     name: 'Please fill out this field',
@@ -43,7 +42,8 @@ export const updateExistingAddress = (email, inputObj) => {
     return updateAddress(email, inputObj)
 }
 export const deleteAddress = (email, addressId) => {
-    return removeAddressById(email, addressId);
+    //return removeAddressById(email, addressId);
+    return null;
 }
 
 export const checkDeliveryAvailability = (pincode) => {

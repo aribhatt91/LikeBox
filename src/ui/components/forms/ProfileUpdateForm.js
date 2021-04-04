@@ -7,6 +7,7 @@ import AppRadioInput from '../generic/AppRadioInput';
 import { CONTACT_INFORMATION_SCHEMA } from '../../../service/validationSchema';
 import { PERSONAL_INFORMATION_SCHEMA } from './../../../service/validationSchema';
 import { AuthContext } from './../../../store/contexts/AuthContext';
+import PageMessage from '../generic/PageMessage';
 
 function ProfileUpdateForm({profile={}, onResult}){
     const [piEditMode, setPiEditMode] = useState(false);//Edit Personal Information
@@ -25,19 +26,19 @@ function ProfileUpdateForm({profile={}, onResult}){
     }
 
     const resetDefPiValues = () => {
-        let defVal = {
+        /* let defVal = {
             ...piInitialValues
         }
-        console.log('Resetting defvals', defVal);
-        setFieldState(defVal);
+        console.log('Resetting defvals', defVal); */
+        //setFieldState(defVal);
     },
     resetDefCiValues = () => {
-        let defVal = {
+        /* let defVal = {
             ...fieldState,
             contactInitialValues
         }
-        console.log('Resetting defvals', defVal);
-        setFieldState(defVal);
+        console.log('Resetting defvals', defVal); */
+        //setFieldState(defVal);
     },
     updatePersonalInformation = async (userInput, {setSubmitting}) => {
         if(currentUser){
@@ -57,7 +58,7 @@ function ProfileUpdateForm({profile={}, onResult}){
             onSubmit={updatePersonalInformation}
             validationSchema={PERSONAL_INFORMATION_SCHEMA}
             >
-                <div className={"editable-form"  +  (piEditMode ? " edit-mode" : "")}>
+                <div className={"editable-form mt-5"  +  (piEditMode ? " edit-mode" : "")}>
                     {
                         piFormError && <div className="row m-0 mb-4">
                             <div className="col-md-12 col-lg-12 pl-2 pr-2 clearfix float-none">
@@ -66,7 +67,7 @@ function ProfileUpdateForm({profile={}, onResult}){
                         </div>
                     }
                     <div className="field-group-header mb-3 d-flex justify-content-between">
-                        <span>Personal information</span><span className="cursor-pointer field-edit" onClick={() => {
+                        <span className="h4">Personal information</span><span className="cursor-pointer field-edit" onClick={() => {
                         if(piEditMode){
                             //resetDefPiValues();
                             //TODO find a way to resent initial values when user hits exit
@@ -76,7 +77,7 @@ function ProfileUpdateForm({profile={}, onResult}){
                     </div>
                     
                     <div className="row m-0">
-                        <div className="field-group col-md-8">
+                        <div className="field-group col-md-8 p-0">
                             <div className="col-md-6 pr-md-3 pl-0 float-left">
                                 <AppTextInput
                                     type="text"
@@ -107,6 +108,7 @@ function ProfileUpdateForm({profile={}, onResult}){
                                     name="gender"
                                     label="Gender"
                                     options={['male', 'female', 'other']}
+                                    disabled={!piEditMode}
                                 />
                             </div>
                         </div>
@@ -123,15 +125,20 @@ function ProfileUpdateForm({profile={}, onResult}){
             initialValues={contactInitialValues}
             onSubmit={updateContactInformation}
             validationSchema={CONTACT_INFORMATION_SCHEMA}>
-                <div className={"editable-form mt-4"  +  (ciEditMode ? " edit-mode" : "")}>
-                    <div className="field-group-header mb-3">Contact<span className="field-edit" onClick={() => {
-                        if(ciEditMode){
-                            //resetDefCiValues();
-                        }
-                        setCiEditMode(!ciEditMode)
-                        }}>{ciEditMode ? "Cancel": "Edit"}</span></div>
+                <div className={"editable-form mt-4 mb-5"  +  (ciEditMode ? " edit-mode" : "")}>
+                    <div className="field-group-header mb-3 d-flex justify-content-between">
+                        <span className="h4">Contact</span>
+                        <span className="field-edit" onClick={() => {
+                            if(ciEditMode){
+                                //resetDefCiValues();
+                            }
+                            setCiEditMode(!ciEditMode)
+                            }}>
+                            {ciEditMode ? "Cancel": "Edit"}
+                        </span>
+                    </div>
                     <div className="row m-0">
-                        <div className="field-group col-md-8">
+                        <div className="field-group col-md-8 p-0">
                             <div className="col-md-6 pr-md-3 pl-0 float-left clearfix">
                                 <AppTextInput
                                     type="email"
@@ -162,4 +169,4 @@ function ProfileUpdateForm({profile={}, onResult}){
     )
 }
 
-export default UserProfileFragment;
+export default ProfileUpdateForm;

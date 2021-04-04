@@ -1,44 +1,111 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Page from './Page';
 import ProductCard, { ProductCardPlaceholder } from './../components/ProductCard';
 import ProductFilters from './../components/ProductFilters';
 import EMPTY from '../../assets/img/no-search-result.png';
 import ErrorModule from './../components/ErrorModule';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
+
+import { parseSearchParams } from '../../service/helper';
+import AppButton from '../components/generic/AppButton';
+import { debounce } from 'lodash';
+
 import { fetchProducts } from './../../service/api/firestore/product';
+import { fetchAwinProduct, fetchAwinProducts } from './../../service/api/firestore/awin';
 
 const EMPTY_TEXT = "Sorry, no results found!",
 EMPTY_SUBTEXT = "Please check the spelling or try searching for something else",
 LOADING_TEXT = "";
 
 //Firestore Pagination - https://stackoverflow.com/questions/53044791/how-to-paginate-cloud-firestore-data-with-reactjs
+const PER_PAGE = 10;
+
+/* 
+Array of last visible documents - used for pagination 
+
+Update this with each page update,
+but reset its value as category or other variables change
+*/
+let LAST_NODES = [], FLUSH = true;
+
 function Listing({type, filter, sortBy}){
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(null);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
-  const {category} = useParams();
+  const {category/* , page */} = useParams();
   const [maxReached, setMaxReached] = useState(false);
+  const location = useLocation();
 
   const getProducts = async () => {
-    console.log('getProducts called', category);
-    setLoading(true);
-    let data = await fetchProducts(category);
-    setProducts(data);
-    setLoading(false);
+    try{
+      console.log('getProducts called', category);
+      setLoading(true);
+      //let data = await fetchProducts(category);
+      let response = await fetchAwinProducts(category, page, PER_PAGE, LAST_NODES);
+      console.log('getProducts:awinData', response, products);
+      if(response && response.items){
+        if(!FLUSH){
+          setProducts([].concat(products || []).concat(response.items));
+        }else {
+          setProducts([].concat(response.items));
+        }
+        
+        if(response.items.length < PER_PAGE){
+          setMaxReached(true);
+        }
+        if(response.lastVisible){
+          LAST_NODES = response.lastVisible;
+        }
+        console.log('getProducts response', response);
+      }
+    }catch(err){
+      console.error('getProducts:error', err);
+    }finally {
+      setLoading(false);
+    }
+    
+  }
+
+  const getQueryParams = () => {
+    let searchParams = parseSearchParams(location.search),
+    queryFilter = {
+      category: (searchParams['category']),
+      brand: (searchParams['brand'])
+    };
+    return queryFilter;
   }
 
   useEffect(()=>{
+    console.log('useEffect:category:page ->', page                  );
+    LAST_NODES = [];
+    if(maxReached){
+      setMaxReached(false);
+    }
+    FLUSH = true;
+    setLoading(true);
     getProducts();
   }, [category])
 
   useEffect(()=> {
-    if(page === 0 || maxReached){return}
+    if(!page || page === 0 || page === 1 || maxReached){return}
+    FLUSH = false;
+    getProducts();
   }, [page])
 
+  const prev = () => {
+
+  }
+
+  const next = () => {
+    setPage(page+1);
+  }
+
   return (
-    <div className="product-cards-container d-flex flex-column">
+    <div className="d-flex flex-column">
       {
-        !loading && products && products.length > 0 && products.map((item, index) => <ProductCard 
+        products && products.length > 0 && <React.Fragment> 
+          <div className="product-cards-container d-flex flex-column">
+          {products.map((item, index) => <ProductCard 
                   key={index}
                   sku={item.sku}
                   title={item.name}
@@ -48,16 +115,29 @@ function Listing({type, filter, sortBy}){
                   rating={item.ratings}
                   brand={item.brand}
                   desc={item.description}
-                  ></ProductCard>)
+                  />)}
+          {
+            loading && <div className="loading-state">
+              <ProductCardPlaceholder/>
+              <ProductCardPlaceholder/>
+              <ProductCardPlaceholder/>
+            </div>
+          }
+          </div>
+          {
+            !loading && <div className="d-flex w-100 justify-content-center mt-5 mb-5">
+              {/* <div className="col-6 col-md-3 col-lg-2">
+                <AppButton className="w-100 border-0 border-radius-0 btn-white page-navigate-btn" label="Previous"onClick={debounce(prev)} />
+              </div> */}
+              <div className="col-12 col-md-6">
+                {!maxReached && <AppButton className="w-100 border-0 border-radius-0 page-navigate-btn" label="Load more" onClick={debounce(next)}/>}
+              </div>
+            </div>
+          }
+        </React.Fragment>
       }
-      {
-        loading && <div className="loading-state">
-          <ProductCardPlaceholder/>
-          <ProductCardPlaceholder/>
-          <ProductCardPlaceholder/>
-        </div>
-      }
-      {!loading && products.length === 0 && <ErrorModule
+      
+      {!loading && (!products || products.length === 0) && <ErrorModule
           error_image={EMPTY}
           error_text={EMPTY_TEXT}
           error_subtext={EMPTY_SUBTEXT}
@@ -87,10 +167,10 @@ function ListingPage(props) {
               <h1 className="listing-page-header m-3 mt-5 mb-5 text-center text-uppercase">
                 {(category|| "").replace('-', ' & ')}
               </h1>
-              {/* <ProductFilters 
+              <ProductFilters 
                 filterHandler={applyFilter}
                 sortHandler={applySort}
-                products={0} /> */}
+                products={0} />
               <Listing/>
             </div>
         </section>

@@ -9,14 +9,33 @@ class Page extends Component {
     }
     componentDidMount(){
         console.log('Mounted Page ->', this.props.pageName);
+        let pageName = this.props.pageName || null, 
+        mboxName = pageName ? ("mbox-" + pageName + "-page") : null;
+        if(this.props.pageName === 'pdp' && this.props.product) {
+            mboxName = 'mbox-product-page';
+            pageName = this.props.product.name || null;
+        }
+        if(!pageName){
+            pageName = 'LikeBox';
+        }
         if(window.dataLayer){
             window.dataLayer.pageName = this.props.pageName;
-            window.dataLayer.pageMbox = "mbox-" + this.props.pageName + "-page";
+            if(mboxName){
+                window.dataLayer.pageMbox = "mbox-" + this.props.pageName + "-page";
+            }
+        }
+        if(mboxName){
+            var event = new CustomEvent("react-view-change", 
+            {
+                detail: {
+                    view: window.dataLayer.pageName, 
+                    mbox: window.dataLayer.pageMbox
+                }
+            });
+            document.dispatchEvent(event);
+            document.title = this.props.pageName;
         }
         
-        var event = new CustomEvent("react-view-change", {detail: {view: window.dataLayer.pageName, mbox: window.dataLayer.pageMbox}});
-        document.dispatchEvent(event);
-        document.title = this.props.pageName;
     }
     render(){
         let {className} = this.props;

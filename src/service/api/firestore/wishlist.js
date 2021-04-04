@@ -155,9 +155,9 @@ export const addToWishList = async (email, sku) => {
                     //let updateQuery = await updateWishlistQuery(doc.id, {'items': products});
                     
                     let docRef = await updateWishlistQuery(doc.id, {'items': products});
-                    doc = await collection.doc(docId).get();
-                    doc = doc || {};
-                    console.log('addToWishList', docId, doc.data());
+                    /* doc = await collection.doc(docId).get();
+                    doc = doc || {}; */
+                    //console.log('addToWishList', docId, doc.data());
                     res = new Promise(resolve => resolve({
                         type: 'success',
                         msg: 'Item added to your wishlist!'
@@ -203,13 +203,12 @@ export const removeFromWishList = async (email, sku) => {
                 if(isPresent && index > -1){
                     products.splice(index, 1);                        
                     let docRef = await updateWishlistQuery(doc.id, {'items': products});
-                    doc = await collection.doc(docId).get();
-                    doc = doc || {};
-                    console.log('removeFromWishList', docId, doc.data());
+                    /* doc = await collection.doc(docId).get();
+                    doc = doc || {}; */
+                    //console.log('removeFromWishList', docId, doc.data());
                     res = new Promise(resolve => resolve({
                         type: 'success',
-                        msg: 'Item removed from your Wishlist!',
-                        items:(doc.data().items || [])
+                        msg: 'Item removed from your Wishlist!'
                     }))
                 }else {/* If not add it and update */
                     let data = {};

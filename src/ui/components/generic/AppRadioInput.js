@@ -7,7 +7,7 @@ export default function AppRadioInput({name, options, onChange, ...rest}) {
         console.log(name, e.target.value);
     }
     return (
-        <div className="app-radio-input-options">
+        <div className="app-radio-input-options d-flex">
             {
                 (options || []).map((item, index) => (
                         <div className="app-radio-input-wrapper mr-2" key={index}>

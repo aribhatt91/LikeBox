@@ -172,6 +172,9 @@ $width: $thumb-dimen-lg;
       justify-content: center;
       align-items: center;
       cursor: pointer;
+      @include media(660px) {
+        margin: 2rem;
+      }
       &.like-box-left-btn {
         color: #FF6969;
       }
@@ -185,6 +188,9 @@ $width: $thumb-dimen-lg;
       height: calc((#{$width} + 2rem + 2.4rem));;
       width: calc((#{$width} + 2rem));
       overflow: hidden;
+      @include media(660px) {
+        order: -1;
+      }
 
       .card-stack-item, .card-item-placeholder {
         position: absolute;

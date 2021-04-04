@@ -451,6 +451,7 @@
     width: 235px;
     border: 1px solid #707070;
     background-color: #ececec; }
+    .product-card .card-thumb-wrapper span,
     .product-card .card-thumb-wrapper .card-thumb {
       width: 100%;
       height: 100%;
@@ -1350,10 +1351,33 @@ $thumb-dimen-xs: 240px; */
   .app-img-background img {
     opacity: 0;
     object-fit: cover;
+    transition: 0.3s ease-in;
     width: 100%;
     height: 100%; }
   .app-img-background.img-loaded img {
     opacity: 1; }
+
+.lazy-load-image-background {
+  height: 100%;
+  opacity: 0;
+  transition: 0.3s ease-in; }
+  .lazy-load-image-background.lazy-load-image-loaded {
+    opacity: 1; }
+
+.square {
+  width: 100%;
+  position: relative; }
+  .square::after {
+    content: "";
+    display: block;
+    padding-bottom: 100%; }
+  .square img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    object-fit: cover;
+    top: 0;
+    left: 0; }
 
 @keyframes anim-placeholder {
   0% {
@@ -1528,6 +1552,9 @@ $thumb-dimen-xs: 240px; */
     justify-content: center;
     align-items: center;
     cursor: pointer; }
+    @media only screen and (max-width: 660px) {
+      .like-box-preference-carousel .like-box-btn {
+        margin: 2rem; } }
     .like-box-preference-carousel .like-box-btn.like-box-left-btn {
       color: #FF6969; }
     .like-box-preference-carousel .like-box-btn.like-box-right-btn {
@@ -1538,6 +1565,9 @@ $thumb-dimen-xs: 240px; */
     height: calc((280px + 2rem + 2.4rem));
     width: calc((280px + 2rem));
     overflow: hidden; }
+    @media only screen and (max-width: 660px) {
+      .like-box-preference-carousel .card-stack {
+        order: -1; } }
     .like-box-preference-carousel .card-stack .card-stack-item, .like-box-preference-carousel .card-stack .card-item-placeholder {
       position: absolute;
       left: 50%;
@@ -1733,6 +1763,179 @@ $thumb-dimen-xs: 240px; */
     transform: rotate(-90deg); }
   .app-dropdown.open .app-dropdown-items {
     display: flex; }
+
+.slider {
+  width: 100%;
+  height: 62px; }
+
+.range-slider__track {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 4px;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  background-color: #666666; }
+
+.range-slider__inner-track {
+  position: absolute;
+  top: 50%;
+  height: 4px;
+  left: 0px;
+  right: 0px;
+  transform: translateY(-50%);
+  background-color: #62B0F2; }
+
+.slider__track-left {
+  height: 3px;
+  position: absolute;
+  bottom: 2px;
+  left: 0px;
+  z-index: 3;
+  background-color: #62B0F2; }
+
+.slider__track-left.disabled {
+  background-color: #666666; }
+
+.target-duration-input {
+  position: relative;
+  width: 100%; }
+
+.slider__track-right {
+  height: 3px;
+  position: absolute;
+  bottom: 2px;
+  right: 0px;
+  z-index: 2;
+  background-color: white; }
+
+.slider__track-right.disabled {
+  background-color: #666666; }
+
+.range-thumb {
+  position: absolute;
+  width: 20px;
+  background-color: transparent;
+  height: 20px;
+  border-radius: 50%;
+  z-index: 3;
+  top: 50%;
+  transform: translateY(-50%); }
+
+.range-thumb__label {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #62B0F2;
+  font-size: 12px;
+  text-align: center; }
+
+.range-thumb__time-label {
+  font-size: 16px; }
+
+.range-thumb__circle {
+  position: absolute;
+  width: 12px;
+  background-color: white;
+  height: 12px;
+  border-radius: 50%;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); }
+
+.range-thumb__border {
+  position: absolute;
+  height: 12px;
+  bottom: 0;
+  width: 20px;
+  overflow: hidden;
+  background-color: transparent; }
+  .range-thumb__border:before {
+    position: absolute;
+    content: "";
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    bottom: 0;
+    background-color: #62B0F2; }
+
+.range-slider {
+  -webkit-appearance: none;
+  pointer-events: none;
+  background-color: white;
+  height: 1px;
+  outline: none;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  z-index: 4;
+  width: 100%;
+  /* Specific width is required for Firefox. */
+  background: transparent; }
+
+/* All the same stuff for Firefox */
+/* All the same stuff for IE */
+.range-slider::-webkit-slider-thumb {
+  appearance: none;
+  pointer-events: all;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  z-index: 1;
+  border-radius: 50%;
+  background-color: transparent;
+  margin-top: -10px;
+  cursor: pointer; }
+
+.range-slider::-moz-range-thumb {
+  pointer-events: all;
+  position: relative;
+  z-index: 10;
+  width: 20x;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #62B0F2;
+  cursor: pointer; }
+
+.range-slider::-ms-thumb {
+  pointer-events: all;
+  position: relative;
+  z-index: 10;
+  width: 20x;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #62B0F2;
+  cursor: pointer; }
+
+.range-slider::-ms-fill-lower {
+  background: white;
+  border-radius: 0.5px; }
+
+.range-slider::-ms-fill-upper {
+  background: white;
+  border-radius: 0.5px; }
+
+.slider__value {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 30px;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: white;
+  top: 20px;
+  left: 0px; }
 
 .hidden-xs-up {
   display: none; }

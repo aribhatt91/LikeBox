@@ -1,4 +1,3 @@
-import { db } from './../firebase';
 import { getUser, updateUserByEmail } from './user';
 
 /* {
@@ -8,8 +7,6 @@ import { getUser, updateUserByEmail } from './user';
     name,
     city
 } */
-
-const collection = db.collection('users');
 
 const validateAddressFields = (address={}) => {
     if(!address || !address.name || !address.postcode || !address.street || !address.housenum || !address.city){
@@ -94,7 +91,7 @@ export const updateAddress = async (email="", address) => {
 
 export const removeAddressById = async (email, addressId) => {
     let addressBook = [], i = -1;
-    try {
+     try {
         addressBook = await getUserAddressBook(email);
         addressBook = addressBook || [];
         if(!addressId){

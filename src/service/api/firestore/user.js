@@ -53,17 +53,21 @@ export const fetchUserQuery = (email) => {
 
 export const getUser = async (email) => {
     let user = null;
+    console.log('getUser:start');
     try {
         let queries = await fetchUserQuery(email);
         if(queries.size > 0){
             user = queries.docs[0].data();
+            console.log('getUser:try', user);
         }else {
             throw new Error('Unique user not found');
         }
     }catch(err){
         console.error('user:getUser:', err);
+    }finally{
+        return new Promise(resolve => resolve(user));
     }
-    return new Promise(resolve => resolve(user));
+    
 }
 
 export const isFirstLoad = async (email) => {

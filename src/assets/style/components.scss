@@ -16,7 +16,7 @@
 @import './likebox.scss';
 @import './notification.scss';
 @import './dropdown.scss';
-
+@import './dual-range-slider.scss';
 .hidden-xs-up {
   display: none;
 }
@@ -556,6 +556,8 @@
     opacity: 1;
   }
 }
+
+
 @media only screen and (max-width: 1024px){
 
 }

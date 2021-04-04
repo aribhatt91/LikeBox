@@ -57,3 +57,22 @@ export const readFromLocalStorage = (key) => {
     }
     return null;
 }
+
+export const parseSearchParams = (search) => {
+    let res = {};
+    try{
+        search = search || "";
+        search = search.replace('?', '');
+        let params = search.split('&');
+        params.forEach(item => {
+            let key = item.split('=')[0] || "", val = decodeURIComponent(item.split('=')[1]) || "";
+            key = key.toLowerCase();
+            val = val.toLowerCase();
+            res[key] = val;
+        })
+    }catch(err){
+        console.error('Error in parsing search params', err)
+    }
+    
+    return res;
+}

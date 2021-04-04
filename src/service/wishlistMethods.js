@@ -27,7 +27,7 @@ export const addItemToWishList = async (email, sku) => {
     return addToWishList(email, sku);
 }
 export const removeItemFromWishList = async (email, sku) => {
-    let items = [], ids = [], data = null;
+    /* let items = [], ids = [], data = null;
     try{
         data = await removeFromWishList(email, sku);
         if(data.type === 'success'){
@@ -52,7 +52,8 @@ export const removeItemFromWishList = async (email, sku) => {
         data.items = items;
     }
     console.log(items);
-    return new Promise(resolve => resolve(data));
+    return new Promise(resolve => resolve(data)); */
+    return removeFromWishList(email, sku);
 }
 
 export const fetchWishList = async (email) => {
@@ -76,7 +77,7 @@ export const fetchWishList = async (email) => {
             
         }
     }
-    console.log(items);
+    console.log('fetchWishList', items);
     
     //return MockGetWishlist();
     return new Promise(resolve => resolve(items));

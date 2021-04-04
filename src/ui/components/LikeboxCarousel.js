@@ -6,6 +6,7 @@ import AppImage from './generic/AppImage';
 import { fetchProductsByPage } from '../../service/api/firestore/product';
 import { useHistory } from 'react-router';
 import { AuthContext } from './../../store/contexts/AuthContext';
+import { debounce } from 'lodash';
 function CardStack({cards, cardsState, loading}) {
     useEffect(() => {}, [cards])
     return (
@@ -111,6 +112,7 @@ export default function LikeBoxCarousel({slideIn, slideOut}) {
         console.log(currentPos);
     }
     const likeItem = () => {
+        console.log('likeItem')
         if(cardsState.loading || reachedMax){
             return;
         }
@@ -136,18 +138,33 @@ export default function LikeBoxCarousel({slideIn, slideOut}) {
         }
         console.log(currentPos);
     }
+
+    const handleKeyPress = (e) => {
+        if(e.keyCode === 39){
+            likeItem();
+        }else if(e.keyCode === 37){
+            rejectItem();
+        }
+
+        console.log('keypressed', e.keyCode)
+    }
+
+    useEffect(()=>{
+        document.body.addEventListener('keyup', debounce(handleKeyPress, 1000))
+    }, [])
+    
     return (
         <React.Fragment>
             {!reachedMax && <div className="like-box"><div className={"like-box-preference-carousel slide-in"}>
-                <div className="d-flex align-items-center justify-content-between">
-                    <div className="like-box-btn like-box-left-btn" onClick={rejectItem}>
+                <div className="d-flex align-items-center justify-content-between flex-wrap">
+                    <div className="like-box-btn like-box-left-btn" onClick={debounce(rejectItem, 1000)}>
                         <FontAwesomeIcon icon={faArrowLeft} />
                     </div>
                     <CardStack
                         cards={items}
                         cardsState={cardsState}
                     />
-                    <div className="like-box-btn like-box-right-btn" onClick={likeItem}>
+                    <div className="like-box-btn like-box-right-btn" onClick={debounce(likeItem, 1000)}>
                         <FontAwesomeIcon icon={faArrowRight} />
                     </div>
                 </div>
