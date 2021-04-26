@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import AddressForm from '../../components/forms/AddressForm';
-import Accordion from '../../components/generic/Accordion';
-import ADDRESSES from '../../../mock/addresses.json';
 import { AuthContext } from './../../../store/contexts/AuthContext';
 import { fetchAddresses, updateExistingAddress, deleteAddress } from '../../../service/addressMethods';
 import AppButton from '../../components/generic/AppButton';

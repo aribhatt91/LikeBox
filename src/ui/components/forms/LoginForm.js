@@ -7,6 +7,7 @@ import AppForm from './AppForm';
 import { LOGIN_FORM_SCHEMA } from './../../../service/validationSchema';
 import AppSubmitButton from './../generic/AppSubmitButton';
 import { AuthContext } from './../../../store/contexts/AuthContext';
+import { Link } from 'react-router-dom';
 
 const validationSchema = LOGIN_FORM_SCHEMA;
 
@@ -43,7 +44,7 @@ const LoginForm = ({email="", onComplete}) => {
     }
   }
   return (
-    <div className="col-12 p-0 m-0">
+    <div className="col-12 col-md-7 col-lg-5 p-0 m-0">
         {
           currentUser && <SuccessMessage message={"You are logged in!"} />
         }
@@ -88,6 +89,11 @@ const LoginForm = ({email="", onComplete}) => {
                         text="Sign in"
                         className="w-100"
                       />
+                  </div>
+                </div>
+                <div className="row m-0 mt-3 d-flex justify-content-start">
+                  <div className="pl-2 pr-2 col-12">
+                    <Link to="/forgot-password">Forgot password?</Link>
                   </div>
                 </div>
 

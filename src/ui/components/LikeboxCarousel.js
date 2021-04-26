@@ -3,10 +3,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import AppButton from './generic/AppButton';
 import AppImage from './generic/AppImage';
-import { fetchProductsByPage } from '../../service/api/firestore/product';
 import { useHistory } from 'react-router';
 import { AuthContext } from './../../store/contexts/AuthContext';
 import { debounce } from 'lodash';
+import { fetchLikeBox, updateLikeBox } from '../../service/userProfile';
+import { fetchProductsBySkus } from './../../service/productMethods';
 function CardStack({cards, cardsState, loading}) {
     useEffect(() => {}, [cards])
     return (
@@ -44,7 +45,7 @@ function CardStack({cards, cardsState, loading}) {
         </div>
     )
 }
-let currentPos = -1, SEEN = [], PAGE = 0, LIMIT = 6, gender = "";
+let currentPos = -1, LIKED = [], DISLIKED = [], PAGE = 0, LIMIT = 5, gender = "", LAST_NODE=null;
 export default function LikeBoxCarousel({slideIn, slideOut}) {
     //const [loading, setLoading] = useState(true);
     const [reachedMax, setReachedMax] = useState(false);
@@ -56,6 +57,16 @@ export default function LikeBoxCarousel({slideIn, slideOut}) {
 
     useEffect(()=>{
         //Find gender and other preferences
+        if(currentUser){
+            (async () => {
+                let res = await fetchLikeBox(currentUser.email);
+                if(res){
+                    LIKED = res.LIKED || [];
+                    DISLIKED = res.DISLIKED || [];
+                    LAST_NODE = res.lastVisible || null;
+                }
+            })()
+        }
     }, [currentUser])
 
     useEffect(()=>{
@@ -68,9 +79,16 @@ export default function LikeBoxCarousel({slideIn, slideOut}) {
             try{
                 (async() => {
                     /* Fetch next batch of cards */
-                    console.log('useEffectCalled: updating');
-                    let products = await fetchProductsByPage(PAGE, LIMIT);
-                    if(products.length === 0){
+                    console.log('LikeBoxCarousel:useEffect: updating', PAGE, LAST_NODE);
+                    //let products = await fetchProductsByPage(PAGE, LIMIT);
+                    let skus = [].concat(LIKED).concat(DISLIKED);
+                    console.log('SKUS', skus);
+                    
+                    let res = await fetchProductsBySkus([], PAGE, LIMIT, LAST_NODE, true);
+                    let products = res ? res.items || [] : [];
+                    LAST_NODE = res ? res.lastVisible : null;
+                    console.log('useEffectCalled: response', res);
+                    if(products.length < LIMIT){
                         setReachedMax(true);
                     }
                     currentPos = products.length;
@@ -110,6 +128,7 @@ export default function LikeBoxCarousel({slideIn, slideOut}) {
             setUpdate(true);
         }
         console.log(currentPos);
+        DISLIKED.push(items[currentPos].sku);
     }
     const likeItem = () => {
         console.log('likeItem')
@@ -136,7 +155,8 @@ export default function LikeBoxCarousel({slideIn, slideOut}) {
         if(currentPos === 0){
             setUpdate(true);
         }
-        console.log(currentPos);
+        console.log(currentPos, items[currentPos]);
+        LIKED.push(items[currentPos].sku);
     }
 
     const handleKeyPress = (e) => {
@@ -150,25 +170,46 @@ export default function LikeBoxCarousel({slideIn, slideOut}) {
     }
 
     useEffect(()=>{
-        document.body.addEventListener('keyup', debounce(handleKeyPress, 1000))
+        document.body.addEventListener('keyup', debounce(handleKeyPress, 300))
     }, [])
+
+    const submit = async () => {
+        if(currentUser){
+            try {
+                let likebox = {LIKED, DISLIKED, 'lastVisible': LAST_NODE.id};
+                console.log('LikeBoxCarousel:submit', likebox);
+                await updateLikeBox(currentUser.email, {likebox});
+                
+            }catch(err){
+                console.error('LikeBoxCarousel:submit:error', err);
+            }finally {
+                setTimeout(()=>{
+                    history.push('/');
+                }, 500)
+            }
+        }
+        
+    }
     
     return (
         <React.Fragment>
-            {!reachedMax && <div className="like-box"><div className={"like-box-preference-carousel slide-in"}>
+            {!reachedMax && <div className="like-box container">
+            <h3 className="text-center mt-5">Go with your heart!</h3>
+            <h4 className="text-center color">(We recommend swiping at least 15 items)</h4>
+            <div className={"like-box-preference-carousel container slide-in"}>
                 <div className="d-flex align-items-center justify-content-between flex-wrap">
-                    <div className="like-box-btn like-box-left-btn" onClick={debounce(rejectItem, 1000)}>
+                    <div className="like-box-btn like-box-left-btn" onClick={debounce(rejectItem, 300)}>
                         <FontAwesomeIcon icon={faArrowLeft} />
                     </div>
                     <CardStack
                         cards={items}
                         cardsState={cardsState}
                     />
-                    <div className="like-box-btn like-box-right-btn" onClick={debounce(likeItem, 1000)}>
+                    <div className="like-box-btn like-box-right-btn" onClick={debounce(likeItem, 300)}>
                         <FontAwesomeIcon icon={faArrowRight} />
                     </div>
                 </div>
-                <AppButton label="Start shopping" className="w-100 mb-5" onClick={() => {history.push('/')}} />
+                <AppButton label="Start shopping" className="w-100 mb-5" onClick={submit} />
             </div>
             </div>}
             {

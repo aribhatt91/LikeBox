@@ -7,6 +7,7 @@ import { AuthContext } from './../../../store/contexts/AuthContext';
 import AppRadioInput from '../generic/AppRadioInput';
 import { SuccessMessage } from '../generic/PageMessage';
 import { addUserProfile } from './../../../service/userProfile';
+import AppDateInput from '../generic/AppDateInput';
 
 function SignupForm(props){
     console.log('SignupModule', props);
@@ -31,11 +32,16 @@ function SignupForm(props){
             user.name = {};
             user.name.fname = userInput.fname;
             user.name.lname = userInput.lname;
-            let d = new Date();
-            d.setDate(Number(userInput.date))
-            d.setMonth((Number(userInput.month) - 1))
-            d.setYear(Number(userInput.year))
-            user.dob = d.toDateString();
+            try{
+                let d = new Date();
+                d.setDate(Number(userInput.day))
+                d.setMonth((Number(userInput.month) - 1))
+                d.setYear(Number(userInput.year))
+                user.dob = d.toDateString();
+            }catch(err){
+
+            }
+            
             user.gender = userInput.gender;
             //await addUser(user);
             await addUserProfile(user);
@@ -53,7 +59,7 @@ function SignupForm(props){
         
     }
     return (
-        <div className="col-12 p-0 m-0">
+        <div className="col-12 col-md-8 col-lg-7 p-0 m-0">
           {
               currentUser && <SuccessMessage message={"You are logged in!"} />
           }
@@ -63,31 +69,13 @@ function SignupForm(props){
               <AppForm
                 onSubmit={submitForm}
                 validationSchema={SIGNUP_FORM_SCHEMA}
-                initialValues={{email: (props.email || ""), password: '', confirmpassword: '', fname: '', date: '', month: '', year: '', lname: '', gender: ''}} >
+                initialValues={{email: (props.email || ""), password: '', confirmpassword: '', fname: '', day: '', month: '', year: '', lname: '', gender: ''}} >
                 
 
                 <div className="row m-0">
-                    <p className="w-100 pl-2 pr-2 font-weight-normal">Enter your date of birth*</p>
-                    <div className="col-md-4 float-left pl-2 pr-2">
-                        <AppTextInput
-                            type="number"
-                            name="date"
-                            label="DD*"
-                            />
-                    </div>
-                    <div className="col-md-4 float-left pl-2 pr-2">
-                        <AppTextInput
-                            type="number"
-                            name="month"
-                            label="MM*"
-                            />
-                    </div>
-                    <div className="col-md-4 float-left pl-2 pr-2">
-                        <AppTextInput
-                            type="number"
-                            name="year"
-                            label="YYYY*"
-                            />
+                    <p className="w-100 pl-2 pr-2 font-weight-normal">Enter your date of birth* (DD/MM/YYYY)</p>
+                    <div className="col-xs-12 float-left pl-2 pr-2">
+                        <AppDateInput />
                     </div>
                 </div>
 

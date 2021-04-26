@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import ThemedButton from './generic/ThemedButton';
 import AppButton from './generic/AppButton';
 import AppImage from './generic/AppImage';
 import { CURRENCY } from './../../service/constants';

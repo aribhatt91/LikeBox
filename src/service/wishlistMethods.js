@@ -1,6 +1,5 @@
-//import { MockGetWishlist } from './../mock/api/mock-wishlist-api';
-import { fetchProductsByIds } from './api/firestore/product';
 import { getUserWishList, addToWishList, removeFromWishList, isItemInWishList } from './api/firestore/wishlist';
+import { fetchProductsBySkus } from './productMethods';
 
 
 export const itemInWishList = (email, sku) => {
@@ -67,7 +66,7 @@ export const fetchWishList = async (email) => {
     }catch(err){
         console.log('fetchWishList:error', err);
     }
-    items = await fetchProductsByIds(ids);
+    items = await fetchProductsBySkus(ids);
     if(data){
         for (let index = 0; index < data.length; index++) {
             const element = data[index];

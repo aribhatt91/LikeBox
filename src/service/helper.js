@@ -76,3 +76,29 @@ export const parseSearchParams = (search) => {
     
     return res;
 }
+
+export const isSafeUrl = (url) => {
+    const protocol = URL(url).protocol;
+    if(protocol === 'http:' || protocol === 'https:'){
+        return true
+    }
+    return false;
+}
+
+export const capitalise = (str) => {
+    if(!str || typeof str !== 'string' || str.trim().length === 0){
+        return str;
+    }
+    return str.charAt(0).toUpperCase() + (str.slice(1) || "").toLowerCase();
+}
+
+export const capitaliseAll = (str) => {
+    if(!str || typeof str !== 'string' || str.trim().length === 0){
+        return str;
+    }
+    return str.split(' ').map(s => capitalise(s)).join(' ');
+}
+
+export const formatPrice = (price) => {
+    return Number(price).toFixed(2).toLocaleString();
+}

@@ -21,7 +21,7 @@ const PageMessage = ({text, type, size, inline=true, icon=false, dismissable=fal
                 {type === "info" && <span>&#9432;</span>}
                 {type === "success" && <span>&#10003;</span>}
             </span>}
-            <span className="msg-text">{text}</span>
+            <span className="msg-text" aria-label={text}>{text}</span>
             {dismissable && <span className="msg-close" onClick={()=>setShowMsg(false)}>&times;</span>}
         </div>
     )
@@ -33,7 +33,7 @@ export const SuccessMessage = ({message}) => {
           <div className="green-tick mb-3">
             <FontAwesomeIcon icon={faCheck} size="2x"></FontAwesomeIcon>
           </div>
-          <h2 className="font-weight-light">{message}</h2>
+          <h2 className="font-weight-light" aria-label={message}>{message}</h2>
         </div>
     )
 }

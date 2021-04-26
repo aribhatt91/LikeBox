@@ -19,11 +19,11 @@ export default function AppDropdown({label, children, className}) {
          }
      }
     return (
-        <div className={"d-inline-block app-dropdown" + (className ? " " + className : "") + (open ? " open" : "")}>
+        <div className={"d-inline-block app-dropdown" + (className ? " " + className : "") + (open ? " open" : "")} aria-label={label}>
             <div className="d-flex d-md-inline-flex app-dropdown-label" onClick={toggle} ref={selectLabel}>
                 {label}            
             </div>
-            <div className="app-dropdown-items" onClick={(e)=>{e.stopPropagation()}}>
+            <div className="app-dropdown-items" onClick={(e)=>{e.stopPropagation()}} aria-hidden={!open} aria-expanded={open}>
                 {
                     children
                 }

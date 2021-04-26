@@ -8,22 +8,47 @@ import { CONTACT_INFORMATION_SCHEMA } from '../../../service/validationSchema';
 import { PERSONAL_INFORMATION_SCHEMA } from './../../../service/validationSchema';
 import { AuthContext } from './../../../store/contexts/AuthContext';
 import PageMessage from '../generic/PageMessage';
-
+import { updateUserProfile } from './../../../service/userProfile';
+import { LoadingSpinner } from '../LoadingModule';
+import { useNotification } from './../../../store/contexts/NotificationProvider';
+import AppDateInput from '../generic/AppDateInput';
 function ProfileUpdateForm({profile={}, onResult}){
     const [piEditMode, setPiEditMode] = useState(false);//Edit Personal Information
     const [ciEditMode, setCiEditMode] = useState(false);//Edit Personal Information
     const [piFormError, setPiFormError] = useState(null);
     const [ciFormError, setCiFormError] = useState(null);
+    const [loading, setLoading] = useState(false);
+
+    let day = "", month = "", year = "";
+
+    if(profile.dob){
+        try{
+            let d = new Date(profile.dob);
+            day = d.getDate();
+            month = d.getMonth() + 1;
+            year = d.getFullYear();
+        }catch(err){
+
+        }
+    }
+
+    const dispatch = useNotification();
+
     const {currentUser} = useContext(AuthContext)
-    
+    profile = profile || {};
     const piInitialValues = {
         fname: (profile.name && profile.name.fname ? profile.name.fname : ""),
         lname: (profile.name && profile.name.lname ? profile.name.lname : ""),
-        gender: (profile.gender || "")
+        gender: (profile.gender || ""),
+        day,
+        month,
+        year
     }
     const contactInitialValues = {
         mobile: (profile.mobile || "")
     }
+
+    console.log('ProfileUpdateForm:getUser', piInitialValues, contactInitialValues)
 
     const resetDefPiValues = () => {
         /* let defVal = {
@@ -40,24 +65,71 @@ function ProfileUpdateForm({profile={}, onResult}){
         console.log('Resetting defvals', defVal); */
         //setFieldState(defVal);
     },
-    updatePersonalInformation = async (userInput, {setSubmitting}) => {
+    updateProfile = async (userInput, {setSubmitting}) => {
         if(currentUser){
-
-        }
-    },
-    updateContactInformation = async (userInput, {setSubmitting}) => {
-        if(currentUser){
+            try {
+                setLoading(true);
+                setSubmitting(true)
+                let update = {}
+                if(userInput.fname || userInput.lname){
+                    update.name = {};
+                    if(userInput.fname){
+                        update.name.fname = userInput.fname;  
+                    }
+                    if(userInput.lname){
+                        update.name.lname = userInput.lname;  
+                    }
+                }
+                if(userInput.gender){
+                    update.gender = userInput.gender;
+                }
+                if(userInput.contact){
+                    update.contact = userInput.contact;
+                }
+                if(userInput.day && userInput.month && userInput.year){
+                    try{
+                        var dob = new Date();
+                        dob.setDate(Number(userInput.day));
+                        dob.setMonth(Number(userInput.month) - 1);
+                        dob.setFullYear(Number(userInput.year));
+                        update.dob = dob.toDateString();
+                        console.log('DOB -> ', update.dob);
+                    }catch(err){
+                        console.error('Error updating Date of Birth');
+                    }
+                }
+                let res = await updateUserProfile(currentUser.email, update);
+                console.log('updateProfile: response', res);
+                setPiEditMode(false);
+                setCiEditMode(false);
+                if(typeof onResult === 'function'){
+                    onResult();
+                }
+                dispatch({
+                    type: 'success',
+                    message: 'Updated your profile!'
+                })
+            }catch(err){
+                console.error('updateProfile: error', err);
+                dispatch({
+                    type: 'error',
+                    message: 'Uh oh! Something went wrong'
+                })
+            }finally{
+                setSubmitting(false);
+                setLoading(false);
+            }
+            /* validate update values */
             
         }
     }
     
     return (
-        <div className={"account-section editable-section"}>
+        <div className={"account-section editable-section position-relative"}>
             <AppForm 
             initialValues={piInitialValues}
-            onSubmit={updatePersonalInformation}
             validationSchema={PERSONAL_INFORMATION_SCHEMA}
-            >
+            onSubmit={updateProfile}>
                 <div className={"editable-form mt-5"  +  (piEditMode ? " edit-mode" : "")}>
                     {
                         piFormError && <div className="row m-0 mb-4">
@@ -67,18 +139,19 @@ function ProfileUpdateForm({profile={}, onResult}){
                         </div>
                     }
                     <div className="field-group-header mb-3 d-flex justify-content-between">
-                        <span className="h4">Personal information</span><span className="cursor-pointer field-edit" onClick={() => {
+                        <span className="h4">Personal information</span>
+                        <a href="#" className="text-decoration-none font-weight-bolder field-edit" onClick={() => {
                         if(piEditMode){
                             //resetDefPiValues();
                             //TODO find a way to resent initial values when user hits exit
                         }
                         setPiEditMode(!piEditMode)
-                        }}>{piEditMode ? "Cancel": "Edit"}</span>
+                        }}>{piEditMode ? "Cancel": "Edit"}</a>
                     </div>
                     
                     <div className="row m-0">
                         <div className="field-group col-md-8 p-0">
-                            <div className="col-md-6 pr-md-3 pl-0 float-left">
+                            <div className="col-xs-12 col-md-6 pr-md-3 pl-0 float-left">
                                 <AppTextInput
                                     type="text"
                                     disabled={!piEditMode}
@@ -86,7 +159,7 @@ function ProfileUpdateForm({profile={}, onResult}){
                                     label="First name"
                                 />
                             </div>
-                            <div className="col-md-6 pr-md-3 pl-0 float-left">
+                            <div className="col-xs-12 col-md-6 pr-md-3 pl-0 float-left">
                                 <AppTextInput
                                     type="text"
                                     disabled={!piEditMode}
@@ -94,22 +167,19 @@ function ProfileUpdateForm({profile={}, onResult}){
                                     label="Last name"
                                 />
                             </div>
-                            <div className="col-md-6 pl-0 float-left">
-                                {/* <RadioButtonGroup
-                                    title="Gender"
-                                    disabled={!piEditMode}
-                                    defvalue={fieldState.gender}
-                                    handler={handleRadioButton}
-                                    options={gender_options}
-                                    name="gender"
-                                    orientation="row"
-                                /> */}
+                            <div className="col-xs-12 pl-0 float-left mt-1">
+                                <p className="col-form-label">Gender</p>
                                 <AppRadioInput 
                                     name="gender"
                                     label="Gender"
                                     options={['male', 'female', 'other']}
                                     disabled={!piEditMode}
                                 />
+                            </div>
+                            
+                            <div className="col-12 pr-md-3 pl-0 float-left mt-3">
+                                <p className="col-form-label">Date of birth (DD/MM/YYYY)</p>
+                                <AppDateInput disabled={!piEditMode} />
                             </div>
                         </div>
                         <div className={"save-btn-container clear-both col-md-4" + (piEditMode ? "" : " d-none")}>
@@ -123,30 +193,30 @@ function ProfileUpdateForm({profile={}, onResult}){
             </AppForm>
             <AppForm
             initialValues={contactInitialValues}
-            onSubmit={updateContactInformation}
+            onSubmit={updateProfile}
             validationSchema={CONTACT_INFORMATION_SCHEMA}>
                 <div className={"editable-form mt-4 mb-5"  +  (ciEditMode ? " edit-mode" : "")}>
                     <div className="field-group-header mb-3 d-flex justify-content-between">
                         <span className="h4">Contact</span>
-                        <span className="field-edit" onClick={() => {
+                        <a href="#" className="text-decoration-none font-weight-bolder field-edit" onClick={() => {
                             if(ciEditMode){
                                 //resetDefCiValues();
                             }
                             setCiEditMode(!ciEditMode)
                             }}>
                             {ciEditMode ? "Cancel": "Edit"}
-                        </span>
+                        </a>
                     </div>
                     <div className="row m-0">
                         <div className="field-group col-md-8 p-0">
-                            <div className="col-md-6 pr-md-3 pl-0 float-left clearfix">
+                            {/* <div className="col-md-6 pr-md-3 pl-0 float-left clearfix">
                                 <AppTextInput
                                     type="email"
                                     disabled={!ciEditMode}
                                     name="email"
                                     label="Email"
                                 />
-                            </div>
+                            </div> */}
                             <div className="col-md-6 pr-md-3 pl-0 float-left clearfix">
                                 <AppTextInput
                                     type="text"
@@ -165,6 +235,7 @@ function ProfileUpdateForm({profile={}, onResult}){
                     </div>
                 </div>
             </AppForm>
+            {loading && <LoadingSpinner text="Please wait while we update your profile" />}
         </div>
     )
 }

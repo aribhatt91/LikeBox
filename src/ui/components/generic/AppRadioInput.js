@@ -16,6 +16,9 @@ export default function AppRadioInput({name, options, onChange, ...rest}) {
                                 type="radio" 
                                 onFocus={() => {setFieldTouched(true)}} 
                                 onChange={handleChange} 
+                                defaultChecked={initialValues[name] === item}
+                                aria-label={item}
+                                aria-checked={values[name] === item}
                                 name={name} 
                                 value={item} />
                             <span className="text-capitalize">{item}</span>

@@ -5,12 +5,12 @@ export default function AppButton({label, href, onClick, className, type="button
     return (
         <React.Fragment>
             {
-                href && <Link {...rest} className={"app-btn" + (className ? " " + className : "") + (loading ? " loading" : "")} to={href}>
+                href && <Link {...rest} className={"app-btn" + (className ? " " + className : "") + (loading ? " loading" : "")} to={href} aria-label={label}>
                     <span className="app-btn-text">{label}</span>
                 </Link>
             }
             {
-                !href && <button {...rest} className={"app-btn" + (className ? " " + className : "") + (loading ? " loading" : "")} type={type} onClick={onClick ? onClick : ()=>{}}>
+                !href && <button {...rest} className={"app-btn" + (className ? " " + className : "") + (loading ? " loading" : "")} type={type} onClick={onClick ? onClick : ()=>{}} aria-label={label}>
                     <span className="app-btn-text">{label}</span>
                 </button>
             }

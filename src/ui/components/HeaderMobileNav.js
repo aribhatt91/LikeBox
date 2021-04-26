@@ -18,11 +18,11 @@ function HeaderMobileNav({user, logout}){
     }
   }, [open])
   return (
-    <div className="d-sm-inline-block nav-mobile-container d-md-none">
+    <div className="d-inline-block nav-mobile-container d-lg-none">
       <a href="#" onClick={()=>{setOpen(true)}} className="hamburger">
         <FontAwesomeIcon icon={faBars}/>
       </a>
-      <div className={"nav-mobile" + (open ? " slide-in" : "")} onScroll={(e)=>{e.stopPropagation()}}>
+      <div className={"nav-mobile" + (open ? " slide-in" : "")} onScroll={(e)=>{e.stopPropagation()}} aria-hidden={!open}>
         <div className="nav-mobile-wrapper">
           {
             user && <div className="user-provile-avatar">
@@ -49,12 +49,12 @@ function HeaderMobileNav({user, logout}){
             <li key="1">
               <Link to="/wishlist" onClick={()=>{setOpen(false)}}>My WishList</Link>
             </li>
-            <li key="0">
+            <li key="2">
               <Link to="/cart" onClick={()=>{setOpen(false)}}>
                 My Bag
               </Link>
             </li>
-            <li key="0">
+            <li key="3">
               <a href="#" onClick={()=>{
                 logout();
                 setOpen(false);
@@ -67,6 +67,9 @@ function HeaderMobileNav({user, logout}){
           {!user && <ul className="clean_list">
              <li key="1">
               <Link to={"/login"} onClick={()=>{setOpen(false)}}>Sign in</Link>
+            </li>
+            <li key="2">
+              <Link to={"/register"} onClick={()=>{setOpen(false)}}>Register</Link>
             </li>
           </ul>}
           <hr className="divider_small"></hr>

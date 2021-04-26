@@ -37,7 +37,7 @@ export const getAllUserOrders = async (email) => {
     }catch(err){
 
     }
-    return new Promise( (resolve, reject) => resolve(orders));
+    return new Promise( (resolve, reject) => resolve(data));
 }
 
 export const addOrder = (order) => {

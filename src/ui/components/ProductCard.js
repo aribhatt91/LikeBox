@@ -6,6 +6,7 @@ import AppImage from './generic/AppImage';
 import { useNotification } from './../../store/contexts/NotificationProvider';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
+import { formatPrice } from '../../service/helper';
 
 export function ProductCardPlaceholder () {
     return (
@@ -93,7 +94,7 @@ const ProductCard = (props) => {
                     <h3 className="card-product-brand text-center">{props.brand}</h3>
                     <h4 className="card-product-name text-center">{props.title}</h4>
                     <div className="card-product-price text-center">
-                        <span>&pound;{props.price}</span>
+                        <span>&pound;{ formatPrice(props.price)}</span>
                     </div>
                 </div>
                 <div className="action-buttons w-100">

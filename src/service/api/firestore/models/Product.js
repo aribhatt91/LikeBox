@@ -1,4 +1,5 @@
 class Product {
+
     constructor(){}
 
     get sku(){
@@ -147,7 +148,7 @@ export const convertAwinToProduct = (awinObj, sku) => {
         p.inventory = awinObj.stock_quantity;
         p.inStock = awinObj.in_stock === 1 || awinObj.in_stock === "1";
         p.description = awinObj.description;
-        p.tags = (awinObj.keywords || "").split('|');
+        p.tags = awinObj.searchTerms;
         p.deliveryTime = awinObj.delivery_time;
         p.reviews = awinObj.reviews;
         p.rating = awinObj.rating;
@@ -170,10 +171,87 @@ export const convertAwinToProduct = (awinObj, sku) => {
         if(awinObj.alternate_image_four && awinObj.alternate_image_four !== ""){
             images.push(awinObj.alternate_image_four)
         }
+        /* If no gallery image is present at all, show the thumbnail */
+        if(images.length === 0){
+            images.push(awinObj.aw_image_url);
+        }
         p.images = images;
+
+        if(awinObj.variants && Array.isArray(awinObj.variants)) {
+            p.variants = awinObj.variants.map((item) => Object.assign({},{
+                'colour': item.colour,
+                'name': item.name,
+                'size': item.size,
+                'link': item.aw_deep_link,
+                'merchant_link': item.merchant_deep_link,
+                'inStock': (item.in_stock === 1 || item.in_stock === "1")
+            }));
+        }
+        
     }
     return p;
     
 }
+
+export const convertCJToProduct = (cjObj, sku) => {
+    let p = {};
+    if(cjObj && sku){
+        p.sku = sku;
+        p.merchantId = cjObj.merchant_id;
+        p.name = cjObj.TITLE;
+        let category = cjObj.PRODUCT_TYPE || "";
+        p.searchTerms = cjObj.searchTerms || [];
+
+        if(category.indexOf('/') > -1){
+            p.category = ((category.split('/') || [])[0] || "").trim();
+            p.subcategory = ((category.split('/') || [])[1] || "").trim();
+        }else if(category.indexOf('>') > -1){
+            p.category = ((category.split('>') || [])[0] || "").trim();
+            p.subcategory = ((category.split('>') || [])[1] || "").trim();
+        }
+        
+        //TODO - change this if necessary
+        p.brand = cjObj.BRAND;
+        p.price = cjObj.SALE_PRICE ? cjObj.SALE_PRICE : cjObj.PRICE;
+        p.fullPrice = cjObj.PRICE;
+        p.currency = cjObj.CURRENCY;
+        //p.inventory = cjObj.stock_quantity;
+        p.inStock = cjObj.AVAILABILITY === "in stock";
+        p.description = cjObj.DESCRIPTION;
+        p.tags = cjObj.searchTerms;
+        //p.deliveryTime = cjObj.delivery_time;
+        //p.reviews = cjObj.reviews;
+        //p.rating = cjObj.rating;
+        p.link = cjObj.LINK;
+        p.thumbnail = cjObj.IMAGE_LINK;
+        p.colour = cjObj.COLOR;
+        let size = cjObj.SIZE || "";
+        try{
+            p.sizes = size.split(',').map(s => s.trim());
+        }catch(err){
+
+        }
+        
+        let images = (cjObj.ADDITIONAL_IMAGE_LINK || "").split(',');
+        if(images.length === 0){
+            images.push(p.thumbnail);
+        }
+        p.images = images || [];
+
+        if(cjObj.variants && Array.isArray(cjObj.variants)) {
+            p.variants = cjObj.variants.map((item) => Object.assign({},{
+                'sku': item.ID,
+                'colour': item.COLOR,
+                'size': item.SIZE,
+                'link': item.LINK,
+                'inStock': (item.AVAILABILITY  === "in stock")
+            }));
+        }
+        
+    }
+    return p;
+    
+}
+
 
 export default Product;

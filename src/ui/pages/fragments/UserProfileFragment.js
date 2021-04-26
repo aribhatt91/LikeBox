@@ -1,48 +1,60 @@
 import React, {useState, useEffect, useContext } from 'react';
 
-import RadioButtonGroup from '../../components/generic/RadioButtonGroup';
-import TextInput from '../../components/generic/TextInput';
-import ThemedButton from '../../components/generic/ThemedButton';
-import USER from '../../../mock/user.json';
 import { AuthContext } from './../../../store/contexts/AuthContext';
 import { fetchUserProfile } from '../../../service/userProfile';
 import ProfileUpdateForm from './../../components/forms/ProfileUpdateForm';
+import { LoadingSpinner } from '../../components/LoadingModule';
+
 
 function UserProfileFragment({}){
-    const [profile, setProfile] = useState(null);//Edit Personal Information
-    const [ciEditMode, setCiEditMode] = useState(false);//Edit Personal Information
-    const [fieldState, setFieldState] = useState(USER);
+    const [profile, setProfile] = useState(null);
+    const [loading, setLoading] = useState(true);
+    
 
     const {currentUser} = useContext(AuthContext);
 
     useEffect(()=>{
+        
         if(currentUser){
+            setLoading(true);
             (async ()=>{
                 try{
-                    console.log('useEffect:fetchUserProfile: request', currentUser.email);
-                    fetchUserProfile(currentUser.email).then(res => {
-                        setProfile(res);
-                        console.log('useEffect:fetchUserProfile: response', res);
-                    }).catch(err => {
-
-                    });
+                    console.log('UserProfileFragment:fetchUserProfile:getUser: request', currentUser.email, (new Date()).getTime());
+                    let res = await fetchUserProfile(currentUser.email);
                     
-                    
+                    console.log('UserProfileFragment:fetchUserProfile:getUser: response', res, (new Date()).getTime());
+                    setProfile(res);
                 }catch(err){
-                    console.error('useEffect:fetchUserProfile', err);
+                    console.error('UserProfileFragment:fetchUserProfile:getUser:error', err);
+                }finally{
+                    setLoading(false);
                 }
             })()
         }
     }, [currentUser])
+
+    const onUpdateComplete = async () => {
+        if(currentUser){
+            try{
+                console.log('onUpdateComplete:fetchUserProfile:getUser: request', currentUser.email, (new Date()).getTime());
+                let res = await fetchUserProfile(currentUser.email);
+                console.log('onUpdateComplete:fetchUserProfile:getUser: response', res, (new Date()).getTime());
+                setProfile(res);
+            }catch(err){
+                console.error('onUpdateComplete:fetchUserProfile:getUser:error', err);
+            }
+        }
+    }
+
+    
     
     return (
-        <div className={"account-section editable-section"}>
+        <div className={"account-section editable-section position-relative"}>
             {
-                profile && <ProfileUpdateForm profile={profile} />
+                !loading && <ProfileUpdateForm profile={profile || {}} onResult={onUpdateComplete} />
             }
-            
             {
-                !profile && <div></div>
+                loading && <LoadingSpinner text={"Please wait while we fetch your profile"} />
             }
         </div>
     )

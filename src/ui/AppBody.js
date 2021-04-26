@@ -11,6 +11,9 @@ import LoginPage from './pages/LoginPage';
 import ProtectedRoute from './../service/middleware/ProtectedRoute';
 import WishListPage from './pages/WishListPage';
 import LikeBoxCarousel from './components/LikeBoxCarousel';
+import ForgotPasswordForm from './components/forms/ForgotPasswordForm';
+import HelpPage from './pages/HelpPage';
+import About from './pages/About';
 
 function AppBody (){
 
@@ -23,11 +26,14 @@ function AppBody (){
         <ProtectedRoute path='/cart' component={CartPage}/>
         <ProtectedRoute path='/checkout' component={CheckoutPage}/>
         
-        <ProtectedRoute path='/user/:page?' component={UserDashboard} />
+        <ProtectedRoute path='/user/:slug?' component={UserDashboard} />
         <ProtectedRoute path='/wishlist' component={WishListPage} />
         <ProtectedRoute path="/login" component={LoginPage} />
+        <Route path="/forgot-password" render={props => <ForgotPasswordForm {...props} />}/>
         <ProtectedRoute path="/register" component={LoginPage} />
         <ProtectedRoute path="/likebox" component={LikeBoxCarousel} />
+        <Route path='/help/:slug?' render={(props) => <HelpPage {...props}/>}/>
+        <Route path='/about/:slug?' render={(props) => <About {...props}/>}/>
         {/* <Route path='/user/:page?' render={(props) => <UserDashboard {...props} pageName="user-dashboard" />}/> */}
         <Route path="*" render={props => <FourZeroFour {...props} />}/>
       </Switch>

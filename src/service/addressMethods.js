@@ -7,9 +7,7 @@ state
 country
 zipcode
 */
-import simulateNetworkRequest from './simulateNetworkRequest';
-import { validateAlpha, validateAlphaNumeric, validateMobileNumber, validatePincode, validateEmpty } from './validation';
-import { addNewAddress, updateAddress, getUserAddressBook /* , removeAddressById */ } from './api/firestore/address';
+import { addNewAddress, updateAddress, getUserAddressBook , removeAddressById } from './api/firestore/address';
 
 export const ERROR_TEXT = {
     name: 'Please fill out this field',
@@ -21,14 +19,6 @@ export const ERROR_TEXT = {
 },
 REQUIRED = ['name', 'mobile', 'pincode', 'locality', 'city', 'state', 'address'];
 
-const requiredFieldsFilled = (inputObj) => {
-    let res = [],
-    keys = Object.keys((inputObj || {}));
-    res = REQUIRED.filter( item => {
-        return keys.indexOf(item) === -1;
-    })
-    return {'required': res}
-}
 
 export const fetchAddresses = (email) => {
     //return MockGetAddresses()
@@ -42,37 +32,16 @@ export const updateExistingAddress = (email, inputObj) => {
     return updateAddress(email, inputObj)
 }
 export const deleteAddress = (email, addressId) => {
-    //return removeAddressById(email, addressId);
-    return null;
+    return removeAddressById(email, addressId);
+    //return null;
 }
 
+/* 
+TODO 
+*/
 export const checkDeliveryAvailability = (pincode) => {
-    if(validatePincode(pincode)){
-        return new Promise((resolve, reject) => {
-            setTimeout(() => resolve({valid: true, msg: 'We deliver at this location!'}), 2000)
-        });
-    }else {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => resolve({valid: false, msg: 'Please enter a valid pincode'}), 500)
-        });
-    }
+    return true;
 }
 export const validateAddressForm = (inputObj) => {
-    let errorObj = {},
-    /* inputObj = inputObj || {},  */keys = Object.keys(inputObj),
-    res = requiredFieldsFilled(inputObj);
-
-    keys.forEach((item) => {
-        if((item === 'name' && !validateAlpha(inputObj[item])) || 
-        (item === 'mobile' && !validateMobileNumber(inputObj[item])) || 
-        (item === 'pincode' && !validatePincode(inputObj[item])) || 
-        (item === 'locality' && !validateAlphaNumeric(inputObj[item])) || 
-        (item === 'address' && !validateAlphaNumeric(inputObj[item])) || 
-        (item === 'city' && !validateEmpty(inputObj[item])) || 
-        (item === 'state' && !validateEmpty(inputObj[item]))){
-            errorObj[item] = ERROR_TEXT[item];
-        }
-    });
-    res.errors = errorObj;
-    return res;
+    return true
 }

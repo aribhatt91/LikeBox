@@ -1,6 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import LoadingModule from '../../components/LoadingModule';
 import { fetchOrders } from './../../../service/ordersMethods';
+import { AuthContext } from './../../../store/contexts/AuthContext';
 
 const ORDER_STATUS = {
     "1": "Order placed",
@@ -92,14 +93,25 @@ function UserOrdersFragment(){
     const [orders, setOrders] = useState([]),
     [pending, setPending] = useState(false);
     let ordersItems = [];
+    const {currentUser} = useContext(AuthContext);
 
     useEffect(() => {
         setPending(true);
-        fetchOrders().then(res => {
-            console.log(res); 
-            setOrders(res);
+        try {
+            if(currentUser){
+                fetchOrders(currentUser.email).then(res => {
+                    console.log(res); 
+                    setOrders(res);
+                });
+            }   
+        }catch(err){
+
+        }finally {
             setPending(false);
-        });
+        }
+        
+        
+        
     }, [])
 
     orders.forEach((item, index) => {

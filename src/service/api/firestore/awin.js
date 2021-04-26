@@ -1,10 +1,21 @@
-import { db } from './../firebase';
+import { db, fieldPath } from './../firebase';
 import { concat, isEqual, max, reject, uniqWith } from 'lodash';
 import { convertAwinToProduct } from './models/Product';
 
 
 const collection = db.collection('awin');
 const categoriesCollection = db.collection('categories');
+
+/* Take a query and a filter object. 
+Add database filtering to the query and return the query object */
+const applyFilter = (query, filter) => {
+    if(!query || !filter){
+        return query;
+    }
+    if(filter.sortBy){
+        
+    }
+}
 /* 
 fetch products by path
 1. Break down the path and 
@@ -41,26 +52,33 @@ export const fetchAwinProducts = async (path="", page=0, LIMIT=10, LAST_NODES=[]
             /* Logical OR operation */
             
             let queries = [];
-            let promises = [];
 
             queryPaths.forEach(item => {
                 if((item || "").trim() !== ""){
                     queries.push(('searchTerms.' + (item || "").trim()))
                 }
             });
-            let q1 = collection.where(queries[0], '==', true).limit(LIMIT),
-            q2 = collection.where(queries[1], '==', true).limit(LIMIT);
+            let q1 = collection.where(queries[0], '==', true),
+            q2 = collection.where(queries[1], '==', true);
+            
+            if(LAST_NODES && Array.isArray(LAST_NODES) && LAST_NODES.length >= 2){
+                q1 = q1.startAfter(LAST_NODES[0]);
+                q2 = q2.startAfter(LAST_NODES[0]);
+            }
+
+            q1 = q1.limit(LIMIT);
+            q2 = q2.limit(LIMIT);
 
             let p1 = q1.get(),
             p2 = q2.get();
             const [p1Snap, p2Snap] = await Promise.all([p1, p2]),
             dump = concat(p1Snap.docs, p2Snap.docs);
 
-            let lastVisible = [p1Snap.docs[p1Snap.docs.length - 1], p1Snap.docs[p1Snap.docs.length - 1]];
+            let lastVisible = [p1Snap.docs[p1Snap.docs.length - 1], p2Snap.docs[p2Snap.docs.length - 1]];
             res = {lastVisible};
 
             res.items = (uniqWith(dump, isEqual)).map(doc => convertAwinToProduct(doc.data(), doc.id));
-            console.log('Fetched awin products for path -> ', path, '--->', res);
+            console.log('2: Fetched awin products for path -> ', path, '--->', res);
         }else if(queryPaths.length === 1){
             console.log('BP3', queryPaths, ('searchTerms.' + (queryPaths[0] || "").trim()));
             let q = collection
@@ -74,7 +92,7 @@ export const fetchAwinProducts = async (path="", page=0, LIMIT=10, LAST_NODES=[]
 
             res = {lastVisible};
             res.items = (querySnapshot.docs || []).map(doc => convertAwinToProduct(doc.data(), doc.id));
-            console.log('Fetched awin products for path -> ', path, '--->', res);
+            console.log('1: Fetched awin products for path -> ', path, '--->', res);
         }
     }catch(err){
         console.error('fetchAwinProducts:error', err);
@@ -82,32 +100,34 @@ export const fetchAwinProducts = async (path="", page=0, LIMIT=10, LAST_NODES=[]
     }
     return new Promise(resolve => resolve(res));    
 }
-
-export const fetchProductsByPage = (page, max) => {
-    /* return new Promise((resolve, reject) => {
-        if(page >= 0 && max > 0) {
-            setTimeout(() => {
-                resolve(products.slice(page*max, page*max + max))
-            }, 1000);
+//https://stackoverflow.com/questions/47876754/query-firestore-database-for-document-id
+//db.collection('books').where(firebase.firestore.FieldPath.documentId(), '==', 'fK3ddutEpD2qQqRMXNW5').get()
+export const fetchAwinProductsBySkus = async (skus=[], page=0, LIMIT=10, LAST_DOC=null, exclusion=false) => {
+    let res = [];
+    try{
+        let query = null;
+        if(!exclusion){
+            query = collection.where(fieldPath.documentId(), 'in', (skus || []));
         }else {
-            reject([]);
+            query = collection;
+            skus = (skus || []).filter(item => item && typeof item === "string");
+            if((skus || []).length > 0){
+                query = query.where(fieldPath.documentId(), 'not-in', (skus || []));
+            }
         }
-    }) */
-}
-export const fetchProductsByIds = (productIds=[]) => {
-    /* return new Promise((resolve, reject) => {
-        var data = (products || []).filter((item, index) => {
-            let isPresent = false;
-            productIds.forEach(p => {
-                if(p === item.sku){
-                    isPresent = true;
-                }
-            })
-            return isPresent;
-        })
-        console.log(productIds, data);
-        resolve(data);
-    }) */
+        if(LAST_DOC && page > 1){
+            query = query.startAfter(LAST_DOC);
+        }
+        query = query.limit(LIMIT); 
+        let querySnapshot = await query.get(),
+        docs = querySnapshot.docs,
+        items = docs.map(doc => convertAwinToProduct(doc.data(), doc.id));
+        let lastVisible = docs[docs.length - 1];
+        res = {lastVisible, items};
+    }catch(err){
+        return new Promise((resolve, reject) => reject(err));
+    }
+    return new Promise(resolve => resolve(res));
 }
 
 export const fetchAwinProduct = async (sku) => {

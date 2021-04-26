@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 
-export default function AppImage({className, src, ...rest}) {
+export default function AppImage({className, src, alt="", ...rest}) {
     const [loaded, setLoaded] = useState(false);
     const imgRef = useRef(null);
     useEffect(()=> {
@@ -12,6 +12,6 @@ export default function AppImage({className, src, ...rest}) {
         }
     }, [imgRef])
     return (
-        <img {...rest} ref={imgRef} className={"app-image" + (loaded ? " img-loaded" : "") + (className ? " " + className : "")} src={src} onLoad={() => setLoaded(true)}/>
+        <img alt={alt || ""} {...rest} ref={imgRef} className={"app-image" + (loaded ? " img-loaded" : "") + (className ? " " + className : "")} src={src} onLoad={() => setLoaded(true)}/>
     )
 }

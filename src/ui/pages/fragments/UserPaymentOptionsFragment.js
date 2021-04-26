@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import CardForm from '../../components/forms/CardForm';
 import Accordion from '../../components/generic/Accordion';
-import PAYMENT from '../../../mock/payment.json';
 
 function formatCardNumber(cardNumber) {
 
@@ -22,7 +21,7 @@ function SavedCard({instance, deleteCard, editCard}){
 }
 function UserPaymentOptionsFragment({saved_cards, deleteCard, editCard}){
     let saved_payments = [],
-    cards = PAYMENT.cards; //(saved_cards ? saved_cards || []: PAYMENT.saved_cards);
+    cards = []; //TODO - Create Payment methods
 
     if(cards && cards.length > 0){
         cards.forEach((item, index) => {

@@ -53,21 +53,22 @@ export const fetchUserQuery = (email) => {
 
 export const getUser = async (email) => {
     let user = null;
-    console.log('getUser:start');
+    console.log('getUser:start', (new Date()).getTime());
     try {
         let queries = await fetchUserQuery(email);
-        if(queries.size > 0){
+        if(queries.docs.length > 0){
             user = queries.docs[0].data();
-            console.log('getUser:try', user);
+            console.log('getUser:try', user, (new Date()).getTime());
         }else {
             throw new Error('Unique user not found');
         }
     }catch(err){
         console.error('user:getUser:', err);
+        return new Promise((resolve, reject) => reject(err));
     }finally{
-        return new Promise(resolve => resolve(user));
+        console.log('getUser:finally', user, (new Date()).getTime()); 
     }
-    
+    return new Promise(resolve => resolve(user));
 }
 
 export const isFirstLoad = async (email) => {
@@ -76,12 +77,17 @@ export const isFirstLoad = async (email) => {
         user = await getUser(email);
         console.log('isFirstLoad', user);
         res = !(user && user.showedPrefs);
-        if(res){
+        console.log('isFirstLoad:first', res);
+        if(!res){
             await updateUserByEmail(email, {showedPrefs: true})
+            user = await getUser(email);
+            res = !(user && user.showedPrefs);
+            console.log('isFirstLoad:await', res);
         }
     }catch(err){
 
     }
+    console.log('isFirstLoad:return', res);
     return new Promise(resolve => resolve(res));
 }
 export const addUser = async (newUser) => {
@@ -89,11 +95,11 @@ export const addUser = async (newUser) => {
         try{
             let user = await getUser(newUser.email);
             if(user){
-                throw new Error('Email address is already registered');
+                console.error('Email address is already registered');
+                return;
             }
         }catch(err) {
             console.error('Error while querying for existing users', err);
-            return;
         }
     
         try {
@@ -118,23 +124,21 @@ export const updateUserByEmail = async (email, update) => {
     try {
         let querySnapshot = await fetchUserQuery(email);
         
-        console.log(querySnapshot);
-        if(querySnapshot.size === 1){
+        //console.log(querySnapshot.docs);
+        if(querySnapshot.docs.length === 1){
             let doc = querySnapshot.docs[0];
                 // doc.data() is never undefined for query doc snapshots
             console.log(doc.id, " => ", doc.data());
-            res = collection.doc(doc.id).update(update);
+            res = await collection.doc(doc.id).update(update);
+            console.log('updateUserByEmail: response', res);
         }else {
             throw new Error('Update Aborted! More than one user found with same email');
         }
     }catch(err){
         console.error("updateUser:error:", err);
-    }   
-    if(res){
-        return new Promise(resolve => resolve(res));
-    }else {
-        return new Promise((resolve, reject) => reject(res));
+        return new Promise((resolve, reject) => reject(err));
     }
+    return new Promise(resolve => resolve(res));
 }
 
 export const getUserSizing = async (email) => {
@@ -143,9 +147,19 @@ export const getUserSizing = async (email) => {
         let user = await getUser(email);
         sizing = user.sizing;
     }catch(err){
-        console.error("getUserSizing: error -> ", err);
+        console.error("getUserSizing:error -> ", err);
     }   
     return new Promise(resolve => resolve(sizing));
+}
+export const getUserLikeBox = async (email) => {
+    let likebox = null;
+    try {
+        let user = await getUser(email);
+        likebox = user.likebox || null;
+    }catch(err){
+        console.error("getUserLikeBox:error -> ", err);
+    } 
+    return new Promise(resolve => resolve(likebox));
 }
 export const setUserSizing = async (email, update) => {
     let res = null;
@@ -153,17 +167,19 @@ export const setUserSizing = async (email, update) => {
         //console.log(doc.id, " => ", doc.data());
         let sizing = await getUserSizing(email);;
         
-        if(!sizing){
+        if(sizing){
             sizing = {
                 ...sizing,
-                update
+                ...update
             };
+        }else {
+            sizing = update;
         }
         res = await updateUserByEmail(email, {sizing});
-        res = res.sizing;
-        console.log('updated sizing', res);
+        //res = res.sizing;
+        console.log('setUserSizing:updated sizing', res);
     }catch(err){
-        console.error("setUserSizing: error -> ", err);
+        console.error("setUserSizing:error -> ", err);
     }   
     return new Promise(resolve => resolve(res));
 }

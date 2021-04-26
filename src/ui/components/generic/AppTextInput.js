@@ -7,7 +7,7 @@ import { useFormikContext } from 'formik';
     name: String
 };
  */
-const AppTextInput = ({name, label, disabled, type='text', ...rest}) => {
+const AppTextInput = ({name, label, disabled=false, type='text', ...rest}) => {
     const {setFieldTouched, handleChange, errors, touched, values, initialValues } = useFormikContext();
     //const [dirty, setDirty] = useState(defvalue && defvalue.trim() !== "");
     //const [err, setErr] = useState(false);
@@ -31,8 +31,10 @@ const AppTextInput = ({name, label, disabled, type='text', ...rest}) => {
                 {
                     (!type || type !== 'textarea') && <input
                         {...rest}
+                        id={name}
                         type={type}
                         name={name}
+                        aria-label={label}
                         /*ref={tinput}*/
                         className="form-control"
                         /*onFocus={() => setDirty(true)}*/
@@ -46,9 +48,11 @@ const AppTextInput = ({name, label, disabled, type='text', ...rest}) => {
                 {
                     type && type === 'textarea' && <textarea
                     {...rest}
+                        id={name}
                         name={name}
                         /*ref={tinput}*/
                         type={type}
+                        aria-label={label}
                         className="form-control"
                         /*onFocus={() => setDirty(true)}*/
                         onBlur={resetEditMode}

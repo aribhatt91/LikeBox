@@ -18,4 +18,7 @@ export const auth = app.auth();
 
 export const db = firebase.firestore();
 
+export const fieldPath = firebase.firestore.FieldPath;
+
 export default app;
+

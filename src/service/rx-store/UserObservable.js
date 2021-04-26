@@ -1,7 +1,6 @@
 import { Observable } from 'rxjs';
 import axios from 'axios';
 /* Mock methods */
-import USER from '../../mock/user.json';
 import simulateNetworkRequest from '../simulateNetworkRequest';
 
 const UserObservable = new Observable( observer => {
@@ -9,7 +8,7 @@ const UserObservable = new Observable( observer => {
     simulateNetworkRequest()
     .then( ( response ) => {
         //observer.next( response.data );
-        observer.next(USER);
+        observer.next({});
         observer.complete();
     } )
     .catch( ( error ) => {

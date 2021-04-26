@@ -1,18 +1,16 @@
 import React, { useState, useContext, useEffect } from 'react';
 import Page from './Page';
-import LoadingModule from './../components/LoadingModule';
+import { LoadingSpinner } from './../components/LoadingModule';
 import ProductHeroGallery from '../components/ProductHeroGallery';
 import PageMessage from '../components/generic/PageMessage';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
-import TextInput from '../components/generic/TextInput';
 import { checkDeliveryAvailability } from '../../service/addressMethods';
 import { addItemToWishList, removeItemFromWishList, itemInWishList } from '../../service/wishlistMethods';
 import Counter from '../components/generic/Counter';
 import AppButton from './../components/generic/AppButton';
 import { Tabs } from 'react-bootstrap';
 import Tab from 'react-bootstrap/Tab'
-import { fetchProduct } from './../../service/api/firestore/product';
 import { AuthContext } from './../../store/contexts/AuthContext';
 import CartService from './../../service/cartOperation';
 import { connect } from 'react-redux';
@@ -20,7 +18,11 @@ import { bindActionCreators } from 'redux';
 import { useParams } from 'react-router-dom';
 import FourZeroFour from './FourZeroFour';
 import { useNotification } from './../../store/contexts/NotificationProvider';
-import { fetchAwinProduct } from '../../service/api/firestore/awin';
+import { fetchProduct } from './../../service/productMethods';
+import AppTextInput from './../components/generic/AppTextInput';
+import { formatPrice } from '../../service/helper';
+import AppRadioInput from '../components/generic/AppRadioInput';
+import RadioButtonGroup from './../components/generic/RadioButtonGroup';
 
 function SizeSelector({sizes, handler, label, name}){
   let size_radios = [];
@@ -88,7 +90,7 @@ function ProductDelivery({handler}){
       <div className="product-delivery-header mb-2">Delivery options</div>
       <div className="product-delivery-check">
         <div className="col-6 pl-0 pr-2">
-          <TextInput
+          <AppTextInput
               name="pincode"
               label="Enter pincode"
           />
@@ -110,8 +112,10 @@ function ProductDelivery({handler}){
 function PinCodeChecker (props) {
   
 }
+function SizeChart(brand, category) {
 
-function ProductDescComponent({description, sizing, shipping, returns}){
+}
+function ProductDescription({description, sizing, shipping, returns}){
   const [key, setKey] = useState('desc');
   return (
     <div className="app-tab-layout">
@@ -146,19 +150,7 @@ function ProductDescComponent({description, sizing, shipping, returns}){
   )
 }
 
-function ProductForm({currentUser, product, sizes, addToCart}){
-  const [quantity, setQuantity] = useState(1);
-  const [size, setSize] = useState('');
-  const [cta1Loading, setCta1Loading] = useState(false);
-
-  
-  const counter = (tag, val) => {
-    setQuantity(val)
-  }
-  const sizeSelect = (tag, val) => {
-    setSize(val)
-  }
-  const _addToCart = () => {
+/* const _addToCart = () => {
     if(!currentUser){
       console.log('User not logged in');
       return;
@@ -203,18 +195,57 @@ function ProductForm({currentUser, product, sizes, addToCart}){
     }else {
       //Show snackbar message
     }
+  } */
+function ProductForm({currentUser, product, sizes, addToCart, toggleInWishList}){
+  const [quantity, setQuantity] = useState(1);
+  const [size, setSize] = useState('');
+  const [cta1Loading, setCta1Loading] = useState(false);
+  const [link, setLink] = useState(product.link || "#");
+
+  
+  /* const counter = (tag, val) => {
+    setQuantity(val)
+  } */
+
+  useEffect(() => {
+    if(product.variants){
+
+    }
+  }, [])
+  const sizeSelect = (val) => {
+    console.log('sizeSelect', val);
+    /* setSize(val);
+    if(product.variants && Array.isArray(product.variants)) {
+      for (let index = 0; index < product.variants.length; index++) {
+        const element = product.variants[index];
+        if(element.size === val && element.link){
+          setLink(element.link);
+        }
+      }
+    } */
   }
+  
 
   return (
     <React.Fragment>
-      {sizes.length > 0 && <div className="product-size-options mb-2 mt-3">
-        <SizeSelector
-          sizes={sizes}
-          name="size"
-          label="Select size"
-          handler={sizeSelect}
-        />
-      </div>}
+      {product.sizes && Array.isArray(product.sizes) && product.sizes.length > 0 && 
+        <div className="product-size-options mb-2 mt-3">
+          {/* <SizeSelector
+            sizes={sizes}
+            name="size"
+            label="Select size"
+            handler={sizeSelect}
+          /> */}
+          <RadioButtonGroup 
+              name="size"
+              label="Select size"
+              options={[product.sizes]}
+              disabled={!currentUser}
+              onChange={sizeSelect}
+              defaultChecked={product.sizes[0]}
+          />
+        </div>
+      }
       {/* <div className="product-quantity mb-3">
         <Counter
           handler={counter}
@@ -223,24 +254,24 @@ function ProductForm({currentUser, product, sizes, addToCart}){
         />
       </div> */}
       {
-        !currentUser && <div className="col-12 m-2">
+        !currentUser && <div className="w-100 d-flex mb-2 mt-2 p-0">
           <PageMessage inline={false} type="info" text="You are not signed in. Sign in to purchase this product" />
         </div>  
       }
       <div className="product-cta-container col-md-10 clearfix mt-2 mb-2 p-0">
         <AppButton
-          label="Buy now"
+          label="Go to brand"
           className="w-100 btn-grey"
-          disabled={!currentUser || quantity === 0 || (sizes.length > 0 && size === '')}
-          onClick={buyNow}
+          disabled={!currentUser || /*quantity === 0 ||*/ (sizes.length > 0 && size === '')}
+          href={link}
         />
       </div>
       <div className="product-cta-container col-md-10 clearfix mt-2 mb-5 p-0">
         <AppButton
-          label="Add to cart"
+          label="Add to Wishlist"
           className="btn-white w-100"
-          onClick={_addToCart}
-          disabled={!currentUser || quantity === 0 || (sizes.length > 0 && size === '')}
+          onClick={() => {}}
+          disabled={!currentUser || /*quantity === 0 ||*/ (sizes.length > 0 && size === '')}
         />
       </div>
     </React.Fragment>
@@ -321,6 +352,9 @@ function ProductPage(props) {
     }
   }
   const parseProduct = (product) => {
+    if(!product || !product.sku){
+      return null;
+    }
     let sizes = [], images = [];
     try{
       if(typeof product.sizes !== 'undefined' && product.sizes !== "-"){
@@ -358,13 +392,14 @@ function ProductPage(props) {
       if(!pending){
         setPending(true);
       }
-      console.log('getProduct -> ', sku);
+      //console.log('getProduct -> ', sku);
       //let product = await fetchProduct(sku);
-      let product = await fetchAwinProduct(sku);
+      let product = await fetchProduct(sku);
+      //console.log('fetchedProduct ->', product);
       setProduct(parseProduct(product));
-      document.title = product.name;
+      
     }catch(err){
-      console.err('ProductPage', err);
+      console.error('ProductPage', err);
     }finally {
       setPending(false);
     }
@@ -375,8 +410,9 @@ function ProductPage(props) {
   }, [id])
 
   return (
-    <Page className={"product-home-page pt-5 pb-5"} product={product} pageName={"pdp"}>
-        {pending && <LoadingModule />}
+    <React.Fragment>
+    {(pending || product) && <Page className={"product-home-page pt-5 pb-5 position-relative"} product={product} pageName={"pdp"}>
+        {pending && <LoadingSpinner text="Please wait.." />}
         {!pending && product && 
           <div className="d-block">
             <ProductHeroGallery
@@ -391,142 +427,24 @@ function ProductPage(props) {
               <div className="product-name mb-3">{product.name}</div>
               <div className="product-price">
                 <div className="product-sale-price">
-                  &pound;{product.price}
+                  &pound;{ formatPrice(product.price)}
                 </div>
                 <div className="price-tax-info mt-1 mb-3">Inclusive of all taxes</div>
               </div>
               {product.rating && RatingStars((product.rating || ""))}
               
-              <ProductForm currentUser={currentUser} addToCart={props.addToCart} product={product} sizes={product.sizes} />
+              <ProductForm currentUser={currentUser} link={product.link} addToCart={props.addToCart} product={product} sizes={product.sizes} />
 
-              <ProductDescComponent description={product.description}/>
+              <ProductDescription description={product.description}/>
             </div>
           </div>
         }
-        {!pending && !product && <FourZeroFour/>} 
-      </Page>
+        
+      </Page>}
+      {!pending && !product && <FourZeroFour/>} 
+      </React.Fragment>
     )
 } 
-
-
-/* class ProductPage extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      pending: true,
-      product: null,
-      error: null,
-      pincode_error: false
-    }
-  }
-
-  async checkPincode(pincode) {
-    let res = await checkDeliveryAvailability(pincode);
-    this.setState({
-      ...this.state,
-      res
-    })
-  }
-  toggleProductWishList(id, wishStatus) {
-    if(wishStatus){
-      removeItemFromWishList(id);
-    }else {
-      addItemToWishList(id);
-    }
-  }
-  async getProducts(){
-    const sku = this.props.match.params.id;
-    console.log('getProduct -> ', sku);
-    let product = await fetchProduct(sku);
-    this.setState(
-      {
-        ...this.state,
-        pending: false,
-        product
-      }
-    )
-  }
-  componentDidMount(){
-    //super();
-    this.getProducts();
-  }
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    // If we have a snapshot value, we've just added new items.
-    // Adjust scroll so these new items don't push the old ones out of view.
-    // (snapshot here is the value returned from getSnapshotBeforeUpdate)
-    if(prevProps.match.params.id !== this.props.match.params.id){
-      this.getProducts();
-    }
-  }
-
-  render() {
-    let product = this.state.product ? this.state.product : {}, sizes = [], images = [];
-    const {addToCart} = this.props;
-    console.log(this.state.size, this.state.qty);
-    try{
-      if(typeof product.sizes !== 'undefined' && product.sizes !== "-"){
-        if(typeof product.sizes === 'string'){
-          if(product.sizes.indexOf('[') === -1 && product.sizes.indexOf(']') === -1){
-            sizes = product.sizes.split(',');
-          }else {
-            sizes = JSON.parse(product.sizes || "");
-          }
-        }else if( product.sizes instanceof Array){
-          sizes = product.sizes || [];
-        }else {
-
-        }
-      }
-    }catch(err){
-      console.error('error while parsing sizes', err, product.sizes);
-    }
-    
-
-    if(typeof product.images !== 'undefined'){
-      if(typeof product.images === 'string'){
-        if(product.images.indexOf('[') === -1 && product.images.indexOf(']') === -1){
-          images = product.images.split(',');
-        }else{
-          images = JSON.parse(product.images || "");
-        }
-      }else if( product.images instanceof Array){
-        images = product.images || [];
-      }
-    }
-
-    return (
-      <div className="page product-home-page pt-5 pb-5">
-        {this.state.pending && <LoadingModule />}
-        {!this.state.pending && this.state.product && 
-          <div className="d-block">
-            <ProductHeroGallery
-              images={images}
-              product_name={product.name}
-              product_id={product.sku}
-            />
-            <div className="product-details p-2 col-lg-5 float-left">
-              <div className="product-brand">{product.brand}</div>
-              <div className="product-name mb-3">{product.name}</div>
-              <div className="product-price">
-                <div className="product-sale-price">
-                  &pound;{product.price}
-                </div>
-                <div className="price-tax-info mt-1 mb-3">Inclusive of all taxes</div>
-              </div>
-              {product.rating && RatingStars((product.rating || ""))}
-              
-              <ProductForm addToCart={addToCart} product={this.state.product} sizes={sizes} />
-
-              <ProductDescComponent description={product.description}/>
-            </div>
-          </div>}
-        {!this.state.pending && !this.state.product && <FourZeroFour/>} 
-      </div>
-    );
-  }
-} */
-
-//export default ProductPage;
 
 
 const mapStateToProps = state => {

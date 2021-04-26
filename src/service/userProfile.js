@@ -1,11 +1,17 @@
 
-import { addUser, isFirstLoad, updateUserByEmail } from './api/firestore/user';
-import { getUser } from './../store/reducers/login_reducer';
+import { addUser, isFirstLoad, updateUserByEmail, setUserSizing, getUserSizing, getUser, getUserLikeBox } from './api/firestore/user';
 
 export const addUserProfile = (user) => {
     return addUser(user);
 }
 
+export const fetchLikeBox = (email) => {
+    return getUserLikeBox(email);
+}
+
+export const updateLikeBox = (email, likebox) => {
+    return updateUserByEmail(email, likebox);
+}
 export const fetchUserProfile = async (email) => {
     /* let res = {};
     try {
@@ -22,9 +28,10 @@ export const fetchUserProfile = async (email) => {
 
     }
     return new Promise(resolve => resolve(res)) */
-    let res = getUser(email);
-    console.log('fetchUserProfile:getUser: res', res);
-    return res;
+    console.log('fetchUserProfile:getUser: request', email);
+    let res = await getUser(email);
+    console.log('fetchUserProfile:getUser: response', res);
+    return new Promise(resolve => resolve(res));
 }
 
 export const updateUserProfile = (email, update) => {
@@ -32,14 +39,21 @@ export const updateUserProfile = (email, update) => {
 }
 
 export const isFirstSession = async (email) => {
-    let res = true;
-    if(!localStorage.getItem('notFirstSession')){
-        res = await isFirstLoad(email);
-        localStorage.setItem('notFirstSession', res);
-    }else {
-        res = localStorage.getItem('notFirstSession') === 'true'
+    let firstSession = localStorage.getItem('firstSession') !== 'false';
+    if(firstSession){
+        let firstSession = await isFirstLoad(email);
+        localStorage.setItem('firstSession', firstSession);
     }
-    return new Promise(resolve => resolve(res));
+    console.log('isFirstSession', firstSession);
+    return new Promise(resolve => resolve(firstSession));
+}
+
+export const setUserSizes = (email, sizes) => {
+    return setUserSizing(email, sizes)
+}
+
+export const getUserSizes = (email) => {
+    return getUserSizing(email)
 }
 
  /* let user = {

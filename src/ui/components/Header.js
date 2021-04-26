@@ -1,15 +1,12 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink, useHistory, useLocation } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import Modal from 'react-bootstrap/Modal';
 import HeaderMobileNav from './HeaderMobileNav.js';
 import HOME_ICON from '../../assets/img/logo.png'; 
 import SearchBar from './SearchBar';
-import { authenticate } from './../../service/authService';
-import { getUserObject } from '../../service/rx-store/dataStore';
 import CartLink from './CartLink';
 import { AuthContext } from './../../store/contexts/AuthContext';
 import AppButton from './generic/AppButton';
@@ -51,7 +48,7 @@ function Header (props) {
   const [scrolling, setScrolling] = useState(false);
   const [loading, setLoading] = useState(true); */
   const location = useLocation();
-
+  let history = useHistory();
   const {currentUser, logout} = useContext(AuthContext);
 
 
@@ -64,12 +61,24 @@ function Header (props) {
       }
     }) */
   }, [])
+
+  const signout = async () => {
+    try{
+      if(currentUser){
+        await logout(currentUser.email);
+        history.replace('/login');
+      }
+      
+    }catch(err){
+      console.err('Sign out error:', err);
+    }
+  }
   
     return (
       <header className="App-header sticky-top">
         <div className={"topnav" /*Add scrolling functionality if needed*/}>
           <Navbar variant="light">
-            <HeaderMobileNav user={currentUser} logout={logout} />
+            <HeaderMobileNav user={currentUser} logout={signout} />
 
             <Navbar.Brand>
               <NavLink activeClassName='active' exact={true} to="/" >
@@ -77,10 +86,10 @@ function Header (props) {
               </NavLink>
             </Navbar.Brand>
             
-            <Nav className="mr-auto d-none d-md-flex navbar-nav">
+            <Nav className="mr-auto d-none d-lg-flex navbar-nav">
               <HeaderNavigation/>
             </Nav>
-            <Nav className="justify-content-end d-none d-md-flex">
+            <Nav className="justify-content-end d-none d-lg-flex">
             
               {/* <SearchBar/> */}
 
@@ -94,22 +103,26 @@ function Header (props) {
               <React.Fragment>
                 {
                   /* Hide wishlist icon for cart page */
-                location.pathname.indexOf('wishlist') === -1 && 
                 <NavLink activeClassName="active" to="/wishlist">
                   <img src={heart_icon} className="nav_icon" />
                 </NavLink>
                 }
                 {
                 /* Hide cart icon for cart page */
-                location.pathname.indexOf('cart') === -1 && 
                 <NavLink activeClassName='active' to="/cart">
                   <CartLink user={currentUser}/>
                 </NavLink>
                 }
                 {
-                location.pathname.indexOf('user') === -1 &&
-                <AppButton label="Your account" className={"d-md-flex no-anim sm align-items-center pl-5 pr-5 no-anim"} 
+                location.pathname.indexOf('/user') === -1 &&
+                <AppButton label="Your account" className={"d-none d-lg-flex no-anim sm align-items-center pl-5 pr-5 no-anim"} 
                   href="/user">
+                </AppButton>
+                }
+                {
+                location.pathname.indexOf('/user') > -1 &&
+                <AppButton label="Log out" className={"d-none d-lg-flex no-anim sm align-items-center pl-5 pr-5 no-anim"} 
+                  onClick={signout}>
                 </AppButton>
                 }
               </React.Fragment>

@@ -4,9 +4,6 @@ import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
 function Accordion({
     label, 
-    openBtn, 
-    openBtnAlign, 
-    openBtnStyle, 
     children, 
     defDisabled=false, 
     defOpen=false, 
@@ -31,7 +28,7 @@ function Accordion({
                     <FontAwesomeIcon icon={open ? faChevronUp : faChevronDown }/>
                 </span>}
             </div>
-            <div className={"accordion-body " + (open ? "d-inline-block" : "d-none")}>
+            <div className={"accordion-body " + (open ? "d-inline-block" : "d-none")} aria-hidden={!open} aria-expanded={open}>
                 {
                     children
                 }
