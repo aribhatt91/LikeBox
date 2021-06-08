@@ -44,7 +44,7 @@ export const addOrder = (order) => {
     let data = [];
     try {
         collection.add(order).then( docRef => {
-            console.log("Document written with ID: ", docRef);
+            window.mlog("Document written with ID: ", docRef);
         }).catch((error) => {
             console.error("Error adding document: ", error);
         });

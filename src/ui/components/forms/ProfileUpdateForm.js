@@ -48,13 +48,13 @@ function ProfileUpdateForm({profile={}, onResult}){
         mobile: (profile.mobile || "")
     }
 
-    console.log('ProfileUpdateForm:getUser', piInitialValues, contactInitialValues)
+    window.mlog('ProfileUpdateForm:getUser', piInitialValues, contactInitialValues)
 
     const resetDefPiValues = () => {
         /* let defVal = {
             ...piInitialValues
         }
-        console.log('Resetting defvals', defVal); */
+        window.mlog('Resetting defvals', defVal); */
         //setFieldState(defVal);
     },
     resetDefCiValues = () => {
@@ -62,7 +62,7 @@ function ProfileUpdateForm({profile={}, onResult}){
             ...fieldState,
             contactInitialValues
         }
-        console.log('Resetting defvals', defVal); */
+        window.mlog('Resetting defvals', defVal); */
         //setFieldState(defVal);
     },
     updateProfile = async (userInput, {setSubmitting}) => {
@@ -93,13 +93,13 @@ function ProfileUpdateForm({profile={}, onResult}){
                         dob.setMonth(Number(userInput.month) - 1);
                         dob.setFullYear(Number(userInput.year));
                         update.dob = dob.toDateString();
-                        console.log('DOB -> ', update.dob);
+                        window.mlog('DOB -> ', update.dob);
                     }catch(err){
                         console.error('Error updating Date of Birth');
                     }
                 }
                 let res = await updateUserProfile(currentUser.email, update);
-                console.log('updateProfile: response', res);
+                window.mlog('updateProfile: response', res);
                 setPiEditMode(false);
                 setCiEditMode(false);
                 if(typeof onResult === 'function'){

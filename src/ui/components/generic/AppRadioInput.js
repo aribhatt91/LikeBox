@@ -4,7 +4,7 @@ import { useFormikContext } from 'formik';
 export default function AppRadioInput({name, options, onChange, ...rest}) {
     const {setFieldTouched, handleChange, errors, touched, initialValues, values} = useFormikContext();
     const postChange = (e) => {
-        console.log(name, e.target.value);
+        window.mlog(name, e.target.value);
     }
     return (
         <div className="app-radio-input-options d-flex">

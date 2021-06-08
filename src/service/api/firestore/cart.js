@@ -85,7 +85,7 @@ export const addProductToCart = async (email, product) => {
                 subTotal += (product.full_price || product.price) * product.quantity;
                 total += product.price * product.quantity;
             }
-            console.log('Products after adding -> ', present, products);
+            window.mlog('Products after adding -> ', present, products);
             cart.products = products;
             cart.count = itemCount;
             cart.subTotal = subTotal;
@@ -93,7 +93,7 @@ export const addProductToCart = async (email, product) => {
             //writeToCookie(CNAME, cart, 30);
             //setTimeout(() => resolve(JSON.stringify(cart)), 2000);
             let update = await updateUserByEmail(email, {cart})
-            console.log(update);
+            window.mlog(update);
         }
         
 
@@ -109,7 +109,7 @@ export const removeProductFromCart = async (email, product, decrement=false) => 
     try {
         cart = await getUserCart(email);
         if(!cart){
-            console.log('No cart found');
+            window.mlog('No cart found');
         }
         if(cart){
             let products = cart.products || [],
@@ -132,7 +132,7 @@ export const removeProductFromCart = async (email, product, decrement=false) => 
                         
                     }
                     
-                    console.log()
+                    window.mlog()
                     break;
                 }
                 
@@ -148,10 +148,10 @@ export const removeProductFromCart = async (email, product, decrement=false) => 
             cart.count = itemCount;
             cart.subTotal = subTotal;
             cart.total = total;
-            console.log(cart);
+            window.mlog(cart);
 
             let update = await updateUserByEmail(email, {cart})
-            console.log(update);
+            window.mlog(update);
         }
         
 

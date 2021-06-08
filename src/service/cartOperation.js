@@ -47,7 +47,7 @@ let CartService = {
         return dispatch => {
             dispatch(addToCartPending(CartService.active_cart));
             if(!CartService.validateProduct(product)){
-                console.log('addToCart: ', INVALID_PRODUCT, product);
+                window.mlog('addToCart: ', INVALID_PRODUCT, product);
                 //DISPATCH ERROR
                 dispatch(cartError({error: CART_ADD_ERROR, cart: CartService.active_cart}));
                 return;
@@ -55,10 +55,10 @@ let CartService = {
             //Firestore
             addProductToCart(email, product).then( res => {
                 CartService.setCart(CartService.parseCart(res));
-                //console.log('addToCart: MockGetCart: parsed cart', CartService.active_cart);
+                //window.mlog('addToCart: MockGetCart: parsed cart', CartService.active_cart);
                 dispatch(addToCartSuccess(CartService.getCart()));
             }).catch( error => {
-                //console.log('addToCart: MockGetCart: error', error);
+                //window.mlog('addToCart: MockGetCart: error', error);
                 dispatch(cartError({error: CART_ADD_ERROR, cart: CartService.active_cart}));
             });
         }
@@ -68,7 +68,7 @@ let CartService = {
         return (dispatch) => {
             dispatch(removeFromCartPending(CartService.active_cart));
             if(!CartService.validateProduct(product)){
-                console.log('removeFromCart: ', INVALID_PRODUCT, product);
+                window.mlog('removeFromCart: ', INVALID_PRODUCT, product);
                 //DISPATCH ERROR
                 if(decrement){
                     dispatch(cartError({error: CART_DECR_ERROR, cart: CartService.active_cart}));
@@ -81,10 +81,10 @@ let CartService = {
            //TODO - Switch to Firestore
            removeProductFromCart(email, product, decrement).then( res => {
                 CartService.setCart(CartService.parseCart(res));
-                console.log('removeFromCart: removeProductFromCart: parsed cart', CartService.active_cart);
+                window.mlog('removeFromCart: removeProductFromCart: parsed cart', CartService.active_cart);
                 dispatch(removeFromCartSuccess(CartService.getCart()));
             }).catch( error => {
-                console.log('removeFromCart: removeProductFromCart: error', error);
+                window.mlog('removeFromCart: removeProductFromCart: error', error);
                 dispatch(cartError({error: CART_REMOVE_ERROR, cart: CartService.active_cart}));
             })
             
@@ -92,16 +92,16 @@ let CartService = {
         
     },
     fetchCart: (email) => {
-        console.log('fetchCart: email -> ', email);
+        window.mlog('fetchCart: email -> ', email);
         return (dispatch) => {
             dispatch(fetchCartPending(EMPTY_CART));            
             getUserCart(email).then(res => {
                 CartService.setCart(CartService.parseCart(res));
-                console.log('getUserCart: parsed cart', CartService.active_cart);
+                window.mlog('getUserCart: parsed cart', CartService.active_cart);
                 dispatch(fetchCartSuccess(CartService.active_cart));
             })
             .catch(err => {
-                console.log('fetchCart: getUserCart: error', err);
+                window.mlog('fetchCart: getUserCart: error', err);
                 dispatch(cartError({error: CART_FETCH_ERROR, cart: CartService.active_cart}));
             })
         }  
@@ -127,7 +127,7 @@ let CartService = {
             });
             return cart;
         }catch(e){
-            console.log('parseCart Error', e);
+            window.mlog('parseCart Error', e);
             cartError({error: CART_FETCH_ERROR, cart: CartService.active_cart});
         }
         return EMPTY_CART;

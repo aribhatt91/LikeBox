@@ -36,7 +36,7 @@ function WishListInstance({instance, removeItem}){
     }
 
     useEffect(()=>{
-        console.log('adding event listener..')
+        window.mlog('adding event listener..')
         window.addEventListener('click', (e)=>{
             //if(showDeletePop){
                 setShowDeletePop(false);
@@ -103,7 +103,7 @@ const WishListPage = () => {
         if(currentUser){
             setPending(true);
             fetchWishList(currentUser.email).then(res => {
-                console.log('UserWishListFragment', res); 
+                window.mlog('UserWishListFragment', res); 
                 setWishList(res); 
             }).catch(err => {
                 console.error(err);
@@ -120,9 +120,9 @@ const WishListPage = () => {
         try {
             setPending(true);
             let rem = await removeItemFromWishList(currentUser.email, sku);
-            console.log(rem);
+            window.mlog(rem);
             let res = await fetchWishList(currentUser.email);
-            console.log('updated wishlist', res);
+            window.mlog('updated wishlist', res);
             if(rem.type === 'success'){
                 dispatch({
                     type: rem.type,
@@ -148,7 +148,7 @@ const WishListPage = () => {
             setPending(false);
         }
     }
-    console.log('wishList', wishList);
+    window.mlog('wishList', wishList);
     return (
         <Page pageName="Wishlist">
             <div className={"wish-list-section mt-5 mb-5 container"}>

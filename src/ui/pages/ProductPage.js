@@ -29,7 +29,7 @@ function SizeSelector({sizes, handler, label, name}){
     if(typeof handler === 'function'){
       handler(e.target.name, e.target.value);
     }else {
-      console.log(e.target.name, e.target.value);
+      window.mlog(e.target.name, e.target.value);
     }
   }
   (sizes || []).forEach((item, index) => {
@@ -129,17 +129,17 @@ function ProductDescription({description, sizing, deliveryTime, deliveryCost, re
 
 /* const _addToCart = () => {
     if(!currentUser){
-      console.log('User not logged in');
+      window.mlog('User not logged in');
       return;
     }
     if(quantity <= 0){
-      console.log('Add products');
+      window.mlog('Add products');
       //Raise error
     }if(sizes.length > 0 && size === ''){
-      console.log('Select size');
+      window.mlog('Select size');
       //Raise error
     }else {
-      console.log('Ready to add to cart');
+      window.mlog('Ready to add to cart');
       try {
         let p = {
           sku: product.sku,
@@ -152,7 +152,7 @@ function ProductDescription({description, sizing, deliveryTime, deliveryCost, re
           p.size = size;
         }
         addToCart(currentUser.email, p);
-        //console.log()
+        //window.mlog()
       }catch(err){
         console.error('CartService error -> ', err);
       }
@@ -160,14 +160,14 @@ function ProductDescription({description, sizing, deliveryTime, deliveryCost, re
   }
   const buyNow = () => {
     if(!currentUser){
-      console.log('User not logged in');
+      window.mlog('User not logged in');
       return;
     }
     if(quantity > 0){
-      console.log('Add products');
+      window.mlog('Add products');
       //Raise error
     }if(sizes.length > 0 && size === ''){
-      console.log('Select size');
+      window.mlog('Select size');
       //Raise error
     }else {
       //Show snackbar message
@@ -190,7 +190,7 @@ function ProductForm({currentUser, product, sizes, addToCart, toggleInWishList})
     }
   }, [])
   const sizeSelect = (val) => {
-    console.log('sizeSelect', val);
+    window.mlog('sizeSelect', val);
     /* setSize(val);
     if(product.variants && Array.isArray(product.variants)) {
       for (let index = 0; index < product.variants.length; index++) {
@@ -316,7 +316,7 @@ function ProductPage(props) {
           })()
         }
       }catch(err){
-        console.log('toggleWishList', err);
+        window.mlog('toggleWishList', err);
         dispatch({
           type: 'error',
           title: 'Error!',
@@ -331,16 +331,16 @@ function ProductPage(props) {
     }
     let sizes = [], images = [];
     try{
-      console.log('Sizes -> ', product.sizes);
+      window.mlog('Sizes -> ', product.sizes);
       if(typeof product.sizes !== 'undefined' && product.sizes !== "-"){
         if(typeof product.sizes === 'string'){
           sizes = product.sizes.replace('[', '').replace(']', '').replace(/\"/g, '').replace(/\'/g, '');
           sizes = sizes.split(',') || [];
-          console.log('Sizes -> ', sizes);
+          window.mlog('Sizes -> ', sizes);
           
         }else if( product.sizes instanceof Array){
           sizes = product.sizes || [];
-          console.log('Sizes -> ', sizes);
+          window.mlog('Sizes -> ', sizes);
         } 
       }
       product.sizes = sizes;
@@ -369,10 +369,10 @@ function ProductPage(props) {
       if(!pending){
         setPending(true);
       }
-      //console.log('getProduct -> ', sku);
+      //window.mlog('getProduct -> ', sku);
       //let product = await fetchProduct(sku);
       let product = await fetchProduct(sku);
-      //console.log('fetchedProduct ->', product);
+      //window.mlog('fetchedProduct ->', product);
       setProduct(parseProduct(product));
       
     }catch(err){

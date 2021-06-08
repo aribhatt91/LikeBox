@@ -32,7 +32,7 @@ export const isItemInWishList = async (email, sku) => {
 
 
             queries.forEach( doc => {
-                console.log('WishList -> ', doc.id, doc.data());
+                window.mlog('WishList -> ', doc.id, doc.data());
                 let data = doc.data();
                 data = data || {};
                 (data.items || []).forEach( item => {
@@ -60,7 +60,7 @@ export const getUserWishList = async (email) => {
             items = [];
             if(queries.size > 0){
                 queries.forEach( doc => {
-                    console.log('WishList -> ', doc.id, doc.data());
+                    window.mlog('WishList -> ', doc.id, doc.data());
                     let data = doc.data();
                     data = data || {};
                     items = items.concat((data.items || []));
@@ -94,7 +94,7 @@ export const createWishList = async (email, name="My Wishlist", products=[]) => 
                         let docRef = await collection.add(wlist),
                         doc = await collection.doc(docRef.id).get();
                         doc = doc || {};
-                        console.log('createWishList', docRef.id, doc.data());
+                        window.mlog('createWishList', docRef.id, doc.data());
                         res = new Promise(resolve => resolve({
                             type: 'success',
                             items:(doc.data().items || [])
@@ -125,13 +125,13 @@ export const addToWishList = async (email, sku) => {
             let queries = await getWishlistQuery(email);
             if(queries.size <= 0){
                 let data = await createWishList(email, "", [sku]);
-                console.log(data);
+                window.mlog(data);
                 res = new Promise(resolve => resolve(data));
             }else if(queries.size === 1){
-                console.log('queries', queries.docs[0].id);
+                window.mlog('queries', queries.docs[0].id);
                 let doc = queries.docs[0],
                 docId = doc.id;
-                    console.log(doc.id, " => ", doc.data());
+                    window.mlog(doc.id, " => ", doc.data());
                 let products = doc.data().items || [], isPresent = false;
                 
                 /* Check if product is present */
@@ -145,7 +145,7 @@ export const addToWishList = async (email, sku) => {
                     let data = {};
                     data.type = 'error';
                     data.msg = 'Product is already present in your wish list';
-                    console.log('Product already present');
+                    window.mlog('Product already present');
                     res = new Promise((resolve, reject) => reject({
                         type: 'error', 
                         msg: 'Product is already present in your wish list'
@@ -157,7 +157,7 @@ export const addToWishList = async (email, sku) => {
                     let docRef = await updateWishlistQuery(doc.id, {'items': products});
                     /* doc = await collection.doc(docId).get();
                     doc = doc || {}; */
-                    //console.log('addToWishList', docId, doc.data());
+                    //window.mlog('addToWishList', docId, doc.data());
                     res = new Promise(resolve => resolve({
                         type: 'success',
                         msg: 'Item added to your wishlist!'
@@ -186,10 +186,10 @@ export const removeFromWishList = async (email, sku) => {
             if(queries.size <= 0){
                 res = createWishList(email, "", [sku]);
             }else if(queries.size === 1){
-                console.log('queries', queries.docs[0].id);
+                window.mlog('queries', queries.docs[0].id);
                 let doc = queries.docs[0],
                 docId = doc.id;
-                console.log(doc.id, " => ", doc.data());
+                window.mlog(doc.id, " => ", doc.data());
                 let products = doc.data().items || [], isPresent = false, index = -1;
                 
                 /* Check if product is present */
@@ -205,7 +205,7 @@ export const removeFromWishList = async (email, sku) => {
                     let docRef = await updateWishlistQuery(doc.id, {'items': products});
                     /* doc = await collection.doc(docId).get();
                     doc = doc || {}; */
-                    //console.log('removeFromWishList', docId, doc.data());
+                    //window.mlog('removeFromWishList', docId, doc.data());
                     res = new Promise(resolve => resolve({
                         type: 'success',
                         msg: 'Item removed from your Wishlist!'

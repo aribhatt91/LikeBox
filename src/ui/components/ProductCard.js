@@ -40,7 +40,7 @@ const ProductCard = (props) => {
             try{
                 setCtaLoading(true);
                 let res = await addItemToWishList(currentUser.email, props.sku);
-                console.log('ProductCard:addToWishList', res);
+                window.mlog('ProductCard:addToWishList', res);
                 dispatch(
                     {
                         type: 'success',
@@ -51,7 +51,7 @@ const ProductCard = (props) => {
                 
                 
             }catch(err){
-                console.log('addToWishList', err);
+                window.mlog('addToWishList', err);
                 if(err.msg){
                     dispatch(
                         {
@@ -66,7 +66,7 @@ const ProductCard = (props) => {
             }
           
         }else {
-            console.log('User not authenticated');
+            window.mlog('User not authenticated');
             dispatch(
                 {
                     type: 'error',

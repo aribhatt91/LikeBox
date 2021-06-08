@@ -6,7 +6,7 @@ const Notification = ({id, type, dispatch, message, dark=false}) => {
   const [width, setWidth] = useState(0);
   const [intervalID, setIntervalID] = useState(null);
   const handleStartTimer = () => {
-    //console.log('Notification: handleStartTimer called');
+    //window.mlog('Notification: handleStartTimer called');
     const id = setInterval(() => {
       setWidth(prev => {
         if (prev < 100) {
@@ -29,7 +29,7 @@ const Notification = ({id, type, dispatch, message, dark=false}) => {
   };
 
   const handleCloseNotification = () => {
-    //console.log('Notification: handleCloseNotification called');
+    //window.mlog('Notification: handleCloseNotification called');
     handlePauseTimer();
     setExit(true);
     setTimeout(() => {

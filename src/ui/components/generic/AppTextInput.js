@@ -15,13 +15,13 @@ const AppTextInput = ({name, label, disabled=false, type='text', ...rest}) => {
     const resetEditMode = (e) => {
         //setDirty(((e.target.value || "").trim() !== ""));
         if(typeof setFieldTouched === 'function'){
-            //console.log('blurrr');
+            //window.mlog('blurrr');
             setFieldTouched(name);
         }
     }
-    //console.log('Ref', tinput, {name, touched, errors});
+    //window.mlog('Ref', tinput, {name, touched, errors});
     /* if(tinput && tinput.current && defvalue){
-        //console.log(name, defvalue);
+        //window.mlog(name, defvalue);
         tinput.current.value = defvalue || "";
     } */
     return (

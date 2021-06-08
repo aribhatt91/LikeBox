@@ -12,7 +12,7 @@ export const readFromCookie = (name) => {
             }
         }
     }catch(err){
-        console.log('readFromCookie: error :', name, err);
+        window.mlog('readFromCookie: error :', name, err);
     }
     return null;
 }

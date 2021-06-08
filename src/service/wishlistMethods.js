@@ -13,14 +13,14 @@ export const addItemToWishList = async (email, sku) => {
         if(data.type === 'success'){
             ids = (data.items || []).map(item => item.sku);
         }
-        console.log('addItemToWishList ->', ids);
+        window.mlog('addItemToWishList ->', ids);
 
     }catch(err){
-        console.log('addItemToWishList:error', err);
+        window.mlog('addItemToWishList:error', err);
     }
     
     items = await fetchProductsByIds(ids);
-    console.log(items);
+    window.mlog(items);
     
     return new Promise(resolve => resolve(items)); */
     return addToWishList(email, sku);
@@ -36,7 +36,7 @@ export const removeItemFromWishList = async (email, sku) => {
         }
         //ids = ids || [];
     }catch(err){
-        console.log('fetchWishList:error', err);
+        window.mlog('fetchWishList:error', err);
         return new Promise((resolve, reject) => reject(err));
     }
     items = await fetchProductsByIds(ids);
@@ -50,7 +50,7 @@ export const removeItemFromWishList = async (email, sku) => {
         }
         data.items = items;
     }
-    console.log(items);
+    window.mlog(items);
     return new Promise(resolve => resolve(data)); */
     return removeFromWishList(email, sku);
 }
@@ -64,7 +64,7 @@ export const fetchWishList = async (email) => {
         }
         //ids = ids || [];
     }catch(err){
-        console.log('fetchWishList:error', err);
+        window.mlog('fetchWishList:error', err);
     }
     items = await fetchProductsBySkus(ids);
     if(data){
@@ -76,7 +76,7 @@ export const fetchWishList = async (email) => {
             
         }
     }
-    console.log('fetchWishList', items);
+    window.mlog('fetchWishList', items);
     
     //return MockGetWishlist();
     return new Promise(resolve => resolve(items));

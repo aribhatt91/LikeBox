@@ -10,23 +10,23 @@ import { addUserProfile } from './../../../service/userProfile';
 import AppDateInput from '../generic/AppDateInput';
 
 function SignupForm(props){
-    console.log('SignupModule', props);
+    window.mlog('SignupModule', props);
     //const { error, pending, user, loggedIn } = props;
     const [error, setError] = useState(null);
     const [ submitted, setSubmitted] = useState(false);
 
     const {signup, currentUser, updateName} = useContext(AuthContext);//useAuth();
-    console.log('SignupForm', currentUser);
+    window.mlog('SignupForm', currentUser);
     const submitForm =  async (userInput, {setSubmitting}) => {
         setSubmitting(true);
-        console.log(userInput, setSubmitting);
+        window.mlog(userInput, setSubmitting);
         if(error){
             setError(null);
         }
         try{
-            console.log('Logging', userInput);
+            window.mlog('Logging', userInput);
             await signup(userInput);
-            console.log('after await', currentUser);
+            window.mlog('after await', currentUser);
             let user = {}
             user.email = userInput.email;
             user.name = {};
@@ -160,7 +160,7 @@ function SignupForm(props){
       );
 }
 /* const mapStateToProps = state => {
-  console.log('mapStateToProps called', state);
+  window.mlog('mapStateToProps called', state);
   return {
     loggedIn: state.loginReducer.loggedIn,
     pending: state.loginReducer.pending,

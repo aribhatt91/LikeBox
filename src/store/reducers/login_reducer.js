@@ -17,7 +17,7 @@ export function loginStateReducer(state = initialState, action) {
                 pending: true
             }
         case LOGIN_SUCCESS:
-            console.log('LOGIN_SUCCESS');
+            window.mlog('LOGIN_SUCCESS');
             return {
                 ...state,
                 loggedIn: true,
@@ -25,7 +25,7 @@ export function loginStateReducer(state = initialState, action) {
                 user: action.user
             }
         case LOGIN_ERROR:
-            console.log('LOGIN_ERROR', action);
+            window.mlog('LOGIN_ERROR', action);
             return {
                 ...state,
                 pending: false,

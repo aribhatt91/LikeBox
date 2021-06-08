@@ -23,21 +23,21 @@ const LoginForm = ({email="", onComplete}) => {
   //https://firebase.google.com/docs/reference/js/firebase.User
   //https://firebase.google.com/docs/reference/js/firebase.User#updateprofile
   const submitForm = async (userInput, {setSubmitting}) => {
-    console.log('submitForm', userInput);
+    window.mlog('submitForm', userInput);
     setSubmitting(true);
     setError(null);
     //signInUser(userInput, () => {setSubmitting(false); setSubmitted(true)});
     try {
       let response = await login(userInput.email, userInput.password);
       setSubmitted(true);
-      console.log('Response ->', response);
+      window.mlog('Response ->', response);
       if(typeof onComplete === 'function'){
           setTimeout(onComplete, 750);
       }
     }catch({code, message}){
       
       setError('Username or Password is invalid');
-      console.log('Login error ->', code, message);
+      window.mlog('Login error ->', code, message);
     }finally {
       setSubmitting(false);
       setSubmitted(true);
@@ -106,7 +106,7 @@ const LoginForm = ({email="", onComplete}) => {
 }
 
 /* const mapStateToProps = state => {
-  console.log('mapStateToProps called', state);
+  window.mlog('mapStateToProps called', state);
   return {
     loggedIn: state.loginReducer.loggedIn,
     pending: state.loginReducer.pending,

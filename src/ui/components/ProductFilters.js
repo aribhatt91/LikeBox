@@ -16,7 +16,7 @@ const PriceRangeFilter = ({min=0, max=100, onSelect}) => {
         setRange(input);
     },
     search = debounce(() => {
-        console.log('price filter ->', range);
+        window.mlog('price filter ->', range);
         if(typeof onSelect === 'function'){
             onSelect(range);
         }

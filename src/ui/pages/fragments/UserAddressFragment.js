@@ -62,7 +62,7 @@ function UserAddressFragment(){
 
     const onAddressOp = (result) => {
         try {
-            console.log('onAddressOp:', result);
+            window.mlog('onAddressOp:', result);
             if(!loading){
                 setLoading(true);
             }

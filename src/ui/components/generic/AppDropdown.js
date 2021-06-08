@@ -5,7 +5,7 @@ export default function AppDropdown({label, children, className}) {
     const selectLabel = useRef(null); 
     useEffect(()=>{
         window.addEventListener('click', e => {
-            //console.log(e.target, selectLabel);
+            //window.mlog(e.target, selectLabel);
             if(selectLabel && e.target !== selectLabel.current){
                 setOpen(false);
             }

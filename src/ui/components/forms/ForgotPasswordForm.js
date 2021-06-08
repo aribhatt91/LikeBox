@@ -15,7 +15,7 @@ export default function ForgotPasswordForm() {
     const initialValues = {},
     submitForm = async (userInput, {setSubmitting}) => {
         setSubmitting(true);
-        console.log(userInput);
+        window.mlog(userInput);
         await resetPassword(userInput.email);
         setSubmitting(false);
         setSubmitted(true)

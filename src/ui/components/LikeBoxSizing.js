@@ -66,7 +66,7 @@ export default function LikeBoxSizing({slideIn, slideOut, onChange, onComplete, 
     const dispatch = useNotification();
 
     const onInputChange = (name, val) => {
-        console.log(name, val);
+        window.mlog(name, val);
         if(val > 0){
             SIZING[name] = val;
         }
@@ -76,7 +76,7 @@ export default function LikeBoxSizing({slideIn, slideOut, onChange, onComplete, 
         try{
             (async ()=>{
                 let res = await getUserSizes(currentUser.email);
-                console.log('Fetched Sizes', res);
+                window.mlog('Fetched Sizes', res);
             })()
         }catch(err){
             console.error('LikeBoxSizing', err);

@@ -14,7 +14,7 @@ class Page extends Component {
         
     }
     componentDidMount(){
-        //console.log('Mounted Page ->', this.props.pageName);
+        //window.mlog('Mounted Page ->', this.props.pageName);
         let pageName = this.props.pageName || null, viewName = pageName;
         triggerCustomEvent(viewName);
         //document.title = capitaliseAll(pageName);

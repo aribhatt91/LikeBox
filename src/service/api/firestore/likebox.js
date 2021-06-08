@@ -9,7 +9,7 @@ export const fetchLikeCards = async () => {
         docs = querySnapshot.docs,
         items = docs.map(doc => doc.data());
         /* Fetch liked and disliked cards */
-        console.log('fetchSwipeCards:response', items);
+        window.mlog('fetchSwipeCards:response', items);
         return new Promise(resolve => resolve(items));
     }catch(err){
         console.error('fetchSwipeCards:error', err);

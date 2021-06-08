@@ -15,7 +15,7 @@ function SelectInput({name, options, handler, error, defvalue, disabled}) {
         if(handler && typeof handler === 'function'){
             handler(e.target.name, e.target.value);
         }else {
-            console.log('No handler attached -> ', e.target.name, " - ", e.target.value);
+            window.mlog('No handler attached -> ', e.target.name, " - ", e.target.value);
         }
     }
     return (

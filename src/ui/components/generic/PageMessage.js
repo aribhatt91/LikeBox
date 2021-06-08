@@ -36,7 +36,6 @@ export const SuccessMessage = ({message}) => {
             
           </div>
           <h2 className="font-weight-light" aria-label={message}>{message}</h2>
-          <TestIcons />
         </div>
     )
 }

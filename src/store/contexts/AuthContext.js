@@ -54,7 +54,7 @@ export function AuthProvider({children}){
             .then((userCredential) => {
                 // Signed in
                 var user = userCredential.user;
-                console.log("User signed in", user);
+                window.mlog("User signed in", user);
                 // ...
             })
             .catch((error) => {
@@ -71,10 +71,10 @@ export function AuthProvider({children}){
             if(user){
                 setUser(user)
                 user.getIdToken().then(token => {
-                    console.log('received token', token);
+                    window.mlog('received token', token);
                     localStorage.setItem('user_token', token);
                 });
-                console.log('onAuthStateChanged', user, user.uid);
+                window.mlog('onAuthStateChanged', user, user.uid);
             }
             
             setLoading(false);

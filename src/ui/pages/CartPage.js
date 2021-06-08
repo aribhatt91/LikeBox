@@ -42,7 +42,7 @@ function CartModule({pending, error, removeFromCart, fetchCart, addToCart, cart=
         try {
             fetchCart(currentUser.email);
         }catch(err){
-            console.log(err);
+            window.mlog(err);
         }
     }, [currentUser])
 

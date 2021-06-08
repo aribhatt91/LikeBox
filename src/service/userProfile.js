@@ -23,14 +23,14 @@ export const fetchUserProfile = async (email) => {
             email: user.email,
             gender: (user.gender || "")
         }
-        console.log('fetchUserProfile:getUser: res', res);
+        window.mlog('fetchUserProfile:getUser: res', res);
     }catch(err){
 
     }
     return new Promise(resolve => resolve(res)) */
-    console.log('fetchUserProfile:getUser: request', email);
+    window.mlog('fetchUserProfile:getUser: request', email);
     let res = await getUser(email);
-    console.log('fetchUserProfile:getUser: response', res);
+    window.mlog('fetchUserProfile:getUser: response', res);
     return new Promise(resolve => resolve(res));
 }
 
@@ -44,7 +44,7 @@ export const isFirstSession = async (email) => {
         let firstSession = await isFirstLoad(email);
         localStorage.setItem('firstSession', firstSession);
     }
-    console.log('isFirstSession', firstSession);
+    window.mlog('isFirstSession', firstSession);
     return new Promise(resolve => resolve(firstSession));
 }
 

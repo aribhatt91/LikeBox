@@ -32,7 +32,7 @@ export const useNotification = () => {
   const dispatch = useContext(NotificationContext);
 
   return (props) => {
-    console.log('useNotification called');
+    window.mlog('useNotification called');
     dispatch({
       type: "ADD_NOTIFICATION",
       payload: {

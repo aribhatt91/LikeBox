@@ -42,12 +42,12 @@ function AddressModule({
     const {currentUser} = useContext(AuthContext);
     //const [deliverySpeed, setDeliverySpeed] = useState(false);
 
-    //console.log('Addresses ->', addresses);
+    //window.mlog('Addresses ->', addresses);
     //saved_addresses.push(<p>Example address</p>)
     useEffect(()=> {
-        console.log("Calling useEffect: loggedIn", loggedIn);
+        window.mlog("Calling useEffect: loggedIn", loggedIn);
         fetchAddresses().then( res => {
-            console.log(res)
+            window.mlog(res)
             let addresses = res.addresses;
             for(let i=0; i < (addresses || []).length; i++) {
                 saved_addresses.push(
@@ -69,7 +69,7 @@ function AddressModule({
 
                     </div>);
             }
-            console.log('Addresses ->', saved_addresses);
+            window.mlog('Addresses ->', saved_addresses);
             setAddressList(saved_addresses)
         }).catch(err => {
     
@@ -87,7 +87,7 @@ function AddressModule({
         }
         setExpandAddAddress(false)
     }
-    console.log('Called AddressModule', saved_addresses)
+    window.mlog('Called AddressModule', saved_addresses)
     return (
         <div className="address-module">
             
@@ -206,7 +206,7 @@ function CheckoutSection({
         transform: `translate(${-1 * slideBy * 100}%)`
     }
 
-    console.log(`${label} open -> ${slideBy}`)
+    window.mlog(`${label} open -> ${slideBy}`)
     return (
         <div style={style} className={"checkout-section-container d-flex flex-column p-5"}>
             <h2 className="checkout-section-header mb-5 font-weight-bold text-uppercase">{label}</h2>
@@ -282,7 +282,7 @@ class CheckoutPage extends Component {
         fetchCart();
     }
     setActiveSlide(slide) {
-        console.log('Setting expand -> ', slide);
+        window.mlog('Setting expand -> ', slide);
         this.setState ({
             ...this.state,
             activeSlide: slide
@@ -311,7 +311,7 @@ class CheckoutPage extends Component {
             //this.setGuest(false)
         }
 
-        console.log('Calling render', activeSlide);
+        window.mlog('Calling render', activeSlide);
         return (
             <div className="page">
                 <section className="container checkout-container">

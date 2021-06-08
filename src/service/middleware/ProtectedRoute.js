@@ -8,7 +8,7 @@ const ProtectedRoute = ({component: Component, path, ...rest}) => {
   let location = useLocation();
   
   const {currentUser} = useContext(AuthContext)
-    //console.log('ProtectedRoute',getUserObject(), Component);
+    //window.mlog('ProtectedRoute',getUserObject(), Component);
     return (
       <Route
         {...rest}
@@ -18,7 +18,7 @@ const ProtectedRoute = ({component: Component, path, ...rest}) => {
             if(currentUser){
               if(Component === LoginPage){
                 let redirectUrl = props.location.state && props.location.state.from ? props.location.state.from.pathname || '/' : '/';
-                console.log('User is logged in: Redirecting from LoginPage to Home', currentUser, props);
+                window.mlog('User is logged in: Redirecting from LoginPage to Home', currentUser, props);
                 return <Redirect
                   to={
                     {
@@ -33,10 +33,10 @@ const ProtectedRoute = ({component: Component, path, ...rest}) => {
               return <Component {...props}/>;
             }else {
               if(Component === LoginPage){
-                console.log('User is not logged in: Allowing entry to LoginPage');
+                window.mlog('User is not logged in: Allowing entry to LoginPage');
                 return <Component {...props}/>;
               }else if(Component === ForgotPasswordForm) {
-                console.log('User is not logged in: Allowing entry to ForgotPasswordForm');
+                window.mlog('User is not logged in: Allowing entry to ForgotPasswordForm');
                 return <Component {...props}/>;
               }
               return <Redirect

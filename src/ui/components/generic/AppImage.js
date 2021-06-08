@@ -4,7 +4,7 @@ export default function AppImage({className, src, alt="", ...rest}) {
     const [loaded, setLoaded] = useState(false);
     const imgRef = useRef(null);
     useEffect(()=> {
-        console.log('useEffect called', imgRef);
+        window.mlog('useEffect called', imgRef);
         if(imgRef && imgRef.current){
             if(imgRef.current.loaded){
                 setLoaded(true);

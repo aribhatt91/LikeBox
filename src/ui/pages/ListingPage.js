@@ -47,7 +47,7 @@ function Listing({type, filter=null, category}){
 
   const getProducts = async () => {
     try{
-      console.log('getProducts called', category, page);
+      window.mlog('getProducts called', category, page);
       setLoading(true);
       //let data = await fetchProducts(category);
       /* If overhead array contains more than PER_PAGE Limit, do not make an API Call */
@@ -59,7 +59,7 @@ function Listing({type, filter=null, category}){
       }
 
       let response = await fetchProducts(category, page, PER_PAGE, LAST_NODES, filter);
-      console.log('getProducts:firestoreData', page, response, products);
+      window.mlog('getProducts:firestoreData', page, response, products);
 
       if(response && response.items){
         let productsList = response.items;
@@ -84,7 +84,7 @@ function Listing({type, filter=null, category}){
           LAST_NODES = response.lastVisible;
         }
         
-        console.log('getProducts response', response);
+        window.mlog('getProducts response', response);
       }else {
         setMaxReached(true);
         if(FLUSH){
@@ -104,7 +104,7 @@ function Listing({type, filter=null, category}){
       }
     }finally {
       setLoading(false);
-      console.log('loading false');
+      window.mlog('loading false');
     }
     
   }
@@ -119,7 +119,7 @@ function Listing({type, filter=null, category}){
   }
 
   useEffect(()=>{
-    console.log('useEffect:category:page ->', page);
+    window.mlog('useEffect:category:page ->', page);
     LAST_NODES = [];
     if(maxReached){
       setMaxReached(false);

@@ -18,7 +18,7 @@ export const getUserAddressBook = async (email) => {
     let addressBook = [];
     try {
         let user = await getUser(email);
-        //console.log(querySnapshot);
+        //window.mlog(querySnapshot);
         if(user){
             addressBook = user.addresses || [];
         }else {
@@ -53,11 +53,11 @@ export const addNewAddress = async (email="", address={}) => {
             address.id = (addressBook.length + 1);
             addressBook.push(address);
             let res = await updateUserByEmail(email, {'addresses': addressBook});
-            console.log(res);
+            window.mlog(res);
         }
         
     }catch(err){
-        console.log('AddAddressError:', err);
+        window.mlog('AddAddressError:', err);
     }
     return new Promise((resolve, reject) => resolve(addressBook));
 }
@@ -80,11 +80,11 @@ export const updateAddress = async (email="", address) => {
         }else {
             addressBook[i] = address;
             let res = await updateUserByEmail(email, {'addresses': addressBook});
-            console.log(res);
+            window.mlog(res);
         }
         
     }catch(err){
-        console.log('UpdateAddressError:', err);
+        window.mlog('UpdateAddressError:', err);
     }
     return new Promise((resolve, reject) => resolve(addressBook));
 }
@@ -107,11 +107,11 @@ export const removeAddressById = async (email, addressId) => {
         }else {
             addressBook.splice(i,1)
             let res = await updateUserByEmail(email, {'addresses': addressBook});
-            console.log(res);
+            window.mlog(res);
         }
         
     }catch(err){
-        console.log('UpdateAddressError:', err);
+        window.mlog('UpdateAddressError:', err);
     }
     return new Promise((resolve, reject) => resolve(addressBook));
 }

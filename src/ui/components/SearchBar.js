@@ -37,15 +37,15 @@ const SearchBar = (props) => {
     const [suggestions, setSuggestions] = useState([]);
     let search_term = "";
     useEffect(() => {
-      console.log('Exec once');
+      window.mlog('Exec once');
       window.addEventListener('click', () => {setShowSuggestions(false)})
     }, [])
     const searchSuggestions = () => {
-      console.log('Fetching data...', search_term.trim());
+      window.mlog('Fetching data...', search_term.trim());
       //setSuggestions([]);
       fetchSuggestions(search_term.trim())
       .then(res => {
-        console.log(res);
+        window.mlog(res);
         let s = [];
         (res || []).forEach((item, index) => {
           s.push(
@@ -80,10 +80,10 @@ const SearchBar = (props) => {
       }
     },
     _search = () => {
-      console.log('Searching for ', search_term.trim());
+      window.mlog('Searching for ', search_term.trim());
       setShowSuggestions(false);
       if(search_term.trim() !== ""){
-        //console.log('Searching for ', search_term);
+        //window.mlog('Searching for ', search_term);
       }
     }
     const optimisedSearch = _debounce(searchSuggestions, 400);

@@ -25,7 +25,7 @@ function App() {
         }, 4000);
         if(auth){
             auth.onAuthStateChanged((user) => {
-                console.log(auth);
+                window.mlog(auth);
             })
         }
     },[])

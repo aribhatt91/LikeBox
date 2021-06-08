@@ -67,18 +67,18 @@ export const fetchFirestoreProducts = async (path="", page=0, LIMIT=10, LAST_NOD
         
         if(availableCategoriesDocs.length > 0){
             avalaibleCategories = availableCategoriesDocs.map(doc => doc.data())[0]
-            //console.log('availableCategories', avalaibleCategories);
+            //window.mlog('availableCategories', avalaibleCategories);
             if(avalaibleCategories){
                 Object.keys(avalaibleCategories).forEach(cat => {
                     for (let index = 0; index < paths.length; index++) {
                         if(paths[index].trim().indexOf(cat.trim()) === 0  || (cat.trim()).indexOf(paths[index]) === 0){
                             queryPaths.push(cat.trim());
-                            //console.log(cat);
+                            //window.mlog(cat);
                             break;
                         }
                     }
                 })
-                //console.log('Actual queryPaths -> ', paths, queryPaths);
+                //window.mlog('Actual queryPaths -> ', paths, queryPaths);
             }
         }
 
@@ -128,7 +128,7 @@ export const fetchFirestoreProducts = async (path="", page=0, LIMIT=10, LAST_NOD
             window.mlog('2: Fetched Firestore products for path -> ', path, '--->', res);
 
         }else if(queryPaths.length === 1){
-            //console.log('BP3', queryPaths, ('searchTerms.' + (queryPaths[0] || "").trim()));
+            //window.mlog('BP3', queryPaths, ('searchTerms.' + (queryPaths[0] || "").trim()));
             let q = collection
             .where(('searchTerms.' + (queryPaths[0] || "").trim()), '==', true);
             if(LAST_NODES && Array.isArray(LAST_NODES) && LAST_NODES.length >= 1){
@@ -150,7 +150,7 @@ export const fetchFirestoreProducts = async (path="", page=0, LIMIT=10, LAST_NOD
                     return convertAwinToProduct(doc.data(), doc.id);
                 }
             });
-            //console.log('1: Fetched Firestore products for path -> ', path, '--->', res);
+            //window.mlog('1: Fetched Firestore products for path -> ', path, '--->', res);
         }
     }catch(err){
         console.error('fetchFirestoreProducts:error', err);

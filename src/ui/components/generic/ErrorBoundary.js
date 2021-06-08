@@ -13,7 +13,7 @@ export default class ErrorBoundary extends Component {
   
     componentDidCatch(error, errorInfo) {
       // You can also log the error to an error reporting service
-      console.log(error, errorInfo);
+      window.mlog(error, errorInfo);
     }
   
     render() {

@@ -27,14 +27,14 @@ function LikeBoxEmailForm({onComplete, setRegistered}) {
         if(userInput.email){
             try {
                 let methods = await fetchSignInMethods(userInput.email)
-                console.log(methods);
+                window.mlog(methods);
                 if(methods.length === 0){
                     //Signup user
-                    console.log('Signup user');
+                    window.mlog('Signup user');
                     setRegistered(false, userInput.email);
                 }else if(methods.indexOf('password') > -1){
                     //Sign in user
-                    console.log('Sign in user');
+                    window.mlog('Sign in user');
                     setRegistered(true, userInput.email);
                 }
                 if(typeof onComplete === 'function'){
@@ -57,7 +57,7 @@ function LikeBoxEmailForm({onComplete, setRegistered}) {
 }
 
 function LikeBoxSignup({slideOut, slideIn, registered, email, onComplete}) {
-    //console.log('LikeBoxSignup', email);
+    //window.mlog('LikeBoxSignup', email);
     return (
         <div className={"like-box-signup mb-5 mt-5" + (!slideIn && !slideOut ? " slide-hold" : "") + (slideOut ? " slide-out" : "") + (slideIn ? " slide-in" : "")}>
         
@@ -189,12 +189,12 @@ export default function Home() {
     const history = useHistory();
     const dispatch = useNotification();
 
-    console.log('LikeBox show', show);
+    window.mlog('LikeBox show', show);
     useEffect(() => {
         if(currentUser){
             (async () => {
                 let firstSession = await isFirstSession(currentUser.email);
-                console.log('LikeBox:isFirstSession', firstSession);
+                window.mlog('LikeBox:isFirstSession', firstSession);
                 if(firstSession){
                     setShow(2);
                 }else {

@@ -100,7 +100,7 @@ function UserOrdersFragment(){
         try {
             if(currentUser){
                 fetchOrders(currentUser.email).then(res => {
-                    console.log(res); 
+                    window.mlog(res); 
                     setOrders(res);
                 });
             }   
