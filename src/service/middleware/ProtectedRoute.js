@@ -1,8 +1,8 @@
 import React, {useContext} from 'react';
-import { getUserObject } from '../rx-store/dataStore';
 import { Redirect, Route, useLocation } from 'react-router-dom';
 import LoginPage from './../../ui/pages/LoginPage';
 import { AuthContext } from './../../store/contexts/AuthContext';
+import ForgotPasswordForm from '../../ui/components/forms/ForgotPasswordForm';
 
 const ProtectedRoute = ({component: Component, path, ...rest}) => {
   let location = useLocation();
@@ -34,6 +34,9 @@ const ProtectedRoute = ({component: Component, path, ...rest}) => {
             }else {
               if(Component === LoginPage){
                 console.log('User is not logged in: Allowing entry to LoginPage');
+                return <Component {...props}/>;
+              }else if(Component === ForgotPasswordForm) {
+                console.log('User is not logged in: Allowing entry to ForgotPasswordForm');
                 return <Component {...props}/>;
               }
               return <Redirect

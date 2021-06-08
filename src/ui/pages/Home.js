@@ -4,7 +4,6 @@ import { AuthContext } from './../../store/contexts/AuthContext';
 import SignupForm from '../components/forms/SignupForm';
 import LoginForm from '../components/forms/LoginForm';
 import LikeBoxHomePage from '../components/LikeBoxHomePage';
-import { getUserSizing } from './../../service/api/firestore/user';
 import { useHistory } from 'react-router';
 import { useNotification } from './../../store/contexts/NotificationProvider';
 import { isFirstSession } from '../../service/userProfile';
@@ -17,6 +16,8 @@ import R2 from '../../assets/img/recommendations.png';
 import R3 from '../../assets/img/newbrand.png';
 import AppImage from '../components/generic/AppImage';
 import Page from './Page';
+import BrandCarousel from '../components/BrandCarousel';
+import { SuccessMessage } from '../components/generic/PageMessage';
 
 function LikeBoxEmailForm({onComplete, setRegistered}) {
     const {fetchSignInMethods} = useContext(AuthContext);
@@ -244,7 +245,8 @@ export default function Home() {
                     slideIn={true || show === 3}
                     onComplete={() => {setShow(4)}}
                 /> */}
-                
+                <BrandCarousel />
+                <SuccessMessage />
             </Page>}
             {show === 4 && <LikeBoxHomePage 
                 slideIn={show === 4}

@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import TestIcons from '../svg-components/TestIcons';
 
 //import {faWarning, faInfoCircle, faCheckCircle} from '@fortawesome/free-solid-svg-icons';
 
@@ -32,8 +33,10 @@ export const SuccessMessage = ({message}) => {
         <div className="d-flex flex-column justify-content-center align-items-center">
           <div className="green-tick mb-3">
             <FontAwesomeIcon icon={faCheck} size="2x"></FontAwesomeIcon>
+            
           </div>
           <h2 className="font-weight-light" aria-label={message}>{message}</h2>
+          <TestIcons />
         </div>
     )
 }

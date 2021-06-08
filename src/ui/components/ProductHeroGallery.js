@@ -26,10 +26,10 @@ function ProductHeroGallery({images, product_name, inWishList, toggleInWishList}
             <div className="product-zoomed-image col-md-10 float-left p-0">
                     {
                         (images || []).map((item, index) => (
-                            <AppImage key={index} className={"m-2 w-100 h-100" + (selected === index ? " selected" : " position-absolute")} src={(decodeURI(item) || "").trim()} alt={product_name} title={product_name}/>
+                            <AppImage key={index} className={"m-2 w-100" + (selected === index ? " selected" : " position-absolute")} src={(decodeURI(item) || "").trim()} alt={product_name} title={product_name}/>
                         ))
                     }
-                    <AppImage className="w-100 h-100" src={(decodeURI(images[0]) || "").trim()} alt={product_name} aria-label={product_name}/>
+                    <AppImage className="w-100" src={(decodeURI(images[0]) || "").trim()} alt={product_name} aria-label={product_name}/>
                     <div className={"product-add-wishlist-icon" + (inWishList ? " wished" : "")} onClick={toggleWished}>
                         <FontAwesomeIcon icon={faHeart} />
                     </div>

@@ -1,5 +1,7 @@
-import React, {Component, useState} from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import Disclaimer from './Disclaimer';
+import TnC from './TnC';
 
 function Footer(){
     return (
@@ -20,6 +22,8 @@ function Footer(){
                         <Link to="/help#returns" className="footer-link">Returns</Link>
                         <Link to="/help#faqs" className="footer-link">Frequently asked questions</Link>
                         <Link to="/help#feedback" className="footer-link">Feedback</Link>
+                        <TnC className="footer-link" />
+                        <Disclaimer className="footer-link" />
                     </div>
                     <div className="col-12 col-md-4">
                         <h5 className="text-uppercase font-weight-normal mb-3">Contact</h5>

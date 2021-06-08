@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Page from './Page';
 import ProductCard, { ProductCardPlaceholder } from './../components/ProductCard';
 import ProductFilters from './../components/ProductFilters';
@@ -10,6 +10,8 @@ import { parseSearchParams } from '../../service/helper';
 import AppButton from '../components/generic/AppButton';
 import { debounce } from 'lodash';
 import { fetchProducts } from './../../service/productMethods';
+import { Helmet } from 'react-helmet';
+import { AuthContext } from './../../store/contexts/AuthContext';
 
 const EMPTY_TEXT = "Sorry, no results found!",
 EMPTY_SUBTEXT = "Please check the spelling or try searching for something else",
@@ -29,30 +31,50 @@ let LAST_NODES = [],
 Set FLUSH to true when new category is fetched or filters are changed. Placeholders will be shown at the start
 When FLUSH is set to false, the Placeholders will show at the end of current list of products
 */
-FLUSH = true;
+FLUSH = true,
 
-function Listing({type, filter, sortBy}){
+/* 
+Products in excess of 10 fetched through compound queries
+*/
+OVERHEAD = [];
+
+function Listing({type, filter=null, category}){
   const [products, setProducts] = useState(null);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
-  const {category/* , page */} = useParams();
   const [maxReached, setMaxReached] = useState(false);
   const location = useLocation();
 
   const getProducts = async () => {
     try{
-      console.log('getProducts called', category);
+      console.log('getProducts called', category, page);
       setLoading(true);
       //let data = await fetchProducts(category);
-      let response = await fetchProducts(category, page, PER_PAGE, LAST_NODES);
-      console.log('getProducts:awinData', page, response, products);
+      /* If overhead array contains more than PER_PAGE Limit, do not make an API Call */
+      if(OVERHEAD.length >= PER_PAGE){
+        setProducts([].concat(products || []).concat(OVERHEAD.slice(0, PER_PAGE)));
+        OVERHEAD = OVERHEAD.slice(PER_PAGE, OVERHEAD.length);
+        setLoading(false);
+        return;
+      }
+
+      let response = await fetchProducts(category, page, PER_PAGE, LAST_NODES, filter);
+      console.log('getProducts:firestoreData', page, response, products);
+
       if(response && response.items){
+        let productsList = response.items;
+        if(OVERHEAD.length > 0) {
+          productsList = [].concat(OVERHEAD).concat(productsList);
+        }
+        if(productsList.length > PER_PAGE) {
+          OVERHEAD = productsList.slice(PER_PAGE, productsList.length);
+          productsList = productsList.slice(0, PER_PAGE);
+        }
         if(!FLUSH){
-          setProducts([].concat(products || []).concat(response.items));
+          setProducts([].concat(products || []).concat(productsList));
         }else {
           FLUSH = false;
-          setProducts([].concat(response.items));
-          
+          setProducts([].concat(productsList));
         }
         
         if(response.items.length < PER_PAGE){
@@ -73,9 +95,16 @@ function Listing({type, filter, sortBy}){
       }
     }catch(err){
       console.error('getProducts:error', err);
-      setMaxReached(true);
+      
+      if(products && products.length > 0) {
+        FLUSH = false;
+        setMaxReached(false);
+      }else {
+        setMaxReached(true);
+      }
     }finally {
       setLoading(false);
+      console.log('loading false');
     }
     
   }
@@ -90,15 +119,16 @@ function Listing({type, filter, sortBy}){
   }
 
   useEffect(()=>{
-    console.log('useEffect:category:page ->', page                  );
+    console.log('useEffect:category:page ->', page);
     LAST_NODES = [];
     if(maxReached){
       setMaxReached(false);
     }
     FLUSH = true;
+    OVERHEAD = [];
     setLoading(true);
     getProducts();
-  }, [category])
+  }, [category, filter])
 
   useEffect(()=> {
     if(!page || page === 0 || page === 1 || maxReached){return}
@@ -132,6 +162,7 @@ function Listing({type, filter, sortBy}){
                     rating={item.ratings}
                     brand={item.brand}
                     desc={item.description}
+                    currency={item.currency}
                     />)
               }
             
@@ -167,16 +198,14 @@ function Listing({type, filter, sortBy}){
 }
 function ListingPage(props) {
   const {category} = useParams();
+  const [filterObject, setFilterObject] = useState(null);
 
-  const applyFilter = async (filterObj) => {
-    console.log('ListingPage:applyFilter ->', filterObj);
+  const applyFilter = async (obj) => {
+    window.mlog('ListingPage:applyFilter ->', obj);
     //fetchAllProducts(filterObj);
+    setFilterObject(obj);
   }
   const applySort = async (sortOrder) => {
-
-  }
-
-  const setPriceRange = () => {
 
   }
 
@@ -186,16 +215,19 @@ function ListingPage(props) {
 
   return (
     <Page pageName={"category"} category={(category|| "").replace('-', ' & ')}>
+        <Helmet>
+          <meta property="og:description" content={category|| ""} />
+        </Helmet>
         <section className="products-section">
             <div className="page container-fluid">
               <h1 className="listing-page-header m-3 mt-5 mb-5 text-center text-uppercase">
                 {(category|| "").replace('-', ' & ')}
               </h1>
               <ProductFilters 
-                filterHandler={applyFilter}
-                sortHandler={applySort}
-                products={0} />
-              <Listing/>
+                category={category}
+                onFilterChange={applyFilter}
+                sortHandler={applySort}/>
+              <Listing category={category} filter={filterObject}/>
             </div>
         </section>
     </Page>

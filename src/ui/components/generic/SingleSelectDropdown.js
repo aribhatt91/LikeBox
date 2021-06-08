@@ -10,13 +10,13 @@ export function Tag({item, onClick, selected=false}) {
     )
 }
 
-const SingleSelectDropdown = ({label, items=[], onSelect}) => {
+const SingleSelectDropdown = ({label, name, items=[], onSelect}) => {
     const [selected, setSelected] = useState('');
     
     const handleSelect = (item) => {
         setSelected(item.val);
         if(typeof onSelect === 'function'){
-            onSelect(item.val);
+            onSelect(name, item.val);
         }
     }
 

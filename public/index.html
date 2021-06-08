@@ -5,6 +5,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
+
+    <script type="text/javascript">
+      window.mlog = function () { 
+        Array.prototype.unshift.call(arguments, 'LIKEBOX:LOG::');
+        console.info.apply(this, arguments); 
+      }
+      window.merror = console.error;
+    </script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-175238138-1"></script>
     <script>
@@ -14,12 +22,8 @@
 
       gtag('config', 'UA-175238138-1');
     </script>
-    <!-- <script src="http://localhost:10080/dataLayer.js"></script> -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet"> 
-    <script src="//assets.adobedtm.com/launch-ENca9a1320a7784b7a9850977442b30a59-development.min.js"></script>    
-    <!-- <script src="//assets.adobedtm.com/7cb8109970d1/91e60302cf2a/launch-e9420fd17383-development.min.js"></script> -->
-    <!-- <script src="//assets.adobedtm.com/7cb8109970d1/91e60302cf2a/launch-039a7402229f-staging.min.js" async></script> -->
-
+    <script src="//assets.adobedtm.com/f16c3156c11f/aa229134c463/launch-7a27e3bfcaac-development.min.js"></script> 
     <!--
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
@@ -27,22 +31,9 @@
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.webp">
     <link rel="stylesheet" href="https://use.typekit.net/ifw6ete.css">
-    <!-- <script src="./at.js"></script> -->
-<!--     <script src="//assets.adobedtm.com/7cb8109970d1/91e60302cf2a/launch-99c8845b08b9-development.min.js" async></script>
- -->
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
     <title>LikeBox</title>
 
-    <!-- update the version number as needed -->
     <script defer src="/__/firebase/8.2.7/firebase-app.js"></script>
-    <!-- include only the Firebase features as you need -->
     <script defer src="/__/firebase/8.2.7/firebase-auth.js"></script>
     <script defer src="/__/firebase/8.2.7/firebase-database.js"></script>
     <script defer src="/__/firebase/8.2.7/firebase-firestore.js"></script>
@@ -52,10 +43,6 @@
     <script defer src="/__/firebase/8.2.7/firebase-analytics.js"></script>
     <script defer src="/__/firebase/8.2.7/firebase-remote-config.js"></script>
     <script defer src="/__/firebase/8.2.7/firebase-performance.js"></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
   </head>
   <body>
@@ -63,39 +50,6 @@
       You need to enable JavaScript to run this app.
     </noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-    <!-- <script type="text/javascript">_satellite.pageBottom();</script> -->
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.firestore().doc('/foo/bar').get().then(() => { });
-        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        // firebase.analytics(); // call to activate
-        // firebase.analytics().logEvent('tutorial_completed');
-        // firebase.performance(); // call to activate
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-
-        try {
-          //let app = firebase.app();
-          
-        } catch (e) {
-          console.error(e);
-        }
-      });
-    </script>
+    <script type="text/javascript">_satellite.pageBottom();</script>
   </body>
 </html>

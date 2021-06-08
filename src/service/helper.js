@@ -100,5 +100,5 @@ export const capitaliseAll = (str) => {
 }
 
 export const formatPrice = (price) => {
-    return Number(price).toFixed(2).toLocaleString();
+    return Number(price).toLocaleString(undefined, {'minimumFractionDigits':2,'maximumFractionDigits':2});
 }

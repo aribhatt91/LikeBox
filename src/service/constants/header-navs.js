@@ -16,6 +16,16 @@ export const HEADER_NAV_MENU = {
             img: ''
         },
         {
+            name: 'Trousers & Chinos',
+            link: '/products/trousers-chinos',
+            img: ''
+        },
+        {
+            name: 'Shorts',
+            link: '/products/shorts',
+            img: ''
+        },
+        {
             name: 'Shirts',
             link: '/products/shirts',
             img: ''
@@ -23,6 +33,27 @@ export const HEADER_NAV_MENU = {
         {
             name: 'T-shirts & vests',
             link: '/products/tshirts-vests',
+            img: ''
+        },
+        
+        {
+            name: 'Polo Shirts',
+            link: '/products/polo',
+            img: ''
+        },
+        {
+            name: 'Jumpers',
+            link: '/products/jumpers',
+            img: ''
+        },
+        {
+            name: 'Cardigans',
+            link: '/products/cardigans',
+            img: ''
+        },
+        {
+            name: 'Tracksuits & Joggers',
+            link: '/products/tracksuits-joggers',
             img: ''
         },
         {
@@ -54,7 +85,7 @@ export const HEADER_NAV_MENU = {
         },
         {
             name: 'Sandals, Sliders & Flip flops',
-            link: '/products/sandals',
+            link: '/products/sandals-sliders',
             img: ''
         },
         {

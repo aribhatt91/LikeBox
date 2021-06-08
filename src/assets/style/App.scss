@@ -2,7 +2,24 @@
 @import './measurement.scss';
 @import './components.scss';
 @import './pages.scss';
-
+html {
+  scroll-behavior: smooth;
+}
+body::-webkit-scrollbar {
+  width: 12px;
+  background-color: rgba($color: #333333, $alpha: 0.1);
+}
+body::-webkit-scrollbar-thumb {
+  width: 8px;
+  border-radius: 8px;
+  background-color: rgba($color: #333333, $alpha: 0.4);
+  &:hover {
+    background-color: rgba($color: #333333, $alpha: 0.8);
+  }
+}
+body::-webkit-scrollbar-track {
+  background-color: transparent;
+}
 .App * {
   // text-align: center;
   font-family: neusa-next-std,sans-serif;
@@ -11,7 +28,6 @@
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
   height: 80px;
 }
 .App-body {
@@ -35,7 +51,10 @@
   margin: 0 auto;
   padding: 0 10px;
 }
-
+body[open-popup="true"]{
+  overflow: hidden !important;
+  max-height: 100vh;
+}
 ul{
   display: inline-block;
 }
@@ -44,11 +63,16 @@ li{
   text-align: left;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.svg-icon {
+  min-width: 24px;
+  min-height: 24px;
+  .md {
+    height: 36px;
+    width: 36px;
   }
-  to {
-    transform: rotate(360deg);
+  .lg {
+    height: 48px;
+    width: 48px;
   }
 }
+

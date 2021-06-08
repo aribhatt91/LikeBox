@@ -3,8 +3,6 @@ import Page from './Page';
 import { LoadingSpinner } from './../components/LoadingModule';
 import ProductHeroGallery from '../components/ProductHeroGallery';
 import PageMessage from '../components/generic/PageMessage';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
 import { checkDeliveryAvailability } from '../../service/addressMethods';
 import { addItemToWishList, removeItemFromWishList, itemInWishList } from '../../service/wishlistMethods';
 import Counter from '../components/generic/Counter';
@@ -21,8 +19,9 @@ import { useNotification } from './../../store/contexts/NotificationProvider';
 import { fetchProduct } from './../../service/productMethods';
 import AppTextInput from './../components/generic/AppTextInput';
 import { formatPrice } from '../../service/helper';
-import AppRadioInput from '../components/generic/AppRadioInput';
 import RadioButtonGroup from './../components/generic/RadioButtonGroup';
+import { Helmet } from 'react-helmet';
+import StarRating from '../components/generic/StarRating';
 
 function SizeSelector({sizes, handler, label, name}){
   let size_radios = [];
@@ -53,27 +52,6 @@ function SizeSelector({sizes, handler, label, name}){
   )
 }
 
-function RatingStars(ratings){
-  let full = Math.floor(Number(ratings)) || 0, part = (Number(ratings) - full) > 0,
-  stars = [];
-  
-  for (let index = 1; index <= 5; index++) {
-    stars.push(
-      <span class={"mr-2 rating-star" + (index <= full ? " active" : "") + (index === full + 1 && part ? " half-star" : "")}>
-        {
-          index <= full && <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
-        }
-        {
-          (index === full + 1 && part) && <FontAwesomeIcon icon={faStarHalfAlt}></FontAwesomeIcon>
-        }
-        {
-          ((!part && index > full) || (part && index > full + 1)) && <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
-        }
-      </span>
-    )
-  }
-
-}
 const formatDeliveryDate = (dateObj) => {
   if(dateObj instanceof Date){
     let res = dateObj.toDateString().replace(dateObj.getFullYear(), "").trim();
@@ -115,7 +93,7 @@ function PinCodeChecker (props) {
 function SizeChart(brand, category) {
 
 }
-function ProductDescription({description, sizing, shipping, returns}){
+function ProductDescription({description, sizing, deliveryTime, deliveryCost, returns}){
   const [key, setKey] = useState('desc');
   return (
     <div className="app-tab-layout">
@@ -125,22 +103,21 @@ function ProductDescription({description, sizing, shipping, returns}){
       >
         <Tab eventKey="desc" title="Description">
           <div>
-            {description || "100% Original Products"}
+            {description || ""}
           </div>
         </Tab>
         <Tab eventKey="size" title="Sizing">
-          <div>Sizing</div>
+          <div></div>
         </Tab>
         <Tab eventKey="ship" title="Shipping">
           <div>
-            <p>Pay on delivery available</p>
-            <p>Get it by Fri, Mar 05</p>
-            <p>Free Delivery on order above ₹799</p>
+            {deliveryCost && <p>{deliveryCost}</p>}
+            {deliveryTime && <p>{deliveryTime}</p>}
           </div>
         </Tab>
         <Tab eventKey="ret" title="Returns">
           <div>
-          Easy 30 days return & exchange available
+
           </div>
         </Tab>
       </Tabs>
@@ -229,17 +206,12 @@ function ProductForm({currentUser, product, sizes, addToCart, toggleInWishList})
   return (
     <React.Fragment>
       {product.sizes && Array.isArray(product.sizes) && product.sizes.length > 0 && 
-        <div className="product-size-options mb-2 mt-3">
-          {/* <SizeSelector
-            sizes={sizes}
-            name="size"
-            label="Select size"
-            handler={sizeSelect}
-          /> */}
+        <div className="product-size-options mb-5 mt-5">
+          <h6 className="text-uppercase">Available sizes</h6>
           <RadioButtonGroup 
               name="size"
               label="Select size"
-              options={[product.sizes]}
+              options={product.sizes}
               disabled={!currentUser}
               onChange={sizeSelect}
               defaultChecked={product.sizes[0]}
@@ -262,8 +234,10 @@ function ProductForm({currentUser, product, sizes, addToCart, toggleInWishList})
         <AppButton
           label="Go to brand"
           className="w-100 btn-grey"
-          disabled={!currentUser || /*quantity === 0 ||*/ (sizes.length > 0 && size === '')}
+          disabled={!currentUser /*|| quantity === 0 || (sizes.length > 0 && size === '')*/}
           href={link}
+          target="_blank"
+          ext={true}
         />
       </div>
       <div className="product-cta-container col-md-10 clearfix mt-2 mb-5 p-0">
@@ -271,7 +245,7 @@ function ProductForm({currentUser, product, sizes, addToCart, toggleInWishList})
           label="Add to Wishlist"
           className="btn-white w-100"
           onClick={() => {}}
-          disabled={!currentUser || /*quantity === 0 ||*/ (sizes.length > 0 && size === '')}
+          disabled={!currentUser  /*|| quantity === 0 || (sizes.length > 0 && size === '')*/}
         />
       </div>
     </React.Fragment>
@@ -280,7 +254,7 @@ function ProductForm({currentUser, product, sizes, addToCart, toggleInWishList})
 
  
 function ProductPage(props) {
-  const [deliverable, setDeliverable] = useState(true);
+  //const [deliverable, setDeliverable] = useState(true);
   const [pending, setPending] = useState(true);
   const [product, setProduct] = useState(null);
   const [inWishList, setInWishList] = useState(false);
@@ -305,12 +279,12 @@ function ProductPage(props) {
     }
   }, [id, currentUser])
   const checkPincode = async (pincode) => {
-    try {
+    /* try {
       let res = await checkDeliveryAvailability(pincode);
       setDeliverable(res);
     }catch(err){
       setDeliverable(false);
-    }
+    } */
   }
   const toggleInWishList = async () => {
     if(currentUser && id){
@@ -357,13 +331,16 @@ function ProductPage(props) {
     }
     let sizes = [], images = [];
     try{
+      console.log('Sizes -> ', product.sizes);
       if(typeof product.sizes !== 'undefined' && product.sizes !== "-"){
         if(typeof product.sizes === 'string'){
           sizes = product.sizes.replace('[', '').replace(']', '').replace(/\"/g, '').replace(/\'/g, '');
           sizes = sizes.split(',') || [];
+          console.log('Sizes -> ', sizes);
           
         }else if( product.sizes instanceof Array){
           sizes = product.sizes || [];
+          console.log('Sizes -> ', sizes);
         } 
       }
       product.sizes = sizes;
@@ -415,6 +392,13 @@ function ProductPage(props) {
         {pending && <LoadingSpinner text="Please wait.." />}
         {!pending && product && 
           <div className="d-block">
+            <Helmet>
+              <meta property="description" content={product.description || ""} />
+              <meta property="og:description" content={product.description || ""} />
+              <meta property="og:url" content={product.link} />
+              <meta property="og:type" content={product.category} />
+              <meta property="og:image" content={product.thumbnail} />
+            </Helmet>
             <ProductHeroGallery
               images={product.images}
               product_name={product.name}
@@ -426,12 +410,25 @@ function ProductPage(props) {
               <div className="product-brand">{product.brand}</div>
               <div className="product-name mb-3">{product.name}</div>
               <div className="product-price">
-                <div className="product-sale-price">
-                  &pound;{ formatPrice(product.price)}
+                {
+                  product.fullPrice && (product.fullPrice > product.salePrice) && <div className="product-full-price mb-1">
+                  <span>{formatPrice(product.price)}</span>
+                  <span className="text-uppercase ml-1">{product.currency}</span>
                 </div>
-                <div className="price-tax-info mt-1 mb-3">Inclusive of all taxes</div>
+                }
+                <div className="product-sale-price">
+                  <span>{formatPrice(product.price)}</span>
+                  <span className="text-uppercase ml-1">{product.currency}</span>
+                </div>
+                {/* <div className="price-tax-info mt-1 mb-3">Inclusive of all taxes</div> */}
               </div>
-              {product.rating && RatingStars((product.rating || ""))}
+              
+              <div className="row">
+                <div className="col-12">
+                  <StarRating />
+                </div>
+              </div>
+              
               
               <ProductForm currentUser={currentUser} link={product.link} addToCart={props.addToCart} product={product} sizes={product.sizes} />
 

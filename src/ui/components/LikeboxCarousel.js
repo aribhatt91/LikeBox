@@ -7,7 +7,9 @@ import { useHistory } from 'react-router';
 import { AuthContext } from './../../store/contexts/AuthContext';
 import { debounce } from 'lodash';
 import { fetchLikeBox, updateLikeBox } from '../../service/userProfile';
-import { fetchProductsBySkus } from './../../service/productMethods';
+import Page from './../pages/Page';
+import { fetchLikeCards } from './../../service/api/firestore/likebox';
+import { SuccessMessage } from './generic/PageMessage';
 function CardStack({cards, cardsState, loading}) {
     useEffect(() => {}, [cards])
     return (
@@ -45,7 +47,7 @@ function CardStack({cards, cardsState, loading}) {
         </div>
     )
 }
-let currentPos = -1, LIKED = [], DISLIKED = [], PAGE = 0, LIMIT = 5, gender = "", LAST_NODE=null;
+let currentPos = -1, LIKED = [], DISLIKED = [], PAGE = 0, LIMIT = 5, gender = "", LAST_NODE=null, CARDS = null;
 export default function LikeBoxCarousel({slideIn, slideOut}) {
     //const [loading, setLoading] = useState(true);
     const [reachedMax, setReachedMax] = useState(false);
@@ -55,6 +57,23 @@ export default function LikeBoxCarousel({slideIn, slideOut}) {
     const history = useHistory();
     const {currentUser} = useContext(AuthContext);
 
+    const getCardsByPage = async (exclude=[]) => {
+        let res = [];
+        try {
+            if(!CARDS) {
+                CARDS = await fetchLikeCards();
+                CARDS = CARDS || [];
+                CARDS = CARDS.filter(item => exclude.indexOf(item) === -1);
+            }
+            if(CARDS && Array.isArray(CARDS)) {
+                res = CARDS.slice((PAGE * LIMIT), ((PAGE * LIMIT) + LIMIT));
+                PAGE++;
+            }
+        }catch(err){
+
+        }
+        return res;
+    }
     useEffect(()=>{
         //Find gender and other preferences
         if(currentUser){
@@ -71,7 +90,7 @@ export default function LikeBoxCarousel({slideIn, slideOut}) {
 
     useEffect(()=>{
         console.log('useEffectCalled');
-        if(update && !reachedMax){
+        if(update && currentUser && !reachedMax){
             setCardsState({
                 ...cardsState,
                 loading: true
@@ -79,15 +98,17 @@ export default function LikeBoxCarousel({slideIn, slideOut}) {
             try{
                 (async() => {
                     /* Fetch next batch of cards */
-                    console.log('LikeBoxCarousel:useEffect: updating', PAGE, LAST_NODE);
+                    //console.log('LikeBoxCarousel:useEffect: updating', PAGE, LAST_NODE);
                     //let products = await fetchProductsByPage(PAGE, LIMIT);
+                    
                     let skus = [].concat(LIKED).concat(DISLIKED);
                     console.log('SKUS', skus);
                     
-                    let res = await fetchProductsBySkus([], PAGE, LIMIT, LAST_NODE, true);
-                    let products = res ? res.items || [] : [];
-                    LAST_NODE = res ? res.lastVisible : null;
-                    console.log('useEffectCalled: response', res);
+                    /* let res = await fetchProductsBySkus([], PAGE, LIMIT, LAST_NODE, true);
+                    let products = res ? res.items || [] : []; */
+                    let products = await getCardsByPage(skus);
+                    //LAST_NODE = res ? res.lastVisible : null;
+                    //console.log('useEffectCalled: response', res);
                     if(products.length < LIMIT){
                         setReachedMax(true);
                     }
@@ -192,30 +213,40 @@ export default function LikeBoxCarousel({slideIn, slideOut}) {
     }
     
     return (
-        <React.Fragment>
+        <Page>
             {!reachedMax && <div className="like-box container">
-            <h3 className="text-center mt-5">Go with your heart!</h3>
-            <h4 className="text-center color">(We recommend swiping at least 15 items)</h4>
             <div className={"like-box-preference-carousel container slide-in"}>
+                <h3 className="text-center mt-5">Go with your heart!</h3>
+                <h4 className="text-center color">(We recommend swiping at least 15 items)</h4>
                 <div className="d-flex align-items-center justify-content-between flex-wrap">
-                    <div className="like-box-btn like-box-left-btn" onClick={debounce(rejectItem, 300)}>
-                        <FontAwesomeIcon icon={faArrowLeft} />
+                
+                    <div className="d-inline-flex flex-column align-center">
+                        <div className="btn-label btn-dislike">Dislike</div>
+                        <div className="like-box-btn like-box-left-btn" onClick={debounce(rejectItem, 100)}>
+                            <FontAwesomeIcon icon={faArrowLeft} />
+                        </div>
                     </div>
                     <CardStack
                         cards={items}
                         cardsState={cardsState}
                     />
-                    <div className="like-box-btn like-box-right-btn" onClick={debounce(likeItem, 300)}>
-                        <FontAwesomeIcon icon={faArrowRight} />
+                    <div className="d-inline-flex flex-column align-center">
+                        <div className="btn-label btn-like">Like</div>
+                        <div className="like-box-btn like-box-right-btn" onClick={debounce(likeItem, 100)}>
+                            <FontAwesomeIcon icon={faArrowRight} />
+                        </div>
                     </div>
                 </div>
-                <AppButton label="Start shopping" className="w-100 mb-5" onClick={submit} />
+                <AppButton label="Start shopping" className="d-block ml-auto mr-auto pr-5 pl-5 mb-5" onClick={submit} />
             </div>
             </div>}
             {
-                reachedMax && <div className=""></div>
+                reachedMax && <div className="container mt-5 p-4">
+                    <SuccessMessage message="Awesome! You are good to go.." />
+                    <AppButton label="Start shopping" className="d-block ml-auto mr-auto pr-5 pl-5 mb-5 mt-5" onClick={submit} />
+                </div>
             }
             
-        </React.Fragment>
+        </Page>
     )
 }

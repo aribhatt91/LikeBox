@@ -28,7 +28,7 @@ function Accordion({
                     <FontAwesomeIcon icon={open ? faChevronUp : faChevronDown }/>
                 </span>}
             </div>
-            <div className={"accordion-body " + (open ? "d-inline-block" : "d-none")} aria-hidden={!open} aria-expanded={open}>
+            <div className={"accordion-body " + (open ? "open" : "")} aria-hidden={!open} aria-expanded={open}>
                 {
                     children
                 }

@@ -21,6 +21,7 @@ import menscaps from '../../assets/img/banners/mens-caps-hats.jpg';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import Page from '../pages/Page';
+import BrandCarousel from './BrandCarousel';
 function LikeBoxHomePage({slideOut, slideIn}) {
     return (<Page>
     <div className="container mb-5 mt-5">
@@ -162,6 +163,7 @@ function LikeBoxHomePage({slideOut, slideIn}) {
             </div>
         </section>
     </div>
+    <BrandCarousel />
     </Page>)
 }
 

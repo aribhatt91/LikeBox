@@ -9,7 +9,7 @@ item object definition:
     val
 }
 */
-const MultiSelectDropdown = ({label, items, onSelect}) => {
+const MultiSelectDropdown = ({label, name, items, onSelect}) => {
     const [selected, setSelected] = useState([]);
     
     const handleSelect = (item) => {
@@ -22,7 +22,7 @@ const MultiSelectDropdown = ({label, items, onSelect}) => {
         }
         setSelected(res);
         if(typeof onSelect === 'function'){
-            onSelect(label, res);
+            onSelect(name, res);
         }
     }
     

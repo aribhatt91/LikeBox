@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import MultiSelectDropdown from './generic/MultiSelectDropdown';
 import AppDropdown from './generic/AppDropdown';
 import AppDualRangeSlider from './generic/AppDualRangeSlider';
@@ -6,6 +6,7 @@ import SingleSelectDropdown from './generic/SingleSelectDropdown';
 import { BRANDS, CATEGORIES, SORT_ORDER } from '../../service/constants/product-listing';
 import AppButton from './generic/AppButton';
 import { debounce } from 'lodash';
+import { getBrands } from './../../service/productMethods';
 
 //_handleBrandChange(e)
 const PriceRangeFilter = ({min=0, max=100, onSelect}) => {
@@ -42,11 +43,123 @@ const PriceRangeFilter = ({min=0, max=100, onSelect}) => {
         </div>
     )
 }
-const ProductFilters = (props) => {
-    const [collapseFilters, setCollapseFilters] = useState(true);
+const DEFAULT_FILTER_OPTIONS = {
+    brands: {
+        state: 'pending',
+        count: 0,
+        items: [],
+        selected: []
+    },
+    pricerange: {
+        state: 'pending',
+        max: 100,
+        min: 0,
+        selected: []
+    },
+    gender: {
+        options: [
+            {
+                label: 'Male',
+                val: 'm'
+            },
+            {
+                label: 'Female',
+                val: 'f'
+            }
+        ],
+        selected: []
+    },
+    sortby: {
+        options: [
+            {
+                label: 'Price: High to Low',
+                val: 'value:desc'
+            },
+            {
+                label: 'Price: Low to High',
+                val: 'value:asc'
+            },
+            {
+                label: 'Popularity',
+                val: 'popular'
+            }
+        ],
+        selected: ""
+    }
+}
+const ProductFilters = ({
+        category, 
+        sort_by, 
+        gender,
+        onFilterChange, 
+        defaultFilterOptions=DEFAULT_FILTER_OPTIONS
+    }) => {
+    const [filterObject, setFilterObject] = useState(defaultFilterOptions);
+    const [state, dispatch] = useReducer();
+    useEffect(() => {
+        (async () => {
+            try{
+                let res = await getBrands(category);
+                //window.mlog('getBrands:', res);
+
+                if(Array.isArray(res)){
+                    let brands = {
+                        ...filterObject.brands,
+                        state: 'done',
+                        count: res.count,
+                        items: res
+                    }
+                    setFilterObject({
+                        ...filterObject,
+                        brands
+                    })
+                }
+            }catch(err){
+
+            }
+        })()
+        
+    }, [category])
     
     const filterHandler = (name, obj) => {
-        console.log('filterHandler', name, obj);
+        window.mlog('filterHandler', name, obj);
+        let f = null;
+        if(name === 'brands'){
+            let brands = {
+                ...filterObject.brands,
+                state: 'done',
+                selected: obj
+            };
+            f = {
+                ...filterObject,
+                brands
+            };
+            setFilterObject(f)
+        }else if(name === 'gender'){
+            let gender = {
+                ...filterObject.gender,
+                state: 'done',
+                selected: obj
+            };
+            f = {
+                ...filterObject,
+                gender
+            };
+            setFilterObject(f);
+        }else if(name === 'sortby'){
+            let sortby = {
+                ...filterObject.sortby,
+                selected: obj
+            };
+            f = {
+                ...filterObject,
+                sortby
+            };
+            setFilterObject(f);
+        }
+        if(typeof onFilterChange === 'function' && f){
+            onFilterChange(f);
+        }
     }
     
     return (
@@ -57,34 +170,50 @@ const ProductFilters = (props) => {
                     <div className="filter_section">
                         <MultiSelectDropdown
                             label="Category"
+                            name="category"
                             items={CATEGORIES}
                             onSelect={filterHandler}
                         />
                     </div>
                 }
-                {BRANDS.length > 0 && 
+                {filterObject.brands && 
                     <div className="filter_section">
                         <MultiSelectDropdown
                             label="Brands"
-                            items={BRANDS}
+                            name="brands"
+                            items={filterObject.brands.items}
                             onSelect={filterHandler}
                         />
                     </div>
                 }
+
+                <div className="filter_section">
+                    <MultiSelectDropdown
+                        label="Gender"
+                        name="gender"
+                        items={filterObject.gender.options}
+                        onSelect={filterHandler}
+                    />
+                </div>
                 
                 <div className="filter_section">
-                    <AppDropdown label="Price range">
+                    <AppDropdown label="Price range" name="pricerange">
                         <PriceRangeFilter/>
                     </AppDropdown>
                 </div>
                 
+                
                 <div className="filter_section">
                     <SingleSelectDropdown 
                         label="Sort by"
-                        items={SORT_ORDER}
-                        onSelect={props.sortBy ? props.sortBy : (item) => {console.log('Sort Order:', item)}}
+                        name="sortby"
+                        items={filterObject.sortby.options}
+                        onSelect={filterHandler}
                     />
                 </div>
+            </div>
+            <div className="container">
+
             </div>
         </div>
     )

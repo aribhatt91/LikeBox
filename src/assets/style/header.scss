@@ -351,7 +351,7 @@ $nav-height: $nav-height-lg;
           .nav-dropdown-items-list {
             list-style: none;
             margin: 0;
-            padding: 0 2rem;
+            padding: 0;
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
@@ -361,32 +361,32 @@ $nav-height: $nav-height-lg;
               flex: 1;
               display: inline-flex;
               height: auto;
-              padding: 0 1rem;
+              padding: 4px 8px;
               min-width: 33.33%;
               .nav-dropdown-item-link {
                 text-decoration: none !important;
                 width: 100%;
+                transition: 0.3s all;
+                margin: 0;
+                padding: 8px;
+                &:hover {
+                  background-color: #ececec;
+                }
                 .nav-dropdown-item-box {
                   width: 100%;
-                  height: 100px;
+                  height: auto;
                   background-repeat: no-repeat;
                   background-size: cover;
-                  background-color: #ececec;
                   position: relative;
                   .nav-dropdown-item-title {
-                    position: absolute;
                     display: flex;
                     align-items: center;
-                    justify-content: center;
                     font-size: 16px;
-                    font-weight: bold;
-                    padding: 16px;
-                    width: 100%;
-                    height: 100%;
-                    top: 0;
-                    left: 0;
-                    background-color: rgba(0, 0, 0, 0.4);
-                    color: #fff;
+                    color: #333;
+                    transition: 0.3s all;
+                    &:hover {
+                      color: #000;
+                    }
                   }
                 }
               }

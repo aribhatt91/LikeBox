@@ -2,8 +2,6 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Link, NavLink, useHistory, useLocation } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
 import HeaderMobileNav from './HeaderMobileNav.js';
 import HOME_ICON from '../../assets/img/logo.png'; 
 import SearchBar from './SearchBar';
@@ -13,7 +11,7 @@ import AppButton from './generic/AppButton';
 import HeaderNavigation from './HeaderNavigation';
 import heart_icon from '../../assets/img/heart.png';
 
-const UserProfileDropDown = ({classes, logout}) => {
+const UserProfileDropDown = ({logout}) => {
   const [expand, setExpand] = useState(false);
   useEffect(() => {
     document.body.addEventListener('click', () => {setExpand(false)})
@@ -21,7 +19,7 @@ const UserProfileDropDown = ({classes, logout}) => {
   return (
     <span className={"user-account-wrapper d-md-flex align-items-center"} onClick={(e) => {e.stopPropagation()}}>
       <a className={"user-account-icon d-md-flex align-items-center"} href="#" onClick={() => setExpand(!expand)}>
-        <FontAwesomeIcon icon={faUser}/>
+        {/* <FontAwesomeIcon icon={faUser}/> */}
       </a>
       <div className={"user-account-dropdown" + (expand ? " d-inline-block" : " d-none")}>
         <ul>
@@ -108,12 +106,6 @@ function Header (props) {
                 </NavLink>
                 }
                 {
-                /* Hide cart icon for cart page */
-                <NavLink activeClassName='active' to="/cart">
-                  <CartLink user={currentUser}/>
-                </NavLink>
-                }
-                {
                 location.pathname.indexOf('/user') === -1 &&
                 <AppButton label="Your account" className={"d-none d-lg-flex no-anim sm align-items-center pl-5 pr-5 no-anim"} 
                   href="/user">
@@ -133,18 +125,7 @@ function Header (props) {
             </Nav>
           </Navbar>
         </div>
-        {/* <Modal
-            show={showModal}
-            onHide={() => {setShowModal(false)}}
-            size="md"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered>
-            <Modal.Body>
-              <div className="d-none d-md-inline-flex login-img" style={{backgroundImage: "url(" + LI + ")"}}></div>
-              <UserLoginSignupModule/>
-            </Modal.Body>
-          </Modal> */}
-          
+
       </header>
     );
   

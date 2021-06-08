@@ -150,6 +150,7 @@ export const convertAwinToProduct = (awinObj, sku) => {
         p.description = awinObj.description;
         p.tags = awinObj.searchTerms;
         p.deliveryTime = awinObj.delivery_time;
+        p.deliveryCost = awinObj.delivery_cost;
         p.reviews = awinObj.reviews;
         p.rating = awinObj.rating;
         p.link = awinObj.merchant_deep_link;

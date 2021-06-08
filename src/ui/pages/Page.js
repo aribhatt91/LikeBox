@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import { Helmet } from 'react-helmet';
 import { triggerCustomEvent } from './../../service/api/adobe/target-methods';
 import { capitaliseAll } from './../../service/helper';
+import { DataLayer } from './../../service/data/dataLayer';
+import { addProductMetadata, addListingMetadata } from './../../service/data/metadata';
 class Page extends Component {
     constructor(props){
         super(props); 
@@ -12,11 +14,8 @@ class Page extends Component {
         
     }
     componentDidMount(){
-        console.log('Mounted Page ->', this.props.pageName);
+        //console.log('Mounted Page ->', this.props.pageName);
         let pageName = this.props.pageName || null, viewName = pageName;
-        if(window.dataLayer){
-            window.dataLayer.pageName = viewName;
-        }
         triggerCustomEvent(viewName);
         //document.title = capitaliseAll(pageName);
     }
@@ -41,12 +40,19 @@ class Page extends Component {
     }
     render(){
         let {className, pageName, category, product} = this.props;
+        let pagetitle = this.getPageTitle();
+        DataLayer.setPageName(pagetitle);
+        if(product){
+            DataLayer.setProduct(product);
+        }
         return (
             <div className={"page" + (className ? (" " + className) : "")}>
                 <Helmet>
                     <title>
-                        {this.getPageTitle()}
+                        {pagetitle}
                     </title>
+                    <meta property="og:site_name" content="LikeBox" />
+                    <meta property="og:title" content={pagetitle} />
                 </Helmet>
                 { this.props.children }
             </div>
