@@ -5,7 +5,7 @@ import { fetchProductsBySkus } from './productMethods';
 export const itemInWishList = (email, sku) => {
     return isItemInWishList(email, sku);
 }
-export const addItemToWishList = async (email, sku) => {
+export const addItemToWishList = async (email, sku, product) => {
     /* let items = [], ids = [], data = null;
     try{
         data = await addToWishList(email, sku);
@@ -23,7 +23,7 @@ export const addItemToWishList = async (email, sku) => {
     window.mlog(items);
     
     return new Promise(resolve => resolve(items)); */
-    return addToWishList(email, sku);
+    return addToWishList(email, sku, product);
 }
 export const removeItemFromWishList = async (email, sku) => {
     /* let items = [], ids = [], data = null;

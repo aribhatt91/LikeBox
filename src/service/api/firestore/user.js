@@ -99,7 +99,7 @@ export const addUser = async (newUser) => {
                 return;
             }
         }catch(err) {
-            console.error('Error while querying for existing users', err);
+            //console.error('Error while querying for existing users', err);
         }
     
         try {

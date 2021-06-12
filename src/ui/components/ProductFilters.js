@@ -166,16 +166,6 @@ const ProductFilters = ({
         <div className="product_filter_wrapper page-content-wrapper">
             
             <div className="d-flex justify-content-between flex-wrap">
-                {CATEGORIES.length > 0 && 
-                    <div className="filter_section">
-                        <MultiSelectDropdown
-                            label="Category"
-                            name="category"
-                            items={CATEGORIES}
-                            onSelect={filterHandler}
-                        />
-                    </div>
-                }
                 {filterObject.brands && 
                     <div className="filter_section">
                         <MultiSelectDropdown
@@ -189,18 +179,18 @@ const ProductFilters = ({
 
                 <div className="filter_section">
                     <MultiSelectDropdown
-                        label="Gender"
+                        label="Category"
                         name="gender"
                         items={filterObject.gender.options}
                         onSelect={filterHandler}
                     />
                 </div>
                 
-                <div className="filter_section">
+                {/* <div className="filter_section">
                     <AppDropdown label="Price range" name="pricerange">
                         <PriceRangeFilter/>
                     </AppDropdown>
-                </div>
+                </div> */}
                 
                 
                 <div className="filter_section">
@@ -211,6 +201,7 @@ const ProductFilters = ({
                         onSelect={filterHandler}
                     />
                 </div>
+                
             </div>
             <div className="container">
 

@@ -21,11 +21,13 @@ const appStore = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ &&
 
 ReactDOM.render(
     <Provider store={appStore}>
-        <NotificationProvider>
-            <BrowserRouter>
-                <App/>
-            </BrowserRouter>
-        </NotificationProvider>
+        <AuthProvider>
+            <NotificationProvider>
+                <BrowserRouter>
+                    <App/>
+                </BrowserRouter>
+            </NotificationProvider>
+        </AuthProvider>
     </Provider>, 
     document.getElementById('root'));
 

@@ -7,15 +7,18 @@ import AppForm from './AppForm';
 import { LOGIN_FORM_SCHEMA } from './../../../service/validationSchema';
 import AppSubmitButton from './../generic/AppSubmitButton';
 import { AuthContext } from './../../../store/contexts/AuthContext';
-import { Link } from 'react-router-dom';
-
+import { Link, useHistory } from 'react-router-dom';
+import { parseSearchParams } from '../../../service/helper';
 const validationSchema = LOGIN_FORM_SCHEMA;
 
-const LoginForm = ({email="", onComplete}) => {
+const LoginForm = ({onComplete}) => {
   //const { signInUser, pending, user, loggedIn } = props;
   const [ submitted, setSubmitted] = useState(false);
   const [ error, setError ] = useState(null);
   const {login, currentUser} = useContext(AuthContext);
+  const history = useHistory();
+  const params = parseSearchParams(history.location.search);
+  const email = params.email || "";
   const initialValues = {
     email,
     password: ""
@@ -44,7 +47,7 @@ const LoginForm = ({email="", onComplete}) => {
     }
   }
   return (
-    <div className="col-12 col-md-7 col-lg-5 p-0 m-0">
+    <div className="col-12 col-md-7 col-lg-5 p-0 mt-0 mb-0 m-auto">
         {
           currentUser && <SuccessMessage message={"You are logged in!"} />
         }

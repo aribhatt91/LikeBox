@@ -16,7 +16,7 @@ const ProtectedRoute = ({component: Component, path, ...rest}) => {
           props => {
             
             if(currentUser){
-              if(Component === LoginPage){
+              if(Component === LoginPage && props.location.pathname === '/login'){
                 let redirectUrl = props.location.state && props.location.state.from ? props.location.state.from.pathname || '/' : '/';
                 window.mlog('User is logged in: Redirecting from LoginPage to Home', currentUser, props);
                 return <Redirect

@@ -1,17 +1,14 @@
-import React, {useState, useEffect, useContext } from 'react';
-
-import { AuthContext } from './../../../store/contexts/AuthContext';
+import React, {useState, useEffect } from 'react';
 import { fetchUserProfile } from '../../../service/userProfile';
 import ProfileUpdateForm from './../../components/forms/ProfileUpdateForm';
-import { LoadingSpinner } from '../../components/LoadingModule';
+import { LoadingPendulum } from './../../components/LoadingModule';
 
 
-function UserProfileFragment({}){
+function UserProfileFragment({currentUser}){
     const [profile, setProfile] = useState(null);
     const [loading, setLoading] = useState(true);
     
 
-    const {currentUser} = useContext(AuthContext);
 
     useEffect(()=>{
         
@@ -49,14 +46,17 @@ function UserProfileFragment({}){
     
     
     return (
-        <div className={"account-section editable-section position-relative"}>
+        <React.Fragment>
+            <div className={"account-section editable-section position-relative"}>
+                {
+                    !loading && <ProfileUpdateForm profile={profile || {}} onResult={onUpdateComplete} />
+                }
+                
+            </div>
             {
-                !loading && <ProfileUpdateForm profile={profile || {}} onResult={onUpdateComplete} />
+                loading && <LoadingPendulum />
             }
-            {
-                loading && <LoadingSpinner text={"Please wait while we fetch your profile"} />
-            }
-        </div>
+        </React.Fragment>
     )
 }
 

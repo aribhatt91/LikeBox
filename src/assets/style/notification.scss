@@ -24,7 +24,7 @@ $width: 360px;
 
 .notification-item {
     box-shadow: 0 0 10px rgba(0,0,0, 0.3);
-    border-radius: 0px;
+    border-radius: 2px;
     overflow: hidden;
     margin-bottom: 20px;
     color: #333;
@@ -38,6 +38,11 @@ $width: 360px;
     justify-content: start;
     align-items: center;
     position: relative;
+
+    &.dark {
+        color: #fff;
+        background-color: #333;
+    }
 
     .bar {
         background-color: #2e86de;

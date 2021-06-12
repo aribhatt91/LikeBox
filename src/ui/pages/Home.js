@@ -1,5 +1,4 @@
 import React, {useContext, useState, useEffect } from 'react'
-import LikeBoxSizing from '../components/LikeBoxSizing'
 import { AuthContext } from './../../store/contexts/AuthContext';
 import SignupForm from '../components/forms/SignupForm';
 import LoginForm from '../components/forms/LoginForm';
@@ -11,16 +10,19 @@ import SubscriptionForm from '../components/forms/SubscriptionForm';
 import FAQS from './../../service/constants/faqs';
 import Accordion from '../components/generic/Accordion';
 
-import R1 from '../../assets/img/sizing.png';
-import R2 from '../../assets/img/recommendations.png';
-import R3 from '../../assets/img/newbrand.png';
+import R1 from '../../assets/img/rtb1.png';
+import R2 from '../../assets/img/rtb2.png';
+import R3 from '../../assets/img/rtb3.png';
 import AppImage from '../components/generic/AppImage';
 import Page from './Page';
 import BrandCarousel from '../components/BrandCarousel';
 import { SuccessMessage } from '../components/generic/PageMessage';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { LoadingPendulum } from '../components/LoadingModule';
 
 function LikeBoxEmailForm({onComplete, setRegistered}) {
     const {fetchSignInMethods} = useContext(AuthContext);
+    const history = useHistory();
     //const validationSchema = EMAIL_FORM_SCHEMA;
     async function submitForm (userInput, {setSubmitting}){
         setSubmitting(true);
@@ -31,15 +33,18 @@ function LikeBoxEmailForm({onComplete, setRegistered}) {
                 if(methods.length === 0){
                     //Signup user
                     window.mlog('Signup user');
-                    setRegistered(false, userInput.email);
+                    //setRegistered(false, userInput.email);
+
+                    history.push('/register?email=' + window.encodeURIComponent(userInput.email));
                 }else if(methods.indexOf('password') > -1){
                     //Sign in user
                     window.mlog('Sign in user');
-                    setRegistered(true, userInput.email);
+                    //setRegistered(true, userInput.email);
+                    history.push('/login?email=' + window.encodeURIComponent(userInput.email));
                 }
-                if(typeof onComplete === 'function'){
+                /* if(typeof onComplete === 'function'){
                     setTimeout(onComplete, 750);
-                }
+                } */
             }catch(err){
                 console.error('fetchSignInMethods', err);
             }
@@ -77,10 +82,11 @@ function LikeBoxLandingPage({slideIn, slideOut, onComplete, setRegistered}) {
         <div className={"like-box-home" + (!slideIn && !slideOut ? " slide-hold" : "") + (slideOut ? " slide-out" : "") + (slideIn ? " slide-in" : "")}>
         
             <section className="like-box-home-section w-100">
+                <LazyLoadImage effect="opacity" className="bg-image" src="https://firebasestorage.googleapis.com/v0/b/webapp-470b3.appspot.com/o/home-page-1166x800.jpg?alt=media&token=12d60918-88a5-4a78-8531-48525a7dcf8a" />
                 <div className="container d-flex flex-column pb-5 pt-5">
                     <h1 className="like-box-header-1 font-weight-bold text-uppercase">Clothes shopping has never been easier</h1>
                     <p className="like-box-subheader-p">Likebox is your own personal shopping assistant</p>
-                    <div className="like-box-stm-container">
+                    <div className="like-box-stm-container d-none">
                         <div className="like-box-stm">
                             <div className="like-box-header-1">You</div>
                             <div className="like-box-header-1 font-weight-bold">Like</div>
@@ -102,7 +108,7 @@ function LikeBoxLandingPage({slideIn, slideOut, onComplete, setRegistered}) {
             <section className="like-box-reasons w-100">
                 <div className="container">
                     <div className="d-flex col-12 pl-2 pr-2 flex-column flex-lg-row justify-content-lg-between">
-                        <div className="col-12 col-md-4 d-flex">
+                        <div className="col-12 mb-5 mb-lg-0 col-lg-4 d-flex">
                             <div className="reasons-icon">
                                 <AppImage className="w-100 h-100" src={R1} />
                             </div>
@@ -111,7 +117,7 @@ function LikeBoxLandingPage({slideIn, slideOut, onComplete, setRegistered}) {
                                 <p className="reasons-text-subheader mb-0">You'll never order the wrong size again</p>
                             </div>
                         </div>
-                        <div className="col-12 col-md-4 d-flex">
+                        <div className="col-12 mb-5 mb-lg-0 col-lg-4 d-flex">
                             <div className="reasons-icon">
                                 <AppImage className="w-100 h-100" src={R2} />
                             </div>
@@ -120,7 +126,7 @@ function LikeBoxLandingPage({slideIn, slideOut, onComplete, setRegistered}) {
                                 <p className="reasons-text-subheader mb-0">Find the right item for you in minutes</p>
                             </div>
                         </div>
-                        <div className="col-12 col-md-4 d-flex">
+                        <div className="col-12 col-lg-4 d-flex">
                             <div className="reasons-icon">
                                 <AppImage className="w-100 h-100" src={R3} />
                             </div>
@@ -183,72 +189,35 @@ function LikeBoxLandingPage({slideIn, slideOut, onComplete, setRegistered}) {
 
 export default function Home() {
     const {currentUser} = useContext(AuthContext);
-    const [registered, setRegistered] = useState(false);
-    const [email, setEmail] = useState('');
     const [show, setShow] = useState(0);
     const history = useHistory();
     const dispatch = useNotification();
 
-    window.mlog('LikeBox show', show);
     useEffect(() => {
         if(currentUser){
             (async () => {
-                let firstSession = await isFirstSession(currentUser.email);
+                /* let firstSession = await isFirstSession(currentUser.email);
                 window.mlog('LikeBox:isFirstSession', firstSession);
                 if(firstSession){
-                    setShow(2);
+                    //setShow(2);
                 }else {
                     setShow(4);                    
-                }
+                } */
             })()
         }
         //setTimeout(handleNewNotification, 5000);
     }, [currentUser])
 
-    const goToLikeBox = () => {
-        history.push('/likebox');
-    }
-
     return (
         <React.Fragment>
-            {show !== 4 && <Page className="like-box container-fluid">
-                {!currentUser && 
-                <React.Fragment>
+            {!currentUser && <Page className="like-box container-fluid">
                     <LikeBoxLandingPage
-                        slideOut={show > 0}
-                        slideIn={show === 0}
-                        setRegistered={(reg, em) => {
-                                setRegistered(reg);
-                                if(em){
-                                    setEmail(em);
-                                }
-                            }
-                        }
-                        onComplete={() => {setShow(1)}}
+                        slideOut={false}
+                        slideIn={true}
                     />
-                    <LikeBoxSignup 
-                        registered={registered} 
-                        slideOut={show > 1}
-                        slideIn={show === 1}
-                        onComplete={() => {setShow(2)}}
-                        email={email}
-                    />
-                </React.Fragment>}
-                <LikeBoxSizing
-                    slideOut={show > 2}
-                    slideIn={show === 2}
-                    skip={true}
-                    onComplete={goToLikeBox}
-                />
-                {/* <LikeBoxCarousel
-                    slideOut={show > 3}
-                    slideIn={true || show === 3}
-                    onComplete={() => {setShow(4)}}
-                /> */}
                 <BrandCarousel />
-                <SuccessMessage />
             </Page>}
-            {show === 4 && <LikeBoxHomePage 
+            {currentUser && <LikeBoxHomePage 
                 slideIn={show === 4}
             />}
         </React.Fragment>

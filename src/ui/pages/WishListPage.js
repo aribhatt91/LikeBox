@@ -148,14 +148,13 @@ const WishListPage = () => {
             setPending(false);
         }
     }
-    window.mlog('wishList', wishList);
     return (
         <Page pageName="Wishlist">
             <div className={"wish-list-section mt-5 mb-5 container"}>
                 <h1 className="text-center mb-5 text-uppercase">Wishlist</h1>
-                <div className="wish-list-container d-flex flex-wrap">
+                <div className="wish-list-container d-flex flex-wrap justify-content-between">
                     {
-                        wishList.map((item, index) => 
+                        wishList && wishList.length > 0 && wishList.map((item, index) => 
                             <div className="d-flex justify-content-center col-md-4 p-0">
                                 <WishListInstance
                                     key={index}
@@ -166,7 +165,12 @@ const WishListPage = () => {
                         )
                     }
                     {
-                        (!pending && wishList.length === 0) && <div></div>
+                        (!pending && wishList.length === 0) && <div className="container d-flex w-100 h-100 m5">
+                            <h1 className="text-center mt-5 mb-5 pt-4 pb-4 w-100">
+                                It seems you haven't added anything to your wishlist.
+                            </h1>
+
+                        </div>
                     }
                     {
                         pending && <React.Fragment>

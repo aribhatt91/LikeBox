@@ -18,6 +18,7 @@ class Page extends Component {
         let pageName = this.props.pageName || null, viewName = pageName;
         triggerCustomEvent(viewName);
         //document.title = capitaliseAll(pageName);
+        window.scrollTo({left:0, top: 0, behavior: 'smooth'});
     }
     getPageTitle(){
         let {pageName, category, product} = this.props;

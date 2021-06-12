@@ -237,3 +237,15 @@ export const fetchProductBrands = async (category) => {
         console.error('getBrands', err);
     }
 }
+
+export const fetchAvailableCategories = async () => {
+    try {
+        let doc = await categoriesCollection.doc('aggregate').get();
+        let res = doc.data() || {};
+        return new Promise((resolve) => resolve(Object.keys(res)));
+    }catch(err) {
+        
+    }
+    return new Promise((resolve) => resolve([])); 
+}
+

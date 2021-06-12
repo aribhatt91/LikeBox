@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import Page from './Page';
-import { LoadingSpinner } from './../components/LoadingModule';
+import { LoadingPendulum } from './../components/LoadingModule';
 import ProductHeroGallery from '../components/ProductHeroGallery';
 import PageMessage from '../components/generic/PageMessage';
 import { checkDeliveryAvailability } from '../../service/addressMethods';
@@ -173,7 +173,7 @@ function ProductDescription({description, sizing, deliveryTime, deliveryCost, re
       //Show snackbar message
     }
   } */
-function ProductForm({currentUser, product, sizes, addToCart, toggleInWishList}){
+function ProductForm({currentUser, product, sizes, addToCart, inWishList, toggleInWishList}){
   const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState('');
   const [cta1Loading, setCta1Loading] = useState(false);
@@ -242,9 +242,9 @@ function ProductForm({currentUser, product, sizes, addToCart, toggleInWishList})
       </div>
       <div className="product-cta-container col-md-10 clearfix mt-2 mb-5 p-0">
         <AppButton
-          label="Add to Wishlist"
+          label={inWishList ? "Remove from Wishlist" : "Add to Wishlist"}
           className="btn-white w-100"
-          onClick={() => {}}
+          onClick={toggleInWishList}
           disabled={!currentUser  /*|| quantity === 0 || (sizes.length > 0 && size === '')*/}
         />
       </div>
@@ -304,7 +304,7 @@ function ProductPage(props) {
           })()
         }else {
           (async ()=>{
-            let res = await addItemToWishList(currentUser.email, id);
+            let res = await addItemToWishList(currentUser.email, id, product);
             if(res.type === 'success'){
               setInWishList(true);
               dispatch({
@@ -389,7 +389,7 @@ function ProductPage(props) {
   return (
     <React.Fragment>
     {(pending || product) && <Page className={"product-home-page pt-5 pb-5 position-relative"} product={product} pageName={"pdp"}>
-        {pending && <LoadingSpinner text="Please wait.." />}
+        {pending && <LoadingPendulum />}
         {!pending && product && 
           <div className="d-block">
             <Helmet>
@@ -425,12 +425,19 @@ function ProductPage(props) {
               
               <div className="row">
                 <div className="col-12">
-                  <StarRating />
+                  {/* <StarRating /> */}
                 </div>
               </div>
               
               
-              <ProductForm currentUser={currentUser} link={product.link} addToCart={props.addToCart} product={product} sizes={product.sizes} />
+              <ProductForm 
+                inWishList={inWishList}
+                toggleInWishList={toggleInWishList} 
+                currentUser={currentUser} 
+                link={product.link} 
+                addToCart={props.addToCart} 
+                product={product} 
+                sizes={product.sizes} />
 
               <ProductDescription description={product.description}/>
             </div>

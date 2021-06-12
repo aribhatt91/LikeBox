@@ -1,4 +1,5 @@
 import React, {useEffect, useState, useRef} from 'react';
+import CloseIcon from '../svg-components/CloseIcon';
 
 let scrolled = 0;
 export default function AppModal({id, removeOnClose, onClose, className, children}) {
@@ -33,7 +34,7 @@ export default function AppModal({id, removeOnClose, onClose, className, childre
                 {children}
                 <span className="app-modal-close">
                     <a href="#" aria-label="Close" onClick={() => setShow(false)}>
-                        &times;
+                        <CloseIcon size={24} />
                     </a>
                 </span>
             </div>

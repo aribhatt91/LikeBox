@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { SIGNUP_FORM_SCHEMA } from './../../../service/validationSchema';
 import AppForm from './AppForm';
 import AppTextInput from '../generic/AppTextInput';
@@ -8,25 +8,30 @@ import AppRadioInput from '../generic/AppRadioInput';
 import { SuccessMessage } from '../generic/PageMessage';
 import { addUserProfile } from './../../../service/userProfile';
 import AppDateInput from '../generic/AppDateInput';
+import { useHistory } from 'react-router-dom';
+import { parseSearchParams } from '../../../service/helper';
 
+let USER_TEMP = null;
 function SignupForm(props){
     window.mlog('SignupModule', props);
     //const { error, pending, user, loggedIn } = props;
     const [error, setError] = useState(null);
     const [ submitted, setSubmitted] = useState(false);
+    
+    const history = useHistory();
+    const params = parseSearchParams(history.location.search);
+    const email = params.email || "";
 
     const {signup, currentUser, updateName} = useContext(AuthContext);//useAuth();
-    window.mlog('SignupForm', currentUser);
+
+    //window.mlog('SignupForm', currentUser);
     const submitForm =  async (userInput, {setSubmitting}) => {
         setSubmitting(true);
-        window.mlog(userInput, setSubmitting);
+        //window.mlog(userInput, setSubmitting);
         if(error){
             setError(null);
         }
         try{
-            window.mlog('Logging', userInput);
-            await signup(userInput);
-            window.mlog('after await', currentUser);
             let user = {}
             user.email = userInput.email;
             user.name = {};
@@ -43,25 +48,55 @@ function SignupForm(props){
             }
             
             user.gender = userInput.gender;
-            //await addUser(user);
-            await addUserProfile(user);
-            await updateName(userInput.fname);
-            if(typeof props.onComplete === 'function'){
-                props.onComplete();
-            }
+            USER_TEMP = user;
+
+            await signup(userInput);
+
         }catch(err){
             console.error(err);
         }finally{
             setSubmitting(false);
-            setSubmitted(true);
+            //setSubmitted(true);
         }
         
         
     }
+    const updateUserInDatabase = async () => {
+        if(USER_TEMP){
+            try{
+                await addUserProfile(USER_TEMP);
+                await updateName(USER_TEMP.name.fname);
+            }catch(err){
+
+            }finally {
+                setTimeout(() => {
+                    //props.onComplete();
+                    if(USER_TEMP){
+                        history.replace('/likebox');
+                    }else {
+                        
+                    }
+                }, 2000);
+            }
+        }else {
+            history.replace('/');
+        }
+    }
+    useEffect(()=>{
+        if(currentUser){
+            //window.mlog('user signed in...');
+            updateUserInDatabase();
+        }
+        
+    }, [currentUser]);
+
     return (
-        <div className="col-12 col-md-8 col-lg-7 p-0 m-0">
+        <div className="col-12 col-md-8 col-lg-7 p-0 mt-0 mb-0 m-auto">
           {
-              currentUser && <SuccessMessage message={"You are logged in!"} />
+              currentUser && 
+              <div className="w-100 h-100 m-5 justify-content-center align-center">
+                <SuccessMessage message={"You are signed in in!"} subtext="You'll be redirected in a moment.." />
+              </div>
           }
         <div className={"signup-form-container" + (currentUser ? ' d-none' : "")}>
             <div className="signup-form-header mb-4 pl-2 pr-2 h3 font-weight-normal w-100 text-center">Sign up for free to start shopping</div>
@@ -69,7 +104,7 @@ function SignupForm(props){
               <AppForm
                 onSubmit={submitForm}
                 validationSchema={SIGNUP_FORM_SCHEMA}
-                initialValues={{email: (props.email || ""), password: '', confirmpassword: '', fname: '', day: '', month: '', year: '', lname: '', gender: ''}} >
+                initialValues={{email: (props.email || email || ""), password: '', confirmpassword: '', fname: '', day: '', month: '', year: '', lname: '', gender: ''}} >
                 
 
                 <div className="row m-0">

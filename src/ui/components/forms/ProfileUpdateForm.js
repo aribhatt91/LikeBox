@@ -9,9 +9,9 @@ import { PERSONAL_INFORMATION_SCHEMA } from './../../../service/validationSchema
 import { AuthContext } from './../../../store/contexts/AuthContext';
 import PageMessage from '../generic/PageMessage';
 import { updateUserProfile } from './../../../service/userProfile';
-import { LoadingSpinner } from '../LoadingModule';
 import { useNotification } from './../../../store/contexts/NotificationProvider';
 import AppDateInput from '../generic/AppDateInput';
+import { LoadingPendulum } from './../LoadingModule';
 function ProfileUpdateForm({profile={}, onResult}){
     const [piEditMode, setPiEditMode] = useState(false);//Edit Personal Information
     const [ciEditMode, setCiEditMode] = useState(false);//Edit Personal Information
@@ -235,7 +235,7 @@ function ProfileUpdateForm({profile={}, onResult}){
                     </div>
                 </div>
             </AppForm>
-            {loading && <LoadingSpinner text="Please wait while we update your profile" />}
+            {loading && <LoadingPendulum/>}
         </div>
     )
 }

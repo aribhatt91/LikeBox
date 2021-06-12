@@ -1,16 +1,16 @@
-import React, { Component, useState } from 'react';
-import { BrowserRouter, Link, Route, Switch, Redirect, NavLink, useParams } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import UserProfileFragment from './fragments/UserProfileFragment';
 import UserAddressFragment from './fragments/UserAddressFragment';
-import UserPaymentOptionsFragment from './fragments/UserPaymentOptionsFragment';
-import UserOrdersFragment from './fragments/UserOrdersFragment';
 import { Tabs } from 'react-bootstrap';
 import Tab from 'react-bootstrap/Tab';
 import LikeBoxSizing from '../components/LikeBoxSizing';
 import Page from './Page';
+import { useContext } from 'react';
+import { AuthContext } from './../../store/contexts/AuthContext';
 
 
-function UserSettings(props){
+function UserSettings({currentUser}){
     const [showDetail, setShowDetail] = useState("");
 
     return (
@@ -35,7 +35,7 @@ function UserSettings(props){
                         <UserPaymentOptionsFragment />
                     </li> */}
                     <li key="2" className={showDetail === "addr" ? "d-flex" : "d-none"}>
-                        <UserAddressFragment/>
+                        <UserAddressFragment currentUser={currentUser}/>
                     </li>
                     <li key="3" className={showDetail === "contact" ? "d-flex" : "d-none"}>
                         
@@ -54,6 +54,7 @@ function UserSettings(props){
 
 function DashboardNavigation({userFirstName, logoSrc}){
     const {slug} = useParams();
+    const {currentUser} = useContext(AuthContext);
     let k = ['box', 'profile', 'sizing', 'settings'].some(el => el === (slug || "").toLowerCase()) ? (slug || "").toLowerCase() : 'profile';
     const [key, setKey] = useState(k);
     return (
@@ -63,7 +64,7 @@ function DashboardNavigation({userFirstName, logoSrc}){
                 onSelect={k => setKey(k)}>
                 
                 <Tab eventKey="profile" title="Profile">
-                    <UserProfileFragment/>
+                    <UserProfileFragment currentUser={currentUser}/>
                 </Tab>
                 <Tab eventKey="box" title="Your box">
                     <div></div>
@@ -73,7 +74,7 @@ function DashboardNavigation({userFirstName, logoSrc}){
                 </Tab>
                 <Tab eventKey="settings" title="Settings">
                     <div className="user-settings-wrapper">
-                        <UserSettings />
+                        <UserSettings currentUser={currentUser} />
                     </div>
                 </Tab>
             </Tabs>

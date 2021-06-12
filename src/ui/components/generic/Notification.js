@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState, useEffect } from "react";
 import { faExclamationCircle, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
-const Notification = ({id, type, dispatch, message, dark=false}) => {
+const Notification = ({id, type, dispatch, message, dark=true}) => {
   const [exit, setExit] = useState(false);
   const [width, setWidth] = useState(0);
   const [intervalID, setIntervalID] = useState(null);

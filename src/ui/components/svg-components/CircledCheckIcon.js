@@ -1,10 +1,9 @@
-import { icon } from '@fortawesome/fontawesome-svg-core'
 import React from 'react'
 
-export default function CircledCheckIcon() {
+export default function CircledCheckIcon({size=24}) {
     return (
         <span className="svg-icon">
-            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 330" style={{enableBackground: 'new 0 0 330 330'}}>
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 330 330" style={{enableBackground: 'new 0 0 330 330'}}>
                 <g>
                     <path d="M165,0C74.019,0,0,74.019,0,165s74.019,165,165,165s165-74.019,165-165S255.981,0,165,0z M165,300
                         c-74.44,0-135-60.561-135-135S90.56,30,165,30s135,60.561,135,135S239.439,300,165,300z"/>

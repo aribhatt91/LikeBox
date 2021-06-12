@@ -63,7 +63,7 @@ function WishListInstance({instance, removeItem}){
                     {instance.brand}
                 </div> */}
                 <div className="wish-list-cta w-100 mt-1">
-                    <AppButton className="w-100 sm" href={`/product/${instance.sku}`} label="Buy now" />
+                    <AppButton className="w-100 sm" href={`/product/${instance.sku}`} label="View product" />
                 </div>
             </div>
             <div className="wish-list-instance-remove-wrapper tooltip-wrapper d-flex flex-column align-items-end" onClick={(e)=>{e.stopPropagation()}}>
@@ -94,8 +94,7 @@ function WishListInstance({instance, removeItem}){
         </div>
     )
 }
-function UserWishListFragment(){
-    const {currentUser} = useContext(AuthContext)
+function UserWishListFragment({currentUser}){
     const [wishList, setWishList] = useState([]),
     [pending, setPending] = useState(false);    
     const dispatch = useNotification();

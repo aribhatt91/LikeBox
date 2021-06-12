@@ -23,7 +23,7 @@ export default function AppDropdown({label, children, className}) {
             <div className="d-flex d-md-inline-flex app-dropdown-label" onClick={toggle} ref={selectLabel}>
                 {label}            
             </div>
-            <div className="app-dropdown-items" onClick={(e)=>{e.stopPropagation()}} aria-hidden={!open} aria-expanded={open}>
+            <div className="app-dropdown-items thin-scroll-bar" onClick={(e)=>{e.stopPropagation()}} aria-hidden={!open} aria-expanded={open}>
                 {
                     children
                 }

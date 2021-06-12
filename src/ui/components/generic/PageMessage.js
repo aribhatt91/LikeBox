@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import TestIcons from '../svg-components/TestIcons';
+import CircledCheckIcon from '../svg-components/CircledCheckIcon';
 
 //import {faWarning, faInfoCircle, faCheckCircle} from '@fortawesome/free-solid-svg-icons';
 
@@ -28,14 +29,15 @@ const PageMessage = ({text, type, size, inline=true, icon=false, dismissable=fal
     )
 }
 
-export const SuccessMessage = ({message}) => {
+export const SuccessMessage = ({message, subtext}) => {
     return (
         <div className="d-flex flex-column justify-content-center align-items-center">
           <div className="green-tick mb-3">
-            <FontAwesomeIcon icon={faCheck} size="2x"></FontAwesomeIcon>
-            
+            <CircledCheckIcon size="64" />
           </div>
           <h2 className="font-weight-light" aria-label={message}>{message}</h2>
+          {subtext && <h3 className="font-weight-light mt-3">{subtext}</h3>}
+
         </div>
     )
 }

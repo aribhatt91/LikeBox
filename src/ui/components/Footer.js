@@ -10,7 +10,7 @@ function Footer(){
                 <div className="row m-0">
                     <div className="col-12 col-md-4">
                         <h5 className="text-uppercase font-weight-normal mb-3">About LikeBox</h5>
-                        <Link to="/about#history" className="footer-link">LikeBox hstory</Link>
+                        <Link to="/about#history" className="footer-link">LikeBox history</Link>
                         <Link to="/about#future" className="footer-link">LikeBox future</Link>
                         <Link to="/careers" className="footer-link">Careers</Link>
                         <Link to="/about#investors" className="footer-link">Investors</Link>
@@ -27,7 +27,7 @@ function Footer(){
                     </div>
                     <div className="col-12 col-md-4">
                         <h5 className="text-uppercase font-weight-normal mb-3">Contact</h5>
-                        <p className="footer-text">Our door is always open! If you have any questions, suggestions or complaints send us an email at <a href="mailto:paul@likebox.co.uk">paul@likebox.co.uk</a></p>
+                        <p className="footer-text">Our door is always open! If you have any questions, suggestions or complaints send us an email at <a href="mailto:support@likebox.co.uk">support@likebox.co.uk</a></p>
                     </div>
                 </div>
             </div>

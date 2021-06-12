@@ -20,6 +20,7 @@
 @import './modal.scss';
 @import './star.scss';
 @import './selectable.scss';
+@import './loading.scss';
 
 .hidden-xs-up {
   display: none;
@@ -369,7 +370,6 @@
 .green-tick {
   width: 64px;
   height: 64px;
-  border: 4px solid $success;
   border-radius: 50%;
   background-color: #fff;
   display: inline-flex;
@@ -378,6 +378,7 @@
   animation: bounce ease-in 1s;
   * {
     color: $success;
+    fill: $success;
   }
 }
 

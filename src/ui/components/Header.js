@@ -10,6 +10,7 @@ import { AuthContext } from './../../store/contexts/AuthContext';
 import AppButton from './generic/AppButton';
 import HeaderNavigation from './HeaderNavigation';
 import heart_icon from '../../assets/img/heart.png';
+import ScaleIcon from './svg-components/ScaleIcon';
 
 const UserProfileDropDown = ({logout}) => {
   const [expand, setExpand] = useState(false);
@@ -99,12 +100,14 @@ function Header (props) {
               </AppButton>}
               {currentUser && 
               <React.Fragment>
-                {
-                  /* Hide wishlist icon for cart page */
+                
+                <NavLink activeClassName="active" to="/user/sizing">
+                  <ScaleIcon size={24} />
+                </NavLink>
                 <NavLink activeClassName="active" to="/wishlist">
                   <img src={heart_icon} className="nav_icon" />
                 </NavLink>
-                }
+                
                 {
                 location.pathname.indexOf('/user') === -1 &&
                 <AppButton label="Your account" className={"d-none d-lg-flex no-anim sm align-items-center pl-5 pr-5 no-anim"} 
