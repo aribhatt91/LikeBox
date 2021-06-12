@@ -21,6 +21,7 @@
 @import './star.scss';
 @import './selectable.scss';
 @import './loading.scss';
+@import './animations.scss';
 
 .hidden-xs-up {
   display: none;
@@ -586,6 +587,13 @@
     }
   }
 
+}
+
+.slide-up {
+  animation-name: slideup;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
 }
 
 @media only screen and (max-width: 1024px){

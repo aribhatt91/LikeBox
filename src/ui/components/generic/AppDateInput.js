@@ -42,23 +42,59 @@ export default function AppDateInput({disabled, className, ...rest}) {
             <div className="d-flex justify-content-start">
                 <div className="d-inline-flex pr-1">
                     <label htmlFor={'day'}>
-                        <input ref={dd} defaultValue={initialValues['day']} onKeyUp={appInputChange} disabled={disabled} onChange={handleChange('day')} name="day" type="number" placeholder="DD" min={1} max={31} className="form-control date-input-field" />
+                        <input 
+                        ref={dd} 
+                        defaultValue={initialValues['day']} 
+                        onKeyUp={appInputChange} 
+                        disabled={disabled} 
+                        onChange={handleChange('day')} 
+                        onBlur={()=>setFieldTouched('day')}
+                        name="day" 
+                        type="number" 
+                        placeholder="DD" 
+                        min={1} 
+                        max={31} 
+                        className="form-control date-input-field" />
                     </label>
                 </div>
                 <div className="d-inline-flex pr-1">
                     <label htmlFor={'day'}>
-                        <input ref={mm} defaultValue={initialValues['month']} onKeyUp={appInputChange} disabled={disabled} onChange={handleChange('month')} name="month" type="number" placeholder="MM" min={1} max={12} className="form-control date-input-field" />
+                        <input 
+                        ref={mm} 
+                        defaultValue={initialValues['month']} 
+                        onKeyUp={appInputChange} 
+                        disabled={disabled} 
+                        onChange={handleChange('month')} 
+                        onBlur={()=>setFieldTouched('month')}
+                        name="month" 
+                        type="number" 
+                        placeholder="MM" 
+                        min={1} 
+                        max={12} 
+                        className="form-control date-input-field" />
                     </label>
                 </div>
                 <div className="d-inline-flex pr-1">
                     <label htmlFor={'day'}>
-                        <input ref={yy} defaultValue={initialValues['year']} onKeyUp={appInputChange} disabled={disabled} onChange={handleChange('year')} name="year" type="number" placeholder="YYYY" min={1900} max={(new Date()).getFullYear()} className="form-control date-input-field"/>
+                        <input 
+                        ref={yy} 
+                        defaultValue={initialValues['year']} 
+                        onKeyUp={appInputChange} 
+                        disabled={disabled} 
+                        onChange={handleChange('year')} 
+                        onBlur={()=>setFieldTouched('year')}
+                        name="year" 
+                        type="number" 
+                        placeholder="YYYY" 
+                        min={1900} 
+                        max={(new Date()).getFullYear()} 
+                        className="form-control date-input-field"/>
                     </label>
                 </div>
             </div>
-            {errors['day'] && <PageMessage type="error" size="small" text={errors['day']} />}
-            {errors['month'] && <PageMessage type="error" size="small" text={errors['month']} />}
-            {errors['year'] && <PageMessage type="error" size="small" text={errors['year']} />}
+            {errors['day'] && touched['day'] && <PageMessage type="error" size="small" text={errors['day']} />}
+            {errors['month'] && touched['month'] && <PageMessage type="error" size="small" text={errors['month']} />}
+            {errors['year'] && touched['year'] && <PageMessage type="error" size="small" text={errors['year']} />}
         </div>
     )
 }

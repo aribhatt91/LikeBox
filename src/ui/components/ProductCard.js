@@ -9,7 +9,7 @@ import { formatPrice } from '../../service/helper';
 
 export function ProductCardPlaceholder () {
     return (
-        <div className="product-card-placeholder row mr-0 ml-0 mt-5 mb-5">
+        <div className="product-card-placeholder slide-up row mr-0 ml-0 mt-5 mb-5">
             <div className="card-thumb-wrapper-placeholder p-0 col-xs-12 col-md-4 col-lg-3">
             </div>
             <div className="card-text-wrapper col-xs-12 col-md-4 col-lg-5 p-4 pt-md-0 pb-md-0 d-flex flex-column justify-content-between align-center">

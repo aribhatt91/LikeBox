@@ -98,8 +98,8 @@ function SignupForm(props){
                 <SuccessMessage message={"You are signed in in!"} subtext="You'll be redirected in a moment.." />
               </div>
           }
-        <div className={"signup-form-container" + (currentUser ? ' d-none' : "")}>
-            <div className="signup-form-header mb-4 pl-2 pr-2 h3 font-weight-normal w-100 text-center">Sign up for free to start shopping</div>
+        <div className={"signup-form-container slide-up" + (currentUser ? ' d-none' : "")}>
+            <h1 className="signup-form-header mb-5 pl-2 pr-2 font-weight-normal w-100 text-center">Sign up for free to start shopping</h1>
             <div className={"signup-form"}>
               <AppForm
                 onSubmit={submitForm}
@@ -140,8 +140,9 @@ function SignupForm(props){
                     </div>
                 </div>
                 <div className="row m-0">
-                    <p className="w-100 pl-2 pr-2 font-weight-normal mb-3">Enter your email address*</p>
+                    
                     <div className="col-md-12 float-left pl-2 pr-2">
+                        <p className="w-100 font-weight-normal mb-3">Enter your email address*</p>
                         <AppTextInput
                             name="email"
                             type="email"
@@ -149,26 +150,19 @@ function SignupForm(props){
                         />
                     </div>
                 </div>
-                <div className="row m-0">
-                    <p className="w-100 pl-2 pr-2 font-weight-normal mb-3">Password*</p>
-                    {/* <div className="col-md-6 float-left pl-2 pr-2">
-                        <AppTextInput
-                            name="mobile"
-                            type="number"
-                            label="Mobile"
-                        />
-                    </div> */}
-                    <div className="col-md-12 float-left pl-2 pr-2">
+                <div className="row m-0"> 
+                    
+                    <div className="col-12 col-md-6 float-left pl-2 pr-2">
+                        <p className="w-100 font-weight-normal mb-3">Password*</p>
                         <AppTextInput
                             name="password"
                             type="password"
                             label="Enter your password"
                         />
                     </div>
-                </div>
-                <div className="row m-0"> 
-                    <p className="w-100 pl-2 pr-2 font-weight-normal mb-3">Confirm password*</p>
-                    <div className="col-md-12 float-left pl-2 pr-2">
+                    
+                    <div className="col-12 col-md-6 float-left pl-2 pr-2">
+                        <p className="w-100 font-weight-normal mb-3">Confirm password*</p>
                         <AppTextInput
                             name="confirmpassword"
                             type="password"

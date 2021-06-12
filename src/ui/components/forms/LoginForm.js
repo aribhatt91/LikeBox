@@ -52,8 +52,8 @@ const LoginForm = ({onComplete}) => {
           currentUser && <SuccessMessage message={"You are logged in!"} />
         }
 
-        <div className={"login-form-container" + (currentUser ? " d-none": "")}>
-          <div className="login-form-header mb-4 pl-2 pr-2 h3 font-weight-normal text-center">Sign into your account</div>
+        <div className={"login-form-container slide-up" + (currentUser ? " d-none": "")}>
+          <h1 className="login-form-header mb-5 pl-2 pr-2 font-weight-normal text-center">Sign into your account</h1>
           <form className={"login-form"}>
 
             <AppForm
