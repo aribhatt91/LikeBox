@@ -1,5 +1,6 @@
 import React from 'react'
 import { useFormikContext } from 'formik';
+import PageMessage from './PageMessage';
 
 export default function AppRadioInput({name, options, onChange, ...rest}) {
     const {setFieldTouched, handleChange, errors, touched, initialValues, values} = useFormikContext();
@@ -7,7 +8,7 @@ export default function AppRadioInput({name, options, onChange, ...rest}) {
         window.mlog(name, e.target.value);
     }
     return (
-        <div className="app-radio-input-options d-flex">
+        <div className="app-radio-input-options d-flex flex-wrap">
             {
                 (options || []).map((item, index) => (
                         <div className="app-radio-input-wrapper mr-2" key={index}>
@@ -25,6 +26,12 @@ export default function AppRadioInput({name, options, onChange, ...rest}) {
                         </div>
                     )
                 )
+            }
+            {
+                errors[name] && 
+                <div className="d-flex w-100 mt-2">
+                    <PageMessage type="error" text={errors[name]} />
+                </div>
             }
             
             

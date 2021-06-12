@@ -29,7 +29,7 @@ function HeaderMobileNav({user, logout}){
             </div>
           }
 
-          <ul className="clean_list category-list">
+          {user && <ul className="clean_list category-list">
             {(Object.keys(HEADER_NAV_MENU) || []).map((key, i) => <li key={i}>
                 <Accordion label={key} openBtn={true}>
                 {
@@ -39,7 +39,7 @@ function HeaderMobileNav({user, logout}){
                 }
                 </Accordion>
             </li>)}
-          </ul>
+          </ul>}
           <hr className="divider_small"></hr>
           {user && <ul className="clean_list personal_list_items">
             <li  key="0">

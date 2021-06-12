@@ -86,7 +86,7 @@ function Header (props) {
             </Navbar.Brand>
             
             <Nav className="mr-auto d-none d-lg-flex navbar-nav">
-              <HeaderNavigation/>
+              {currentUser&& <HeaderNavigation/>}
             </Nav>
             <Nav className="justify-content-end d-none d-lg-flex">
             

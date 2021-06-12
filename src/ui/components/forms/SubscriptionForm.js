@@ -11,11 +11,12 @@ export default function SubscriptionForm({subscribe}) {
                 initialValues={{email: ''}}
                 validationSchema={EMAIL_FORM_SCHEMA}
                 onSubmit={subscribe}>
-                <div className="d-flex">
+                <div className="d-flex flex-wrap flex-md-nowrap">
                     <AppTextInput
                         name="email"
                         label="Enter your email address"
-                        type="email" />
+                        type="email"
+                        className=" " />
                     <AppSubmitButton
                         text="Get started"
                         className="border-radius-0" />
