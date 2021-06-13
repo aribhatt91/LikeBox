@@ -34,7 +34,7 @@ export default function HeaderNavigation() {
             Object.keys(HEADER_NAV_MENU).map((item, index) => {
                 return <div key={index} className={"primary-nav-dropdown" + (open && (active === index) ? " open" : "")} aria-expanded={open && (active === index)} onClick={(e) => {e.stopPropagation()}}>
                     <a href="#" className={"nav-anchor text-uppercase"} onClick={(e) => openTab(index)}>{item}</a>
-                    <div className="nav-dropdown-container">
+                    <div className={"nav-dropdown-container" + (open ? ' slide-down': '')}>
                     
                         <div className="nav-dropdown">
                             
@@ -56,7 +56,9 @@ export default function HeaderNavigation() {
                             </div>
                         </div>
                     </div>
-
+                    {
+                        open && <span className="nav-background" onClick={() => setOpen(false)}></span>
+                    }
                 </div>
             })
             

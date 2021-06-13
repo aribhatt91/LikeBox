@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons'
 import { HEADER_NAV_MENU } from './../../service/constants/header-navs';
 import Accordion from './generic/Accordion';
+import HamburgerIcon from './svg-components/HamburgerIcon';
 function HeaderMobileNav({user, logout}){
   const [open, setOpen] = useState(false);
 
@@ -19,7 +18,7 @@ function HeaderMobileNav({user, logout}){
   return (
     <div className="d-inline-block nav-mobile-container d-lg-none">
       <a href="#" onClick={()=>{setOpen(true)}} className="hamburger">
-        <FontAwesomeIcon icon={faBars}/>
+        <HamburgerIcon />
       </a>
       <div className={"nav-mobile" + (open ? " slide-in" : "")} onScroll={(e)=>{e.stopPropagation()}} aria-hidden={!open}>
         <div className="nav-mobile-wrapper">

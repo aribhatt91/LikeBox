@@ -1,6 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import React, {useState, useEffect, useContext} from 'react';
 import AppButton from './generic/AppButton';
 import AppImage from './generic/AppImage';
 import { useHistory } from 'react-router';
@@ -10,6 +8,8 @@ import { fetchLikeBox, updateLikeBox } from '../../service/userProfile';
 import Page from './../pages/Page';
 import { fetchLikeCards } from './../../service/api/firestore/likebox';
 import { SuccessMessage } from './generic/PageMessage';
+import LeftArrowIcon from './svg-components/LeftArrowIcon';
+import RightArrowIcon from './svg-components/RightArrowIcon';
 function CardStack({cards, cardsState, loading}) {
     useEffect(() => {}, [cards])
     return (
@@ -89,7 +89,7 @@ export default function LikeBoxCarousel({slideIn, slideOut}) {
     }, [currentUser])
 
     useEffect(()=>{
-        console.log('useEffectCalled');
+        window.mlog('useEffectCalled');
         if(update && currentUser && !reachedMax){
             setCardsState({
                 ...cardsState,
@@ -98,17 +98,17 @@ export default function LikeBoxCarousel({slideIn, slideOut}) {
             try{
                 (async() => {
                     /* Fetch next batch of cards */
-                    //console.log('LikeBoxCarousel:useEffect: updating', PAGE, LAST_NODE);
+                    //window.mlog('LikeBoxCarousel:useEffect: updating', PAGE, LAST_NODE);
                     //let products = await fetchProductsByPage(PAGE, LIMIT);
                     
                     let skus = [].concat(LIKED).concat(DISLIKED);
-                    console.log('SKUS', skus);
+                    window.mlog('SKUS', skus);
                     
                     /* let res = await fetchProductsBySkus([], PAGE, LIMIT, LAST_NODE, true);
                     let products = res ? res.items || [] : []; */
                     let products = await getCardsByPage(skus);
                     //LAST_NODE = res ? res.lastVisible : null;
-                    //console.log('useEffectCalled: response', res);
+                    //window.mlog('useEffectCalled: response', res);
                     if(products.length < LIMIT){
                         setReachedMax(true);
                     }
@@ -148,11 +148,11 @@ export default function LikeBoxCarousel({slideIn, slideOut}) {
         if(currentPos === 0){
             setUpdate(true);
         }
-        console.log(currentPos);
+        window.mlog(currentPos);
         DISLIKED.push(items[currentPos].sku);
     }
     const likeItem = () => {
-        console.log('likeItem')
+        window.mlog('likeItem')
         if(cardsState.loading || reachedMax){
             return;
         }
@@ -176,7 +176,7 @@ export default function LikeBoxCarousel({slideIn, slideOut}) {
         if(currentPos === 0){
             setUpdate(true);
         }
-        console.log(currentPos, items[currentPos]);
+        window.mlog(currentPos, items[currentPos]);
         LIKED.push(items[currentPos].sku);
     }
 
@@ -187,7 +187,7 @@ export default function LikeBoxCarousel({slideIn, slideOut}) {
             rejectItem();
         }
 
-        console.log('keypressed', e.keyCode)
+        window.mlog('keypressed', e.keyCode)
     }
 
     useEffect(()=>{
@@ -198,7 +198,7 @@ export default function LikeBoxCarousel({slideIn, slideOut}) {
         if(currentUser){
             try {
                 let likebox = {LIKED, DISLIKED, 'lastVisible': LAST_NODE.id};
-                console.log('LikeBoxCarousel:submit', likebox);
+                window.mlog('LikeBoxCarousel:submit', likebox);
                 await updateLikeBox(currentUser.email, {likebox});
                 
             }catch(err){
@@ -223,7 +223,7 @@ export default function LikeBoxCarousel({slideIn, slideOut}) {
                     <div className="d-inline-flex flex-column align-center">
                         <div className="btn-label btn-dislike">Dislike</div>
                         <div className="like-box-btn like-box-left-btn" onClick={debounce(rejectItem, 100)}>
-                            <FontAwesomeIcon icon={faArrowLeft} />
+                            <LeftArrowIcon size={64} />
                         </div>
                     </div>
                     <CardStack
@@ -233,7 +233,7 @@ export default function LikeBoxCarousel({slideIn, slideOut}) {
                     <div className="d-inline-flex flex-column align-center">
                         <div className="btn-label btn-like">Like</div>
                         <div className="like-box-btn like-box-right-btn" onClick={debounce(likeItem, 100)}>
-                            <FontAwesomeIcon icon={faArrowRight} />
+                            <RightArrowIcon size={64} />
                         </div>
                     </div>
                 </div>

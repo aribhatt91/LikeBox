@@ -7,24 +7,63 @@ exports.getAvailableKeywords = exports.getBrands = exports.fetchProduct = export
 
 var _product = require("./api/firestore/product");
 
-/* export const fetchProducts = (path="", page=0, LIMIT=10, LAST_NODES=[], filter={}) => {
-    return fetchAwinProducts(path, page, LIMIT, LAST_NODES, filter);
-}
-
-export const fetchProductsBySkus = (skus=[], page=0, LIMIT=10, LAST_DOC=null, exclusion=false) => {
-    return fetchAwinProductsBySkus(skus, page, LIMIT, LAST_DOC, exclusion);
-}
-
-export const fetchProduct = (sku) => {
-    return fetchAwinProduct(sku);
-} */
 var fetchProducts = function fetchProducts() {
-  var path = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
-  var page = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-  var LIMIT = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 10;
-  var LAST_NODES = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
-  var filter = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : {};
-  return (0, _product.fetchFirestoreProducts)(path, page, LIMIT, LAST_NODES, filter);
+  var path,
+      page,
+      LIMIT,
+      LAST_NODES,
+      filter,
+      categories,
+      paths,
+      availableKeywords,
+      len,
+      j,
+      i,
+      _args = arguments;
+  return regeneratorRuntime.async(function fetchProducts$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          path = _args.length > 0 && _args[0] !== undefined ? _args[0] : "";
+          page = _args.length > 1 && _args[1] !== undefined ? _args[1] : 0;
+          LIMIT = _args.length > 2 && _args[2] !== undefined ? _args[2] : 10;
+          LAST_NODES = _args.length > 3 && _args[3] !== undefined ? _args[3] : [];
+          filter = _args.length > 4 && _args[4] !== undefined ? _args[4] : {};
+          categories = [], paths = path.split('-');
+          _context.prev = 6;
+          _context.next = 9;
+          return regeneratorRuntime.awrap(getAvailableKeywords());
+
+        case 9:
+          availableKeywords = _context.sent;
+          availableKeywords = availableKeywords || [];
+          len = availableKeywords.length;
+
+          for (j = 0; j < paths.length; j++) {
+            for (i = 0; i < len; i++) {
+              if (availableKeywords[i].toLowerCase().indexOf(paths[j].toLowerCase()) === 0) {
+                categories.push(availableKeywords[i]);
+              }
+            }
+          }
+
+          _context.next = 18;
+          break;
+
+        case 15:
+          _context.prev = 15;
+          _context.t0 = _context["catch"](6);
+          console.error('getBrands:error: ', _context.t0);
+
+        case 18:
+          return _context.abrupt("return", (0, _product.fetchFirestoreProducts)(categories, page, LIMIT, LAST_NODES, filter));
+
+        case 19:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, null, null, [[6, 15]]);
 };
 
 exports.fetchProducts = fetchProducts;
@@ -46,62 +85,87 @@ var fetchProduct = function fetchProduct(sku) {
 
 exports.fetchProduct = fetchProduct;
 
-var getBrands = function getBrands(category) {
-  var res;
-  return regeneratorRuntime.async(function getBrands$(_context) {
+var getBrands = function getBrands(slug) {
+  var paths, categories, availableKeywords, len, j, i;
+  return regeneratorRuntime.async(function getBrands$(_context2) {
     while (1) {
-      switch (_context.prev = _context.next) {
+      switch (_context2.prev = _context2.next) {
         case 0:
-          res = [];
-          /* if(sessionStorage.getItem('available_brands')){
-              res = JSON.parse(sessionStorage.getItem('available_brands'));
-          } */
+          console.log('getBrands', slug);
+          paths = slug.split('-');
+          categories = [];
+          _context2.prev = 3;
+          _context2.next = 6;
+          return regeneratorRuntime.awrap(getAvailableKeywords());
 
-          return _context.abrupt("return", (0, _product.fetchProductBrands)(category));
+        case 6:
+          availableKeywords = _context2.sent;
+          availableKeywords = availableKeywords || [];
+          len = availableKeywords.length;
 
-        case 2:
+          for (j = 0; j < paths.length; j++) {
+            for (i = 0; i < len; i++) {
+              if (availableKeywords[i].toLowerCase().indexOf(paths[j].toLowerCase()) === 0) {
+                categories.push(availableKeywords[i]);
+              }
+            }
+          }
+
+          _context2.next = 15;
+          break;
+
+        case 12:
+          _context2.prev = 12;
+          _context2.t0 = _context2["catch"](3);
+          console.error('getBrands:error: ', _context2.t0);
+
+        case 15:
+          return _context2.abrupt("return", (0, _product.fetchProductBrands)(categories));
+
+        case 16:
         case "end":
-          return _context.stop();
+          return _context2.stop();
       }
     }
-  });
+  }, null, null, [[3, 12]]);
 };
 
 exports.getBrands = getBrands;
 
 var getAvailableKeywords = function getAvailableKeywords() {
   var res;
-  return regeneratorRuntime.async(function getAvailableKeywords$(_context2) {
+  return regeneratorRuntime.async(function getAvailableKeywords$(_context3) {
     while (1) {
-      switch (_context2.prev = _context2.next) {
+      switch (_context3.prev = _context3.next) {
         case 0:
           res = [];
 
-          if (!sessionStorage.getItem('available_keys')) {
-            _context2.next = 5;
+          if (!(window.sessionStorage && sessionStorage.getItem('available_keys'))) {
+            _context3.next = 5;
             break;
           }
 
-          res = JSON.parse(sessionStorage.getItem('available_keys'));
-          _context2.next = 9;
+          res = JSON.parse(sessionStorage.getItem('available_keys')); //window.mlog('Fetching from storage', res);
+
+          _context3.next = 9;
           break;
 
         case 5:
-          _context2.next = 7;
+          _context3.next = 7;
           return regeneratorRuntime.awrap((0, _product.fetchAvailableCategories)());
 
         case 7:
-          res = _context2.sent;
+          res = _context3.sent;
           sessionStorage.setItem('available_keys', JSON.stringify(res));
 
         case 9:
-          return _context2.abrupt("return", new Promise(function (resolve) {
+          return _context3.abrupt("return", new Promise(function (resolve) {
             return resolve(res);
           }));
 
         case 10:
         case "end":
-          return _context2.stop();
+          return _context3.stop();
       }
     }
   });
@@ -109,59 +173,78 @@ var getAvailableKeywords = function getAvailableKeywords() {
 
 exports.getAvailableKeywords = getAvailableKeywords;
 
-var isSearchKeyPresent = function isSearchKeyPresent(key) {
-  var available, _key, keys, res, i;
-
-  return regeneratorRuntime.async(function isSearchKeyPresent$(_context3) {
+var isSearchKeyPresent = function isSearchKeyPresent(query) {
+  var available, res, search, avkeys, i;
+  return regeneratorRuntime.async(function isSearchKeyPresent$(_context4) {
     while (1) {
-      switch (_context3.prev = _context3.next) {
+      switch (_context4.prev = _context4.next) {
         case 0:
-          available = false;
-          _context3.prev = 1;
-          _key = _key.toLowerCase();
-          _context3.next = 5;
+          available = false, res = new Set();
+          _context4.prev = 1;
+          search = query.toLowerCase().split('-');
+          _context4.next = 5;
           return regeneratorRuntime.awrap(getAvailableKeywords());
 
         case 5:
-          keys = _context3.sent;
-          res = [];
-          keys = keys || [];
+          avkeys = _context4.sent;
+          avkeys = avkeys || [];
           i = 0;
 
-        case 9:
-          if (!(i < keys.length)) {
-            _context3.next = 16;
+        case 8:
+          if (!(i < avkeys.length)) {
+            _context4.next = 17;
             break;
           }
 
-          if (!(keys[i] === _key)) {
-            _context3.next = 13;
+          if (!(search.indexOf(avkeys[i].toLowerCase()) > -1)) {
+            _context4.next = 14;
             break;
           }
 
           available = true;
-          return _context3.abrupt("break", 16);
+          res.add(avkeys[i]);
 
-        case 13:
+          if (!(res.size() === search.length)) {
+            _context4.next = 14;
+            break;
+          }
+
+          return _context4.abrupt("break", 17);
+
+        case 14:
           i++;
-          _context3.next = 9;
+          _context4.next = 8;
           break;
 
-        case 16:
-          _context3.next = 20;
+        case 17:
+          _context4.next = 21;
           break;
 
-        case 18:
-          _context3.prev = 18;
-          _context3.t0 = _context3["catch"](1);
-
-        case 20:
-          return _context3.abrupt("return", available);
+        case 19:
+          _context4.prev = 19;
+          _context4.t0 = _context4["catch"](1);
 
         case 21:
+          return _context4.abrupt("return", new Promise(function (resolve) {
+            return resolve(Array.from(res));
+          }));
+
+        case 22:
         case "end":
-          return _context3.stop();
+          return _context4.stop();
       }
     }
-  }, null, null, [[1, 18]]);
+  }, null, null, [[1, 19]]);
+};
+
+var getNearestMatches = function getNearestMatches(query) {
+  return regeneratorRuntime.async(function getNearestMatches$(_context5) {
+    while (1) {
+      switch (_context5.prev = _context5.next) {
+        case 0:
+        case "end":
+          return _context5.stop();
+      }
+    }
+  });
 };

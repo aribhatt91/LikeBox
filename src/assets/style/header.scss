@@ -269,6 +269,15 @@ $nav-height: $nav-height-lg;
   .primary-nav-dropdown {
     position: relative;
     display: inline-flex;
+    > span.nav-background {
+      position: fixed;
+      background: rgba(0, 0, 0, 0.1);
+      top: 120px;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
     .nav-anchor {
       position: relative;
       display: inline-flex;
@@ -304,6 +313,7 @@ $nav-height: $nav-height-lg;
         max-width: 950px;
         display: flex;
         margin: 2rem auto;
+        
         .nav-dropdown-menu {
           width: 220px;
           min-height: 300px;

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import AppImage from './generic/AppImage';
 import { debounce } from 'lodash';
+import HeartIcon from './svg-components/HeartIcon';
 
 function ProductHeroGallery({images, product_name, inWishList, toggleInWishList}) {
     const [selected, setSelected] = useState(0);
@@ -31,7 +30,7 @@ function ProductHeroGallery({images, product_name, inWishList, toggleInWishList}
                     }
                     <AppImage className="w-100" src={(decodeURI(images[0]) || "").trim()} alt={product_name} aria-label={product_name}/>
                     <div className={"product-add-wishlist-icon" + (inWishList ? " wished" : "")} onClick={toggleWished}>
-                        <FontAwesomeIcon icon={faHeart} />
+                        <HeartIcon />
                     </div>
             </div>
             

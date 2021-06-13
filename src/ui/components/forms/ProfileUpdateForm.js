@@ -151,6 +151,7 @@ function ProfileUpdateForm({profile={}, onResult}){
                     
                     <div className="row m-0">
                         <div className="field-group col-md-8 p-0">
+                            <p className="col-xs-12 pr-md-3 pl-0 col-form-label">Name</p>
                             <div className="col-xs-12 col-md-6 pr-md-3 pl-0 float-left">
                                 <AppTextInput
                                     type="text"
@@ -191,7 +192,7 @@ function ProfileUpdateForm({profile={}, onResult}){
                     </div>
                 </div>
             </AppForm>
-            <AppForm
+           {/*  <AppForm
             initialValues={contactInitialValues}
             onSubmit={updateProfile}
             validationSchema={CONTACT_INFORMATION_SCHEMA}>
@@ -209,14 +210,7 @@ function ProfileUpdateForm({profile={}, onResult}){
                     </div>
                     <div className="row m-0">
                         <div className="field-group col-md-8 p-0">
-                            {/* <div className="col-md-6 pr-md-3 pl-0 float-left clearfix">
-                                <AppTextInput
-                                    type="email"
-                                    disabled={!ciEditMode}
-                                    name="email"
-                                    label="Email"
-                                />
-                            </div> */}
+                            
                             <div className="col-md-6 pr-md-3 pl-0 float-left clearfix">
                                 <AppTextInput
                                     type="text"
@@ -234,7 +228,7 @@ function ProfileUpdateForm({profile={}, onResult}){
                         </div>
                     </div>
                 </div>
-            </AppForm>
+            </AppForm> */}
             {loading && <LoadingPendulum/>}
         </div>
     )

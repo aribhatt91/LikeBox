@@ -1,6 +1,7 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState, useEffect } from "react";
-import { faExclamationCircle, faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import CircledCheckIcon from './../svg-components/CircledCheckIcon';
+import InfoIcon from "../svg-components/InfoIcon";
+
 const Notification = ({id, type, dispatch, message, dark=true}) => {
   const [exit, setExit] = useState(false);
   const [width, setWidth] = useState(0);
@@ -61,7 +62,7 @@ const Notification = ({id, type, dispatch, message, dark=true}) => {
         >
         <span className="notification-icon">
         {
-        ( (type || "").toLowerCase() === 'success') ? <FontAwesomeIcon icon={faCheckCircle}/> : <FontAwesomeIcon icon={faExclamationCircle}/>
+        ( (type || "").toLowerCase() === 'success') ? <CircledCheckIcon /> : <InfoIcon />
         }
         </span>
       <div className="notification-text">{message}</div>

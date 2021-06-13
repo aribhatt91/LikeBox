@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { fetchWishList, removeItemFromWishList } from './../../service/wishlistMethods';
 import AppButton from '../components/generic/AppButton';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import AppImage from '../components/generic/AppImage';
 import Page from './Page';
 import { CURRENCY } from './../../service/constants';
 import { AuthContext } from './../../store/contexts/AuthContext';
 import { useNotification } from './../../store/contexts/NotificationProvider';
+import TrashIcon from '../components/svg-components/TrashIcon';
 function WishListInstancePlaceholder() {
     return (
         <div className="wish-list-instance-container wish-list-instance-container-placeholder mb-3 position-relative">
@@ -68,7 +67,7 @@ function WishListInstance({instance, removeItem}){
             </div>
             <div className="wish-list-instance-remove-wrapper tooltip-wrapper d-flex flex-column align-items-end" onClick={(e)=>{e.stopPropagation()}}>
                 <span className="action-icon" onClick={deletePopAlert}>
-                    <FontAwesomeIcon icon={faTrashAlt} />
+                    <TrashIcon />
                 </span>
                 <div className={"action-message-tooltip p-3" + (showDeletePop ? "" : " d-none")}>
                     <p className="mb-2">Are you sure you want to remove this item?</p>

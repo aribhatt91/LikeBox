@@ -12,14 +12,14 @@ function LikeBoxHomePage() {
             <section className="likebox-home-section section-clothes mb-5">
                 <h1>Clothes</h1>
                 <div className="staggered-grid clothes-grid row ml-0 mr-0">
-                    <div className="col-xs-12 col-md-6 grid-item position-relative">
+                    <div className="col-xs-12 col-md-6 grid-item position-relative zoom-in">
                         <div className="position-relative">
                             <LazyLoadImage effect="opacity" className="grid-img" src="https://firebasestorage.googleapis.com/v0/b/webapp-470b3.appspot.com/o/mens-polo-shirts.jpg?alt=media&token=7259d185-0287-41cc-9f7c-cd3de37a8e9b"/>
                             <h3>Polo shirts</h3>
                             <Link className="position-absolute" to='/products/polo'/>
                         </div>
                     </div>
-                    <div className="col-xs-12 col-md-6 grid-item position-relative">
+                    <div className="col-xs-12 col-md-6 grid-item position-relative zoom-in">
                         <div className="position-relative">
                             <LazyLoadImage effect="opacity" className="grid-img" src="https://firebasestorage.googleapis.com/v0/b/webapp-470b3.appspot.com/o/mens-hoodies-sweatshirts.jpg?alt=media&token=3609f086-ba52-4c6e-b043-2a556936f56e" />
                             <h3>Hoodies & Sweatshirts</h3>
@@ -27,35 +27,35 @@ function LikeBoxHomePage() {
                         </div>
                     </div>
 
-                    <div className="col-xs-12 col-md-4 grid-item position-relative">
+                    <div className="col-xs-12 col-md-4 grid-item position-relative zoom-in">
                         <div className="position-relative">
                             <LazyLoadImage effect="opacity" className="grid-img" src="https://firebasestorage.googleapis.com/v0/b/webapp-470b3.appspot.com/o/mens-jeans.jpg?alt=media&token=0f3bf7a9-0b51-41dd-b2c5-ffb701eb8490" />
                             <h3>Jeans</h3>
                             <Link className="position-absolute" to='/products/jeans'/>
                         </div>
                     </div>
-                    <div className="col-xs-12 col-md-4 grid-item position-relative">
+                    <div className="col-xs-12 col-md-4 grid-item position-relative zoom-in">
                         <div className="position-relative">
                             <LazyLoadImage effect="opacity" className="grid-img" src="https://firebasestorage.googleapis.com/v0/b/webapp-470b3.appspot.com/o/mens-shorts.jpg?alt=media&token=836117fe-c663-4aab-839b-cab5418611d7" />
                             <h3>Shorts</h3>
                             <Link className="position-absolute" to='/products/shorts'/>
                         </div>
                     </div>
-                    <div className="col-xs-12 col-md-4 grid-item position-relative">
+                    <div className="col-xs-12 col-md-4 grid-item position-relative zoom-in">
                         <div className="position-relative">
                             <LazyLoadImage effect="opacity" className="grid-img" src="https://firebasestorage.googleapis.com/v0/b/webapp-470b3.appspot.com/o/mens-scarves.jpg?alt=media&token=fad0f031-ad94-4f2c-87e6-7ec14515e149" />
                             <h3>Scarves</h3>
                             <Link className="position-absolute" to='/products/scarves'/>
                         </div>
                     </div>
-                    <div className="col-xs-12 col-md-6 grid-item position-relative">
+                    <div className="col-xs-12 col-md-6 grid-item position-relative zoom-in">
                         <div className="position-relative">
                             <LazyLoadImage effect="opacity" className="grid-img" src="https://firebasestorage.googleapis.com/v0/b/webapp-470b3.appspot.com/o/mens-shirts.jpg?alt=media&token=887e1a9d-7a6f-42d5-8430-29ffb4b8b481" />
                             <h3>Shirts</h3>
                             <Link className="position-absolute" to='/products/shirts'/>
                         </div>
                     </div>
-                    <div className="col-xs-12 col-md-6 grid-item position-relative">
+                    <div className="col-xs-12 col-md-6 grid-item position-relative zoom-in">
                         <div className="position-relative">
                             <LazyLoadImage effect="opacity" className="grid-img" src="https://firebasestorage.googleapis.com/v0/b/webapp-470b3.appspot.com/o/mens-jackets-coats.jpg?alt=media&token=53a33b6b-783b-4b50-81f8-115099439b0e" />
                             <h3>Jackets & Coats</h3>
@@ -64,7 +64,7 @@ function LikeBoxHomePage() {
                     </div>
                 </div>
             </section>
-            <section className="likebox-home-section section-clothes mb-5">
+            <section className="likebox-home-section section-clothes mb-5 zoom-in">
                 <h1 className="text-right">Shoes</h1>
                 <div className="staggered-grid clothes-grid row ml-0 mr-0">
                     <div className="col-xs-12 col-md-7 grid-item position-relative">
@@ -74,7 +74,7 @@ function LikeBoxHomePage() {
                             <Link className="position-absolute" to='/products/boots'/>
                         </div>
                     </div>
-                    <div className="col-xs-12 col-md-5 grid-item position-relative">
+                    <div className="col-xs-12 col-md-5 grid-item position-relative zoom-in">
                         <div className="position-relative">
                             <LazyLoadImage effect="opacity" className="grid-img" src="https://firebasestorage.googleapis.com/v0/b/webapp-470b3.appspot.com/o/mens-sandals-flip.jpg?alt=media&token=5665d7c0-bd9c-4343-a608-6b795efca3c6" />
                             <h3>Sandals & Flip-flops</h3>
@@ -82,21 +82,21 @@ function LikeBoxHomePage() {
                         </div>
                     </div>
 
-                    <div className="col-xs-12 col-md-5 grid-item position-relative">
+                    <div className="col-xs-12 col-md-5 grid-item position-relative zoom-in">
                         <div className="position-relative">
                             <LazyLoadImage effect="opacity" className="grid-img" src="https://firebasestorage.googleapis.com/v0/b/webapp-470b3.appspot.com/o/mens-trainers.jpg?alt=media&token=ea2de3de-9a68-4b81-9ec4-66b588038d43" />
                             <h3>Trainers</h3>
                             <Link className="position-absolute" to='/products/trainer'/>
                         </div>
                     </div>
-                    <div className="col-xs-12 col-md-7 grid-item position-relative">
+                    <div className="col-xs-12 col-md-7 grid-item position-relative zoom-in">
                         <div className="position-relative">
                             <LazyLoadImage effect="opacity" className="grid-img" src="https://firebasestorage.googleapis.com/v0/b/webapp-470b3.appspot.com/o/mens-slippers.jpg?alt=media&token=88508106-8e68-4b1c-88f6-b15906781f03" />
                             <h3>Slippers</h3>
                             <Link className="position-absolute" to='/products/slippers'/>
                         </div>
                     </div>
-                    <div className="col-xs-12 col-md-12 grid-item position-relative">
+                    <div className="col-xs-12 col-md-12 grid-item position-relative zoom-in">
                         <div className="position-relative">
                             <LazyLoadImage effect="opacity" className="grid-img" src="https://firebasestorage.googleapis.com/v0/b/webapp-470b3.appspot.com/o/mens-shoes.jpg?alt=media&token=41f2d077-66de-4d59-80eb-e1f3100f2704" />
                             <h3>All shoes</h3>

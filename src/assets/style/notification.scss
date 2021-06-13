@@ -71,11 +71,17 @@ $width: 360px;
         display: inline-flex;
         align-items: center;
         color: #2e86de;
+        svg {
+            fill: #2e86de;
+        }
     }
     &.error {
         /* background-color: #ff6b6b; */
         .notification-icon {
             color: #ff6b6b;
+            svg {
+                fill: #ff6b6b;
+            }
         }
         .bar {
             background-color: #ff6b6b;
@@ -85,6 +91,9 @@ $width: 360px;
         /* background-color: #1dd1a1; */
         .notification-icon {
             color: #1dd1a1;
+            svg {
+                fill: #1dd1a1;
+            }
         }
         .bar {
             background-color: #1dd1a1;
@@ -94,6 +103,9 @@ $width: 360px;
         /* background-color: #feca57; */
         .notification-icon {
             color: #feca57;
+            svg {
+                fill: #feca57;
+            }
         }
         .bar {
             background-color: #feca57;

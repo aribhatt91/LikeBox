@@ -215,9 +215,15 @@ $width: $thumb-dimen-lg;
       }
       &.like-box-left-btn {
         color: #FF6969;
+        svg {
+          fill: #FF6969;
+        }
       }
       &.like-box-right-btn {
         color: #2F97C1;
+        svg {
+          fill: #2f97c1;
+        }
       }
     }
     .app-btn {
@@ -228,15 +234,34 @@ $width: $thumb-dimen-lg;
     }
     .card-stack {
       position: relative;
-      margin: 2rem;
+      margin: 4rem;
+      padding: 2rem;
       height: calc((#{$width} + 2rem + 2.4rem + 8px));;
       width: calc((#{$width} + 2rem + 8px));
-      overflow: hidden;
+      overflow: visible;
       @include media(660px) {
         order: -1;
       }
+      .card-stack-item {
+        &:nth-child(1) {
+          transform: rotate(0deg);
+        }
+        &:nth-child(2) {
+          transform: rotate(-5deg);
+        }
+        &:nth-child(3) {
+          transform: rotate(5deg);
+        }
+        &:nth-child(4) {
+          transform: rotate(-9deg);
+        }
+        &:nth-child(5) {
+          transform: rotate(9deg);
+        }
+      }
 
-      .card-stack-item, .card-item-placeholder {
+      .card-stack-item, 
+      .card-item-placeholder {
         position: absolute;
         left: 50%;
         top: 0;
@@ -250,7 +275,7 @@ $width: $thumb-dimen-lg;
         align-items: center;
         background: #fbfbfb;
         margin-left: calc(-1 * (#{$width}/2 + 1rem));
-        border: 2px solid #393020;
+        box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.20), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
         .card-container {
             width: $width;
         }
@@ -290,12 +315,18 @@ $width: $thumb-dimen-lg;
             }
         }
         &.rejected {
-          left: -300%;
-          transform: scale(0.2);
+          animation-name: spinoutleft;
+          animation-duration: 0.6s;
+          animation-timing-function: linear;
+          animation-fill-mode: forwards;
         }
         &.liked {
-          left: 300%;
-          transform: scale(0.2);
+          /* left: 300%;
+          transform: scale(0.2); */
+          animation-name: spinoutright;
+          animation-duration: 0.6s;
+          animation-timing-function: linear;
+          animation-fill-mode: forwards;
         }
 
       }

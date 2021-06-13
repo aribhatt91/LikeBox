@@ -1,6 +1,6 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, {useState} from 'react';
-import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import ChevronUp from '../svg-components/ChevronUp';
+import ChevronDown from '../svg-components/ChevronDown';
 
 function Accordion({
     label, 
@@ -25,7 +25,9 @@ function Accordion({
             <div className={"accordion-header " + (hideHeader ? " d-none" : "") + (disabled ? " disabled" : "")} onClick={toggleAccordion}>
                 <span className="accordion-header-label">{label}</span>
                 {<span className={"accordion-btn"}>
-                    <FontAwesomeIcon icon={open ? faChevronUp : faChevronDown }/>
+                    {
+                        open ? <ChevronUp size={16}/> : <ChevronDown size={16}/>
+                    }
                 </span>}
             </div>
             <div className={"accordion-body " + (open ? "open" : "")} aria-hidden={!open} aria-expanded={open}>

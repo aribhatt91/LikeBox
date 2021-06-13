@@ -1,10 +1,5 @@
 import React, {useState} from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import TestIcons from '../svg-components/TestIcons';
 import CircledCheckIcon from '../svg-components/CircledCheckIcon';
-
-//import {faWarning, faInfoCircle, faCheckCircle} from '@fortawesome/free-solid-svg-icons';
 
 /* 
 size: [small, [default]],

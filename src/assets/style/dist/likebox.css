@@ -31,6 +31,70 @@
     transform: rotate(360deg);
   }
 }
+@keyframes slideup {
+  from {
+    transform: translateY(100px);
+  }
+  to {
+    transform: translateY(0px);
+  }
+}
+@keyframes slidedown {
+  from {
+    transform: translateY(-10px);
+  }
+  to {
+    transform: translateY(0px);
+  }
+}
+@keyframes zoomin {
+  from {
+    transform: scale(0.8);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes spinoutleft {
+  0% {
+    opacity: 1;
+    left: 0;
+  }
+  25% {
+    transform: rotate(-14deg) scale(0.8);
+  }
+  50% {
+    transform: rotate(-45deg) scale(0.6);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(-60deg) scale(0.4);
+    opacity: 0;
+    left: -200%;
+    top: 200%;
+  }
+}
+@keyframes spinoutright {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    left: 20%;
+    transform: rotate(14deg) scale(0.8);
+  }
+  50% {
+    transform: rotate(45deg) scale(0.6);
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(60deg) scale(0.4);
+    left: 200%;
+    top: 200%;
+    opacity: 0;
+  }
+}
 .button--interactive:not([disabled]):hover:active:before {
   background-color: #000;
 }
@@ -253,8 +317,14 @@
 .like-box-preference-carousel .like-box-btn.like-box-left-btn {
   color: #FF6969;
 }
+.like-box-preference-carousel .like-box-btn.like-box-left-btn svg {
+  fill: #FF6969;
+}
 .like-box-preference-carousel .like-box-btn.like-box-right-btn {
   color: #2F97C1;
+}
+.like-box-preference-carousel .like-box-btn.like-box-right-btn svg {
+  fill: #2f97c1;
 }
 .like-box-preference-carousel .app-btn {
   width: calc((280px + 2rem + 8px));
@@ -266,17 +336,34 @@
 }
 .like-box-preference-carousel .card-stack {
   position: relative;
-  margin: 2rem;
+  margin: 4rem;
+  padding: 2rem;
   height: calc((280px + 2rem + 2.4rem + 8px));
   width: calc((280px + 2rem + 8px));
-  overflow: hidden;
+  overflow: visible;
 }
 @media only screen and (max-width: 660px) {
   .like-box-preference-carousel .card-stack {
     order: -1;
   }
 }
-.like-box-preference-carousel .card-stack .card-stack-item, .like-box-preference-carousel .card-stack .card-item-placeholder {
+.like-box-preference-carousel .card-stack .card-stack-item:nth-child(1) {
+  transform: rotate(0deg);
+}
+.like-box-preference-carousel .card-stack .card-stack-item:nth-child(2) {
+  transform: rotate(-5deg);
+}
+.like-box-preference-carousel .card-stack .card-stack-item:nth-child(3) {
+  transform: rotate(5deg);
+}
+.like-box-preference-carousel .card-stack .card-stack-item:nth-child(4) {
+  transform: rotate(-9deg);
+}
+.like-box-preference-carousel .card-stack .card-stack-item:nth-child(5) {
+  transform: rotate(9deg);
+}
+.like-box-preference-carousel .card-stack .card-stack-item,
+.like-box-preference-carousel .card-stack .card-item-placeholder {
   position: absolute;
   left: 50%;
   top: 0;
@@ -290,23 +377,27 @@
   align-items: center;
   background: #fbfbfb;
   margin-left: calc(-1 * (280px/2 + 1rem));
-  border: 2px solid #393020;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 }
-.like-box-preference-carousel .card-stack .card-stack-item .card-container, .like-box-preference-carousel .card-stack .card-item-placeholder .card-container {
+.like-box-preference-carousel .card-stack .card-stack-item .card-container,
+.like-box-preference-carousel .card-stack .card-item-placeholder .card-container {
   width: 280px;
 }
-.like-box-preference-carousel .card-stack .card-stack-item .card-thumb, .like-box-preference-carousel .card-stack .card-item-placeholder .card-thumb {
+.like-box-preference-carousel .card-stack .card-stack-item .card-thumb,
+.like-box-preference-carousel .card-stack .card-item-placeholder .card-thumb {
   width: 280px;
   height: 280px;
   display: inline-block;
   background-color: #ececec;
 }
-.like-box-preference-carousel .card-stack .card-stack-item .card-thumb img, .like-box-preference-carousel .card-stack .card-item-placeholder .card-thumb img {
+.like-box-preference-carousel .card-stack .card-stack-item .card-thumb img,
+.like-box-preference-carousel .card-stack .card-item-placeholder .card-thumb img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-.like-box-preference-carousel .card-stack .card-stack-item .card-title, .like-box-preference-carousel .card-stack .card-item-placeholder .card-title {
+.like-box-preference-carousel .card-stack .card-stack-item .card-title,
+.like-box-preference-carousel .card-stack .card-item-placeholder .card-title {
   margin-top: 1rem;
   margin-bottom: 0;
   font-size: 1.2rem;
@@ -314,28 +405,39 @@
   font-weight: bold;
   text-align: center;
 }
-.like-box-preference-carousel .card-stack .card-stack-item .card-title-placeholder, .like-box-preference-carousel .card-stack .card-item-placeholder .card-title-placeholder {
+.like-box-preference-carousel .card-stack .card-stack-item .card-title-placeholder,
+.like-box-preference-carousel .card-stack .card-item-placeholder .card-title-placeholder {
   margin-top: 1rem;
   height: 1.44rem;
   width: 50%;
   background-color: #ececec;
 }
-.like-box-preference-carousel .card-stack .card-stack-item .card-price, .like-box-preference-carousel .card-stack .card-item-placeholder .card-price {
+.like-box-preference-carousel .card-stack .card-stack-item .card-price,
+.like-box-preference-carousel .card-stack .card-item-placeholder .card-price {
   font-size: 18px;
   line-height: 24px;
   font-weight: bold;
   text-align: start;
 }
-.like-box-preference-carousel .card-stack .card-stack-item .card-price .currency, .like-box-preference-carousel .card-stack .card-item-placeholder .card-price .currency {
+.like-box-preference-carousel .card-stack .card-stack-item .card-price .currency,
+.like-box-preference-carousel .card-stack .card-item-placeholder .card-price .currency {
   font-weight: bold;
 }
-.like-box-preference-carousel .card-stack .card-stack-item.rejected, .like-box-preference-carousel .card-stack .card-item-placeholder.rejected {
-  left: -300%;
-  transform: scale(0.2);
+.like-box-preference-carousel .card-stack .card-stack-item.rejected,
+.like-box-preference-carousel .card-stack .card-item-placeholder.rejected {
+  animation-name: spinoutleft;
+  animation-duration: 0.6s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
 }
-.like-box-preference-carousel .card-stack .card-stack-item.liked, .like-box-preference-carousel .card-stack .card-item-placeholder.liked {
-  left: 300%;
-  transform: scale(0.2);
+.like-box-preference-carousel .card-stack .card-stack-item.liked,
+.like-box-preference-carousel .card-stack .card-item-placeholder.liked {
+  /* left: 300%;
+  transform: scale(0.2); */
+  animation-name: spinoutright;
+  animation-duration: 0.6s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
 }
 .like-box-preference-carousel .card-stack .card-item-placeholder {
   animation: anim-placeholder 1.5s infinite;

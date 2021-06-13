@@ -52,35 +52,10 @@ const applyFilter = (query, filterObject) => {
 fetch products by path
 1. Break down the path and 
 */
-export const fetchFirestoreProducts = async (path="", page=0, LIMIT=10, LAST_NODES=[], filterObject=null) => {
-    window.mlog('Product category ->', path);
-    path = path.toLowerCase() || "";
-    let paths = path.split('-').map(p => (p || "").trim()), 
-    queryPaths = [], 
-    res = null;
-    /* Get available paths as per search terms */
+export const fetchFirestoreProducts = async (queryPaths=[], page=0, LIMIT=10, LAST_NODES=[], filterObject=null) => {
+    window.mlog('Product category ->', queryPaths);
+    let res = null;
     try {
-        let categoriesQuerySnapshot = await categoriesCollection.get(),
-        categories = categoriesQuerySnapshot.docs;
-        let availableCategoriesDocs = categories.filter(doc => doc.id === 'aggregate'),
-        avalaibleCategories = null;
-        
-        if(availableCategoriesDocs.length > 0){
-            avalaibleCategories = availableCategoriesDocs.map(doc => doc.data())[0]
-            //window.mlog('availableCategories', avalaibleCategories);
-            if(avalaibleCategories){
-                Object.keys(avalaibleCategories).forEach(cat => {
-                    for (let index = 0; index < paths.length; index++) {
-                        if(paths[index].trim().indexOf(cat.trim()) === 0  || (cat.trim()).indexOf(paths[index]) === 0){
-                            queryPaths.push(cat.trim());
-                            //window.mlog(cat);
-                            break;
-                        }
-                    }
-                })
-                //window.mlog('Actual queryPaths -> ', paths, queryPaths);
-            }
-        }
 
         if(queryPaths.length > 1){
             /* Logical OR operation */
@@ -125,7 +100,7 @@ export const fetchFirestoreProducts = async (path="", page=0, LIMIT=10, LAST_NOD
                 }
             });
 
-            window.mlog('2: Fetched Firestore products for path -> ', path, '--->', res);
+            window.mlog('2: Fetched Firestore products for path -> ', queryPaths.join('-'), '  --->', res);
 
         }else if(queryPaths.length === 1){
             //window.mlog('BP3', queryPaths, ('searchTerms.' + (queryPaths[0] || "").trim()));
@@ -150,7 +125,7 @@ export const fetchFirestoreProducts = async (path="", page=0, LIMIT=10, LAST_NOD
                     return convertAwinToProduct(doc.data(), doc.id);
                 }
             });
-            //window.mlog('1: Fetched Firestore products for path -> ', path, '--->', res);
+            window.mlog('1: Fetched Firestore products for path -> ', queryPaths[0], '--->', res);
         }
     }catch(err){
         console.error('fetchFirestoreProducts:error', err);
@@ -216,13 +191,16 @@ export const fetchFirestoreProduct = async (sku) => {
     return new Promise(resolve => resolve(res));
 }
 
-export const fetchProductBrands = async (category) => {
+export const fetchProductBrands = async (categories) => {
+    
     try {
+        let category = categories[0];
         let query = brandsCollection;
+        window.mlog('fetchProductBrands:start:', category);
         if(category){
             try{
-                category = category.split('-')[0];
-                query = query.where(category, ">", 10).orderBy(category);
+                //category = category.split('-')[0];
+                query = query.where(category, ">", 1).orderBy(category, 'desc');
             }catch(err){
 
             }
@@ -231,11 +209,12 @@ export const fetchProductBrands = async (category) => {
         brands = brandsQuerySnapshot.docs;
         let availableBrandsDocs = brands.filter(doc => doc.id !== 'aggregate');
         let res = availableBrandsDocs.map(doc => Object.assign({'label': doc.id, 'val': doc.id}));
-        window.mlog('getBrands', res);
+        window.mlog('fetchProductBrands:res:', res);
         return new Promise(resolve => resolve(res));
     }catch(err){
-        console.error('getBrands', err);
+        console.error('fetchProductBrands', err);
     }
+    return new Promise(resolve => resolve([]));
 }
 
 export const fetchAvailableCategories = async () => {

@@ -595,7 +595,18 @@
   animation-fill-mode: forwards;
   animation-iteration-count: 1;
 }
-
+.slide-down {
+  animation-name: slidedown;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
+.zoom-in {
+  animation: zoomin;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+}
 @media only screen and (max-width: 1024px){
 
 }

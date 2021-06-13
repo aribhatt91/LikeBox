@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faWarning, faInfoCircle, faCheckCircle} from '@fortawesome/free-solid-svg-icons';
 import InfoIcon from './svg-components/InfoIcon';
+import WarningIcon from './svg-components/WarningIcon';
+import CircledCheckIcon from './svg-components/CircledCheckIcon';
 /* 
 size: [small, [default]],
 type: [error, success, info, alert],
@@ -15,9 +15,9 @@ const NotFoundModule = (props) => {
     return (
         <div className={"empty-error-container" + (props.size === "small" ? " msg-small" : "") + " " + (props.type || "") + (props.border === false ? "" : " no-border")} hidden={!showMsg}>
             <span className="empty-error-icon">
-                {(props.type === "error" || props.type === "alert") && <FontAwesomeIcon icon={faWarning}></FontAwesomeIcon>}
+                {(props.type === "error" || props.type === "alert") && <WarningIcon />}
                 {props.type === "info" && <InfoIcon/>}
-                {props.type === "success" && <FontAwesomeIcon icon={faCheckCircle}></FontAwesomeIcon>}
+                {props.type === "success" && <CircledCheckIcon />}
             </span>
             <span className="empty-error-text">{props.text}</span>
         </div>
