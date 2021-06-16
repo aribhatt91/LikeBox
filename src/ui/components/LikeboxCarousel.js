@@ -111,6 +111,7 @@ export default function LikeBoxCarousel({slideIn, slideOut}) {
                     //window.mlog('useEffectCalled: response', res);
                     if(products.length < LIMIT){
                         setReachedMax(true);
+                        window.scrollTo({top: 0, left: 0});
                     }
                     currentPos = products.length;
                     PAGE++;
@@ -121,6 +122,7 @@ export default function LikeBoxCarousel({slideIn, slideOut}) {
             }catch(err){
                 setUpdate(false);
                 setReachedMax(true);
+                window.scrollTo({top: 0, left: 0});
             }finally{
                 setCardsState({loading: false});
             }
@@ -146,7 +148,10 @@ export default function LikeBoxCarousel({slideIn, slideOut}) {
         arr[st] = "rejected";
         setCardsState(arr);
         if(currentPos === 0){
-            setUpdate(true);
+            setTimeout(() => {
+                setUpdate(true);
+            }, 500);
+            
         }
         window.mlog(currentPos);
         DISLIKED.push(items[currentPos].sku);
@@ -174,7 +179,10 @@ export default function LikeBoxCarousel({slideIn, slideOut}) {
         arr[st] = "liked";
         setCardsState(arr);
         if(currentPos === 0){
-            setUpdate(true);
+            setTimeout(() => {
+                setUpdate(true);
+            }, 500);
+            
         }
         window.mlog(currentPos, items[currentPos]);
         LIKED.push(items[currentPos].sku);

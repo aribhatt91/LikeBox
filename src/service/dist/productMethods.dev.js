@@ -3,9 +3,13 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getAvailableKeywords = exports.getBrands = exports.fetchProduct = exports.fetchProductsBySkus = exports.fetchProducts = void 0;
+exports.getNearestMatches = exports.isSearchKeyPresent = exports.getAvailableKeywords = exports.getBrands = exports.fetchProduct = exports.fetchProductsBySkus = exports.fetchProducts = void 0;
 
 var _product = require("./api/firestore/product");
+
+var _diffMatchPatch = _interopRequireDefault(require("diff-match-patch"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var fetchProducts = function fetchProducts() {
   var path,
@@ -237,14 +241,49 @@ var isSearchKeyPresent = function isSearchKeyPresent(query) {
   }, null, null, [[1, 19]]);
 };
 
+exports.isSearchKeyPresent = isSearchKeyPresent;
+
 var getNearestMatches = function getNearestMatches(query) {
+  var map, dmp, avkeys, i, diff;
   return regeneratorRuntime.async(function getNearestMatches$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
+          map = {};
+          _context5.prev = 1;
+          dmp = new _diffMatchPatch["default"]();
+          _context5.next = 5;
+          return regeneratorRuntime.awrap(getAvailableKeywords());
+
+        case 5:
+          avkeys = _context5.sent;
+          avkeys = avkeys || [];
+
+          for (i = 0; i < avkeys.length; i++) {
+            diff = dmp.diff_main(query, avkeys[i]);
+            map[avkeys[i]] = diff;
+          }
+
+          window.mlog('getNearestMatches', map);
+          _context5.next = 14;
+          break;
+
+        case 11:
+          _context5.prev = 11;
+          _context5.t0 = _context5["catch"](1);
+          console.error('getNearestMatches:error', _context5.t0);
+
+        case 14:
+          return _context5.abrupt("return", new Promise(function (resolve) {
+            return resolve(map);
+          }));
+
+        case 15:
         case "end":
           return _context5.stop();
       }
     }
-  });
+  }, null, null, [[1, 11]]);
 };
+
+exports.getNearestMatches = getNearestMatches;

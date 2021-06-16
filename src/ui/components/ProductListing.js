@@ -138,16 +138,8 @@ function ProductListing({type, filter=null, category, addToWishlist, inWishlist}
               {
                 products.map((item, index) => 
                 <ProductCard 
+                    product={item}
                     key={index}
-                    sku={item.sku}
-                    title={item.name}
-                    img={item.thumbnail}
-                    price={item.price}
-                    link={"/product/" + item.sku}
-                    rating={item.ratings}
-                    brand={item.brand}
-                    desc={item.description}
-                    currency={item.currency}
                     />)
               }
             

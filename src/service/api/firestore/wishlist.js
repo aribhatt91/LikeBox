@@ -53,7 +53,7 @@ export const isItemInWishList = async (email, sku) => {
 }
 
 export const getUserWishList = async (email) => {
-    let res = null;
+    let res = [];
     try {
         if(email){
             let queries = await getWishlistQuery(email),
@@ -65,7 +65,7 @@ export const getUserWishList = async (email) => {
                     data = data || {};
                     items = items.concat((data.items || []));
                 });
-                res = new Promise(resolve => resolve({type: 'success', items}));
+                res = new Promise(resolve => resolve(items));
             }
         }else {
             throw new Error('No email parameter found');
@@ -83,11 +83,19 @@ export const createWishList = async (email, name="My Wishlist", products=[]) => 
                 if(queries.size <= 0){
                     let wlist = {}, items = [];
                     wlist.user_id = email;
-                    products.forEach(sku => {
-                        let item = {};
-                        item.sku = sku;
-                        item.date_added = (new Date()).getTime();
-                        items.push(item);
+                    products.forEach(product => {
+                        if(!product.sku){
+                            throw new Error('Invalid product');
+                        }
+                        items.push({
+                            sku: product.sku, 
+                            thumbnail: product.thumbnail,
+                            name: product.name,
+                            link: product.link,
+                            price: product.price,
+                            currency: product.currency,
+                            date_added: (new Date()).getTime()
+                        });
                     })
                     wlist.items = items;
                     try {
@@ -118,25 +126,27 @@ export const createWishList = async (email, name="My Wishlist", products=[]) => 
     return res;
 }
 
-export const addToWishList = async (email, sku) => {
+export const addToWishList = async (email, sku, product) => {
     let res = null;
+    window.mlog('addToWishList called', product); 
     if(email){
         try{
             let queries = await getWishlistQuery(email);
             if(queries.size <= 0){
-                let data = await createWishList(email, "", [sku]);
-                window.mlog(data);
+                let data = await createWishList(email, "", [product]);
+                
+                window.mlog('addToWishList: createWishList', data); 
                 res = new Promise(resolve => resolve(data));
             }else if(queries.size === 1){
                 window.mlog('queries', queries.docs[0].id);
                 let doc = queries.docs[0],
                 docId = doc.id;
-                    window.mlog(doc.id, " => ", doc.data());
+                window.mlog(doc.id, " => ", doc.data());
                 let products = doc.data().items || [], isPresent = false;
                 
                 /* Check if product is present */
                 for (let i = 0; i < products.length; i++) {
-                    if(products[i].sku === sku){
+                    if(products[i].sku === product.sku){
                         isPresent = true;
                         break;
                     }
@@ -146,12 +156,16 @@ export const addToWishList = async (email, sku) => {
                     data.type = 'error';
                     data.msg = 'Product is already present in your wish list';
                     window.mlog('Product already present');
-                    res = new Promise((resolve, reject) => reject({
-                        type: 'error', 
-                        msg: 'Product is already present in your wish list'
-                    }))
+                    res = new Promise((resolve, reject) => reject(data))
                 }else {/* If not add it and update */
-                    products.push({sku: sku, date_added: (new Date()).getTime()});
+                    products.push({
+                        sku: product.sku, 
+                        thumbnail: product.thumbnail,
+                        name: product.name,
+                        link: product.link,
+                        price: product.price,
+                        currency: product.currency,
+                        date_added: (new Date()).getTime()});
                     //let updateQuery = await updateWishlistQuery(doc.id, {'items': products});
                     
                     let docRef = await updateWishlistQuery(doc.id, {'items': products});
@@ -169,9 +183,11 @@ export const addToWishList = async (email, sku) => {
             /* let data = {};
             data.type = 'error';
             data.msg = 'Product is already present in your wish list'; */
-            res = new Promise(resolve => resolve({
+            //console.error(err);
+            res = new Promise((resolve, reject) => reject({
                 type: 'error',
-                msg: 'An error occurred!'
+                msg: 'An error occurred!',
+                error: err
             }))
         }
         return res; 

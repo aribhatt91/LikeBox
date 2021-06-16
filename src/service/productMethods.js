@@ -1,10 +1,5 @@
-import { 
-    fetchFirestoreProducts, 
-    fetchFirestoreProductsBySkus, 
-    fetchFirestoreProduct, 
-    fetchProductBrands,
-    fetchAvailableCategories } from './api/firestore/product';
-
+import { fetchFirestoreProducts, fetchFirestoreProductsBySkus, fetchFirestoreProduct, fetchProductBrands, fetchAvailableCategories } from './api/firestore/product';
+import DiffMatchPatch from 'diff-match-patch';
 export const fetchProducts = async (path="", page=0, LIMIT=10, LAST_NODES=[], filter={}) => {
     let categories = [],
     paths = path.split('-');
@@ -69,7 +64,7 @@ export const getAvailableKeywords = async () => {
     return new Promise(resolve => resolve(res));   
 }
 
-const isSearchKeyPresent = async (query) => {
+export const isSearchKeyPresent = async (query) => {
     let available = false, res = new Set();
     try {
         let search = query.toLowerCase().split('-'),
@@ -93,6 +88,22 @@ const isSearchKeyPresent = async (query) => {
     return new Promise(resolve => resolve(Array.from(res)));
 }
 
-const getNearestMatches = async (query) => {
+export const getNearestMatches = async (query) => {
+    let map = {};
+    try {
+        const dmp = new DiffMatchPatch();
 
+        let avkeys = await getAvailableKeywords();
+        
+        avkeys = avkeys || [];
+
+        for (let i = 0; i < avkeys.length; i++) {
+            const diff = dmp.diff_main(query, avkeys[i]);
+            map[avkeys[i]] = diff;
+        }
+        window.mlog('getNearestMatches', map);
+    }catch(err) {
+        console.error('getNearestMatches:error', err);
+    }
+    return new Promise(resolve => resolve(map));
 }

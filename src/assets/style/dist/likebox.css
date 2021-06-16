@@ -77,9 +77,10 @@
 @keyframes spinoutright {
   0% {
     opacity: 1;
+    right: 0;
   }
   25% {
-    left: 20%;
+    right: -100%;
     transform: rotate(14deg) scale(0.8);
   }
   50% {
@@ -90,7 +91,7 @@
   }
   100% {
     transform: rotate(60deg) scale(0.4);
-    left: 200%;
+    right: -400%;
     top: 200%;
     opacity: 0;
   }
@@ -299,7 +300,7 @@
 .like-box-preference-carousel .like-box-btn {
   width: 120px;
   height: 120px;
-  border: 2px solid #424B54;
+  border: 3px solid #424B54;
   font-size: 2.5rem;
   font-weight: 100;
   border-radius: 50%;
@@ -315,12 +316,14 @@
   }
 }
 .like-box-preference-carousel .like-box-btn.like-box-left-btn {
+  border: 3px solid #FF6969;
   color: #FF6969;
 }
 .like-box-preference-carousel .like-box-btn.like-box-left-btn svg {
   fill: #FF6969;
 }
 .like-box-preference-carousel .like-box-btn.like-box-right-btn {
+  border: 3px solid #2F97C1;
   color: #2F97C1;
 }
 .like-box-preference-carousel .like-box-btn.like-box-right-btn svg {

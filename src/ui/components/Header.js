@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Link, NavLink, useHistory, useLocation } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
@@ -9,57 +9,17 @@ import CartLink from './CartLink';
 import { AuthContext } from './../../store/contexts/AuthContext';
 import AppButton from './generic/AppButton';
 import HeaderNavigation from './HeaderNavigation';
-import heart_icon from '../../assets/img/heart.png';
 import ScaleIcon from './svg-components/ScaleIcon';
+import HeartLineIcon from './svg-components/HeartLineIcon.js';
+import BagIcon from './svg-components/BagIcon.js';
 
-const UserProfileDropDown = ({logout}) => {
-  const [expand, setExpand] = useState(false);
-  useEffect(() => {
-    document.body.addEventListener('click', () => {setExpand(false)})
-  }, [])
-  return (
-    <span className={"user-account-wrapper d-md-flex align-items-center"} onClick={(e) => {e.stopPropagation()}}>
-      <a className={"user-account-icon d-md-flex align-items-center"} href="#" onClick={() => setExpand(!expand)}>
-        {/* <FontAwesomeIcon icon={faUser}/> */}
-      </a>
-      <div className={"user-account-dropdown" + (expand ? " d-inline-block" : " d-none")}>
-        <ul>
-          <li>
-            <Link to="/user">My account</Link>
-          </li>
-          <li>
-            <Link to="/user/orders">My orders</Link>
-          </li>
-          <li>
-            <Link to="/user/wishlists">My wishlist</Link>
-          </li>
-          <li>
-            <a href="#" onClick={logout}>Log out</a>
-          </li>
-        </ul>
-      </div>
-    </span>
-  )
-}
+
 function Header (props) {
-  /* const [showModal, setShowModal] = useState(false);
-  const [searchExpand, setSearchExpand] = useState(false);
-  const [scrolling, setScrolling] = useState(false);
-  const [loading, setLoading] = useState(true); */
+
   const location = useLocation();
   let history = useHistory();
   const {currentUser, logout} = useContext(AuthContext);
 
-
-  useEffect(()=>{
-    /* window.addEventListener('scroll', (e) => {
-      if(window.pageYOffset <= 20 && setScrolling && scrolling){
-        setScrolling(false);
-      }else if(window.pageYOffset > 30 && setScrolling && !scrolling) {
-        setScrolling(true)
-      }
-    }) */
-  }, [])
 
   const signout = async () => {
     try{
@@ -105,7 +65,7 @@ function Header (props) {
                   <ScaleIcon size={24} />
                 </NavLink>
                 <NavLink activeClassName="active" to="/wishlist">
-                  <img src={heart_icon} className="nav_icon" />
+                  <HeartLineIcon />
                 </NavLink>
                 
                 {

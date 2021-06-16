@@ -14,6 +14,7 @@ import LikeBoxCarousel from './components/LikeBoxCarousel';
 import ForgotPasswordForm from './components/forms/ForgotPasswordForm';
 import HelpPage from './pages/HelpPage';
 import About from './pages/About';
+import SearchPage from './pages/SearchPage';
 
 function AppBody (){
 
@@ -22,6 +23,7 @@ function AppBody (){
         <Route exact path='/' render={(props) => <Home {...props}/>}/>
         <Route path='/products/:category/:page?' render={(props) => <ListingPage {...props}/>}/>
         <Route path='/product/:id' render={(props) => <ProductPage {...props}/>}/>
+        <Route path="/search" render={(props) => <SearchPage {...props} />} />
         {/* <Route path='/about' render={(props) => <About {...props} pageName="about" />}/> */}
         <ProtectedRoute path='/cart' component={CartPage}/>
         <ProtectedRoute path='/checkout' component={CheckoutPage}/>

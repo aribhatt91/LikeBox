@@ -49,7 +49,7 @@ function WishListInstance({instance, removeItem}){
             </a>
             <div className="wish-list-instance-text pt-2 pb-2">
                 <div className="wish-list-instance-price">
-                    <span className="currency">{CURRENCY}</span>
+                    <span className="currency text-uppercase">{instance.currency}</span>
                     <span className="wish-list-instance-sale-price">
                         {instance.price}
                     </span>

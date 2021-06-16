@@ -1797,7 +1797,7 @@ $thumb-dimen-xs: 240px; */
   .like-box-preference-carousel .like-box-btn {
     width: 120px;
     height: 120px;
-    border: 2px solid #424B54;
+    border: 3px solid #424B54;
     font-size: 2.5rem;
     font-weight: 100;
     border-radius: 50%;
@@ -1810,10 +1810,12 @@ $thumb-dimen-xs: 240px; */
       .like-box-preference-carousel .like-box-btn {
         margin: 2rem; } }
     .like-box-preference-carousel .like-box-btn.like-box-left-btn {
+      border: 3px solid #FF6969;
       color: #FF6969; }
       .like-box-preference-carousel .like-box-btn.like-box-left-btn svg {
         fill: #FF6969; }
     .like-box-preference-carousel .like-box-btn.like-box-right-btn {
+      border: 3px solid #2F97C1;
       color: #2F97C1; }
       .like-box-preference-carousel .like-box-btn.like-box-right-btn svg {
         fill: #2f97c1; }

@@ -151,10 +151,10 @@ const WishListPage = () => {
         <Page pageName="Wishlist">
             <div className={"wish-list-section mt-5 mb-5 container"}>
                 <h1 className="text-center mb-5 text-uppercase">Wishlist</h1>
-                <div className="wish-list-container d-flex flex-wrap justify-content-between">
+                <div className="wish-list-container d-flex flex-wrap justify-content-start">
                     {
                         wishList && wishList.length > 0 && wishList.map((item, index) => 
-                            <div className="d-flex justify-content-center col-md-4 p-0">
+                            <div className="d-flex col-12 col-md-4 justify-content-center p-0">
                                 <WishListInstance
                                     key={index}
                                     instance={item}
@@ -173,12 +173,15 @@ const WishListPage = () => {
                     }
                     {
                         pending && <React.Fragment>
-                            <WishListInstancePlaceholder/>
-                            <WishListInstancePlaceholder/>
-                            <WishListInstancePlaceholder/>
-                            <WishListInstancePlaceholder/>
-                            <WishListInstancePlaceholder/>
-                            <WishListInstancePlaceholder/>
+                            <div className="d-flex col-12 col-md-4 justify-content-center p-0">
+                                <WishListInstancePlaceholder/>
+                            </div>
+                            <div className="d-flex col-12 col-md-4 justify-content-center p-0">
+                                <WishListInstancePlaceholder/>
+                            </div>
+                            <div className="d-flex col-12 col-md-4 justify-content-center p-0">
+                                <WishListInstancePlaceholder/>
+                            </div>
                         </React.Fragment>
                     }
                 </div>
