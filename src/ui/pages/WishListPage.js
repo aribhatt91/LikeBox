@@ -3,18 +3,18 @@ import { fetchWishList, removeItemFromWishList } from './../../service/wishlistM
 import AppButton from '../components/generic/AppButton';
 import AppImage from '../components/generic/AppImage';
 import Page from './Page';
-import { CURRENCY } from './../../service/constants';
 import { AuthContext } from './../../store/contexts/AuthContext';
 import { useNotification } from './../../store/contexts/NotificationProvider';
 import TrashIcon from '../components/svg-components/TrashIcon';
+import { formatPrice } from '../../service/helper';
 function WishListInstancePlaceholder() {
     return (
         <div className="wish-list-instance-container wish-list-instance-container-placeholder mb-3 position-relative">
             <div className="wish-list-instance-thumb">
             </div>
             <div className="wish-list-instance-text pt-2 pb-2">
-                <div className="wish-list-instance-price-placeholder w-100"></div>
-                <div className="wish-list-instance-name-placeholder w-100"></div>
+                <div className="wish-list-instance-price-placeholder w-50"></div>
+                <div className="wish-list-instance-name-placeholder w-50"></div>
                 <div className="wish-list-cta-placeholder w-100 mt-1"></div>
             </div>
         </div>
@@ -45,24 +45,22 @@ function WishListInstance({instance, removeItem}){
 
     return (
         <div className="wish-list-instance-container mb-3 position-relative">
-            <a href={instance.url} className="wish-list-instance-thumb">
+            <a href={instance.url} target="_blank" className="wish-list-instance-thumb">
                 <AppImage src={instance.thumbnail}/>
             </a>
             <div className="wish-list-instance-text pt-2 pb-2">
                 <div className="wish-list-instance-price">
-                    <span className="currency">{CURRENCY}</span>
                     <span className="wish-list-instance-sale-price">
-                        {instance.price}
+                        {formatPrice(instance.price)}
                     </span>
+                    <span className="ml-1 currency">{instance.currency}</span>
                 </div>
                 <div className="wish-list-instance-name">
                     {instance.name}
-                </div>{/* 
-                <div className="wish-list-instance-brand">
-                    {instance.brand}
-                </div> */}
+                </div>
+
                 <div className="wish-list-cta w-100 mt-1">
-                    <AppButton className="w-100 sm" href={`/product/${instance.sku}`} label="Buy now" />
+                    <AppButton className="w-100 sm" href={instance.link} target="_blank" ext={true} label="Go to brand" />
                 </div>
             </div>
             <div className="wish-list-instance-remove-wrapper tooltip-wrapper d-flex flex-column align-items-end" onClick={(e)=>{e.stopPropagation()}}>
@@ -102,7 +100,7 @@ const WishListPage = () => {
         if(currentUser){
             setPending(true);
             fetchWishList(currentUser.email).then(res => {
-                window.mlog('UserWishListFragment', res); 
+                window.mlog('WishListPage', res); 
                 setWishList(res); 
             }).catch(err => {
                 console.error(err);

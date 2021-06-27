@@ -22,6 +22,7 @@ import { formatPrice } from '../../service/helper';
 import RadioButtonGroup from './../components/generic/RadioButtonGroup';
 import { Helmet } from 'react-helmet';
 import StarRating from '../components/generic/StarRating';
+import WishListButton from '../components/WishListButton';
 
 function SizeSelector({sizes, handler, label, name}){
   let size_radios = [];
@@ -173,10 +174,9 @@ function ProductDescription({description, sizing, deliveryTime, deliveryCost, re
       //Show snackbar message
     }
   } */
-function ProductForm({currentUser, product, sizes, addToCart, inWishList, toggleInWishList}){
+function ProductForm({currentUser, product, sizes, addToCart }){
   const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState('');
-  const [cta1Loading, setCta1Loading] = useState(false);
   const [link, setLink] = useState(product.link || "#");
 
   
@@ -241,12 +241,7 @@ function ProductForm({currentUser, product, sizes, addToCart, inWishList, toggle
         />
       </div>
       <div className="product-cta-container col-md-10 clearfix mt-2 mb-5 p-0">
-        <AppButton
-          label={inWishList ? "Remove from Wishlist" : "Add to Wishlist"}
-          className="btn-white w-100"
-          onClick={toggleInWishList}
-          disabled={!currentUser  /*|| quantity === 0 || (sizes.length > 0 && size === '')*/}
-        />
+        <WishListButton className="btn-white w-100" product={product} />
       </div>
     </React.Fragment>
   )
@@ -257,74 +252,9 @@ function ProductPage(props) {
   //const [deliverable, setDeliverable] = useState(true);
   const [pending, setPending] = useState(true);
   const [product, setProduct] = useState(null);
-  const [inWishList, setInWishList] = useState(false);
   const { id } = useParams();
   const { currentUser } = useContext(AuthContext);
-  const dispatch = useNotification();
-
-  useEffect(()=>{
-    if(currentUser && id){
-      try{
-        if(id){
-          
-          (async ()=>{
-            let res = await itemInWishList(currentUser.email, id);
-            setInWishList(res);
-          })()
-        }
-        
-      }catch(err){
-        console.error(err);
-      }
-    }
-  }, [id, currentUser])
-  const checkPincode = async (pincode) => {
-    /* try {
-      let res = await checkDeliveryAvailability(pincode);
-      setDeliverable(res);
-    }catch(err){
-      setDeliverable(false);
-    } */
-  }
-  const toggleInWishList = async () => {
-    if(currentUser && id){
-      try {
-        if(inWishList){
-          (async ()=>{
-            let res = await removeItemFromWishList(currentUser.email, id);
-            //let res = await itemInWishList(currentUser.email, id);
-            if(res.type === 'success'){
-              setInWishList(false);
-              dispatch({
-                type: res.type,
-                title: 'Success!',
-                message: res.msg
-              })
-            }
-          })()
-        }else {
-          (async ()=>{
-            let res = await addItemToWishList(currentUser.email, id, product);
-            if(res.type === 'success'){
-              setInWishList(true);
-              dispatch({
-                type: res.type,
-                title: 'Success!',
-                message: res.msg
-              })
-            }
-          })()
-        }
-      }catch(err){
-        window.mlog('toggleWishList', err);
-        dispatch({
-          type: 'error',
-          title: 'Error!',
-          message: 'Something went wrong!'
-        })
-      }
-    }
-  }
+  
   const parseProduct = (product) => {
     if(!product || !product.sku){
       return null;
@@ -401,10 +331,7 @@ function ProductPage(props) {
             </Helmet>
             <ProductHeroGallery
               images={product.images}
-              product_name={product.name}
-              product_id={product.sku}
-              inWishList={inWishList}
-              toggleInWishList={toggleInWishList}
+              productName={product.name}
             />
             <div className="product-details p-2 col-lg-5 float-left">
               <div className="product-brand">{product.brand}</div>
@@ -431,11 +358,8 @@ function ProductPage(props) {
               
               
               <ProductForm 
-                inWishList={inWishList}
-                toggleInWishList={toggleInWishList} 
                 currentUser={currentUser} 
                 link={product.link} 
-                addToCart={props.addToCart} 
                 product={product} 
                 sizes={product.sizes} />
 

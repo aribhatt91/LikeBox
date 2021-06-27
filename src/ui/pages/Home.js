@@ -61,22 +61,6 @@ function LikeBoxEmailForm({onComplete, setRegistered}) {
     )
 }
 
-function LikeBoxSignup({slideOut, slideIn, registered, email, onComplete}) {
-    //window.mlog('LikeBoxSignup', email);
-    return (
-        <div className={"like-box-signup mb-5 mt-5" + (!slideIn && !slideOut ? " slide-hold" : "") + (slideOut ? " slide-out" : "") + (slideIn ? " slide-in" : "")}>
-        
-            {
-                registered && email !== '' && <LoginForm email={email} onComplete={onComplete} />
-                
-            }
-            {
-                !registered && email !== '' && <SignupForm onComplete={onComplete} email={email}/>
-            }
-        </div>
-    )
-}
-
 function LikeBoxLandingPage({slideIn, slideOut, onComplete, setRegistered}) {
     return (
         <div className={"like-box-home" + (!slideIn && !slideOut ? " slide-hold" : "") + (slideOut ? " slide-out" : "") + (slideIn ? " slide-in" : "")}>

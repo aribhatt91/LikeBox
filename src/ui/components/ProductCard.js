@@ -6,6 +6,7 @@ import { useNotification } from './../../store/contexts/NotificationProvider';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 import { formatPrice } from '../../service/helper';
+import WishListButton from './WishListButton';
 
 export function ProductCardPlaceholder () {
     return (
@@ -98,7 +99,7 @@ const ProductCard = ({product}) => {
                 </div>
                 <div className="action-buttons w-100">
                     <AppButton href={"/product/" + product.sku} target="_blank" label="View product" className="w-100 btn-grey"/>
-                    <AppButton disabled={!currentUser} onClick={addToWishList} loading={ctaLoading} label="Add to wishlist" className="btn-white w-100 mt-2"/>
+                    <WishListButton className={"btn-white w-100 mt-2"} product={product} />
                 </div>
             </div>
             <div className="card-desc-wrapper col-xs-12 col-md-4 col-lg-4 p-4 pt-md-0 pb-md-0">

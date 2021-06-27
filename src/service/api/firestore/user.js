@@ -183,3 +183,27 @@ export const setUserSizing = async (email, update) => {
     }   
     return new Promise(resolve => resolve(res));
 }
+
+export const getUserStyle = async (email) => {
+    let styles = null;
+    try {
+        let user = await getUser(email);
+        styles = user.styles;
+    }catch(err){
+        console.error("getUserStyle:error -> ", err);
+    }   
+    return new Promise(resolve => resolve(styles));
+}
+
+export const updateUserStyle = async (email, styles) => {
+    let res = null;
+    try {
+        res = await updateUserByEmail(email, {styles});
+        window.mlog('updateUserStyle:updated styles', res);
+    }catch(err){
+        console.error("updateUserStyle:error -> ", err);
+        return new Promise((resolve, reject) => reject(err));
+    }   
+    return new Promise(resolve => resolve(res));
+}
+

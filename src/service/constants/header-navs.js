@@ -1,14 +1,16 @@
 export const HEADER_NAV_MENU = {
     'Clothes': [
         {
-            name: 'Hoodies & Sweatshirts',
-            link: '/products/hoodies-sweatshirts',
-            img: ''
-        },
-        {
             name: 'Jackets & Coats',
             link: '/products/jackets-coats',
-            img: ''
+            img: '',
+            top: true
+        },
+        {
+            name: 'Hoodies & Sweatshirts',
+            link: '/products/hoodies-sweatshirts',
+            img: '',
+            top: true
         },
         {
             name: 'Jeans',
@@ -28,28 +30,27 @@ export const HEADER_NAV_MENU = {
         {
             name: 'Shirts',
             link: '/products/shirts',
-            img: ''
+            img: '',
+            top: true
         },
         {
             name: 'T-shirts & vests',
             link: '/products/tshirts-vests',
-            img: ''
+            img: '',
+            top: true
         },
         
         {
             name: 'Polo Shirts',
             link: '/products/polo',
-            img: ''
+            img: '',
+            top: true
         },
         {
-            name: 'Jumpers',
-            link: '/products/jumpers',
-            img: ''
-        },
-        {
-            name: 'Cardigans',
-            link: '/products/cardigans',
-            img: ''
+            name: 'Jumpers & Cardigans',
+            link: '/products/jumpers-cardigans',
+            img: '',
+            top: true
         },
         {
             name: 'Tracksuits & Joggers',
@@ -59,6 +60,11 @@ export const HEADER_NAV_MENU = {
         {
             name: 'Swimwear',
             link: '/products/swimwear',
+            img: ''
+        },
+        {
+            name: 'Underwear',
+            link: '/products/underwear',
             img: ''
         }
     ], 

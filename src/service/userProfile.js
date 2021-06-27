@@ -1,5 +1,5 @@
 
-import { addUser, isFirstLoad, updateUserByEmail, setUserSizing, getUserSizing, getUser, getUserLikeBox } from './api/firestore/user';
+import { addUser, isFirstLoad, updateUserByEmail, setUserSizing, getUserSizing, getUser, getUserLikeBox, getUserStyle, updateUserStyle } from './api/firestore/user';
 
 export const addUserProfile = (user) => {
     return addUser(user);
@@ -13,24 +13,9 @@ export const updateLikeBox = (email, likebox) => {
     return updateUserByEmail(email, likebox);
 }
 export const fetchUserProfile = async (email) => {
-    /* let res = {};
-    try {
-        let user = await getUser(email);
-        
-        res = {
-            name: (user.name || {}),
-            mobile: (user.mobile || ""),
-            email: user.email,
-            gender: (user.gender || "")
-        }
-        window.mlog('fetchUserProfile:getUser: res', res);
-    }catch(err){
-
-    }
-    return new Promise(resolve => resolve(res)) */
-    window.mlog('fetchUserProfile:getUser: request', email);
+    //window.mlog('fetchUserProfile:getUser: request', email);
     let res = await getUser(email);
-    window.mlog('fetchUserProfile:getUser: response', res);
+    //window.mlog('fetchUserProfile:getUser: response', res);
     return new Promise(resolve => resolve(res));
 }
 
@@ -49,11 +34,19 @@ export const isFirstSession = async (email) => {
 }
 
 export const setUserSizes = (email, sizes) => {
-    return setUserSizing(email, sizes)
+    return setUserSizing(email, sizes);
 }
 
 export const getUserSizes = (email) => {
-    return getUserSizing(email)
+    return getUserSizing(email);
+}
+
+export const updateUserStylePref = (email, sizes) => {
+    return updateUserStyle(email, sizes);
+}
+
+export const getUserStylePref = (email) => {
+    return getUserStyle(email);
 }
 
  /* let user = {

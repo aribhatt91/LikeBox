@@ -15,6 +15,7 @@ import ForgotPasswordForm from './components/forms/ForgotPasswordForm';
 import HelpPage from './pages/HelpPage';
 import About from './pages/About';
 import SearchPage from './pages/SearchPage';
+import YourStylePage from './pages/YourStylePage';
 
 function AppBody (){
 
@@ -33,7 +34,8 @@ function AppBody (){
         <ProtectedRoute path="/login" component={LoginPage} />
         <Route path="/forgot-password" render={props => <ForgotPasswordForm {...props} />}/>
         <ProtectedRoute path="/register" component={LoginPage} />
-        <ProtectedRoute path="/likebox" component={LikeBoxCarousel} />
+        <ProtectedRoute path="/your-style" component={YourStylePage} />
+        <ProtectedRoute path="/your-style-cards" component={LikeBoxCarousel} />
         <Route path='/help/:slug?' render={(props) => <HelpPage {...props}/>}/>
         <Route path='/about/:slug?' render={(props) => <About {...props}/>}/>
         {/* <Route path='/user/:page?' render={(props) => <UserDashboard {...props} pageName="user-dashboard" />}/> */}

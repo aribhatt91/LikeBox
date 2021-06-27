@@ -72,7 +72,7 @@ function SignupForm(props){
                 setTimeout(() => {
                     //props.onComplete();
                     if(USER_TEMP){
-                        history.replace('/likebox');
+                        history.replace('/your-style');
                     }else {
                         
                     }
