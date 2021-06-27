@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "the-likebox"
+    "default": "the-likebox",
+    "dev": "the-likebox"
   }
 }
