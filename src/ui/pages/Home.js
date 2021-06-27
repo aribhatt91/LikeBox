@@ -1,11 +1,8 @@
 import React, {useContext, useState, useEffect } from 'react'
 import { AuthContext } from './../../store/contexts/AuthContext';
-import SignupForm from '../components/forms/SignupForm';
-import LoginForm from '../components/forms/LoginForm';
 import LikeBoxHomePage from '../components/LikeBoxHomePage';
 import { useHistory } from 'react-router';
 import { useNotification } from './../../store/contexts/NotificationProvider';
-import { isFirstSession } from '../../service/userProfile';
 import SubscriptionForm from '../components/forms/SubscriptionForm';
 import FAQS from './../../service/constants/faqs';
 import Accordion from '../components/generic/Accordion';
@@ -16,9 +13,7 @@ import R3 from '../../assets/img/rtb3.png';
 import AppImage from '../components/generic/AppImage';
 import Page from './Page';
 import BrandCarousel from '../components/BrandCarousel';
-import { SuccessMessage } from '../components/generic/PageMessage';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { LoadingPendulum } from '../components/LoadingModule';
 
 function LikeBoxEmailForm({onComplete, setRegistered}) {
     const {fetchSignInMethods} = useContext(AuthContext);

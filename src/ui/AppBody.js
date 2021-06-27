@@ -10,7 +10,7 @@ import FourZeroFour from './pages/FourZeroFour';
 import LoginPage from './pages/LoginPage';
 import ProtectedRoute from './../service/middleware/ProtectedRoute';
 import WishListPage from './pages/WishListPage';
-import LikeBoxCarousel from './components/LikeBoxCarousel';
+import YourStyleCardsPage from './pages/YourStyleCardsPage';
 import ForgotPasswordForm from './components/forms/ForgotPasswordForm';
 import HelpPage from './pages/HelpPage';
 import About from './pages/About';
@@ -35,7 +35,7 @@ function AppBody (){
         <Route path="/forgot-password" render={props => <ForgotPasswordForm {...props} />}/>
         <ProtectedRoute path="/register" component={LoginPage} />
         <ProtectedRoute path="/your-style" component={YourStylePage} />
-        <ProtectedRoute path="/your-style-cards" component={LikeBoxCarousel} />
+        <ProtectedRoute path="/your-style-cards" component={YourStyleCardsPage} />
         <Route path='/help/:slug?' render={(props) => <HelpPage {...props}/>}/>
         <Route path='/about/:slug?' render={(props) => <About {...props}/>}/>
         {/* <Route path='/user/:page?' render={(props) => <UserDashboard {...props} pageName="user-dashboard" />}/> */}

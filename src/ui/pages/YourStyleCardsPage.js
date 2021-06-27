@@ -1,15 +1,16 @@
 import React, {useState, useEffect, useContext} from 'react';
-import AppButton from './generic/AppButton';
-import AppImage from './generic/AppImage';
+import AppButton from '../components/generic/AppButton';
+import AppImage from '../components/generic/AppImage';
 import { useHistory } from 'react-router';
-import { AuthContext } from './../../store/contexts/AuthContext';
+import { AuthContext } from '../../store/contexts/AuthContext';
 import { debounce } from 'lodash';
 import { fetchLikeBox, updateLikeBox } from '../../service/userProfile';
-import Page from './../pages/Page';
-import { fetchLikeCards } from './../../service/api/firestore/likebox';
-import { SuccessMessage } from './generic/PageMessage';
-import LeftArrowIcon from './svg-components/LeftArrowIcon';
-import RightArrowIcon from './svg-components/RightArrowIcon';
+import Page from './Page';
+import { fetchLikeCards } from '../../service/api/firestore/likebox';
+import { SuccessMessage } from '../components/generic/PageMessage';
+import LeftArrowIcon from '../components/svg-components/LeftArrowIcon';
+import RightArrowIcon from '../components/svg-components/RightArrowIcon';
+import YourStylePage from './YourStylePage';
 function CardStack({cards, cardsState, loading}) {
     useEffect(() => {}, [cards])
     return (
@@ -48,7 +49,7 @@ function CardStack({cards, cardsState, loading}) {
     )
 }
 let currentPos = -1, LIKED = [], DISLIKED = [], PAGE = 0, LIMIT = 5, gender = "", LAST_NODE=null, CARDS = null;
-export default function LikeBoxCarousel({slideIn, slideOut}) {
+export default function YourStyleCardsPage({slideIn, slideOut}) {
     //const [loading, setLoading] = useState(true);
     const [reachedMax, setReachedMax] = useState(false);
     const [cardsState, setCardsState] = useState({loading: true});
@@ -221,7 +222,7 @@ export default function LikeBoxCarousel({slideIn, slideOut}) {
     }
     
     return (
-        <Page>
+        <Page pageName="Your style">
             {!reachedMax && <div className="like-box container">
             <div className={"like-box-preference-carousel container slide-in"}>
                 <h1 className="text-center mt-5">Go with your heart!</h1>
