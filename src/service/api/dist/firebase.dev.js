@@ -17,7 +17,7 @@ var _firebaseDev2 = _interopRequireDefault(require("../keys/firebase-dev-2.json"
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var app = _app["default"].initializeApp(_firebaseDev["default"]);
+var app = _app["default"].initializeApp(_firebaseDev2["default"]);
 
 var auth = app.auth();
 exports.auth = auth;

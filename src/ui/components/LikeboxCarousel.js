@@ -101,7 +101,7 @@ export default function LikeBoxCarousel({slideIn, slideOut}) {
                     //window.mlog('LikeBoxCarousel:useEffect: updating', PAGE, LAST_NODE);
                     //let products = await fetchProductsByPage(PAGE, LIMIT);
                     
-                    let skus = [].concat(LIKED).concat(DISLIKED);
+                    let skus = [].concat(LIKED.map(item => item.sku)).concat(DISLIKED.map(item => item.sku));
                     window.mlog('SKUS', skus);
                     
                     /* let res = await fetchProductsBySkus([], PAGE, LIMIT, LAST_NODE, true);
@@ -154,7 +154,7 @@ export default function LikeBoxCarousel({slideIn, slideOut}) {
             
         }
         window.mlog(currentPos);
-        DISLIKED.push(items[currentPos].sku);
+        DISLIKED.push(items[currentPos]);
     }
     const likeItem = () => {
         window.mlog('likeItem')
@@ -185,7 +185,7 @@ export default function LikeBoxCarousel({slideIn, slideOut}) {
             
         }
         window.mlog(currentPos, items[currentPos]);
-        LIKED.push(items[currentPos].sku);
+        LIKED.push(items[currentPos]);
     }
 
     const handleKeyPress = (e) => {
@@ -224,7 +224,7 @@ export default function LikeBoxCarousel({slideIn, slideOut}) {
         <Page>
             {!reachedMax && <div className="like-box container">
             <div className={"like-box-preference-carousel container slide-in"}>
-                <h3 className="text-center mt-5">Go with your heart!</h3>
+                <h1 className="text-center mt-5">Go with your heart!</h1>
                 <h4 className="text-center color">(We recommend swiping at least 15 items)</h4>
                 <div className="d-flex align-items-center justify-content-between flex-wrap">
                 

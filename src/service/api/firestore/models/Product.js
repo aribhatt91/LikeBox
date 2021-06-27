@@ -156,6 +156,7 @@ export const convertAwinToProduct = (awinObj, sku) => {
         p.link = awinObj.merchant_deep_link;
         p.thumbnail = awinObj.aw_image_url;
         p.colour = awinObj.colour;
+        p.merchant_name = awinObj.merchant_name || "";
         let images = [];
         if(awinObj.merchant_thumb_url && awinObj.merchant_thumb_url !== ""){
             images.push(awinObj.merchant_thumb_url)
@@ -226,6 +227,7 @@ export const convertCJToProduct = (cjObj, sku) => {
         p.link = cjObj.LINK;
         p.thumbnail = cjObj.IMAGE_LINK;
         p.colour = cjObj.COLOR;
+        p.merchant_name = cjObj.merchant_name || "";
         let size = cjObj.SIZE || "";
         try{
             p.sizes = size.split(',').map(s => s.trim());

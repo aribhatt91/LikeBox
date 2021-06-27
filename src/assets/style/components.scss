@@ -588,8 +588,52 @@
     }
   }
 
+  strong {
+    font-weight: bold;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  u {
+    text-decoration: underline;
+  }
+
 }
 
+table {
+  border: 2px solid;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  tr {
+    border-bottom: 2px solid;
+  }
+
+  td:not(:last-child) {
+    border-right: 2px solid;
+  }
+  td {
+    padding: 0.5rem;
+  }
+  tbody {
+    tr:last-child {
+      border-bottom: none;
+    }
+  }
+  thead {
+    td {
+      font-weight: bold;
+    }
+  }
+}
+.size-guide-modal {
+  width: 450px;
+  max-width: 100%;
+  height: auto;
+  max-height: 100%;
+  overflow: auto;
+}
 .slide-up {
   animation-name: slideup;
   animation-duration: 0.3s;

@@ -36,9 +36,9 @@ function ListingPage(props) {
               <h1 className="listing-page-header m-3 mt-5 mb-5 text-center text-uppercase">
                 {(category|| "").replace('-', ' & ')}
               </h1>
-              <ProductFilters 
+              {/* <ProductFilters 
                 category={category}
-                onFilterChange={applyFilter}/>
+                onFilterChange={applyFilter}/> */}
               <ProductListing category={category} filter={filterObject} />
             </div>
         </section>

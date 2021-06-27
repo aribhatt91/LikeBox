@@ -30,7 +30,7 @@ export default function BrandCarousel() {
                     <li className="col-6 mb-3 col-sm-4 col-md-2 p-0 mb-lg-0 m-0 pl-3 pr-3">
                         <div className="d-flex w-100 h-100 align-center justify-content-center">
                             <a href="" target="_blank" className="w-100">
-                                <AppImage className="w-100" alt="Farah" src="//cdn.shopify.com/s/files/1/0021/1514/1731/files/Farah-logo_130x.png?v=1610455817"/>
+                                <AppImage className="w-100" alt="Farah" src="https://s3-eu-west-1.amazonaws.com/globale-prod/Images/FarahUK/Far-logo-400x400.png"/>
                             </a>
                         </div>
                     </li>

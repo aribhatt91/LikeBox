@@ -4,7 +4,7 @@ import 'firebase/firestore';
 import DEVCONFIG1 from '../keys/firebase-dev-1.json';
 import DEVCONFIG2 from '../keys/firebase-dev-2.json';
 
-const app = firebase.initializeApp(DEVCONFIG1)
+const app = firebase.initializeApp(DEVCONFIG2)
 
 export const auth = app.auth();
 

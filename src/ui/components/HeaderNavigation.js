@@ -98,7 +98,7 @@ export default function HeaderNavigation() {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col-12 mt-4">
+                                    <div className="col-12 mt-4" onClick={() => {setOpen(false)}}>
                                         <AppButton href="/your-style" className="w-100 md" label="Update style" />
                                     </div>
                                 </div>

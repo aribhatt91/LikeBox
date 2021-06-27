@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.updateUserStyle = exports.getUserStyle = exports.setUserSizing = exports.getUserLikeBox = exports.getUserSizing = exports.updateUserByEmail = exports.addUser = exports.isFirstLoad = exports.getUser = exports.fetchUserQuery = void 0;
+exports.getUserChoice = exports.updateUserStyle = exports.getUserStyle = exports.setUserSizing = exports.getUserLikeBox = exports.getUserSizing = exports.updateUserByEmail = exports.addUser = exports.isFirstLoad = exports.getUser = exports.fetchUserQuery = void 0;
 
 var _firebase = require("./../firebase");
 
@@ -515,3 +515,40 @@ var updateUserStyle = function updateUserStyle(email, styles) {
 };
 
 exports.updateUserStyle = updateUserStyle;
+
+var getUserChoice = function getUserChoice(email) {
+  var likebox, user;
+  return regeneratorRuntime.async(function getUserChoice$(_context10) {
+    while (1) {
+      switch (_context10.prev = _context10.next) {
+        case 0:
+          likebox = null;
+          _context10.prev = 1;
+          _context10.next = 4;
+          return regeneratorRuntime.awrap(getUser(email));
+
+        case 4:
+          user = _context10.sent;
+          likebox = user.box || null;
+          _context10.next = 11;
+          break;
+
+        case 8:
+          _context10.prev = 8;
+          _context10.t0 = _context10["catch"](1);
+          console.error("getUserLikeBox:error -> ", _context10.t0);
+
+        case 11:
+          return _context10.abrupt("return", new Promise(function (resolve) {
+            return resolve(likebox);
+          }));
+
+        case 12:
+        case "end":
+          return _context10.stop();
+      }
+    }
+  }, null, null, [[1, 8]]);
+};
+
+exports.getUserChoice = getUserChoice;

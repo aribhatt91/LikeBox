@@ -298,7 +298,7 @@ export default function TnC({className}) {
                                 <p>London, England N17 9EA</p>
                                 <p>United Kingdom</p>
                                 <p><span>Phone: </span><a>(+44)07341097729</a></p>
-                                <p><a href="mailto:paul@likebox.co.uk">paul@likebox.co.uk</a></p>
+                                <p><a href="mailto:support@likebox.co.uk">support@likebox.co.uk</a></p>
                             </div>
                         </div>
                     </div>

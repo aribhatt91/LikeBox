@@ -3,9 +3,6 @@ import Page from './Page';
 import { LoadingPendulum } from './../components/LoadingModule';
 import ProductHeroGallery from '../components/ProductHeroGallery';
 import PageMessage from '../components/generic/PageMessage';
-import { checkDeliveryAvailability } from '../../service/addressMethods';
-import { addItemToWishList, removeItemFromWishList, itemInWishList } from '../../service/wishlistMethods';
-import Counter from '../components/generic/Counter';
 import AppButton from './../components/generic/AppButton';
 import { Tabs } from 'react-bootstrap';
 import Tab from 'react-bootstrap/Tab'
@@ -15,86 +12,15 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { useParams } from 'react-router-dom';
 import FourZeroFour from './FourZeroFour';
-import { useNotification } from './../../store/contexts/NotificationProvider';
 import { fetchProduct } from './../../service/productMethods';
-import AppTextInput from './../components/generic/AppTextInput';
 import { formatPrice } from '../../service/helper';
 import RadioButtonGroup from './../components/generic/RadioButtonGroup';
 import { Helmet } from 'react-helmet';
 import StarRating from '../components/generic/StarRating';
 import WishListButton from '../components/WishListButton';
-
-function SizeSelector({sizes, handler, label, name}){
-  let size_radios = [];
-  const handleSelect = (e) => {
-    if(typeof handler === 'function'){
-      handler(e.target.name, e.target.value);
-    }else {
-      window.mlog(e.target.name, e.target.value);
-    }
-  }
-  (sizes || []).forEach((item, index) => {
-    size_radios.push(
-      <label className="square-radio mr-2 mb-2" key={index}>
-        <input type="radio" name={name} value={item} onChange={handleSelect} />
-        <span className="square-radio-text">{item}</span>
-      </label>
-    );
-  });
-  return (
-    <div className="select-size-wrapper">
-      <div className="select-size-label mb-2">{label}</div>
-      <div className="select-size-input-container">
-        {
-          size_radios
-        }
-      </div>
-    </div>
-  )
-}
-
-const formatDeliveryDate = (dateObj) => {
-  if(dateObj instanceof Date){
-    let res = dateObj.toDateString().replace(dateObj.getFullYear(), "").trim();
-    return res.replace(" ", ", ");
-  }
-  return null;
-}
-function ProductDelivery({handler}){
-  let d = new Date();
-  d.setDate(d.getDate() + 4);
-
-  return (
-    <div className="product-delivery-container mt-2">
-      <div className="product-delivery-header mb-2">Delivery options</div>
-      <div className="product-delivery-check">
-        <div className="col-6 pl-0 pr-2">
-          <AppTextInput
-              name="pincode"
-              label="Enter pincode"
-          />
-        </div>
-        
-        <div className="small-msg mt-1">Please enter PIN code to check delivery availability</div>
-      </div>
-      <ul className="product-delivery-options mt-2 mb-2">
-        <li>Get it by {formatDeliveryDate(d)}</li>
-        <li>Pay on delivery available</li>
-        <li>Easy 30 days return & exchange available</li>
-        <li>100% Original Products</li>
-        <li>Free Delivery on order above &#x20B9;799</li>
-      </ul>
-    </div>
-  )
-}
-
-function PinCodeChecker (props) {
-  
-}
-function SizeChart(brand, category) {
-
-}
-function ProductDescription({description, sizing, deliveryTime, deliveryCost, returns}){
+import SizeGuide from '../components/SizeGuide';
+import SizeChart from '../components/SizeChart';
+function ProductDescription({product}){
   const [key, setKey] = useState('desc');
   return (
     <div className="app-tab-layout">
@@ -103,23 +29,16 @@ function ProductDescription({description, sizing, deliveryTime, deliveryCost, re
         onSelect={k => setKey(k)}
       >
         <Tab eventKey="desc" title="Description">
-          <div>
-            {description || ""}
+          <div className="d-flex">
+            {product.description || ""}
           </div>
         </Tab>
         <Tab eventKey="size" title="Sizing">
-          <div></div>
-        </Tab>
-        <Tab eventKey="ship" title="Shipping">
-          <div>
-            {deliveryCost && <p>{deliveryCost}</p>}
-            {deliveryTime && <p>{deliveryTime}</p>}
-          </div>
-        </Tab>
-        <Tab eventKey="ret" title="Returns">
-          <div>
-
-          </div>
+          <React.Fragment>
+            {
+              product.brand && <SizeChart affiliate={(product.merchant_name || "").toLowerCase()} />
+            }
+          </React.Fragment>
         </Tab>
       </Tabs>
 
@@ -127,53 +46,6 @@ function ProductDescription({description, sizing, deliveryTime, deliveryCost, re
     </div>
   )
 }
-
-/* const _addToCart = () => {
-    if(!currentUser){
-      window.mlog('User not logged in');
-      return;
-    }
-    if(quantity <= 0){
-      window.mlog('Add products');
-      //Raise error
-    }if(sizes.length > 0 && size === ''){
-      window.mlog('Select size');
-      //Raise error
-    }else {
-      window.mlog('Ready to add to cart');
-      try {
-        let p = {
-          sku: product.sku,
-          thumbnail: product.thumbnail,
-          name: product.name,
-          price: product.price,
-          quantity: quantity
-        }
-        if(size !== ''){
-          p.size = size;
-        }
-        addToCart(currentUser.email, p);
-        //window.mlog()
-      }catch(err){
-        console.error('CartService error -> ', err);
-      }
-    }
-  }
-  const buyNow = () => {
-    if(!currentUser){
-      window.mlog('User not logged in');
-      return;
-    }
-    if(quantity > 0){
-      window.mlog('Add products');
-      //Raise error
-    }if(sizes.length > 0 && size === ''){
-      window.mlog('Select size');
-      //Raise error
-    }else {
-      //Show snackbar message
-    }
-  } */
 function ProductForm({currentUser, product, sizes, addToCart }){
   const [quantity, setQuantity] = useState(1);
   const [size, setSize] = useState('');
@@ -225,6 +97,11 @@ function ProductForm({currentUser, product, sizes, addToCart }){
           label="Quantity"
         />
       </div> */}
+      {
+        product.merchant_name && <div>
+          <SizeGuide affiliate={(product.merchant_name || "").toLowerCase()} className="text-uppercase size-guide-link mt-5 mb-5" />
+        </div>
+      }
       {
         !currentUser && <div className="w-100 d-flex mb-2 mt-2 p-0">
           <PageMessage inline={false} type="info" text="You are not signed in. Sign in to purchase this product" />
@@ -363,7 +240,7 @@ function ProductPage(props) {
                 product={product} 
                 sizes={product.sizes} />
 
-              <ProductDescription description={product.description}/>
+              <ProductDescription product={product}/>
             </div>
           </div>
         }

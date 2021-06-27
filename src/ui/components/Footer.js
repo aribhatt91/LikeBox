@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Disclaimer from './Disclaimer';
 import TnC from './TnC';
+import PrivacyPolicy from './PrivacyPolicy';
 
 function Footer(){
     return (
@@ -12,16 +13,13 @@ function Footer(){
                         <h5 className="text-uppercase font-weight-normal mb-3">About LikeBox</h5>
                         <Link to="/about#history" className="footer-link">LikeBox history</Link>
                         <Link to="/about#future" className="footer-link">LikeBox future</Link>
-                        <Link to="/careers" className="footer-link">Careers</Link>
+                        <Link to="/about#careers" className="footer-link">Careers</Link>
                         <Link to="/about#investors" className="footer-link">Investors</Link>
                         <Link to="/about#sustainability" className="footer-link">Sustainability</Link>
                     </div>
                     <div className="col-12 col-md-4">
                         <h5 className="text-uppercase font-weight-normal mb-3">Help & Information</h5>
-                        <Link to="/help#shipping" className="footer-link">Shipping and Delivery</Link>
-                        <Link to="/help#returns" className="footer-link">Returns</Link>
-                        <Link to="/help#faqs" className="footer-link">Frequently asked questions</Link>
-                        <Link to="/help#feedback" className="footer-link">Feedback</Link>
+                        <PrivacyPolicy className="footer-link" />
                         <TnC className="footer-link" />
                         <Disclaimer className="footer-link" />
                     </div>

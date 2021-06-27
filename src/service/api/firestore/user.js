@@ -207,3 +207,14 @@ export const updateUserStyle = async (email, styles) => {
     return new Promise(resolve => resolve(res));
 }
 
+export const getUserChoice = async (email) => {
+    let likebox = null;
+    try {
+        let user = await getUser(email);
+        likebox = user.box || null;
+    }catch(err){
+        console.error("getUserLikeBox:error -> ", err);
+    } 
+    return new Promise(resolve => resolve(likebox));
+}
+

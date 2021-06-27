@@ -6,7 +6,7 @@ import { Tabs } from 'react-bootstrap';
 import Tab from 'react-bootstrap/Tab';
 import LikeBoxSizing from '../components/LikeBoxSizing';
 import Page from './Page';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { AuthContext } from './../../store/contexts/AuthContext';
 
 
@@ -51,7 +51,16 @@ function UserSettings({currentUser}){
         </div>
     )
 }
-
+function YourBox({user}) {
+    useEffect(()=>{
+        if(user){
+            /* (async () => {
+                let items = await get
+            })() */
+        }
+    },[user])
+    return <div></div>
+}
 function DashboardNavigation({userFirstName, logoSrc}){
     const {slug} = useParams();
     const {currentUser} = useContext(AuthContext);
@@ -72,11 +81,11 @@ function DashboardNavigation({userFirstName, logoSrc}){
                 <Tab eventKey="sizing" title="Sizing">
                     <LikeBoxSizing slideIn={true}/>
                 </Tab>
-                <Tab eventKey="settings" title="Settings">
+                {/* <Tab eventKey="settings" title="Settings">
                     <div className="user-settings-wrapper">
                         <UserSettings currentUser={currentUser} />
                     </div>
-                </Tab>
+                </Tab> */}
             </Tabs>
         </div>
     )

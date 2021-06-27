@@ -21,6 +21,15 @@ export const triggerCustomEvent = (viewName, params) => {
     document.dispatchEvent(event);
 }
 
-export const sendProductInformation = () => {
+export const sendProductInformation = (item) => {
+
+}
+
+export const updateProductPageVisit = (item) => {
+    let mboxName = 'mbox-pdp-recs',
+    detail = {
+        productId: item.sku,
+        productCategory: item.searchTerms
+    };
 
 }
