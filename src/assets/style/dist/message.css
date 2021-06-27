@@ -1,0 +1,70 @@
+.msg-container {
+  border: none;
+  padding: 8px 16px;
+}
+.msg-container .msg-icon {
+  font-size: 20px;
+  line-height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+}
+.msg-container .msg-text {
+  font-size: 14px;
+  width: 100%;
+  color: inherit;
+  padding: 0 8px;
+}
+.msg-container .msg-close {
+  font-size: 24px;
+  display: inline-flex;
+  color: inherit;
+  cursor: pointer;
+}
+.msg-container.msg-small {
+  padding: 8px;
+  line-height: 1;
+}
+.msg-container.msg-small .msg-icon {
+  font-size: 15px;
+  line-height: 14px;
+  height: auto;
+  width: auto;
+}
+.msg-container.msg-small .msg-text {
+  font-size: 12px;
+  line-height: 14px;
+}
+.msg-container.msg-small .msg-close {
+  font-size: 16px;
+  line-height: 14px;
+}
+.msg-container.no-border {
+  border: none;
+  padding: 0 !important;
+}
+.msg-container.error, .msg-container.alert {
+  background-color: rgba(204, 0, 0, 0.2);
+  border-color: #cc0000;
+  color: #cc0000;
+}
+.msg-container.error svg, .msg-container.alert svg {
+  fill: #cc0000;
+}
+.msg-container.success {
+  background-color: rgba(40, 167, 69, 0.2);
+  border-color: #28a745;
+  color: #28a745;
+}
+.msg-container.success svg {
+  fill: #28a745;
+}
+.msg-container.info {
+  background-color: rgba(0, 102, 204, 0.2);
+  border-color: #06c;
+  color: #06c;
+}
+.msg-container.info svg {
+  fill: #06c;
+}

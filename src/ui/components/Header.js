@@ -1,144 +1,99 @@
-import React, {Component, useState, useEffect } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { Link, NavLink } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, NavLink, useHistory, useLocation } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartPlus, faUser, faHeart } from '@fortawesome/free-solid-svg-icons';
-import Modal from 'react-bootstrap/Modal';
-import SideNav from './SideNav';
-import HOME_ICON from '../../assets/img/home_icon.png'; 
+import HeaderMobileNav from './HeaderMobileNav.js';
+import HOME_ICON from '../../assets/img/logo.png'; 
 import SearchBar from './SearchBar';
-import { authenticate } from './../../service/authService';
-import { getUserObject } from '../../service/rx-store/dataStore';
-import UserLoginSignupModule from './UserLoginSignupModule';
-import LI from '../../assets/img/login.jpg';
 import CartLink from './CartLink';
+import { AuthContext } from './../../store/contexts/AuthContext';
+import AppButton from './generic/AppButton';
+import HeaderNavigation from './HeaderNavigation';
+import ScaleIcon from './svg-components/ScaleIcon';
+import HeartLineIcon from './svg-components/HeartLineIcon.js';
+import BagIcon from './svg-components/BagIcon.js';
 
-const UserProfileDropDown = ({classes}) => {
-  const [expand, setExpand] = useState(false);
-  useEffect(() => {
-    document.body.addEventListener('click', () => {setExpand(false)})
-  }, [])
-  return (
-    <span className={"user-account-wrapper d-md-flex align-items-center"} onClick={(e) => {e.stopPropagation()}}>
-      <a className={"user-account-icon d-md-flex align-items-center"} href="#" onClick={() => setExpand(!expand)}>
-        <FontAwesomeIcon icon={faUser}/>
-      </a>
-      <div className={"user-account-dropdown" + (expand ? " d-inline-block" : " d-none")}>
-        <ul>
-          <li>
-            <Link to="/user">My account</Link>
-          </li>
-          <li>
-            <Link to="/user/orders">My orders</Link>
-          </li>
-          <li>
-            <Link to="/user/wishlists">My wishlist</Link>
-          </li>
-          <li>
-            <a>Sign out</a>
-          </li>
-        </ul>
-      </div>
-    </span>
-  )
-}
-class Header extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      showModal: false, 
-      searchExpand: false,
-      loggedIn: (getUserObject() !== null),
-      user: null,
-      scrolling: false
-    };
-    this.setShowModal = this.setShowModal.bind(this);
-    this.setHideModal = this.setHideModal.bind(this);
-    console.log('Header props ->',this.props);
-    
-  }
-  componentDidMount(){
-    let that = this;
-    this.props.authenticate();
-    console.log('componentDidMount: called authenticate');
-    window.addEventListener('scroll', (e) => {
-      if(window.pageYOffset <= 20 && that.state.scrolling){
-        that.setState({
-          scrolling: false
-        })
-      }else if(window.pageYOffset > 30 && !that.state.scrolling) {
-        that.setState({
-          scrolling: true
-        })
+
+function Header (props) {
+
+  const location = useLocation();
+  let history = useHistory();
+  const {currentUser, logout} = useContext(AuthContext);
+
+
+  const signout = async () => {
+    try{
+      if(currentUser){
+        await logout(currentUser.email);
+        history.replace('/login');
       }
-    })
+      
+    }catch(err){
+      console.err('Sign out error:', err);
+    }
   }
-  setShowModal(){
-    this.setState({
-      showModal: true
-    })
-  }
-  setHideModal(){
-    this.setState({
-      showModal: false
-    })
-  }
-  render(){
+  
     return (
       <header className="App-header sticky-top">
-        <div className={"topnav" + (this.state.scrolling ? ' scrolling' : "")}>
+        <div className={"topnav" /*Add scrolling functionality if needed*/}>
           <Navbar variant="light">
-  
+            <HeaderMobileNav user={currentUser} logout={signout} />
+
             <Navbar.Brand>
-              <SideNav loggedIn={this.state.loggedIn} signIn={this.setShowModal}></SideNav>
               <NavLink activeClassName='active' exact={true} to="/" >
                 <img className="home_icon" src={HOME_ICON} alt="Home"/>
               </NavLink>
             </Navbar.Brand>
             
-            <Nav className="mr-auto d-none d-md-flex navbar-nav">
-              <NavLink activeClassName='active' to="/products/men">Men</NavLink>
-              <NavLink activeClassName='active' to="/products/women">Women</NavLink>
-              <NavLink activeClassName='active' to="/products/kids">Kids</NavLink>
-              <NavLink activeClassName='active' to="/products/sale">Sale</NavLink>
+            <Nav className="mr-auto d-none d-lg-flex navbar-nav">
+              {currentUser&& <HeaderNavigation/>}
             </Nav>
-            <Nav className="justify-content-end">
+            <Nav className="justify-content-end d-none d-lg-flex">
             
-              <SearchBar/>
+              {/* <SearchBar/> */}
 
-              {!this.props.loggedIn && <Nav.Link className={"d-md-flex align-items-center"} 
-                onClick={() => this.setShowModal()}>
-                <FontAwesomeIcon icon={faUser}/>
-              </Nav.Link>}
-              {this.props.loggedIn && <UserProfileDropDown/>}
+              {!currentUser && location.pathname.indexOf('login') === -1 && <AppButton label="Sign in" className={"d-md-flex sm align-items-center pl-5 pr-5 no-anim"} 
+                href="/login">
+              </AppButton>}
+              {!currentUser && location.pathname.indexOf('login') > -1 && <AppButton label="Register" className={"d-md-flex sm align-items-center pl-5 pr-5 no-anim"} 
+                href="/register">
+              </AppButton>}
+              {currentUser && 
+              <React.Fragment>
+                
+                <NavLink activeClassName="active" to="/user/sizing">
+                  <ScaleIcon size={24} />
+                </NavLink>
+                <NavLink activeClassName="active" to="/wishlist">
+                  <HeartLineIcon />
+                </NavLink>
+                
+                {
+                location.pathname.indexOf('/user') === -1 &&
+                <AppButton label="Your account" className={"d-none d-lg-flex no-anim sm align-items-center pl-5 pr-5 no-anim"} 
+                  href="/user">
+                </AppButton>
+                }
+                {
+                location.pathname.indexOf('/user') > -1 &&
+                <AppButton label="Log out" className={"d-none d-lg-flex no-anim sm align-items-center pl-5 pr-5 no-anim"} 
+                  onClick={signout}>
+                </AppButton>
+                }
+              </React.Fragment>
+              }
 
-              <NavLink activeClassName='active' to="/cart">
-                {/* <FontAwesomeIcon icon={faCartPlus}/> */}
-                <CartLink/>
-              </NavLink>
+              
 
             </Nav>
           </Navbar>
         </div>
-        <Modal
-            show={this.state.showModal}
-            onHide={this.setHideModal}
-            size="md"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered>
-            <Modal.Body>
-              <div className="d-none d-md-inline-flex login-img" style={{backgroundImage: "url(" + LI + ")"}}></div>
-              <UserLoginSignupModule/>
-            </Modal.Body>
-          </Modal>
+
       </header>
     );
-  }
+  
 }
-const mapStateToProps = state => {
+/* const mapStateToProps = state => {
   return {
     loggedIn: state.loginReducer.loggedIn,
     user: state.loginReducer.user
@@ -146,4 +101,6 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = (dispatch) => bindActionCreators({authenticate: authenticate}, dispatch)
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(Header); */
+
+export default Header;

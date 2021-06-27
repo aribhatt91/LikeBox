@@ -1,17 +1,17 @@
 import React from 'react';
 import { useFormikContext } from 'formik';
-import ThemedButton from './ThemedButton';
-function AppSubmitButton({text, theme, size, ...rest}) {
+import AppButton from './AppButton';
+function AppSubmitButton({text,...rest}) {
     const {handleSubmit, isSubmitting} = useFormikContext();
     return (
         <React.Fragment>
-            <ThemedButton
+            <AppButton
+                label={text}
+                disabled={isSubmitting}
+                onClick={handleSubmit}
+                loading={isSubmitting}
+                type="submit"
                 {...rest}
-                btnState={ isSubmitting ? "disabled" : "active"}
-                text={text}
-                theme={theme}
-                size={size}
-                _click={handleSubmit}
             />
         </React.Fragment>
     );

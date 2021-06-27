@@ -1,17 +1,16 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import 'firebase/firestore';
+import DEVCONFIG1 from '../keys/firebase-dev-1.json';
+import DEVCONFIG2 from '../keys/firebase-dev-2.json';
 
-const app = firebase.initializeApp(
-    {
-        apiKey: "AIzaSyBYOdKnJRiZZJ9d6a4SFqVDHRS1AooLviA",
-        authDomain: "spa-aribhatt.firebaseapp.com",
-        databaseURL: "https://spa-aribhatt.firebaseio.com",
-        projectId: "spa-aribhatt",
-        storageBucket: "spa-aribhatt.appspot.com",
-        messagingSenderId: "331228169107"
-    }
-)
+const app = firebase.initializeApp(DEVCONFIG2)
 
 export const auth = app.auth();
 
+export const db = firebase.firestore();
+
+export const fieldPath = firebase.firestore.FieldPath;
+
 export default app;
+

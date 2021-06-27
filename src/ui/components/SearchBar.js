@@ -1,10 +1,9 @@
 import React, {useState, useEffect } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch} from '@fortawesome/free-solid-svg-icons';
 import Nav from 'react-bootstrap/Nav';
 import { fetchSuggestions, saveSeachHistory, fetchSearchHistory } from '../../service/search';
 import { _debounce } from '../../service/helper';
 import { Link } from 'react-router-dom';
+import SearchIcon from './svg-components/SearchIcon';
 
 const SearchItem = ({item}) => {
   const type = item.type,
@@ -37,15 +36,15 @@ const SearchBar = (props) => {
     const [suggestions, setSuggestions] = useState([]);
     let search_term = "";
     useEffect(() => {
-      console.log('Exec once');
+      window.mlog('Exec once');
       window.addEventListener('click', () => {setShowSuggestions(false)})
     }, [])
     const searchSuggestions = () => {
-      console.log('Fetching data...', search_term.trim());
+      window.mlog('Fetching data...', search_term.trim());
       //setSuggestions([]);
       fetchSuggestions(search_term.trim())
       .then(res => {
-        console.log(res);
+        window.mlog(res);
         let s = [];
         (res || []).forEach((item, index) => {
           s.push(
@@ -80,10 +79,10 @@ const SearchBar = (props) => {
       }
     },
     _search = () => {
-      console.log('Searching for ', search_term.trim());
+      window.mlog('Searching for ', search_term.trim());
       setShowSuggestions(false);
       if(search_term.trim() !== ""){
-        //console.log('Searching for ', search_term);
+        //window.mlog('Searching for ', search_term);
       }
     }
     const optimisedSearch = _debounce(searchSuggestions, 400);
@@ -93,7 +92,7 @@ const SearchBar = (props) => {
           <span className="close_icon" onClick={()=>{setExpandSearch(false)}}>&times;</span>
           <input type="text" placeholder="Search..." className='themed_text_input search_input' onChange={_change} onKeyPress={_keyPress}></input>
           <Nav.Link onClick={searchExpand ? _search : (() => {setExpandSearch(true)})} className="search_icon">
-            <FontAwesomeIcon icon={faSearch}/>
+            <SearchIcon />
           </Nav.Link>
         </div>
         {showSuggestions && <div className={"search_suggestions"}>

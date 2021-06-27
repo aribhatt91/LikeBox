@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-//import {faWarning, faInfoCircle, faCheckCircle} from '@fortawesome/free-solid-svg-icons';
+import CircledCheckIcon from '../svg-components/CircledCheckIcon';
 
 /* 
 size: [small, [default]],
@@ -19,8 +18,21 @@ const PageMessage = ({text, type, size, inline=true, icon=false, dismissable=fal
                 {type === "info" && <span>&#9432;</span>}
                 {type === "success" && <span>&#10003;</span>}
             </span>}
-            <span className="msg-text">{text}</span>
+            <span className="msg-text" aria-label={text}>{text}</span>
             {dismissable && <span className="msg-close" onClick={()=>setShowMsg(false)}>&times;</span>}
+        </div>
+    )
+}
+
+export const SuccessMessage = ({message, subtext}) => {
+    return (
+        <div className="d-flex flex-column justify-content-center align-items-center">
+          <div className="green-tick mb-3">
+            <CircledCheckIcon size="64" />
+          </div>
+          <h2 className="font-weight-light" aria-label={message}>{message}</h2>
+          {subtext && <h3 className="font-weight-light mt-3">{subtext}</h3>}
+
         </div>
     )
 }

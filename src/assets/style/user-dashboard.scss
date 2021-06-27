@@ -1,5 +1,5 @@
 .user-dashboard{
-    max-width: 1200px;
+    max-width: 750px !important;
     margin: auto;
     padding: 32px 0;
     .dashboard-navigation {
@@ -71,6 +71,65 @@
                 font-weight: bold;
                 color: #06c;
                 cursor: pointer;
+            }
+        }
+    }
+    .app-tab-layout {
+        .tab-pane {
+            min-height: 400px;
+        }
+    }
+    .user-settings-wrapper{
+        width: 100%;
+        overflow: hidden;
+        .user-settings {
+            display: flex;
+            flex-wrap: nowrap;
+            transition: 0.3s all;
+            transform: translateX(0); 
+            .user-settings-menu { 
+                flex: 1 1;
+                min-width: 100%; 
+                ul {
+                    list-style-type: none;
+                    padding-left: 0;
+                    margin: 0;
+                    width: 100%;
+                    li {
+                        min-height: 64px;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        font-weight: 24px;
+                        line-height: 10px;
+                        cursor: pointer;
+                        padding: 1rem;
+
+                        &:not(:last-child){
+                            border-bottom: 1px solid rgba(112,112,112, 0.25);
+                        }
+                    }
+                }             
+            }
+            .user-settings-detail { 
+                flex: 1 1;
+                min-width: 100%;   
+                .back {
+                    font-size: 16px;
+                    text-transform: uppercase;
+                    text-decoration: underline;
+                    clear: both;
+                    cursor: pointer;
+                    min-height: 64px;
+                    display: flex;
+                    align-items: center;
+                }           
+            }
+            &.detail-open {
+                transform: translateX(-100%);
+                .user-settings-menu {
+                    
+                }
             }
         }
     }

@@ -1,16 +1,26 @@
-import React, { useState } from 'react';
-import UserLoginSignupModule from './../components/UserLoginSignupModule';
+import React from 'react';
+import { useLocation } from 'react-router-dom';
+import LoginForm from '../components/forms/LoginForm';
+import SignupForm from './../components/forms/SignupForm';
+import Page from './Page';
 
 const LoginPage = (props) => {
-    console.log('LoginPage', props);
-    let redirectTo = props.location.state && props.location.state.from ? props.location.state.from.pathname || "/" : "/",
-    page = props.match.params.page;
+    const location = useLocation();
+
+    const login = location.pathname.indexOf('login') > -1;
+
     return (
-        <div className="page d-flex justify-content-center">
-            <div className="mt-4 mb-4 d-inline-flex shadow">
-                <UserLoginSignupModule/>
+        <Page className="d-flex justify-content-center" pageName={login ? 'Sign in' : 'Register'}>
+            <div className="mt-5 mb-5 d-flex align-center justify-content-center w-100">
+                {/* <UserLoginSignupModule/> */}
+                {
+                    login && <LoginForm/>
+                }
+                {
+                    location.pathname.indexOf('register') > -1 && <SignupForm/>
+                }
             </div>
-        </div>
+        </Page>
     )
 }
 

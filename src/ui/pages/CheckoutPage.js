@@ -1,15 +1,16 @@
 import Page from './Page';
-import React, {useState, useEffect} from 'react';
+import React, { Component, useState, useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import CartService from './../../service/cartOperation';
-import ThemedButton from '../components/generic/ThemedButton';
 import AddressForm from '../components/forms/AddressForm';
 import Accordion from '../components/generic/Accordion';
 import LoginForm from './../components/forms/LoginForm';
 import { transform } from 'lodash';
 import { fetchAddresses } from '../../service/addressMethods';
 import { addAddress } from './../../service/addressMethods';
+import AppButton from '../components/generic/AppButton';
+import { AuthContext } from './../../store/contexts/AuthContext';
 
 
 
@@ -19,9 +20,10 @@ function UserModule({onClickContinue}){
             <LoginForm/>
         </div>
         <div className="d-flex justify-content-center align-items-center p-2 flex-grow-1">
-            <ThemedButton
-                text="Continue as guest"
-                _click={onClickContinue}
+            <AppButton
+                className="border-radius-0"
+                label="Continue as guest"
+                onClick={onClickContinue}
             />
         </div>
     </div>)
@@ -31,33 +33,43 @@ function AddressModule({
     addNewAddress, 
     selectAddress, 
     loggedIn
-}){
+    }){
     const [expandAddAddress, setExpandAddAddress] = useState(false);
     const [addressSelected, setAddressSelected] = useState(-1)
     const [addressList, setAddressList] = useState([])
     const [fetchAddressFlag, setFetchAddressFlag] = useState(false)
     const [dirty, setDirty] = useState(true);
+    const {currentUser} = useContext(AuthContext);
     //const [deliverySpeed, setDeliverySpeed] = useState(false);
 
-    //console.log('Addresses ->', addresses);
+    //window.mlog('Addresses ->', addresses);
     //saved_addresses.push(<p>Example address</p>)
     useEffect(()=> {
-        console.log("Calling useEffect: loggedIn", loggedIn);
+        window.mlog("Calling useEffect: loggedIn", loggedIn);
         fetchAddresses().then( res => {
-            console.log(res)
+            window.mlog(res)
             let addresses = res.addresses;
             for(let i=0; i < (addresses || []).length; i++) {
                 saved_addresses.push(
-                    <div key={i} className={"select-address-item p-2 col-12 col-md-3" + (i === addressSelected ? " selected" : "")}>
-                        <h6 className="text-center text-uppercase mb-1">{addresses[i].adtype}</h6>
-                        <p className="addr_line1">{addresses[i].address}</p>
-                        <p className="addr_line2">{addresses[i].locality}</p>
-                        <p className="addr_city">{addresses[i].city}</p>
-                        <p className="addr_city">{addresses[i].state}</p>
-                        <p className="addr_zipcode">{addresses[i].zipcode}</p>
+                    <div key={i} className={"select-address-item d-flex flex-column justify-content-between p-4 col-12 col-md-3" + (i === addressSelected ? " selected" : "")}>
+                        <div>
+                            <h6 className="text-center text-uppercase mb-1">{addresses[i].adtype}</h6>
+                            <p className="name">{addresses[i].name}</p>
+                            <p className="addr_line1">{addresses[i].address}</p>
+                            <p className="addr_line2">{addresses[i].locality}</p>
+                            <p className="addr_city">{addresses[i].city}</p>
+                            {/* <p className="addr_city">{addresses[i].state}</p> */}
+                            <p className="addr_zipcode">{addresses[i].pincode}</p>
+                        </div>
+                        <AppButton
+                            label="Select"
+                            className="w-100 mt-3"
+                            onClick={() => {}}
+                        />
+
                     </div>);
             }
-            console.log('Addresses ->', saved_addresses);
+            window.mlog('Addresses ->', saved_addresses);
             setAddressList(saved_addresses)
         }).catch(err => {
     
@@ -75,7 +87,7 @@ function AddressModule({
         }
         setExpandAddAddress(false)
     }
-    console.log('Called AddressModule', saved_addresses)
+    window.mlog('Called AddressModule', saved_addresses)
     return (
         <div className="address-module">
             
@@ -91,21 +103,21 @@ function AddressModule({
                         addNewAddress={addAddress}/>
                     }
                     <div className={"justify-content-start submit-button-container" + (expandAddAddress ? " d-none": " d-flex")}>
-                        <ThemedButton
-                        text="Add new address"
-                        border="false"
-                        _click={() => setExpandAddAddress(true)}
-                        ></ThemedButton>
+                        <AppButton
+                        label="Add new address"
+                        className="w-50"
+                        onClick={() => setExpandAddAddress(true)}
+                        ></AppButton>
                     </div>
                 </div>
             </div>
             <div className="d-flex justify-content-end submit-button-container mt-5">
-                <ThemedButton
-                text="Continue"
-                border="false"
-                btnState={saved_addresses.length === 0 ? 'disabled' : 'active'}
-                _click={selectAddress}
-                ></ThemedButton>
+                <AppButton
+                label="Continue"
+                className="border-radius-0"
+                disabled={saved_addresses.length === 0}
+                onClick={selectAddress}
+                ></AppButton>
             </div>
             
         </div>
@@ -137,12 +149,11 @@ function PaymentModule({expandModule, editPaymentOption, debit_cards, selectPaym
                 </div>
                 <div className={(expand ? "d-none" : "d-inline-block") + "edit-btn-container"}>
                     {
-                        dirty && <ThemedButton 
-                        text="Edit"
-                        theme="outline"
-                        size="small"
-                        _click={() => {editPaymentOption();setExpand(true);} }
-                        ></ThemedButton>
+                        dirty && <AppButton 
+                        label="Edit"
+                        className="border-radius-0"
+                        onClick={() => {editPaymentOption();setExpand(true);} }
+                        ></AppButton>
                     }
                 </div>
             </div>
@@ -161,11 +172,11 @@ function PaymentModule({expandModule, editPaymentOption, debit_cards, selectPaym
                 </div>
                     {
                     expandAddCard && <div className="container-fluid d-flex justify-content-end submit-button-container">
-                        <ThemedButton
-                        theme="accent"
-                        border="false"
-                        _click={selectPaymentOption}
-                        ></ThemedButton>
+                        <AppButton 
+                        label="Add"
+                        className="border-radius-0"
+                        onClick={() => {selectPaymentOption();setExpand(true);} }
+                        ></AppButton>
                     </div>
                     }
             </div>
@@ -195,10 +206,10 @@ function CheckoutSection({
         transform: `translate(${-1 * slideBy * 100}%)`
     }
 
-    console.log(`${label} open -> ${slideBy}`)
+    window.mlog(`${label} open -> ${slideBy}`)
     return (
         <div style={style} className={"checkout-section-container d-flex flex-column p-5"}>
-            <h2 className="checkout-section-header mb-5 font-weight-lighter">{label}</h2>
+            <h2 className="checkout-section-header mb-5 font-weight-bold text-uppercase">{label}</h2>
             <div className={"checkout-section"}>
                 {
                     children
@@ -207,7 +218,57 @@ function CheckoutSection({
         </div>
     )
 }
-class CheckoutPage extends Page {
+
+/* function CheckoutPage({fetchCart, cart}){
+    const [activeSlide, setActiveSlide] = useState(0);
+    const [addresses, setAddresses] = useState([]);
+    const {currentUser} = useContext(AuthContext);
+
+    useEffect(()=>{
+        if(currentUser){
+            fetchCart(currentUser.email);
+            let res = await fetchAddresses(currentUser.email);
+            res = res || [];
+            setAddresses(res);
+            setActiveSlide(1);
+        }
+    }, [currentUser])
+
+    return (
+        <Page className="checkout-page" pageName={"Checkout"}>
+            <section className="container checkout-container">
+
+                <CheckoutSection
+                    label="Delivery address"
+                    slideBy={activeSlide}>
+
+                    <AddressModule
+                        user={currentUser}
+                        addresses={addresses}
+                    />
+
+                </CheckoutSection>
+                <CheckoutSection
+                    label="Payment options"
+                    slideBy = {activeSlide}>
+
+                    <div className="dummydiv"></div>
+
+                </CheckoutSection>
+                <CheckoutSection
+                    label="Order Confirmed"
+                    slideBy = {activeSlide}>
+
+                    <div className="dummydiv"></div>
+
+                </CheckoutSection>
+                
+            </section>
+            <section className="cart_summary"></section>
+        </Page>
+    )
+} */
+class CheckoutPage extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -221,7 +282,7 @@ class CheckoutPage extends Page {
         fetchCart();
     }
     setActiveSlide(slide) {
-        console.log('Setting expand -> ', slide);
+        window.mlog('Setting expand -> ', slide);
         this.setState ({
             ...this.state,
             activeSlide: slide
@@ -250,12 +311,9 @@ class CheckoutPage extends Page {
             //this.setGuest(false)
         }
 
-        console.log('Calling render', activeSlide);
+        window.mlog('Calling render', activeSlide);
         return (
             <div className="page">
-                <section className="container checkout-flow-indicator-container">
-
-                </section>
                 <section className="container checkout-container">
                     <CheckoutSection
                         label=" "

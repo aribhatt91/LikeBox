@@ -1,0 +1,20 @@
+$default: #ececec;
+$selected: orange;
+.star {
+
+    svg {
+        transition: 0.3s fill;
+        width: 24px;
+        fill: $default;
+    }
+    &.selected {
+        svg {
+            fill: $selected;
+        }
+    }
+    &.sm {
+        svg {
+            width: 18px;
+        }
+    }
+}

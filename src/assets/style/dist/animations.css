@@ -1,0 +1,123 @@
+@keyframes anim-placeholder {
+  0% {
+    opacity: 0.4;
+  }
+  25% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+@keyframes grow {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes slideup {
+  from {
+    transform: translateY(100px);
+  }
+  to {
+    transform: translateY(0px);
+  }
+}
+@keyframes slidedown {
+  from {
+    transform: translateY(-10px);
+  }
+  to {
+    transform: translateY(0px);
+  }
+}
+@keyframes zoomin {
+  from {
+    transform: scale(0.8);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes spinoutleft {
+  0% {
+    opacity: 1;
+    left: 0;
+  }
+  25% {
+    transform: rotate(-14deg) scale(0.8);
+  }
+  50% {
+    transform: rotate(-45deg) scale(0.6);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(-60deg) scale(0.4);
+    opacity: 0;
+    left: -200%;
+    top: 200%;
+  }
+}
+@keyframes spinoutright {
+  0% {
+    opacity: 1;
+    right: 0;
+  }
+  25% {
+    right: -100%;
+    transform: rotate(14deg) scale(0.8);
+  }
+  50% {
+    transform: rotate(45deg) scale(0.6);
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(60deg) scale(0.4);
+    right: -400%;
+    top: 200%;
+    opacity: 0;
+  }
+}
+.button--interactive:not([disabled]):hover:active:before {
+  background-color: #000;
+}
+
+.button--interactive:active {
+  -webkit-animation: clicked-on-interactive 0.3s ease-in;
+  animation: clicked-on-interactive 0.3s ease-in;
+}
+
+@keyframes clicked-on-interactive {
+  50% {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+    color: #fff;
+    background-color: #000 !important;
+    border-color: #000;
+  }
+  to {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    color: #fff;
+    background-color: #000 !important;
+    border-color: #000;
+  }
+}

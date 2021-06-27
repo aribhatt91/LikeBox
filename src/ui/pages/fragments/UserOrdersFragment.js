@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react';
-import ORDERS from '../../../mock/orders.json';
+import React, { useState, useEffect, useContext } from 'react';
 import LoadingModule from '../../components/LoadingModule';
 import { fetchOrders } from './../../../service/ordersMethods';
+import { AuthContext } from './../../../store/contexts/AuthContext';
 
 const ORDER_STATUS = {
     "1": "Order placed",
@@ -68,6 +68,7 @@ function OrderInstance({instance}){
             <ProductInstance
                 instance={item}
                 order_placed={instance.order_date}
+                key={index}
             />
         )
     })
@@ -92,20 +93,32 @@ function UserOrdersFragment(){
     const [orders, setOrders] = useState([]),
     [pending, setPending] = useState(false);
     let ordersItems = [];
+    const {currentUser} = useContext(AuthContext);
 
     useEffect(() => {
         setPending(true);
-        fetchOrders().then(res => {
-            console.log(res); 
-            setOrders(res);
+        try {
+            if(currentUser){
+                fetchOrders(currentUser.email).then(res => {
+                    window.mlog(res); 
+                    setOrders(res);
+                });
+            }   
+        }catch(err){
+
+        }finally {
             setPending(false);
-        });
+        }
+        
+        
+        
     }, [])
 
     orders.forEach((item, index) => {
         ordersItems.push(
             <OrderInstance
                 instance={item}
+                key={index}
             />
         )
     });

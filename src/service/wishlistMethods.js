@@ -1,13 +1,17 @@
-import { MockGetWishlist } from './../mock/api/mock-wishlist-api';
+import { getUserWishList, addToWishList, removeFromWishList, isItemInWishList } from './api/firestore/wishlist';
+import { fetchProductsBySkus } from './productMethods';
 
-export const addItemToWishList = (itemid) => {
 
+export const itemInWishList = (email, sku) => {
+    return isItemInWishList(email, sku);
+}
+export const addItemToWishList = async (email, sku, product) => {
+    return addToWishList(email, sku, product);
+}
+export const removeItemFromWishList = async (email, sku) => {
+    return removeFromWishList(email, sku);
 }
 
-export const removeItemFromWishList = (itemid) => {
-
-}
-
-export const fetchWishList = () => {
-    return MockGetWishlist();
+export const fetchWishList = async (email) => {
+    return getUserWishList(email);
 }

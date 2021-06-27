@@ -1,40 +1,131 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import {signin} from '../../../service/authService';
+import React, { useState, useEffect, useContext } from 'react';
 import { SIGNUP_FORM_SCHEMA } from './../../../service/validationSchema';
 import AppForm from './AppForm';
 import AppTextInput from '../generic/AppTextInput';
 import AppSubmitButton from './../generic/AppSubmitButton';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { AuthContext } from './../../../store/contexts/AuthContext';
+import AppRadioInput from '../generic/AppRadioInput';
+import { SuccessMessage } from '../generic/PageMessage';
+import { addUserProfile } from './../../../service/userProfile';
+import AppDateInput from '../generic/AppDateInput';
+import { useHistory } from 'react-router-dom';
+import { parseSearchParams } from '../../../service/helper';
 
-const validationSchema = SIGNUP_FORM_SCHEMA;
+let USER_TEMP = null;
 function SignupForm(props){
-    console.log('SignupModule', props);
-    const { error, pending, user, loggedIn } = props;
+    window.mlog('SignupModule', props);
+    //const { error, pending, user, loggedIn } = props;
+    const [error, setError] = useState(null);
     const [ submitted, setSubmitted] = useState(false);
+    
+    const history = useHistory();
+    const params = parseSearchParams(history.location.search);
+    const email = params.email || "";
 
-    const submitForm = (userInput, {setSubmitting}) => {
+    const {signup, currentUser, updateName} = useContext(AuthContext);//useAuth();
 
+    //window.mlog('SignupForm', currentUser);
+    const submitForm =  async (userInput, {setSubmitting}) => {
+        setSubmitting(true);
+        //window.mlog(userInput, setSubmitting);
+        if(error){
+            setError(null);
+        }
+        try{
+            let user = {}
+            user.email = userInput.email;
+            user.name = {};
+            user.name.fname = userInput.fname;
+            user.name.lname = userInput.lname;
+            try{
+                let d = new Date();
+                d.setDate(Number(userInput.day))
+                d.setMonth((Number(userInput.month) - 1))
+                d.setYear(Number(userInput.year))
+                user.dob = d.toDateString();
+            }catch(err){
+
+            }
+            
+            user.gender = userInput.gender;
+            USER_TEMP = user;
+
+            await signup(userInput);
+
+        }catch(err){
+            console.error(err);
+        }finally{
+            setSubmitting(false);
+            //setSubmitted(true);
+        }
+        
+        
     }
+    const updateUserInDatabase = async () => {
+        if(USER_TEMP){
+            try{
+                await addUserProfile(USER_TEMP);
+                await updateName(USER_TEMP.name.fname);
+            }catch(err){
+
+            }finally {
+                setTimeout(() => {
+                    //props.onComplete();
+                    if(USER_TEMP){
+                        history.replace('/your-style');
+                    }else {
+                        
+                    }
+                }, 2000);
+            }
+        }else {
+            history.replace('/');
+        }
+    }
+    useEffect(()=>{
+        if(currentUser){
+            //window.mlog('user signed in...');
+            updateUserInDatabase();
+        }
+        
+    }, [currentUser]);
+
     return (
-        <div className="col-12 p-0 m-0">
-          {loggedIn && <div className="login-success-container d-flex flex-column justify-content-center align-items-center">
-            <div className="green-tick mb-3">
-                <FontAwesomeIcon icon={faCheck} size="2x"></FontAwesomeIcon>
-            </div>
-            <h2 className="font-weight-light">You are logged in!</h2>
-            </div>}
-          {!loggedIn && <div className={"signup-form-container"}>
-            <div className="signup-form-header mb-4 pl-2 pr-2 h3 font-weight-normal">Create an account</div>
-            <form className={"signup-form"}>
+        <div className="col-12 col-md-8 col-lg-7 p-0 mt-0 mb-0 m-auto">
+          {
+              currentUser && 
+              <div className="w-100 h-100 m-5 justify-content-center align-center">
+                <SuccessMessage message={"You are signed in in!"} subtext="You'll be redirected in a moment.." />
+              </div>
+          }
+        <div className={"signup-form-container slide-up" + (currentUser ? ' d-none' : "")}>
+            <h1 className="signup-form-header mb-5 pl-2 pr-2 font-weight-normal w-100 text-center">Sign up for free to start shopping</h1>
+            <div className={"signup-form"}>
               <AppForm
-                initialValues={{email: '', password: '', fname: '', lname: '', mobile: ''}}
-                onSubmit= {submitForm}
-                validationSchema={validationSchema}>
+                onSubmit={submitForm}
+                validationSchema={SIGNUP_FORM_SCHEMA}
+                initialValues={{email: (props.email || email || ""), password: '', confirmpassword: '', fname: '', day: '', month: '', year: '', lname: '', gender: ''}} >
+                
+
+                <div className="row m-0">
+                    <p className="w-100 pl-2 pr-2 font-weight-normal">Enter your date of birth* (DD/MM/YYYY)</p>
+                    <div className="col-xs-12 float-left pl-2 pr-2">
+                        <AppDateInput />
+                    </div>
+                </div>
+
+                <div className="row m-0">
+                    <p className="w-100 pl-2 pr-2 font-weight-normal mb-3">Select your gender*</p>
+                    <div className="col-12 pl-2 pr-2">
+                        <AppRadioInput 
+                            name="gender"
+                            options={['male', 'female', 'other']}
+                        />
+                    </div>
+                </div>
                 
                 <div className="row m-0">
+                    <p className="w-100 pl-2 pr-2 font-weight-normal mb-3 mt-3">Enter your name*</p>
                     <div className="col-md-6 float-left pl-2 pr-2">
                         <AppTextInput
                             name="fname"
@@ -49,54 +140,56 @@ function SignupForm(props){
                     </div>
                 </div>
                 <div className="row m-0">
-                    <div className="col-md-6 float-left pl-2 pr-2">
+                    
+                    <div className="col-md-12 float-left pl-2 pr-2">
+                        <p className="w-100 font-weight-normal mb-3">Enter your email address*</p>
                         <AppTextInput
                             name="email"
                             type="email"
                             label="Email"
                         />
                     </div>
-                    <div className="col-md-6 float-left pl-2 pr-2">
-                        <AppTextInput
-                            name="mobile"
-                            type="number"
-                            label="Mobile"
-                        />
-                    </div>
-                    <div className="col-md-12 float-left pl-2 pr-2">
+                </div>
+                <div className="row m-0"> 
+                    
+                    <div className="col-12 col-md-6 float-left pl-2 pr-2">
+                        <p className="w-100 font-weight-normal mb-3">Password*</p>
                         <AppTextInput
                             name="password"
                             type="password"
-                            label="Password"
+                            label="Enter your password"
+                        />
+                    </div>
+                    
+                    <div className="col-12 col-md-6 float-left pl-2 pr-2">
+                        <p className="w-100 font-weight-normal mb-3">Confirm password*</p>
+                        <AppTextInput
+                            name="confirmpassword"
+                            type="password"
+                            label="Confirm your password"
                         />
                     </div>
                 </div>
-                <div className="row m-0">
-                  <div className="col-md-12 float-left pl-2 pr-2">
-
-                  </div>
-                </div>
                 
                 <div className="row m-0 mt-3 d-flex justify-content-start">
-                    <div className="pl-2 pr-2">
-                        <div className="d-inline-block pr-4">
+                    <div className="pl-2 pr-2 w-100">
+                        <div className="col-12">
                             <AppSubmitButton
                                 text="Create account"
-                                theme="accent"
-                                size="medium"
+                                className="w-100"
                             />
                         </div>
                     </div>
                 </div>
                 </AppForm>
-            </form>
-        </div>}
+            </div>
+        </div>
           
         </div>
       );
 }
-const mapStateToProps = state => {
-  console.log('mapStateToProps called', state);
+/* const mapStateToProps = state => {
+  window.mlog('mapStateToProps called', state);
   return {
     loggedIn: state.loginReducer.loggedIn,
     pending: state.loginReducer.pending,
@@ -107,3 +200,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({signInUser: signin}, dispatch)
 export default connect(mapStateToProps, mapDispatchToProps)(SignupForm);
+ */
+
+ export default SignupForm;

@@ -1,0 +1,44 @@
+@import './variables.scss';
+
+.app-img-background {
+    background-color: $placeholder-bg;
+    img{
+        opacity: 0;
+        object-fit: cover;
+        transition: 0.3s ease-in;
+        width: 100%;
+        height: 100%;
+    }
+    &.img-loaded {
+        img {
+            opacity: 1;
+        }
+    }
+}
+
+.lazy-load-image-background {
+    height: 100%;
+    opacity: 0;
+    transition: 0.3s ease-in;
+    &.lazy-load-image-loaded {
+        opacity: 1;
+    }
+}
+
+.square {
+    width: 100%;
+    position: relative;
+    &::after {
+      content: "";
+      display: block;
+      padding-bottom: 100%;
+    }
+    img {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        object-fit: cover;
+        top: 0;
+        left: 0;
+    }
+}

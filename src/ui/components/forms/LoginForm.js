@@ -1,41 +1,64 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {signin} from '../../../service/authService';
-import PageMessage from './../generic/PageMessage';
+import PageMessage, { SuccessMessage } from './../generic/PageMessage';
 import AppTextInput from './../generic/AppTextInput';
 import AppForm from './AppForm';
 import { LOGIN_FORM_SCHEMA } from './../../../service/validationSchema';
 import AppSubmitButton from './../generic/AppSubmitButton';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
-
+import { AuthContext } from './../../../store/contexts/AuthContext';
+import { Link, useHistory } from 'react-router-dom';
+import { parseSearchParams } from '../../../service/helper';
 const validationSchema = LOGIN_FORM_SCHEMA;
 
-const LoginForm = (props) => {
-  const { signInUser, error, pending, user, loggedIn } = props;
+const LoginForm = ({onComplete}) => {
+  //const { signInUser, pending, user, loggedIn } = props;
   const [ submitted, setSubmitted] = useState(false);
-
-  const submitForm = (userInput, {setSubmitting}) => {
-    console.log('submitForm', userInput);
-    signInUser(userInput, () => {setSubmitting(false); setSubmitted(true)});
+  const [ error, setError ] = useState(null);
+  const {login, currentUser} = useContext(AuthContext);
+  const history = useHistory();
+  const params = parseSearchParams(history.location.search);
+  const email = params.email || "";
+  const initialValues = {
+    email,
+    password: ""
+  }
+  //https://firebase.google.com/docs/reference/js/firebase.User
+  //https://firebase.google.com/docs/reference/js/firebase.User#updateprofile
+  const submitForm = async (userInput, {setSubmitting}) => {
+    window.mlog('submitForm', userInput);
+    setSubmitting(true);
+    setError(null);
+    //signInUser(userInput, () => {setSubmitting(false); setSubmitted(true)});
+    try {
+      let response = await login(userInput.email, userInput.password);
+      setSubmitted(true);
+      window.mlog('Response ->', response);
+      if(typeof onComplete === 'function'){
+          setTimeout(onComplete, 750);
+      }
+    }catch({code, message}){
+      
+      setError('Username or Password is invalid');
+      window.mlog('Login error ->', code, message);
+    }finally {
+      setSubmitting(false);
+      setSubmitted(true);
+    }
   }
   return (
-    <div className="col-12 p-0 m-0">
-        {loggedIn && <div className="login-success-container d-flex flex-column justify-content-center align-items-center">
-          <div className="green-tick mb-3">
-            <FontAwesomeIcon icon={faCheck} size="2x"></FontAwesomeIcon>
-          </div>
-          <h2 className="font-weight-light">You are logged in!</h2>
-        </div>}
+    <div className="col-12 col-md-7 col-lg-5 p-0 mt-0 mb-0 m-auto">
+        {
+          currentUser && <SuccessMessage message={"You are logged in!"} />
+        }
 
-        <div className={"login-form-container" + (loggedIn ? " d-none": "")}>
-          <div className="login-form-header mb-4 pl-2 pr-2 h3 font-weight-normal">Log in</div>
+        <div className={"login-form-container slide-up" + (currentUser ? " d-none": "")}>
+          <h1 className="login-form-header mb-5 pl-2 pr-2 font-weight-normal text-center">Sign into your account</h1>
           <form className={"login-form"}>
 
             <AppForm
-              initialValues={{email: '', password: ''}}
-              onSubmit= {submitForm}
+              initialValues={initialValues}
+              onSubmit={submitForm}
               validationSchema={validationSchema}>
                 {submitted && error && 
                   <div className="row m-0 mb-4">
@@ -50,6 +73,7 @@ const LoginForm = (props) => {
                       name="email"
                       label="Email"
                       type="email"
+                      // defvalue={props.email ? props.email : ''}
                     />
                   </div>
 
@@ -60,24 +84,19 @@ const LoginForm = (props) => {
                       type="password"
                     />
                   </div>
-
-                  <div className="col-12 clearfix float-none pl-2 pr-2">
-                    <label className="p-0 mt-2">
-                      <input className="mr-2" type="checkbox" onChange={() => console.log('checked')}/>
-                      Keep me signed in
-                    </label>
-                  </div>
                 </div>
 
                 <div className="row m-0 mt-3 d-flex justify-content-start">
-                  <div className="pl-2 pr-2">
-                    <div className="d-inline-block pr-4">
+                  <div className="pl-2 pr-2 col-12">
                       <AppSubmitButton
-                        text="Login"
-                        theme="accent"
-                        size="medium"
+                        text="Sign in"
+                        className="w-100"
                       />
-                    </div>
+                  </div>
+                </div>
+                <div className="row m-0 mt-3 d-flex justify-content-start">
+                  <div className="pl-2 pr-2 col-12">
+                    <Link to="/forgot-password">Forgot password?</Link>
                   </div>
                 </div>
 
@@ -89,8 +108,8 @@ const LoginForm = (props) => {
   )
 }
 
-const mapStateToProps = state => {
-  console.log('mapStateToProps called', state);
+/* const mapStateToProps = state => {
+  window.mlog('mapStateToProps called', state);
   return {
     loggedIn: state.loginReducer.loggedIn,
     pending: state.loginReducer.pending,
@@ -102,3 +121,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => bindActionCreators({signInUser: signin}, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+ */
+
+ export default LoginForm;

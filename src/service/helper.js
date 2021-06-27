@@ -12,7 +12,7 @@ export const readFromCookie = (name) => {
             }
         }
     }catch(err){
-        console.log('readFromCookie: error :', name, err);
+        window.mlog('readFromCookie: error :', name, err);
     }
     return null;
 }
@@ -56,4 +56,49 @@ export const readFromLocalStorage = (key) => {
         return localStorage.getItem(key);
     }
     return null;
+}
+
+export const parseSearchParams = (search) => {
+    let res = {};
+    try{
+        search = search || "";
+        search = search.replace('?', '');
+        let params = search.split('&');
+        params.forEach(item => {
+            let key = item.split('=')[0] || "", val = decodeURIComponent(item.split('=')[1]) || "";
+            key = key.toLowerCase();
+            val = val.toLowerCase();
+            res[key] = val;
+        })
+    }catch(err){
+        console.error('Error in parsing search params', err)
+    }
+    
+    return res;
+}
+
+export const isSafeUrl = (url) => {
+    const protocol = URL(url).protocol;
+    if(protocol === 'http:' || protocol === 'https:'){
+        return true
+    }
+    return false;
+}
+
+export const capitalise = (str) => {
+    if(!str || typeof str !== 'string' || str.trim().length === 0){
+        return str;
+    }
+    return str.charAt(0).toUpperCase() + (str.slice(1) || "").toLowerCase();
+}
+
+export const capitaliseAll = (str) => {
+    if(!str || typeof str !== 'string' || str.trim().length === 0){
+        return str;
+    }
+    return str.split(' ').map(s => capitalise(s)).join(' ');
+}
+
+export const formatPrice = (price) => {
+    return Number(price).toLocaleString(undefined, {'minimumFractionDigits':2,'maximumFractionDigits':2});
 }

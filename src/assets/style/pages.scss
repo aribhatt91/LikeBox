@@ -9,6 +9,7 @@
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
+    min-height: 80vh;
 }
 .products-section {
     width: 100%;
@@ -19,30 +20,40 @@
             float: left;
         }
     }
+    .listing-page-header {
+        font-size: 36px;
+    }
 }
 .page-content-wrapper {
     margin: auto;
     max-width: 1200px;
 }
-
+.product-cards-container, .wish-list-container {
+    max-width: 950px;
+    margin: auto;
+}
 .product-home-page {
     .product-details {
         .product-name {
             font-weight: 500;
-            font-size: 14px;
+            font-size: 16px;
+            line-height: 36px;
         }
         .product-brand {
             font-weight: 300;
-            font-size: 16px;
+            font-size: 27px;
+            line-height: 36px;
+            font-weight: 500;
             text-transform: uppercase;
         }
         .product-price {
             .product-sale-price {
                 font-weight: 500;
-                font-size: 22px;
+                font-size: 21px;
             }
             .product-full-price {
                 font-size: 14px;
+                text-decoration: line-through;
             }
             .product-discount {
                 font-size: 14px;
@@ -50,7 +61,7 @@
             }
             .price-tax-info {
                 font-size: 12px;
-                color: $info;
+                color: $success;
                 font-weight: 500;
             }
         }
@@ -155,6 +166,12 @@
                 }
             }
         }
+    }
+    .size-guide-link {
+        text-decoration: underline;
+        font-size: 1.25rem;
+        display: inline-flex;
+        color: #333;
     }
 }
 

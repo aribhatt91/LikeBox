@@ -1,14 +1,21 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Page from './Page';
-class About extends Page {
+function About(props) {
 
-  render() {
     return (
-    <div className="page about-section">
-        <h3>"I would like to say a few words. And here they are: Nitwit! Blubber! Oddment! Tweak!"</h3>
-        <h4> - Albus Dumbledore</h4>
-    </div>);
-  }
+    <Page className="page about-section" pageName="about">
+        <div className="w-100 h-100 d-flex align-center">
+                <div className="container d-flex flex-column align-center justify-content-center">
+                    <h1 className="font-weight-bold text-uppercase col-lg-5 mt-5">
+                        Coming soon.
+                    </h1>
+                    <h3 className="text-uppercase col-lg-5 mt-4 mb-5">
+                        Stay tuned...
+                    </h3>
+                </div>
+            </div>
+    </Page>);
+  
 }
 
 export default About;

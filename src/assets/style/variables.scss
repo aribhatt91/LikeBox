@@ -11,11 +11,25 @@ $disabled-color: lightgrey;
 $success: #28a745;
 $error: #cc0000;
 $red: #cc0000;
-$info: #03a685;
+$info: #06c;
 $dark: #000;
+$placeholder-bg: #ececec;
 
 // Breakpoints
+$breakpoint-mobile: 600px;
 $breakpoint-tablet: 768px;
 $breakpoint-tablet-large: 1024px;
 $breakpoint-desktop: 1200px;
 $breakpoint-desktop-large: 1600px;
+
+//Thumbnails for cards
+$thumb-dimen-lg: 280px;
+$thumb-dimen-md: 220px;
+$thumb-dimen-sm: 200px;
+$thumb-dimen-xs: 240px;
+
+//Nav Header
+$nav-height-lg: 96px;
+$nav-height-md: 80px;
+$nav-height-sm: 64px;
+$nav-height-xs: 56px;

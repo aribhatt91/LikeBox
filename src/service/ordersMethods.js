@@ -1,5 +1,5 @@
-import { MockGetAllOrders } from './../mock/api/mock-orders-api';
+import { getAllUserOrders } from './api/firestore/orders';
 
-export const fetchOrders = () => {
-    return MockGetAllOrders();
+export const fetchOrders = (email) => {
+    return getAllUserOrders(email);
 }

@@ -2,17 +2,52 @@
 @import './measurement.scss';
 @import './components.scss';
 @import './pages.scss';
+html * {
+  scroll-behavior: smooth;
+}
+*::-webkit-scrollbar {
+  width: 12px;
+  background-color: rgba($color: #333333, $alpha: 0.1);
+}
+*::-webkit-scrollbar-thumb {
+  width: 8px;
+  border-radius: 8px;
+  background-color: rgba($color: #333333, $alpha: 0.4);
+  &:hover {
+    background-color: rgba($color: #333333, $alpha: 0.8);
+  }
+}
+*::-webkit-scrollbar-track {
+  background-color: transparent;
+}
 
-.App {
+.thin-scroll-bar::-webkit-scrollbar {
+  width: 6px;
+  background-color: rgba($color: #333333, $alpha: 0.1);
+}
+.thin-scroll-bar::-webkit-scrollbar-thumb {
+  width: 4px;
+  border-radius: 4px;
+  background-color: rgba($color: #333333, $alpha: 0.4);
+  &:hover {
+    background-color: rgba($color: #333333, $alpha: 0.8);
+  }
+}
+.thin-scroll-bar::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.App * {
   // text-align: center;
+  font-family: neusa-next-std,sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
   height: 80px;
 }
 .App-body {
-  max-width: 1200px;
+  /* max-width: 1200px; */
   margin: auto;
   display: flex;
 }
@@ -32,7 +67,10 @@
   margin: 0 auto;
   padding: 0 10px;
 }
-
+body[open-popup="true"]{
+  overflow: hidden !important;
+  max-height: 100vh;
+}
 ul{
   display: inline-block;
 }
@@ -41,11 +79,16 @@ li{
   text-align: left;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.svg-icon {
+  min-width: 24px;
+  min-height: 24px;
+  .md {
+    height: 36px;
+    width: 36px;
   }
-  to {
-    transform: rotate(360deg);
+  .lg {
+    height: 48px;
+    width: 48px;
   }
 }
+

@@ -1,9 +1,8 @@
 import { _debounce } from './helper';
-import { MockGetSuggestions } from './../mock/api/mock-search-api';
 let counter = 0;
 export const fetchSuggestions = (str) => {
-    console.log('Fetching data...', str);
-    return MockGetSuggestions(str);
+    window.mlog('Fetching data...', str);
+    return new Promise(res => []);
 }
 export const fetchSearchHistory = (str) => {
 

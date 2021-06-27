@@ -1,10 +1,26 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="theme-color" content="#000000">
+
+    <script type="text/javascript">
+      window.mlog = function () { 
+        Array.prototype.unshift.call(arguments, 'LIKEBOX:LOG::');
+        console.info.apply(this, arguments); 
+      }
+      window.merror = console.error;
+    </script>
+    <script>
+      /* 
+      !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.src="https://cdn.segment.com/analytics.js/v1/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._loadOptions=e};analytics._writeKey="YYMObP8p9hcioVWwrYlJBV4aWY2BZLL2";analytics.SNIPPET_VERSION="4.13.2";
+      analytics.load("YYMObP8p9hcioVWwrYlJBV4aWY2BZLL2");
+      analytics.page();
+      }}(); 
+      */
+    </script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-175238138-1"></script>
     <script>
@@ -14,53 +30,34 @@
 
       gtag('config', 'UA-175238138-1');
     </script>
-    <!-- <script src="http://localhost:10080/dataLayer.js"></script> -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet"> 
-    <script>
-      dataLayer.push({
-        products: ["Spell Books", "Flying Cars", "Butterbeer", "Magic Wands", "Wizard Robes"],
-        sellers: ["Amazon", "eBay", "Flipkart", "ShopClues", "Wallmart", "Ollivanders"]
-      })
-    </script>
-    <!-- <script src="//assets.adobedtm.com/7cb8109970d1/91e60302cf2a/launch-e9420fd17383-development.min.js"></script> -->
-    <script src="//assets.adobedtm.com/7cb8109970d1/91e60302cf2a/launch-039a7402229f-staging.min.js" async></script>
-
-
+    <!-- <script src="//assets.adobedtm.com/f16c3156c11f/aa229134c463/launch-7a27e3bfcaac-development.min.js"></script>  -->
+    
     <!--
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-    <!-- <script src="./at.js"></script> -->
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon-48.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://use.typekit.net/ifw6ete.css">
+    <title>LikeBox</title>
 
-
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>Plex</title>
+    <script defer src="/__/firebase/8.2.7/firebase-app.js"></script>
+    <script defer src="/__/firebase/8.2.7/firebase-auth.js"></script>
+    <script defer src="/__/firebase/8.2.7/firebase-database.js"></script>
+    <script defer src="/__/firebase/8.2.7/firebase-firestore.js"></script>
+    <script defer src="/__/firebase/8.2.7/firebase-functions.js"></script>
+    <script defer src="/__/firebase/8.2.7/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/8.2.7/firebase-storage.js"></script>
+    <script defer src="/__/firebase/8.2.7/firebase-analytics.js"></script>
+    <script defer src="/__/firebase/8.2.7/firebase-remote-config.js"></script>
+    <script defer src="/__/firebase/8.2.7/firebase-performance.js"></script>
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
   </head>
   <body>
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-    <!-- <script type="text/javascript">_satellite.pageBottom();</script> -->
   </body>
 </html>

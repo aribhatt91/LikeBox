@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import CartService from './../../service/cartOperation';
+import bag_icon from '../../assets/img/bag.png';
 function CartLink(props) {
     const { cart, fetchCart } = props;
+    
     useEffect(() => {
-        fetchCart();
-    }, [])
+        if(props.user){
+            fetchCart(props.user.email);
+        }
+    }, [props.user])
     return (
         <React.Fragment>
             <span className="d-sm-inline-block d-md-none">My Cart</span>
             <span className="d-none d-md-inline position-relative">
-                <FontAwesomeIcon icon={faCartPlus}/>
-                {cart && cart.count && <span className="cart-count">{cart.count}</span>}
+                {/* <FontAwesomeIcon icon={faCartPlus}/> */}
+                <img src={bag_icon} className="nav_icon"/>
+                {/*cart && cart.count && <span className="cart-count">{cart.count}</span>*/}
             </span>
             
         </React.Fragment>

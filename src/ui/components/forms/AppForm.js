@@ -11,7 +11,7 @@ function AppForm({initialValues, onSubmit, validationSchema, children}) {
         >
 
         {
-          ({handleChange, handleSubmit, setFieldError, setFieldTouched, errors, touched}) => (
+          ({values, handleChange, handleSubmit, setFieldError, setFieldTouched, errors, touched}) => (
             <React.Fragment>
                 {
                     children

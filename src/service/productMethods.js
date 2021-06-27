@@ -1,126 +1,109 @@
-import { fetchStateError, fetchStateSuccess, fetchStatePending } from '../store/actions/index';
-import { MockFetchAllProducts, MockFetchProduct } from './../mock/api/mock-products-api';
-//import { debounce, throttle } from 'lodash';
-import { _debounce } from './helper';
-/*
-filter = {
-    category: (MEN, WOMEN, KIDS, TRENDING),
-    type: (SNEAKERS, CASUAL, FLIP-FLOP etc),
-    sort_by: string,
-    brands: [],
-    price_range: [],
-    discounts: [],
-    search: ()
-}
-*/
-let products_fetched = [];
-function _sortBy(_products, key){
-    let products = _products || products_fetched;
-    if(!products || products.length <= 1 || !key || key.trim() === ""){
-        return products;
-    }
-    //return products.sort()
-    if(key === 'price-asc'){
-        return products.sort(function(a,b){
-            return Number(a.price) - Number(b.price)
-        })
-    }else if(key === 'price-desc'){
-        return products.sort(function(a,b){
-            return Number(b.price) - Number(a.price)
-        })
-    }else if(key === 'popularity'){
-        return products.sort(function(a,b){
-            return Number(b.ratings) - Number(a.ratings)
-        })
-    }else {
-        return products;
-    }
-}
-export const filterProducts = (filter, _products) => {
-    let products = _products || products_fetched;
-    if(filter && filter.hasOwnProperty('category')){
-        if(filter.category === 'sale'){
-            products = products.filter((product) => {return product.onSale === 'true' || product.onSale === true});
-        }else{
-            products = products.filter((product) => {return (product.category.toLowerCase()).split(', ').indexOf(filter.category.toLowerCase()) > -1});
+import { fetchFirestoreProducts, fetchFirestoreProductsBySkus, fetchFirestoreProduct, fetchProductBrands, fetchAvailableCategories } from './api/firestore/product';
+import DiffMatchPatch from 'diff-match-patch';
+export const fetchProducts = async (path="", page=0, LIMIT=10, LAST_NODES=[], filter={}) => {
+    let categories = [],
+    paths = path.split('-');
+    try {
+        let availableKeywords = await getAvailableKeywords();
+        availableKeywords = availableKeywords || [];
+        let len = availableKeywords.length;
+        for (let j = 0; j < paths.length; j++) {
+            for (let i = 0; i < len; i++) {
+                if(availableKeywords[i].toLowerCase().indexOf(paths[j].toLowerCase()) === 0){
+                    categories.push(availableKeywords[i]);
+                }
+            }
         }
+        
+    }catch(err){
+        console.error('getBrands:error: ', err);
     }
-    if(filter && filter.hasOwnProperty('price_range')){
-        let temp = []; 
-            
-        filter.price_range.forEach((pair)=>{
-            temp.push(products.filter((product) => {
-                    var res = false;
-                if(pair.min){
-                    res = Number(product.price) >= Number(pair.min)
+    return fetchFirestoreProducts(categories, page, LIMIT, LAST_NODES, filter);
+}
+
+export const fetchProductsBySkus = (skus=[], page=0, LIMIT=10, LAST_DOC=null, exclusion=false) => {
+    return fetchFirestoreProductsBySkus(skus, page, LIMIT, LAST_DOC, exclusion)
+}
+
+export const fetchProduct = (sku) => {
+    return fetchFirestoreProduct(sku);
+}
+
+export const getBrands = async (slug) => {
+    console.log('getBrands', slug);
+    let paths = slug.split('-');
+    let categories = [];
+    try {
+        let availableKeywords = await getAvailableKeywords();
+        availableKeywords = availableKeywords || [];
+        let len = availableKeywords.length;
+        for (let j = 0; j < paths.length; j++) {
+            for (let i = 0; i < len; i++) {
+                if(availableKeywords[i].toLowerCase().indexOf(paths[j].toLowerCase()) === 0){
+                    categories.push(availableKeywords[i]);
                 }
-                if(pair.max){
-                    res = Number(product.price) <= Number(pair.max)
+            }
+        }
+        
+    }catch(err){
+        console.error('getBrands:error: ', err);
+    }
+    return fetchProductBrands(categories);   
+}
+
+export const getAvailableKeywords = async () => {
+    let res = [];
+    if(window.sessionStorage && sessionStorage.getItem('available_keys')){
+        
+        res = JSON.parse(sessionStorage.getItem('available_keys'));
+        //window.mlog('Fetching from storage', res);
+    }else {
+        res = await fetchAvailableCategories();
+        sessionStorage.setItem('available_keys', JSON.stringify(res));
+    }
+    return new Promise(resolve => resolve(res));   
+}
+
+export const isSearchKeyPresent = async (query) => {
+    let available = false, res = new Set();
+    try {
+        let search = query.toLowerCase().split('-'),
+        avkeys = await getAvailableKeywords();
+        
+        avkeys = avkeys || [];
+
+        for (let i = 0; i < avkeys.length; i++) {
+            if(search.indexOf(avkeys[i].toLowerCase()) > -1){
+                available = true;
+                res.add(avkeys[i]);
+                if(res.size() === search.length){
+                    break;
                 }
-                return res;
-            }));
-        })
-        products = temp;
+            }
+        }
+    }catch(err) {
+
     }
-    if(filter && filter.hasOwnProperty('discount')) {
-        let temp = []; 
-            
-        filter.discount.forEach((d)=>{
-            temp.push(products.filter((product) => {
-                return (Number( (product.discount || "") ) === Number(d));
-            }))
-        })
-        products = temp;
-    }
-    if(filter && filter.hasOwnProperty('brands')) {
-        let temp = []; 
-            
-        filter.brands.forEach((brand)=>{
-            temp.push(products.filter((product) => {
-                return (product.brand || "").toLowerCase().indexOf(brand.toLowerCase()) > -1;
-            }))
-        })
-        products = temp;
-    }
-    return products;
-}
-const logme = (obj) => {
-    console.log('Logging', obj);
-}
-export const applyOptimisedFilter = (filterObj) => {
-    let optimised = _debounce(logme, 1000);
-    optimised(filterObj);
-}
-export const fetchAllProducts = (filter) => {
-    return dispatch => {
-        dispatch(fetchStatePending());
-        MockFetchAllProducts(filter, filterProducts)
-        .then((products) => {
-            products_fetched = products;
-            dispatch(fetchStateSuccess(products));
-            //return products;
-        })
-        .catch(error => {
-            dispatch(fetchStateError(error));
-        })
-    }
+
+    return new Promise(resolve => resolve(Array.from(res)));
 }
 
-export const fetchSingleProduct = (sku) => {
-    return dispatch => {
-        dispatch(fetchStatePending());
-        MockFetchProduct(sku)
-        .then((products) => {
-            
-            dispatch(fetchStateSuccess(products));
-            //return products;
-        })
-        .catch(error => {
-            dispatch(fetchStateError(error));
-        })
+export const getNearestMatches = async (query) => {
+    let map = {};
+    try {
+        const dmp = new DiffMatchPatch();
+
+        let avkeys = await getAvailableKeywords();
+        
+        avkeys = avkeys || [];
+
+        for (let i = 0; i < avkeys.length; i++) {
+            const diff = dmp.diff_main(query, avkeys[i]);
+            map[avkeys[i]] = diff;
+        }
+        window.mlog('getNearestMatches', map);
+    }catch(err) {
+        console.error('getNearestMatches:error', err);
     }
+    return new Promise(resolve => resolve(map));
 }
-
-
-
-export const getAllProducts = () => products_fetched

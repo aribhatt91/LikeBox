@@ -7,9 +7,8 @@ state
 country
 zipcode
 */
-import simulateNetworkRequest from './simulateNetworkRequest';
-import { validateAlpha, validateAlphaNumeric, validateMobileNumber, validatePincode, validateEmpty } from './validation';
-import { MockGetAddresses } from './../mock/api/mock-address-api';
+import { addNewAddress, updateAddress, getUserAddressBook , removeAddressById } from './api/firestore/address';
+
 export const ERROR_TEXT = {
     name: 'Please fill out this field',
     mobile: 'Please enter 10-digit mobile number',
@@ -20,56 +19,29 @@ export const ERROR_TEXT = {
 },
 REQUIRED = ['name', 'mobile', 'pincode', 'locality', 'city', 'state', 'address'];
 
-const requiredFieldsFilled = (inputObj) => {
-    let res = [],
-    keys = Object.keys((inputObj || {}));
-    res = REQUIRED.filter( item => {
-        return keys.indexOf(item) === -1;
-    })
-    return {'required': res}
+
+export const fetchAddresses = (email) => {
+    //return MockGetAddresses()
+    return getUserAddressBook(email);
 }
 
-export const fetchAddresses = () => {
-    return MockGetAddresses()
+export const addAddress = (email, inputObj) => {
+    return addNewAddress(email, inputObj)
+}
+export const updateExistingAddress = (email, inputObj) => {
+    return updateAddress(email, inputObj)
+}
+export const deleteAddress = (email, addressId) => {
+    return removeAddressById(email, addressId);
+    //return null;
 }
 
-export const addAddress = (inputObj) => {
-
-}
-export const updateAddress = (inputObj) => {
-
-}
-export const deleteAddress = (inputObj) => {
-
-}
-
+/* 
+TODO 
+*/
 export const checkDeliveryAvailability = (pincode) => {
-    if(validatePincode(pincode)){
-        return new Promise((resolve, reject) => {
-            setTimeout(() => resolve({valid: true, msg: 'We deliver at this location!'}), 2000)
-        });
-    }else {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => resolve({valid: false, msg: 'Please enter a valid pincode'}), 500)
-        });
-    }
+    return true;
 }
 export const validateAddressForm = (inputObj) => {
-    let errorObj = {},
-    /* inputObj = inputObj || {},  */keys = Object.keys(inputObj),
-    res = requiredFieldsFilled(inputObj);
-
-    keys.forEach((item) => {
-        if((item === 'name' && !validateAlpha(inputObj[item])) || 
-        (item === 'mobile' && !validateMobileNumber(inputObj[item])) || 
-        (item === 'pincode' && !validatePincode(inputObj[item])) || 
-        (item === 'locality' && !validateAlphaNumeric(inputObj[item])) || 
-        (item === 'address' && !validateAlphaNumeric(inputObj[item])) || 
-        (item === 'city' && !validateEmpty(inputObj[item])) || 
-        (item === 'state' && !validateEmpty(inputObj[item]))){
-            errorObj[item] = ERROR_TEXT[item];
-        }
-    });
-    res.errors = errorObj;
-    return res;
+    return true
 }

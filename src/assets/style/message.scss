@@ -52,15 +52,24 @@
     background-color: rgba($error, 0.2);
     border-color: $error;
     color:$error;
+    svg {
+      fill: $error;
+    }
   }
   &.success {
     background-color: rgba($success, 0.2);
     border-color: $success;
     color: $success;
+    svg {
+      fill: $success;
+    }
   }
   &.info {
     background-color: rgba($info, 0.2);
     border-color: $info;
     color: $info;
+    svg {
+      fill: $info;
+    }
   }
 }
