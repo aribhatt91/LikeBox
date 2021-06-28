@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Disclaimer from './Disclaimer';
-import TnC from './TnC';
-import PrivacyPolicy from './PrivacyPolicy';
+import Disclaimer from './documents/Disclaimer';
+import TnC from './documents/TnC';
+import PrivacyPolicy from './documents/PrivacyPolicy';
 
 function Footer(){
     return (

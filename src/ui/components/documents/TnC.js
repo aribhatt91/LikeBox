@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import AppModal from './generic/AppModal';
+import AppModal from '../generic/AppModal';
 
 export default function TnC({className}) {
     const [show, setShow] = useState(false);
