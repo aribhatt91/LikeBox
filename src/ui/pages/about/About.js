@@ -5,7 +5,7 @@ function About() {
     return (
     <Page className="page" pageName="about">
         <div className={"about-section mt-5 mb-5 container"}>
-            <h1 className="text-center mb-5 text-uppercase">About Us</h1>
+            <h1 className="text-center mb-5 text-uppercase">The LikeBox Story</h1>
             <div className="col-xs-12">
                 <p className="text-uppercase h3">
                 WE CREATED LIKEBOX BECAUSE WE BELIEVE SHOPPING FOR CLOTHES ONLINE SHOULDN'T BE SO DIFFICULT.
