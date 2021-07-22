@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import { Redirect, Route, useLocation } from 'react-router-dom';
-import LoginPage from './../../ui/pages/LoginPage';
+import LoginPage from '../../ui/pages/login/LoginPage';
 import { AuthContext } from './../../store/contexts/AuthContext';
 import ForgotPasswordForm from '../../ui/components/forms/ForgotPasswordForm';
 

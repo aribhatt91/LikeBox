@@ -3,7 +3,7 @@ import Page from '../Page';
 function About() {
 
     return (
-    <Page className="page" pageName="about us">
+    <Page pageName="about us">
         <div className={"about-section mt-5 mb-5 container"}>
             <h1 className="text-center mb-5 text-uppercase">The LikeBox Story</h1>
             <div className="col-xs-12">

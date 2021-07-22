@@ -495,6 +495,9 @@
   margin: 0px;
   background: #FFFFFF;
   animation: anim-placeholder 1.5s infinite; }
+  @media only screen and (max-width: 767px) {
+    .product-card-placeholder {
+      justify-content: center; } }
   .product-card-placeholder .card-thumb-wrapper-placeholder {
     height: 235px;
     width: 235px;
@@ -632,7 +635,6 @@
     width: 280px;
     height: 280px;
     display: inline-block;
-    background-color: #ececec;
     border: 1px solid #ebebeb; }
     @media only screen and (max-width: 768px) {
       .product-card-min-container .product-card-min-thumb {
@@ -642,7 +644,7 @@
       .product-card-min-container .product-card-min-thumb {
         width: 200px;
         height: 200px; } }
-    @media only screen and (max-width: 320px) {
+    @media only screen and (max-width: 420px) {
       .product-card-min-container .product-card-min-thumb {
         width: 240px;
         height: 240px; } }
@@ -653,6 +655,8 @@
   .product-card-min-container .product-card-min-text .product-card-min-name {
     font-size: 14px;
     font-weight: 500; }
+  .product-card-min-container .product-card-min-text .product-card-min-thumb-placeholder {
+    background-color: #ececec; }
   .product-card-min-container .product-card-min-text .product-card-min-price-placeholder {
     height: 18px;
     margin-bottom: 6px;
@@ -1427,7 +1431,7 @@ $thumb-dimen-xs: 240px; */
       .wish-list-instance-container .wish-list-instance-thumb {
         width: 200px;
         height: 200px; } }
-    @media only screen and (max-width: 320px) {
+    @media only screen and (max-width: 420px) {
       .wish-list-instance-container .wish-list-instance-thumb {
         width: 240px;
         height: 240px; } }
@@ -1862,7 +1866,7 @@ $thumb-dimen-xs: 240px; */
     margin-bottom: 8px; }
     .like-box-slider-wrapper .like-box-slider-text-container .like-box-slider-value, .like-box-slider-wrapper .like-box-slider-text-container .like-box-slider-label {
       font-size: 22px;
-      line-height: 10px; }
+      line-height: 1; }
     .like-box-slider-wrapper .like-box-slider-text-container .like-box-unit-btn {
       border: 1px solid #707070;
       color: #000000;
@@ -3177,7 +3181,6 @@ table {
       margin-bottom: 0; }
 
 .user-dashboard {
-  max-width: 750px !important;
   margin: auto;
   padding: 32px 0; }
   .user-dashboard .dashboard-navigation {

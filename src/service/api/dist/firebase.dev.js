@@ -3,13 +3,15 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports["default"] = exports.fieldPath = exports.db = exports.auth = void 0;
+exports["default"] = exports.fieldPath = exports.db = exports.auth = exports.firebaseAnalyticsEvents = exports.firebaseAnalytics = void 0;
 
 var _app = _interopRequireDefault(require("firebase/app"));
 
 require("firebase/auth");
 
 require("firebase/firestore");
+
+require("firebase/analytics");
 
 var _firebaseDev = _interopRequireDefault(require("../keys/firebase-dev-1.json"));
 
@@ -19,6 +21,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 var app = _app["default"].initializeApp(_firebaseDev2["default"]);
 
+var firebaseAnalytics = _app["default"].analytics();
+
+exports.firebaseAnalytics = firebaseAnalytics;
+var firebaseAnalyticsEvents = _app["default"].analytics.EventName;
+exports.firebaseAnalyticsEvents = firebaseAnalyticsEvents;
 var auth = app.auth();
 exports.auth = auth;
 

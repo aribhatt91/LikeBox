@@ -4,7 +4,9 @@ import { triggerCustomEvent } from './../../service/api/adobe/target-methods';
 import { capitaliseAll } from './../../service/helper';
 import { DataLayer } from './../../service/data/dataLayer';
 import { addProductMetadata, addListingMetadata } from './../../service/data/metadata';
+import { logPageView } from './../../service/api/analytics/index';
 class Page extends Component {
+    visitedOnce = false;
     constructor(props){
         super(props); 
     }
@@ -19,6 +21,12 @@ class Page extends Component {
         triggerCustomEvent(viewName);
         //document.title = capitaliseAll(pageName);
         window.scrollTo({left:0, top: 0, behavior: 'smooth'});
+        
+        /* GA Logging */
+        if(!this.visitedOnce){
+            logPageView(this.getPageTitle(), window.location.href, window.location.pathname);
+            this.visitedOnce = true;
+        }
     }
     getPageTitle(){
         let {pageName, category, product} = this.props;

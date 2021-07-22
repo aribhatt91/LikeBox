@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Disclaimer from './documents/Disclaimer';
+import FAQ from './documents/FAQ';
 import TnC from './documents/TnC';
 import PrivacyPolicy from './documents/PrivacyPolicy';
 
@@ -22,6 +23,7 @@ function Footer(){
                         <PrivacyPolicy className="footer-link" />
                         <TnC className="footer-link" />
                         <Disclaimer className="footer-link" />
+                        <FAQ className="footer-link" />
                     </div>
                     <div className="col-12 col-md-4">
                         <h5 className="text-uppercase font-weight-normal mb-3">Contact</h5>

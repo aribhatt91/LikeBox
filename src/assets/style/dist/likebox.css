@@ -249,7 +249,7 @@
 }
 .like-box-slider-wrapper .like-box-slider-text-container .like-box-slider-value, .like-box-slider-wrapper .like-box-slider-text-container .like-box-slider-label {
   font-size: 22px;
-  line-height: 10px;
+  line-height: 1;
 }
 .like-box-slider-wrapper .like-box-slider-text-container .like-box-unit-btn {
   border: 1px solid #707070;

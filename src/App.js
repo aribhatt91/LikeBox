@@ -4,7 +4,6 @@ import AppBody from './ui/AppBody';
 import Footer from './ui/components/Footer';
 import { AuthProvider, AuthContext } from './store/contexts/AuthContext';
 import { auth } from './service/api/firebase';
-import LoadingModule from './ui/components/LoadingModule';
 import SplashPage from './ui/pages/SplashPage';
 
 function App() {
@@ -31,12 +30,9 @@ function App() {
     },[])
     return ( 
             <div className="App">
-            
-                {/* <AuthProvider> */}
                     <Header/>
                     <AppBody/>
-                    <Footer></Footer>
-                {/* </AuthProvider> */}
+                    <Footer/>
                 {!(currentUser || !loading) && <SplashPage />}
             </div>
 

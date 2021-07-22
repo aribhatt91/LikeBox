@@ -36,7 +36,7 @@ $thumb-dimen-xs: 240px; */
         width: $thumb-dimen-sm;
         height: $thumb-dimen-sm;
       }
-      @include media(320px){
+      @include media(420px){
         width: $thumb-dimen-xs;
         height: $thumb-dimen-xs;
       }
