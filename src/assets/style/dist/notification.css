@@ -96,18 +96,18 @@
 
 @keyframes SlideLeft {
   0% {
-    margin-left: 120%;
+    transform: translateX(120%);
   }
   100% {
-    margin-left: 0;
+    transform: translateX(0);
   }
 }
 @keyframes SlideRight {
   0% {
-    margin-left: 0;
+    transform: translateX(0);
   }
   100% {
-    margin-left: 120%;
+    transform: translateX(120%);
   }
 }
 .notification-item.exit {

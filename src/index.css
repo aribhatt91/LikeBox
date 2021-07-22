@@ -2132,15 +2132,15 @@ $thumb-dimen-xs: 240px; */
 
 @keyframes SlideLeft {
   0% {
-    margin-left: 120%; }
+    transform: translateX(120%); }
   100% {
-    margin-left: 0; } }
+    transform: translateX(0); } }
 
 @keyframes SlideRight {
   0% {
-    margin-left: 0; }
+    transform: translateX(0); }
   100% {
-    margin-left: 120%; } }
+    transform: translateX(120%); } }
 
 .notification-item.exit {
   animation: SlideRight 0.4s;

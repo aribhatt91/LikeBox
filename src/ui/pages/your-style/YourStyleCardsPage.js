@@ -52,6 +52,7 @@ export default function YourStyleCardsPage({slideIn, slideOut}) {
     //const [loading, setLoading] = useState(true);
     const [reachedMax, setReachedMax] = useState(false);
     const [cardsState, setCardsState] = useState({loading: true});
+    const [submitting, setSubmitting] = useState(false);
     const [items, setItems] = useState([]);
     const [update, setUpdate] = useState(true);
     const history = useHistory();
@@ -206,14 +207,16 @@ export default function YourStyleCardsPage({slideIn, slideOut}) {
     }, [])
 
     const submit = async () => {
-        if(currentUser){
+        if(currentUser && !submitting){
             try {
+                setSubmitting(true);
                 let likebox = {LIKED, DISLIKED, 'lastVisible': ""};
                 window.mlog('LikeBoxCarousel:submit', likebox);
                 await updateLikeBox(currentUser.email, {likebox});
                 
             }catch(err){
                 console.error('LikeBoxCarousel:submit:error', err);
+                setSubmitting(false)
             }finally {
                 setTimeout(()=>{
                     history.push('/');
@@ -248,13 +251,13 @@ export default function YourStyleCardsPage({slideIn, slideOut}) {
                         </div>
                     </div>
                 </div>
-                <AppButton label="Start shopping" className="d-block ml-auto mr-auto pr-5 pl-5 mb-5" onClick={submit} />
+                <AppButton loading={submitting} label="Start shopping" className="d-block ml-auto mr-auto pr-5 pl-5 mb-5" onClick={submit} />
             </div>
             </div>}
             {
                 reachedMax && <div className="container mt-5 p-4">
                     <SuccessMessage message="Awesome! You are good to go.." />
-                    <AppButton label="Start shopping" className="d-block ml-auto mr-auto pr-5 pl-5 mb-5 mt-5" onClick={submit} />
+                    <AppButton loading={submitting} label="Start shopping" className="d-block ml-auto mr-auto pr-5 pl-5 mb-5 mt-5" onClick={submit} />
                 </div>
             }
             
