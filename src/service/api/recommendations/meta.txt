@@ -1,0 +1,62 @@
+/* 
+https://cloud.google.com/recommendations-ai/docs/reference/rest/v1beta1/projects.locations.catalogs.eventStores.userEvents#UserInfo
+*/
+
+var user_event = {
+    "eventType" : "detail-page-view",
+    "userInfo": {
+        "visitorId": "1722213811.1597377125",
+        "userId": "user-id"
+        },
+    "eventDetail" : {
+      "recommendationToken": "recommendation-token",
+      "experimentIds": "experiment-id"
+    },
+    "productEventDetail": {
+       "productDetails": [
+          {
+            "id": "123",
+            "originalPrice": 140.00,
+            "displayPrice": 130.00,
+            "currencyCode":"USD"
+          }
+        ]
+      }
+  };
+  /* 
+  https://cloud.google.com/recommendations-ai/docs/reference/rest/v1beta1/projects.locations.catalogs.eventStores.userEvents#ProductEventDetail
+  
+  add-to-cart
+  add-to-list
+  category-page-view
+  checkout-start
+  detail-page-view
+  home-page-view
+  page-visit
+  purchase-complete
+  refund
+  remove-from-cart
+  remove-from-cart
+  search
+  shopping-cart-page-view
+  impression
+  */
+  var _gre = _gre || [];
+  // Credentials for project.
+  _gre.push(['apiKey', KEYS['RECS-API-KEY']]);
+  _gre.push(['logEvent', user_event]);
+  _gre.push(['projectId', 'the-likebox']);
+  _gre.push(['locationId', 'global']);
+  _gre.push(['catalogId', 'default_catalog']);
+  _gre.push(['eventStoreId', 'default_event_store']);
+  
+  (function() {
+    var gre = document.createElement('script'); gre.type = 'text/javascript'; gre.async = true;
+    gre.src = 'https://www.gstatic.com/recommendationengine/v1beta_event.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gre, s);
+  })();
+
+
+  CatalogItem
+  https://cloud.google.com/recommendations-ai/docs/reference/rest/v1beta1/projects.locations.catalogs.catalogItems
+  

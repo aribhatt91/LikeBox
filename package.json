@@ -23,6 +23,7 @@
     "react-redux": "^5.0.7",
     "react-router-dom": "^5.2.0",
     "react-scripts": "1.0.14",
+    "react-slick": "^0.28.1",
     "react-slider": "^1.1.4",
     "redux": "^4.0.0",
     "redux-devtools-extension": "^2.13.8",
@@ -42,7 +43,9 @@
     "build": "npm run build-css && react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "deploy": "firebase deploy --only hosting",
+    "deploy": "npm run build && firebase deploy --only hosting",
+    "deploy-prod": "firebase use prod && npm run deploy",
+    "deploy-stage": "firebase use stage && npm run deploy",
     "deploy-rules": "firebase deploy --only firestore:rules"
   },
   "devDependencies": {

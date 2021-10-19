@@ -4,6 +4,7 @@ import { removeItemFromWishList, addItemToWishList, itemInWishList } from '../..
 import { AuthContext } from './../../store/contexts/AuthContext';
 import { useNotification } from './../../store/contexts/NotificationProvider';
 import { logAddToWishList } from './../../service/api/analytics/index';
+import { addToList, removeFromList } from './../../service/api/recommendations/index';
 
 export default function WishListButton({product, className="" }) {
     const [loading, setLoading] = useState(true);
@@ -47,7 +48,8 @@ export default function WishListButton({product, className="" }) {
                     type: res.type,
                     title: 'Success!',
                     message: res.msg
-                  })
+                  });
+                  removeFromList(product);
                 }
                 setLoading(false);
               })()
@@ -63,6 +65,7 @@ export default function WishListButton({product, className="" }) {
                     message: res.msg
                   });
                   logAddToWishList(product);
+                  addToList(product);
                 }
                 setLoading(false);
               })()

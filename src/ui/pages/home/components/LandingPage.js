@@ -7,6 +7,8 @@ import Accordion from '../../../components/generic/Accordion';
 import R1 from '../../../../assets/img/rtb1.png';
 import R2 from '../../../../assets/img/rtb2.png';
 import R3 from '../../../../assets/img/rtb3.png';
+import BrandCarousel from './BrandCarousel';
+import BlogSection from './BlogSection';
 export default function LandingPage({slideIn, slideOut, onComplete, setRegistered}) {
     return (
         <div className={"like-box-home" + (!slideIn && !slideOut ? " slide-hold" : "") + (slideOut ? " slide-out" : "") + (slideIn ? " slide-in" : "")}>
@@ -34,6 +36,9 @@ export default function LandingPage({slideIn, slideOut, onComplete, setRegistere
                         <SubscriptionComponent onComplete={onComplete} setRegistered={setRegistered} />
                     </div>
                 </div>
+            </section>
+            <section className="brands w-100 p-0 m-0">
+                <BrandCarousel />
             </section>
             <section className="like-box-reasons w-100">
                 <div className="container">
@@ -112,6 +117,7 @@ export default function LandingPage({slideIn, slideOut, onComplete, setRegistere
                     </div>
                 </div>
             </section>
+            <BlogSection />
         </div>
     )
 }

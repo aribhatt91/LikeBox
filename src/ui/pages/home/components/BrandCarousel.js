@@ -1,6 +1,71 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import AppImage from '../../../components/generic/AppImage';
+import Slider from "react-slick";
+import BRANDS from '../../../../service/constants/brands.json';
+
+const settings = {
+    dots: false,
+    infinite: true,
+    slidesToShow: 5,
+    slidesToScroll: 5,
+    autoplay: true,
+    speed: 500,
+    autoplaySpeed: 2000,
+    cssEase: "linear",
+    responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            infinite: true
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            initialSlide: 2
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2
+          }
+        }
+      ]
+  };
+
 export default function BrandCarousel() {
+    
+    return (
+        <div className="affiliate-brands pt-4 pb-4 border-top w-100">
+            <div className="mt-4 mb-4">
+
+                <Slider {...settings}>
+                    {
+                        BRANDS.map(brand => {
+                            return (
+                                <div className="col mb-3 p-0 mb-lg-0 m-0 pl-3 pr-3 brand-item">
+                                    <div className="d-flex w-100 h-100 align-center justify-content-center">
+                                        <a href={brand.link} target="_blank" className="w-100">
+                                            <AppImage className="w-100" alt={brand.brand} src={brand.logo} />
+                                        </a>
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
+                </Slider>
+            </div>
+        </div>
+    )
+}
+/* export default function BrandCarousel() {
+    
     return (
         <div className="affiliate-brands pt-4 pb-4 border-top">
             <div className="container mt-4 mb-4">
@@ -29,7 +94,7 @@ export default function BrandCarousel() {
                     </li>
                     <li className="col-6 mb-3 col-sm-4 col-md-2 p-0 mb-lg-0 m-0 pl-3 pr-3">
                         <div className="d-flex w-100 h-100 align-center justify-content-center">
-                            <a href="" target="_blank" className="w-100">
+                            <a href="https://www.farah.co.uk/" target="_blank" className="w-100">
                                 <AppImage className="w-100" alt="Farah" src="https://s3-eu-west-1.amazonaws.com/globale-prod/Images/FarahUK/Far-logo-400x400.png"/>
                             </a>
                         </div>
@@ -47,3 +112,4 @@ export default function BrandCarousel() {
     )
 }
 
+ */

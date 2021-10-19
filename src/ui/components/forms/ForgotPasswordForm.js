@@ -5,37 +5,49 @@ import AppForm from './AppForm';
 import AppSubmitButton from './../generic/AppSubmitButton';
 import { AuthContext } from './../../../store/contexts/AuthContext';
 import { EMAIL_FORM_SCHEMA } from './../../../service/validationSchema';
-import Page from '../../pages/Page';
 
 export default function ForgotPasswordForm() {
     const [submitted, setSubmitted] = useState(false);
 
-    const [error, setError] = useState(false);
+    const [error, setError] = useState(null);
     const {currentUser, resetPassword} = useContext(AuthContext);
-    const initialValues = {},
-    submitForm = async (userInput, {setSubmitting}) => {
+    const initialValues = {email: ""};
+    const submitForm = async (userInput, {setSubmitting}) => {
         setSubmitting(true);
-        window.mlog(userInput);
-        await resetPassword(userInput.email);
-        setSubmitting(false);
-        setSubmitted(true)
+        setError(null);
+        //window.mlog(userInput);
+        try{
+            await resetPassword(userInput.email);
+            
+            if(error){
+                setError(null);
+            }
+        }catch(err){
+            console.error('logging error', err);
+            setError('Please check the email address you have entered');
+        }finally {
+            setSubmitting(false);
+            setSubmitted(true);
+            
+        }
+        
+        
     }
     return (
-        <Page className="d-flex justify-content-center" pageName="Forgot password">
-            <div className="mt-5 mb-5 d-flex align-center col-12 col-md-7 col-lg-5">
-                <div className="col-12 p-0 m-0">
-                    {
-                    submitted && <SuccessMessage message={"Sent an email to reset password. Check your inbox for further instructions"} />
-                    }
-            
-                    <div className={"login-form-container" + (submitted ? ' d-none' : "")}>
-                    <div className="login-form-header mb-4 pl-2 pr-2 h3 font-weight-normal text-center">Reset your password</div>
+        
+            <div className="col-12 col-md-7 col-lg-5 p-0 mt-0 mb-0 m-auto">
+                {
+                submitted && !error && <SuccessMessage message={"Sent an email to reset password. Check your inbox for further instructions"} />
+                }
+        
+                <div className={"login-form-container" + (submitted && !error ? ' d-none' : "")}>
+                <div className="login-form-header mb-4 pl-2 pr-2 h3 font-weight-normal text-center">Reset your password</div>
                     <form className={"login-form"}>
             
                         <AppForm
-                        initialValues={initialValues}
-                        onSubmit={submitForm}
-                        validationSchema={EMAIL_FORM_SCHEMA}>
+                            initialValues={initialValues}
+                            onSubmit={submitForm}
+                            validationSchema={EMAIL_FORM_SCHEMA}>
                             {submitted && error && 
                             <div className="row m-0 mb-4">
                                 <div className="col-md-12 col-lg-12 pl-2 pr-2 clearfix float-none">
@@ -65,10 +77,8 @@ export default function ForgotPasswordForm() {
             
                         </AppForm>
                     </form>
-                    </div>
-                    
                 </div>
+                
             </div>
-          </Page>
       )
 }

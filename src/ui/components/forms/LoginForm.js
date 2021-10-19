@@ -33,7 +33,6 @@ const LoginForm = ({onComplete}) => {
     //signInUser(userInput, () => {setSubmitting(false); setSubmitted(true)});
     try {
       let response = await login(userInput.email, userInput.password);
-      setSubmitted(true);
       window.mlog('Response ->', response);
       logSignIn("password");
       if(typeof onComplete === 'function'){

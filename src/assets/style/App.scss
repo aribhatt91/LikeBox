@@ -33,8 +33,11 @@ html * {
     background-color: rgba($color: #333333, $alpha: 0.8);
   }
 }
-.thin-scroll-bar::-webkit-scrollbar-track {
-  background-color: transparent;
+.no-scroll-bar::-webkit-scrollbar-track,
+.no-scroll-bar::-webkit-scrollbar,
+.no-scroll-bar::-webkit-scrollbar-thumb,
+.no-scroll-bar::-webkit-scrollbar-track {
+  display: none;
 }
 .App * {
   // text-align: center;

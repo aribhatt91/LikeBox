@@ -1,0 +1,100 @@
+.user-dashboard {
+  margin: auto;
+  padding: 32px 0; }
+  .user-dashboard .dashboard-navigation {
+    width: 250px;
+    padding: 16px 0; }
+    .user-dashboard .dashboard-navigation > .hello-user {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 16px; }
+      .user-dashboard .dashboard-navigation > .hello-user .hello-user-logo {
+        height: 50px;
+        width: 50px; }
+      .user-dashboard .dashboard-navigation > .hello-user .hello-user-text {
+        padding: 5px 0 0 16px;
+        width: 100%; }
+        .user-dashboard .dashboard-navigation > .hello-user .hello-user-text .hello-user-greeting {
+          font-size: 12px; }
+        .user-dashboard .dashboard-navigation > .hello-user .hello-user-text .hello-user-name {
+          font-size: 16px;
+          font-weight: 500; }
+    .user-dashboard .dashboard-navigation > ul {
+      box-sizing: border-box;
+      list-style-type: none;
+      padding: 0;
+      width: 100%;
+      margin: 0; }
+      .user-dashboard .dashboard-navigation > ul:not(:last-child) {
+        padding-bottom: 16px; }
+      .user-dashboard .dashboard-navigation > ul:not(:first-child) {
+        padding-top: 16px; }
+      .user-dashboard .dashboard-navigation > ul li {
+        padding: 0;
+        margin: 0;
+        display: flex; }
+        .user-dashboard .dashboard-navigation > ul li a {
+          background-color: transparent;
+          color: #333;
+          width: 100%;
+          padding: 6px 8px;
+          text-decoration: none !important;
+          margin: 2px 0;
+          transition: 0.3 all; }
+          .user-dashboard .dashboard-navigation > ul li a.active {
+            border-left: 3px solid #333;
+            font-weight: 500; }
+  .user-dashboard .dashboard-body {
+    width: 100%;
+    padding: 16px 32px; }
+    .user-dashboard .dashboard-body h1 {
+      font-weight: 300; }
+    .user-dashboard .dashboard-body .editable-section .field-edit {
+      margin-left: 32px;
+      font-size: 13px;
+      font-weight: bold;
+      color: #06c;
+      cursor: pointer; }
+  .user-dashboard .app-tab-layout .tab-pane {
+    min-height: 400px; }
+  .user-dashboard .user-settings-wrapper {
+    width: 100%;
+    overflow: hidden; }
+    .user-dashboard .user-settings-wrapper .user-settings {
+      display: flex;
+      flex-wrap: nowrap;
+      transition: 0.3s all;
+      transform: translateX(0); }
+      .user-dashboard .user-settings-wrapper .user-settings .user-settings-menu {
+        flex: 1 1;
+        min-width: 100%; }
+        .user-dashboard .user-settings-wrapper .user-settings .user-settings-menu ul {
+          list-style-type: none;
+          padding-left: 0;
+          margin: 0;
+          width: 100%; }
+          .user-dashboard .user-settings-wrapper .user-settings .user-settings-menu ul li {
+            min-height: 64px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 24px;
+            line-height: 10px;
+            cursor: pointer;
+            padding: 1rem; }
+            .user-dashboard .user-settings-wrapper .user-settings .user-settings-menu ul li:not(:last-child) {
+              border-bottom: 1px solid rgba(112, 112, 112, 0.25); }
+      .user-dashboard .user-settings-wrapper .user-settings .user-settings-detail {
+        flex: 1 1;
+        min-width: 100%; }
+        .user-dashboard .user-settings-wrapper .user-settings .user-settings-detail .back {
+          font-size: 16px;
+          text-transform: uppercase;
+          text-decoration: underline;
+          clear: both;
+          cursor: pointer;
+          min-height: 64px;
+          display: flex;
+          align-items: center; }
+      .user-dashboard .user-settings-wrapper .user-settings.detail-open {
+        transform: translateX(-100%); }

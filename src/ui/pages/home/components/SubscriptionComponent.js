@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router';
+import { logClickSubscriptionCTA } from '../../../../service/api/analytics/ui';
 import { AuthContext } from '../../../../store/contexts/AuthContext';
 import SubscriptionForm from '../../../components/forms/SubscriptionForm';
 export default function SubscriptionComponent({onComplete}) {
@@ -10,23 +11,22 @@ export default function SubscriptionComponent({onComplete}) {
         setSubmitting(true);
         if(userInput.email){
             try {
+                /* 
+                GA Event
+                */
+                logClickSubscriptionCTA();
                 let methods = await fetchSignInMethods(userInput.email)
-                window.mlog(methods);
+                //window.mlog(methods);
                 if(methods.length === 0){
                     //Signup user
-                    window.mlog('Signup user');
-                    //setRegistered(false, userInput.email);
-
+                    //window.mlog('Signup user');
                     history.push('/register?email=' + window.encodeURIComponent(userInput.email));
                 }else if(methods.indexOf('password') > -1){
                     //Sign in user
-                    window.mlog('Sign in user');
-                    //setRegistered(true, userInput.email);
+                    //window.mlog('Sign in user');
                     history.push('/login?email=' + window.encodeURIComponent(userInput.email));
                 }
-                /* if(typeof onComplete === 'function'){
-                    setTimeout(onComplete, 750);
-                } */
+
             }catch(err){
                 console.error('fetchSignInMethods', err);
             }

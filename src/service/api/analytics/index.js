@@ -128,6 +128,8 @@ export const logPurchase = (item) => {
     logEvent(firebaseAnalyticsEvents.PURCHASE, {
         currency: 'GBP',
         value,
+        affiliation: item.affiliation,
+        transaction_id: ('T_' + Math.floor(Math.random() * (10000 - 1) + 1)),
         items: [item]
     });
 }

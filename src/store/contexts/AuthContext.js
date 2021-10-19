@@ -37,6 +37,12 @@ export function AuthProvider({children}){
         return auth.fetchSignInMethodsForEmail(email);
     }
 
+    function setUserAvatar(userObj){
+        if(userObj){
+            setUserProfile(userObj);
+        }
+    }
+
     function updateName(displayName){
         return currentUser.updateProfile({
             displayName
@@ -72,7 +78,7 @@ export function AuthProvider({children}){
             if(user){
                 setUser(user)
                 user.getIdToken().then(token => {
-                    window.mlog('received token', token);
+                    //window.mlog('received token', token);
                     localStorage.setItem('user_token', token);
                 });
                 window.mlog('onAuthStateChanged', user, user.uid);
@@ -86,6 +92,7 @@ export function AuthProvider({children}){
 
     const value = {
         currentUser,
+        userProfile,
         login,
         signup,
         logout,

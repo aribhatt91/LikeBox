@@ -27,15 +27,18 @@
 .hidden-xs-up {
   display: none;
 }
+
+$footerText: #DDFFF7;
+$footerBackground: #424B54;
 .global-footer {
-  background-color: #424B54;
+  background-color: $footerBackground;
   min-height: 48px;
   padding: 2rem 0;
   h5 {
-    color: #DDFFF7;
+    color: $footerText;
   }
   .footer-link, .footer-text {
-    color: #DDFFF7;
+    color: $footerText;
     font-size: 1rem;
     line-height: 1.1;
     text-decoration: none;
@@ -46,9 +49,12 @@
   }
   .footer-text {
     a {
-      color: #DDFFF7;
+      color: $footerText;
       text-decoration: underline;
     }
+  }
+  svg {
+    fill: $footerText;
   }
 }
 
@@ -339,6 +345,13 @@
       }
       img {
         width: 100%;
+      }
+      
+    }
+    @media (max-width: 767px) {
+      .thumb-image {
+        min-width: 72px;
+        height: 72px;
       }
     }
   }
