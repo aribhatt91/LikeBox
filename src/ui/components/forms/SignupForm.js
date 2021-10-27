@@ -10,6 +10,7 @@ import { addUserProfile } from './../../../service/userProfile';
 import AppDateInput from '../generic/AppDateInput';
 import { useHistory } from 'react-router-dom';
 import { parseSearchParams } from '../../../service/helper';
+import { logRegister } from './../../../service/api/analytics/index';
 
 let USER_TEMP = null;
 function SignupForm(props){
@@ -64,6 +65,7 @@ function SignupForm(props){
     const updateUserInDatabase = async () => {
         if(USER_TEMP){
             try{
+                logRegister("password");
                 await addUserProfile(USER_TEMP);
                 await updateName(USER_TEMP.name.fname);
             }catch(err){

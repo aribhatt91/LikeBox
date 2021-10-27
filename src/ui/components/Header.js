@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link, NavLink, useHistory, useLocation } from 'react-router-dom';
+import { NavLink, useHistory, useLocation } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import HeaderMobileNav from './HeaderMobileNav.js';
@@ -11,7 +11,6 @@ import AppButton from './generic/AppButton';
 import HeaderNavigation from './HeaderNavigation';
 import ScaleIcon from './svg-components/ScaleIcon';
 import HeartLineIcon from './svg-components/HeartLineIcon.js';
-import BagIcon from './svg-components/BagIcon.js';
 
 
 function Header (props) {

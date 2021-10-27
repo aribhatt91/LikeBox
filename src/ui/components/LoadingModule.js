@@ -1,19 +1,12 @@
 import React from 'react';
 import Spinner from 'react-bootstrap/Spinner';
 import HOME_ICON from '../../assets/img/logo.png'; 
-export default function LoadingModule({text, type='loading', fullscreen=true, opaque=true}){
+export default function LoadingModule({fullscreen=true}){
     return (
-    <div className={'loading_module ' + (fullscreen ? 'fullscreen' : 'block')}>
-        <div className='loading_module_wrapper'>
-            <span className='loading_icon'>
-                {/* {type === 'loading' && <Spinner animation="border" variant="info"/>}
-                {type === 'success' && <span className="tick-wrapper">
-                    <span className="tick">L</span>
-                </span>} */}
-                <img className="home_icon" src={HOME_ICON} />
-            </span>
-{/*             <span className={'loading_text' + (type === 'success' ? ' success' : '')}>{text}</span>
- */}        </div>
+    <div className={'loading-module d-flex w-100 h-100'}>
+        <div className='container d-flex h-100 position-relative'>
+            <LoadingPendulum />
+        </div>
     </div>
     );
 }

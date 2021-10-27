@@ -11,7 +11,7 @@ $width: 360px;
 }
 @include media(660px){
   $nav-height: $nav-height-xs;
-  $width: 300px;
+  $width: 90%;
 }
 
 .notification-wrapper {
@@ -115,21 +115,21 @@ $width: 360px;
 
 @keyframes SlideLeft {
     0% {
-        margin-left: 120%;
+        transform: translateX(120%);
     }
 
     100% {
-        margin-left: 0;
+        transform: translateX(0);
     }
 }
 
 @keyframes SlideRight {
     0% {
-        margin-left: 0;
+        transform: translateX(0);
     }
 
     100% {
-        margin-left: 120%;
+        transform: translateX(120%);
     }
 }
 

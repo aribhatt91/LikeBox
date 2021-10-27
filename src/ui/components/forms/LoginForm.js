@@ -9,6 +9,7 @@ import AppSubmitButton from './../generic/AppSubmitButton';
 import { AuthContext } from './../../../store/contexts/AuthContext';
 import { Link, useHistory } from 'react-router-dom';
 import { parseSearchParams } from '../../../service/helper';
+import { logSignIn } from '../../../service/api/analytics';
 const validationSchema = LOGIN_FORM_SCHEMA;
 
 const LoginForm = ({onComplete}) => {
@@ -32,8 +33,8 @@ const LoginForm = ({onComplete}) => {
     //signInUser(userInput, () => {setSubmitting(false); setSubmitted(true)});
     try {
       let response = await login(userInput.email, userInput.password);
-      setSubmitted(true);
       window.mlog('Response ->', response);
+      logSignIn("password");
       if(typeof onComplete === 'function'){
           setTimeout(onComplete, 750);
       }

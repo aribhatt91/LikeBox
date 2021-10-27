@@ -1,6 +1,7 @@
 {
   "projects": {
-    "default": "the-likebox",
-    "dev": "the-likebox"
+    "default": "the-likebox-stage",
+    "prod": "the-likebox",
+    "stage": "the-likebox-stage"
   }
 }

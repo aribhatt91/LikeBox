@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { auth } from '../../service/api/firebase';
 //import signup from './../../service/signupService';
+import { setUserId } from './../../service/api/analytics/user/index';
 
 export const AuthContext = React.createContext();
 
@@ -34,6 +35,12 @@ export function AuthProvider({children}){
 
     function fetchSignInMethods(email) {
         return auth.fetchSignInMethodsForEmail(email);
+    }
+
+    function setUserAvatar(userObj){
+        if(userObj){
+            setUserProfile(userObj);
+        }
     }
 
     function updateName(displayName){
@@ -71,10 +78,11 @@ export function AuthProvider({children}){
             if(user){
                 setUser(user)
                 user.getIdToken().then(token => {
-                    window.mlog('received token', token);
+                    //window.mlog('received token', token);
                     localStorage.setItem('user_token', token);
                 });
                 window.mlog('onAuthStateChanged', user, user.uid);
+                setUserId(user.uid);
             }
             
             setLoading(false);
@@ -84,6 +92,7 @@ export function AuthProvider({children}){
 
     const value = {
         currentUser,
+        userProfile,
         login,
         signup,
         logout,

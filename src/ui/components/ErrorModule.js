@@ -1,11 +1,18 @@
-import React, {useState} from 'react';
+import React from 'react';
 
-export default function ErrorModule({error_image, error_text, error_subtext}) {
+export default function ErrorModule({error_text}) {
     return (
-        <div className="error-module d-flex justify-content-center align-items-center flex-column">
-            {error_image && <img className="error-image" src={error_image}/>}
-            {error_text && <div className="d-inline-flex error-text text-center">{error_text}</div>}
-            {error_subtext && <div className="d-inline-flex error-subtext text-center">{error_subtext}</div>}
+        <div className="error-module w-100 h-100 d-flex align-center pt-5 pb-5">
+            <div className="container d-flex flex-column align-center justify-content-center">
+                <h1 className="font-weight-bold text-uppercase col-lg-5">
+                    OOPS!
+                </h1>
+                <h3 className="text-uppercase mt-4 col-lg-5">
+                    {
+                        error_text
+                    }
+                </h3>
+            </div>
         </div>
     )
 }

@@ -1,0 +1,77 @@
+[
+    {
+        "brand": "Asket",
+        "logo": "https://images.opumo.com/storage/brand/opumo-asket-brand-page-logo.png",
+        "link": "https://www.asket.com/"
+    },
+    {
+        "brand": "Bellfield Clothing",
+        "logo": "//cdn.shopify.com/s/files/1/0009/5695/6732/files/Bellfield-Logo-Updated_410x.png?v=1576251689",
+        "link": "https://www.bellfieldclothing.com/"
+    },
+    {
+        "brand": "Craghoppers",
+        "logo": "https://static.craghoppers.com/version1620808872/frontend/Regatta/craghoppers-desktop/en_GB/images/logo.svg",
+        "link": "https://www.craghoppers.com/"
+    },
+    {
+        "brand": "Farah",
+        "logo": "https://cdn.shopify.com/s/files/1/0809/2329/files/Farah_Collection_Logo.png?v=1580396682",
+        "link": "https://www.farah.co.uk/"
+    },
+    {
+        "brand": "Original Penguin",
+        "logo": "https://www.pngkey.com/png/full/28-282737_original-penguin-logo-original-penguin-op-tip-mens.png",
+        "link": "https://www.originalpenguin.co.uk/"
+    },
+    {
+        "brand": "Berghaus",
+        "logo": "https://gretnagateway.com/wp-content/uploads/2018/01/Gretna-website-logo_Berghaus.png",
+        "link": "https://www.berghaus.com/"
+    },
+    {
+        "brand": "ellesse",
+        "logo": "https://www.nicefootwear.it/wp-content/uploads/ellesse-square-new-300x150.png",
+        "link": "https://www.ellesse.com/"
+    },
+    {
+        "brand": "French connection",
+        "logo": "https://www.complaintsdepartment.co.uk/image/431/600/french-connection.png",
+        "link": "https://www.frenchconnection.com/"
+    },
+    {
+        "brand": "Nudie Jeans",
+        "logo": "https://media.fashionunited.com/logos/logo_nudie.eyWEHxGbCqpDAPHw6.png",
+        "link": "https://www.nudiejeans.com/"
+    },
+    {
+        "brand": "Under Armour",
+        "logo": "https://www.underarmour.co.uk/on/demandware.static/Sites-UKIE-Site/-/default/dwa402eca6/images/uablacklogo.svg",
+        "link": "https://www.underarmour.co.uk/en-gb/"
+    },
+    {
+        "brand": "Fatface",
+        "logo": "https://www.thembsgroup.co.uk/wp-content/uploads/2020/05/FatFace-Final-logo.png",
+        "link": "https://www.fatface.com/"
+    },
+    {
+        "brand": "Burton menswear",
+        "logo": "https://www.f3.com.my/wp-content/uploads/2019/09/F3-Brand-Logo-Burtron.png",
+        "link": "https://www.burton.co.uk/"
+    },
+    {
+        "brand": "Footpatrol",
+        "logo": "https://www.footpatrol.com/skins/footpatrolgb-desktop/public/img/logos/logo.png",
+        "link": "https://www.footpatrol.com/"
+    },
+    {
+        "brand": "Regatta",
+        "logo": "https://media.regatta.com/logo/stores/69/Regatta-Logo.svg",
+        "link": "https://www.regatta.com/"
+    },
+    {
+        "brand": "Brora",
+        "logo": "https://www.presson.co.uk/wp-content/uploads/2017/08/brora-logo.png",
+        "link": "https://www.broraonline.com/uk/"
+    }
+]

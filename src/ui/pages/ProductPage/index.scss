@@ -1,0 +1,144 @@
+@import '../../../assets/style/variables.scss';
+
+.product-home-page {
+    .product-details {
+        .product-name {
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 36px;
+        }
+        .product-brand {
+            font-weight: 300;
+            font-size: 27px;
+            line-height: 36px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+        .product-price {
+            .product-sale-price {
+                font-weight: 500;
+                font-size: 21px;
+            }
+            .product-full-price {
+                font-size: 14px;
+                text-decoration: line-through;
+            }
+            .product-discount {
+                font-size: 14px;
+                color: $success;
+            }
+            .price-tax-info {
+                font-size: 12px;
+                color: $success;
+                font-weight: 500;
+            }
+        }
+        .product-rating {
+            font-size: 14px;
+            .rating-star {
+                color: #ebebeb;
+                font-size: inherit;
+                &.active {
+                    color: orange;
+                }
+                &.half-star {
+                    color: orange;
+                    position: relative;
+                    &:after {
+                        position: absolute;
+                        width: 50%;
+                        right: 0;
+                        top: 0;
+                        height: 100%;
+                        background-color: #fff;
+                    }
+                }
+            }
+        }
+        .product-delivery-container {
+            .product-delivery-header {
+                font-size: 14px;
+                text-transform: uppercase;
+            }
+            .product-delivery-check {
+                .small-msg {
+                    font-size: 12px;
+                }
+                .form-group {
+                    margin-bottom: 0;
+                }
+            }
+            .product-delivery-options {
+                font-size: 14px;
+                padding-left: 0;
+                margin-left: 0;
+                list-style-type: none;
+                list-style: none;
+                li {
+                    padding-left: 0;
+                    margin-left: 0;
+                    margin-bottom: .5rem;
+                    font-weight: 500;
+                }
+            }
+        }
+        .select-size-wrapper {
+            display: inline-block;
+            width: 100%;
+            .select-size-label {
+                font-size: 14px;
+                text-transform: uppercase;
+            }
+            .select-size-input-container {
+                display: flex;
+                flex-wrap: wrap;
+                
+                .square-radio {
+                    display: inline-flex;
+                    position: relative;
+                    cursor: pointer;
+                    -webkit-user-select: none;
+                    -moz-user-select: none;
+                    -ms-user-select: none;
+                    user-select: none;
+                    height: 48px;
+                    width: 48px;
+                    input {
+                        position: absolute;
+                        opacity: 0;
+                        cursor: pointer;
+                        &:checked {
+                            &+.square-radio-text {
+                                background-color: $accent-color;
+                                color: $dark-btn-text;
+                            }
+                        }
+                    }
+                    .square-radio-text {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        height: 100%;
+                        width: 100%;
+                        background-color: #eee;
+                        color: #333;
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 14px;
+                    }
+                }
+                &:hover {
+                    .square-radio-text {
+                    }
+                }
+            }
+        }
+    }
+    .size-guide-link {
+        text-decoration: underline;
+        font-size: 1.25rem;
+        display: inline-flex;
+        color: #333;
+    }
+}
