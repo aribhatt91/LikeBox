@@ -17,6 +17,11 @@
 .home_icon {
   max-width: 96px; }
 
+@media (max-width: 768px) {
+  .topnav .navbar-brand {
+    margin-left: calc(50% - 96px);
+    margin-right: auto; } }
+
 .topnav {
   overflow: inherit;
   padding: 0px 8px;
@@ -345,7 +350,6 @@
   max-height: 24px; }
 
 .home_icon {
-  width: 240px;
   height: auto; }
 
 .static-cards .card-stack {
@@ -2739,58 +2743,6 @@ $thumb-dimen-xs: 240px; */
     transform: scale(1.25); }
   100% {
     transform: scale(0.8); } }
-
-.product-thumb-gallery .product-zoomed-image {
-  position: relative; }
-  .product-thumb-gallery .product-zoomed-image img {
-    width: 100%;
-    border: 2px solid #ececec;
-    transition: 0.3s; }
-    .product-thumb-gallery .product-zoomed-image img:not(.selected) {
-      position: absolute;
-      opacity: 0;
-      top: 0;
-      left: 0;
-      border-color: transparent; }
-
-.product-thumb-gallery .product-image-thumbnails .thumb-image {
-  height: auto;
-  border: 2px solid #ececec;
-  cursor: pointer;
-  transition: 0.3s; }
-  .product-thumb-gallery .product-image-thumbnails .thumb-image:not(:last-child) {
-    margin-bottom: 4px; }
-  .product-thumb-gallery .product-image-thumbnails .thumb-image.selected {
-    border-color: #000; }
-  .product-thumb-gallery .product-image-thumbnails .thumb-image img {
-    width: 100%; }
-
-@media (max-width: 767px) {
-  .product-thumb-gallery .product-image-thumbnails .thumb-image {
-    min-width: 72px;
-    height: 72px; } }
-
-.product-thumb-gallery .product-add-wishlist-icon {
-  position: absolute;
-  top: 24px;
-  left: 24px;
-  cursor: pointer;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 1px solid #f0f0f0;
-  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.1);
-  background: #fff;
-  color: #c2c2c2;
-  font-size: 15px;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  transition: 0.5s; }
-  .product-thumb-gallery .product-add-wishlist-icon.wished {
-    color: #ff3e6c; }
-    .product-thumb-gallery .product-add-wishlist-icon.wished svg {
-      animation: anim-heart 0.5s; }
 
 /* 64x64 green tick circle */
 .green-tick {

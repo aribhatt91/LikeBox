@@ -47,9 +47,9 @@ export default function BrandCarousel() {
 
                 <Slider {...settings}>
                     {
-                        BRANDS.map(brand => {
+                        BRANDS.map((brand, index) => {
                             return (
-                                <div className="col mb-3 p-0 mb-lg-0 m-0 pl-3 pr-3 brand-item">
+                                <div className="col mb-3 p-0 mb-lg-0 m-0 pl-3 pr-3 brand-item" key={brand.brand}>
                                     <div className="d-flex w-100 h-100 align-center justify-content-center">
                                         <a href={brand.link} target="_blank" className="w-100">
                                             <AppImage className="w-100" alt={brand.brand} src={brand.logo} />

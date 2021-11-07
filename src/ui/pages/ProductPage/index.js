@@ -90,7 +90,7 @@ function ProductForm({currentUser, product, sizes, addToCart }){
   return (
     <React.Fragment>
       {product.sizes && Array.isArray(product.sizes) && product.sizes.length > 0 && 
-        <div className="product-size-options mb-5 mt-5">
+        <div className="product-size-options mt-3 mb-3 mb-lg-5 mt-lg-5">
           <h6 className="text-uppercase">Available sizes</h6>
           <RadioButtonGroup 
               name="size"
@@ -111,7 +111,7 @@ function ProductForm({currentUser, product, sizes, addToCart }){
       </div> */}
       {
         product.merchant_name && <div>
-          <SizeGuide affiliate={(product.merchant_name || "").toLowerCase()} className="text-uppercase size-guide-link mt-5 mb-5" />
+          <SizeGuide affiliate={(product.merchant_name || "").toLowerCase()} className="text-uppercase size-guide-link mt-2 mb-2 mt-lg-5 mb-lg-5" />
         </div>
       }
       {
@@ -150,16 +150,16 @@ function ProductPage(props) {
     }
     let sizes = [], images = [];
     try{
-      window.mlog('Sizes -> ', product.sizes);
+      window.mlog('Product Sizes -> ', product.sizes);
       if(typeof product.sizes !== 'undefined' && product.sizes !== "-"){
         if(typeof product.sizes === 'string'){
           sizes = product.sizes.replace('[', '').replace(']', '').replace(/\"/g, '').replace(/\'/g, '');
           sizes = sizes.split(',') || [];
-          window.mlog('Sizes -> ', sizes);
+          //window.mlog('Sizes -> ', sizes);
           
         }else if( product.sizes instanceof Array){
           sizes = product.sizes || [];
-          window.mlog('Sizes -> ', sizes);
+          //window.mlog('Sizes -> ', sizes);
         } 
       }
       product.sizes = sizes;
@@ -209,7 +209,7 @@ function ProductPage(props) {
 
   return (
     <React.Fragment>
-    {(pending || product) && <Page className={"product-home-page pt-5 pb-5 position-relative"} product={product} pageName={"pdp"}>
+    {(pending || product) && <Page className={"product-home-page pt-2 pt-lg-5 pb-5 position-relative"} product={product} pageName={"pdp"}>
         {pending && <LoadingPendulum />}
         {!pending && product && 
           <div className="d-block">
@@ -226,7 +226,7 @@ function ProductPage(props) {
             />
             <div className="product-details col-lg-5 float-left">
               <div className="product-brand">{product.brand}</div>
-              <div className="product-name mb-3">{product.name}</div>
+              <div className="product-name mb-lg-3">{product.name}</div>
               <div className="product-price">
                 {
                   product.fullPrice && (product.fullPrice > product.salePrice) && <div className="product-full-price mb-1">

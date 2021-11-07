@@ -27,6 +27,12 @@ $nav-height: $nav-height-lg;
   .home_icon {
     max-width: 96px;
   }
+  @media(max-width:768px) {
+    .topnav .navbar-brand {
+      margin-left: calc(50% - 96px);
+      margin-right: auto;
+    }
+  }
   .topnav {
     overflow: inherit;
     padding: 0px 8px;
@@ -412,7 +418,6 @@ $nav-height: $nav-height-lg;
   max-height: 24px;
 }
 .home_icon {
-  width: 240px;
   height: auto;
 }
 
