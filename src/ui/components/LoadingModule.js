@@ -28,16 +28,8 @@ export function LoadingSpinner({text}){
 export function LoadingPendulum(){
     return (
     <div className={'loading-pendulum d-flex justify-content-center align-items-center'}>
-        <div className='pendulum'>
-            <span className='ball'>
-            </span>
-            <span className='ball'>
-            </span>
-            <span className='ball'>
-            </span>
-            <span className='ball'>
-            </span>
-      </div>
+        <div className='pulse'>
+        </div>
     </div>
     );
 }

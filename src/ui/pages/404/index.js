@@ -1,6 +1,7 @@
 import React from 'react';
-import AppButton from '../components/generic/AppButton';
-import Page from './Page';
+import AppButton from '../../components/generic/AppButton';
+import Page from '../Page';
+
 const FourZeroFour = (props) => {
     return (
         <Page className="d-flex align-items-center justify-content-center pt-5 pb-5" pageName={"404"}>

@@ -25,12 +25,12 @@ function ProductInstance({instance, order_placed}) {
     return (
         <div className="order-instance-product position-relative d-flex flex-column">
             <div className="order-summary-container d-flex pt-3">
-                <a href={"/product/" + instance.sku} className="order-instance-thumb">
+                <a href={"/product/" + instance.id} className="order-instance-thumb">
                     <img src={instance.thumbnail}/>
                 </a>
                 <div className="order-instance-text pl-3 pr-3">
                     <div className="order-instance-name">
-                        {instance.name}
+                        {instance.title}
                     </div>
                     <div className="order-instance-brand">
                         {instance.brand}

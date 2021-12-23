@@ -13,6 +13,21 @@
         console.info.apply(this, arguments); 
       }
       window.merror = console.error;
+
+      window.digitalData = window.digitalData || {
+        page: {
+
+        },
+        user: {
+
+        },
+        product: {
+
+        },
+        events: {
+
+        }
+      };
     </script>
     <script>
       /* 
@@ -57,6 +72,11 @@
     <script defer src="/__/firebase/8.2.7/firebase-remote-config.js"></script>
     <script defer src="/__/firebase/8.2.7/firebase-performance.js"></script>
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+    <!-- Adobe Launch -- Comment out in production -->
+    <script src="https://assets.adobedtm.com/770d56ad37f4/63b7bc8dbb9f/launch-2aefcf817d42-development.min.js" async></script>
+    <!-- Google Optimize -->
+    <script src="https://www.googleoptimize.com/optimize.js?id=OPT-T5SSNJ9"></script>
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->

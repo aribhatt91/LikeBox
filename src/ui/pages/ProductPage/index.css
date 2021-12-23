@@ -168,3 +168,6 @@
     color: #ff3e6c; }
     .product-thumb-gallery .product-add-wishlist-icon.wished svg {
       animation: anim-heart 0.5s; }
+
+.delivery-info, .delivery-info * {
+  border-width: 0 !important; }

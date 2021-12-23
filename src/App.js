@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import Header from './ui/components/Header';
 import AppBody from './ui/AppBody';
 import Footer from './ui/components/Footer';
-import { AuthProvider, AuthContext } from './store/contexts/AuthContext';
+import { AuthContext } from './store/contexts/AuthContext';
 import { auth } from './service/api/firebase';
 import SplashPage from './ui/pages/SplashPage';
 

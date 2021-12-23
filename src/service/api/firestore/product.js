@@ -1,11 +1,11 @@
 import { db, fieldPath } from './../firebase';
 import { concat, isEqual, uniqWith } from 'lodash';
-import { convertAwinToProduct, convertCJToProduct } from './models/Product';
 
 
 const collection = db.collection('products');
 const brandsCollection = db.collection('brands');
 const categoriesCollection = db.collection('categories');
+const SEARCH_TERM = 'tags';
 
 /* Take a query and a filter object. 
 Add database filtering to the query and return the query object */
@@ -36,9 +36,9 @@ const applyFilter = (query, filterObject) => {
             if(gender.indexOf('m') > -1 && gender.indexOf('f') > -1){
                 //do nothing
             }else if(gender.indexOf('m') > -1){
-                query = query.where('searchTerms.mens', '==', true);
+                query = query.where(`${SEARCH_TERM}.mens`, '==', true);
             }else if(gender.indexOf('f') > -1){
-                query = query.where('searchTerms.womens', '==', true);
+                query = query.where(`${SEARCH_TERM}.womens`, '==', true);
             }
         }
     }
@@ -53,7 +53,7 @@ fetch products by path
 1. Break down the path and 
 */
 export const fetchFirestoreProducts = async (queryPaths=[], page=0, LIMIT=10, LAST_NODES=[], filterObject=null) => {
-    window.mlog('Product category ->', queryPaths);
+    //window.mlog('Product category ->', queryPaths);
     let res = null;
     try {
 
@@ -64,7 +64,7 @@ export const fetchFirestoreProducts = async (queryPaths=[], page=0, LIMIT=10, LA
 
             queryPaths.forEach(item => {
                 if((item || "").trim() !== ""){
-                    queries.push(('searchTerms.' + (item || "").trim()))
+                    queries.push((`${SEARCH_TERM}.` + (item || "").trim()))
                 }
             });
             let q1 = collection.where(queries[0], '==', true),
@@ -91,21 +91,14 @@ export const fetchFirestoreProducts = async (queryPaths=[], page=0, LIMIT=10, LA
             let lastVisible = [p1Snap.docs[p1Snap.docs.length - 1], p2Snap.docs[p2Snap.docs.length - 1]];
             res = {lastVisible};
 
-            res.items = (uniqWith(dump, isEqual)).map(doc => {
-                let item = doc.data();
-                if(item.affiliate === 'cj'){
-                    return convertCJToProduct(item, doc.id);
-                }else if(item.affiliate === 'awin'){
-                    return convertAwinToProduct(doc.data(), doc.id);
-                }
-            });
+            res.items = (uniqWith(dump, isEqual)).map(doc => doc.data());
 
-            window.mlog('2: Fetched Firestore products for path -> ', queryPaths.join('-'), '  --->', res);
+            //window.mlog('2: Fetched Firestore products for path -> ', queryPaths.join('-'), '  --->', res);
 
         }else if(queryPaths.length === 1){
             //window.mlog('BP3', queryPaths, ('searchTerms.' + (queryPaths[0] || "").trim()));
             let q = collection
-            .where(('searchTerms.' + (queryPaths[0] || "").trim()), '==', true);
+            .where((`${SEARCH_TERM}.` + (queryPaths[0] || "").trim()), '==', true);
             if(LAST_NODES && Array.isArray(LAST_NODES) && LAST_NODES.length >= 1){
                 q = q.startAfter(LAST_NODES[0]);
             }
@@ -117,15 +110,8 @@ export const fetchFirestoreProducts = async (queryPaths=[], page=0, LIMIT=10, LA
             let lastVisible = [querySnapshot.docs[querySnapshot.docs.length - 1]];
 
             res = {lastVisible};
-            res.items = (querySnapshot.docs || []).map(doc => {
-                let item = doc.data();
-                if(item.affiliate === 'cj'){
-                    return convertCJToProduct(item, doc.id);
-                }else if(item.affiliate === 'awin'){
-                    return convertAwinToProduct(doc.data(), doc.id);
-                }
-            });
-            window.mlog('1: Fetched Firestore products for path -> ', queryPaths[0], '--->', res);
+            res.items = (querySnapshot.docs || []).map(doc => doc.data());
+            //window.mlog('1: Fetched Firestore products for path -> ', queryPaths[0], '--->', res);
         }
     }catch(err){
         console.error('fetchFirestoreProducts:error', err);
@@ -154,14 +140,7 @@ export const fetchFirestoreProductsBySkus = async (skus=[], page=0, LIMIT=10, LA
         query = query.limit(LIMIT); 
         let querySnapshot = await query.get(),
         docs = querySnapshot.docs,
-        items = docs.map(doc => {
-            let item = doc.data();
-            if(item.affiliate === 'cj'){
-                return convertCJToProduct(item, doc.id);
-            }else if(item.affiliate === 'awin'){
-                return convertAwinToProduct(doc.data(), doc.id);
-            }
-        });
+        items = docs.map(doc => doc.data());
         let lastVisible = docs[docs.length - 1];
         res = {lastVisible, items};
     }catch(err){
@@ -176,13 +155,7 @@ export const fetchFirestoreProduct = async (sku) => {
     try {
         let doc = await collection.doc(sku).get();
         
-        let item = doc.data();
-        if(item.affiliate === 'cj'){
-            res = convertCJToProduct(item, doc.id);
-        }else if(item.affiliate === 'awin'){
-            res = convertAwinToProduct(item, doc.id);
-        }
-        
+        res = doc.data();
         window.mlog('fetchFirestoreProduct:response', res);
     }catch(err){
         console.error('fetchFirestoreProduct:error', err);

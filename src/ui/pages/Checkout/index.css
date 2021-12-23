@@ -1,0 +1,32 @@
+.checkout-container {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: hidden; }
+  .checkout-container .dummydiv {
+    background-color: teal;
+    height: 300px;
+    width: 100%; }
+  .checkout-container .checkout-section-container {
+    min-width: 100%;
+    transition: 0.4s ease-in-out; }
+  .checkout-container .user-module > div {
+    width: 100%; }
+  .checkout-container .user-module > div:nth-child(2) {
+    position: relative; }
+    .checkout-container .user-module > div:nth-child(2)::before {
+      content: "OR";
+      position: absolute;
+      left: -12px; }
+      @media only screen and (max-width: 991px) {
+        .checkout-container .user-module > div:nth-child(2)::before {
+          left: 50%;
+          margin-left: -12px;
+          top: -10px; } }
+  .checkout-container .address-module .select-address-item {
+    border: 2px solid;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    cursor: pointer; }
+    .checkout-container .address-module .select-address-item p {
+      font-size: 14px;
+      margin-bottom: 0; }

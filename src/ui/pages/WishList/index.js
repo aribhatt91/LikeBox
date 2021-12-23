@@ -4,6 +4,8 @@ import Page from '../Page';
 import { AuthContext } from '../../../store/contexts/AuthContext';
 import { useNotification } from '../../../store/contexts/NotificationProvider';
 import WishListInstance, { WishListInstanceSkeleton } from './components/WishListInstance';
+import './index.css';
+
 const WishList = () => {
     const {currentUser} = useContext(AuthContext)
     const [wishList, setWishList] = useState([]),

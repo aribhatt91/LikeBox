@@ -2,7 +2,6 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { fetchLikeBox } from '../../../../service/userProfile';
 import ProductGrid from '../../../components/ProductGrid';
-import { fetchLikeCards } from '../../../../service/api/firestore/likebox';
 
 export default function YourBox({currentUser}) {
     const [loading, setLoading] = useState(true);

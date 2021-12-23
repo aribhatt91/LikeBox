@@ -3,7 +3,7 @@ import AppButton from '../../../components/generic/AppButton';
 import AppImage from '../../../components/generic/AppImage';
 import { CURRENCY } from '../../../../service/constants';
 
-function CartProduct({item, _removeItem, user={}}){
+function CartItem({item, _removeItem, user={}}){
     const [showRemove, setShowRemove] = useState(false);
     return (
         <div className="cart-product pt-4 pb-5">
@@ -17,7 +17,7 @@ function CartProduct({item, _removeItem, user={}}){
                         <div className="h-100 d-flex flex-column justify-content-between">
                             <div className="desc">
                             
-                                <h4>{item.name}</h4>
+                                <h4>{item.title}</h4>
                                 <p>Quanity: {item.quantity}</p>
                                 <div className="price_wrapper d-flex">
                                     <span className="currency">{CURRENCY}</span><span className="price">{item.price}</span>
@@ -54,4 +54,4 @@ function CartProduct({item, _removeItem, user={}}){
     );
 }
 
-export default CartProduct;
+export default CartItem;

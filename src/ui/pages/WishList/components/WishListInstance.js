@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import AppButton from '../../../components/generic/AppButton';
 import AppImage from '../../../components/generic/AppImage';
 import TrashIcon from '../../../components/svg-components/TrashIcon';
-import { formatPrice } from '../../../../service/helper';
+import PriceText from '../../../components/generic/PriceText';
+
 export function WishListInstanceSkeleton() {
     return (
         <div className="wish-list-instance-container wish-list-instance-container-placeholder mb-3 position-relative">
@@ -18,7 +19,7 @@ export function WishListInstanceSkeleton() {
 }
 export default function WishListInstance({instance, removeItem}){
     const [showDeletePop, setShowDeletePop] = useState(false);
-    const sku = instance.sku, 
+    const sku = instance.id, 
     deletePopAlert = (e) => {
         //e.stopImmediatePropagation();
         setShowDeletePop(true);
@@ -46,10 +47,7 @@ export default function WishListInstance({instance, removeItem}){
             </a>
             <div className="wish-list-instance-text pt-2 pb-2">
                 <div className="wish-list-instance-price">
-                    <span className="wish-list-instance-sale-price">
-                        {formatPrice(instance.price)}
-                    </span>
-                    <span className="ml-1 currency">{instance.currency}</span>
+                    <PriceText value={instance.price} />
                 </div>
                 <div className="wish-list-instance-name">
                     {instance.name}

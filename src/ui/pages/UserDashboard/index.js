@@ -9,6 +9,7 @@ import { AuthContext } from '../../../store/contexts/AuthContext';
 import { logScreenView } from '../../../service/api/analytics';
 import { Suspense } from 'react';
 import LoadingModule from '../../components/LoadingModule';
+import './index.css';
 
 const YourBox = React.lazy(() => import('./components/YourBox'));
 const UserProfileFragment = React.lazy(() => import('./components/UserProfileFragment'));

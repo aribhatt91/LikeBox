@@ -28,7 +28,7 @@ export const sendProductInformation = (item) => {
 export const updateProductPageVisit = (item) => {
     let mboxName = 'mbox-pdp-recs',
     detail = {
-        productId: item.sku,
+        productId: item.id,
         productCategory: item.searchTerms
     };
 

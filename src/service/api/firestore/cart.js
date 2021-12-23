@@ -71,7 +71,7 @@ export const addProductToCart = async (email, product) => {
             present = false, itemCount = 0, subTotal = 0, total = 0;
             for(let p in products){
                 /* Check product id and size - if product with different size exists, add a new instance, else increment */
-                if(products[p].sku === product.sku && ((!product.size && !products[p].size) || (products[p].size === product.size))){
+                if(products[p].id === product.id && ((!product.size && !products[p].size) || (products[p].size === product.size))){
                     products[p].quantity = Number(products[p].quantity) + Number(product.quantity);
                     present = true;
                 }
@@ -119,7 +119,7 @@ export const removeProductFromCart = async (email, product, decrement=false) => 
             let q = 1, price = 0, full_price = 0, index = -1;
 
             for(let p in products){
-                if(products[p].sku === product.sku && (Number(products[p].size) === Number(product.size) || (!product.size && !products[p].size))){
+                if(products[p].id === product.id && (Number(products[p].size) === Number(product.size) || (!product.size && !products[p].size))){
                     q = 1, 
                     price = products[p].price, 
                     full_price = products[p].full_price || products[p].price;

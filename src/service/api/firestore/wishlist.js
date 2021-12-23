@@ -36,7 +36,7 @@ export const isItemInWishList = async (email, sku) => {
                 let data = doc.data();
                 data = data || {};
                 (data.items || []).forEach( item => {
-                    if(item.sku === sku){
+                    if(item.id === sku){
                         isPresent = true;
                     }
                 })
@@ -84,13 +84,13 @@ export const createWishList = async (email, name="My Wishlist", products=[]) => 
                     let wlist = {}, items = [];
                     wlist.user_id = email;
                     products.forEach(product => {
-                        if(!product.sku){
+                        if(!product.id){
                             throw new Error('Invalid product');
                         }
                         items.push({
-                            sku: product.sku, 
+                            sku: product.id, 
                             thumbnail: product.thumbnail,
-                            name: product.name,
+                            name: product.title,
                             link: product.link,
                             price: product.price,
                             currency: product.currency,
@@ -106,7 +106,7 @@ export const createWishList = async (email, name="My Wishlist", products=[]) => 
                         res = new Promise(resolve => resolve({
                             type: 'success',
                             items:(doc.data().items || [])
-                        })) //(data.items || []).map(item => item.sku)
+                        })) //(data.items || []).map(item => item.id)
                     }catch(err){
                         console.error(err);
                         res = new Promise(resolve => resolve([]))
@@ -146,7 +146,7 @@ export const addToWishList = async (email, sku, product) => {
                 
                 /* Check if product is present */
                 for (let i = 0; i < products.length; i++) {
-                    if(products[i].sku === product.sku){
+                    if(products[i].id === product.id){
                         isPresent = true;
                         break;
                     }
@@ -159,9 +159,9 @@ export const addToWishList = async (email, sku, product) => {
                     res = new Promise((resolve, reject) => reject(data))
                 }else {/* If not add it and update */
                     products.push({
-                        sku: product.sku, 
+                        sku: product.id, 
                         thumbnail: product.thumbnail,
-                        name: product.name,
+                        name: product.title,
                         link: product.link,
                         price: product.price,
                         currency: product.currency,
@@ -210,7 +210,7 @@ export const removeFromWishList = async (email, sku) => {
                 
                 /* Check if product is present */
                 for (let i = 0; i < products.length; i++) {
-                    if(products[i].sku === sku){
+                    if(products[i].id === sku){
                         isPresent = true;
                         index = i;
                         break;

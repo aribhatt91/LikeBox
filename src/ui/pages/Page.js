@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import { Helmet } from 'react-helmet';
 import { triggerCustomEvent } from './../../service/api/adobe/target-methods';
 import { capitaliseAll } from './../../service/helper';
-import { DataLayer } from './../../service/data/dataLayer';
+import DataLayer from './../../service/api/DataLayer';
 import { addProductMetadata, addListingMetadata } from './../../service/data/metadata';
 import { logPageView } from './../../service/api/analytics/index';
 class Page extends Component {
@@ -34,7 +34,7 @@ class Page extends Component {
             return 'LikeBox';
         }
         if(pageName === 'pdp') {
-            pageName = product ? product.name : null;
+            pageName = product ? product.title : null;
         }
         else if(pageName === 'category') {
             pageName = category || null;

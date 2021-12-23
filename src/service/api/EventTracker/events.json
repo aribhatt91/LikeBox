@@ -1,0 +1,30 @@
+{
+    "page": {
+        "PAGE_VIEW": "page-view",
+        "VIEW_CHANGE": "view-change",
+        "NAVIGATION_ITEM_CLICK": "nav-item-click"
+    },
+    "product": {
+        "PRODUCT_VIEW": "prod-view",
+        "SELECT_SIZE": "select-size",
+        "ADD_TO_CART": "add-to-cart",
+        "ADD_TO_WISHLIST": "add-to-wishlist",
+        "REMOVE_FROM_WISHLIST": "",
+        "ADDED_TO_FAVOURITE": "",
+        "REMOVED_FROM_FAVOURITE": "",
+        "ADDED_TO_BLACKLIST": "",
+        "REMOVED_FROM_BLACKLIST": ""
+    },
+    "user": {
+        "LOGIN_START": "",
+        "LOGIN_COMPLETE": "",
+        "LOGIN_ERROR": "",
+        "SIGNUP_START": "",
+        "SIGNUP_COMPLETE": "",
+        "SIGNUP_ERROR": ""
+    },
+    "transaction": {
+
+    }
+
+}

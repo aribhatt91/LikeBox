@@ -10,7 +10,7 @@ export default function ProductGrid({products=[], loading=true, header=null, rem
                     {
                         products.map((item, index) => 
                             <ProductCardMinimal 
-                                title={item.name} 
+                                title={item.title || item.name} 
                                 subtext={item.brand} 
                                 thumbnail={item.thumbnail} 
                                 price={item.price} 

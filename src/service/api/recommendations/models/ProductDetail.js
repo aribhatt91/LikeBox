@@ -1,7 +1,7 @@
 const ProductDetail = (obj, quantity) => {
     let p = {};
     if(obj){
-        p.id = obj.sku;
+        p.id = obj.id;
         p.displayPrice = obj.price;
         p.originalPrice = obj.price;
         p.currencyCode = obj.currency;

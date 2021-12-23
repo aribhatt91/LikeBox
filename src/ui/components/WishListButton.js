@@ -15,10 +15,10 @@ export default function WishListButton({product, className="" }) {
     useEffect(()=>{
         if(currentUser && product){
           try{
-            if(product.sku){
+            if(product.id){
               
               (async ()=>{
-                let res = await itemInWishList(currentUser.email, product.sku);
+                let res = await itemInWishList(currentUser.email, product.id);
                 setInWishList(res);
                 setLoading(false);
               })()
@@ -40,7 +40,7 @@ export default function WishListButton({product, className="" }) {
             if(inWishList){
               (async ()=>{
                 setLoading(true);
-                let res = await removeItemFromWishList(currentUser.email, product.sku);
+                let res = await removeItemFromWishList(currentUser.email, product.id);
                 //let res = await itemInWishList(currentUser.email, id);
                 if(res.type === 'success'){
                   setInWishList(false);
@@ -56,7 +56,7 @@ export default function WishListButton({product, className="" }) {
             }else {
               (async ()=>{
                 setLoading(true);
-                let res = await addItemToWishList(currentUser.email, product.sku, product);
+                let res = await addItemToWishList(currentUser.email, product.id, product);
                 if(res.type === 'success'){
                   setInWishList(true);
                   dispatch({

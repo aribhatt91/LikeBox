@@ -1,8 +1,8 @@
 export const GAProduct = (obj, quantity) => {
     let p = {};
     if(obj){
-        p.item_id = obj.sku;
-        p.item_name = obj.name;
+        p.item_id = obj.id;
+        p.item_name = obj.title;
         p.item_brand = obj.brand;
         p.price = obj.price;
         p.currency = obj.currency;

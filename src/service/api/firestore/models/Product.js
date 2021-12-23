@@ -3,10 +3,10 @@ class Product {
     constructor(){}
 
     get sku(){
-        return this.sku;
+        return this.id;
     }
     set sku(sku) {
-        this.sku = sku;
+        this.id = sku;
     }
     get merchantId(){
         return this.merchantId;
@@ -18,7 +18,7 @@ class Product {
         return this.name;
     }
     set name(name) {
-        this.name = name;
+        this.title = name;
     }
     get brand(){
         return this.name;
@@ -198,7 +198,7 @@ export const convertAwinToProduct = (awinObj, sku) => {
 export const convertCJToProduct = (cjObj, sku) => {
     let p = {};
     if(cjObj && sku){
-        p.sku = sku;
+        p.id = sku;
         p.merchantId = cjObj.merchant_id;
         p.name = cjObj.TITLE;
         let category = cjObj.PRODUCT_TYPE || "";

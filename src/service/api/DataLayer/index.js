@@ -1,4 +1,4 @@
-const DATA_LAYER_NAME = 'dataLayer';
+const DATA_LAYER_NAME = 'digitalData';
 const PRODUCT_KEY = 'product';
 function getDataLayer() {
     return window[DATA_LAYER_NAME] || {}
@@ -24,7 +24,7 @@ function removeKey(key){
     initDataLayer();
     delete window[DATA_LAYER_NAME][key];
 }
-export const DataLayer = {
+const DataLayer = {
     setProduct: function(product) {
         setValue(PRODUCT_KEY, product);
     },
@@ -38,11 +38,19 @@ export const DataLayer = {
         pushValue('products', product);
     },
     pushEvent: function(event) {
-        
+        pushValue("events", event);
     },
     clearEvents: function() {
         if(window[DATA_LAYER_NAME]){
             window[DATA_LAYER_NAME].events = [];
         }
+    },
+    getState: function() {
+        return window[DATA_LAYER_NAME];
+    },
+    getName: function(){
+        return DATA_LAYER_NAME
     }
 }
+
+export default DataLayer;

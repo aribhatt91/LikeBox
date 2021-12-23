@@ -2,7 +2,6 @@ import React, {Suspense} from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
 import UserDashboard from './pages/UserDashboard';
-import FourZeroFour from './pages/FourZeroFour';
 import LoginPage from './pages/LoginPage';
 import ProtectedRoute from './../service/middleware/ProtectedRoute';
 import WishListPage from './pages/WishList';
@@ -13,7 +12,9 @@ import LoadingModule from './components/LoadingModule';
 
 const ProductPageLazy = React.lazy(() => import('./pages/ProductPage/index.js'));
 const CategoryPageLazy = React.lazy(() => import('./pages/CategoryPage/index.js'));
-const AboutPageLazy = React.lazy(() => import('./pages/About'))
+const AboutPageLazy = React.lazy(() => import('./pages/About'));
+const FourZeroFourLazy = React.lazy(() => import('./pages/404/index.js'))
+
 function AppBody (){
     return (<main className="App-body">
       <Switch>
@@ -52,6 +53,7 @@ function AppBody (){
         <ProtectedRoute path="/register" component={LoginPage} />
         <ProtectedRoute path="/your-style" component={YourStyle} />
         <ProtectedRoute path="/your-style-cards" component={YourStyleCards} />
+
         {/* <Route path='/help/:slug?' render={(props) => <HelpPage {...props}/>}/> */}
         <Route path='/about/:slug?' render={(props) => 
           <React.Fragment>
@@ -61,7 +63,13 @@ function AppBody (){
           </React.Fragment>
         }/>
         {/* <Route path='/user/:page?' render={(props) => <UserDashboard {...props} pageName="user-dashboard" />}/> */}
-        <Route path="*" render={props => <FourZeroFour {...props} />}/>
+        <Route path='*' render={(props) => 
+          <React.Fragment>
+            <Suspense fallback={<LoadingModule />}>
+              <FourZeroFourLazy {...props}/>
+            </Suspense>
+          </React.Fragment>
+        }/>
       </Switch>
     </main>);
   
