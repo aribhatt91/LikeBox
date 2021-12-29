@@ -1,19 +1,17 @@
-const ProductDetail = (obj, quantity) => {
+const ProductDetail = (obj) => {
     let p = {};
     if(obj){
         p.id = obj.id;
-        p.displayPrice = obj.price;
-        p.originalPrice = obj.price;
-        p.currencyCode = obj.currency;
-        p.quantity = quantity || 1;
-        p.stockState = 'In Stock';
-        /* p.variant = obj.colour;
-        p.item_name = obj.name;
-        p.item_brand = obj.brand;
-        p.affiliation = obj.merchant_name;
-        p.item_category = obj.category; */
+        /* p.displayPrice = obj.price;
+        p.originalPrice = obj.full_price || obj.price;
+        p.currencyCode = obj.currency || "GBP";
+        p.name = obj.title;
+        p.stockState = 'In Stock'; */
     }
-    return p;   
+    return {
+      "product": p,
+      "quantity": obj.quantity || 1
+    };   
 }
 export default ProductDetail;
 /* 

@@ -4,7 +4,8 @@ import ErrorModule from '../../../components/ErrorModule';
 import AppButton from '../../../components/generic/AppButton';
 import { debounce } from 'lodash';
 import { fetchProducts } from '../../../../service/productMethods';
-import { logViewSearchResult } from '../../../../service/api/analytics';
+//import { logViewSearchResult } from '../../../../service/api/analytics';
+import EventTracker from '../../../../service/api/EventTracker';
 
 
 const EMPTY_TEXT = "Seems like we don't have what you're looking for!",
@@ -76,7 +77,8 @@ function ProductListing({type, filter=null, category, addToWishlist, inWishlist}
         if(response.lastVisible){
           LAST_NODES = response.lastVisible;
         }
-        logViewSearchResult(category, productsList);
+        //logViewSearchResult(category, productsList);
+        EventTracker.trackEvent(EventTracker.events.page.SEARCH_RESULT, category, productsList);
         window.mlog('getProducts response', response);
       }else {
         setMaxReached(true);
@@ -88,7 +90,7 @@ function ProductListing({type, filter=null, category, addToWishlist, inWishlist}
       }
     }catch(err){
       console.error('getProducts:error', err);
-      
+      EventTracker.trackEvent(EventTracker.events.page.SEARCH_ERROR, category);
       if(products && products.length > 0) {
         FLUSH = false;
         setMaxReached(false);
@@ -97,7 +99,7 @@ function ProductListing({type, filter=null, category, addToWishlist, inWishlist}
       }
     }finally {
       setLoading(false);
-      window.mlog('loading false');
+      //window.mlog('loading false');
     }
     
   }

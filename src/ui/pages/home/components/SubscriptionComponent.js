@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router';
-import { logClickSubscriptionCTA } from '../../../../service/api/analytics/ui';
+import EventTracker from '../../../../service/api/EventTracker';
+//import { logClickSubscriptionCTA } from '../../../../service/api/analytics/ui';
 import { AuthContext } from '../../../../store/contexts/AuthContext';
 import SubscriptionForm from '../../../components/forms/SubscriptionForm';
+
 export default function SubscriptionComponent({onComplete}) {
     const {fetchSignInMethods} = useContext(AuthContext);
     const history = useHistory();
@@ -14,7 +16,8 @@ export default function SubscriptionComponent({onComplete}) {
                 /* 
                 GA Event
                 */
-                logClickSubscriptionCTA();
+                //logClickSubscriptionCTA();
+                EventTracker.trackEvent(EventTracker.events.ui.HOME_PAGE_SUBSCRIPTION_CTA);
                 let methods = await fetchSignInMethods(userInput.email)
                 //window.mlog(methods);
                 if(methods.length === 0){

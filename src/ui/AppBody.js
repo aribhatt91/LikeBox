@@ -9,6 +9,7 @@ import WishListPage from './pages/WishList';
 import YourStyle from './pages/YourStyle';
 import YourStyleCards from './pages/YourStyleCards';
 import LoadingModule from './components/LoadingModule';
+import Cart from './pages/Cart';
 
 const ProductPageLazy = React.lazy(() => import('./pages/ProductPage/index.js'));
 const CategoryPageLazy = React.lazy(() => import('./pages/CategoryPage/index.js'));
@@ -62,6 +63,12 @@ function AppBody (){
             </Suspense>
           </React.Fragment>
         }/>
+        
+        {
+          /*  */
+          process.env.REACT_APP_ENV === 'dev' && <ProtectedRoute path="/cart" component={Cart} />
+        }
+
         {/* <Route path='/user/:page?' render={(props) => <UserDashboard {...props} pageName="user-dashboard" />}/> */}
         <Route path='*' render={(props) => 
           <React.Fragment>

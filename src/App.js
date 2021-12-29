@@ -5,6 +5,7 @@ import Footer from './ui/components/Footer';
 import { AuthContext } from './store/contexts/AuthContext';
 import { auth } from './service/api/firebase';
 import SplashPage from './ui/pages/SplashPage';
+import { Helmet } from 'react-helmet';
 
 function App() {
     const [loading, setLoading] = useState(true);
@@ -30,6 +31,12 @@ function App() {
     },[])
     return ( 
             <div className="App">
+                {/*  */
+                    process.env.REACT_APP_ENV === "dev" && <Helmet>
+                        <script src="https://assets.adobedtm.com/770d56ad37f4/63b7bc8dbb9f/launch-2aefcf817d42-development.min.js" async></script>
+                        <script src="https://www.googleoptimize.com/optimize.js?id=OPT-T5SSNJ9"></script>
+                    </Helmet>
+                }
                     <Header/>
                     <AppBody/>
                     <Footer/>

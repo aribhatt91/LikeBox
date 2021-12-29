@@ -5,7 +5,8 @@ import { useParams, useLocation } from 'react-router-dom';
 import { getAvailableKeywords, getNearestMatches } from '../../../service/productMethods';
 import { Helmet } from 'react-helmet';
 import ProductListing from './components/ProductListing';
-import { logSearch } from './../../../service/api/analytics/index';
+//import { logSearch } from './../../../service/api/analytics/index';
+import EventTracker from './../../../service/api/EventTracker';
 import { parseSearchParams } from '../../../service/helper';
 import './index.css';
 
@@ -24,7 +25,8 @@ function ListingPage(props) {
   }
 
   useEffect(()=>{
-    logSearch(category);
+    //logSearch(category);
+    EventTracker.trackEvent(EventTracker.events.page.SEARCH, category);
     document.title = (category|| "").replace('-', ' & ').toUpperCase();
     (async () => {
       let keys = await getAvailableKeywords();
@@ -55,7 +57,7 @@ function ListingPage(props) {
 }, [searchTerm])
 
   return (
-    <Page pageName={"category"} category={(category|| "").replace('-', ' & ')}>
+    <Page pageName={"category-page"} category={(category|| "").replace('-', ' & ')}>
         <Helmet>
           <meta property="og:description" content={category|| ""} />
         </Helmet>

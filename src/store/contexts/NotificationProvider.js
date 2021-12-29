@@ -1,5 +1,6 @@
 import React, {createContext, useContext, useReducer, useState} from "react";
 import {v4} from "uuid";
+import EventTracker from "../../service/api/EventTracker";
 import Notification from "../../ui/components/generic/Notification";
 
 const NotificationContext = createContext();
@@ -33,6 +34,7 @@ export const useNotification = () => {
 
   return (props) => {
     window.mlog('useNotification called');
+    EventTracker.trackEvent(EventTracker.events.ui.NOTIFICATION_DISPLAYED);
     dispatch({
       type: "ADD_NOTIFICATION",
       payload: {

@@ -8,9 +8,12 @@
     <title>LikeBox</title>
 
     <script type="text/javascript">
+      window.DEV_MODE = window.location.hostname === 'localhost';
       window.mlog = function () { 
-        Array.prototype.unshift.call(arguments, 'LIKEBOX:LOG::');
-        console.info.apply(this, arguments); 
+        if(window.DEV_MODE){
+          Array.prototype.unshift.call(arguments, 'LIKEBOX:LOG::');
+          console.info.apply(this, arguments);
+        }
       }
       window.merror = console.error;
 
@@ -73,10 +76,6 @@
     <script defer src="/__/firebase/8.2.7/firebase-performance.js"></script>
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
 
-    <!-- Adobe Launch -- Comment out in production -->
-    <script src="https://assets.adobedtm.com/770d56ad37f4/63b7bc8dbb9f/launch-2aefcf817d42-development.min.js" async></script>
-    <!-- Google Optimize -->
-    <script src="https://www.googleoptimize.com/optimize.js?id=OPT-T5SSNJ9"></script>
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->

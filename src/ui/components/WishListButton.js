@@ -3,8 +3,8 @@ import AppButton from './generic/AppButton';
 import { removeItemFromWishList, addItemToWishList, itemInWishList } from '../../service/wishlistMethods';
 import { AuthContext } from './../../store/contexts/AuthContext';
 import { useNotification } from './../../store/contexts/NotificationProvider';
-import { logAddToWishList } from './../../service/api/analytics/index';
-import { addToList, removeFromList } from './../../service/api/recommendations/index';
+import EventTracker from './../../service/api/EventTracker';
+//import { addToList, removeFromList } from './../../service/api/recommendations/index';
 
 export default function WishListButton({product, className="" }) {
     const [loading, setLoading] = useState(true);
@@ -49,7 +49,8 @@ export default function WishListButton({product, className="" }) {
                     title: 'Success!',
                     message: res.msg
                   });
-                  removeFromList(product);
+                  EventTracker.trackEvent(EventTracker.events.REMOVE_FROM_WISHLIST, product);
+                  //removeFromList(product);
                 }
                 setLoading(false);
               })()
@@ -64,8 +65,9 @@ export default function WishListButton({product, className="" }) {
                     title: 'Success!',
                     message: res.msg
                   });
-                  logAddToWishList(product);
-                  addToList(product);
+                  
+                  EventTracker.trackEvent(EventTracker.events.ADD_TO_WISHLIST, product);
+                  //addToList(product);
                 }
                 setLoading(false);
               })()

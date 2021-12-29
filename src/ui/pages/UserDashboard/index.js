@@ -6,10 +6,11 @@ import Page from '../Page';
 import { useContext, useEffect } from 'react';
 import { AuthContext } from '../../../store/contexts/AuthContext';
 //import YourBox from './components/YourBox';
-import { logScreenView } from '../../../service/api/analytics';
+//import { logScreenView } from '../../../service/api/analytics';
 import { Suspense } from 'react';
 import LoadingModule from '../../components/LoadingModule';
 import './index.css';
+import EventTracker from '../../../service/api/EventTracker';
 
 const YourBox = React.lazy(() => import('./components/YourBox'));
 const UserProfileFragment = React.lazy(() => import('./components/UserProfileFragment'));
@@ -67,7 +68,8 @@ function UserDashboard(props) {
     const [key, setKey] = useState(k);
     const switchTab = (k) => {
         setKey(k);
-        logScreenView("user-dashboard:" + k);
+        //logScreenView();
+        EventTracker.trackEvent(EventTracker.events.page.VIEW_CHANGE, "user-dashboard-" + k);
     }
     return (
         <Page className="user-dashboard d-flex" pageName={"dashboard"}>

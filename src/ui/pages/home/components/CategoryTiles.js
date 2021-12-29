@@ -2,17 +2,29 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
-import { logClickCategoryTiles } from '../../../../service/api/analytics/ui/index';
+//import { logClickCategoryTiles } from '../../../../service/api/analytics/ui/index';
 import BrandCarousel from './BrandCarousel';
+import EventTracker from '../../../../service/api/EventTracker';
 
 
 function CategoryTiles() {
+
+    const trackClick = (e) => {
+        try{
+            const section = e.target ? (e.target.closest('section') ? e.target.closest('section').querySelector('h1').textContent : null) : null;
+            EventTracker.trackEvent(EventTracker.events.ui.NAVIGATION_ITEM_CLICK, section);
+        }catch(err){
+
+        }
+        
+    };
+
     return (
         <React.Fragment>
         <div className="container mb-5 mt-5">
             <section className="likebox-home-section section-clothes mb-5">
                 <h1>Clothes</h1>
-                <div className="staggered-grid clothes-grid row ml-0 mr-0" onClick={logClickCategoryTiles}>
+                <div className="staggered-grid clothes-grid row ml-0 mr-0" onClick={trackClick}>
                     <div className="col-xs-12 col-md-6 grid-item position-relative zoom-in">
                         <div className="position-relative">
                             <LazyLoadImage effect="opacity" className="grid-img" src="https://firebasestorage.googleapis.com/v0/b/webapp-470b3.appspot.com/o/mens-polo-shirts.jpg?alt=media&token=7259d185-0287-41cc-9f7c-cd3de37a8e9b"/>
@@ -67,7 +79,7 @@ function CategoryTiles() {
             </section>
             <section className="likebox-home-section section-clothes mb-5 zoom-in">
                 <h1 className="text-right">Shoes</h1>
-                <div className="staggered-grid clothes-grid row ml-0 mr-0" onClick={logClickCategoryTiles}>
+                <div className="staggered-grid clothes-grid row ml-0 mr-0" onClick={trackClick}>
                     <div className="col-xs-12 col-md-7 grid-item position-relative">
                         <div className="position-relative">
                             <LazyLoadImage effect="opacity" className="grid-img" src="https://firebasestorage.googleapis.com/v0/b/webapp-470b3.appspot.com/o/mens-boots.jpg?alt=media&token=502263df-1fd4-4cd1-9f19-0fe8f3f7e983" />
@@ -108,7 +120,7 @@ function CategoryTiles() {
             </section>
             <section className="likebox-home-section section-clothes">
                 <h1>Accessories</h1>
-                <div className="staggered-grid clothes-grid row ml-0 mr-0" onClick={logClickCategoryTiles}>
+                <div className="staggered-grid clothes-grid row ml-0 mr-0" onClick={trackClick}>
                     <div className="col-xs-12 col-md-7 grid-item position-relative">
                         <div className="position-relative">
                             <LazyLoadImage effect="opacity" className="grid-img" src="https://firebasestorage.googleapis.com/v0/b/webapp-470b3.appspot.com/o/mens-belts.jpg?alt=media&token=99933eb9-ab43-446c-acec-e7dba57da6fb" />

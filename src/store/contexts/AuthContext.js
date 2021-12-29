@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { auth } from '../../service/api/firebase';
 //import signup from './../../service/signupService';
-import { setUserId } from './../../service/api/analytics/user/index';
+import EventTracker from './../../service/api/EventTracker';
 
 export const AuthContext = React.createContext();
 
@@ -19,6 +19,7 @@ export function AuthProvider({children}){
         return auth.signInWithEmailAndPassword(email, password)
     }
     function logout() {
+        EventTracker.trackEvent(EventTracker.events.user.LOGOUT);
         return auth.signOut()
     }
     function resetPassword(email) {
@@ -62,18 +63,20 @@ export function AuthProvider({children}){
                 // Signed in
                 var user = userCredential.user;
                 window.mlog("User signed in", user);
+                EventTracker.trackEvent(EventTracker.events.user.AUTHENTICATED, user);
                 // ...
             })
             .catch((error) => {
                 var errorCode = error.code;
                 var errorMessage = error.message;
+                EventTracker.trackEvent(EventTracker.events.user.AUTHENTICATTION_ERROR, error);
                 // ...
             });
         }
     }
 
     useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged(user => {
+        const unsubscribe = auth.onAuthStateChanged((user, error) => {
             ;
             if(user){
                 setUser(user)
@@ -82,11 +85,15 @@ export function AuthProvider({children}){
                     localStorage.setItem('user_token', token);
                 });
                 window.mlog('onAuthStateChanged', user, user.uid);
-                setUserId(user.uid);
+                EventTracker.trackEvent(EventTracker.events.user.AUTHENTICATED, user);
+                //setUserId(user.uid);
             }
-            
+            if(error){
+                EventTracker.trackEvent(EventTracker.events.user.AUTHENTICATTION_ERROR, error);
+            }
+            /* TODO Add Authentication error event tracker */
             setLoading(false);
-        })
+        });
         return unsubscribe;
     }, [])
 

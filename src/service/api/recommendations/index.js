@@ -1,64 +1,162 @@
-import KEYS from '../../keys/api-keys.json';
-import axios from "axios";
 import ProductDetail from './models/ProductDetail';
-const BASE_URL = "https://recommendationengine.googleapis.com/v1beta1/projects/the-likebox/locations/global/catalogs/default_catalog/eventStores/default_event_store/userEvents:write?key="
+import DataLayer from '../DataLayer';
+const BASE_URL = `http://localhost:3300/`
 
-const userEvent = (payload) => {
-    try{
-        const URL = BASE_URL + KEYS["RECS-API-KEY"];
-        axios.post(URL, payload).then((res) => {
-
-        }).catch(err => {});
-    }catch(err){
-
+const sendUserEvent = async (userEvent) => {
+    if(!window.DEV_MODE || !userEvent.eventType){
+        return;
     }
-    
-}
-const postProductDetailEvent = (eventType, product) => {
     try{
-        let visitorId = window.gaGlobal ? window.gaGlobal.vid || "" : "";
-        var obj = {
-            eventType,
-            "userInfo": {
-                visitorId
-            },
-            "productDetails": {
-                "productDetails": [
-                    ProductDetail(product)
-                ]
+        window.mlog('api:recommendations:sendUserEvent:request:payload', userEvent);
+        const response = await fetch(
+            `${BASE_URL}recommendations/user-event`,
+            {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                },
+                body: JSON.stringify(userEvent)
             }
-        };
+        );
 
-        userEvent(obj);
+        const data = await response.json();
+        window.mlog('api:recommendations:sendUserEvent:response', data);
+    }catch(error){
+        window.merror('api:recommendations:sendUserEvent:error', error);
+    }
+    
+}
+
+/* 
+Product
+https://cloud.google.com/retail/recommendations-ai/docs/reference/rest/v2/projects.locations.catalogs.branches.products#Product
+
+
+ProductDetail
+https://cloud.google.com/retail/recommendations-ai/docs/reference/rest/v2/projects.locations.catalogs.userEvents#ProductDetail
+{
+  "product": {
+    object (Product)
+  },
+  "quantity": integer
+}
+https://cloud.google.com/recommendations-ai/docs/record-events#pixel
+UserEvent
+https://cloud.google.com/recommendations-ai/docs/reference/rest/v1beta1/projects.locations.catalogs.eventStores.userEvents
+*/
+const getVisitorId = () => {
+    return window.gaGlobal ? window.gaGlobal.vid || "" : "";
+}
+const postProductDetailEvent = function(eventType, productDetails, listId) {
+    try{
+        if(arguments.length < 2){
+            window.merror('postProductDetailEvent:error:Insufficient arguments');
+            return;
+        }
+        const visitorId = getVisitorId();
+        const obj = {
+            eventType,
+            visitorId,
+            productDetails,
+            userId: DataLayer.getUser().email
+        };
+        if(listId){
+            obj.listId = listId;
+        }
+
+        sendUserEvent(obj);
     }catch(err){
 
     }
     
 }
-export const detailPageView = (product) => {
-    postProductDetailEvent("detail-page-view", product);
-};
 
-export const addToList = (product) => {
-    postProductDetailEvent("add-to-list", product);
-};
+export default {
+    homePageView: () => {
+        sendUserEvent({
+            "vistorId": getVisitorId(),
+            "eventType": "home-page-view"
+        });
+    },
+    categoryPageView: (pageCategories) => {
+        sendUserEvent({
+            "vistorId": getVisitorId(),
+            "eventType": "category-page-view",
+            pageCategories
+        });
+    },
+    detailPageView: (product) => {
+        postProductDetailEvent("detail-page-view", [{'id': product.id}]);
+    },
+    cartPageView: () => {
+        /* 
+        https://cloud.google.com/retail/recommendations-ai/docs/user-events#shopping-cart-page-view
+         */
+        postProductDetailEvent("shopping-cart-page-view", (DataLayer.getCart().products || []).map(product => {
+            return {
+                "product": {
+                    id: product.id
+                },
+                "quantity": product.quantity || 1
+            }
+        }));
+    },
+    addToList: (product) => {
+        postProductDetailEvent("add-to-list", [product], "wishlist1");
+    },
+    removeFromList: (product) => {
+        postProductDetailEvent("remove-from-list", [product], "wishlist1");
+    },
+    addToCart: (product) => {
+        postProductDetailEvent("add-to-cart", [{
+            "product": {
+                id: product.id
+            },
+            "quantity": product.quantity || 1
+        }]);
+    },
+    removeFromCart: (product) => {
+        postProductDetailEvent("remove-from-cart", [{
+            "product": {
+                id: product.id
+            },
+            "quantity": product.quantity || 1
+        }]);
+    },
+    search: (searchQuery) => {
+        sendUserEvent({
+            "eventType": "search", 
+            "visitorId": getVisitorId(),
+            searchQuery
+        });
+    },
+    fetchRecommendedProducts: async ({
+        criteria="recently_viewed_default",
+        category,
+        productId
+    }) => {
+        try{
+            window.mlog('api:recommendations:fetchRecommendedProducts:request', productId);
+            const payload = {
+                criteria,
+                eventType: "detail-page-view",
+                productId,
+                visitorId: getVisitorId()
+            };
+            const response = await fetch(
+                `${BASE_URL}recommendations/fetch/`,
+                {
+                  method: 'post',
+                  headers: {
+                    'Content-Type': 'application/json; charset=utf-8'
+                  },
+                  body: JSON.stringify(payload)
+                }
+            );
 
-export const removeFromList = (product) => {
-    postProductDetailEvent("remove-from-list", product);
-};
-
-export const addToCart = (product) => {
-    postProductDetailEvent("add-to-cart", product);
-};
-
-export const removeFromCart = (product) => {
-    postProductDetailEvent("remove-from-cart", product);
-};
-
-export const categoryPageView = (product) => {
-    postProductDetailEvent("category-page-view", product);
-};
-
-export const search = (product) => {
-    postProductDetailEvent("search", product);
-};
+            window.mlog('api:recommendations:fetchRecommendedProducts:response', response);
+        }catch(error){
+            window.merror('api:recommendations:fetchRecommendedProducts:request', error);
+        }        
+    }
+}

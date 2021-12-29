@@ -59,4 +59,66 @@ var user_event = {
 
   CatalogItem
   https://cloud.google.com/recommendations-ai/docs/reference/rest/v1beta1/projects.locations.catalogs.catalogItems
+
+
+GOOGLE CLOUD SUPPORT 
+// Authentication:
+// 
+// the GOOGLE_APPLICATION_CREDENTIALS environment variable must be set to point to 
+// the key file of a servcice account.
+
+// Imports the Google Cloud client library
+const {UserEventServiceClient, ProductServiceClient} = require('@google-cloud/retail');
+
+// Data.
+const products = {
+"productInlineSource": {
+  "products": [
+        { "id": "1234", "categories": ["Apparel & Accessories > Shoes"], "title": "ABC sneakers"},
+        { "id": "5839", "categories": ["casual attire > t-shirts"], "title": "Crew t-shirt" },
+        { "id": "5840", "categories": ["casual attire > t-shirts"], "title": "V neck t-shirt" },
+        { "id": "5841", "categories": ["casual attire > t-shirts"], "title": "Turtle neck t-shirt" },
+        { "id": "5842", "categories": ["casual attire > t-shirts"], "title": "Navy t-shirt" },
+  ]
+}
+};
+
+const userEvent = {
+  "eventType": "add-to-cart",
+  "visitorId": "1",
+  "productDetails": [
+	  {
+	      "product": {"productId": "1234"},
+	      "quantity": {"value": 1}
+	  }
+  ]
+};
+
+const projectId = 'ENTER PROJECT ID'
+const loc = 'ENTER LOCATION'
+
+// Creates a clients.
+const userEventClient = new UserEventServiceClient();
+const productClient = new ProductServiceClient();
+
+async function importProducts() {
+	const res = await productClient.importProducts({
+            parent: `projects/${projectId}/locations/${loc}/catalogs/default_catalog/branches/0`,
+            inputConfig: products
+	});
+	console.info(res);
+}
+
+async function writeUserEvent() {
+	const res = await userEventClient.writeUserEvent({
+            parent: `projects/${projectId}/locations/${loc}/catalogs/default_catalog`,
+            userEvent: userEvent
+	});
+	console.info(res);
+}
+
+importProducts();
+
+writeUserEvent();
+
   

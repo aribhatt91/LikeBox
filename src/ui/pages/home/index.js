@@ -25,7 +25,7 @@ export default function Home() {
     }, [currentUser])
 
     return (
-        <Page className="like-box container-fluid">
+        <Page pageName="home-page" className="like-box container-fluid">
                 {!currentUser && <LandingPage
                     slideOut={false}
                     slideIn={true}

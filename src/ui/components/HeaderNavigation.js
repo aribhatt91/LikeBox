@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { HEADER_NAV_MENU } from './../../service/constants/header-navs';
 import AppButton from './generic/AppButton';
+import AppImage from './generic/AppImage';
+
 export default function HeaderNavigation() {
     const [open, setOpen] = useState(false);
-    const [active, setActive] = useState(0);
+    const [active, setActive] = useState(-1);
 
     useEffect(() => {
         if(open){
@@ -18,15 +19,21 @@ export default function HeaderNavigation() {
         
     }, [open])
     useEffect(() => {
-        window.addEventListener('click', (e) => {
-            setOpen(false);
-        })
+        window.addEventListener('click', (e) => closeTab())
     })
     //TODO - Use layout effect to remove the listener
 
     const openTab = (index) => {
+        if(index === active){
+            closeTab();
+            return;
+        }
         setActive(index); 
         setOpen(true);
+    }
+    const closeTab = () => {
+        setOpen(false);
+        setActive(-1); 
     }
     
     return (
@@ -82,7 +89,7 @@ export default function HeaderNavigation() {
                                         <div className="card-stack">
                                             <div className="card-stack-item">
                                                 <div className="card-thumb">
-                                                    <LazyLoadImage effect="opacity" src="https://firebasestorage.googleapis.com/v0/b/webapp-470b3.appspot.com/o/Trendy.jpg?alt=media&token=1dcfe99e-2a13-4587-9ac2-d2a153b520dd" alt="" />
+                                                    <AppImage src="https://firebasestorage.googleapis.com/v0/b/webapp-470b3.appspot.com/o/Trendy.jpg?alt=media&token=1dcfe99e-2a13-4587-9ac2-d2a153b520dd" alt="" />
                                                 </div>
                                                 <div className="card-title">
                                                     Trendy
@@ -90,7 +97,7 @@ export default function HeaderNavigation() {
                                             </div>
                                             <div className="card-stack-item">
                                                 <div className="card-thumb">
-                                                    <LazyLoadImage effect="opacity" src="https://firebasestorage.googleapis.com/v0/b/webapp-470b3.appspot.com/o/Classic.jpg?alt=media&token=2ca68b58-bc4f-40e9-b6f7-a1f0f786f207" alt="" />
+                                                    <AppImage src="https://firebasestorage.googleapis.com/v0/b/webapp-470b3.appspot.com/o/Classic.jpg?alt=media&token=2ca68b58-bc4f-40e9-b6f7-a1f0f786f207" alt="" />
                                                 </div>
                                                 <div className="card-title">
                                                     Classic

@@ -9,7 +9,7 @@ import { useNotification } from '../../../store/contexts/NotificationProvider';
 import { updateUserStylePref } from '../../../service/userProfile';
 import { useHistory } from 'react-router';
 import { LoadingPendulum } from '../../components/LoadingModule';
-import { setUserStyles } from '../../../service/api/analytics/user';
+import EventTracker from '../../../service/api/EventTracker';
 
 function StyleTile({styleName, toggleFunction, thumbnail, selected=false}){
     return (
@@ -79,7 +79,8 @@ export default function YourStyle() {
                 /* 
                 Sending selected styles to Google Analytics
                 */
-                setUserStyles(selected);
+                //setUserStyles(selected);
+                EventTracker.trackEvent(EventTracker.events.user.UPDATE_STYLE, selected);
             }
             
             setTimeout(() => {

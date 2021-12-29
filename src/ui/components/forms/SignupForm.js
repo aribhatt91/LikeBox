@@ -10,7 +10,8 @@ import { addUserProfile } from './../../../service/userProfile';
 import AppDateInput from '../generic/AppDateInput';
 import { useHistory } from 'react-router-dom';
 import { parseSearchParams } from '../../../service/helper';
-import { logRegister } from './../../../service/api/analytics/index';
+//import { logRegister } from './../../../service/api/analytics/index';
+import EventTracker from './../../../service/api/EventTracker';
 
 let USER_TEMP = null;
 function SignupForm(props){
@@ -29,6 +30,7 @@ function SignupForm(props){
     const submitForm =  async (userInput, {setSubmitting}) => {
         setSubmitting(true);
         //window.mlog(userInput, setSubmitting);
+        
         if(error){
             setError(null);
         }
@@ -55,6 +57,7 @@ function SignupForm(props){
 
         }catch(err){
             console.error(err);
+            EventTracker.trackEvent(EventTracker.events.user.SIGNUP_ERROR);
         }finally{
             setSubmitting(false);
             //setSubmitted(true);
@@ -65,11 +68,12 @@ function SignupForm(props){
     const updateUserInDatabase = async () => {
         if(USER_TEMP){
             try{
-                logRegister("password");
+                //logRegister("password");
+                EventTracker.trackEvent(EventTracker.events.user.SIGNUP_COMPLETE, "password");
                 await addUserProfile(USER_TEMP);
                 await updateName(USER_TEMP.name.fname);
             }catch(err){
-
+                EventTracker.trackEvent(EventTracker.events.user.SIGNUP_ERROR);
             }finally {
                 setTimeout(() => {
                     //props.onComplete();
@@ -91,6 +95,10 @@ function SignupForm(props){
         }
         
     }, [currentUser]);
+
+    useEffect(()=>{
+        EventTracker.trackEvent(EventTracker.events.user.SIGNUP_START);
+    }, [])
 
     return (
         <div className="col-12 col-md-8 col-lg-7 p-0 mt-0 mb-0 m-auto">

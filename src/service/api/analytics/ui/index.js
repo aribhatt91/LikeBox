@@ -1,61 +1,53 @@
+export default { 
+    /*
+    Header 
+    */
+    logOpenNavigation: (panel_name) => {
 
-/*
-Header 
-*/
-export const logOpenNavigation = (panel_name) => {
+    },
+    logOpenMobileNavigation: (panel_name) => {
 
-}
+    },
+    logClickNavigationStyleCTA: () => {
 
-export const logOpenMobileNavigation = (panel_name) => {
+    },
+    /* Home page */
+    logHomePageTilesClick: () => {},
+    /* 
+    Landing page
+    */
+    logClickSubscriptionCTA: () => {
 
-}
+    },
+    logOpenFAQAccordion: () => {
 
-export const logClickNavigationStyleCTA = () => {
+    },
+    logOpenTNC: () => {
 
-}
+    },
+    logClickCategoryTiles: () => {
 
-/* 
-Landing page
-*/
-export const logClickSubscriptionCTA = () => {
+    },
+    /* 
+    Your style page
+    */
+    logVisitYourStyle: () => {
 
-}
+    },
+    logVisitYourStyleCards: () => {
 
-export const logOpenFAQAccordion = () => {
+    },
+    /* 
+    User dashboard
+    */
+    logVisitSizingDashboard: () => {
 
-}
+    },
+    logVisitBoxDashboard: () => {
 
-export const logOpenTNC = () => {
+    },
+    logUpdateProfile: () => {
 
-}
-
-export const logClickCategoryTiles = () => {
-
-}
-
-/* 
-Your style page
-*/
-export const logVisitYourStyle = () => {
-
-}
-
-export const logVisitYourStyleCards = () => {
-
-}
-
-/* 
-User dashboard
-*/
-export const logVisitSizingDashboard = () => {
-
-}
-
-export const logVisitBoxDashboard = () => {
-
-}
-
-export const logUpdateProfile = () => {
-
+    }
 }
 

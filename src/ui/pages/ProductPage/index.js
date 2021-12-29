@@ -15,13 +15,15 @@ import { fetchProduct } from '../../../service/productMethods';
 import { Helmet } from 'react-helmet';
 import StarRating from '../../components/generic/StarRating';
 import WishListButton from '../../components/WishListButton';
-import { logAddToCart, logSelectItem } from '../../../service/api/analytics';
-import { logPurchase } from '../../../service/api/analytics/index';
-import { detailPageView } from '../../../service/api/recommendations/index';
+//import { logAddToCart, logSelectItem } from '../../../service/api/analytics';
+//import { logPurchase } from '../../../service/api/analytics/index';
+//import { detailPageView } from '../../../service/api/recommendations/index';
 import SignInMessage from '../../components/SignInMessage';
 import SizeSelector from './components/SizeSelector';
 import ProductDescription from './components/ProductDescription';
 import PriceText from '../../components/generic/PriceText';
+
+import EventTracker from '../../../service/api/EventTracker';
 
 function ProductForm({currentUser, product, addToCart }){
   const [quantity, setQuantity] = useState(1);
@@ -32,11 +34,6 @@ function ProductForm({currentUser, product, addToCart }){
     setQuantity(val)
   } */
 
-  useEffect(() => {
-    if(product.variants){
-
-    }
-  }, [])
   const sizeSelect = (e) => {
     window.mlog('sizeSelect', e.target.value);
     const val = e.target.value,
@@ -44,12 +41,14 @@ function ProductForm({currentUser, product, addToCart }){
 
     if(newVar){
       setVariant(newVar);
+      EventTracker.trackEvent(EventTracker.events.product.SELECT_SIZE, variant);
     }
   }
 
   const trackConversion = () => {
     if(product){
-      logPurchase(product);
+      //logPurchase(product);
+      EventTracker.trackEvent(EventTracker.events.product.PURCHASE, product);
     }
   }
   
@@ -131,11 +130,12 @@ function ProductPage(props) {
       let product = await fetchProduct(id);
       //window.mlog('fetchedProduct ->', product);
       setProduct(product);
-      logSelectItem([product]);
-      detailPageView(product);
+      window.mlog('ProductPage:', EventTracker.events.product.PRODUCT_VIEW, product);
+      EventTracker.trackEvent(EventTracker.events.product.PRODUCT_VIEW, product);
       
     }catch(err){
       console.error('ProductPage', err);
+      EventTracker.trackEvent(EventTracker.events.product.PRODUCT_FETCH_ERROR);
     }finally {
       setPending(false);
     }

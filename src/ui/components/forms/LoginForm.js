@@ -1,6 +1,6 @@
-import React, { useState, useContext } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React, { useState, useContext, useEffect } from 'react';
+//import { connect } from 'react-redux';
+//import { bindActionCreators } from 'redux';
 import PageMessage, { SuccessMessage } from './../generic/PageMessage';
 import AppTextInput from './../generic/AppTextInput';
 import AppForm from './AppForm';
@@ -9,7 +9,10 @@ import AppSubmitButton from './../generic/AppSubmitButton';
 import { AuthContext } from './../../../store/contexts/AuthContext';
 import { Link, useHistory } from 'react-router-dom';
 import { parseSearchParams } from '../../../service/helper';
-import { logSignIn } from '../../../service/api/analytics';
+//import { logSignIn } from '../../../service/api/analytics';
+import EventTracker from '../../../service/api/EventTracker';
+
+
 const validationSchema = LOGIN_FORM_SCHEMA;
 
 const LoginForm = ({onComplete}) => {
@@ -33,8 +36,9 @@ const LoginForm = ({onComplete}) => {
     //signInUser(userInput, () => {setSubmitting(false); setSubmitted(true)});
     try {
       let response = await login(userInput.email, userInput.password);
-      window.mlog('Response ->', response);
-      logSignIn("password");
+      //window.mlog('Response ->', response);
+      //logSignIn("password");
+      EventTracker.trackEvent(EventTracker.events.user.LOGIN_COMPLETE, "password");
       if(typeof onComplete === 'function'){
           setTimeout(onComplete, 750);
       }
@@ -42,11 +46,15 @@ const LoginForm = ({onComplete}) => {
       
       setError('Username or Password is invalid');
       window.mlog('Login error ->', code, message);
+      EventTracker.trackEvent(EventTracker.events.user.LOGIN_ERROR);
     }finally {
       setSubmitting(false);
       setSubmitted(true);
     }
   }
+  useEffect(() => {
+    EventTracker.trackEvent(EventTracker.events.user.LOGIN_START);
+  }, []);
   return (
     <div className="col-12 col-md-7 col-lg-5 p-0 mt-0 mb-0 m-auto">
         {
