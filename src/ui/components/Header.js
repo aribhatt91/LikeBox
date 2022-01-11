@@ -66,6 +66,11 @@ function Header (props) {
                 <NavLink activeClassName="active" to="/wishlist">
                   <HeartLineIcon />
                 </NavLink>
+                {
+                  window.DEV_MODE && <NavLink activeClassName="active" to="/cart">
+                  <CartLink />
+                </NavLink> 
+                }
                 
                 {
                 location.pathname.indexOf('/user') === -1 &&

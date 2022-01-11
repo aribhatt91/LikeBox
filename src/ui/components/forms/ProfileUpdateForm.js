@@ -8,7 +8,7 @@ import { CONTACT_INFORMATION_SCHEMA } from '../../../service/validationSchema';
 import { PERSONAL_INFORMATION_SCHEMA } from './../../../service/validationSchema';
 import { AuthContext } from './../../../store/contexts/AuthContext';
 import PageMessage from '../generic/PageMessage';
-import { updateUserProfile } from './../../../service/userProfile';
+import { updateUserProfile } from '../../../service/UserService';
 import { useNotification } from './../../../store/contexts/NotificationProvider';
 import AppDateInput from '../generic/AppDateInput';
 import { LoadingPendulum } from './../LoadingModule';

@@ -1,7 +1,7 @@
 import React, {useState, useContext, useEffect} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import CartService from '../../../service/cartOperation';
+import CartService from '../../../service/CartService';
 import Page from '../Page';
 import CartItem from './components/CartItem'; 
 import LoadingModule from '../../components/LoadingModule';
@@ -9,6 +9,7 @@ import ErrorModule from '../../components/ErrorModule';
 import { AuthContext } from '../../../store/contexts/AuthContext';
 import './index.css';
 import CartSummary from './components/CartSummary';
+import EventTracker from '../../../service/api/EventTracker';
 
 const EMPTY_TEXT = "You have no items in your cart!",
 EMPTY_SUBTEXT = "Please check the spelling or try searching for something else";
@@ -27,40 +28,45 @@ function Cart(props) {
         }
     }, [currentUser])
 
+    useEffect(() => {
+        if(cart && !error){
+            EventTracker.trackEvent(EventTracker.events.transaction.VIEW_CART, cart);
+        }
+    }, [cart])
+
+    const removeItem = (item) => {
+        removeFromCart(currentUser.email, item, false);
+        EventTracker.trackEvent(EventTracker.events.product.REMOVE_FROM_CART, item);
+    }
+
     return (
         
-        <Page className="checkout_container container" pageName={"Cart"}>
-            <React.Fragment>
-            {fetch_pending && <LoadingModule text="Please wait..."></LoadingModule>}
-            {!fetch_pending && (error || !cart || (cart.products || []).length <= 0) && <ErrorModule
-                
-                error_text={EMPTY_TEXT}
-            />}
-            {!fetch_pending && !error && (cart.products || []).length > 0 &&
+        <Page pageName="Cart">
+            <div className="cart-container mt-5 mb-5 container">
+                <h1 className="text-center mb-5 text-uppercase">Shopping cart</h1>
+                {fetch_pending && <LoadingModule text="Please wait..."></LoadingModule>}
+                {!fetch_pending && (error || !cart || (cart.products || []).length <= 0) && <ErrorModule
+                    
+                    error_text={EMPTY_TEXT}
+                />}
+                {!fetch_pending && !error && (cart.products || []).length > 0 &&
 
-                <section className="cart_body">
-                    <div className="float-left pl-4 pr-4 flex-grow-1">
-                        {
-                        (cart.products || []).map((item, index) => {
-                            return (
-                                <CartItem
-                                key={index} 
-                                item={item}
-                                _removeItem={removeFromCart}
-                                user={currentUser}
-                                ></CartItem>)
-                        })
-                        }
-                    </div>
-                    <CartSummary
-                        subTotal={cart.subTotal}
-                        total={cart.total}
-                        savings={cart.savings}
-                        curr={cart.currency}
-                    />
-                </section>
-            }
-        </React.Fragment>
+                    <section className="cart-body">
+                        <div className="cart-product-list pl-md-4 pr-md-4 flex-grow-1">
+                            {
+                            (cart.products || []).map((item, index) => <CartItem
+                                        key={item.id} 
+                                        item={item}
+                                        removeItem={() => removeItem(item)}
+                                    />)
+                            }
+                        </div>
+                        <CartSummary
+                            cart={cart}
+                        />
+                    </section>
+                }
+            </div>
             
         </Page>
     ); 

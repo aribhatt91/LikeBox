@@ -37,7 +37,7 @@ const ProductCard = ({product}) => {
             <div className="card-thumb-wrapper p-0 col-xs-12 col-md-4 col-lg-3">
 {/*                 <AppImage className="card-thumb" src={(decodeURI(props.img) || "").trim()} alt={props.title} aria-label={props.title} />
  */}                <LazyLoadImage
-                    alt={product.title}
+                    alt={product.title || product.name}
                     aria-label={product.title || product.name}
                     effect="opacity"
                     src={(decodeURI(product.thumbnail) || "").trim() + '&w=400&h=400'}

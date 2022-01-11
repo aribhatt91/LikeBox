@@ -3,7 +3,7 @@ import ProductCard, { ProductCardPlaceholder } from '../../../components/Product
 import ErrorModule from '../../../components/ErrorModule';
 import AppButton from '../../../components/generic/AppButton';
 import { debounce } from 'lodash';
-import { fetchProducts } from '../../../../service/productMethods';
+import { fetchProducts } from '../../../../service/ProductService';
 //import { logViewSearchResult } from '../../../../service/api/analytics';
 import EventTracker from '../../../../service/api/EventTracker';
 
@@ -77,7 +77,6 @@ function ProductListing({type, filter=null, category, addToWishlist, inWishlist}
         if(response.lastVisible){
           LAST_NODES = response.lastVisible;
         }
-        //logViewSearchResult(category, productsList);
         EventTracker.trackEvent(EventTracker.events.page.SEARCH_RESULT, category, productsList);
         window.mlog('getProducts response', response);
       }else {
@@ -141,7 +140,7 @@ function ProductListing({type, filter=null, category, addToWishlist, inWishlist}
                 products.map((item, index) => 
                 <ProductCard 
                     product={item}
-                    key={index}
+                    key={item.id}
                     />)
               }
             

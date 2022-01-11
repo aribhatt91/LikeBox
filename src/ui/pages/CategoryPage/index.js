@@ -2,15 +2,14 @@ import React, { useState, useEffect } from 'react';
 import Page from '../Page';
 //import ProductFilters from './components/ProductFilters';
 import { useParams, useLocation } from 'react-router-dom';
-import { getAvailableKeywords, getNearestMatches } from '../../../service/productMethods';
+import { getAvailableKeywords, getNearestMatches } from '../../../service/ProductService';
 import { Helmet } from 'react-helmet';
 import ProductListing from './components/ProductListing';
-//import { logSearch } from './../../../service/api/analytics/index';
 import EventTracker from './../../../service/api/EventTracker';
-import { parseSearchParams } from '../../../service/helper';
+import { capitaliseAll, parseSearchParams } from '../../../service/helper';
 import './index.css';
 
-function ListingPage(props) {
+function CategoryPage(props) {
   const location = useLocation();
   const params = parseSearchParams(location.search),
   searchTerm = params.search,
@@ -25,9 +24,12 @@ function ListingPage(props) {
   }
 
   useEffect(()=>{
-    //logSearch(category);
+    const pageTitle = capitaliseAll((category|| "").replace('-', ' & '));
     EventTracker.trackEvent(EventTracker.events.page.SEARCH, category);
-    document.title = (category|| "").replace('-', ' & ').toUpperCase();
+    EventTracker.trackEvent(EventTracker.events.page.PAGE_VIEW, pageTitle, 'category-page');
+    EventTracker.trackEvent(EventTracker.events.page.VIEW_CHANGE, 'category-page');
+    
+    document.title = pageTitle;
     (async () => {
       let keys = await getAvailableKeywords();
       window.mlog('All available keys -- ', keys);
@@ -78,4 +80,4 @@ function ListingPage(props) {
 }
 
 
-export default ListingPage;
+export default CategoryPage;

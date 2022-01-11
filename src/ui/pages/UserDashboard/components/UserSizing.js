@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import RangeSlider from 'react-bootstrap-range-slider';
 import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
 import AppButton from '../../../components/generic/AppButton';
-import { getUserSizes, setUserSizes } from '../../../../service/userProfile';
+import { getUserSizes, setUserSizes } from '../../../../service/UserService';
 import { useNotification } from '../../../../store/contexts/NotificationProvider';
 
 function SizeSlider({label, min=0, max=100, onChange, slideIn, slideOut}) {

@@ -2463,8 +2463,10 @@
   .global-footer .footer-text a {
     color: #DDFFF7;
     text-decoration: underline; }
-  .global-footer svg {
+  .global-footer .media-links a {
     fill: #DDFFF7; }
+  .global-footer svg {
+    fill: #000; }
 
 .card-white {
   background-color: #fff;

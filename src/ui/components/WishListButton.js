@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 import AppButton from './generic/AppButton';
-import { removeItemFromWishList, addItemToWishList, itemInWishList } from '../../service/wishlistMethods';
+import { removeItemFromWishList, addItemToWishList, itemInWishList } from '../../service/WishlistService';
 import { AuthContext } from './../../store/contexts/AuthContext';
 import { useNotification } from './../../store/contexts/NotificationProvider';
 import EventTracker from './../../service/api/EventTracker';

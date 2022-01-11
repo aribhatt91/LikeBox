@@ -1,5 +1,7 @@
 import { db } from './../firebase';
 import { getUser, updateUserByEmail } from './user';
+import CartProduct from './models/CartProduct';
+import Cart from './models/Cart';
 
 const collection = db.collection('users');
 /*
@@ -7,14 +9,11 @@ const collection = db.collection('users');
 {
     id: String,
     count: Number,
-    sub_total: Number,
     total: Number,
-    savings: Number,
     currency: String,
-    products: Array,
-    promo_code: String,
+    products: Array<CartProduct>
 }
-// Product
+// CartProduct
 {
     id: String,
     parent_product_id: String,
@@ -43,6 +42,34 @@ export const getUserCart = async (email) => {
     }
     return new Promise((resolve, reject) => resolve(cart));
 }
+
+export const updateUserCart = async ({products, email}) => {
+    let cart = null, id = null;
+    
+    try {
+        let user = await getUser(email);
+        cart = user.cart || null;
+        if(cart){
+            id = cart.id;
+        }
+        cart = Cart({id, products});
+        /* 
+        Use this to clear the cart and set a new cart for future use
+        */
+        if(!products || products.length === 0){
+            cart = Cart({products: []});
+        }
+
+        let update = await updateUserByEmail(email, {cart});
+        window.mlog('api:firestore:updateUserCart::response', update);
+        return new Promise((resolve, reject) => resolve(cart));
+
+    }catch(error){
+        console.error('getUserCart:Error ', error);
+        //return new Promise((resolve, reject) => reject(err));
+        return new Promise((resolve, reject) => reject(error));
+    }
+}
 export const getCartCount = async (email) => {
     let cart = null, count = 0;
     try {
@@ -58,45 +85,36 @@ export const getCartCount = async (email) => {
     }
     return new Promise(resolve => resolve(count));
 }
-export const addProductToCart = async (email, product) => {
-    let cart = null;
+export const addProductToCart = async (email, product, variant=null) => {
+    let cart = null, id = null;
+    let cartProduct = CartProduct(product, variant);
     try {
         cart = await getUserCart(email);
+        id = cart ? cart.id : null;
         if(!cart){
-            cart = EMPTY_CART;
-            cart.id = (new Date()).getTime();
+            cart = {};
         }
-        if(cart){
-            let products = cart.products || [],
-            present = false, itemCount = 0, total = 0;
-            for(let p in products){
-                /* Check product id and size - if product with different size exists, add a new instance, else increment */
-                if(products[p].id === product.id && ((!product.size && !products[p].size) || (products[p].size === product.size))){
-                    products[p].quantity = Number(products[p].quantity) + Number(product.quantity);
-                    present = true;
-                }
-                itemCount += Number(products[p].quantity);
-                total += products[p].price * products[p].quantity; 
+
+        let products = cart.products || [],
+        present = false;
+        for(let p in products){
+            /* Check product id and size - if product with different size exists, add a new instance, else increment */
+            if(products[p].id === cartProduct.id && ((!cartProduct.size && !products[p].size) || (products[p].size === cartProduct.size))){
+                products[p].quantity = Number(products[p].quantity) + Number(cartProduct.quantity);
+                present = true;
             }
-            if(!present){
-                products.push(product);
-                itemCount++;
-                total += product.price * product.quantity;
-            }
-            window.mlog('Products after adding -> ', present, products);
-            cart.products = products;
-            cart.count = itemCount;
-            cart.total = total;
-            //writeToCookie(CNAME, cart, 30);
-            //setTimeout(() => resolve(JSON.stringify(cart)), 2000);
-            let update = await updateUserByEmail(email, {cart})
-            window.mlog(update);
         }
-        
+        if(!present){
+            products.push(cartProduct);
+        }
+        window.mlog('Products after adding -> ', present, products);
+        cart = Cart({id, products});
 
+        let update = await updateUserByEmail(email, {cart});
+        window.mlog('api:firestore:addProductToCart::response', update);
         
-    }catch(err){
-
+    }catch(error){
+        console.error('api:firestore:addProductToCart::response', error);
     }
     return new Promise((resolve, reject) => resolve(cart));
 }

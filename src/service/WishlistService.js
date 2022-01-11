@@ -1,5 +1,5 @@
 import { getUserWishList, addToWishList, removeFromWishList, isItemInWishList } from './api/firestore/wishlist';
-import { fetchProductsBySkus } from './productMethods';
+import { fetchProductsBySkus } from './ProductService';
 
 
 export const itemInWishList = (email, sku) => {

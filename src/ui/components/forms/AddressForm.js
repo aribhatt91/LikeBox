@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { addAddress, updateExistingAddress } from '../../../service/addressMethods';
+import { addAddress, updateExistingAddress } from '../../../service/AddressService';
 import AppSubmitButton from './../generic/AppSubmitButton';
 import AppButton from './../generic/AppButton';
 import AppTextInput from './../generic/AppTextInput';

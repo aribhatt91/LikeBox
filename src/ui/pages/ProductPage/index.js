@@ -6,18 +6,15 @@ import ProductImageGrid from './components/ProductImageGrid';
 import PageMessage from '../../components/generic/PageMessage';
 import AppButton from '../../components/generic/AppButton';
 import { AuthContext } from '../../../store/contexts/AuthContext';
-import CartService from '../../../service/cartOperation';
+import CartService from '../../../service/CartService';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { useParams } from 'react-router-dom';
 import FourZeroFour from '../404';
-import { fetchProduct } from '../../../service/productMethods';
+import { fetchProduct } from '../../../service/ProductService';
 import { Helmet } from 'react-helmet';
 import StarRating from '../../components/generic/StarRating';
 import WishListButton from '../../components/WishListButton';
-//import { logAddToCart, logSelectItem } from '../../../service/api/analytics';
-//import { logPurchase } from '../../../service/api/analytics/index';
-//import { detailPageView } from '../../../service/api/recommendations/index';
 import SignInMessage from '../../components/SignInMessage';
 import SizeSelector from './components/SizeSelector';
 import ProductDescription from './components/ProductDescription';
@@ -51,7 +48,6 @@ function ProductForm({currentUser, product, addToCart }){
       EventTracker.trackEvent(EventTracker.events.product.PURCHASE, product);
     }
   }
-  
 
   return (
     <React.Fragment>
@@ -95,14 +91,23 @@ function ProductForm({currentUser, product, addToCart }){
         </div>  
       }
       <div className="product-cta-container col-md-10 clearfix mt-2 mb-2 p-0">
-        <AppButton
-          label="Go to brand"
-          className="w-100 btn-grey"
-          disabled={!currentUser /*|| quantity === 0 || (sizes.length > 0 && size === '')*/}
-          href={variant.link}
-          ext={true}
-          clickEvents={[trackConversion]}
-        />
+        {
+          window.DEV_MODE && <AppButton 
+            label="Add to Cart"
+            className="w-100 btn-grey"
+            disabled={!currentUser /*|| quantity === 0 || (sizes.length > 0 && size === '')*/}
+            onClick={() => addToCart(currentUser.email, product, variant)} />
+        }
+        {
+          !window.DEV_MODE && <AppButton
+            label="Go to brand"
+            className="w-100 btn-grey"
+            disabled={!currentUser /*|| quantity === 0 || (sizes.length > 0 && size === '')*/}
+            href={variant.link}
+            ext={true}
+            clickEvents={[trackConversion]}
+          />
+        }
       </div>
       <div className="product-cta-container col-md-10 clearfix mt-2 mb-5 p-0">
         <WishListButton className="btn-white w-100" product={product} />
@@ -124,13 +129,9 @@ function ProductPage(props) {
       if(!pending){
         setPending(true);
       }
-      //window.mlog('getProduct -> ', sku);
-      //let product = await fetchProduct(sku);
 
       let product = await fetchProduct(id);
-      //window.mlog('fetchedProduct ->', product);
       setProduct(product);
-      window.mlog('ProductPage:', EventTracker.events.product.PRODUCT_VIEW, product);
       EventTracker.trackEvent(EventTracker.events.product.PRODUCT_VIEW, product);
       
     }catch(err){
@@ -147,7 +148,7 @@ function ProductPage(props) {
 
   return (
     <React.Fragment>
-    {(pending || product) && <Page className={"product-home-page pt-2 pt-lg-5 pb-5 position-relative"} product={product} pageName={"pdp"}>
+    {(pending || product) && <Page className={"product-home-page pt-2 pt-lg-5 pb-5 position-relative"} product={product} pageName={"product-page"}>
         {pending && <LoadingPendulum />}
         {!pending && product && 
           <div className="d-block">
@@ -165,7 +166,8 @@ function ProductPage(props) {
             <div className="product-details col-lg-5 float-left">
               <ProductForm 
                 currentUser={currentUser} 
-                product={product}/>
+                product={product}
+                addToCart={props.addToCart}/>
 
               <ProductDescription product={product}/>
             </div>

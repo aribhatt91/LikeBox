@@ -54,11 +54,11 @@ function HeaderMobileNav({user, logout}){
               <li key="1" className="mt-1 mb-1">
                 <Link to="/wishlist" onClick={()=>{setOpen(false)}}>My WishList</Link>
               </li>
-              <li key="2" className="mt-1 mb-1">
+              {window.DEV_MODE && <li key="2" className="mt-1 mb-1">
                 <Link to="/cart" onClick={()=>{setOpen(false)}}>
                   My Bag
                 </Link>
-              </li>
+              </li>}
               <li key="3" className="mt-1">
                 <a href="#" onClick={()=>{
                   logout();

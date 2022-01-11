@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { fetchWishList, removeItemFromWishList } from '../../../service/wishlistMethods';
+import { fetchWishList, removeItemFromWishList } from '../../../service/WishlistService';
 import Page from '../Page';
 import { AuthContext } from '../../../store/contexts/AuthContext';
 import { useNotification } from '../../../store/contexts/NotificationProvider';
@@ -32,7 +32,6 @@ const WishList = () => {
         try {
             setPending(true);
             let rem = await removeItemFromWishList(currentUser.email, sku);
-            window.mlog(rem);
             let res = await fetchWishList(currentUser.email);
             window.mlog('updated wishlist', res);
             if(rem.type === 'success'){

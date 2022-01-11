@@ -1,5 +1,5 @@
 import React, {useState, useEffect } from 'react';
-import { fetchUserProfile } from '../../../../service/userProfile';
+import { fetchUserProfile } from '../../../../service/UserService';
 import ProfileUpdateForm from '../../../components/forms/ProfileUpdateForm';
 import { LoadingPendulum } from '../../../components/LoadingModule';
 

@@ -1,28 +1,25 @@
 import { addToCartSuccess, addToCartPending, removeFromCartPending, removeFromCartSuccess, fetchCartPending, fetchCartSuccess, cartError } from '../store/actions/index';
-import { CURRENCY } from './constants';
-import { getUserCart, addProductToCart, removeProductFromCart, getCartCount } from './api/firestore/cart';
+import { getUserCart, addProductToCart, removeProductFromCart, updateUserCart, getCartCount } from './api/firestore/cart';
 
 /*
 // Cart
 {
+    id: String,
     count: Number,
-    subTotal: Number,
     total: Number,
-    savings: Number,
     currency: String,
-    products: Array,
-    promoCode: String,
-    promoApplied: Boolean,
+    products: Array<Product>,
 }
 // Product
 {
-    sku: String,
+    id: String,
+    title: String,
     name: String,
     thumbnail: String,
     full_price: Number,
     price: Number,
     quantity: Number,
-    size: Number
+    size: String
 }
 */
 const CART_ADD_ERROR = "Failed to add the product to the cart!",
@@ -34,15 +31,12 @@ INVALID_PRODUCT = "Product is not valid";
 
 const EMPTY_CART = {
     count: 0,
-    subTotal: 0,
     total: 0,
-    savings: 0,
-    currency: CURRENCY,
     products: []
 }
 let CartService = {
     active_cart: EMPTY_CART,
-    addToCart: (email, product) => {
+    addToCart: (email, product, variant=null) => {
         
         return dispatch => {
             dispatch(addToCartPending(CartService.active_cart));
@@ -53,7 +47,7 @@ let CartService = {
                 return;
             }
             //Firestore
-            addProductToCart(email, product).then( res => {
+            addProductToCart(email, product, variant).then( res => {
                 CartService.setCart(CartService.parseCart(res));
                 //window.mlog('addToCart: MockGetCart: parsed cart', CartService.active_cart);
                 dispatch(addToCartSuccess(CartService.getCart()));
@@ -106,6 +100,21 @@ let CartService = {
             })
         }  
     },
+    clearCart: (email) => {
+        window.mlog('clearCart: email -> ', email);
+        return (dispatch) => {
+            dispatch(fetchCartPending(EMPTY_CART));            
+            updateUserCart(email, null).then(res => {
+                CartService.setCart(CartService.parseCart(res));
+                window.mlog('clearCart: parsed cart', CartService.active_cart);
+                dispatch(fetchCartSuccess(CartService.active_cart));
+            })
+            .catch(err => {
+                window.mlog('clearCart: getUserCart: error', err);
+                dispatch(cartError({error: CART_FETCH_ERROR, cart: CartService.active_cart}));
+            })
+        }  
+    },
     parseCart: (cartString) => {
         try{
             let cart = null; 
@@ -116,14 +125,10 @@ let CartService = {
             }
             cart.count = cart.count ? Number(cart.count) || 0 : 0;
             cart.total = cart.total ? Number(cart.total) || 0 : 0;
-            cart.subTotal = cart.subTotal ? Number(cart.subTotal) || 0 : 0;
             cart.products = cart.products || [];
             cart.products.forEach((item, index) => {
-                item.size = item.size ? Number(item.size) || 0 : 0;
                 item.quantity = item.quantity ? Number(item.quantity) || 0 : 0;
-                item.full_price = item.full_price ? Number(item.full_price) || 0 : 0;
                 item.price = item.price ? Number(item.price) || 0 : 0;
-                item.full_price = item.full_price === 0 ? item.price : item.full_price;
             });
             return cart;
         }catch(e){
@@ -137,7 +142,7 @@ let CartService = {
     },
     setCart: (cart) => {
         CartService.active_cart = cart || EMPTY_CART;
-        CartService.calculateSavings();
+        //CartService.calculateSavings();
         //CartService.writeCartToCookie();
     },
     calculateSavings: () => {
@@ -157,13 +162,16 @@ let CartService = {
         return CartService.active_cart.subTotal|| 0;
     },
     validateProduct: (product) => {
-        if(!product || !product.hasOwnProperty('sku') || !product.hasOwnProperty('name') || !product.hasOwnProperty('price') || !product.hasOwnProperty('quantity') /*|| !product.hasOwnProperty('size')*/){
+        if(!product || !product.hasOwnProperty('id') || !(product.hasOwnProperty('name') || product.hasOwnProperty('title')) || !product.hasOwnProperty('price') /*|| !product.hasOwnProperty('quantity') || !product.hasOwnProperty('size')*/){
             return false;
         }
         if(product.quantity <= 0){
             return false;
         }
         return true;
+    },
+    saveCartToLocalStorage: () => {
+        
     },
     isEmpty: () => {        
         return CartService.active_cart.count === 0;

@@ -37,7 +37,7 @@ const settings = {
 function BlogCard({title, thumbnail, date, link}){
     return (
         <div className="app-card m-3">
-            <AppLink className="app-card-body d-flex flex-column" href={link} target="_blank">
+            <AppLink className="app-card-body blog-card d-flex flex-column" href={link} target="_blank">
                 <div className="app-card-img d-flex">
                     <LazyLoadImage className="w-100" src={thumbnail} effect="blur" />
                 </div>
@@ -65,7 +65,6 @@ export default function BlogSection() {
                     method: 'get',
                     url: 'https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@the_likebox'
                 });
-                console.log('BLOGS', res);
                 setBlogs(res.data.items || []);
             }catch(err){
 
@@ -78,7 +77,7 @@ export default function BlogSection() {
     return (
         <section className={blogs.length > 0 ? "d-flex flex-column w-100 container" : "d-none"}>
             <h1 className="like-box-header-1 font-weight-bold text-center w-100">LikeBLOGS</h1>
-            <div className="affiliate-brands pt-4 pb-4 w-100">
+            <div className="likeblogs pt-4 pb-4 w-100">
                 <div className="mt-4 mb-4 w-100">
                     {blogs.length > 0 && <Slider {...settings}>
                         {

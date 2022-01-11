@@ -1,5 +1,6 @@
 import { fetchFirestoreProducts, fetchFirestoreProductsBySkus, fetchFirestoreProduct, fetchProductBrands, fetchAvailableCategories } from './api/firestore/product';
 import DiffMatchPatch from 'diff-match-patch';
+
 export const fetchProducts = async (path="", page=0, LIMIT=10, LAST_NODES=[], filter={}) => {
     let categories = [],
     paths = path.split('-');

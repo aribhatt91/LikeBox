@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import AddressForm from '../../../components/forms/AddressForm';
 import { AuthContext } from '../../../../store/contexts/AuthContext';
-import { fetchAddresses, updateExistingAddress, deleteAddress } from '../../../../service/addressMethods';
+import { fetchAddresses, updateExistingAddress, deleteAddress } from '../../../../service/AddressService';
 import AppButton from '../../../components/generic/AppButton';
 
 function Address({user, instance, onAddressOp }){

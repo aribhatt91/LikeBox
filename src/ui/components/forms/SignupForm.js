@@ -6,7 +6,7 @@ import AppSubmitButton from './../generic/AppSubmitButton';
 import { AuthContext } from './../../../store/contexts/AuthContext';
 import AppRadioInput from '../generic/AppRadioInput';
 import { SuccessMessage } from '../generic/PageMessage';
-import { addUserProfile } from './../../../service/userProfile';
+import { addUserProfile } from '../../../service/UserService';
 import AppDateInput from '../generic/AppDateInput';
 import { useHistory } from 'react-router-dom';
 import { parseSearchParams } from '../../../service/helper';

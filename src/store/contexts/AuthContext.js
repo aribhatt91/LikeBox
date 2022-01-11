@@ -85,7 +85,7 @@ export function AuthProvider({children}){
                     localStorage.setItem('user_token', token);
                 });
                 window.mlog('onAuthStateChanged', user, user.uid);
-                EventTracker.trackEvent(EventTracker.events.user.AUTHENTICATED, user);
+                //EventTracker.trackEvent(EventTracker.events.user.AUTHENTICATED, {id: user.email, status: "logged-in"});
                 //setUserId(user.uid);
             }
             if(error){

@@ -1,10 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import CartService from './../../service/cartOperation';
-import bag_icon from '../../assets/img/bag.png';
+import EventTracker from '../../service/api/EventTracker';
+import CartService from '../../service/CartService';
+import BagIcon from './svg-components/BagIcon';
+
 function CartLink(props) {
     const { cart, fetchCart } = props;
+
+    useEffect(() => {
+        if(cart) {
+            EventTracker.trackEvent(EventTracker.events.transaction.UPDATE_CART, cart);
+        }
+    }, [cart])
     
     useEffect(() => {
         if(props.user){
@@ -13,10 +21,9 @@ function CartLink(props) {
     }, [props.user])
     return (
         <React.Fragment>
-            <span className="d-sm-inline-block d-md-none">My Cart</span>
+            <span className="d-sm-inline-block d-md-none">My Bag</span>
             <span className="d-none d-md-inline position-relative">
-                {/* <FontAwesomeIcon icon={faCartPlus}/> */}
-                <img src={bag_icon} className="nav_icon"/>
+                <BagIcon size={24}/>
                 {/*cart && cart.count && <span className="cart-count">{cart.count}</span>*/}
             </span>
             

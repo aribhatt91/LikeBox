@@ -52,8 +52,11 @@ $footerBackground: #424B54;
       text-decoration: underline;
     }
   }
-  svg {
+  .media-links a {
     fill: $footerText;
+  }
+  svg {
+    fill: #000;
   }
 }
 

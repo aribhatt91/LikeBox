@@ -4,12 +4,14 @@
         "VIEW_CHANGE": "view-change",
         "SEARCH": "search",
         "SEARCH_RESULT": "search-result",
-        "PAGE_NOT_FOUND": "page-not-found"
+        "SEARCH_RESULT_EMPTY": "search-result-empty",
+        "PAGE_NOT_FOUND": "error-page"
     },
     "product": {
         "PRODUCT_VIEW": "prod-view",
         "SELECT_SIZE": "select-size",
         "ADD_TO_CART": "add-to-cart",
+        "UPDATE_CART": "add-to-cart",
         "REMOVE_FROM_CART": "remove-from-cart",
         "ADD_TO_WISHLIST": "add-to-wishlist",
         "REMOVE_FROM_WISHLIST": "remove-from-wishlist",
@@ -32,8 +34,12 @@
         "LOGOUT": "logout"
     },
     "transaction": {
+        "VIEW_CART": "view-cart",
+        "UPDATE_CART": "update-cart",
         "START_CHECKOUT": "checkout-start",
-        "SELECT_PAYMENT": "select-payment",
+        "SELECT_ADDRESS": "select-address",
+        "SELECT_PAYMENT_METHOD": "select-payment-method",
+        "SELECT_DELIVERY_OPTION": "select-delivery-option",
         "CHECKOUT_ERROR": "checkout-error",
         "ORDER_CONFIRM": "order-confirm"
     },
@@ -42,7 +48,9 @@
         "HOME_PAGE_SUBSCRIPTION_CTA": "home-page-subscription-cta",
         "HOME_PAGE_TILE_CLICK": "home-page-tile-click",
         "NOTIFICATION_DISPLAYED": "notification-displayed",
-        "NOTIFICATION_CLICKED": "notification-clicked"
+        "NOTIFICATION_CLICKED": "notification-clicked",
+        "FOOTER_LINK_CLICKED": "footer-link-clicked",
+        "BLOG_ITEM_CLICKED": "blog-item-clicked"
     }
 
 }

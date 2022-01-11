@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { fetchLikeBox } from '../../../../service/userProfile';
+import { fetchLikeBox } from '../../../../service/UserService';
 import ProductGrid from '../../../components/ProductGrid';
 
 export default function YourBox({currentUser}) {

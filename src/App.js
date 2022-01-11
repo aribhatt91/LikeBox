@@ -6,10 +6,18 @@ import { AuthContext } from './store/contexts/AuthContext';
 import { auth } from './service/api/firebase';
 import SplashPage from './ui/pages/SplashPage';
 import { Helmet } from 'react-helmet';
+import EventTracker from './service/api/EventTracker';
 
 function App() {
     const [loading, setLoading] = useState(true);
     const {currentUser} = useContext(AuthContext);
+
+    useEffect(() => {
+        if(currentUser){
+            EventTracker.trackEvent(EventTracker.events.user.AUTHENTICATED, currentUser);
+        }
+    }, [currentUser]);
+
     useEffect(()=>{
         document.body.style.height = '100vh';
         document.body.style.overflow = 'hidden';
@@ -32,7 +40,7 @@ function App() {
     return ( 
             <div className="App">
                 {/*  */
-                    process.env.REACT_APP_ENV === "dev" && <Helmet>
+                    window.DEV_MODE && <Helmet>
                         <script src="https://assets.adobedtm.com/770d56ad37f4/63b7bc8dbb9f/launch-2aefcf817d42-development.min.js" async></script>
                         <script src="https://www.googleoptimize.com/optimize.js?id=OPT-T5SSNJ9"></script>
                     </Helmet>

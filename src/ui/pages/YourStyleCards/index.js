@@ -4,7 +4,7 @@ import AppImage from '../../components/generic/AppImage';
 import { useHistory } from 'react-router';
 import { AuthContext } from '../../../store/contexts/AuthContext';
 import { debounce } from 'lodash';
-import { fetchLikeBox, updateLikeBox } from '../../../service/userProfile';
+import { fetchLikeBox, updateLikeBox } from '../../../service/UserService';
 import Page from '../Page';
 import { fetchLikeCards } from '../../../service/api/firestore/likebox';
 import { SuccessMessage } from '../../components/generic/PageMessage';
