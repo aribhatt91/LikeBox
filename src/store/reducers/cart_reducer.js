@@ -17,51 +17,22 @@ export function cartReducer(state = initialState, action) {
             }
         case CART_FETCH_SUCCESS:
             return {
-                ...state,
-                fetch_pending: false,
-                cart: action.cart,
-                error: null
+                ...initialState,
+                cart: action.cart
             }
-        /* case CART_ADD_PENDING: 
-            return {
-                ...state,
-                add_pending: true
-            } */
         case CART_ADD_SUCCESS:
             return {
-                ...state,
-                add_pending: false,
-                cart: action.cart,
-                error: null
+                ...initialState,
+                cart: action.cart
             }
-        /* case CART_ADD_ERROR:
-            return {
-                ...state,
-                add_pending: false,
-                error: action.error
-            }
-        case CART_REMOVE_PENDING: 
-            return {
-                ...state,
-                remove_pending: true
-            } */
         case CART_REMOVE_SUCCESS:
             return {
-                ...state,
-                remove_pending: false,
-                cart: action.cart,
-                error: null
+                ...initialState,
+                cart: action.cart
             }
-        /*case CART_REMOVE_ERROR:
-            return {
-                ...state,
-                remove_pending: false,
-                error: action.error
-            }*/
         case CART_ERROR:
             return {
-                ...state,
-                remove_pending: false,
+                ...initialState,
                 error: action.error,
                 cart: action.cart
             }
@@ -69,40 +40,3 @@ export function cartReducer(state = initialState, action) {
             return state;
     }
 }
-/*
-
-        case CART_INCR_PENDING: 
-            return {
-                ...state,
-                pending: true
-            }
-        case CART_INCR_SUCCESS:
-            return {
-                ...state,
-                pending: false,
-                cart: action.cart
-            }
-        case CART_INCR_ERROR:
-            return {
-                ...state,
-                pending: false,
-                error: action.error
-            }
-        case CART_DECR_PENDING: 
-            return {
-                ...state,
-                pending: true
-            }
-        case CART_DECR_SUCCESS:
-            return {
-                ...state,
-                pending: false,
-                cart: action.cart
-            }
-        case CART_DECR_ERROR:
-            return {
-                ...state,
-                pending: false,
-                error: action.error
-            }
-*/

@@ -108,13 +108,13 @@ let CartService = {
         window.mlog('clearCart: email -> ', email);
         return (dispatch) => {
             dispatch(fetchCartPending(EMPTY_CART));            
-            updateUserCart(email, null).then(res => {
+            updateUserCart({email}).then(res => {
                 CartService.setCart(CartService.parseCart(res));
                 window.mlog('clearCart: parsed cart', CartService.active_cart);
                 dispatch(fetchCartSuccess(CartService.active_cart));
             })
             .catch(err => {
-                window.mlog('clearCart: getUserCart: error', err);
+                console.error('clearCart: getUserCart: error', err);
                 dispatch(cartError({error: CART_FETCH_ERROR, cart: CartService.active_cart}));
             })
         }  

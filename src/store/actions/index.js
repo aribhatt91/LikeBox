@@ -66,51 +66,51 @@ export function addToCartPending(_cart){
 export function addToCartSuccess(cart){
   return {
     type: CART_ADD_SUCCESS,
-    cart: cart
+    cart
   }
 }
-export function addToCartError(_error){
+export function addToCartError(error){
   return {
     type: CART_ADD_ERROR,
-    error: _error
+    error
   }
 }
 
-export function removeFromCartPending(_cart){
+export function removeFromCartPending(cart){
   return {
     type: CART_REMOVE_PENDING,
-    cart: _cart
+    cart
   }
 }
 export function removeFromCartSuccess(cart){
   return {
     type: CART_REMOVE_SUCCESS,
-    cart: cart
+    cart
   }
 }
-export function removeFromCartError(_error){
+export function removeFromCartError(error){
   return {
     type: CART_REMOVE_ERROR,
-    error: _error
+    error
   }
 }
 
-export function fetchCartPending(_cart){
+export function fetchCartPending(cart){
   return {
     type: CART_FETCH_PENDING,
-    cart: _cart
+    cart
   }
 }
-export function fetchCartSuccess(_cart){
+export function fetchCartSuccess(cart){
   return {
     type: CART_FETCH_SUCCESS,
-    cart: _cart
+    cart
   }
 }
-export function fetchCartError(_error){
+export function fetchCartError(error){
   return {
     type: CART_FETCH_ERROR,
-    error: _error
+    error
   }
 }
 export function cartError(param){

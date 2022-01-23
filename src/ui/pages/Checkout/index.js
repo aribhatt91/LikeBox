@@ -20,7 +20,8 @@ import './index.css';
 
 
 
-const EMPTY_TEXT = "You have no items in your cart!";
+const EMPTY_TEXT = "You have no items in your cart!",
+    ERROR_TEXT = "Error occurred! Refresh and try again";
 
 function Checkout(props) {
 
@@ -83,7 +84,7 @@ function Checkout(props) {
         if(stage === 3){
             setStage(4);
             try{
-                const res = await CheckoutService.placeOrder(cart);
+                const res = await CheckoutService.placeOrder(currentUser, cart);
                 //Clear Cart
                 clearCart(currentUser.email);
                 setStage(5);
@@ -98,15 +99,17 @@ function Checkout(props) {
     return (
         <Page pageName="Checkout" className="position-relative">
             {fetch_pending && <LoadingModule/>}
-            <div className="checkout-container mt-5 mb-5 container position-relative">
-                {!fetch_pending && (error || !cart || (cart.products || []).length <= 0) && <ErrorModule
-                    
+            {!fetch_pending && <div className="checkout-container mt-5 mb-5 container position-relative">
+
+                {(error || !cart || (cart.products || []).length <= 0) && stage <= 0 && <ErrorModule    
                     error_text={EMPTY_TEXT}
                 />}
 
-                {!fetch_pending && !error && stage === 5 && <OrderConfirmation />}
+                {!error && stage === 5 && <OrderConfirmation />}
 
-                {!fetch_pending && cart && cart.id && <React.Fragment>
+                {!error && stage === 6 && <ErrorModule error_text={ERROR_TEXT} />}
+
+                {!error && stage < 5 && cart && cart.id && (cart.products || []).length > 0 && <React.Fragment>
                     <div className="d-flex flex-column flex-md-row mb-4 bordered-bottom">
                         <section className="checkout-form pr-md-3 w-100">
                             <Accordion 
@@ -176,7 +179,7 @@ function Checkout(props) {
                     </section>
                 </React.Fragment>}
 
-            </div>
+            </div>}
         </Page>
     )
 }
