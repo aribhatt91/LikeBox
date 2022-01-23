@@ -1,7 +1,7 @@
 export default function Address({
     user,
     name,
-    housenumber,
+    housenum,
     street,
     city,
     postcode
@@ -9,7 +9,7 @@ export default function Address({
     const address = {
         user_id: user.email,
         name,
-        housenumber,
+        housenum,
         street,
         city,
         postcode

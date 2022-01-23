@@ -4,7 +4,7 @@ import ProfileUpdateForm from '../../../components/forms/ProfileUpdateForm';
 import { LoadingPendulum } from '../../../components/LoadingModule';
 
 
-function UserProfileFragment({currentUser}){
+function UserProfile({currentUser}){
     const [profile, setProfile] = useState(null);
     const [loading, setLoading] = useState(true);
     
@@ -60,4 +60,4 @@ function UserProfileFragment({currentUser}){
     )
 }
 
-export default UserProfileFragment;
+export default UserProfile;

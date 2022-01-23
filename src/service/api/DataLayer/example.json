@@ -56,8 +56,7 @@
         }],
         "payment": {
             "method": "card",
-            "value": 100,
-            "delivery_charge": 10
+            "value": 100
         },
         "user": {
             "email": "admin@gmail.com"
@@ -70,7 +69,8 @@
                 "postcode": ""
             },
             "delivery_date": "",
-            "delivery_option": "STANDARD"
+            "delivery_option": "FAST",
+            "delivery_charge": 10
         }
     },
     "events": [

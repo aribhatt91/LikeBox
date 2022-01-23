@@ -9,7 +9,7 @@ function CartLink(props) {
     const { cart, fetchCart } = props;
 
     useEffect(() => {
-        if(cart) {
+        if(cart && cart.id) {
             EventTracker.trackEvent(EventTracker.events.transaction.UPDATE_CART, cart);
         }
     }, [cart])
@@ -19,6 +19,7 @@ function CartLink(props) {
             fetchCart(props.user.email);
         }
     }, [props.user])
+    
     return (
         <React.Fragment>
             <span className="d-sm-inline-block d-md-none">My Bag</span>

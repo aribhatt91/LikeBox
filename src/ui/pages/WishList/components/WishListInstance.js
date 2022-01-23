@@ -6,7 +6,7 @@ import PriceText from '../../../components/generic/PriceText';
 
 export function WishListInstanceSkeleton() {
     return (
-        <div className="wish-list-instance-container wish-list-instance-container-placeholder mb-3 position-relative">
+        <div className="wish-list-instance-container wish-list-instance-container-placeholder placeholder mb-3 position-relative">
             <div className="wish-list-instance-thumb">
             </div>
             <div className="wish-list-instance-text pt-2 pb-2">

@@ -6,7 +6,7 @@ import PriceText from './generic/PriceText';
 export function ProductCardMinimalSkeleton() {
     return (
         <div className="d-flex col-12 col-md-4 justify-content-center p-0">
-            <div className="product-card-min-container product-card-min-placeholder mb-3 position-relative">
+            <div className="product-card-min-container product-card-min-placeholder placeholder mb-3 position-relative">
                 <div className="product-card-min-thumb product-card-min-thumb-placeholder">
                 </div>
                 <div className="product-card-min-text pt-2 pb-2">

@@ -10,6 +10,7 @@ import YourStyle from './pages/YourStyle';
 import YourStyleCards from './pages/YourStyleCards';
 import LoadingModule from './components/LoadingModule';
 import Cart from './pages/Cart';
+import Checkout from './pages/Checkout';
 
 const ProductPageLazy = React.lazy(() => import('./pages/ProductPage/index.js'));
 const CategoryPageLazy = React.lazy(() => import('./pages/CategoryPage/index.js'));
@@ -47,7 +48,7 @@ function AppBody (){
         {/* <ProtectedRoute path='/cart' component={CartPage}/>
         <ProtectedRoute path='/checkout' component={CheckoutPage}/> */}
         
-        <ProtectedRoute path='/user/:slug?' component={UserDashboard} />
+        <ProtectedRoute path='/user/:slug?/:topic?' component={UserDashboard} />
         <ProtectedRoute path='/wishlist' component={WishListPage} />
         <ProtectedRoute path="/login" component={LoginPage} />
         <ProtectedRoute path="/forgot-password" component={LoginPage} />
@@ -68,8 +69,12 @@ function AppBody (){
           /*  */
           process.env.REACT_APP_ENV === 'dev' && <ProtectedRoute path="/cart" component={Cart} />
         }
+        {
+          /*  */
+          process.env.REACT_APP_ENV === 'dev' && <ProtectedRoute path="/checkout" component={Checkout} />
+        }
 
-        {/* <Route path='/user/:page?' render={(props) => <UserDashboard {...props} pageName="user-dashboard" />}/> */}
+        {/* <Route path='/user/:page?/:topic?' render={(props) => <UserDashboard {...props} pageName="user-dashboard" />}/> */}
         <Route path='*' render={(props) => 
           <React.Fragment>
             <Suspense fallback={<LoadingModule />}>

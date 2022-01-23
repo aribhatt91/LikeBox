@@ -45,7 +45,7 @@ export default function HeaderNavigation() {
                         className={"primary-nav-dropdown" + (open && (active === index) ? " open" : "")} 
                         aria-expanded={open && (active === index)} 
                         onClick={(e) => {e.stopPropagation()}}>
-                        <a href="#" className={"nav-anchor text-uppercase"} onClick={(e) => openTab(index)}>{item}</a>
+                        <a href="#" className={"nav-anchor text-uppercase"} onClick={(e) => {e.stopPropagation();openTab(index);}}>{item}</a>
                         <div className={"nav-dropdown-container" + (open ? ' slide-down': '')}>
                         
                             <div className="nav-dropdown">

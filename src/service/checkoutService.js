@@ -44,6 +44,7 @@ const fetchPaymentMethods = async () => {
 const selectPaymentMethod = (method) => {
     if(method && ['card', 'cod'].indexOf(method.id) !== -1) {
         ACTIVE_ORDER.payment_method = method;
+        EventTracker.trackEvent(EventTracker.events.transaction.SELECT_PAYMENT_METHOD, method.id);
         return true;
     }
     return false;
@@ -59,8 +60,9 @@ const fetchAddresses = async (email) => {
 }
 
 const selectAddress = (address) => {
-    if(address && address.street && address.housenumber && address.postcode){
+    if(address && address.street && address.housenum && address.postcode){
         ACTIVE_ORDER.address = address;
+        EventTracker.trackEvent(EventTracker.events.transaction.SELECT_ADDRESS, address);
         return true;
     }
     return false;
@@ -70,9 +72,10 @@ const fetchDeliveryOptions = async () => {
     return DELIVERY_OPTIONS;
 }
 
-const selectDeliveryOptions = (option) => {
+const selectDeliveryOption = (option) => {
     if(option && ['FAST', 'FREE'].indexOf(option.title.toUpperCase()) !== -1) {
         ACTIVE_ORDER.delivery_option = option;
+        EventTracker.trackEvent(EventTracker.events.transaction.SELECT_DELIVERY_OPTION, option.title, option.cost);
     }
 }
 
@@ -86,6 +89,7 @@ const placeOrder = async (user, cart) => {
             user,
             cart
         });
+        EventTracker.trackEvent(EventTracker.events.transaction.ORDER_CONFIRM, cart);
         return new Promise((resolve, reject) => resolve(response));
     }catch(error) {
         return new Promise((resolve, reject) => reject(error));
@@ -98,7 +102,7 @@ const CheckoutService = {
     fetchAddresses,
     selectAddress,
     fetchDeliveryOptions,
-    selectDeliveryOptions,
+    selectDeliveryOption,
     placeOrder
 };
 

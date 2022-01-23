@@ -6,7 +6,7 @@ import RecsApi from '../RecsApi';
 const trackEvent = function() {
     const event = arguments[0],
     payload = arguments[1];
-    window.mlog('api:EventTracker:trackEvent', arguments);
+    window.mlog('api:EventTracker:trackEvent::', event, payload);
     switch (event) {
         /* PAGE EVENTS */
         case Events.page.PAGE_VIEW:
@@ -128,11 +128,7 @@ const trackEvent = function() {
             updateCart(arguments[1]);
             break;
         case Events.transaction.START_CHECKOUT:
-            /* (order_id) */
-            trackStartCheckout(arguments[1]);
-            break;
-        case Events.transaction.START_CHECKOUT:
-            /* (order_id) */
+            /* (cart) */
             trackStartCheckout(arguments[1]);
             break;
         case Events.transaction.SELECT_ADDRESS:
@@ -144,8 +140,8 @@ const trackEvent = function() {
             trackSelectPaymentMethod(arguments[1]);
             break;
         case Events.transaction.SELECT_DELIVERY_OPTION:
-            /* (delivery_option) */
-            trackSelectDeliveryMethod(arguments[1]);
+            /* (delivery_option, cost) */
+            trackSelectDeliveryOption(arguments[1], arguments[2]);
             break;   
         case Events.transaction.ORDER_CONFIRM:
             trackOrderConfirm(arguments[1]);
@@ -308,19 +304,19 @@ const trackCartView = (cart) => {
 }
 
 const trackStartCheckout = (cart) => {
-    DataLayer.initTransaction();
+    DataLayer.initTransaction(cart);
 }
 
 const trackSelectAddress = (address) => {
-    
+    DataLayer.setDeliveryAddress(address);
 }
 
 const trackSelectPaymentMethod = (payment_method) => {
-
+    DataLayer.setPaymentMethod(payment_method);
 }
 
-const trackSelectDeliveryMethod = (delivery_option) => {
-
+const trackSelectDeliveryOption = (delivery_option, cost=0) => {
+    DataLayer.setDeliveryOption(delivery_option, cost);
 }
 
 const trackOrderConfirm = () => {

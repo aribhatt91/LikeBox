@@ -1,4 +1,5 @@
 import { addToCartSuccess, addToCartPending, removeFromCartPending, removeFromCartSuccess, fetchCartPending, fetchCartSuccess, cartError } from '../store/actions/index';
+import EventTracker from './api/EventTracker';
 import { getUserCart, addProductToCart, removeProductFromCart, updateUserCart, getCartCount } from './api/firestore/cart';
 
 /*
@@ -51,6 +52,7 @@ let CartService = {
                 CartService.setCart(CartService.parseCart(res));
                 //window.mlog('addToCart: MockGetCart: parsed cart', CartService.active_cart);
                 dispatch(addToCartSuccess(CartService.getCart()));
+                EventTracker.trackEvent(EventTracker.events.product.ADD_TO_CART, product, CartService.active_cart);
             }).catch( error => {
                 //window.mlog('addToCart: MockGetCart: error', error);
                 dispatch(cartError({error: CART_ADD_ERROR, cart: CartService.active_cart}));
@@ -77,6 +79,7 @@ let CartService = {
                 CartService.setCart(CartService.parseCart(res));
                 window.mlog('removeFromCart: removeProductFromCart: parsed cart', CartService.active_cart);
                 dispatch(removeFromCartSuccess(CartService.getCart()));
+                EventTracker.trackEvent(EventTracker.events.product.REMOVE_FROM_CART, product, CartService.active_cart);
             }).catch( error => {
                 window.mlog('removeFromCart: removeProductFromCart: error', error);
                 dispatch(cartError({error: CART_REMOVE_ERROR, cart: CartService.active_cart}));
@@ -93,6 +96,7 @@ let CartService = {
                 CartService.setCart(CartService.parseCart(res));
                 window.mlog('getUserCart: parsed cart', CartService.active_cart);
                 dispatch(fetchCartSuccess(CartService.active_cart));
+                EventTracker.trackEvent(EventTracker.events.transaction.UPDATE_CART, CartService.active_cart);
             })
             .catch(err => {
                 window.mlog('fetchCart: getUserCart: error', err);

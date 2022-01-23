@@ -1,16 +1,15 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import ChevronUp from '../svg-components/ChevronUp';
 import ChevronDown from '../svg-components/ChevronDown';
 
 function Accordion({
     label, 
     children, 
-    defDisabled=false, 
+    disabled=false, 
     defOpen=false, 
     hideHeaderOnOpen=false
 }){
-    const [open, setOpen] = useState((typeof defOpen !== "undefined" && (defOpen === true || defOpen === "true") ? true : false));
-    const [disabled, setDisabled] = useState((typeof defDisabled !== "undefined" && (defDisabled === true || defDisabled === "true") ? true : false));
+    const [open, setOpen] = useState(defOpen);
     const [hideHeader, setHideHeader] = useState(typeof hideHeaderOnOpen !== "undefined" && (hideHeaderOnOpen === true || hideHeaderOnOpen === 'true') && open);
     const toggleAccordion = (e) => {
         if(!disabled){
@@ -20,6 +19,11 @@ function Accordion({
             }
         }
     }
+    useEffect(() => {
+        if(defOpen && !open){
+            toggleAccordion();
+        }
+    }, [defOpen])
     return (
         <div className={"accordion-container" + (open ? " open" : "")}>
             <div className={"accordion-header " + (hideHeader ? " d-none" : "") + (disabled ? " disabled" : "")} onClick={toggleAccordion}>

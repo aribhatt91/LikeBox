@@ -1,9 +1,11 @@
 import { getAllUserOrders } from './api/firestore/transaction';
 
-const fetchPastOrders = (email) => {
+export const fetchPastOrders = (email) => {
     return getAllUserOrders(email);
 }
 
-export default {
-    fetchPastOrders
+export const updateOrder = (email, update) => {
+
 }
+
+export const cancelOrder = (email, orderid) => {}

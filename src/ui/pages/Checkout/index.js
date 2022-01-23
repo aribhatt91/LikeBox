@@ -10,17 +10,23 @@ import EventTracker from '../../../service/api/EventTracker';
 import LoadingModule from '../../components/LoadingModule';
 import ErrorModule from '../../components/ErrorModule';
 import CheckoutService, {DELIVERY_OPTIONS, PAYMENT_METHODS} from '../../../service/CheckoutService'
-
+import PriceText from '../../components/generic/PriceText';
 
 import AddressList from './components/AddressList';
 import PaymentMethods from './components/PaymentMethods';
 import DeliveryOptions from './components/DeliveryOptions';
 import OrderConfirmation from './components/OrderConfirmation';
-const EMPTY_TEXT = "You have no items in your cart!",
+import './index.css';
+
+
+
+const EMPTY_TEXT = "You have no items in your cart!";
 
 function Checkout(props) {
 
     const [stage, setStage] = useState(0);
+    const [deliveryCost, setDeliveryCost] = useState(0);
+
     /* 
     0 - Address not selected
     1 - Addresses selected
@@ -38,18 +44,20 @@ function Checkout(props) {
     useEffect(()=>{
         try {
             fetchCart(currentUser.email);
+
         }catch(err){
             window.mlog(err);
         }
     }, [currentUser])
 
     useEffect(() => {
-        if(cart && !error){
+        if(cart && cart.id && !error && !fetch_pending){
             EventTracker.trackEvent(EventTracker.events.transaction.START_CHECKOUT, cart);
         }
-    }, [cart])
+    }, [cart, fetch_pending]);
 
     const selectAddress = (address) => {
+        window.mlog('selectAddress::', address, stage);
         if(stage < 1){
             setStage(1);
         }
@@ -68,6 +76,7 @@ function Checkout(props) {
             setStage(3);
         }
         CheckoutService.selectDeliveryOption(DELIVERY_OPTIONS[index]);
+        setDeliveryCost(DELIVERY_OPTIONS[index].cost);
     }
 
     const placeOrder = async () => {
@@ -87,31 +96,30 @@ function Checkout(props) {
     }
 
     return (
-        <Page pageName="Checkout">
-            <div className="checkout-container mt-5 mb-5 container">
-                {fetch_pending && <LoadingModule />}
-
+        <Page pageName="Checkout" className="position-relative">
+            {fetch_pending && <LoadingModule/>}
+            <div className="checkout-container mt-5 mb-5 container position-relative">
                 {!fetch_pending && (error || !cart || (cart.products || []).length <= 0) && <ErrorModule
                     
                     error_text={EMPTY_TEXT}
                 />}
 
-                {!error && stage === 5 && <OrderConfirmation />}
+                {!fetch_pending && !error && stage === 5 && <OrderConfirmation />}
 
-                {cart && !fetch_pending && <React.Fragment>
+                {!fetch_pending && cart && cart.id && <React.Fragment>
                     <div className="d-flex flex-column flex-md-row mb-4 bordered-bottom">
-                        <section className="checkout-form pr-md-3">
+                        <section className="checkout-form pr-md-3 w-100">
                             <Accordion 
-                                label="Select delivery address">
+                                label="Select delivery address"
+                                defOpen={true}>
                                 <AddressList
                                     user={currentUser}
                                     onSelect={selectAddress}
-                                    defOpen={true}
                                     />
                             </Accordion>
                             <Accordion 
                                 label="Select payment method"
-                                defDisabled={stage < 1}
+                                disabled={stage < 1}
                                 defOpen={stage >= 1}>
                                 <PaymentMethods
                                     onSelect={selectPaymentMethod}
@@ -119,7 +127,7 @@ function Checkout(props) {
                             </Accordion>
                             <Accordion 
                                 label="Select delivery option"
-                                defDisabled={stage < 2}
+                                disabled={stage < 2}
                                 defOpen={stage >= 2}>
                                 <DeliveryOptions
                                     onSelect={selectDeliveryOption}
@@ -128,7 +136,34 @@ function Checkout(props) {
 
                         </section>
                         <section className="checkout-summary-panel">
+                            <div className="d-flex flex-column justify-content-between h-100">
 
+                                
+                                <div className="checkout-summary d-flex flex-column p-3">
+                                    <h4 className="mb-4 d-none d-md-flex text-uppercase w-100">
+                                        Summary
+                                    </h4>
+                                    <div className="d-flex justify-content-between w-100">
+                                        <p className="pr-2 text-uppercase">Items</p>
+                                        <p className="pl-2">{cart.count}</p>
+                                    </div>
+                                    <div className="d-flex justify-content-between w-100">
+                                        <p className="pr-2 text-uppercase">Sub-total</p>
+                                        <p className="pl-2"><PriceText value={cart.total} /></p>
+                                    </div>
+                                    <div className="d-flex justify-content-between w-100">
+                                        <p className="pr-2 text-uppercase">Delivery charge</p>
+                                        <p className="pl-2"><PriceText value={deliveryCost} /></p>
+                                    </div>
+                                    <div className="d-flex justify-content-between mt-3 w-100">
+                                        <h5 className="pr-2 text-uppercase">You pay</h5>
+                                        <h5 className="pl-2"><PriceText value={(cart.total + deliveryCost)} /></h5>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+                            
                         </section>
                     </div>
                     <section className="checkout-button-container">

@@ -3,6 +3,7 @@ import AddressForm from '../../../components/forms/AddressForm';
 import { AuthContext } from '../../../../store/contexts/AuthContext';
 import { fetchAddresses, updateExistingAddress, deleteAddress } from '../../../../service/AddressService';
 import AppButton from '../../../components/generic/AppButton';
+import LoadingModule from '../../../components/LoadingModule';
 
 function Address({user, instance, onAddressOp }){
     const [editMode, setEditMode] = useState(false);
@@ -30,11 +31,10 @@ function Address({user, instance, onAddressOp }){
         </div>
     )
 }
-function UserAddressFragment(){
+function UserAddress({currentUser}){
     const [loading, setLoading] = useState(true);
     const [addresses, setAddresses] = useState([]);
     const [openNewAddressForm, setOpenNewAddressForm] = useState(false);
-    const {currentUser} = useContext(AuthContext);
 
     useEffect(() => {
         try{
@@ -47,6 +47,8 @@ function UserAddressFragment(){
                     res = res || [];
                     if(res.length > 0){
                         setAddresses(res);
+                    }else {
+                        setOpenNewAddressForm(true);
                     }
                 })()
             }
@@ -54,9 +56,7 @@ function UserAddressFragment(){
         }catch(err){
             console.error('UserAddressFragment:useEffect:', err);
         }finally{
-            if(loading){
-                setLoading(false);
-            }
+            setLoading(false);
         }
     }, [currentUser])
 
@@ -95,25 +95,45 @@ function UserAddressFragment(){
 
     return (
         <div className={"address-section editable-section w-100"}>
-            <h1 className="editable-section-header mb-5">My addresses</h1>
-            
-            {<div className={"saved-address-container" + (openNewAddressForm ? ' d-none' : "")}>
-                {
-                    (addresses || []).map((item, index) => 
-                    <Address
-                        user={currentUser}
-                        key={index}
-                        instance={item}
-                        deleteAddress={remove}
-                        onAddressOp={onAddressOp}
-                    />)
-                }
-            </div>}
-            <div className="add-address-container w-100 mb-4">
-                <div className={"w-100" + (openNewAddressForm ? ' d-none' : "")}>
-                    <AppButton label="Add new address" className="w-100"  onClick={()=>setOpenNewAddressForm(true)} />
+
+            {
+                loading && <div className="m-5">
+                    <LoadingModule />
                 </div>
-                {openNewAddressForm && <div className="w-100">
+            }
+            
+            
+            {!loading && addresses && addresses.length > 0 && <React.Fragment>
+
+                {!openNewAddressForm && <h1 className="editable-section-header p-3 mb-3">Your addresses</h1>}
+
+                <div className={"saved-address-container p-3" + (openNewAddressForm ? ' d-none' : "")}>
+                    {
+                        (addresses || []).map((item, index) => 
+                        <Address
+                            user={currentUser}
+                            key={index}
+                            instance={item}
+                            deleteAddress={remove}
+                            onAddressOp={onAddressOp}
+                        />)
+                    }
+                </div>
+            </React.Fragment>
+            }
+            
+            {!loading && <div className="add-address-container w-100 mb-4">
+                {
+                    !openNewAddressForm && (!addresses || addresses.length === 0) && <div className="p-3 mb-3 mt-3">
+                        <h3>Looks like you haven't added an address yet!</h3>
+                        <h5> Click below to add one.</h5>
+                    </div>
+                }
+                {!openNewAddressForm && <div className={"d-inline-block p-3"}>
+                    <AppButton label="Add new address" className="w-100 border-radius-0"  onClick={()=>setOpenNewAddressForm(true)} />
+                </div>}
+                {(openNewAddressForm) && <div className="w-100">
+                    <h1 className="editable-section-header p-3">Add new address</h1>
                     <AddressForm
                         user={currentUser}
                         onComplete={onAddressOp}
@@ -121,10 +141,10 @@ function UserAddressFragment(){
                         cancelEdit={()=>setOpenNewAddressForm(false)}
                     />
                 </div>}
-            </div>
+            </div>}
 
         </div>
     )
 }
 
-export default UserAddressFragment;
+export default UserAddress;

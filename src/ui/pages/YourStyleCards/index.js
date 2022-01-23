@@ -35,7 +35,7 @@ function CardStack({cards, cardsState}) {
                 
             }
             {
-                cardsState.loading && <div className={"card-stack-item card-item-placeholder"}>
+                cardsState.loading && <div className={"card-stack-item card-item-placeholder placeholder"}>
                     <div className="card-container d-inline-flex flex-column">
                         <div className="card-thumb">
                         </div>

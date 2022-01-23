@@ -52,7 +52,7 @@ $footerBackground: #424B54;
       text-decoration: underline;
     }
   }
-  .media-links a {
+  .media-links a svg{
     fill: $footerText;
   }
   svg {
@@ -599,6 +599,11 @@ table {
   animation-duration: 0.3s;
   animation-fill-mode: forwards;
   animation-iteration-count: 1;
+}
+
+.placeholder {
+  transition: 0.3s ease-in-out;
+  animation: anim-placeholder 1.5s infinite;
 }
 @media only screen and (max-width: 1024px){
 

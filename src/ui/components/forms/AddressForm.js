@@ -85,7 +85,7 @@ const AddressForm = ({user, address={}, cancelable=true, cancelEdit, update=fals
                             />
                         </div>
                     </div>
-                    <div className="row m-0 mt-3 pl-md-0 pr-md-0 d-flex justify-content-between">
+                    <div className="row m-0 mt-3 pl-md-0 pr-md-0 d-flex justify-content-start">
                         <div className="col-5 p-0 d-inline-block">
                             <AppSubmitButton
                                 text="Save"
@@ -96,7 +96,7 @@ const AddressForm = ({user, address={}, cancelable=true, cancelEdit, update=fals
                         {cancelable && (typeof cancelEdit === 'function') && <div className="col-5 p-0 d-inline-block">
                             <AppButton
                                 label="Cancel"
-                                className="btn-white w-100 border-0 border-radius-"
+                                className="btn-white w-100 border-0 border-radius-0"
                                 onClick={cancelEdit}
                             />
                         </div>}

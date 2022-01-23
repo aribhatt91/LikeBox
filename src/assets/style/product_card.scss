@@ -23,7 +23,6 @@ $thumb_dimen: $thumb_lg;
     position: relative;
     margin: 0px;
     background: #FFFFFF;
-    animation: anim-placeholder 1.5s infinite;
     @include media(767px) {
         justify-content: center;
     }
@@ -179,7 +178,6 @@ $thumb_dimen: $thumb_lg;
 }
 
 .product-card-min-container-placeholder {
-    animation: anim-placeholder 1.5s infinite;
 }
 .product-card-min-container {
     max-width: $thumb-dimen-lg;

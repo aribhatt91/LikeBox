@@ -153,16 +153,17 @@ const DataLayer = {
         }
     },
     /* Transaction */
-    initTransaction: function() {
-        if(window[DATA_LAYER_NAME] && window[DATA_LAYER_NAME]['cart']){
+    initTransaction: function(cart) {
+        if(window[DATA_LAYER_NAME] && window[DATA_LAYER_NAME]['cart'] && cart.id && cart.total){
             window[DATA_LAYER_NAME]['transaction'] = window[DATA_LAYER_NAME]['transaction'] || {
-                'payment': {},
-                'deliver': {},
-                'user': {},
+                'payment': {
+                    'value': cart.total
+                },
+                'delivery': {},
                 'status': 'in-progress'
             };
-            window[DATA_LAYER_NAME]['transaction']['order_id'] = window[DATA_LAYER_NAME]['cart'].id;
-            window[DATA_LAYER_NAME]['transaction']['items'] = window[DATA_LAYER_NAME]['cart']['products'];
+            window[DATA_LAYER_NAME]['transaction']['order_id'] = cart.id;
+            window[DATA_LAYER_NAME]['transaction']['items'] = cart.products;
         }
     },
     setPaymentMethod: function(method){
@@ -173,19 +174,34 @@ const DataLayer = {
             }
         }
     },
-    setDeliveryOption: function(delivery_option){
-        if(window[DATA_LAYER_NAME]['transaction'] && delivery_option) {
-            window[DATA_LAYER_NAME]['transaction']['delivery'] = {
-                ...window[DATA_LAYER_NAME]['transaction']['delivery'],
-                delivery_option
-            }
-        }
-    },
     setPaymentValue: function(value){
         if(window[DATA_LAYER_NAME]['transaction'] && value) {
             window[DATA_LAYER_NAME]['transaction']['payment'] = {
                 ...window[DATA_LAYER_NAME]['transaction']['payment'],
                 value
+            }
+        }
+    },
+    setDeliveryOption: function(delivery_option, delivery_charge=0){
+        if(window[DATA_LAYER_NAME]['transaction'] && delivery_option) {
+            window[DATA_LAYER_NAME]['transaction']['delivery'] = {
+                ...window[DATA_LAYER_NAME]['transaction']['delivery'],
+                delivery_option,
+                delivery_charge
+            }
+        }
+        if(window[DATA_LAYER_NAME]['transaction'] && window[DATA_LAYER_NAME]['cart'] && window[DATA_LAYER_NAME]['cart'].total) {
+            window[DATA_LAYER_NAME]['transaction']['payment'] = {
+                ...window[DATA_LAYER_NAME]['transaction']['payment'],
+                value: (window[DATA_LAYER_NAME]['cart'].total + delivery_charge)
+            }
+        }
+    },
+    setDeliveryAddress: function(address){
+        if(window[DATA_LAYER_NAME]['transaction'] && address) {
+            window[DATA_LAYER_NAME]['transaction']['delivery'] = {
+                ...window[DATA_LAYER_NAME]['transaction']['delivery'],
+                address
             }
         }
     },
