@@ -5,7 +5,7 @@ import PriceText from '../../../components/generic/PriceText';
 function CartSummary({cart}) {
     return (
         <div className="cart-side-panel">
-            <div className="d-flex flex-wrap flex-md-column justify-content-between h-100">
+            <div className="d-flex flex-column justify-content-between h-100">
 
                 
                 <div className="cart-summary d-flex flex-column">

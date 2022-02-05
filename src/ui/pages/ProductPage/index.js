@@ -22,9 +22,10 @@ import PriceText from '../../components/generic/PriceText';
 
 import EventTracker from '../../../service/api/EventTracker';
 
-function ProductForm({currentUser, product, addToCart }){
+function ProductForm({currentUser, product, addToCart, pending_update=false }){
   const [quantity, setQuantity] = useState(1);
   const [variant, setVariant] = useState(product.variants[0]);
+  const [loading, setLoading] = useState(false);
 
   
   /* const counter = (tag, val) => {
@@ -93,10 +94,12 @@ function ProductForm({currentUser, product, addToCart }){
       <div className="product-cta-container col-md-10 clearfix mt-2 mb-2 p-0">
         {
           window.DEV_MODE && <AppButton 
-            label="Add to Cart"
-            className="w-100 btn-grey"
-            disabled={!currentUser /*|| quantity === 0 || (sizes.length > 0 && size === '')*/}
-            onClick={() => addToCart(currentUser.email, product, variant)} />
+                disabled={!currentUser}
+                className='w-100 btn-grey'
+                onClick={() => addToCart(currentUser.email, product, variant)}
+                loading={pending_update}
+                label={"Add to Bag"}
+              />
         }
         {
           !window.DEV_MODE && <AppButton
@@ -167,7 +170,8 @@ function ProductPage(props) {
               <ProductForm 
                 currentUser={currentUser} 
                 product={product}
-                addToCart={props.addToCart}/>
+                addToCart={props.addToCart}
+                pending_update={props.pending_update}/>
 
               <ProductDescription product={product}/>
             </div>
@@ -184,8 +188,12 @@ function ProductPage(props) {
 
 const mapStateToProps = state => {
   return {
-      cart: state.cartReducer.cart
+      cart: state.cartReducer.cart,
+      cart_error: state.cartReducer.error,
+      pending_update: state.cartReducer.update_pending
   }
 }
-const mapDispatchToProps = (dispatch) => bindActionCreators({addToCart: CartService.addToCart}, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  addToCart: CartService.addToCart
+}, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(ProductPage);

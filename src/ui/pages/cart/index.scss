@@ -88,11 +88,17 @@
                 color: inherit;
             }
         }
-        @media screen and (max-width: 768px) {
+        
+        
+    }
+    @media screen and (max-width: 768px) {
+        .cart-body {
+            flex-direction: column;
             .cart-side-panel {
                 width: 100%;
                 color: #333;
                 background-color: #fff;
+                border-top: 1px solid #333;
                 h4 {
                     display: none;
                 }

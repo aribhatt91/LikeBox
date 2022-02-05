@@ -1,6 +1,7 @@
 import { getUser, updateUserByEmail } from './user';
 
 /* {
+    name,
     housenum,
     street,
     postcode,

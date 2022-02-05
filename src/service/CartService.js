@@ -1,4 +1,4 @@
-import { addToCartSuccess, addToCartPending, removeFromCartPending, removeFromCartSuccess, fetchCartPending, fetchCartSuccess, cartError } from '../store/actions/index';
+import { addToCartSuccess, addToCartPending, removeFromCartPending, removeFromCartSuccess, fetchCartPending, updateCartPending, fetchCartSuccess, cartError } from '../store/actions/index';
 import EventTracker from './api/EventTracker';
 import { getUserCart, addProductToCart, removeProductFromCart, updateUserCart, getCartCount } from './api/firestore/cart';
 
@@ -23,7 +23,8 @@ import { getUserCart, addProductToCart, removeProductFromCart, updateUserCart, g
     size: String
 }
 */
-const CART_ADD_ERROR = "Failed to add the product to the cart!",
+const CART_SUCCESS = "Added an item to cart!",
+CART_ADD_ERROR = "Failed to add the product to the cart!",
 CART_INCR_ERROR = "Failed to increase quantity of the product!",
 CART_DECR_ERROR = "Failed to decrease quantity of the product!",
 CART_REMOVE_ERROR = "Encountered an error while trying to remove the product from your cart!",
@@ -37,14 +38,17 @@ const EMPTY_CART = {
 }
 let CartService = {
     active_cart: EMPTY_CART,
-    addToCart: (email, product, variant=null) => {
+    addToCart: (email, product, variant=null, notify=null) => {
         
         return dispatch => {
-            dispatch(addToCartPending(CartService.active_cart));
+            dispatch(updateCartPending(CartService.active_cart));
             if(!CartService.validateProduct(product)){
                 window.mlog('addToCart: ', INVALID_PRODUCT, product);
                 //DISPATCH ERROR
                 dispatch(cartError({error: CART_ADD_ERROR, cart: CartService.active_cart}));
+                if(typeof notify === 'function'){
+                    notify({error: CART_ADD_ERROR, cart: CartService.active_cart})
+                }
                 return;
             }
             //Firestore
@@ -53,16 +57,22 @@ let CartService = {
                 //window.mlog('addToCart: MockGetCart: parsed cart', CartService.active_cart);
                 dispatch(addToCartSuccess(CartService.getCart()));
                 EventTracker.trackEvent(EventTracker.events.product.ADD_TO_CART, product, CartService.active_cart);
+                if(typeof notify === 'function'){
+                    notify({message: CART_SUCCESS, cart: CartService.active_cart})
+                }
             }).catch( error => {
                 //window.mlog('addToCart: MockGetCart: error', error);
                 dispatch(cartError({error: CART_ADD_ERROR, cart: CartService.active_cart}));
+                if(typeof notify === 'function'){
+                    notify({error: CART_ADD_ERROR, cart: CartService.active_cart})
+                }
             });
         }
         
     },
-    removeFromCart: (email, product, decrement=false) => {
+    removeFromCart: (email, product, decrement=false, notify) => {
         return (dispatch) => {
-            dispatch(removeFromCartPending(CartService.active_cart));
+            dispatch(updateCartPending(CartService.active_cart));
             if(!CartService.validateProduct(product)){
                 window.mlog('removeFromCart: ', INVALID_PRODUCT, product);
                 //DISPATCH ERROR
@@ -71,7 +81,10 @@ let CartService = {
                 }else {
                     dispatch(cartError({error: CART_REMOVE_ERROR, cart: CartService.active_cart}));
                 }
-                return;
+                
+                if(typeof notify === 'function'){
+                    notify({error: CART_REMOVE_ERROR, cart: CartService.active_cart})
+                }
             }
             
            //TODO - Switch to Firestore

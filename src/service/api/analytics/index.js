@@ -1,15 +1,20 @@
-import { firebaseAnalytics, firebaseAnalyticsEvents } from "../firebase";
+import { logEvent, firebaseAnalyticsEvents } from "../firebase";
 import { GAProduct } from './../firestore/models/GAProduct';
 import UI_EVENTS from './ui';
 import USER_EVENTS from './user';
+import CUSTOM_EVENTS from './custom';
+
 /* 
 Google Analytics event Reference
 https://developers.google.com/gtagjs/reference/event
+
+GTAG Events
+https://developers.google.com/tag-platform/gtagjs/reference/events
 */
-const logEvent = (event_name, payload) => {
+/* const logEvent = (event_name, payload) => {
     window.mlog('logEvent', event_name, payload);
     firebaseAnalytics.logEvent(event_name, payload);
-}
+} */
 
 const logPageView = (page_title) => {
     logEvent(firebaseAnalyticsEvents.PAGE_VIEW, {
@@ -154,6 +159,7 @@ const GAEventStore = {
     logSignIn,
     logException,
     UI_EVENTS,
+    CUSTOM_EVENTS,
     USER_EVENTS
 }
 

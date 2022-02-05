@@ -41,12 +41,13 @@
 
 @media screen and (max-width: 768px) {
   .checkout-summary-panel {
-    width: 100%; }
+    width: 100%;
+    border-top: 1px solid #333;
+    margin-top: 2rem; }
     .checkout-summary-panel .checkout-summary {
       background-color: #fff; }
     .checkout-summary-panel * {
-      color: #000;
-      border-top: 1px solid #333; }
+      color: #000; }
     .checkout-summary-panel h4 {
       display: none; } }
 
@@ -67,7 +68,11 @@
   .radio-list > div.active, .radio-list > li.active {
     border: 3px solid #000; }
     .radio-list > div.active:before, .radio-list > li.active:before {
-      background-color: #000; }
+      background-color: #000;
+      content: "L";
+      color: #fff;
+      transform: rotate(-135deg) scaleY(-1);
+      font-size: 18px; }
 
 .address-list-item-placeholder .container {
   border: 1px solid #ebebeb; }
@@ -85,3 +90,56 @@
   margin-left: 45px; }
   .address-list-item-placeholder p:last-child {
     width: 15%; }
+
+.checkout-status-bar {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  width: 100%;
+  max-width: 450px; }
+  .checkout-status-bar .line {
+    height: 5px;
+    flex-grow: 1;
+    width: 100%;
+    background-color: grey;
+    position: relative; }
+    .checkout-status-bar .line::after {
+      position: absolute;
+      content: '';
+      width: 0;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background-color: #067D62;
+      transition: 0.6s width; }
+    .checkout-status-bar .line.done::after {
+      width: 100%; }
+  .checkout-status-bar .step {
+    min-width: 24px;
+    height: 24px;
+    border-radius: 24px;
+    color: grey;
+    border: grey;
+    border: 2px solid grey;
+    font-size: 12px;
+    line-height: 0.8;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box; }
+    .checkout-status-bar .step.done {
+      animation-duration: 0.6s;
+      animation-delay: 0.6s;
+      animation-name: 'step-complete';
+      animation-fill-mode: forwards; }
+      .checkout-status-bar .step.done:first-child, .checkout-status-bar .step.done:last-child {
+        animation-delay: 0 !important; }
+
+@keyframes step-complete {
+  from {
+    color: grey;
+    border: grey; }
+  to {
+    border-width: 0px;
+    color: white;
+    background-color: #067D62; } }

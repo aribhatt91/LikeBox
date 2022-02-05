@@ -24,7 +24,7 @@
 export default function Order({
     user,
     address /* Address */,
-    delivery_option="FREE",
+    delivery_option={},
     payment_method,
     cart
 }) {
@@ -35,15 +35,18 @@ export default function Order({
         user: {},
         delivery: {}
     };
+
     if(user){
         order.user.email = user.email;
     }
+
     if(cart){
         
         order.items = cart.products;
         order.payment.value = cart.total;
         order.order_id = cart.id;
     }
+
     if(payment_method){
         order.payment.method = payment_method;
     }
@@ -51,14 +54,12 @@ export default function Order({
     if(address){
         order.delivery.address = address;
     }
-    order.delivery.delivery_option = delivery_option;
 
-    if(delivery_option === "FAST") {
-        order.payment.value += 10;
-        order.delivery.delivery_charge = 10; 
-    }else {
-        order.delivery_charge = 0; 
-    }
+    order.delivery.delivery_option = delivery_option.title || "FREE";
+    order.delivery.delivery_charge = delivery_option.cost || 0;
+    order.payment.value += order.delivery_charge;
+
+    order.delivery.delivery_date = (new Date(new Date().getTime()+((delivery_option.time || 7)*24*60*60*1000))).toISOString();
 
     order.order_date = (new Date()).toISOString();
 

@@ -4,7 +4,7 @@ import { SuccessMessage } from '../../../components/generic/PageMessage';
 const OrderConfirmation = () => {
     return (
         <div className="container mb-5 mt-5 p-3">
-            <SuccessMessage message={"Order placed!"} subtext="Your items will shortly be at your doorstep." />
+            <SuccessMessage message={"Order placed, thank you!"} subtext="Your items will shortly be at your doorstep." />
         </div>
     );
 }

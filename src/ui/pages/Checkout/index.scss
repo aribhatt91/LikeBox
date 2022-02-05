@@ -65,12 +65,13 @@
 @media screen and (max-width: 768px) {
     .checkout-summary-panel {
         width: 100%;
+        border-top: 1px solid #333;
+        margin-top: 2rem;
         .checkout-summary {
             background-color: #fff;
         }
         * {
             color: #000;
-            border-top: 1px solid #333;
         }
         h4 {
             display: none;
@@ -99,6 +100,10 @@
             border: 3px solid #000;
             &:before {
                 background-color: #000;
+                content: "L";
+                color: #fff;
+                transform: rotate(-135deg) scaleY(-1);
+                font-size: 18px;
             }
         }
     }
@@ -121,6 +126,74 @@
         margin-left: 45px;
         &:last-child {
             width: 15%;
+        }
+    }
+}
+
+.checkout-status-bar {
+    $dimen: 24px;
+    $base_col: grey;
+    $done_col: #067D62;
+
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: 100%;
+    max-width: 450px;
+    .line {
+        height: 5px;
+        flex-grow: 1;
+        width: 100%;
+        background-color: $base_col;
+        position: relative;
+        &::after {
+            position: absolute;
+            content: '';
+            width: 0;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-color: $done_col;
+            transition: 0.6s width;
+        }
+        &.done {
+            &::after {
+                width: 100%;
+            }
+        }
+    }
+    .step {
+        min-width: $dimen;
+        height: $dimen;
+        border-radius: $dimen;
+        color: $base_col;
+        border: $base_col;
+        border: 2px solid $base_col;
+        font-size: 12px;
+        line-height: 0.8;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+        &.done {
+            animation-duration: 0.6s;
+            animation-delay: 0.6s;
+            animation-name: 'step-complete';
+            animation-fill-mode: forwards;
+            &:first-child, &:last-child {
+                animation-delay: 0 !important;
+            }
+        }
+        @keyframes step-complete {
+            from {
+                color: $base_col;
+                border: $base_col;
+            }
+            to {
+                border-width: 0px;
+                color: white;
+                background-color: $done_col;
+            }
         }
     }
 }

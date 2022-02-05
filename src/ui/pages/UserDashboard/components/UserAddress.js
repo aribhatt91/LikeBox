@@ -103,7 +103,8 @@ function UserAddress({currentUser}){
             }
             
             
-            {!loading && addresses && addresses.length > 0 && <React.Fragment>
+            {
+            !loading && addresses && addresses.length > 0 && <React.Fragment>
 
                 {!openNewAddressForm && <h1 className="editable-section-header p-3 mb-3">Your addresses</h1>}
 
@@ -122,7 +123,8 @@ function UserAddress({currentUser}){
             </React.Fragment>
             }
             
-            {!loading && <div className="add-address-container w-100 mb-4">
+            {
+            !loading && <div className="add-address-container w-100 mb-4">
                 {
                     !openNewAddressForm && (!addresses || addresses.length === 0) && <div className="p-3 mb-3 mt-3">
                         <h3>Looks like you haven't added an address yet!</h3>

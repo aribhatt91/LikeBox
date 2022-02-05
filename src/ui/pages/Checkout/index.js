@@ -17,8 +17,7 @@ import PaymentMethods from './components/PaymentMethods';
 import DeliveryOptions from './components/DeliveryOptions';
 import OrderConfirmation from './components/OrderConfirmation';
 import './index.css';
-
-
+import Checkoutstatusbar from './components/CheckoutStatusBar';
 
 const EMPTY_TEXT = "You have no items in your cart!",
     ERROR_TEXT = "Error occurred! Refresh and try again";
@@ -98,8 +97,14 @@ function Checkout(props) {
 
     return (
         <Page pageName="Checkout" className="position-relative">
+            
             {fetch_pending && <LoadingModule/>}
+
             {!fetch_pending && <div className="checkout-container mt-5 mb-5 container position-relative">
+
+                <h1 className="mt-2 mb-3 text-center text-uppercase">Checkout</h1>
+
+                <Checkoutstatusbar step={stage} />
 
                 {(error || !cart || (cart.products || []).length <= 0) && stage <= 0 && <ErrorModule    
                     error_text={EMPTY_TEXT}
@@ -169,7 +174,7 @@ function Checkout(props) {
                             
                         </section>
                     </div>
-                    <section className="checkout-button-container">
+                    <section className="checkout-button-container mt-3 mb-5">
                         <AppButton 
                             onClick={placeOrder} 
                             loading={stage === 4} 
@@ -177,7 +182,8 @@ function Checkout(props) {
                             label="Place order" 
                             disabled={stage < 3} />
                     </section>
-                </React.Fragment>}
+                </React.Fragment>
+                }
 
             </div>}
         </Page>

@@ -9,6 +9,7 @@ export const CART_REMOVE_PENDING = 'CART_REMOVE_PENDING';
 export const CART_REMOVE_SUCCESS = 'CART_REMOVE_SUCCESS';
 export const CART_REMOVE_ERROR = 'CART_REMOVE_ERROR';
 export const CART_FETCH_PENDING = 'CART_FETCH_PENDING';
+export const CART_UPDATE_PENDING = 'CART_UPDATE_PENDING';
 export const CART_FETCH_SUCCESS = 'CART_FETCH_SUCCESS';
 export const CART_FETCH_ERROR = 'CART_FETCH_ERROR';
 export const CART_ERROR = 'CART_ERROR';
@@ -98,6 +99,12 @@ export function removeFromCartError(error){
 export function fetchCartPending(cart){
   return {
     type: CART_FETCH_PENDING,
+    cart
+  }
+}
+export function updateCartPending(cart){
+  return {
+    type: CART_UPDATE_PENDING,
     cart
   }
 }

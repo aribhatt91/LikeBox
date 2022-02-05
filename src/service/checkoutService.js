@@ -22,12 +22,14 @@ export const DELIVERY_OPTIONS = [
     {
         title: 'FREE', 
         description: 'Standard delivery within 7-10 days',
-        cost: 0
+        cost: 0,
+        time: 7
     },
     {
         title: 'FAST', 
         description: 'Get guaranteed delivery within 2 days for a fee',
-        cost: 10
+        cost: 10,
+        time: 2
     }
 ];
 const validateCart = (cart) => {

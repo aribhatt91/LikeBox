@@ -112,11 +112,13 @@ export const addProductToCart = async (email, product, variant=null) => {
 
         let update = await updateUserByEmail(email, {cart});
         window.mlog('api:firestore:addProductToCart::response', update);
+        return new Promise((resolve, reject) => resolve(cart));
         
     }catch(error){
         console.error('api:firestore:addProductToCart::response', error);
+        return new Promise((resolve, reject) => reject(error));
     }
-    return new Promise((resolve, reject) => resolve(cart));
+    
 }
 
 export const removeProductFromCart = async (email, product, decrement=false) => {

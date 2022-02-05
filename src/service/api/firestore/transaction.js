@@ -34,7 +34,6 @@ export const getAllUserOrders = async (email) => {
 }
 
 export const addOrder = async (order) => {
-    let data = [];
     try {
         order = Order(order);
         if(!validateOrder(order)){

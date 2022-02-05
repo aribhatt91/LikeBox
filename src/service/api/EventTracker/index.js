@@ -320,6 +320,9 @@ const trackSelectDeliveryOption = (delivery_option, cost=0) => {
 }
 
 const trackOrderConfirm = () => {
+    GAEventStore.logPurchase(DataLayer.getCart().products || []);
+    //RecsApi.
+    triggerEvent(Events.transaction.ORDER_CONFIRM);
     DataLayer.clearCart();
 }
 

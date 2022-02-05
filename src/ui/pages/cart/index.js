@@ -41,15 +41,16 @@ function Cart(props) {
 
     return (
         
-        <Page pageName="Cart">
-            <div className="cart-container mt-5 mb-5 container">
-                <h1 className="text-center mb-5 text-uppercase">Shopping cart</h1>
-                {fetch_pending && <LoadingModule text="Please wait..."></LoadingModule>}
-                {!fetch_pending && (error || !cart || (cart.products || []).length <= 0) && <ErrorModule
+        <Page pageName="Cart" className="position-relative">
+            {fetch_pending && <LoadingModule/>}
+            {!fetch_pending && <div className="cart-container mt-5 mb-5 container">
+                <h1 className="text-center mb-5 text-uppercase">Shopping bag</h1>
+                
+                { (error || !cart || (cart.products || []).length <= 0) && <ErrorModule
                     
                     error_text={EMPTY_TEXT}
                 />}
-                {!fetch_pending && !error && (cart.products || []).length > 0 &&
+                {!error && (cart.products || []).length > 0 &&
 
                     <section className="cart-body">
                         <div className="cart-product-list pl-md-4 pr-md-4 flex-grow-1">
@@ -66,7 +67,7 @@ function Cart(props) {
                         />
                     </section>
                 }
-            </div>
+            </div>}
             
         </Page>
     ); 

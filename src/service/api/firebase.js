@@ -16,5 +16,10 @@ export const db = firebase.firestore();
 
 export const fieldPath = firebase.firestore.FieldPath;
 
+export const logEvent = (event_name, payload) => {
+    window.mlog('logEvent', event_name, payload);
+    firebaseAnalytics.logEvent(event_name, payload);
+}
+
 export default app;
 
