@@ -162,7 +162,7 @@ function SignupForm(props){
                 </div>
                 <div className="row m-0"> 
                     
-                    <div className="col-12 col-md-6 float-left pl-2 pr-2">
+                    <div className="col-12 col-md-6 float-left pl-2 pr-2" data-private>
                         <p className="w-100 font-weight-normal mb-3">Password*</p>
                         <AppTextInput
                             name="password"
