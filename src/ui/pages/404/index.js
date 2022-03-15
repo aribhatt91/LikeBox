@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import AppButton from '../../components/generic/AppButton';
+import React from 'react';
+import AppButton from '../../components/_generic/AppButton';
 import Page from '../Page';
 
 const FourZeroFour = (props) => {

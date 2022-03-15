@@ -1,15 +1,15 @@
 import React, { useEffect, useState, useContext } from 'react'
 import Page from '../Page';
-import { AuthContext } from '../../../store/contexts/AuthContext';
-import AppImage from '../../components/generic/AppImage';
-import STYLES from '../../../service/constants/styles';
-import AppButton from '../../components/generic/AppButton';
-import { getUserStylePref } from '../../../service/UserService';
-import { useNotification } from '../../../store/contexts/NotificationProvider';
-import { updateUserStylePref } from '../../../service/UserService';
+import { AuthContext } from '../../../libs/store/contexts/AuthContext';
+import AppImage from '../../components/_generic/AppImage';
+import STYLES from '../../../libs/constants/styles';
+import AppButton from '../../components/_generic/AppButton';
+import { getUserStylePref } from '../../../libs/UserService';
+import { useNotification } from '../../../libs/store/contexts/NotificationProvider';
+import { updateUserStylePref } from '../../../libs/UserService';
 import { useHistory } from 'react-router';
 import { LoadingPendulum } from '../../components/LoadingModule';
-import EventTracker from '../../../service/api/EventTracker';
+import EventTracker from '../../../libs/api/EventTracker';
 
 function StyleTile({styleName, toggleFunction, thumbnail, selected=false}){
     return (
@@ -55,7 +55,7 @@ export default function YourStyle() {
                         setSelected(styles);
                     }
                 }catch(err){
-                    console.error(err);
+                    window.logerror(err);
                 }
             })();
             setTimeout(() => {

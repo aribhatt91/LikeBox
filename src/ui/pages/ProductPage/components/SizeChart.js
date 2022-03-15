@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import SIZE_CHART from '../../../../service/constants/size-guide';
+import SIZE_CHART from '../../../../libs/constants/size-guide';
 
 export default function SizeChart({affiliate, className}) {
     const size_obj = SIZE_CHART[affiliate] || [];
@@ -10,7 +10,6 @@ export default function SizeChart({affiliate, className}) {
         bottom = size_obj[1];
         let top_sizes = top['sizes'] || {},
         top_keys = Object.keys(top_sizes);
-        console.log('top_keys', top_keys);
         let bottom_sizes = top['sizes'] || {},
         bottom_keys = Object.keys(bottom_sizes);
 

@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router';
-import EventTracker from '../../../../service/api/EventTracker';
-//import { logClickSubscriptionCTA } from '../../../../service/api/analytics/ui';
-import { AuthContext } from '../../../../store/contexts/AuthContext';
-import SubscriptionForm from '../../../components/forms/SubscriptionForm';
+import EventTracker from '../../../../libs/api/EventTracker';
+//import { logClickSubscriptionCTA } from '../../../../libs/api/analytics/ui';
+import { AuthContext } from '../../../../libs/store/contexts/AuthContext';
+import SubscriptionForm from '../../../components/_forms/SubscriptionForm';
 
 export default function SubscriptionComponent({onComplete}) {
     const {fetchSignInMethods} = useContext(AuthContext);
@@ -19,19 +19,19 @@ export default function SubscriptionComponent({onComplete}) {
                 //logClickSubscriptionCTA();
                 EventTracker.trackEvent(EventTracker.events.ui.HOME_PAGE_SUBSCRIPTION_CTA);
                 let methods = await fetchSignInMethods(userInput.email)
-                //window.mlog(methods);
+                //window.loginfo(methods);
                 if(methods.length === 0){
                     //Signup user
-                    //window.mlog('Signup user');
+                    //window.loginfo('Signup user');
                     history.push('/register?email=' + window.encodeURIComponent(userInput.email));
                 }else if(methods.indexOf('password') > -1){
                     //Sign in user
-                    //window.mlog('Sign in user');
+                    //window.loginfo('Sign in user');
                     history.push('/login?email=' + window.encodeURIComponent(userInput.email));
                 }
 
             }catch(err){
-                console.error('fetchSignInMethods', err);
+                window.logerror('fetchSignInMethods', err);
             }
         }
         setSubmitting(false);

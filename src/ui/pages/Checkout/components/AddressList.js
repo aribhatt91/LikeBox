@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import {fetchAddresses} from '../../../../service/AddressService';
-import AppButton from '../../../components/generic/AppButton';
+import {fetchAddresses} from '../../../../libs/AddressService';
+import AppButton from '../../../components/_generic/AppButton';
 
 const AddressListItemPlaceholder = () => <div className="address-list-item-placeholder placeholder w-100 d-flex p-3">
     <div className="container p-3">
@@ -34,12 +34,12 @@ const AddressList = ({onSelect, user}) => {
             try{
                 if(user){
                     const res = await fetchAddresses(user.email);
-                    window.mlog('Checkout:SelectAddress::response', res);
+                    window.loginfo('Checkout:SelectAddress::response', res);
                     setAddresses(res || []);
                 }
                 
             }catch(error){
-                console.error('Checkout:SelectAddress::error', error);
+                window.logerror('Checkout:SelectAddress::error', error);
             }finally {
                 setLoading(false);
             }

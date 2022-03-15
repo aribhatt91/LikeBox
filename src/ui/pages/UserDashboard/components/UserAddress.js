@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
-import AddressForm from '../../../components/forms/AddressForm';
-import { AuthContext } from '../../../../store/contexts/AuthContext';
-import { fetchAddresses, updateExistingAddress, deleteAddress } from '../../../../service/AddressService';
-import AppButton from '../../../components/generic/AppButton';
+import AddressForm from '../../../components/_forms/AddressForm';
+import { fetchAddresses, updateExistingAddress, deleteAddress } from '../../../../libs/AddressService';
+import AppButton from '../../../components/_generic/AppButton';
 import LoadingModule from '../../../components/LoadingModule';
 
 function Address({user, instance, onAddressOp }){
@@ -54,7 +53,7 @@ function UserAddress({currentUser}){
             }
             
         }catch(err){
-            console.error('UserAddressFragment:useEffect:', err);
+            window.logerror('UserAddressFragment:useEffect:', err);
         }finally{
             setLoading(false);
         }
@@ -62,7 +61,7 @@ function UserAddress({currentUser}){
 
     const onAddressOp = (result) => {
         try {
-            window.mlog('onAddressOp:', result);
+            window.loginfo('onAddressOp:', result);
             if(!loading){
                 setLoading(true);
             }
@@ -73,7 +72,7 @@ function UserAddress({currentUser}){
                 setAddresses(result);
             }
         }catch(err){
-            console.error('UserAddressFragment:update:', err);
+            window.logerror('UserAddressFragment:update:', err);
             setLoading(false);
         }finally{
         }
@@ -87,7 +86,7 @@ function UserAddress({currentUser}){
                 setAddresses(res);
             }
         }catch(err){
-            console.error('UserAddressFragment:update:', err);
+            window.logerror('UserAddressFragment:update:', err);
         }finally {
 
         }
@@ -132,7 +131,7 @@ function UserAddress({currentUser}){
                     </div>
                 }
                 {!openNewAddressForm && <div className={"d-inline-block p-3"}>
-                    <AppButton label="Add new address" className="w-100 border-radius-0"  onClick={()=>setOpenNewAddressForm(true)} />
+                    <AppButton label="Add new address" rounded={false} className="w-100"  onClick={()=>setOpenNewAddressForm(true)} />
                 </div>}
                 {(openNewAddressForm) && <div className="w-100">
                     <h1 className="editable-section-header p-3">Add new address</h1>

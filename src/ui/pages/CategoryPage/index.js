@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import Page from '../Page';
 //import ProductFilters from './components/ProductFilters';
 import { useParams, useLocation } from 'react-router-dom';
-import { getAvailableKeywords, getNearestMatches } from '../../../service/ProductService';
+import { getAvailableKeywords, getNearestMatches } from '../../../libs/ProductService';
 import { Helmet } from 'react-helmet';
 import ProductListing from './components/ProductListing';
-import EventTracker from './../../../service/api/EventTracker';
-import { capitaliseAll, parseSearchParams } from '../../../service/helper';
-import './index.css';
+import EventTracker from './../../../libs/api/EventTracker';
+import { capitaliseAll, parseSearchParams } from '../../../libs/Helper';
+import './style.page.css';
 
 function CategoryPage(props) {
   const location = useLocation();
@@ -19,7 +19,7 @@ function CategoryPage(props) {
   const [filterObject, setFilterObject] = useState(null);
 
   const applyFilter = async (obj) => {
-    window.mlog('ListingPage:applyFilter ->', obj);
+    window.loginfo('ListingPage:applyFilter ->', obj);
     setFilterObject(obj);
   }
 
@@ -32,7 +32,7 @@ function CategoryPage(props) {
     document.title = pageTitle;
     (async () => {
       let keys = await getAvailableKeywords();
-      window.mlog('All available keys -- ', keys);
+      window.loginfo('All available keys -- ', keys);
     })();
     
   }, [category])
@@ -49,7 +49,7 @@ function CategoryPage(props) {
       (async ()=> {
           try{
               let map = await getNearestMatches(searchTerm);
-              window.mlog('SearchPage:', map);
+              window.loginfo('SearchPage:', map);
           }catch(err){
 
           }

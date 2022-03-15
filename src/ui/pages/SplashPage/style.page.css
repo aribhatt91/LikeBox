@@ -1,0 +1,7 @@
+.splash {
+  left: 0;
+  top: 0;
+  background-color: #fff;
+  z-index: 99999999999; }
+  .splash h1 {
+    max-width: 500px; }

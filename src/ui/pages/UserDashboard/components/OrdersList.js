@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import LoadingModule from '../../../components/LoadingModule';
-import { fetchPastOrders } from '../../../../service/OrdersService';
-import { AuthContext } from '../../../../store/contexts/AuthContext';
+import { fetchPastOrders } from '../../../../libs/OrdersService';
+import { AuthContext } from '../../../../libs/store/contexts/AuthContext';
 
 const ORDER_STATUS = {
     "1": "Order placed",
@@ -95,7 +95,7 @@ function OrdersList(){
                     const result = await fetchPastOrders(currentUser.email);
                     setOrders(result);
                 }catch(error){
-                    console.log('OrdersList:fetchPastOrders::error', error);
+                    window.logerror('OrdersList:fetchPastOrders::error', error);
                 }finally {
                     setPending(false);
                 }

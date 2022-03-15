@@ -1,5 +1,5 @@
 import React from 'react';
-import AppButton from './generic/AppButton';
+import AppButton from './_generic/AppButton';
 
 const SignInMessage = (props) => {
     return (

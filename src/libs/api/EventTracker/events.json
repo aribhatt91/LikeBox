@@ -1,0 +1,57 @@
+{
+    "page": {
+        "PAGE_VIEW": "page-view",
+        "VIEW_CHANGE": "view-change",
+        "SEARCH": "search",
+        "SEARCH_RESULT": "search-result",
+        "SEARCH_RESULT_EMPTY": "search-result-empty",
+        "PAGE_NOT_FOUND": "error-page"
+    },
+    "product": {
+        "PRODUCT_VIEW": "prod-view",
+        "SELECT_SIZE": "select-size",
+        "ADD_TO_CART": "add-to-cart",
+        "UPDATE_CART": "update-cart",
+        "REMOVE_FROM_CART": "remove-from-cart",
+        "ADD_TO_WISHLIST": "add-to-wishlist",
+        "REMOVE_FROM_WISHLIST": "remove-from-wishlist",
+        "ADD_TO_FAVOURITE": "add-to-favourite",
+        "REMOVE_FROM_FAVOURITE": "remove-from-favourite",
+        "ADD_TO_BLACKLIST": "add-to-blacklist",
+        "REMOVE_FROM_BLACKLIST": "remove-from-blacklist"
+    },
+    "user": {
+        "LOGIN_START": "login-start",
+        "LOGIN_COMPLETE": "login-complete",
+        "LOGIN_ERROR": "login-error",
+        "SIGNUP_START": "signup-start",
+        "SIGNUP_COMPLETE": "signup-complete",
+        "SIGNUP_ERROR": "signup-error",
+        "UPDATE_PROFILE": "update-profile",
+        "UPDATE_ADDRESS": "update-address",
+        "AUTHENTICATED": "authenticated",
+        "AUTHENTICATTION_ERROR": "authentication-error",
+        "UPDATE_STYLE": "update-style",
+        "LOGOUT": "logout"
+    },
+    "transaction": {
+        "VIEW_CART": "view-cart",
+        "UPDATE_CART": "update-cart",
+        "START_CHECKOUT": "checkout-start",
+        "SELECT_ADDRESS": "select-address",
+        "SELECT_PAYMENT_METHOD": "select-payment-method",
+        "SELECT_DELIVERY_OPTION": "select-delivery-option",
+        "CHECKOUT_ERROR": "checkout-error",
+        "ORDER_CONFIRM": "order-confirm"
+    },
+    "ui": {
+        "NAVIGATION_ITEM_CLICK": "nav-item-click",
+        "HOME_PAGE_SUBSCRIPTION_CTA": "home-page-subscription-cta",
+        "HOME_PAGE_TILE_CLICK": "home-page-tile-click",
+        "NOTIFICATION_DISPLAYED": "notification-displayed",
+        "NOTIFICATION_CLICKED": "notification-clicked",
+        "FOOTER_LINK_CLICKED": "footer-link-clicked",
+        "BLOG_ITEM_CLICKED": "blog-item-clicked"
+    }
+
+}

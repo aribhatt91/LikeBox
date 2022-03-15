@@ -1,0 +1,9 @@
+.app-select select {
+  font-size: 14px;
+  width: 100%;
+  min-height: 44px;
+  margin-bottom: .5rem; }
+
+.app-select.app-select--error select {
+  border-color: #cc0000;
+  color: #cc0000; }

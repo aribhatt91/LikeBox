@@ -1,0 +1,248 @@
+import { db } from '../firebase.js';
+
+/* 
+Wishlist Schema
+{
+    id,
+    name,
+    user_id,
+    items: [
+        {
+            id,
+            date_added
+        }
+    ]
+} 
+*/
+const collection = db.collection('wishlists');
+
+export const getWishlistQuery = (email) => {
+    return collection.where("user_id", "==", email).get();
+}
+
+export const updateWishlistQuery = (docId, update) => {
+    return collection.doc(docId).update(update);
+}
+
+export const isItemInWishList = async (email, sku) => {
+    try{
+        let queries = await getWishlistQuery(email);
+        if(queries.size > 0){
+            let isPresent = false;
+
+
+            queries.forEach( doc => {
+                window.loginfo('WishList -> ', doc.id, doc.data());
+                let data = doc.data();
+                data = data || {};
+                (data.items || []).forEach( item => {
+                    if(item.id === sku){
+                        isPresent = true;
+                    }
+                })
+            });
+
+            return new Promise(resolve => resolve(isPresent));
+
+        }
+    }catch(err){
+        window.logerror(err);
+    }
+    return new Promise(resolve => resolve(false));
+
+}
+
+export const getUserWishList = async (email) => {
+    let res = [];
+    try {
+        if(email){
+            let queries = await getWishlistQuery(email),
+            items = [];
+            if(queries.size > 0){
+                queries.forEach( doc => {
+                    window.loginfo('WishList -> ', doc.id, doc.data());
+                    let data = doc.data();
+                    data = data || {};
+                    items = items.concat((data.items || []));
+                });
+                res = new Promise(resolve => resolve(items));
+            }
+        }else {
+            throw new Error('No email parameter found');
+        }
+    }catch(err){
+        res = new Promise((resolve, reject) => reject(err));
+    }
+    return res;
+}
+export const createWishList = async (email, name="My Wishlist", products=[]) => {
+    let res = null;
+        try {
+            if(email){
+                let queries = await getWishlistQuery(email);
+                if(queries.size <= 0){
+                    let wlist = {}, items = [];
+                    wlist.user_id = email;
+                    products.forEach(product => {
+                        if(!product.id){
+                            throw new Error('Invalid product');
+                        }
+                        items.push({
+                            sku: product.id, 
+                            thumbnail: product.thumbnail,
+                            name: product.title,
+                            link: product.link,
+                            price: product.price,
+                            currency: product.currency,
+                            date_added: (new Date()).getTime()
+                        });
+                    })
+                    wlist.items = items;
+                    try {
+                        let docRef = await collection.add(wlist),
+                        doc = await collection.doc(docRef.id).get();
+                        doc = doc || {};
+                        window.loginfo('createWishList', docRef.id, doc.data());
+                        res = new Promise(resolve => resolve({
+                            type: 'success',
+                            items:(doc.data().items || [])
+                        })) //(data.items || []).map(item => item.id)
+                    }catch(err){
+                        window.logerror(err);
+                        res = new Promise(resolve => resolve([]))
+                    }
+                }else {
+                    let data = {};
+                    data.type = 'error';
+                    data.msg = 'Wishlist is already present';
+                    res = new Promise(resolve => resolve(data));
+                }
+            }else {
+                throw new Error('No email parameter present');
+            }
+        }catch(err){
+            res = new Promise((resolve, reject) => reject(err));
+        }
+    return res;
+}
+
+export const addToWishList = async (email, sku, product) => {
+    let res = null;
+    window.loginfo('addToWishList called', product); 
+    if(email){
+        try{
+            let queries = await getWishlistQuery(email);
+            if(queries.size <= 0){
+                let data = await createWishList(email, "", [product]);
+                
+                window.loginfo('addToWishList: createWishList', data); 
+                res = new Promise(resolve => resolve(data));
+            }else if(queries.size === 1){
+                window.loginfo('queries', queries.docs[0].id);
+                let doc = queries.docs[0],
+                docId = doc.id;
+                window.loginfo(doc.id, " => ", doc.data());
+                let products = doc.data().items || [], isPresent = false;
+                
+                /* Check if product is present */
+                for (let i = 0; i < products.length; i++) {
+                    if(products[i].id === product.id){
+                        isPresent = true;
+                        break;
+                    }
+                }
+                if(isPresent){
+                    let data = {};
+                    data.type = 'error';
+                    data.msg = 'Product is already present in your wish list';
+                    window.loginfo('Product already present');
+                    res = new Promise((resolve, reject) => reject(data))
+                }else {/* If not add it and update */
+                    products.push({
+                        sku: product.id, 
+                        thumbnail: product.thumbnail,
+                        name: product.title,
+                        link: product.link,
+                        price: product.price,
+                        currency: product.currency,
+                        date_added: (new Date()).getTime()});
+                    //let updateQuery = await updateWishlistQuery(doc.id, {'items': products});
+                    
+                    let docRef = await updateWishlistQuery(doc.id, {'items': products});
+                    /* doc = await collection.doc(docId).get();
+                    doc = doc || {}; */
+                    //window.loginfo('addToWishList', docId, doc.data());
+                    res = new Promise(resolve => resolve({
+                        type: 'success',
+                        msg: 'Item added to your wishlist!'
+                    }))
+                }
+            }
+        }
+        catch(err){
+            /* let data = {};
+            data.type = 'error';
+            data.msg = 'Product is already present in your wish list'; */
+            //window.logerror(err);
+            res = new Promise((resolve, reject) => reject({
+                type: 'error',
+                msg: 'An error occurred!',
+                error: err
+            }))
+        }
+        return res; 
+    }
+}
+
+export const removeFromWishList = async (email, sku) => {
+    let res = null;
+    if(email){
+        try{
+            let queries = await getWishlistQuery(email);
+            if(queries.size <= 0){
+                res = createWishList(email, "", [sku]);
+            }else if(queries.size === 1){
+                window.loginfo('queries', queries.docs[0].id);
+                let doc = queries.docs[0],
+                docId = doc.id;
+                window.loginfo(doc.id, " => ", doc.data());
+                let products = doc.data().items || [], isPresent = false, index = -1;
+                
+                /* Check if product is present */
+                for (let i = 0; i < products.length; i++) {
+                    if(products[i].id === sku){
+                        isPresent = true;
+                        index = i;
+                        break;
+                    }
+                }
+                if(isPresent && index > -1){
+                    products.splice(index, 1);                        
+                    let docRef = await updateWishlistQuery(doc.id, {'items': products});
+                    /* doc = await collection.doc(docId).get();
+                    doc = doc || {}; */
+                    //window.loginfo('removeFromWishList', docId, doc.data());
+                    res = new Promise(resolve => resolve({
+                        type: 'success',
+                        msg: 'Item removed from your Wishlist!'
+                    }))
+                }else {/* If not add it and update */
+                    let data = {};
+                    data.type = 'error';
+                    data.msg = 'Item is not present in your wish list';
+                    res = new Promise((resolve, reject) => reject(data))
+                }
+            }
+        }
+        catch(err){
+            /* let data = {};
+            data.type = 'error';
+            data.msg = 'Product is already present in your wish list'; */
+            let data = {};
+            data.type = 'error';
+            data.msg = 'An error occurred!';
+            res = new Promise((resolve, reject) => reject(data))
+        }
+        return res; 
+    }
+}

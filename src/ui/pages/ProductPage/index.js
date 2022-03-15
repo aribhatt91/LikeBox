@@ -1,26 +1,25 @@
 import React, { useState, useContext, useEffect } from 'react';
 import Page from '../Page';
-import './index.css';
 import { LoadingPendulum } from '../../components/LoadingModule';
 import ProductImageGrid from './components/ProductImageGrid';
-import PageMessage from '../../components/generic/PageMessage';
-import AppButton from '../../components/generic/AppButton';
-import { AuthContext } from '../../../store/contexts/AuthContext';
-import CartService from '../../../service/CartService';
+import AppMessage from '../../components/_generic/AppMessage';
+import AppButton from '../../components/_generic/AppButton';
+import { AuthContext } from '../../../libs/store/contexts/AuthContext';
+import CartService from '../../../libs/CartService';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { useParams } from 'react-router-dom';
 import FourZeroFour from '../404';
-import { fetchProduct } from '../../../service/ProductService';
+import { fetchProduct } from '../../../libs/ProductService';
 import { Helmet } from 'react-helmet';
-import StarRating from '../../components/generic/StarRating';
+import StarRating from '../../components/_generic/StarRating';
 import WishListButton from '../../components/WishListButton';
 import SignInMessage from '../../components/SignInMessage';
 import SizeSelector from './components/SizeSelector';
 import ProductDescription from './components/ProductDescription';
-import PriceText from '../../components/generic/PriceText';
-
-import EventTracker from '../../../service/api/EventTracker';
+import PriceText from '../../components/_generic/PriceText';
+import EventTracker from '../../../libs/api/EventTracker';
+import './style.page.css';
 
 function ProductForm({currentUser, product, addToCart, pending_update=false }){
   const [quantity, setQuantity] = useState(1);
@@ -33,7 +32,7 @@ function ProductForm({currentUser, product, addToCart, pending_update=false }){
   } */
 
   const sizeSelect = (e) => {
-    window.mlog('sizeSelect', e.target.value);
+    window.loginfo('sizeSelect', e.target.value);
     const val = e.target.value,
     newVar = product.variants.find(v => v.size === val);
 
@@ -52,8 +51,8 @@ function ProductForm({currentUser, product, addToCart, pending_update=false }){
 
   return (
     <React.Fragment>
-      <div className="product-brand">{product.brand}</div>
-      <div className="product-name mb-lg-3">{variant.title || product.title}</div>
+      <h3 className="product-brand text-uppercase mb-0">{product.brand}</h3>
+      <h5 className="product-name mb-lg-3">{variant.title || product.title}</h5>
       <div className="product-price">
         {
           product.full_price && product.full_price > product.price && <div className="product-full-price mb-1">
@@ -88,14 +87,14 @@ function ProductForm({currentUser, product, addToCart, pending_update=false }){
       
       {
         !currentUser && <div className="w-100 d-flex mb-2 mt-2 p-0">
-          <PageMessage inline={false} type="info" text="You are not signed in. Sign in to purchase this product" />
+          <AppMessage inline={false} type="info" text="You are not signed in. Sign in to purchase this product" />
         </div>  
       }
       <div className="product-cta-container col-md-10 clearfix mt-2 mb-2 p-0">
         {
           window.DEV_MODE && <AppButton 
                 disabled={!currentUser}
-                className='w-100 btn-grey'
+                className='w-100'
                 onClick={() => addToCart(currentUser.email, product, variant)}
                 loading={pending_update}
                 label={"Add to Bag"}
@@ -104,16 +103,16 @@ function ProductForm({currentUser, product, addToCart, pending_update=false }){
         {
           !window.DEV_MODE && <AppButton
             label="Go to brand"
-            className="w-100 btn-grey"
+            className="w-100"
             disabled={!currentUser /*|| quantity === 0 || (sizes.length > 0 && size === '')*/}
-            href={variant.link}
+            href={(variant.link || "").split('?')[0]}
             ext={true}
             clickEvents={[trackConversion]}
           />
         }
       </div>
       <div className="product-cta-container col-md-10 clearfix mt-2 mb-5 p-0">
-        <WishListButton className="btn-white w-100" product={product} />
+        <WishListButton variant="white" className="w-100" product={product} />
       </div>
     </React.Fragment>
   )
@@ -138,12 +137,16 @@ function ProductPage(props) {
       EventTracker.trackEvent(EventTracker.events.product.PRODUCT_VIEW, product);
       
     }catch(err){
-      console.error('ProductPage', err);
+      window.logerror('ProductPage', err);
       EventTracker.trackEvent(EventTracker.events.product.PRODUCT_FETCH_ERROR);
     }finally {
       setPending(false);
     }
   }
+
+  useEffect(() => {
+    
+  }, [props.cart_error])
   
   useEffect(()=> {
     getProducts();
@@ -193,7 +196,9 @@ const mapStateToProps = state => {
       pending_update: state.cartReducer.update_pending
   }
 }
+
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   addToCart: CartService.addToCart
 }, dispatch);
+
 export default connect(mapStateToProps, mapDispatchToProps)(ProductPage);

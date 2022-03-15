@@ -1,0 +1,73 @@
+$min-height: 40px;
+$padding: 1rem;
+.accordion {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #e0e0e0;
+    .accordion__header {
+      min-height: $min-height;
+      padding: $padding;
+      font-size: 14px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      flex-wrap: nowrap;
+      cursor: pointer;
+
+      .accordion__header-label {
+        width: 100%;
+        align-items: center;
+        display: flex;
+      }
+
+      .accordion__btn {
+        height: 100%;
+        width: 32px;
+        min-height: 16px;
+        color: inherit;
+        margin-right: 0;
+        margin-left: 16px;
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #333;
+  
+        &.accordion__btn--left {
+          order: -1;
+          margin-right: 16px;
+          margin-left: 0;
+        }
+      }
+    }
+    
+    &.accordion--open {
+      .accordion__header-label {
+        font-weight: bold;
+      }
+      .accordion__body {
+        max-height: none;
+      }
+    }
+
+    .accordion__body {
+      transition: max-height 0.2s ease-out;
+      max-height: 0;
+      overflow: hidden;
+    }
+    
+    &.accordion--disabled {
+      .accordion__header {
+          opacity: 0.8;
+      }
+    }
+}
+@media only screen and (max-width: 1024px){
+
+}
+@media only screen and (max-width: 768px){
+
+}
+@media only screen and (max-width: 768px) and (orientation: portrait){
+  
+}

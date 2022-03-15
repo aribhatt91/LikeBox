@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
-import AppModal from '../../../components/generic/AppModal';
-import SIZE_CHART from '../../../../service/constants/size-guide';
+import AppModal from '../../../components/_generic/AppModal';
+import SIZE_CHART from '../../../../libs/constants/size-guide';
 import SizeChart from './SizeChart';
 export default function SizeGuide({affiliate, className}) {
     const [show, setShow] = useState(false);

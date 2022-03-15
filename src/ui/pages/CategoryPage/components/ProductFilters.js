@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useReducer } from 'react';
-import MultiSelectDropdown from '../../../components/generic/MultiSelectDropdown';
-import AppDualRangeSlider from '../../../components/generic/AppDualRangeSlider';
-import SingleSelectDropdown from '../../../components/generic/SingleSelectDropdown';
-import AppButton from '../../../components/generic/AppButton';
+import AppDualRangeSlider from '../../../components/_generic/AppDualRangeSlider';
+import AppSelectDropdown from '../../../components/_generic/AppSelectDropdown';
+import AppButton from '../../../components/_generic/AppButton';
 import { debounce } from 'lodash';
-import { getBrands } from '../../../../service/productMethods';
+import { getBrands } from '../../../../libs/productMethods';
 
 //_handleBrandChange(e)
 const PriceRangeFilter = ({min=0, max=100, onSelect}) => {
@@ -14,7 +13,7 @@ const PriceRangeFilter = ({min=0, max=100, onSelect}) => {
         setRange(input);
     },
     search = debounce(() => {
-        window.mlog('price filter ->', range);
+        window.loginfo('price filter ->', range);
         if(typeof onSelect === 'function'){
             onSelect(range);
         }
@@ -36,7 +35,7 @@ const PriceRangeFilter = ({min=0, max=100, onSelect}) => {
                 <AppDualRangeSlider min={min} max={max} onChange={handleChange} />
             </div>
             <div className="price-range-btn-wrapper w-100 mb-2">
-                <AppButton className="w-100 border-0 border-radius-0 sm" label="Search" onClick={search}/>
+                <AppButton size="sm" rounded={false} className="w-100 border-0" label="Search" onClick={search}/>
             </div>
         </div>
     )
@@ -87,7 +86,7 @@ const DEFAULT_FILTER_OPTIONS = {
 }
 const ProductFilters = ({
         category, 
-        sort_by, 
+        sortBy, 
         gender,
         onFilterChange, 
         defaultFilterOptions=DEFAULT_FILTER_OPTIONS
@@ -98,7 +97,7 @@ const ProductFilters = ({
         (async () => {
             try{
                 let res = await getBrands(category);
-                //window.mlog('getBrands:', res);
+                //window.loginfo('getBrands:', res);
 
                 if(Array.isArray(res)){
                     let brands = {
@@ -120,7 +119,7 @@ const ProductFilters = ({
     }, [category])
     
     const filterHandler = (name, obj) => {
-        window.mlog('filterHandler', name, obj);
+        window.loginfo('filterHandler', name, obj);
         let f = null;
         if(name === 'brands'){
             let brands = {
@@ -166,21 +165,23 @@ const ProductFilters = ({
             <div className="d-flex justify-content-between flex-wrap">
                 {filterObject.brands && 
                     <div className="filter_section">
-                        <MultiSelectDropdown
+                        <AppSelectDropdown
                             label="Brands"
                             name="brands"
                             items={filterObject.brands.items}
                             onSelect={filterHandler}
+                            multiSelect={true}
                         />
                     </div>
                 }
 
                 <div className="filter_section">
-                    <MultiSelectDropdown
+                    <AppSelectDropdown
                         label="Category"
                         name="gender"
                         items={filterObject.gender.options}
                         onSelect={filterHandler}
+                        multiSelect={true}
                     />
                 </div>
                 
@@ -192,7 +193,7 @@ const ProductFilters = ({
                 
                 
                 <div className="filter_section">
-                    <SingleSelectDropdown 
+                    <AppSelectDropdown 
                         label="Sort by"
                         name="sortby"
                         items={filterObject.sortby.options}

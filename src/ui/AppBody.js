@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
 import UserDashboard from './pages/UserDashboard';
 import LoginPage from './pages/LoginPage';
-import ProtectedRoute from './../service/middleware/ProtectedRoute';
+import ProtectedRoute from './../libs/middleware/ProtectedRoute';
 import WishListPage from './pages/WishList';
 
 import YourStyle from './pages/YourStyle';

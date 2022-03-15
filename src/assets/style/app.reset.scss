@@ -1,0 +1,13 @@
+/* Box Sizing */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Padding, margin */
+body, html {
+    padding: 0;
+    margin: 0;
+    line-height: 1.25;
+}

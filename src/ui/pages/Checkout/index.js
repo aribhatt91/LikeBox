@@ -1,23 +1,23 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import CartService from '../../../service/CartService';
-import Accordion from '../../components/generic/Accordion';
-import AppButton from '../../components/generic/AppButton';
-import { AuthContext } from '../../../store/contexts/AuthContext';
+import CartService from '../../../libs/CartService';
+import Accordion from '../../components/_generic/Accordion';
+import AppButton from '../../components/_generic/AppButton';
+import { AuthContext } from '../../../libs/store/contexts/AuthContext';
 import Page from '../Page';
-import EventTracker from '../../../service/api/EventTracker';
+import EventTracker from '../../../libs/api/EventTracker';
 import LoadingModule from '../../components/LoadingModule';
 import ErrorModule from '../../components/ErrorModule';
-import CheckoutService, {DELIVERY_OPTIONS, PAYMENT_METHODS} from '../../../service/CheckoutService'
-import PriceText from '../../components/generic/PriceText';
+import CheckoutService, {DELIVERY_OPTIONS, PAYMENT_METHODS} from '../../../libs/CheckoutService'
+import PriceText from '../../components/_generic/PriceText';
 
 import AddressList from './components/AddressList';
 import PaymentMethods from './components/PaymentMethods';
 import DeliveryOptions from './components/DeliveryOptions';
 import OrderConfirmation from './components/OrderConfirmation';
-import './index.css';
 import Checkoutstatusbar from './components/CheckoutStatusBar';
+import './style.page.css';
 
 const EMPTY_TEXT = "You have no items in your cart!",
     ERROR_TEXT = "Error occurred! Refresh and try again";
@@ -46,7 +46,7 @@ function Checkout(props) {
             fetchCart(currentUser.email);
 
         }catch(err){
-            window.mlog(err);
+            window.loginfo(err);
         }
     }, [currentUser])
 
@@ -57,7 +57,7 @@ function Checkout(props) {
     }, [cart, fetch_pending]);
 
     const selectAddress = (address) => {
-        window.mlog('selectAddress::', address, stage);
+        window.loginfo('selectAddress::', address, stage);
         if(stage < 1){
             setStage(1);
         }
@@ -89,7 +89,7 @@ function Checkout(props) {
                 setStage(5);
             }catch(err){
                 setStage(6);
-                console.error('Checkout:placeOrder::error', err);
+                window.logerror('Checkout:placeOrder::error', err);
             }
             
         }
@@ -178,7 +178,8 @@ function Checkout(props) {
                         <AppButton 
                             onClick={placeOrder} 
                             loading={stage === 4} 
-                            className="border-radius-0 w-100" 
+                            rounded={false}
+                            className="w-100" 
                             label="Place order" 
                             disabled={stage < 3} />
                     </section>

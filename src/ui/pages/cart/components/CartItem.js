@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import AppButton from '../../../components/generic/AppButton';
-import AppImage from '../../../components/generic/AppImage';
-import PriceText from '../../../components/generic/PriceText';
+import AppButton from '../../../components/_generic/AppButton';
+import AppImage from '../../../components/_generic/AppImage';
+import PriceText from '../../../components/_generic/PriceText';
 
 export function CartItemPlaceholder() {
     
@@ -45,10 +45,10 @@ function CartItem({item, removeItem}){
                         <h5 className="mb-1 text-center">Are you sure you want to remove this item from your cart?</h5>
                         <div className="mt-3 mb-1 d-flex justify-content-center">
                             <div className="left_btn_wrapper d-inline-block align-center float-right">
-                                <AppButton label="Yes" className="border-radius-0 border-0 remove-cart-item" onClick={removeItem} />
+                                <AppButton label="Yes" rounded={false} className="border-0 remove-cart-item" onClick={removeItem} />
                             </div>
                             <div className="left_btn_wrapper d-inline-block float-right mr-3">
-                                <AppButton label="Cancel" className="border-0 border-radius-0 btn-white" onClick={() => setShowRemove(false)}/>
+                                <AppButton label="Cancel" variant="white" rounded={false} className="border-0" onClick={() => setShowRemove(false)}/>
                             </div>
 
                         </div>

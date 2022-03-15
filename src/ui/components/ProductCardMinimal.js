@@ -1,8 +1,8 @@
 import React from 'react'
-import AppImage from './generic/AppImage';
-import { formatPrice } from '../../service/helper';
+import AppImage from './_generic/AppImage';
+import { formatPrice } from '../../libs/helper';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import PriceText from './generic/PriceText';
+import PriceText from './_generic/PriceText';
 export function ProductCardMinimalSkeleton() {
     return (
         <div className="d-flex col-12 col-md-4 justify-content-center p-0">

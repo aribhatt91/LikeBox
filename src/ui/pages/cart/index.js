@@ -1,15 +1,15 @@
 import React, {useState, useContext, useEffect} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import CartService from '../../../service/CartService';
+import CartService from '../../../libs/CartService';
 import Page from '../Page';
 import CartItem from './components/CartItem'; 
 import LoadingModule from '../../components/LoadingModule';
 import ErrorModule from '../../components/ErrorModule';
-import { AuthContext } from '../../../store/contexts/AuthContext';
-import './index.css';
+import { AuthContext } from '../../../libs/store/contexts/AuthContext';
 import CartSummary from './components/CartSummary';
-import EventTracker from '../../../service/api/EventTracker';
+import EventTracker from '../../../libs/api/EventTracker';
+import './style.page.css';
 
 const EMPTY_TEXT = "You have no items in your cart!",
 EMPTY_SUBTEXT = "Please check the spelling or try searching for something else";
@@ -24,7 +24,7 @@ function Cart(props) {
         try {
             fetchCart(currentUser.email);
         }catch(err){
-            window.mlog(err);
+            window.loginfo(err);
         }
     }, [currentUser])
 

@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
-//import { logClickCategoryTiles } from '../../../../service/api/analytics/ui/index';
+//import { logClickCategoryTiles } from '../../../../libs/api/analytics/ui/index';
 import BrandCarousel from './BrandCarousel';
-import EventTracker from '../../../../service/api/EventTracker';
+import EventTracker from '../../../../libs/api/EventTracker';
 
 
 function CategoryTiles() {

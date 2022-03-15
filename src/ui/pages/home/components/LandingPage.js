@@ -1,9 +1,9 @@
 import React from 'react';
 import SubscriptionComponent from './SubscriptionComponent';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
-import AppImage from '../../../components/generic/AppImage';
-import FAQS from '../../../../service/constants/faqs';
-import Accordion from '../../../components/generic/Accordion';
+import AppImage from '../../../components/_generic/AppImage';
+import FAQS from '../../../../libs/constants/faqs';
+import Accordion from '../../../components/_generic/Accordion';
 import R1 from '../../../../assets/img/rtb1.png';
 import R2 from '../../../../assets/img/rtb2.png';
 import R3 from '../../../../assets/img/rtb3.png';

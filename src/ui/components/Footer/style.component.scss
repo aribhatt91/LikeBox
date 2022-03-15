@@ -1,0 +1,32 @@
+$footerText: #DDFFF7;
+$footerBackground: #424B54;
+.global-footer {
+  background-color: $footerBackground;
+  min-height: 48px;
+  padding: 2rem 0;
+  h5 {
+    color: $footerText;
+  }
+  .footer-link, .footer-text {
+    color: $footerText;
+    font-size: 1rem;
+    line-height: 1.1;
+    text-decoration: none;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    display: block;
+    opacity: 0.7;
+  }
+  .footer-text {
+    a {
+      color: $footerText;
+      text-decoration: underline;
+    }
+  }
+  .media-links a svg{
+    fill: $footerText;
+  }
+  svg {
+    fill: #000;
+  }
+}

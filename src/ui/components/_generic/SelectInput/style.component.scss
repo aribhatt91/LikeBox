@@ -1,0 +1,16 @@
+$error: #cc0000;
+
+.app-select {
+    select {
+      font-size: 14px;
+      width: 100%;
+      min-height: 44px;
+      margin-bottom: .5rem;
+    }
+    &.app-select--error {
+      select {
+        border-color: $error;
+        color: $error;
+      }
+    }
+}

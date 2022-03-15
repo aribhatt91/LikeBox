@@ -4,8 +4,8 @@
     "sources": [
         "index.scss",
         "assets/style/App.scss",
-        "assets/style/variables.scss",
-        "assets/style/measurement.scss",
+        "assets/style/app.variables.scss",
+        "assets/style/app.measurement.scss",
         "assets/style/components.scss",
         "assets/style/header.scss",
         "assets/style/product_card.scss",

@@ -56,19 +56,19 @@ function registerValidSW(swUrl) {
               // the fresh content will have been added to the cache.
               // It's the perfect time to display a "New content is
               // available; please refresh." message in your web app.
-              window.mlog('New content is available; please refresh.');
+              window.loginfo('New content is available; please refresh.');
             } else {
               // At this point, everything has been precached.
               // It's the perfect time to display a
               // "Content is cached for offline use." message.
-              window.mlog('Content is cached for offline use.');
+              window.loginfo('Content is cached for offline use.');
             }
           }
         };
       };
     })
     .catch(error => {
-      console.error('Error during service worker registration:', error);
+      window.logerror('Error during service worker registration:', error);
     });
 }
 
@@ -93,7 +93,7 @@ function checkValidServiceWorker(swUrl) {
       }
     })
     .catch(() => {
-      window.mlog(
+      window.loginfo(
         'No internet connection found. App is running in offline mode.'
       );
     });

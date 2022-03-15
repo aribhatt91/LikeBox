@@ -1,6 +1,6 @@
 import React, {useState, useEffect } from 'react';
-import { fetchUserProfile } from '../../../../service/UserService';
-import ProfileUpdateForm from '../../../components/forms/ProfileUpdateForm';
+import { fetchUserProfile } from '../../../../libs/UserService';
+import ProfileUpdateForm from '../../../components/_forms/ProfileUpdateForm';
 import { LoadingPendulum } from '../../../components/LoadingModule';
 
 
@@ -16,13 +16,13 @@ function UserProfile({currentUser}){
             setLoading(true);
             (async ()=>{
                 try{
-                    window.mlog('UserProfileFragment:fetchUserProfile:getUser: request', currentUser.email, (new Date()).getTime());
+                    window.loginfo('UserProfileFragment:fetchUserProfile:getUser: request', currentUser.email, (new Date()).getTime());
                     let res = await fetchUserProfile(currentUser.email);
                     
-                    window.mlog('UserProfileFragment:fetchUserProfile:getUser: response', res, (new Date()).getTime());
+                    window.loginfo('UserProfileFragment:fetchUserProfile:getUser: response', res, (new Date()).getTime());
                     setProfile(res);
                 }catch(err){
-                    console.error('UserProfileFragment:fetchUserProfile:getUser:error', err);
+                    window.logerror('UserProfileFragment:fetchUserProfile:getUser:error', err);
                 }finally{
                     setLoading(false);
                 }
@@ -33,12 +33,12 @@ function UserProfile({currentUser}){
     const onUpdateComplete = async () => {
         if(currentUser){
             try{
-                window.mlog('onUpdateComplete:fetchUserProfile:getUser: request', currentUser.email, (new Date()).getTime());
+                window.loginfo('onUpdateComplete:fetchUserProfile:getUser: request', currentUser.email, (new Date()).getTime());
                 let res = await fetchUserProfile(currentUser.email);
-                window.mlog('onUpdateComplete:fetchUserProfile:getUser: response', res, (new Date()).getTime());
+                window.loginfo('onUpdateComplete:fetchUserProfile:getUser: response', res, (new Date()).getTime());
                 setProfile(res);
             }catch(err){
-                console.error('onUpdateComplete:fetchUserProfile:getUser:error', err);
+                window.logerror('onUpdateComplete:fetchUserProfile:getUser:error', err);
             }
         }
     }

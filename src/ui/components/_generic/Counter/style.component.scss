@@ -1,0 +1,63 @@
+.app-counter {
+    .app-counter__label {
+        font-size: 14px;
+        text-transform: uppercase;
+    }
+    .app-counter__input-wrapper {
+        button {
+            height: 48px;
+            width: 48px;
+            outline: none;
+            background-color: #ffffff;
+            border: 1px solid #666;
+            box-shadow: none;
+            margin: 0;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            line-height: 48px;
+            color: #666;
+            &:focus {
+                outline: none;
+            }
+            &:hover:not([disabled]) {
+                background-color: #eeeeee;
+            }
+            &[disabled] {
+                opacity: 0.6;
+            }
+        }
+        input {
+            display: inline-flex;
+            height: 48px;
+            width: 48px;
+            outline: none;
+            background-color: #ffffff;
+            border-top: 1px solid #666;
+            border-bottom: 1px solid #666;
+            border-left: none;
+            border-right: none;
+            justify-content: center;
+            align-items: center;
+            padding: 8px;
+            font-size: 14px;
+            text-align: center;
+            margin: 0;
+            -moz-appearance: textfield;
+            &:after, &:before {
+                display: none !important;
+            }
+            &::-webkit-outer-spin-button,
+            &::-webkit-inner-spin-button {
+              -webkit-appearance: none;
+            }
+        }
+    }
+    &.app-counter--md {
+        button, input {
+            height: 40px;
+            width: 40px;
+        }
+    }
+}

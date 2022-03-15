@@ -1,0 +1,12 @@
+.error-module {
+  padding: 50px; }
+  .error-module .error-module__image {
+    max-width: 250px; }
+  .error-module .error-module__text {
+    font-size: 24px;
+    font-weight: 500;
+    margin: 20px 0 10px; }
+  .error-module .error-module__subtext {
+    color: #878787;
+    font-size: 18px;
+    margin-bottom: 8px; }

@@ -1,0 +1,54 @@
+.app-message {
+  padding: 0.5rem 1rem;
+  margin: 0.25rem 0;
+  display: flex;
+  align-items: center;
+  border-radius: 3px;
+  background-color: #06c;
+  color: #fff;
+  /* Size variants */
+  /* Type variant */ }
+  .app-message .app-message__icon {
+    font-size: 20px;
+    line-height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-items: center;
+    color: inherit; }
+    .app-message .app-message__icon svg {
+      fill: #fff; }
+  .app-message .app-message__text {
+    font-size: 0.8rem;
+    line-height: 1.25;
+    width: 100%;
+    color: inherit;
+    flex: 1;
+    padding: 0 8px; }
+  .app-message .app-message__close {
+    font-size: 24px;
+    display: inline-flex;
+    color: inherit;
+    cursor: pointer; }
+    .app-message .app-message__close svg {
+      fill: #fff; }
+  .app-message .app-message--sm {
+    padding: 0.5rem 1rem; }
+  .app-message .app-message--md {
+    padding: 1rem;
+    border-radius: 4px;
+    min-height: 40px; }
+    .app-message .app-message--md .app-message__text {
+      font-size: 1rem; }
+  .app-message .app-message--lg {
+    padding: 1rem;
+    border-radius: 6px;
+    min-height: 56px; }
+    .app-message .app-message--lg .app-message__text {
+      font-size: 1rem; }
+  .app-message .app-message--info {
+    background-color: #06c; }
+  .app-message .app-message--success {
+    background-color: #28a745; }
+  .app-message .app-message--error {
+    background-color: #cc0000; }

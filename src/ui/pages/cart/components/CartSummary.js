@@ -1,6 +1,6 @@
 import React from 'react';
-import AppButton from '../../../components/generic/AppButton';
-import PriceText from '../../../components/generic/PriceText';
+import AppButton from '../../../components/_generic/AppButton';
+import PriceText from '../../../components/_generic/PriceText';
 
 function CartSummary({cart}) {
     return (

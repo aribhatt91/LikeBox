@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import EventTracker from '../../../service/api/EventTracker';
-import LoginForm from '../../components/forms/LoginForm';
-import SignupForm from '../../components/forms/SignupForm';
+import EventTracker from '../../../libs/api/EventTracker';
+import LoginForm from '../../components/_forms/LoginForm';
+import SignupForm from '../../components/_forms/SignupForm';
 import Page from '../Page';
-import ForgotPasswordForm from './../../components/forms/ForgotPasswordForm';
+import ForgotPasswordForm from './../../components/_forms/ForgotPasswordForm';
 
 const LoginPage = (props) => {
     const location = useLocation();

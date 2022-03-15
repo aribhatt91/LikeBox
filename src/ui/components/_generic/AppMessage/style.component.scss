@@ -1,0 +1,88 @@
+$success: #28a745;
+$error: #cc0000;
+$red: #cc0000;
+$info: #06c;
+$text_color: #fff;
+
+.app-message {
+    padding: 0.5rem 1rem;
+    margin: 0.25rem 0;
+    display: flex;
+    align-items: center;
+    border-radius: 3px;
+    background-color: $info;
+    color: $text_color;
+
+    .app-message__icon {
+        font-size: 20px;
+        line-height: 20px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        align-items: center;
+        color: inherit;
+
+        svg {
+            fill: $text_color;
+        }
+    }
+
+    .app-message__text {
+        font-size: 0.8rem;
+        line-height: 1.25;
+        width: 100%;
+        color: inherit;
+        flex: 1;
+        padding: 0 8px;
+    }
+
+    .app-message__close {
+        font-size: 24px;
+        display: inline-flex;
+        color: inherit;
+        cursor: pointer;
+
+        svg {
+            fill: $text_color;
+        }
+    }
+
+    /* Size variants */
+
+    .app-message--sm {
+        padding: 0.5rem 1rem;
+    }
+
+    .app-message--md {
+        padding: 1rem;
+        border-radius: 4px;
+        min-height: 40px;
+        .app-message__text {
+            font-size: 1rem;
+        }
+    }
+
+    .app-message--lg {
+        padding: 1rem;
+        border-radius: 6px;
+        min-height: 56px;
+        .app-message__text {
+            font-size: 1rem;
+        }
+    }
+
+    /* Type variant */
+
+    .app-message--info {
+        background-color: $info;
+    }
+
+    .app-message--success {
+        background-color: $success;
+    }
+
+    .app-message--error {
+        background-color: $error;
+
+    }
+}

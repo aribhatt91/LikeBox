@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import AppImage from '../../../components/generic/AppImage';
+import AppImage from '../../../components/_generic/AppImage';
 
 function ProductImageGrid({images, productName }) {
     const [selected, setSelected] = useState(0);

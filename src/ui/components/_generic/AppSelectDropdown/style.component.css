@@ -1,0 +1,51 @@
+.app-tag {
+  display: flex;
+  margin-top: 4px;
+  cursor: pointer;
+  color: #333;
+  padding: 6px 16px;
+  border-radius: 4px;
+  background-color: #fff;
+  transition: 0.3s; }
+  .app-tag:hover {
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2); }
+  .app-tag.app-tag--selected {
+    background-color: gray;
+    color: #fff; }
+  .app-tag.app-tag--cancelable {
+    padding-right: 24px;
+    position: relative; }
+    .app-tag.app-tag--cancelable .tag-cancel {
+      position: absolute;
+      font-size: 16px;
+      height: 100%;
+      display: inline-flex;
+      align-items: center;
+      right: 8px;
+      color: inherit; }
+  .app-tag .app-tag__name {
+    font-size: 1rem;
+    text-align: center; }
+  .app-tag:hover, .app-tag:focus {
+    opacity: 0.9; }
+  .app-tag.app-tag--primary {
+    border-color: #000; }
+    .app-tag.app-tag--primary.selected {
+      background-color: #000; }
+  .app-tag.app-tag--blue {
+    border-color: #06c;
+    color: #06c; }
+    .app-tag.app-tag--blue.selected {
+      background-color: #06c; }
+  .app-tag.app-tag--grey {
+    color: #333;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-color: rgba(0, 0, 0, 0.2); }
+    .app-tag.app-tag--grey.app-tag--selected {
+      color: #333;
+      background-color: rgba(0, 0, 0, 0.4);
+      border-color: rgba(0, 0, 0, 0.4); }
+  .app-tag.app-tag--disabled {
+    opacity: 0.7;
+    user-select: none;
+    cursor: none; }

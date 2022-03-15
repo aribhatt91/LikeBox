@@ -1,0 +1,95 @@
+{
+    "page": {
+        "name": "Home",
+        "path": "/",
+        "section": "home",
+        "server": "localhost",
+        "language": "en_GB",
+        "view": "home",
+        "search": ""
+    },
+    "user": {
+        "id": "user0001",
+        "email": "user@example.com",
+        "name": "User",
+        "status": "logged-in"
+    },
+    "product": {
+        "id": "product0001",
+        "name": "Product 1",
+        "category": "pType > pSubType > pSubSubType",
+        "price": 100,
+        "productEvent": {
+            "eventType": "product-view"
+        }
+    },
+    "cart": {
+        "id": "cart0001",
+        "total": 100,
+        "products": [{
+            "id": "product0001",
+            "quantity": 1,
+            "price": 30,
+            "size": "S"
+        },
+        {
+            "id": "product0021",
+            "quantity": 1,
+            "price": 70,
+            "size": "XL"
+        }]
+    },
+    "transaction": {
+        "order_id": "order0001",
+        "status": "in-progress",
+        "items": [{
+            "id": "product0001",
+            "quantity": 1,
+            "price": 30,
+            "size": "S"
+        },
+        {
+            "id": "product0021",
+            "quantity": 1,
+            "price": 70,
+            "size": "XL"
+        }],
+        "payment": {
+            "method": "card",
+            "value": 100
+        },
+        "user": {
+            "email": "admin@gmail.com"
+        },
+        "delivery": {
+            "address": {
+                "housenumber": "123",
+                "street": "",
+                "city": "",
+                "postcode": ""
+            },
+            "delivery_date": "",
+            "delivery_option": "FAST",
+            "delivery_charge": 10
+        }
+    },
+    "events": [
+        {
+            "eventType": "view-change",
+            "viewName": "home"
+        },
+        {
+            "eventType": "product-view",
+            "products": [{
+                "id": "product0001"
+            }]
+        },
+        {
+            "eventType": "add-to-cart",
+            "products": [{
+                "id": "product0001",
+                "quantity": 1
+            }]
+        }
+    ]
+}

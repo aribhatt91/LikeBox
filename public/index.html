@@ -9,20 +9,18 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0"> -->
     <title>LikeBox</title>
-
+    <script src="https://www.googleoptimize.com/optimize.js?id=OPT-T5SSNJ9"></script>
     <script type="text/javascript">
-      window.DEV_MODE = window.location.hostname === 'localhost';
-
-      /* 
-      window.location.hostname === 'the-likebox-stage.web.app';
-      */
-      window.mlog = function () { 
-        if(window.DEV_MODE){
+      window.DEV_MODE = window.location.hostname === 'localhost' || window.localStorage && localStorage.getItem('dev_mode') === 'true';
+      /* window.ENV_STAGE = window.location.hostname === 'the-likebox-stage.web.app'; */
+    
+      window.loginfo = function () { 
+        if(window.DEV_MODE || localStorage.getItem('_debug_') === 'true'){
           Array.prototype.unshift.call(arguments, 'LIKEBOX:LOG::');
           console.info.apply(this, arguments);
         }
       }
-      window.merror = console.error;
+      window.logerror = window.console && window.console.error ? window.console.error : function(){};
 
       window.digitalData = window.digitalData || {
         page: {
@@ -51,6 +49,17 @@
     <link rel="stylesheet" href="https://use.typekit.net/ifw6ete.css">
     <link rel="stylesheet" type="text/css" charset="UTF-8" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" /> 
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-196770190-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-196770190-1');
+    </script>
+
     
 <!-- 
     <script defer src="/__/firebase/8.2.7/firebase-app.js"></script>
@@ -64,7 +73,7 @@
     <script defer src="/__/firebase/8.2.7/firebase-remote-config.js"></script>
     <script defer src="/__/firebase/8.2.7/firebase-performance.js"></script>
     <script defer src="/__/firebase/init.js?useEmulator=true"></script> -->
-
+    
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->

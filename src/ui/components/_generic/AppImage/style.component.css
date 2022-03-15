@@ -1,0 +1,38 @@
+.app-img-background {
+  background-color: #ececec; }
+  .app-img-background img {
+    opacity: 0;
+    object-fit: cover;
+    transition: 0.3s ease-in;
+    width: 100%;
+    height: 100%; }
+  .app-img-background.img-loaded img {
+    opacity: 1; }
+
+.app-image {
+  opacity: 0;
+  transition: 0.3s all ease-in-out; }
+  .app-image.app-img--loaded {
+    opacity: 1; }
+
+.lazy-load-image-background {
+  height: 100%;
+  opacity: 0;
+  transition: 0.3s ease-in; }
+  .lazy-load-image-background.lazy-load-image-loaded {
+    opacity: 1; }
+
+.square {
+  width: 100%;
+  position: relative; }
+  .square::after {
+    content: "";
+    display: block;
+    padding-bottom: 100%; }
+  .square img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    object-fit: cover;
+    top: 0;
+    left: 0; }

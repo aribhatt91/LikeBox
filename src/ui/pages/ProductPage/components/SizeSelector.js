@@ -1,5 +1,5 @@
 import React from 'react';
-import RadioButtonGroup from '../../../components/generic/RadioButtonGroup';
+import RadioButtonGroup from '../../../components/_generic/RadioButtonGroup';
 //import SizeGuide from './SizeGuide';
 
 const SizeSelector = ({className, variants, onSelect, disabled}) => {

@@ -4,14 +4,14 @@ import { Tabs } from 'react-bootstrap';
 import Tab from 'react-bootstrap/Tab';
 import Page from '../Page';
 import { useContext, useEffect } from 'react';
-import { AuthContext } from '../../../store/contexts/AuthContext';
+import { AuthContext } from '../../../libs/store/contexts/AuthContext';
 //import YourBox from './components/YourBox';
-//import { logScreenView } from '../../../service/api/analytics';
+//import { logScreenView } from '../../../libs/api/analytics';
 import { Suspense } from 'react';
 import LoadingModule from '../../components/LoadingModule';
-import './index.css';
-import EventTracker from '../../../service/api/EventTracker';
+import EventTracker from '../../../libs/api/EventTracker';
 import Settings from './components/Settings';
+import './style.page.css';
 
 const YourBox = React.lazy(() => import('./components/YourBox'));
 const UserProfile = React.lazy(() => import('./components/UserProfile'));
@@ -28,7 +28,7 @@ function UserDashboard(props) {
         //logScreenView();
         EventTracker.trackEvent(EventTracker.events.page.VIEW_CHANGE, "user-dashboard-" + k);
     }
-    window.mlog('SLUG', slug, topic);
+    window.loginfo('SLUG', slug, topic);
 
     const SETTINGS_MAP = {
         'sizing': 1,

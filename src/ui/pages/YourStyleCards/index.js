@@ -1,15 +1,17 @@
 import React, {useState, useEffect, useContext} from 'react';
-import AppButton from '../../components/generic/AppButton';
-import AppImage from '../../components/generic/AppImage';
+import AppButton from '../../components/_generic/AppButton';
+import AppImage from '../../components/_generic/AppImage';
 import { useHistory } from 'react-router';
-import { AuthContext } from '../../../store/contexts/AuthContext';
+import { AuthContext } from '../../../libs/store/contexts/AuthContext';
 import { debounce } from 'lodash';
-import { fetchLikeBox, updateLikeBox } from '../../../service/UserService';
+import { fetchLikeBox, updateLikeBox } from '../../../libs/UserService';
 import Page from '../Page';
-import { fetchLikeCards } from '../../../service/api/firestore/likebox';
-import { SuccessMessage } from '../../components/generic/PageMessage';
-import LeftArrowIcon from '../../components/svg-components/LeftArrowIcon';
-import RightArrowIcon from '../../components/svg-components/RightArrowIcon';
+import { fetchLikeCards } from '../../../libs/api/firestore/likebox';
+import { SuccessMessage } from '../../components/_generic/AppMessage';
+import LeftArrowIcon from '../../components/_svg-components/LeftArrowIcon';
+import RightArrowIcon from '../../components/_svg-components/RightArrowIcon';
+import './style.page.css';
+
 function CardStack({cards, cardsState}) {
     useEffect(() => {}, [cards])
     return (
@@ -90,7 +92,7 @@ export default function YourStyleCards({slideIn, slideOut}) {
     }, [currentUser])
 
     useEffect(()=>{
-        window.mlog('useEffectCalled');
+        window.loginfo('useEffectCalled');
         if(update && currentUser && !reachedMax){
             setCardsState({
                 ...cardsState,
@@ -102,7 +104,7 @@ export default function YourStyleCards({slideIn, slideOut}) {
                     
                     let skus = [].concat(LIKED.map(item => item.productid)).concat(DISLIKED.map(item => item.productid));
                     
-                    window.mlog('SKUS', skus, LIKED, DISLIKED);
+                    window.loginfo('SKUS', skus, LIKED, DISLIKED);
                     
                     let products = await getCardsByPage(skus);
 
@@ -172,7 +174,7 @@ export default function YourStyleCards({slideIn, slideOut}) {
             }, 500);
             
         }
-        window.mlog(currentPos);
+        window.loginfo(currentPos);
         if(!checkExists(DISLIKED, items[currentPos])){
             DISLIKED.push(items[currentPos]);
             removeFromArray(DISLIKED, items[currentPos]);
@@ -180,7 +182,7 @@ export default function YourStyleCards({slideIn, slideOut}) {
         
     }
     const likeItem = () => {
-        window.mlog('likeItem')
+        window.loginfo('likeItem')
         if(cardsState.loading || reachedMax){
             return;
         }
@@ -207,7 +209,7 @@ export default function YourStyleCards({slideIn, slideOut}) {
             }, 500);
             
         }
-        window.mlog(currentPos, items[currentPos]);        
+        window.loginfo(currentPos, items[currentPos]);        
         if(!checkExists(LIKED, items[currentPos])){
             LIKED.push(items[currentPos]);
             removeFromArray(DISLIKED, items[currentPos]);
@@ -221,7 +223,7 @@ export default function YourStyleCards({slideIn, slideOut}) {
             rejectItem();
         }
 
-        window.mlog('keypressed', e.keyCode)
+        window.loginfo('keypressed', e.keyCode)
     }
 
     useEffect(()=>{
@@ -236,11 +238,11 @@ export default function YourStyleCards({slideIn, slideOut}) {
             try {
                 setSubmitting(true);
                 let likebox = {LIKED, DISLIKED, 'lastVisible': ""};
-                window.mlog('LikeBoxCarousel:submit', likebox);
+                window.loginfo('LikeBoxCarousel:submit', likebox);
                 await updateLikeBox(currentUser.email, {likebox});
                 
             }catch(err){
-                console.error('LikeBoxCarousel:submit:error', err);
+                window.logerror('LikeBoxCarousel:submit:error', err);
                 setSubmitting(false)
             }finally {
                 setTimeout(()=>{

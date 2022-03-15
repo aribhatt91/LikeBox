@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { fetchLikeBox } from '../../../../service/UserService';
+import { fetchLikeBox } from '../../../../libs/UserService';
 import ProductGrid from '../../../components/ProductGrid';
 
 export default function YourBox({currentUser}) {
@@ -13,7 +13,7 @@ export default function YourBox({currentUser}) {
                     let res = await fetchLikeBox(currentUser.email);
                     setCards(res || {});
                 }catch(err){
-                    console.error('YourBox:fetchLikeBox:error', err);
+                    window.logerror('YourBox:fetchLikeBox:error', err);
                 }finally {
                     setLoading(false);
                 }

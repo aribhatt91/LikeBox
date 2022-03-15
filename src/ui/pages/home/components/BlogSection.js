@@ -2,7 +2,7 @@ import React, { useState, useEffect} from 'react'
 import Slider from 'react-slick';
 //https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@the_likebox
 import axios from 'axios';
-import AppLink from './../../../components/generic/AppLink';
+import AppLink from './../../../components/_generic/AppLink';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const settings = {

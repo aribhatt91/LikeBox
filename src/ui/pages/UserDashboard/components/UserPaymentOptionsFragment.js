@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import CardForm from '../../../components/forms/CardForm';
-import Accordion from '../../../components/generic/Accordion';
+import CardForm from '../../../components/_forms/CardForm';
+import Accordion from '../../../components/_generic/Accordion';
 
 function formatCardNumber(cardNumber) {
 

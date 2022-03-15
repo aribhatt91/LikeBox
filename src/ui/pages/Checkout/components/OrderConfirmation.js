@@ -1,5 +1,5 @@
 import React from 'react';
-import { SuccessMessage } from '../../../components/generic/PageMessage';
+import { SuccessMessage } from '../../../components/_generic/AppMessage';
 
 const OrderConfirmation = () => {
     return (

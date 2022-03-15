@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import ProductCard, { ProductCardPlaceholder } from '../../../components/ProductCard';
 import ErrorModule from '../../../components/ErrorModule';
-import AppButton from '../../../components/generic/AppButton';
+import AppButton from '../../../components/_generic/AppButton';
 import { debounce } from 'lodash';
-import { fetchProducts } from '../../../../service/ProductService';
-//import { logViewSearchResult } from '../../../../service/api/analytics';
-import EventTracker from '../../../../service/api/EventTracker';
+import { fetchProducts } from '../../../../libs/ProductService';
+//import { logViewSearchResult } from '../../../../libs/api/analytics';
+import EventTracker from '../../../../libs/api/EventTracker';
 
 
 const EMPTY_TEXT = "Seems like we don't have what you're looking for!",
@@ -40,7 +40,7 @@ function ProductListing({type, filter=null, category, addToWishlist, inWishlist}
 
   const getProducts = async () => {
     try{
-      window.mlog('getProducts called', category, page);
+      window.loginfo('getProducts called', category, page);
       setLoading(true);
       //let data = await fetchProducts(category);
       /* If overhead array contains more than PER_PAGE Limit, do not make an API Call */
@@ -52,7 +52,7 @@ function ProductListing({type, filter=null, category, addToWishlist, inWishlist}
       }
 
       let response = await fetchProducts(category, page, PER_PAGE, LAST_NODES, filter);
-      window.mlog('getProducts:firestoreData', page, response, products);
+      window.loginfo('getProducts:firestoreData', page, response, products);
 
       if(response && response.items){
         let productsList = response.items;
@@ -78,7 +78,7 @@ function ProductListing({type, filter=null, category, addToWishlist, inWishlist}
           LAST_NODES = response.lastVisible;
         }
         EventTracker.trackEvent(EventTracker.events.page.SEARCH_RESULT, category, productsList);
-        window.mlog('getProducts response', response);
+        window.loginfo('getProducts response', response);
       }else {
         setMaxReached(true);
         if(FLUSH){
@@ -88,7 +88,7 @@ function ProductListing({type, filter=null, category, addToWishlist, inWishlist}
         }
       }
     }catch(err){
-      console.error('getProducts:error', err);
+      window.logerror('getProducts:error', err);
       EventTracker.trackEvent(EventTracker.events.page.SEARCH_ERROR, category);
       if(products && products.length > 0) {
         FLUSH = false;
@@ -98,14 +98,14 @@ function ProductListing({type, filter=null, category, addToWishlist, inWishlist}
       }
     }finally {
       setLoading(false);
-      //window.mlog('loading false');
+      //window.loginfo('loading false');
     }
     
   }
 
 
   useEffect(()=>{
-    window.mlog('useEffect:category:page ->', page);
+    window.loginfo('useEffect:category:page ->', page);
     LAST_NODES = [];
     if(maxReached){
       setMaxReached(false);
@@ -156,7 +156,7 @@ function ProductListing({type, filter=null, category, addToWishlist, inWishlist}
           {
             !loading && !maxReached && products && products.length > 0 && <div className="d-flex w-100 justify-content-center mt-5 mb-5">
               <div className="col-12 col-md-6">
-                <AppButton className="w-100 border-0 border-radius-0 page-navigate-btn" label="Load more" onClick={debounce(next)}/>
+                <AppButton rounded={false} className="w-100 border-0 page-navigate-btn" label="Load more" onClick={debounce(next)}/>
               </div>
             </div>
           }

@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import { Tabs } from 'react-bootstrap';
 import Tab from 'react-bootstrap/Tab'
-import { capitalise } from '../../../../service/helper';
-import PriceText from '../../../components/generic/PriceText';
+import { capitalise } from '../../../../libs/Helper';
+import PriceText from '../../../components/_generic/PriceText';
 
 function ProductDescription({product}){
     const [key, setKey] = useState('desc');

@@ -1,0 +1,17 @@
+{
+    "id": "",
+    "name": {
+        "fname": "John",
+        "lname": "Doe"
+    },
+    "date_joined": "1628235600929",
+    "dob": "Mon Aug 09 1993",
+    "email": "user@gmail.com",
+    "gender": "male",
+    "last_seen": "1628235600929",
+    "likebox": {
+        "LIKED": [],
+        "DISLIKED": []
+    },
+    "styles": ["Sporty", "Streetwear", "Casual"]
+}

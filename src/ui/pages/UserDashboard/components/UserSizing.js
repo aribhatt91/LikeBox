@@ -1,9 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
 import RangeSlider from 'react-bootstrap-range-slider';
 import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
-import AppButton from '../../../components/generic/AppButton';
-import { getUserSizes, setUserSizes } from '../../../../service/UserService';
-import { useNotification } from '../../../../store/contexts/NotificationProvider';
+import AppButton from '../../../components/_generic/AppButton';
+import { getUserSizes, setUserSizes } from '../../../../libs/UserService';
+import { useNotification } from '../../../../libs/store/contexts/NotificationProvider';
 
 function SizeSlider({label, min=0, max=100, onChange, slideIn, slideOut}) {
     const [value, setValue] = useState(0)
@@ -64,7 +64,7 @@ export default function UserSizing({slideIn, slideOut, currentUser, onChange, on
     const dispatch = useNotification();
 
     const onInputChange = (name, val) => {
-        window.mlog(name, val);
+        window.loginfo(name, val);
         if(val > 0){
             SIZING[name] = val;
         }
@@ -74,10 +74,10 @@ export default function UserSizing({slideIn, slideOut, currentUser, onChange, on
         try{
             (async ()=>{
                 let res = await getUserSizes(currentUser.email);
-                window.mlog('Fetched Sizes', res);
+                window.loginfo('Fetched Sizes', res);
             })()
         }catch(err){
-            console.error('LikeBoxSizing', err);
+            window.logerror('LikeBoxSizing', err);
         }
     }, [currentUser])
     const submit = async () => {
@@ -89,7 +89,7 @@ export default function UserSizing({slideIn, slideOut, currentUser, onChange, on
                     message: 'Updated your sizes!'
                 }) 
             }catch(err) {
-                console.error('LikeBoxSizing:submit', err);
+                window.logerror('LikeBoxSizing:submit', err);
                 dispatch({
                     type: 'error',
                     message: 'Uh Oh! Something went wrong!'
@@ -140,7 +140,7 @@ export default function UserSizing({slideIn, slideOut, currentUser, onChange, on
                     <AppButton label="Submit" className="w-100" onClick={submit}/>
                 </div>
                 {skip &&<div className="col-6">
-                    <AppButton label="Skip" className="btn-white border-0 border-radius-0 w-100" onClick={onComplete}/>
+                    <AppButton label="Skip" rounded={false} variant="white" className="border-0 w-100" onClick={onComplete}/>
                 </div>}
             </div>
 
