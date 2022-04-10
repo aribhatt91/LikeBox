@@ -43,7 +43,7 @@ export default function WishListButton({product, className="", ...rest}) {
               if(inWishList){
                 res= await removeItemFromWishList(currentUser.email, product.id);
               }else {
-                res = await addItemToWishList(currentUser.email, product.id, product);
+                res = await addItemToWishList(currentUser.email, product);
               }
               //let res = await itemInWishList(currentUser.email, id);
               if(res.type === 'success'){

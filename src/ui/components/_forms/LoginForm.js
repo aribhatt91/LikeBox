@@ -38,6 +38,9 @@ const LoginForm = ({onComplete}) => {
       //window.loginfo('Response ->', response);
       //logSignIn("password");
       EventTracker.trackEvent(EventTracker.events.user.LOGIN_COMPLETE, "password");
+      setTimeout(() => {
+        window.scrollTo({top: 0});
+      }, 10);
       if(typeof onComplete === 'function'){
           setTimeout(onComplete, 750);
       }
@@ -60,7 +63,7 @@ const LoginForm = ({onComplete}) => {
           currentUser && <SuccessMessage message={"You are logged in!"} />
         }
 
-        <div className={"login-form-container slide-up" + (currentUser ? " d-none": "")}>
+        <div className={"login-form-container anim--slide-up" + (currentUser ? " d-none": "")}>
           <h1 className="login-form-header mb-5 pl-2 pr-2 font-weight-normal text-center">Sign into your account</h1>
           <form className={"login-form"}>
 
@@ -76,7 +79,7 @@ const LoginForm = ({onComplete}) => {
                   </div>
                 }
                 <div className="row m-0">
-                  <div className="col-md-12 col-lg-12 pl-2 pr-2 clearfix float-none">
+                  <div className="col-md-12 col-lg-12 pl-2 pr-2 clearfix float-none" data-private>
                     <AppTextInput
                       name="email"
                       label="Email"

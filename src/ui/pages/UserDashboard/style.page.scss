@@ -133,3 +133,29 @@
         }
     }
 }
+.tab-slider{
+    .slick-list {
+        position: relative;
+        &::after {
+            content: "";
+            height: 100%;
+            position: absolute;
+            width: 30px;
+            background-image: linear-gradient(to right, transparent, white);
+            right: -1px;
+            top: 0;
+        } 
+        &::before {
+            content: "";
+            height: 100%;
+            position: absolute;
+            width: 30px;
+            background-image: linear-gradient(to right, white, transparent);
+            left: -1px;
+            top: 0;
+        }   
+    }
+    .slick-arrow:not(.slick-disabled)::before {
+        color: #000 !important;
+    }
+}

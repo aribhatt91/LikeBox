@@ -1,7 +1,5 @@
-@import './app.variables.scss';
-@import './app.mixins.scss';
-
 //Nav Header
+
 $nav-height-lg: 96px;
 $nav-height-md: 80px;
 $nav-height-sm: 64px;
@@ -9,17 +7,17 @@ $nav-height-xs: 56px;
 
 $nav-height: $nav-height-lg;
 
-@include media(1024px){
+@media(max-width:1024px){
   $nav-height: $nav-height-md;
 }
-@include media(767px){
+@media(max-width:767px){
   $nav-height: $nav-height-sm;
 }
-@include media(660px){
+@media(max-width: 660px){
   $nav-height: $nav-height-xs;
 }
 
-  .App-header {
+  .app-header {
     background: white;
     z-index: 10;
     -webkit-box-shadow: 0 4px 12px 0 rgba(0,0,0,.05);
@@ -46,13 +44,14 @@ $nav-height: $nav-height-lg;
     min-height: $nav-height;
     display: flex;
     align-items: center;
-    @include media(1024px){
+
+    @media(max-width: 1024px){
       min-height: $nav-height-md;
     }
-    @include media(767px){
+    @media(max-width: 767px){
       min-height: $nav-height-sm;
     }
-    @include media(660px){
+    @media(max-width: 660px){
       min-height: $nav-height-xs;
     }
   }
@@ -167,7 +166,7 @@ $nav-height: $nav-height-lg;
   }
 
   .cart-count {
-    background: $success;
+    background: #000;
     font-size: 10px;
     height: 16px;
     width: 16px;

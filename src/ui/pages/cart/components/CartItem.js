@@ -48,7 +48,7 @@ function CartItem({item, removeItem}){
                                 <AppButton label="Yes" rounded={false} className="border-0 remove-cart-item" onClick={removeItem} />
                             </div>
                             <div className="left_btn_wrapper d-inline-block float-right mr-3">
-                                <AppButton label="Cancel" variant="white" rounded={false} className="border-0" onClick={() => setShowRemove(false)}/>
+                                <AppButton label="Cancel" variant="secondary" rounded={false} className="border-0" onClick={() => setShowRemove(false)}/>
                             </div>
 
                         </div>

@@ -5,7 +5,7 @@ import AppButton from '../../../components/_generic/AppButton';
 import { getUserSizes, setUserSizes } from '../../../../libs/UserService';
 import { useNotification } from '../../../../libs/store/contexts/NotificationProvider';
 
-function SizeSlider({label, min=0, max=100, onChange, slideIn, slideOut}) {
+function SizeSlider({label, min=0, max=100, onChange }) {
     const [value, setValue] = useState(0)
     //const [displayValue, setDisplayValue] = useState(0)
     const [unit, setUnit] = useState('cm') 
@@ -102,7 +102,7 @@ export default function UserSizing({slideIn, slideOut, currentUser, onChange, on
         }
     }
     return (
-        <div className={"like-box-preference container mx-auto col-lg-8" + (!slideIn && !slideOut ? " slide-hold" : "") + (slideOut ? " slide-out" : "") + (slideIn ? " slide-in" : "")}>
+        <div className={"like-box-preference container mx-auto col-lg-8"}>
             <h2 className="align-text-center pl-3 pr-3 mt-5 mb-5">Add your sizes so that we can ensure that everything you order will fit you perfectly</h2>
             <SizeSlider
                 min={0}
@@ -140,7 +140,7 @@ export default function UserSizing({slideIn, slideOut, currentUser, onChange, on
                     <AppButton label="Submit" className="w-100" onClick={submit}/>
                 </div>
                 {skip &&<div className="col-6">
-                    <AppButton label="Skip" rounded={false} variant="white" className="border-0 w-100" onClick={onComplete}/>
+                    <AppButton label="Skip" rounded={false} variant="secondary" className="border-0 w-100" onClick={onComplete}/>
                 </div>}
             </div>
 

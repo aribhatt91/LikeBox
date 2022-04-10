@@ -9,28 +9,30 @@ const CONFIG = {
     lg: 4
 }
 
-export default function ProductGrid({products=[], config, loading=true, header=null, removeItem}) {
+export default function ProductGrid({products=[], config=CONFIG, loading=true, header=null, removeItem}) {
     const { sm, md, lg } = config;
     return (
-        <div className="product-grid w-100">
+        <div className="product-grid w-100 mb-5">
             <div className="container">
+                {header && <h2 className='mt-5 mb-5 text-center text-bold'>{header}</h2>}
                 <div className="row ml-0 mr-0 pl-0 pr-0">
                     {
                         products.map((item, index) => 
                             <ProductCardBase 
-                                title={item.title || item.name} 
-                                subtext={item.brand} 
-                                thumbnail={item.thumbnail} 
+                                className={`col-12 col-md-${md} col-lg-${lg}`}
+                                name={item.title || item.name} 
+                                brand={item.brand} 
+                                img={item.thumbnail} 
                                 price={item.price} 
                                 currency={item.currency} 
-                                link={item.url || item.link} 
-                                key={index} />
+                                url={item.url || item.link} 
+                                key={item.id} />
                         )
                     }
                     {loading && <React.Fragment>
-                        <ProductCardBaseSkeleton />
-                        <ProductCardBaseSkeleton />
-                        <ProductCardBaseSkeleton />
+                        <ProductCardBaseSkeleton className={`col-12 col-md-${md} col-lg-${lg}`} />
+                        <ProductCardBaseSkeleton className={`col-12 col-md-${md} col-lg-${lg}`} />
+                        <ProductCardBaseSkeleton className={`col-12 col-md-${md} col-lg-${lg}`} />
                     </React.Fragment>}
 
                 </div>
@@ -46,5 +48,6 @@ ProductGrid.propTypes = {
         md: PropTypes.number,
         lg: PropTypes.number
     }),
-    loading: PropTypes.bool
+    loading: PropTypes.bool,
+    header: PropTypes.string
 }

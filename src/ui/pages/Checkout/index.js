@@ -112,7 +112,7 @@ function Checkout(props) {
 
                 {!error && stage === 5 && <OrderConfirmation />}
 
-                {!error && stage === 6 && <ErrorModule error_text={ERROR_TEXT} />}
+                {!error && stage === 6 && <ErrorModule error={ERROR_TEXT} />}
 
                 {!error && stage < 5 && cart && cart.id && (cart.products || []).length > 0 && <React.Fragment>
                     <div className="d-flex flex-column flex-md-row mb-4 bordered-bottom">

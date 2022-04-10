@@ -112,7 +112,7 @@ function ProductForm({currentUser, product, addToCart, pending_update=false }){
         }
       </div>
       <div className="product-cta-container col-md-10 clearfix mt-2 mb-5 p-0">
-        <WishListButton variant="white" className="w-100" product={product} />
+        <WishListButton variant="secondary" className="w-100" product={product} />
       </div>
     </React.Fragment>
   )

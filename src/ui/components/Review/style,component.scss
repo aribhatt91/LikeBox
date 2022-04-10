@@ -1,0 +1,27 @@
+.review {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+    .review__head {
+        padding: 1rem 0.5rem;
+        border-bottom: 1px solid #ececec;
+    }
+    .review__name {
+        font-size: 1rem;
+        font-weight: bold;
+    }
+    .review__stars {
+        margin-top: 0.5rem;
+    }
+    .review__date {
+        font-size: 0.875rem;
+        color: #333;
+    }
+    .review__body {
+        padding: 1rem 0.5rem;
+    }
+    &:not(:last-child) {
+        border-bottom: 1px solid #333;
+    }
+}

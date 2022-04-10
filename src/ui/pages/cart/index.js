@@ -48,7 +48,7 @@ function Cart(props) {
                 
                 { (error || !cart || (cart.products || []).length <= 0) && <ErrorModule
                     
-                    error_text={EMPTY_TEXT}
+                    error={EMPTY_TEXT}
                 />}
                 {!error && (cart.products || []).length > 0 &&
 

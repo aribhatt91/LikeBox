@@ -32,23 +32,23 @@
     cursor: pointer; }
     .app-message .app-message__close svg {
       fill: #fff; }
-  .app-message .app-message--sm {
+  .app-message.app-message--sm {
     padding: 0.5rem 1rem; }
-  .app-message .app-message--md {
+  .app-message.app-message--md {
     padding: 1rem;
     border-radius: 4px;
     min-height: 40px; }
-    .app-message .app-message--md .app-message__text {
+    .app-message.app-message--md .app-message__text {
       font-size: 1rem; }
-  .app-message .app-message--lg {
+  .app-message.app-message--lg {
     padding: 1rem;
     border-radius: 6px;
     min-height: 56px; }
-    .app-message .app-message--lg .app-message__text {
+    .app-message.app-message--lg .app-message__text {
       font-size: 1rem; }
-  .app-message .app-message--info {
+  .app-message.app-message--info {
     background-color: #06c; }
-  .app-message .app-message--success {
+  .app-message.app-message--success {
     background-color: #28a745; }
-  .app-message .app-message--error {
+  .app-message.app-message--error {
     background-color: #cc0000; }

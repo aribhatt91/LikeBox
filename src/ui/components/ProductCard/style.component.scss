@@ -1,0 +1,121 @@
+$pc_order-radius: 0px;
+$thumb_lg: 235px;
+$thumb_md: 128px;
+$thumb_sm: 200px;
+$thumb_dimen: $thumb_lg;
+
+@media (max-width: 1024px){
+    $thumb_dimen: $thumb_md;
+}
+@media (max-width: 600px){
+    $thumb_dimen: $thumb_sm;
+}
+
+
+.product-card {
+    transition: 0.3s ease-in-out;
+    display: flex;
+    position: relative;
+    @media (max-width: 767px) {
+        justify-content: center;
+    }
+    &:not(:last-child)::after{
+        content: "";
+        position: absolute;
+        bottom: -3rem;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        border-bottom: 1px solid #ececec;
+    }
+    .product-card__thumb-wrapper {
+        height: $thumb_dimen;
+        width: $thumb_dimen;
+        border: 1px solid #707070;
+        background-color: #ececec;
+        
+        span,
+        .product-card__thumb {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    .product-card__detail {
+
+        .product-card__text-brand {
+            font-size: 27px;
+            font-weight: 500;
+            line-height: 36px;
+            color: #282c3f;
+            margin-bottom: 6px;
+        }
+        .product-card__text-name {
+            color: #727C8E;
+            font-size: 16px;
+            line-height: 1.2;
+            font-weight: 400;
+        }
+        .product-card__text-price {
+            font-size: 21px;
+            line-height: 36px;
+            font-weight: 500;
+        }
+
+    }
+    .product-card__description {
+        height: auto;
+        max-height: $thumb_dimen;
+        overflow: auto;
+        display: flex;
+        flex-direction: column;
+        color: #727C8E;
+        &::-webkit-scrollbar {
+            width: 6px;
+            border-radius: 3px;
+            background-color: rgba($color: #333, $alpha: 0.1);
+        }
+        &::-webkit-scrollbar-thumb {
+            width: 6px;
+            border-radius: 3px;
+            background-color: rgba($color: #333, $alpha: 0.4);
+            &:hover {
+                background-color: rgba($color: #333, $alpha: 0.8);
+            }
+        }
+        &::-webkit-scrollbar-track {
+            border-radius: 6px;
+            background-color: transparent;
+        }
+    }
+}
+
+.product-card--skeleton {
+
+    .product-card__thumb-wrapper {
+        border: none;
+    }
+    
+    .product-card__text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        > .placeholder__element {
+            height: 1.25rem;
+        }
+
+    }
+    .product-card__buttons {
+        > .placeholder__element {
+            height: 3rem;
+            border-radius: 3rem;
+        }
+
+    }
+
+    .product-card__description {
+        > div {
+            height: 1rem;
+        }
+    }
+}

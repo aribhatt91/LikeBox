@@ -69,15 +69,19 @@
 @mixin animSlideY($selector, $fromY, $toY, $duration, $id) {
     @keyframes slideY-#{$id} {
         from {
+            opacity: 0;
             transform: translateY(#{$fromY});
         }
         to {
+            opacity: 1;
             transform: translateY(#{$toY});
         }
     }
     #{$selector} {
-        animation-duration: $duration;
+        animation-duration: #{$duration}s;
         animation-name: slideY-#{$id};
+        animation-fill-mode: forwards;
+        animation-iteration-count: 1;
     }
 }
 @keyframes zoomin {
@@ -159,6 +163,14 @@ to{-webkit-transform:scale(1);transform:scale(1);color:#fff;background-color:#00
     }
 }
 
+@keyframes bounce {
+    0% {transform: scale(0.5);}
+    25% {transform: scale(0.8);}
+    50% {transform: scale(0.7);}
+    100% {transform: scale(1);}
+}
+  
+
 .pulse {
     width: 64px;
     height: 64px;
@@ -166,4 +178,28 @@ to{-webkit-transform:scale(1);transform:scale(1);color:#fff;background-color:#00
     margin: 100px auto;
     -webkit-animation: pulse 1.2s infinite ease-in-out;
     animation: pulse 1.2s infinite ease-in-out;
+}
+
+
+
+.animate--app {
+    /* HOME PAGE ANIMATIONS */
+    /* Main Hero section */
+    @include  animSlideY('h1.like-box-header-1', 60px, 0, 0.35, 'h1');
+    @include  animSlideY('.like-box-subheader-p', 60px, 0, 0.5, 'p');
+    @include  animSlideY('.like-box-stm-container', 70px, 0, 0.6, 'stm');
+    @include  animSlideY('.like-box-email-form-container', 75px, 0, 0.7, 'form');
+
+
+    /* Generic */
+    @include  animSlideY('.anim--slide-up', 100px, 0, 0.3, 'anim--slide-up');
+    @include  animSlideY('.anim--slide-down', '-100px', 0, 0.3, 'slide-down');
+    @include  animSlideY('.anim--slide-down_50', '-50px', 0, 0.3, 'slide-down');
+    @include  animSlideY('.anim--slide-down_20', '-20px', 0, 0.3, 'slide-down');
+    .zoom-in {
+        animation: zoomin;
+        animation-duration: 0.3s;
+        animation-fill-mode: forwards;
+        animation-iteration-count: 1;
+    }
 }

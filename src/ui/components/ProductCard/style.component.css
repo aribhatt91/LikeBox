@@ -1,0 +1,77 @@
+.product-card {
+  transition: 0.3s ease-in-out;
+  display: flex;
+  position: relative; }
+  @media (max-width: 767px) {
+    .product-card {
+      justify-content: center; } }
+  .product-card:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    bottom: -3rem;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    border-bottom: 1px solid #ececec; }
+  .product-card .product-card__thumb-wrapper {
+    height: 235px;
+    width: 235px;
+    border: 1px solid #707070;
+    background-color: #ececec; }
+    .product-card .product-card__thumb-wrapper span,
+    .product-card .product-card__thumb-wrapper .product-card__thumb {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; }
+  .product-card .product-card__detail .product-card__text-brand {
+    font-size: 27px;
+    font-weight: 500;
+    line-height: 36px;
+    color: #282c3f;
+    margin-bottom: 6px; }
+  .product-card .product-card__detail .product-card__text-name {
+    color: #727C8E;
+    font-size: 16px;
+    line-height: 1.2;
+    font-weight: 400; }
+  .product-card .product-card__detail .product-card__text-price {
+    font-size: 21px;
+    line-height: 36px;
+    font-weight: 500; }
+  .product-card .product-card__description {
+    height: auto;
+    max-height: 235px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    color: #727C8E; }
+    .product-card .product-card__description::-webkit-scrollbar {
+      width: 6px;
+      border-radius: 3px;
+      background-color: rgba(51, 51, 51, 0.1); }
+    .product-card .product-card__description::-webkit-scrollbar-thumb {
+      width: 6px;
+      border-radius: 3px;
+      background-color: rgba(51, 51, 51, 0.4); }
+      .product-card .product-card__description::-webkit-scrollbar-thumb:hover {
+        background-color: rgba(51, 51, 51, 0.8); }
+    .product-card .product-card__description::-webkit-scrollbar-track {
+      border-radius: 6px;
+      background-color: transparent; }
+
+.product-card--skeleton .product-card__thumb-wrapper {
+  border: none; }
+
+.product-card--skeleton .product-card__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+  .product-card--skeleton .product-card__text > .placeholder__element {
+    height: 1.25rem; }
+
+.product-card--skeleton .product-card__buttons > .placeholder__element {
+  height: 3rem;
+  border-radius: 3rem; }
+
+.product-card--skeleton .product-card__description > div {
+  height: 1rem; }

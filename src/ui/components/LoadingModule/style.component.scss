@@ -1,6 +1,19 @@
 $ballSize: 32px;
 $animDuration: 1s;
 
+.loading-spinner {
+    background-color: rgba($color: #fff, $alpha: 0.9);
+    top: 0;
+    left: 0;
+    .loading-spinner-icon {
+      font-size: 2.5rem;
+    }
+    .loading-spinner-text {
+      font-size: 1.25rem;
+    }
+}
+  
+
 .loading-pendulum {
     display: flex;
     position: absolute;

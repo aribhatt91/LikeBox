@@ -56,6 +56,16 @@
               text-decoration: none;
             }
         }
+        .accordion {
+            border: none;
+            width: 100%;
+            .accordion__header {
+                padding: 0.5rem 1rem !important;
+                .svg-icon {
+                    transform: scale(0.8);
+                }
+            }
+        }
     }
   }
 

@@ -56,7 +56,7 @@ export default function ForgotPasswordForm() {
                             </div>
                             }
                             <div className="row m-0">
-                            <div className="col-md-12 col-lg-12 pl-2 pr-2 clearfix float-none">
+                            <div className="col-md-12 col-lg-12 pl-2 pr-2 clearfix float-none" data-private>
                                 <AppTextInput
                                 name="email"
                                 label="Email"

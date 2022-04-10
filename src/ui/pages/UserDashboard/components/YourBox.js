@@ -23,7 +23,7 @@ export default function YourBox({currentUser}) {
 
     return (
         <div className="your-box container pl-0 pr-0">
-            <ProductGrid products={LIKED} loading={loading} header="Items you've liked"/>
+            {<ProductGrid products={LIKED} loading={loading} header="Items you've liked"/>}
             {DISLIKED && DISLIKED.length > 0 && <ProductGrid products={DISLIKED} loading={loading} header="Items you've disliked"/>}
             <div className="d-flex justify-content-center">
 

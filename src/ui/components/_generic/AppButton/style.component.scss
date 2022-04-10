@@ -59,7 +59,7 @@ $btn-disabled-text: #333;
         opacity: 0.5;
         text-decoration: none !important;
     }
-    &:not(.loading)::after{
+    &:not(.app-btn--loading)::after{
         content: "";
         position: absolute;
         top: 50%;
@@ -68,7 +68,7 @@ $btn-disabled-text: #333;
         border-radius: 50%;
         height: 0;
     }
-    &:hover:not([disabled]):not(.loading)/* , &:focus:not([disabled]), &:active:not([disabled]) */ {
+    &:hover:not([disabled]):not(.app-btn--loading)/* , &:focus:not([disabled]), &:active:not([disabled]) */ {
         text-decoration: none;
         .app-btn__text {
             /* font-size: 80%; */
@@ -79,24 +79,16 @@ $btn-disabled-text: #333;
             @include ripple-hover(#333, 'base')
         }      
     }
-    &.app-btn--white {
+    &.app-btn--secondary {
         border: 2px solid $light-btn-border;
         color: $light-btn-text;
         background-color: $light-btn;
         color: $light-btn-text !important;
         box-sizing: border-box;
-        &:hover:not([disabled]):not(.loading) {
+        &:hover:not([disabled]):not(.app-btn--loading) {
             background-color: $light-btn;
             &::after {
                 @include ripple-hover(#ececec, 'white')
-            }
-        }
-    }
-    &.app-btn--grey {
-        background-color: $grey-btn;
-        &:hover:not([disabled]):not(.loading) {
-            &::after {
-                @include ripple-hover(#000, 'grey')
             }
         }
     }
@@ -129,7 +121,7 @@ $btn-disabled-text: #333;
             border-bottom-color: transparent !important;
             animation: 0.75s linear infinite spin;
         }
-        &.app-btn--white {
+        &.app-btn--secondary {
             &::after {
                 border-color: $dark-btn-border;
             }

@@ -1,8 +1,9 @@
 import React, {Component, useEffect, useContext} from 'react';
 import { Helmet } from 'react-helmet';
-import { capitaliseAll } from '../../libs/Helper';
-import EventTracker from './../../libs/api/EventTracker';
-import { AuthContext } from '../../libs/store/contexts/AuthContext';
+import { capitaliseAll } from '../../../libs/Helper';
+import EventTracker from '../../../libs/api/EventTracker';
+import { AuthContext } from '../../../libs/store/contexts/AuthContext';
+import './style.component.css';
 
 function Page({className, pageName, category, product, children}) {
     const {currentUser, pendingAuthentication } = useContext(AuthContext);

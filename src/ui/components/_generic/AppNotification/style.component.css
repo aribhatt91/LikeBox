@@ -60,9 +60,9 @@
       background-color: #ff6b6b; }
   .app-notification.app-notification--success {
     /* background-color: #1dd1a1; */ }
-    .app-notification.app-notification--success .app-notification-icon {
+    .app-notification.app-notification--success .app-notification__icon {
       color: #1dd1a1; }
-      .app-notification.app-notification--success .app-notification-icon svg {
+      .app-notification.app-notification--success .app-notification__icon svg {
         fill: #1dd1a1; }
     .app-notification.app-notification--success .app-notification__bar {
       background-color: #1dd1a1; }
@@ -87,9 +87,29 @@
   100% {
     transform: translateX(120%); } }
 
+@keyframes SlideUp {
+  0% {
+    transform: translateY(120%); }
+  100% {
+    transform: translateY(0); } }
+
+@keyframes SlideDown {
+  0% {
+    transform: translateY(0); }
+  100% {
+    transform: translateY(120%); } }
+
 .app-notification--exit {
   animation: SlideRight 0.4s;
   animation-fill-mode: forwards; }
+
+@media (max-width: 660px) {
+  .app-notification-wrapper {
+    top: auto !important;
+    bottom: 1rem;
+    left: 5%; }
+  .app-notification--exit {
+    animation: SlideDown 0.4s; } }
 
 .app-notification__close {
   height: 1.6rem;

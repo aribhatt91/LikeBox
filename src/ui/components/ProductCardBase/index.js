@@ -11,8 +11,8 @@ export function ProductCardBaseSkeleton({className}) {
                 <div className="product-card-base__thumb d-flex justify-content-center">
                 </div>
                 <div className="product-card-base__details pt-2 pb-2">
-                    <div className="product-card-base__brand placeholder--element mb-2 col-12"></div>
-                    <div className="product-card-base__title placeholder--element col-6"></div>
+                    <div className="product-card-base__brand placeholder__element mb-2 col-12"></div>
+                    <div className="product-card-base__title placeholder__element col-6"></div>
                 </div>
             </div>
         </div>

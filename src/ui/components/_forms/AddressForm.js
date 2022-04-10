@@ -48,7 +48,7 @@ const AddressForm = ({user, address={}, cancelable=true, cancelEdit, update=fals
                     onSubmit={submitForm}
                     validationSchema={validationSchema}>
                     <div className="row m-0">
-                        <div className="col-xs-12 col-md-12 pl-md-0 pr-md-2">
+                        <div className="col-xs-12 col-md-12 pl-md-0 pr-md-2"> data-private
                             <AppTextInput
                                 name="name"
                                 label="Name*"
@@ -56,13 +56,13 @@ const AddressForm = ({user, address={}, cancelable=true, cancelEdit, update=fals
                         </div>
                     </div>
                     <div className="row m-0">
-                        <div className="col-md-6 float-left pl-md-0 pr-md-2">
+                        <div className="col-md-6 float-left pl-md-0 pr-md-2" data-private>
                             <AppTextInput
                                 name="postcode"
                                 label="Postcode*"
                             />
                         </div>
-                        <div className="col-md-6 float-left pl-md-2 pr-md-0">
+                        <div className="col-md-6 float-left pl-md-2 pr-md-0" data-private>
                             <AppTextInput
                                 name="housenum"
                                 label="House number*"
@@ -70,7 +70,7 @@ const AddressForm = ({user, address={}, cancelable=true, cancelEdit, update=fals
                         </div>
                     </div>
                     <div className="row m-0">
-                        <div className="col-md-12 float-left pl-md-0 pr-md-0">
+                        <div className="col-md-12 float-left pl-md-0 pr-md-0" data-private>
                             <AppTextInput
                                 name="street"
                                 label="Street*"
@@ -78,7 +78,7 @@ const AddressForm = ({user, address={}, cancelable=true, cancelEdit, update=fals
                         </div>
                     </div>
                     <div className="row m-0">
-                        <div className="col-md-6 float-left pl-md-0 pr-md-2">
+                        <div className="col-md-6 float-left pl-md-0 pr-md-2" data-private>
                             <AppTextInput
                                 name="city"
                                 label="City/Town*"
@@ -98,7 +98,7 @@ const AddressForm = ({user, address={}, cancelable=true, cancelEdit, update=fals
                             <AppButton
                                 label="Cancel"
                                 rounded={false}
-                                variant="white"
+                                variant="secondary"
                                 className="w-100 border-0"
                                 onClick={cancelEdit}
                             />

@@ -105,7 +105,7 @@ function UserAddress({currentUser}){
             {
             !loading && addresses && addresses.length > 0 && <React.Fragment>
 
-                {!openNewAddressForm && <h1 className="editable-section-header p-3 mb-3">Your addresses</h1>}
+                {!openNewAddressForm && <h1 className="editable-section-header p-3 mb-5">Your addresses</h1>}
 
                 <div className={"saved-address-container p-3" + (openNewAddressForm ? ' d-none' : "")}>
                     {

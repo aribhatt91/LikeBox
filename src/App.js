@@ -8,6 +8,7 @@ import SplashPage from './ui/pages/SplashPage';
 import { Helmet } from 'react-helmet';
 import EventTracker from './libs/api/EventTracker';
 import LogRocket from 'logrocket';
+import API_KEYS from './libs/keys/api-keys.json';
 
 function App() {
     const [loading, setLoading] = useState(true);
@@ -27,6 +28,9 @@ function App() {
             setLoading(false);
             document.body.style.height = 'auto';
             document.body.style.overflow = 'auto';
+            if(!document.body.classList.contains('animate--app')){
+                document.body.classList.add('animate--app');
+            }
         }, 4000);
         if(auth){
             auth.onAuthStateChanged((user) => {
@@ -35,19 +39,28 @@ function App() {
                     setLoading(false);
                     document.body.style.height = 'auto';
                     document.body.style.overflow = 'auto';
-                    LogRocket.identify(user.email, {
-                        name: user.displayName,
-                        email: user.email
-                    });
+
+                    if(!document.body.classList.contains('animate--app')){
+                        document.body.classList.add('animate--app');
+                    }
+
+                    if(!window.DEV_MODE && !window.ENV_STAGE){
+                        LogRocket.identify(user.email, {
+                            name: user.displayName,
+                            email: user.email
+                        });
+                    }
                 }
             })
         }
-        LogRocket.init('ljgr4x/the-likebox');
+        if(!window.DEV_MODE && !window.ENV_STAGE){
+            LogRocket.init(API_KEYS.LOGROCKET);
+        }
     },[])
     return ( 
             <div className="App">
                 {/*  */
-                    window.DEV_MODE && <Helmet>
+                    window.DEV_MODE && !window.adobe && <Helmet>
                         <script src="https://assets.adobedtm.com/770d56ad37f4/63b7bc8dbb9f/launch-2aefcf817d42-development.min.js" async></script>
                     </Helmet>
                 }

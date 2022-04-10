@@ -49,11 +49,11 @@ $text_color: #fff;
 
     /* Size variants */
 
-    .app-message--sm {
+    &.app-message--sm {
         padding: 0.5rem 1rem;
     }
 
-    .app-message--md {
+    &.app-message--md {
         padding: 1rem;
         border-radius: 4px;
         min-height: 40px;
@@ -62,7 +62,7 @@ $text_color: #fff;
         }
     }
 
-    .app-message--lg {
+    &.app-message--lg {
         padding: 1rem;
         border-radius: 6px;
         min-height: 56px;
@@ -73,15 +73,15 @@ $text_color: #fff;
 
     /* Type variant */
 
-    .app-message--info {
+    &.app-message--info {
         background-color: $info;
     }
 
-    .app-message--success {
+    &.app-message--success {
         background-color: $success;
     }
 
-    .app-message--error {
+    &.app-message--error {
         background-color: $error;
 
     }

@@ -43,6 +43,7 @@ const AppTextInput = ({name, label, disabled=false, type='text', ...rest}) => {
                         defaultValue={initialValues[name] || ""}
                         placeholder={label}
                         disabled={disabled ? " disabled" : ""}
+                        data-private
                     />
                 }
                 {
@@ -59,6 +60,7 @@ const AppTextInput = ({name, label, disabled=false, type='text', ...rest}) => {
                         onChange={handleChange(name)}
                         defaultValue={initialValues[name]}
                         disabled={disabled ? " disabled" : ""}
+                        data-private
                     />
                 }
             </label>

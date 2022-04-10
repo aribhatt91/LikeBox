@@ -2,137 +2,17 @@
 @import './app.text-input.scss';
 @import './app.home.scss';
 @import './app.animations.scss';
-@import './header.scss';
-@import './product_card.scss';
-@import './orders.scss';
-@import './tablayout.scss';
 
 .hidden-xs-up {
   display: none;
 }
 
-
-.card-white {
-  background-color: #fff;
-  border-radius: 4px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  transition: 0.3s all ease-in-out;
-}
-.card-white:hover, .card-white:focus {
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2)
-}
-// Component - LoadingModule.js
-@keyframes bounce {
-  0% {transform: scale(0.5);}
-  25% {transform: scale(0.8);}
-  50% {transform: scale(0.7);}
-  100% {transform: scale(1);}
-}
-.loading_module {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background: white;
-  z-index: 9999;
-  &.block {
-    position: relative;
-    min-height: 400px;
-    top: auto;
-    left: auto;
-  }
-  &.overlay {
-    position: absolute;
-    background: rgba(#fff, 0.3);
-  }
-  .loading_module_wrapper {
-    display: flex;
-    height: 100%;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    .loading_icon {
-      font-size: 20px;
-      .spinner-border {
-        width: 3rem;
-        height: 3rem;
-      }
-      .tick-wrapper {
-        width: 75px;
-        height: 75px;
-        border-radius: 50%;
-        background-color: ($accent-color, 0.2);
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        .tick-background {
-          width: 50px;
-          height: 50px;
-          border-radius: 50%;
-          background-color: $accent-color;
-          display: inline-flex;
-          justify-content: center;
-          align-items: center;
-          animation: bounce 0.5s;
-          .tick {
-            width: 24px;
-            height: 32px;
-            border: 3px solid #333;
-            background: transparent;
-            transform: rotate(30deg);
-          }
-        }
-      }
-    }
-    .loading_text {
-      margin-top: 24px;
-      font-size: 15px;
-      font-weight: 500;
-      color: #17a2b8;
-      &.success {
-        color: #333;
-        font-size: 16px;
-      }
-    }
-  }
-}
-.loading-spinner {
-  background-color: rgba($color: #fff, $alpha: 0.9);
-  top: 0;
-  left: 0;
-  .loading-spinner-icon {
-    font-size: 2.5rem;
-  }
-  .loading-spinner-text {
-    font-size: 1.25rem;
-  }
-}
-
-
-
-.p-8{
-  padding: 8px;
-}
 .float-left {
   float: left;
-}
-.flex_row {
-  display: flex;
 }
 .align-center {
   align-items: center;
 }
-.themed_link {
-  color: #000;
-  text-decoration: none;
-  &:focus, &:hover {
-    text-decoration: none;
-    color: #000;
-  }
-}
-
 
 //Component - AddressForm
 .address-form-container {
@@ -171,6 +51,7 @@
     color: #0066cc;
   }
 }
+/* UserPaymentOptionsFragment */
 .card-instance-container {
   border: 1px solid #ebebeb;
   .card-instance-display, .card-instance-edit {
@@ -245,6 +126,7 @@
   transform: translateY(300%);
   position: absolute;
 }
+
 .likebox-home-section {
   h1 {
     margin: 2rem 0.25rem;
@@ -467,32 +349,16 @@ table {
   max-height: 100%;
   overflow: auto;
 }
-.slide-up {
-  animation-name: slideup;
-  animation-duration: 0.3s;
-  animation-fill-mode: forwards;
-  animation-iteration-count: 1;
-}
-.slide-down {
-  animation-name: slidedown;
-  animation-duration: 0.3s;
-  animation-fill-mode: forwards;
-  animation-iteration-count: 1;
-}
-.zoom-in {
-  animation: zoomin;
-  animation-duration: 0.3s;
-  animation-fill-mode: forwards;
-  animation-iteration-count: 1;
-}
 
+/* Skeletons */
 .placeholder {
   transition: 0.3s ease-in-out;
   animation: anim-placeholder 1.5s infinite;
-  .placeholder--element {
+  .placeholder__element {
     background-color: $placeholder-bg;
   }
 }
+
 @media only screen and (max-width: 1024px){
 
 }
@@ -518,4 +384,48 @@ $nav-height: $nav-height-lg;
 
 .below--nav {
     top: calc(#{$nav-height});
+}
+
+
+/*  Tab Layout */
+
+.app-tab-layout {
+  width: 100%;
+  .nav-tabs {
+      border-bottom: none !important;
+      display: flex;
+
+      .nav-link {
+          text-transform: uppercase;
+          font-size: 16px;
+          line-height: 36px;
+          text-decoration: none;
+          color: #727C8E66;
+          border-bottom: 1px solid #707070;
+          border-top: 0 !important;
+              border-left: 0 !important;
+              border-right: 0 !important;
+              padding-top: 0;
+              padding-bottom: 0;
+              flex: 1;
+              text-align: center;
+          &:hover, &:focus, &:active {
+              border-top: 0 !important;
+              border-left: 0 !important;
+              border-right: 0 !important;
+              border-bottom: 1px solid #707070;
+          }
+          &.active {
+              color: #707070;
+              border-radius: 0 !important;
+              border-top: 0 !important;
+              border-left: 0 !important;
+              border-right: 0 !important;
+              border-bottom: 3px solid #707070;
+          }
+      }
+  }
+  .tab-pane {
+      padding: 1rem;;
+  }
 }

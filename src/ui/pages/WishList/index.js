@@ -15,29 +15,32 @@ const WishList = () => {
     const dispatch = useNotification();
 
     useEffect(() => {
-        if(currentUser){
+        (async () => {
+            
             setPending(true);
-            fetchWishList(currentUser.email).then(res => {
-                window.loginfo('WishListPage', res); 
-                setWishList(res); 
-            }).catch(err => {
-                window.logerror(err);
-            }).finally(() => {
+            try{
+                const res = await fetchWishList(currentUser.email);
+                if(res && Array.isArray(res)){
+                    setWishList(res.filter(item => item.id && item.title));
+                }
+            }catch(error){
+                window.logerror(error);
+            }finally{
                 setPending(false);
-            })
-        }else {
-        }
+            }
+            
+        })()
     }, [currentUser])
 
-    const removeItem = async (itemId) => {
+    const removeItem = async (productId) => {
         if(!currentUser){
             return;
         }
         try {
             setPending(true);
-            let rem = await removeItemFromWishList(currentUser.email, itemId);
+            let rem = await removeItemFromWishList(currentUser.email, productId);
             let res = await fetchWishList(currentUser.email);
-            window.loginfo('updated wishlist', res);
+            
             if(rem.type === 'success'){
                 dispatch({
                     type: rem.type,
@@ -45,19 +48,16 @@ const WishList = () => {
                     title: 'Success!'
                 })
             }
-            if(res){
-                setWishList(res);
+            if(res && Array.isArray(res)){
+                setWishList(res.filter(item => item.id && item.title));
             }
             
-        }catch(err) {
-            window.logerror(err)
-            if(err.msg){
-                dispatch({
-                    type: err.type,
-                    message: err.msg,
-                    title: 'Error'
-                })
-            }
+        }catch(error) {
+            dispatch({
+                type: 'error',
+                message: 'Something went wrong while trying to remove the item',
+                title: 'Error'
+            })
             
         }finally {
             setPending(false);
@@ -72,8 +72,8 @@ const WishList = () => {
                     {
                         wishList && wishList.length > 0 && wishList.map((item, index) => 
                             <ProductCardBase
-                                key={(item.sku || item.id) + index}
-                                name={item.name}
+                                key={item.id}
+                                name={item.title}
                                 price={item.price}
                                 url={item.link}
                                 img={item.thumbnail}
@@ -90,7 +90,7 @@ const WishList = () => {
                                                 label="Cancel" 
                                                 size="sm"
                                                 rounded={false}
-                                                variant="white"
+                                                variant="secondary"
                                                 className="w-100 border-0" 
                                                 onClick={(e) => {}}
                                                 />
@@ -102,7 +102,7 @@ const WishList = () => {
                                                 rounded={false}
                                                 className="w-100 border-0" 
                                                 onClick={()=>{
-                                                    removeItem(item.sku);
+                                                    removeItem(item.id);
                                                 }}
                                                 />
                                         </div>

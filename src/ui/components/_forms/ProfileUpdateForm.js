@@ -154,7 +154,7 @@ function ProfileUpdateForm({profile={}, onResult}){
                     <div className="row m-0">
                         <div className="field-group col-md-8 p-0">
                             <p className="col-xs-12 pr-md-3 pl-0 col-form-label">Name</p>
-                            <div className="col-xs-12 col-md-6 pr-md-3 pl-0 float-left">
+                            <div className="col-xs-12 col-md-6 pr-md-3 pl-0 float-left" data-private>
                                 <AppTextInput
                                     type="text"
                                     disabled={!piEditMode}
@@ -162,7 +162,7 @@ function ProfileUpdateForm({profile={}, onResult}){
                                     label="First name"
                                 />
                             </div>
-                            <div className="col-xs-12 col-md-6 pr-md-3 pl-0 float-left">
+                            <div className="col-xs-12 col-md-6 pr-md-3 pl-0 float-left" data-private>
                                 <AppTextInput
                                     type="text"
                                     disabled={!piEditMode}
@@ -170,7 +170,7 @@ function ProfileUpdateForm({profile={}, onResult}){
                                     label="Last name"
                                 />
                             </div>
-                            <div className="col-xs-12 pl-0 float-left mt-1">
+                            <div className="col-xs-12 pl-0 float-left mt-1" data-private>
                                 <p className="col-form-label">Gender</p>
                                 <AppRadioInput 
                                     name="gender"
@@ -180,7 +180,7 @@ function ProfileUpdateForm({profile={}, onResult}){
                                 />
                             </div>
                             
-                            <div className="col-12 pr-md-3 pl-0 float-left mt-3">
+                            <div className="col-12 pr-md-3 pl-0 float-left mt-3" data-private>
                                 <p className="col-form-label">Date of birth (DD/MM/YYYY)</p>
                                 <AppDateInput disabled={!piEditMode} />
                             </div>

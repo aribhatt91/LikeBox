@@ -11,9 +11,8 @@
     <title>LikeBox</title>
     <script src="https://www.googleoptimize.com/optimize.js?id=OPT-T5SSNJ9"></script>
     <script type="text/javascript">
-      window.DEV_MODE = window.location.hostname === 'localhost' || window.localStorage && localStorage.getItem('dev_mode') === 'true';
-      /* window.ENV_STAGE = window.location.hostname === 'the-likebox-stage.web.app'; */
-    
+      window.DEV_MODE = (window.location.hostname === 'localhost' || window.localStorage && localStorage.getItem('dev_mode') === 'true') && localStorage.getItem('dev_mode_off') !== 'true';
+      window.ENV_STAGE = window.location.hostname === 'the-likebox-stage.web.app';
       window.loginfo = function () { 
         if(window.DEV_MODE || localStorage.getItem('_debug_') === 'true'){
           Array.prototype.unshift.call(arguments, 'LIKEBOX:LOG::');
@@ -23,18 +22,10 @@
       window.logerror = window.console && window.console.error ? window.console.error : function(){};
 
       window.digitalData = window.digitalData || {
-        page: {
-
-        },
-        user: {
-
-        },
-        product: {
-
-        },
-        events: {
-
-        }
+        page: {},
+        user: {},
+        product: {},
+        events: {}
       };
     </script>
 
@@ -59,27 +50,9 @@
 
       gtag('config', 'UA-196770190-1');
     </script>
-
-    
-<!-- 
-    <script defer src="/__/firebase/8.2.7/firebase-app.js"></script>
-    <script defer src="/__/firebase/8.2.7/firebase-auth.js"></script>
-    <script defer src="/__/firebase/8.2.7/firebase-database.js"></script>
-    <script defer src="/__/firebase/8.2.7/firebase-firestore.js"></script>
-    <script defer src="/__/firebase/8.2.7/firebase-functions.js"></script>
-    <script defer src="/__/firebase/8.2.7/firebase-messaging.js"></script>
-    <script defer src="/__/firebase/8.2.7/firebase-storage.js"></script>
-    <script defer src="/__/firebase/8.2.7/firebase-analytics.js"></script>
-    <script defer src="/__/firebase/8.2.7/firebase-remote-config.js"></script>
-    <script defer src="/__/firebase/8.2.7/firebase-performance.js"></script>
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script> -->
     
   </head>
   <body>
-    <!-- Google Tag Manager (noscript) -->
-    <!-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KR39PGX"
-      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> -->
-      <!-- End Google Tag Manager (noscript) -->
     <noscript>
       You need to enable JavaScript to run this app.
     </noscript>

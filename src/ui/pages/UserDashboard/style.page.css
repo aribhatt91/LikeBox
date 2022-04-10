@@ -98,3 +98,25 @@
           align-items: center; }
       .user-dashboard .user-settings-wrapper .user-settings.detail-open {
         transform: translateX(-100%); }
+
+.tab-slider .slick-list {
+  position: relative; }
+  .tab-slider .slick-list::after {
+    content: "";
+    height: 100%;
+    position: absolute;
+    width: 30px;
+    background-image: linear-gradient(to right, transparent, white);
+    right: -1px;
+    top: 0; }
+  .tab-slider .slick-list::before {
+    content: "";
+    height: 100%;
+    position: absolute;
+    width: 30px;
+    background-image: linear-gradient(to right, white, transparent);
+    left: -1px;
+    top: 0; }
+
+.tab-slider .slick-arrow:not(.slick-disabled)::before {
+  color: #000 !important; }

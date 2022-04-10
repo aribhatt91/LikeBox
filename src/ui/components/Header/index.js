@@ -11,7 +11,7 @@ import AppButton from '../_generic/AppButton';
 import MainNavigation from '../MainNavigation';
 import ScaleIcon from '../_svg-components/ScaleIcon';
 import HeartLineIcon from '../_svg-components/HeartLineIcon.js';
-
+import './style.module.css';
 
 function Header (props) {
 
@@ -24,22 +24,14 @@ function Header (props) {
     try{
       if(currentUser){
         logout();
-        /* //window.loginfo('SIGNOUT', res, currentUser);
-        window.setTimeout(()=>{
-          window.loginfo('SIGNOUT', currentUser);
-          //window.location.replace('/');
-        }, 1000) */
-        
-        //history.replace('/login');
       }
-      
     }catch(err){
       console.err('Sign out error:', err);
     }
   }
   
     return (
-      <header className="App-header sticky-top">
+      <header className="app-header sticky-top">
         <div className={"topnav" /*Add scrolling functionality if needed*/}>
           <Navbar variant="light">
             <MobileNavigation user={currentUser} logout={signout} />
@@ -51,7 +43,7 @@ function Header (props) {
             </Navbar.Brand>
             
             <Nav className="mr-auto d-none d-lg-flex navbar-nav">
-              {currentUser&& <MainNavigation/>}
+              {currentUser && <MainNavigation/>}
             </Nav>
             <Nav className="justify-content-end d-none d-lg-flex">
             
@@ -94,8 +86,6 @@ function Header (props) {
                 }
               </React.Fragment>
               }
-
-              
 
             </Nav>
           </Navbar>

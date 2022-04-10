@@ -11,7 +11,7 @@ export default function AppButton({
     className, 
     size="md", 
     type="button", 
-    variant="dark", 
+    variant="primary", 
     rounded=true, 
     loading=false, 
     ext=false,
@@ -46,7 +46,7 @@ AppButton.propTypes = {
     onClick: PropTypes.func,
     className: PropTypes.string,
     size: PropTypes.oneOf(['sm', 'md', 'lg']),
-    variant: PropTypes.oneOf(['dark', 'white', 'grey', 'transparent']),
+    variant: PropTypes.oneOf(['primary', 'secondary', 'transparent']),
     rounded: PropTypes.bool,
     loading: PropTypes.bool,
     ext: PropTypes.bool

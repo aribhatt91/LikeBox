@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { HEADER_NAV_MENU } from '../../libs/constants/header-navs';
-import AppButton from './_generic/AppButton';
-import AppImage from './_generic/AppImage';
+import { HEADER_NAV_MENU } from '../../../libs/constants/header-navs';
+import AppButton from '../_generic/AppButton';
+import AppImage from '../_generic/AppImage';
 
 export default function MainNavigation() {
     const [open, setOpen] = useState(false);
@@ -46,7 +46,7 @@ export default function MainNavigation() {
                         aria-expanded={open && (active === index)} 
                         onClick={(e) => {e.stopPropagation()}}>
                         <a href="#" className={"nav-anchor text-uppercase"} onClick={(e) => {e.stopPropagation();openTab(index);}}>{item}</a>
-                        <div className={"nav-dropdown-container" + (open ? ' slide-down': '')}>
+                        <div className={"nav-dropdown-container" + (open ? ' anim--slide-down_20': '')}>
                         
                             <div className="nav-dropdown">
                                 
@@ -123,7 +123,7 @@ export default function MainNavigation() {
                     aria-expanded={open && (active === index)} 
                     onClick={(e) => {e.stopPropagation()}}>
                         <a href="#" className={"nav-anchor text-uppercase"} onClick={(e) => openTab(index)}>{item}</a>
-                        <div className={"nav-dropdown-container" + (open ? ' slide-down': '')}>
+                        <div className={"nav-dropdown-container" + (open ? ' anim--slide-down_20': '')}>
                         
                             <div className="nav-dropdown">
                                 

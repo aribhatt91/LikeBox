@@ -50,6 +50,13 @@
       text-decoration: none; }
       .nav-mobile__list .nav-mobile__list-item a:hover, .nav-mobile__list .nav-mobile__list-item a:focus, .nav-mobile__list .nav-mobile__list-item a:active {
         text-decoration: none; }
+    .nav-mobile__list .nav-mobile__list-item .accordion {
+      border: none;
+      width: 100%; }
+      .nav-mobile__list .nav-mobile__list-item .accordion .accordion__header {
+        padding: 0.5rem 1rem !important; }
+        .nav-mobile__list .nav-mobile__list-item .accordion .accordion__header .svg-icon {
+          transform: scale(0.8); }
 
 .nav-mobile .accordion-container {
   width: 100%;
