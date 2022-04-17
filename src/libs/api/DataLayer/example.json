@@ -12,7 +12,8 @@
         "id": "user0001",
         "email": "user@example.com",
         "name": "User",
-        "status": "logged-in"
+        "status": "logged-in",
+        "gender": "m"
     },
     "product": {
         "id": "product0001",

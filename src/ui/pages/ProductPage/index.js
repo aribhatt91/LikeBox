@@ -38,7 +38,7 @@ function ProductForm({currentUser, product, addToCart, pending_update=false }){
 
     if(newVar){
       setVariant(newVar);
-      EventTracker.trackEvent(EventTracker.events.product.SELECT_SIZE, variant);
+      EventTracker.trackEvent(EventTracker.events.product.SELECT_SIZE, newVar);
     }
   }
 

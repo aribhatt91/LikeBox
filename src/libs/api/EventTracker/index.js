@@ -212,8 +212,10 @@ const trackProductView = (product) => {
     triggerEvent(Events.product.PRODUCT_VIEW);
 }
 
-const trackProductVariantSelect = (product, variant) => {
-    DataLayer.setProductEvent(Events.product.SELECT_SIZE, product);
+const trackProductVariantSelect = (variant) => {
+    DataLayer.setProductEvent(Events.product.SELECT_SIZE, variant);
+    DataLayer.selectVariant(variant);
+    triggerEvent(Events.product.SELECT_SIZE);
 }
 
 const trackAddToWishList = (product) => {

@@ -1,0 +1,40 @@
+{
+    "title": "LikeBox | Home",
+    "path": "/",
+    "user": {
+        "name": "Dashboard",
+        "path": "/user",
+        "profile": {
+            "name": "Dashboard | Profile",
+            "path": "user/profile"
+        },
+        "sizing": {
+            "name": "Dashboard | Sizing",
+            "path": "user/sizing"
+        },
+        "address": {
+            "name": "Dashboard | Addresses",
+            "path": "/user/addresses"
+        },
+        "box": {
+            "name":"Dashboard | Your Box"
+        }
+    },
+
+    "wishlist": {
+        "name": "Wishlist",
+        "path": "/wishlist"
+    },
+    "cart": {
+        "name": "Cart",
+        "path": "/cart"
+    },
+    "checkout": {
+        "name": "Checkout",
+        "path": "/checkout"
+    },
+    "about": {
+        "name": "About LikeBox",
+        "path": "/about"
+    }
+}

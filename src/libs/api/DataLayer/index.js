@@ -70,6 +70,14 @@ const DataLayer = {
             productId: product.id
         }
     },
+    selectVariant: function(variant) {
+        console.log('selectVariant',variant);
+        if(!variant || !variant.size){
+            return;
+        }
+        initDataLayer();
+        window[DATA_LAYER_NAME][PRODUCT_KEY].size = variant.size || "";
+    },
     clearProduct: function() {
         window[DATA_LAYER_NAME][PRODUCT_KEY] = {};
     },
