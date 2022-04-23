@@ -35,7 +35,7 @@ const trackEvent = function() {
             break;
         case Events.page.SEARCH_RESULT_EMPTY:
             /* (event_type, search_term) */
-            //trackSearchResult(arguments[1]);
+            trackSearchResult(arguments[1]);
             break;
 
         /* USER EVENTS */
@@ -75,6 +75,7 @@ const trackEvent = function() {
         case Events.user.LOGOUT:
             trackLogout();
             break;
+        /* --- */
         /* PRODUCT EVENTS */
         case Events.product.PRODUCT_VIEW:
             /* (event_type, product) */
@@ -104,6 +105,7 @@ const trackEvent = function() {
             break;
         case Events.transaction.ORDER_CONFIRM: //purchase 
             break;
+        /* --- */
         /* UI EVENTS */
         case Events.ui.HOME_PAGE_SUBSCRIPTION_CTA:
             break;
@@ -119,7 +121,17 @@ const trackEvent = function() {
         case Events.ui.NOTIFICATION_CLICKED:
             trackNotificationClick();
             break;
+        /* --- */
         /* TRANSACTION EVENTS */
+        case Events.transaction.FETCH_CART:
+            /* (cart) */
+            updateCart(arguments[1]);
+            break;
+        case Events.transaction.FETCH_CART_ERROR:
+            /* (cart) */
+            //updateCart(arguments[1]);
+            trackCartError(Events.transaction.FETCH_CART_ERROR);
+            break;
         case Events.transaction.VIEW_CART:
             /* (cart) */
             trackCartView(arguments[1]);
@@ -127,6 +139,11 @@ const trackEvent = function() {
         case Events.transaction.UPDATE_CART:
             /* (cart) */
             updateCart(arguments[1]);
+            break;
+        case Events.transaction.UPDATE_CART_ERROR:
+            /* (cart) */
+            //updateCart(arguments[1]);
+            trackCartError(Events.transaction.UPDATE_CART_ERROR);
             break;
         case Events.transaction.START_CHECKOUT:
             /* (cart) */
@@ -179,15 +196,20 @@ const trackViewChange = (view_name) => {
 }
 
 const trackSearch = (search_term) => {
-    DataLayer.setSearchTerm(search_term);
+    DataLayer.setSearch(search_term);
     GAEventStore.PAGE_EVENTS.logSearch(search_term);
     RecsApi.search(search_term);
 }
 
 const trackSearchResult = (search_term, search_result=[]) => {
-    if(search_result && search_result.length){
+    if(search_result && search_result.length > 0){
+        DataLayer.setSearch(search_term, "success");
         GAEventStore.PAGE_EVENTS.logViewSearchResult(search_term, search_result);
         GAEventStore.PRODUCT_EVENTS.logViewItemsInCategory(search_term, search_result);
+        triggerEvent(Events.page.SEARCH_RESULT)
+    }else {
+        DataLayer.setSearch(search_term, "failure");
+        triggerEvent(Events.page.SEARCH_RESULT_EMPTY);
     }
 }
 const trackErrorPage = () => {
@@ -330,7 +352,10 @@ const trackCartView = (cart) => {
     updateCart(cart);
     triggerEvent(Events.transaction.VIEW_CART);
     GAEventStore.PAGE_EVENTS.logViewCart(cart);
+}
 
+const trackCartError = (errorEvent) => {
+    triggerEvent(errorEvent)
 }
 
 const trackStartCheckout = (cart) => {

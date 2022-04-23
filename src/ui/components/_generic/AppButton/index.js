@@ -41,7 +41,7 @@ export default function AppButton({
 }
 
 AppButton.propTypes = {
-    label: PropTypes.string.isRequired,
+    label: PropTypes.any.isRequired,
     href: PropTypes.string,
     onClick: PropTypes.func,
     className: PropTypes.string,

@@ -1,36 +1,36 @@
 @import '../../../assets/style/app.variables.scss';
 
-.product-home-page {
-    .product-details {
-        .product-name {
+.product-page {
+    .product__details {
+        .product__name {
             font-weight: 500;
             font-size: 16px;
             line-height: 36px;
         }
-        .product-brand {
+        .product__brand {
             font-weight: 500;
             text-transform: uppercase;
         }
-        .product-price {
-            .product-sale-price {
+        .product__price {
+            .product__price-sale {
                 font-weight: 500;
                 font-size: 21px;
             }
-            .product-full-price {
+            .product__price-full {
                 font-size: 14px;
                 text-decoration: line-through;
             }
-            .product-discount {
+            .product__discount {
                 font-size: 14px;
                 color: $success;
             }
-            .price-tax-info {
+            .price__taxinfo {
                 font-size: 12px;
                 color: $success;
                 font-weight: 500;
             }
         }
-        .product-rating {
+        .product__rating {
             font-size: 14px;
             .rating-star {
                 color: #ebebeb;

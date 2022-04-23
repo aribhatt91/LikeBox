@@ -19,7 +19,7 @@ export default function SubscriptionComponent({onComplete}) {
                 //logClickSubscriptionCTA();
                 EventTracker.trackEvent(EventTracker.events.ui.HOME_PAGE_SUBSCRIPTION_CTA);
                 let methods = await fetchSignInMethods(userInput.email)
-                //window.loginfo(methods);
+                window.loginfo(methods);
                 if(methods.length === 0){
                     //Signup user
                     //window.loginfo('Signup user');
@@ -27,7 +27,9 @@ export default function SubscriptionComponent({onComplete}) {
                 }else if(methods.indexOf('password') > -1){
                     //Sign in user
                     //window.loginfo('Sign in user');
-                    history.push('/login?email=' + window.encodeURIComponent(userInput.email));
+                    history.push('/login?method=password&email=' + window.encodeURIComponent(userInput.email));
+                }else if(methods.indexOf('google.com') > -1){
+                    history.push('/login?method=google');
                 }
 
             }catch(err){

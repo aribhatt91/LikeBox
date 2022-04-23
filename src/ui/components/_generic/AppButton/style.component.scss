@@ -92,6 +92,19 @@ $btn-disabled-text: #333;
             }
         }
     }
+    &.app-btn--transparent {
+        border: none;
+        color: $dark-btn-text;
+        background-color: rgba(0,0,0,0.03);
+        color: $light-btn-text !important;
+        box-sizing: border-box;
+        &:hover:not([disabled]):not(.app-btn--loading) {
+            background-color: rgba(0,0,0,0.03);;
+            &::after {
+                @include ripple-hover(#ececec, 'white')
+            }
+        }
+    }
     &.app-btn--lg {
         height: 80px;
     }

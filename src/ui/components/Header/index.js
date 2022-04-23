@@ -68,7 +68,7 @@ function Header (props) {
                 </NavLink>
                 {
                   window.DEV_MODE && <NavLink activeClassName="active" to="/cart">
-                  <CartLink />
+                  <CartLink user={currentUser} />
                 </NavLink> 
                 }
                 

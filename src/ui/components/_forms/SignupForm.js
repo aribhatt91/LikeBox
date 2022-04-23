@@ -11,6 +11,8 @@ import AppDateInput from '../_generic/AppDateInput';
 import { useHistory } from 'react-router-dom';
 import { parseSearchParams } from '../../../libs/Helper';
 import EventTracker from '../../../libs/api/EventTracker';
+import AppButton from '../_generic/AppButton';
+import GoogleLogo from '../_svg-components/GoogleLogo';
 
 let USER_TEMP = null;
 function SignupForm(props){
@@ -22,7 +24,7 @@ function SignupForm(props){
     const params = parseSearchParams(history.location.search);
     const email = params.email || "";
 
-    const {signup, currentUser, updateName} = useContext(AuthContext);//useAuth();
+    const {signup, currentUser, updateName, signInWithGoogle} = useContext(AuthContext);//useAuth();
 
     //window.loginfo('SignupForm', currentUser);
     const submitForm =  async (userInput, {setSubmitting}) => {
@@ -202,6 +204,17 @@ function SignupForm(props){
                         </div>
                     </div>
                     </AppForm>
+                </div>
+
+                <div className='d-flex mt-4 mb-4 justify-content-center text-center'>
+                    OR
+                </div>
+                <div className='d-flex row m-0 justify-center'>
+                    <div className="pl-2 pr-2 w-100">
+                        <div className="col-12">
+                            <AppButton onClick={signInWithGoogle} className="w-100" variant="transparent" label={<React.Fragment><GoogleLogo size={18}/><span className='ml-2'>Sign-in with Google</span></React.Fragment>}></AppButton>
+                        </div>
+                    </div>
                 </div>
             </div>
           

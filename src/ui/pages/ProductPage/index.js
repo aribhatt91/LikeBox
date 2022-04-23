@@ -32,7 +32,6 @@ function ProductForm({currentUser, product, addToCart, pending_update=false }){
   } */
 
   const sizeSelect = (e) => {
-    window.loginfo('sizeSelect', e.target.value);
     const val = e.target.value,
     newVar = product.variants.find(v => v.size === val);
 
@@ -51,15 +50,15 @@ function ProductForm({currentUser, product, addToCart, pending_update=false }){
 
   return (
     <React.Fragment>
-      <h3 className="product-brand text-uppercase mb-0">{product.brand}</h3>
-      <h5 className="product-name mb-lg-3">{variant.title || product.title}</h5>
-      <div className="product-price">
+      <h3 className="product__brand text-uppercase mb-0">{product.brand}</h3>
+      <h5 className="product__name mb-lg-3">{variant.title || product.title}</h5>
+      <div className="product__price">
         {
-          product.full_price && product.full_price > product.price && <div className="product-full-price mb-1">
+          product.full_price && product.full_price > product.price && <div className="product__price-full mb-1">
           <PriceText value={product.full_price}/>
         </div>
         }
-        <div className="product-sale-price">
+        <div className="product__price-sale">
           <PriceText value={product.price}/>
         </div>
         {/* <div className="price-tax-info mt-1 mb-3">Inclusive of all taxes</div> */}
@@ -134,7 +133,7 @@ function ProductPage(props) {
 
       let product = await fetchProduct(id);
       setProduct(product);
-      EventTracker.trackEvent(EventTracker.events.product.PRODUCT_VIEW, product);
+      EventTracker.trackEvent(EventTracker.events.product.PRODUCT_VIEW, {...product, size: product && product.variants ? product.variants.size || "" : ""});
       
     }catch(err){
       window.logerror('ProductPage', err);
@@ -154,7 +153,7 @@ function ProductPage(props) {
 
   return (
     <React.Fragment>
-    {(pending || product) && <Page className={"product-home-page pt-2 pt-lg-5 pb-5 position-relative"} product={product} pageName={"product-page"}>
+    {(pending || product) && <Page className={"product-page pt-2 pt-lg-5 pb-5 position-relative"} product={product} pageName={"product-page"}>
         {pending && <LoadingPendulum />}
         {!pending && product && 
           <div className="d-block">
@@ -169,7 +168,7 @@ function ProductPage(props) {
               images={product.images}
               productName={product.title}
             />
-            <div className="product-details col-lg-5 float-left">
+            <div className="product__details col-lg-5 float-left">
               <ProductForm 
                 currentUser={currentUser} 
                 product={product}

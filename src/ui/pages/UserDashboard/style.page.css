@@ -120,3 +120,6 @@
 
 .tab-slider .slick-arrow:not(.slick-disabled)::before {
   color: #000 !important; }
+
+.tab-slider .tab-slider__content {
+  min-height: 300px; }

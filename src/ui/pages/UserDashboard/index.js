@@ -75,28 +75,20 @@ if(window.DEV_MODE) {
     )
 }
 
-const TabSlider = ({tabs, settings, user, activeIndex=0}) => {
-    const [selected, setSelected] = useState(tabs[activeIndex]);
-
-    const selectTab = (index) => {
-        if(selected !== tabs[index]){
-            setSelected(tabs[index]);
-            EventTracker.trackEvent(EventTracker.events.page.VIEW_CHANGE, "user-dashboard-" + index);
-        }
-    }
+const TabSlider = ({tabs, settings, user, selected}) => {
     return (
         <div className='tab-slider container row d-flex flex-column mr-0 ml-0'>
             <div className='col-12 col-lg-9 mx-auto'>
                 <Slider className='tab-slider_buttons' {...settings}>
                     {
                         tabs.map((tab, index) => <div className="tab-slider_button mr-4" key={tab.key}>
-                            <AppButton onClick={() => {selectTab(index);}} variant={selected.key === tab.key ? "primary" : "secondary"} label={tab.title}  key={tab.key} />
+                            <AppButton href={`/user/${tab.key}`} variant={selected.key === tab.key ? "primary" : "secondary"} label={tab.title}  key={tab.key} />
                         </div>)
                     }
                 </Slider>
             </div>
             
-            <div className='d-flex col-12'>
+            <div className='tab-slider__content d-flex col-12'>
                 {
                     <Suspense fallback={<LoadingModule />}>
                         <selected.component currentUser={user} />
@@ -109,16 +101,25 @@ const TabSlider = ({tabs, settings, user, activeIndex=0}) => {
 
 
 function UserDashboard() {
-    const {slug, topic} = useParams();
+    const { slug } = useParams();
     const {currentUser} = useContext(AuthContext);
     const SLUGS = TABS.map(tab => tab.key);
     let activeIndex = SLUGS.indexOf(slug);
     activeIndex = activeIndex > -1 ? activeIndex : 0;
+    document.title = `Dashboard | ${TABS[activeIndex].title}`;
+
+    useEffect(()=>{
+        EventTracker.trackEvent(EventTracker.events.page.PAGE_VIEW, document.title, "dashboard");
+        EventTracker.trackEvent(EventTracker.events.page.VIEW_CHANGE, "user-dashboard-" + slug);
+        /* activeIndex = SLUGS.indexOf(slug);
+        activeIndex = activeIndex > -1 ? activeIndex : 0; */
+        
+    }, [slug]);
 
     return (
         <Page className="user-dashboard d-flex" pageName={"dashboard"}>
             <div className="container">
-                <TabSlider settings={CONFIG} tabs={TABS} onClick={()=>{}} user={currentUser} activeIndex={activeIndex} />
+                <TabSlider settings={CONFIG} tabs={TABS} onClick={()=>{}} user={currentUser} activeIndex={activeIndex} selected={TABS[activeIndex]} />
             </div>
         </Page>
     );

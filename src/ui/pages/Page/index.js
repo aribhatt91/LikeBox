@@ -50,7 +50,7 @@ function Page({className, pageName, category, product, children}) {
     }, [pageName])
 
     useEffect(() => {
-        if(['product-page', 'login', 'register', 'reset-password', 'category-page'].indexOf(pageName) === -1 && pageName && !pendingAuthentication){
+        if(['product-page', 'login', 'register', 'reset-password', 'category-page', 'dashboard'].indexOf(pageName) === -1 && pageName && !pendingAuthentication){
             EventTracker.trackEvent(EventTracker.events.page.PAGE_VIEW, pageTitle, pageName);
             EventTracker.trackEvent(EventTracker.events.page.VIEW_CHANGE, pageName);          
         }

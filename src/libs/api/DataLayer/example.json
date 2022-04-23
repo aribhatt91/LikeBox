@@ -4,9 +4,12 @@
         "path": "/",
         "section": "home",
         "server": "localhost",
-        "language": "en_GB",
+        "language": "en",
         "view": "home",
-        "search": ""
+        "search": {
+            "query": "hoodies",
+            "result": "success"
+        }
     },
     "user": {
         "id": "user0001",
@@ -24,9 +27,11 @@
             "eventType": "product-view"
         }
     },
+    "products": [],
     "cart": {
         "id": "cart0001",
         "total": 100,
+        "currency": "GBP",
         "products": [{
             "id": "product0001",
             "quantity": 1,

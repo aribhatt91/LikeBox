@@ -1,6 +1,11 @@
 $ballSize: 32px;
 $animDuration: 1s;
 
+.loading-module {
+    min-height: 300px;
+    align-items: center;
+    justify-content: center;
+}
 .loading-spinner {
     background-color: rgba($color: #fff, $alpha: 0.9);
     top: 0;

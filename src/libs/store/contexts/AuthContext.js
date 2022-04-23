@@ -1,7 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { auth } from '../../api/firebase';
+import { auth, GoogleSignIn } from '../../api/firebase';
 //import signup from './../../libs/signupService';
 import EventTracker from '../../api/EventTracker';
+import { addUserProfile } from '../../UserService';
 
 export const AuthContext = React.createContext();
 
@@ -81,6 +82,37 @@ export function AuthProvider({children}){
         }
     }
 
+    async function signInWithGoogle(){
+        try{
+            EventTracker.trackEvent(EventTracker.events.user.LOGIN_START, "google");
+            const res = await GoogleSignIn(auth);
+            window.loginfo('Google sign in res', res);
+            if(res.user){
+
+                try{
+                    /* Add User Object to Database */
+                    let user = {},
+                    name = (res.user.displayName || "").trim().split(' ');
+                    user.email = res.user.email;
+                    user.name = {};
+                    user.name.fname = name[0] || "";
+                    user.name.lname = name.length > 1 ? name[name.length - 1] || "" : "";
+                    await addUserProfile(user);
+                }catch(error){
+                    window.logerror('signInWithGoogle::addUserProfile::error', error)
+                }
+                
+                setUser(res.user);
+                const token = await res.user.getIdToken();
+                localStorage.setItem('user_token', res.user, token);
+                EventTracker.trackEvent(EventTracker.events.user.LOGIN_COMPLETE, "google");
+            }
+        }catch(error){
+            window.logerror('signInWithGoogle::error::', error);
+            EventTracker.trackEvent(EventTracker.events.user.LOGIN_ERROR, error);
+        }
+    }
+
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(async (user, error) => {
             setLoading(true);
@@ -115,7 +147,8 @@ export function AuthProvider({children}){
         updateEmail,
         updatePassword,
         updateName,
-        updatePhotoUrl
+        updatePhotoUrl,
+        signInWithGoogle
     };
     return (
         <AuthContext.Provider value={value}>

@@ -10,6 +10,8 @@ import { AuthContext } from '../../../libs/store/contexts/AuthContext';
 import { Link, useHistory } from 'react-router-dom';
 import { parseSearchParams } from '../../../libs/Helper';
 import EventTracker from '../../../libs/api/EventTracker';
+import AppButton from '../_generic/AppButton';
+import GoogleLogo from '../_svg-components/GoogleLogo';
 
 
 const validationSchema = LOGIN_FORM_SCHEMA;
@@ -18,10 +20,11 @@ const LoginForm = ({onComplete}) => {
   //const { signInUser, pending, user, loggedIn } = props;
   const [ submitted, setSubmitted] = useState(false);
   const [ error, setError ] = useState(null);
-  const {login, currentUser} = useContext(AuthContext);
+  const {login, currentUser, signInWithGoogle} = useContext(AuthContext);
   const history = useHistory();
   const params = parseSearchParams(history.location.search);
-  const email = params.email || "";
+  const email = params.email || "",
+  method = params.method || "";
   const initialValues = {
     email,
     password: ""
@@ -63,9 +66,9 @@ const LoginForm = ({onComplete}) => {
           currentUser && <SuccessMessage message={"You are logged in!"} />
         }
 
-        <div className={"login-form-container anim--slide-up" + (currentUser ? " d-none": "")}>
+        <div className={"login-form-container anim--slide-up" + (currentUser ? " d-none": " d-flex flex-column")}>
           <h1 className="login-form-header mb-5 pl-2 pr-2 font-weight-normal text-center">Sign into your account</h1>
-          <form className={"login-form"}>
+          <form className={"login-form"} style={{order: (method === 'google' ? 2 : 0)}}>
 
             <AppForm
               initialValues={initialValues}
@@ -113,6 +116,13 @@ const LoginForm = ({onComplete}) => {
 
             </AppForm>
           </form>
+          <div className='d-flex mt-4 mb-4 justify-content-center text-center' style={{order: 1}}>
+            OR
+          </div>
+          <div className='d-flex justify-center' style={{order: (method === 'google' ? 0 : 2)}}>
+            <AppButton onClick={signInWithGoogle} className="col-12" variant="transparent" label={<React.Fragment><GoogleLogo size={18}/><span className='ml-2'>Sign-in with Google</span></React.Fragment>}></AppButton>
+          </div>
+          
         </div>
         
       </div>

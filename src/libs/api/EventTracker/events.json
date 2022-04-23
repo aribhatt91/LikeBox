@@ -18,7 +18,9 @@
         "ADD_TO_FAVOURITE": "add-to-favourite",
         "REMOVE_FROM_FAVOURITE": "remove-from-favourite",
         "ADD_TO_BLACKLIST": "add-to-blacklist",
-        "REMOVE_FROM_BLACKLIST": "remove-from-blacklist"
+        "REMOVE_FROM_BLACKLIST": "remove-from-blacklist",
+        "RECOMMENDATIONS_VIEW": "recommendations-view",
+        "RECOMMENDATIONS_CLICK": "recommendations-click"
     },
     "user": {
         "LOGIN_START": "login-start",
@@ -28,21 +30,30 @@
         "SIGNUP_COMPLETE": "signup-complete",
         "SIGNUP_ERROR": "signup-error",
         "UPDATE_PROFILE": "update-profile",
+        "UPDATE_PROFILE_ERROR": "update-profile-error",
         "UPDATE_ADDRESS": "update-address",
+        "UPDATE_ADDRESS_SUCCESS": "update-address-success",
+        "UPDATE_ADDRESS_ERROR": "update-address-error",
         "AUTHENTICATED": "authenticated",
         "AUTHENTICATTION_ERROR": "authentication-error",
         "UPDATE_STYLE": "update-style",
         "LOGOUT": "logout"
     },
     "transaction": {
+        "FETCH_CART": "fetch-cart-error",
+        "FETCH_CART_ERROR": "fetch-cart-error",
         "VIEW_CART": "view-cart",
         "UPDATE_CART": "update-cart",
+        "UPDATE_CART_ERROR": "update-cart-error",
         "START_CHECKOUT": "checkout-start",
         "SELECT_ADDRESS": "select-address",
         "SELECT_PAYMENT_METHOD": "select-payment-method",
         "SELECT_DELIVERY_OPTION": "select-delivery-option",
         "CHECKOUT_ERROR": "checkout-error",
-        "ORDER_CONFIRM": "order-confirm"
+        "ORDER_CONFIRM": "order-confirm",
+        "CANCEL_ORDER": "cancel-order",
+        "CANCCEL_ORDER_SUCCESS": "cancel-order-success",
+        "CANCEL_ORDER_ERROR": "cancel-order-error"
     },
     "ui": {
         "NAVIGATION_ITEM_CLICK": "nav-item-click",

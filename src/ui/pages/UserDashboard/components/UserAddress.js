@@ -36,12 +36,13 @@ function UserAddress({currentUser}){
     const [openNewAddressForm, setOpenNewAddressForm] = useState(false);
 
     useEffect(() => {
-        try{
-            if(!loading){
-                setLoading(true);
-            }
-            if(currentUser){
-                (async()=>{
+        (async()=>{
+            try{
+                if(!loading){
+                    setLoading(true);
+                }
+                if(currentUser){
+                    
                     let res = await fetchAddresses(currentUser.email);
                     res = res || [];
                     if(res.length > 0){
@@ -49,14 +50,15 @@ function UserAddress({currentUser}){
                     }else {
                         setOpenNewAddressForm(true);
                     }
-                })()
+                    
+                }
+                
+            }catch(err){
+                window.logerror('UserAddressFragment:useEffect:', err);
+            }finally{
+                setLoading(false);
             }
-            
-        }catch(err){
-            window.logerror('UserAddressFragment:useEffect:', err);
-        }finally{
-            setLoading(false);
-        }
+        })()
     }, [currentUser])
 
     const onAddressOp = (result) => {
@@ -93,7 +95,7 @@ function UserAddress({currentUser}){
     }
 
     return (
-        <div className={"address-section editable-section w-100"}>
+        <div className={"address-section editable-section col-12 col-lg-8 mx-auto"}>
 
             {
                 loading && <div className="m-5">
@@ -105,7 +107,7 @@ function UserAddress({currentUser}){
             {
             !loading && addresses && addresses.length > 0 && <React.Fragment>
 
-                {!openNewAddressForm && <h1 className="editable-section-header p-3 mb-5">Your addresses</h1>}
+                {!openNewAddressForm && <h2 className="mt-5 mb-5 text-center text-bold">Your addresses</h2>}
 
                 <div className={"saved-address-container p-3" + (openNewAddressForm ? ' d-none' : "")}>
                     {
@@ -126,8 +128,8 @@ function UserAddress({currentUser}){
             !loading && <div className="add-address-container w-100 mb-4">
                 {
                     !openNewAddressForm && (!addresses || addresses.length === 0) && <div className="p-3 mb-3 mt-3">
-                        <h3>Looks like you haven't added an address yet!</h3>
-                        <h5> Click below to add one.</h5>
+                        <h3 className='mt-5 text-bold'>Looks like you haven't added an address yet!</h3>
+                        <h5 className='mb-5'> Click below to add one.</h5>
                     </div>
                 }
                 {!openNewAddressForm && <div className={"d-inline-block p-3"}>

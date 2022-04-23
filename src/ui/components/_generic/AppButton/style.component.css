@@ -73,6 +73,27 @@
     background-color: #ececec;
     padding-top: 90rem;
     width: 90rem; } }
+  .app-btn.app-btn--transparent {
+    border: none;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.03);
+    color: #000 !important;
+    box-sizing: border-box; }
+    .app-btn.app-btn--transparent:hover:not([disabled]):not(.app-btn--loading) {
+      background-color: rgba(0, 0, 0, 0.03); }
+      .app-btn.app-btn--transparent:hover:not([disabled]):not(.app-btn--loading)::after {
+        animation: hover-in-interactive-white 0.6s cubic-bezier(0.6, 0.1, 0.9, 0.6) forwards;
+        background-color: #ececec; }
+
+@keyframes hover-in-interactive-white {
+  0.00% {
+    background-color: #ececec;
+    padding-top: 0;
+    width: 0; }
+  to {
+    background-color: #ececec;
+    padding-top: 90rem;
+    width: 90rem; } }
   .app-btn.app-btn--lg {
     height: 80px; }
   .app-btn.app-btn--sm {

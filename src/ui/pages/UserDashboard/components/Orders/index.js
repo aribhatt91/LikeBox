@@ -48,7 +48,7 @@ export default function Orders() {
     return (
         <div className='w-100'>
             <div className='mt-5 mb-5'>
-                <h1 className='text-center mb-5'>Orders</h1>
+                <h2 className='mb-5 text-center text-bold'>Orders</h2>
                 {
                     !loading && orders.length <= 0 && <ErrorModule error={EMPTY_TEXT} />
                 }

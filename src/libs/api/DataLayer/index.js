@@ -15,6 +15,7 @@ function initDataLayer() {
                 status: "logged-out"
             },
             "product": {},
+            "products": [],
             "events": []
         };
     }
@@ -81,6 +82,9 @@ const DataLayer = {
     clearProduct: function() {
         window[DATA_LAYER_NAME][PRODUCT_KEY] = {};
     },
+    clearProducts: function() {
+        window[DATA_LAYER_NAME]["products"] = [];
+    },
     addProduct: function(product) {
         pushValue('products', product);
     },
@@ -102,6 +106,19 @@ const DataLayer = {
             window[DATA_LAYER_NAME]['page']['search'] = search;
         }
     },
+    setSearch: function(query, result){
+        initDataLayer();
+        window[DATA_LAYER_NAME]['page']['search'] = {};
+
+        if(query){
+            window[DATA_LAYER_NAME]['page']['search'].query = query;
+        }
+
+        if(result){
+            window[DATA_LAYER_NAME]['page']['search'].result = result;
+        }
+
+    },
     setErrorPage: function() {
         window[DATA_LAYER_NAME]['page'] = {
             errorPage: 'errorPage',
@@ -115,9 +132,6 @@ const DataLayer = {
     },
     setPagePath: function() {
         setValue('page', 'path', window.location.pathname);
-    },
-    setSearchTerm: function(search) {
-        setValue('page', 'search', search);
     },
     setView: function(view) {
         if(view){
@@ -154,9 +168,10 @@ const DataLayer = {
         return window[DATA_LAYER_NAME].user || {};
     },
     /* Cart */
-    setCart: function(cart){
+    setCart: function({id, count, currency="GBP", total, products=[]}){
         if(window[DATA_LAYER_NAME]){
-            window[DATA_LAYER_NAME].cart = cart;
+            window[DATA_LAYER_NAME].cart = {id, count, currency, total, products};
+            window[DATA_LAYER_NAME].products = products;
         }
     },
     getCart: function(){
@@ -166,20 +181,22 @@ const DataLayer = {
     clearCart: function() {
         if(window[DATA_LAYER_NAME]){
             window[DATA_LAYER_NAME].cart = {};
+            window[DATA_LAYER_NAME].products = [];
         }
     },
     /* Transaction */
-    initTransaction: function(cart) {
-        if(window[DATA_LAYER_NAME] && window[DATA_LAYER_NAME]['cart'] && cart.id && cart.total){
+    initTransaction: function({id, total, products, currency}) {
+        if(window[DATA_LAYER_NAME] && window[DATA_LAYER_NAME]['cart'] && id && total){
             window[DATA_LAYER_NAME]['transaction'] = window[DATA_LAYER_NAME]['transaction'] || {
                 'payment': {
-                    'value': cart.total
+                    'value': total,
+                    currency
                 },
                 'delivery': {},
                 'status': 'in-progress'
             };
-            window[DATA_LAYER_NAME]['transaction']['order_id'] = cart.id;
-            window[DATA_LAYER_NAME]['transaction']['items'] = cart.products;
+            window[DATA_LAYER_NAME]['transaction']['order_id'] = id;
+            //window[DATA_LAYER_NAME]['transaction']['items'] = cart.products;
         }
     },
     setPaymentMethod: function(method){
@@ -222,7 +239,11 @@ const DataLayer = {
         }
     },
     clearTransaction: function (){
-        delete window[DATA_LAYER_NAME]['transaction'];
+        if(window[DATA_LAYER_NAME]){
+            delete window[DATA_LAYER_NAME]['transaction'];
+            window[DATA_LAYER_NAME].products = [];
+        }
+        
     },
     get: function() {
         initDataLayer();
