@@ -10,7 +10,7 @@ function CartLink(props) {
 
     useEffect(() => {
         if(cart && cart.id) {
-            EventTracker.trackEvent(EventTracker.events.transaction.FETCH_CART, cart);
+            EventTracker.trackEvent(EventTracker.events.auto.FETCH_CART, cart);
         }
     }, [cart])
     

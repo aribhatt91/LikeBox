@@ -5,8 +5,8 @@
   height: 48px;
   width: auto;
   border-radius: 24px;
-  background-color: #000;
-  color: #fff !important;
+  background-color: #FF9100;
+  color: #000 !important;
   padding: 6px 24px;
   display: inline-flex;
   justify-content: center;
@@ -41,15 +41,15 @@
       position: relative; }
     .app-btn:hover:not([disabled]):not(.app-btn--loading)::after {
       animation: hover-in-interactive-base 0.6s cubic-bezier(0.6, 0.1, 0.9, 0.6) forwards;
-      background-color: #333; }
+      background-color: #faa02b; }
 
 @keyframes hover-in-interactive-base {
   0.00% {
-    background-color: #333;
+    background-color: #faa02b;
     padding-top: 0;
     width: 0; }
   to {
-    background-color: #333;
+    background-color: #faa02b;
     padding-top: 90rem;
     width: 90rem; } }
   .app-btn.app-btn--secondary {
@@ -75,7 +75,7 @@
     width: 90rem; } }
   .app-btn.app-btn--transparent {
     border: none;
-    color: #fff;
+    color: #000;
     background-color: rgba(0, 0, 0, 0.03);
     color: #000 !important;
     box-sizing: border-box; }
@@ -99,8 +99,8 @@
   .app-btn.app-btn--sm {
     height: 32px; }
     .app-btn.app-btn--sm .app-btn__text {
-      font-size: 14px;
-      font-weight: normal; }
+      font-size: 12px;
+      font-weight: bold; }
   .app-btn.app-btn--loading {
     position: relative; }
     .app-btn.app-btn--loading .app-btn__text {
@@ -119,4 +119,4 @@
       border-bottom-color: transparent !important;
       animation: 0.75s linear infinite spin; }
     .app-btn.app-btn--loading.app-btn--secondary::after {
-      border-color: #000; }
+      border-color: #FF9100; }

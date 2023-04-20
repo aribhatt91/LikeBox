@@ -87,13 +87,14 @@ export default function YourStyle() {
                 history.push('/your-style-cards');
             }, 500);
             
-        }catch(err) {
+        }catch(error) {
             notify({
                 type: 'error',
                 message: 'Something went wrong!',
                 title: 'Uh!'
             });
             setSubmitting(false);
+            EventTracker.trackEvent(EventTracker.events.user.UPDATE_STYLE_ERROR, error);
         }finally {
             
         }

@@ -62,7 +62,7 @@ CONFIG = {
 if(window.DEV_MODE) {
     TABS.push(
         {
-            key: 'address-book',
+            key: 'addresses',
             title: 'Your addresses',
             component: UserAddress
         },

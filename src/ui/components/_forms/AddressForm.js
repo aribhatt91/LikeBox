@@ -6,6 +6,7 @@ import AppTextInput from '../_generic/AppTextInput';
 import AppForm from './AppForm';
 import { ADDRESS_SCHEMA } from './../../../libs/ValidationSchema';
 import { SuccessMessage } from '../_generic/AppMessage';
+import EventTracker from '../../../libs/api/EventTracker';
 
 //component.scss
 const validationSchema = ADDRESS_SCHEMA;
@@ -22,6 +23,7 @@ const AddressForm = ({user, address={}, cancelable=true, cancelEdit, update=fals
     },
     submitForm = async(userInput, {setSubmitting}) => {
         if(user && user.email){
+            EventTracker.trackEvent(EventTracker.events.user.UPDATE_ADDRESS_START);
             setSubmitting(true);
             try {
                 let res = await (update ? updateExistingAddress(user.email, userInput) : addAddress(user.email, userInput));
@@ -30,9 +32,11 @@ const AddressForm = ({user, address={}, cancelable=true, cancelEdit, update=fals
                 if(typeof onComplete === 'function'){
                     onComplete(res);
                 }
-            }catch(err){
+                EventTracker.trackEvent(EventTracker.events.user.UPDATE_ADDRESS_SUCCESS);
+            }catch(error){
                 setSuccess(false);
                 setSubmitting(false);
+                EventTracker.trackEvent(EventTracker.events.user.UPDATE_ADDRESS_ERROR, error);
             }
         }
         

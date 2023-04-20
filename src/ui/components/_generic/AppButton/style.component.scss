@@ -1,11 +1,11 @@
-$dark-btn: #000;
+$dark-btn: #FF9100;
 $light-btn: #fff;
 $grey-btn: #424B54;
 
-$dark-btn-border: #000;
+$dark-btn-border: #FF9100;
 $light-btn-border: #000;
 
-$dark-btn-text: #fff;
+$dark-btn-text: #000;
 $light-btn-text: #000;
 
 $btn-disabled-color: #ebebeb;
@@ -76,7 +76,7 @@ $btn-disabled-text: #333;
             position: relative;
         }  
         &::after {
-            @include ripple-hover(#333, 'base')
+            @include ripple-hover(#faa02b, 'base')
         }      
     }
     &.app-btn--secondary {
@@ -111,8 +111,8 @@ $btn-disabled-text: #333;
     &.app-btn--sm {
         height: 32px;
         .app-btn__text {
-            font-size: 14px;
-            font-weight: normal;
+            font-size: 12px;
+            font-weight: bold;
         }
     }
     &.app-btn--loading {

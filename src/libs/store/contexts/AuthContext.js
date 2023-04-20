@@ -70,13 +70,13 @@ export function AuthProvider({children}){
                 // Signed in
                 var user = userCredential.user;
                 window.loginfo("User signed in", user);
-                EventTracker.trackEvent(EventTracker.events.user.AUTHENTICATED, user);
+                EventTracker.trackEvent(EventTracker.events.auto.AUTHENTICATED, user);
                 // ...
             })
             .catch((error) => {
                 var errorCode = error.code;
                 var errorMessage = error.message;
-                EventTracker.trackEvent(EventTracker.events.user.AUTHENTICATTION_ERROR, error);
+                EventTracker.trackEvent(EventTracker.events.auto.AUTHENTICATTION_ERROR, error);
                 // ...
             });
         }
@@ -127,7 +127,7 @@ export function AuthProvider({children}){
                 setUser(null);
             }
             if(error){
-                EventTracker.trackEvent(EventTracker.events.user.AUTHENTICATTION_ERROR, error);
+                EventTracker.trackEvent(EventTracker.events.auto.AUTHENTICATTION_ERROR, error);
             }
             /* TODO Add Authentication error event tracker */
             setLoading(false);

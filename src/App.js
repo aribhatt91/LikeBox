@@ -9,6 +9,7 @@ import { Helmet } from 'react-helmet';
 import EventTracker from './libs/api/EventTracker';
 import LogRocket from 'logrocket';
 import API_KEYS from './libs/keys/api-keys.json';
+import Constants from './libs/keys/constants.json';
 
 function App() {
     const [loading, setLoading] = useState(true);
@@ -16,7 +17,7 @@ function App() {
 
     useEffect(() => {
         if(currentUser){
-            EventTracker.trackEvent(EventTracker.events.user.AUTHENTICATED, currentUser);
+            EventTracker.trackEvent(EventTracker.events.auto.AUTHENTICATED, currentUser);
         }
     }, [currentUser]);
 
@@ -61,7 +62,7 @@ function App() {
             <div className="App">
                 {/*  */
                     window.DEV_MODE && !window.adobe && <Helmet>
-                        <script src="https://assets.adobedtm.com/770d56ad37f4/63b7bc8dbb9f/launch-2aefcf817d42-development.min.js" async></script>
+                        <script src={Constants['adobe-launch-lib']} async></script>
                     </Helmet>
                 }
                     <Header/>

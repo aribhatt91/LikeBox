@@ -2,12 +2,16 @@ import DataLayer from '../DataLayer';
 import Events from './events.json';
 import GAEventStore from '../Analytics';
 import RecsApi from '../RecsApi';
+import { LOGIN_ERROR } from '../../store/actions';
+
+const dataLayer = new DataLayer();
 
 const trackEvent = function() {
     const event = arguments[0],
     payload = arguments[1];
     window.loginfo('api:EventTracker:trackEvent::', event, payload);
     switch (event) {
+        /* AUTO EVENTS */
         /* PAGE EVENTS */
         case Events.page.PAGE_VIEW:
             /* (event_type, page_title, page_type) */
@@ -40,7 +44,7 @@ const trackEvent = function() {
 
         /* USER EVENTS */
         case Events.user.LOGIN_START:
-            trackLoginStart();
+            trackLoginStart(arguments[1]);
             break;
         case Events.user.LOGIN_COMPLETE:
             /* (event_type, login_method="password") */
@@ -59,18 +63,41 @@ const trackEvent = function() {
         case Events.user.SIGNUP_ERROR:
             trackSignupError(arguments[1]);
             break;
-        case Events.user.AUTHENTICATED:
+        case Events.auto.AUTHENTICATED:
             /* (event_type, user) */
             trackAuthState(arguments[1]);
             break;
-        case Events.user.AUTHENTICATTION_ERROR:
+        case Events.auto.AUTHENTICATTION_ERROR:
             trackLoginError();
             break;
         case Events.user.UPDATE_STYLE:
             /* (event_type, styles=[]) */
             trackUpdateStyles(arguments[1]);
             break;
+        case Events.user.UPDATE_STYLE_ERROR:
+            /* (event_type, styles=[]) */
+            //trackUpdateStyles(arguments[1]);
+            break;
         case Events.user.UPDATE_PROFILE:
+            trackUpdateProfile();
+            break;
+        case Events.user.UPDATE_PROFILE_ERROR:
+            trackUpdateProfileError(arguments[0]);
+            break;
+        case Events.user.UPDATE_ADDRESS_START:
+            trackUpdateAddressStart();
+            break;
+        case Events.user.UPDATE_ADDRESS_SUCCESS:
+            trackUpdateAddressSuccess();
+            break;
+        case Events.user.UPDATE_ADDRESS_ERROR:
+            trackUpdateAddressError(arguments[0]);
+            break;
+        case Events.user.UPDATE_MEASUREMENTS_SUCCESS:
+            trackUpdateMeasurementsSuccess();
+            break;
+        case Events.user.UPDATE_MEASUREMENTS_ERROR:
+            trackUpdateMeasurementsError(arguments[0]);
             break;
         case Events.user.LOGOUT:
             trackLogout();
@@ -99,11 +126,10 @@ const trackEvent = function() {
         case Events.product.ADD_TO_FAVOURITE:
             break;
         case Events.product.REMOVE_FROM_FAVOURITE:
+            
             break;
         case Events.product.SELECT_SIZE:
             trackProductVariantSelect(arguments[1]);
-            break;
-        case Events.transaction.ORDER_CONFIRM: //purchase 
             break;
         /* --- */
         /* UI EVENTS */
@@ -111,6 +137,9 @@ const trackEvent = function() {
             break;
         case Events.ui.HOME_PAGE_TILE_CLICK:
             trackHomePageTilesClick();
+            break;
+        case Events.ui.NAVIGATION_PANEL_OPEN:
+            trackNavigationPanelOpen();
             break;
         case Events.ui.NAVIGATION_ITEM_CLICK:
             trackNavigationItemClick();
@@ -123,14 +152,14 @@ const trackEvent = function() {
             break;
         /* --- */
         /* TRANSACTION EVENTS */
-        case Events.transaction.FETCH_CART:
+        case Events.auto.FETCH_CART:
             /* (cart) */
             updateCart(arguments[1]);
             break;
-        case Events.transaction.FETCH_CART_ERROR:
+        case Events.auto.FETCH_CART_ERROR:
             /* (cart) */
             //updateCart(arguments[1]);
-            trackCartError(Events.transaction.FETCH_CART_ERROR);
+            trackCartError(Events.auto.FETCH_CART_ERROR);
             break;
         case Events.transaction.VIEW_CART:
             /* (cart) */
@@ -170,53 +199,108 @@ const trackEvent = function() {
     }
 }
 
-const triggerEvent = (eventName) => {
-    if(!eventName){
-        return;
-    }
-    let event = new CustomEvent(eventName);
-    document.dispatchEvent(event);
-}
-
 /* PAGE */
-const trackPageView = (page_title, page_type) => {
-    DataLayer.setPage(page_title, page_type);
-    DataLayer.clearEvents();
-    DataLayer.clearProduct();
-    GAEventStore.PAGE_EVENTS.logPageView(page_title);
+const trackPageView = (title, page_type) => {
+    //let referrer = window[DATA_LAYER_NAME]['page'] ? window[DATA_LAYER_NAME]['page'].path || "" : "";
+    //referrer = referrer || document.referrer || "";
+    const domain = window.location.hostname,
+    environment = domain.indexOf('likebox.co.uk') > -1 ? 'production' : (domain.indexOf('localhost') > -1 ? 'development' : 'staging');
+
+
+    dataLayer.clearEvents();
+    dataLayer.remove('product');
+
+    dataLayer.push([
+    {
+        event: Events.page.PAGE_VIEW,
+        data: {
+            page: {
+                path: window.location.pathname,
+                title,
+                section: page_type,
+                view: page_type,
+                url: (window.location.href || "").replace(window.location.search, '').replace('?', '').replace(window.location.hash, '')
+            }
+        },
+        merge: false
+    }, 
+    {
+        data: {
+            site: {
+                domain,
+                language: "en",
+                environment
+            }
+        }
+    }]);
+    GAEventStore.PAGE_EVENTS.logPageView();
+
     if(page_type === "home"){
         RecsApi.homePageView();
     }
 }
 
-const trackViewChange = (view_name) => {
-    DataLayer.setView(view_name);
-    GAEventStore.PAGE_EVENTS.logScreenView(view_name);
-    triggerEvent(Events.ui.VIEW_CHANGE);
+const trackViewChange = (view) => {
+    dataLayer.clearEvents();
+    dataLayer.push({
+        event: Events.page.VIEW_CHANGE,
+        data: {
+            page: {
+                view
+            }
+        }
+    })
+    
+    GAEventStore.PAGE_EVENTS.logScreenView(view);
 }
 
-const trackSearch = (search_term) => {
-    DataLayer.setSearch(search_term);
-    GAEventStore.PAGE_EVENTS.logSearch(search_term);
-    RecsApi.search(search_term);
+const trackSearch = (query) => {
+    dataLayer.push({
+        search: {
+            query,
+            type: 'internal'
+        }
+    });
+    GAEventStore.PAGE_EVENTS.logSearch(query);
+    RecsApi.search(query);
 }
 
-const trackSearchResult = (search_term, search_result=[]) => {
-    if(search_result && search_result.length > 0){
-        DataLayer.setSearch(search_term, "success");
-        GAEventStore.PAGE_EVENTS.logViewSearchResult(search_term, search_result);
-        GAEventStore.PRODUCT_EVENTS.logViewItemsInCategory(search_term, search_result);
-        triggerEvent(Events.page.SEARCH_RESULT)
+const trackSearchResult = (query, result=[]) => {
+
+    let name;
+
+    if(result && result.length > 0){
+        GAEventStore.PAGE_EVENTS.logViewSearchResult(query, result);
+        GAEventStore.PRODUCT_EVENTS.logViewItemsInCategory(query, result);
+        name = Events.page.SEARCH_RESULT;
+        
     }else {
-        DataLayer.setSearch(search_term, "failure");
-        triggerEvent(Events.page.SEARCH_RESULT_EMPTY);
+        name = Events.page.SEARCH_RESULT_EMPTY;
     }
+    
+    dataLayer.push({
+        name,
+        data: {
+            search: {
+                query,
+                type: 'internal',
+                results: result.length
+            }
+        }
+    });
 }
-const trackErrorPage = () => {
-    DataLayer.setErrorPage();
+const trackErrorPage = () => {    
+    dataLayer.push({
+        event: Events.page.PAGE_NOT_FOUND,
+        data: {
+            page: {
+                errorPage: 'errorPage'
+            }
+        },
+        merge: false
+    }, false);
 }
 const trackHomePage = () => {
-    //DataLayer;
     RecsApi.homePageView();
 }
 
@@ -225,32 +309,61 @@ const trackCategoryPage = (category) => {
     RecsApi.categoryPageView(category);
 }
 const trackProductView = (product) => {
+
     trackPageView(product.title, 'product-page');
-    //DataLayer.setPage(product.title, 'product-page');
-    DataLayer.setView('product-page');
-    DataLayer.setProduct(product);
+
+    dataLayer.push([
+    {
+        event: Events.product.PRODUCT_VIEW,
+        data: {
+            product
+        },
+        merge: false
+    }]);
+
     GAEventStore.PRODUCT_EVENTS.logViewItem(product);
     RecsApi.detailPageView(product);
-    triggerEvent(Events.product.PRODUCT_VIEW);
 }
 
 const trackProductVariantSelect = (variant) => {
-    DataLayer.setProductEvent(Events.product.SELECT_SIZE, variant);
-    DataLayer.selectVariant(variant);
-    triggerEvent(Events.product.SELECT_SIZE);
+    const {size} = variant;
+    dataLayer.push([{
+        event: Events.product.SELECT_SIZE,
+        data: {
+            variant
+        },
+        update: false
+    },
+    {
+        data: {
+            product: {
+                size
+            }
+        }
+    }])
 }
 
 const trackAddToWishList = (product) => {
-    DataLayer.setProductEvent(Events.product.ADD_TO_WISHLIST, product);
     GAEventStore.PRODUCT_EVENTS.logAddToWishList(product);
     RecsApi.addToList(product);
-    triggerEvent(Events.product.ADD_TO_WISHLIST);
+    dataLayer.push({
+        event: Events.product.ADD_TO_WISHLIST,
+        data: {
+            product
+        },
+        update: false
+    })
 }
 
 const trackRemoveFromWishList = (product) => {
-    DataLayer.setProductEvent(Events.product.REMOVE_FROM_WISHLIST, product);
     RecsApi.removeFromList(product);
-    triggerEvent(Events.product.REMOVE_FROM_WISHLIST);
+    dataLayer.push({
+        event: Events.product.REMOVE_FROM_WISHLIST,
+        data: {
+            product
+        },
+        update: false
+    })
 }
 
 /* USER PROFILE*/
@@ -258,67 +371,322 @@ const trackLikes = (products=[]) => {
     
 }
 const trackDislikes = (products=[]) => {
+
     
 }
 const trackAuthState = (user) => {
-    DataLayer.setUser(user);
-    GAEventStore.USER_EVENTS.setUserId(user.uid);
+    if(user && user.uid && window.localStorage){
+        dataLayer.push({
+            event: Events.auto.AUTHENTICATED,
+            data: {
+                user: {
+                    id: user.uid, 
+                    event: user.displayName, 
+                    status: 'logged-in'
+                }
+            },
+            merge: false
+        })
+        GAEventStore.USER_EVENTS.setUserId(user.uid);
+        window.localStorage.setItem('__userId__', user.uid);
+    }
 }
-const trackSignupStart = () => {
-    triggerEvent(Events.user.SIGNUP_START);
+const trackSignupStart = (method="password") => {
+    dataLayer.push([{
+        event: Events.user.APPLICATION_START,
+        data: {
+            form: {
+                event: 'registration-form',
+                data: {
+                    method
+                }
+            }
+        },
+        merge: false
+    }, 
+    {
+        data: {
+            user: {
+                method
+            }
+        }
+    }])
     GAEventStore.USER_EVENTS.logSignUpStart();
 }
+
 const trackSignupComplete = (method="password") => {
+    dataLayer.push([{
+        event: Events.user.APPLICATION_COMPLETE,
+        data: {
+            form: {
+                event: 'registration-form',
+                data: {
+                    method
+                }
+            }
+        },
+        merge: false
+    },
+    {
+        data: {
+            user: {
+                method
+            }
+        }
+    },
+    {
+        event: Events.ui.VIEW_CHANGE,
+        data: {
+            page: {
+                view: 'registration-complete'
+            }
+        }
+    }])
     GAEventStore.USER_EVENTS.logSignUp(method);
-    DataLayer.setView('registration-complete');
-    triggerEvent(Events.ui.VIEW_CHANGE);
+    GAEventStore.UI_EVENTS.logFormSubmission('registration-form');
 }
 const trackSignupError = (error) => {
-    triggerEvent(Events.user.SIGNUP_ERROR);
+    dataLayer.push({
+        event: Events.user.APPLICATION_ERROR,
+        data: {
+            form: {
+                event: 'registration-form',
+                data: {
+                    error
+                }
+            }
+        },
+        merge: false
+    })
     GAEventStore.logException(error.message);
     GAEventStore.USER_EVENTS.logSignUpError();
+    GAEventStore.UI_EVENTS.logFormError('registration-form', error.message);
 }
-const trackLoginStart = () => {
-    GAEventStore.USER_EVENTS.logSignInStart();
-    triggerEvent(Events.user.LOGIN_START);
+const trackLoginStart = (method) => {
+    dataLayer.push({
+        event: Events.user.APPLICATION_START,
+        data: {
+            form: {
+                event: 'login-form',
+                data: {
+                    method
+                }
+            }
+        },
+        merge: false
+    });
+    GAEventStore.USER_EVENTS.logSignInStart(method);
 }
 const trackLoginComplete = (method="password") => {
+    dataLayer.push([{
+        event: Events.user.APPLICATION_COMPLETE,
+        data: {
+            form: {
+                event: 'login-form',
+                data: {
+                    method
+                }
+            }
+        },
+        merge: false
+    },
+    {
+        data: {
+            user: {
+                method
+            }
+        }
+    },
+    {
+        event: Events.ui.VIEW_CHANGE,
+        data: {
+            page: {
+                view: 'login-complete'
+            }
+        }
+    }]);
     GAEventStore.USER_EVENTS.logSignIn(method);
-    DataLayer.setView('login-complete');
-    triggerEvent(Events.user.LOGIN_COMPLETE);
+    GAEventStore.UI_EVENTS.logFormSubmission('login-form');
+    
 }
 const trackLoginError = (error) => {
+
+    dataLayer.push({
+        event: Events.user.APPLICATION_ERROR,
+        data: {
+            form: {
+                event: 'login-form',
+                data: {
+                    error
+                }
+            }
+        },
+        merge: false
+    });
+
     GAEventStore.logException(error.message);
     GAEventStore.USER_EVENTS.logSignInError();
+    GAEventStore.UI_EVENTS.logFormError('login-form', error.message);
 }
 const trackUpdateStyles = (styles=[]) => {
     if(styles && styles.length){
+        dataLayer.push({
+            event: Events.user.APPLICATION_COMPLETE,
+            data: {
+                form: {
+                    event: 'styles-form',
+                    data: {
+                        styles
+                    }
+                }
+            },
+            merge: false
+        });
         GAEventStore.USER_EVENTS.setUserStyles(styles);
+        GAEventStore.UI_EVENTS.logFormSubmission('styles-form');
     }
 }
+const trackUpdateProfile = () => {
+    dataLayer.push({
+        event: Events.user.APPLICATION_COMPLETE,
+        data: {
+            form: {
+                event: 'profile-update-form'
+            }
+        },
+        merge: false
+    });
+    GAEventStore.UI_EVENTS.logFormSubmission('profile-update-form');
+}
+const trackUpdateProfileError = (error) => {
+    dataLayer.push({
+        event: Events.user.APPLICATION_ERROR,
+        data: {
+            form: {
+                event: 'profile-update-form',
+                data: {
+                    error
+                }
+            }
+        },
+        merge: false
+    });
+    GAEventStore.UI_EVENTS.logFormError('profile-update-form', error.message);
+}
+const trackUpdateAddressStart = () => {
+    dataLayer.push({
+        event: Events.user.APPLICATION_START,
+        data: {
+            form: {
+                event: 'address-update-form'
+            }
+        },
+        merge: false
+    });
+}
+const trackUpdateAddressSuccess = () => {
+    dataLayer.push({
+        event: Events.user.APPLICATION_COMPLETE,
+        data: {
+            form: {
+                event: 'address-update-form'
+            }
+        },
+        merge: false
+    });
+    GAEventStore.UI_EVENTS.logFormSubmission('address-update-form');
+}
+const trackUpdateAddressError = (error) => {
+    dataLayer.push({
+        event: Events.user.APPLICATION_ERROR,
+        data: {
+            form: {
+                event: 'address-update-form',
+                data: {
+                    error
+                }
+            }
+        },
+        merge: false
+    });
+    GAEventStore.UI_EVENTS.logFormError('address-update-form', error.message);
+}
+const trackUpdateMeasurementsSuccess = () => {
+    dataLayer.push({
+        event: Events.user.APPLICATION_COMPLETE,
+        data: {
+            form: {
+                event: 'measurement-update-form'
+            }
+        },
+        merge: false
+    });
+    GAEventStore.UI_EVENTS.logFormSubmission('measurement-update-form');
+}
+const trackUpdateMeasurementsError = (error) => {
+    dataLayer.push({
+        event: Events.user.APPLICATION_ERROR,
+        data: {
+            form: {
+                event: 'measurement-update-form',
+                data: {
+                    error
+                }
+            }
+        },
+        merge: false
+    });
+    GAEventStore.UI_EVENTS.logFormError('measurement-update-form', error.message);
+}
 const trackLogout = () => {
-    DataLayer.clearUser();
-    triggerEvent(Events.user.LOGOUT);
+    dataLayer.push({
+        event: Events.user.LOGOUT,
+        data: {
+            user: {
+                status: 'logged-out'
+            },
+            form: {
+                event: 'logout-form'
+            }
+        },
+        merge: false
+    });
+
     GAEventStore.USER_EVENTS.logSignOut();
+    if(window.localStorage){
+        window.localStorage.removeItem('__userId__');
+    }
 }
 
 /* UI */
+const trackNavigationPanelOpen = () => {
+    dataLayer.push({
+        event: Events.ui.NAVIGATION_PANEL_OPEN
+    })
+}
 const trackNavigationItemClick = (section) => {
+    dataLayer.push({
+        event: Events.ui.NAVIGATION_ITEM_CLICK
+    })
     GAEventStore.UI_EVENTS.logOpenNavigation(section);
-    triggerEvent(Events.ui.NAVIGATION_ITEM_CLICK);
 }
 const trackMobileNavigationItemClick = (section) => {
+    dataLayer.push({
+        event: Events.ui.NAVIGATION_ITEM_CLICK
+    })
     GAEventStore.UI_EVENTS.logOpenNavigation(section);
-    triggerEvent(Events.ui.NAVIGATION_ITEM_CLICK);
 }
 const trackHomePageTilesClick = () => {
+    dataLayer.push({
+        event: Events.ui.HOME_PAGE_TILE_CLICK
+    })
     GAEventStore.UI_EVENTS.logHomePageTilesClick();
-    triggerEvent(Events.ui.HOME_PAGE_TILE_CLICK);
 }
 const trackNotificationClick = () => {
-    triggerEvent(Events.ui.NOTIFICATION_CLICKED);
+    dataLayer.push({
+        event: Events.ui.NOTIFICATION_CLICKED
+    })
 }
-
 const trackNotificationDisplayed = () => {
 
 }
@@ -328,63 +696,167 @@ const trackNotificationDisplayed = () => {
 /* TRANSACTION & CART ---- DEV MODE */
 
 const trackAddToCart = (product, cart) => {
-    DataLayer.setProductEvent(Events.product.ADD_TO_CART, product);
     RecsApi.addToCart(product);
-    updateCart(cart);
-    triggerEvent(Events.product.ADD_TO_CART);
+    const {id, count, currency="GBP", total, products=[]} = cart;
+    dataLayer.push([{
+        event: Events.product.ADD_TO_CART,
+        data: {
+            product 
+        },
+        update: false
+    },
+    {
+        data: {
+            cart: { id, count, currency, total },
+            items: products
+        },
+        merge: false
+    }]);
+
     GAEventStore.PRODUCT_EVENTS.logAddToCart(product);
 }
 const trackRemoveFromCart = (product, cart) => {
-    DataLayer.setProductEvent(Events.product.REMOVE_FROM_CART, product);
     RecsApi.removeFromCart(product);
     GAEventStore.PRODUCT_EVENTS.logRemoveFromCart(product);
-    updateCart(cart);
-    triggerEvent(Events.product.REMOVE_FROM_CART);
-    //GAEventStore.logRe
+    const {id, count, currency="GBP", total, products=[]} = cart;
+    dataLayer.push([{
+        event: Events.product.REMOVE_FROM_CART,
+        data: {
+            product
+        },
+        update: false
+    },
+    {
+        data: {
+            cart: { id, count, currency, total },
+            items: products
+        },
+        merge: false
+    }])
 }
 const updateCart = (cart) => {
     if(cart){
-        DataLayer.setCart(cart);
+        const { id, count, currency, total, products } = cart;
+        dataLayer.push({
+            data: {
+                cart: { id, count, currency, total },
+                items: products
+            },
+            merge: false
+        });
     }
 }
 
 const trackCartView = (cart) => {
-    updateCart(cart);
-    triggerEvent(Events.transaction.VIEW_CART);
+    const {id, count, currency="GBP", total, products=[]} = cart;
+    dataLayer.push([{
+        event: Events.product.VIEW_CART,
+        update: false
+    },
+    {
+        data: {
+            cart: { id, count, currency, total },
+            items: products
+        },
+        merge: false
+    }])
     GAEventStore.PAGE_EVENTS.logViewCart(cart);
 }
 
 const trackCartError = (errorEvent) => {
-    triggerEvent(errorEvent)
+    dataLayer.push({
+        event: errorEvent
+    })
 }
 
 const trackStartCheckout = (cart) => {
-    DataLayer.initTransaction(cart);
+    const {id, total, currency} = cart;
+    dataLayer.push({
+        event: Events.transaction.START_CHECKOUT,
+        data: {
+            transaction: {
+                order_id: id,
+                payment: {
+                    value: total,
+                    currency
+                },
+                status: 'in-progress'
+            }
+        },
+        merge: false
+    })
     GAEventStore.TRANSACTION_EVENTS.logBeginCheckout(cart);
 }
 
 const trackSelectAddress = (address) => {
-    DataLayer.setDeliveryAddress(address);
+    dataLayer.push({
+        event: Events.transaction.SELECT_ADDRESS,
+        data: {
+            transaction: {
+                delivery: {
+                    address,
+                    __MERGE__: false
+                }
+            }
+        }
+    })
 }
 
-const trackSelectPaymentMethod = (payment_method) => {
-    DataLayer.setPaymentMethod(payment_method);
-    GAEventStore.TRANSACTION_EVENTS.logAddPaymentInfo(DataLayer.getCart(), payment_method);
+const trackSelectPaymentMethod = (method) => {
+    dataLayer.push({
+        event: Events.transaction.SELECT_PAYMENT_METHOD,
+        data: {
+            transaction: {
+                payment: {
+                    method
+                }
+            }
+        }
+    })
+    //GAEventStore.TRANSACTION_EVENTS.logAddPaymentInfo(dataLayer.get('cart'), method);
 }
 
 const trackSelectDeliveryOption = (delivery_option, cost=0) => {
-    DataLayer.setDeliveryOption(delivery_option, cost);
-    GAEventStore.TRANSACTION_EVENTS.logAddPaymentInfo(DataLayer.getCart(), delivery_option);
+    dataLayer.push({
+        event: Events.transaction.SELECT_DELIVERY_OPTION,
+        data: {
+            transaction: {
+                delivery: {
+                    delivery_option,
+                    delivery_charge: cost
+                }
+            }
+        }
+    })
+    //GAEventStore.TRANSACTION_EVENTS.logAddPaymentInfo(dataLayer.get('cart'), delivery_option);
 }
 
 const trackOrderConfirm = () => {
-    GAEventStore.PRODUCT_EVENTS.logPurchase(DataLayer.getCart());
-    //RecsApi.
-    triggerEvent(Events.transaction.ORDER_CONFIRM);
-    DataLayer.clearCart();
+    dataLayer.push([{
+        event: Events.transaction.ORDER_CONFIRM,
+        data: {
+            transaction: {
+                status: 'complete'
+            }
+        }
+    }, 
+    {
+        data: {
+            cart: {}
+        }
+    }])
+    //GAEventStore.TRANSACTION_EVENTS.logPurchase(dataLayer.getCart());
 }
 
 const trackCheckoutError = (error) => {
+    dataLayer.push([{
+        event: Events.transaction.CHECKOUT_ERROR,
+        data: {
+            transaction: {
+                status: 'error'
+            }
+        }
+    }])
     GAEventStore.logException(error, true);
 }
 

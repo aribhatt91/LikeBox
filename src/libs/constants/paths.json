@@ -1,40 +1,61 @@
 {
-    "title": "LikeBox | Home",
-    "path": "/",
-    "user": {
-        "name": "Dashboard",
-        "path": "/user",
-        "profile": {
-            "name": "Dashboard | Profile",
-            "path": "user/profile"
-        },
-        "sizing": {
-            "name": "Dashboard | Sizing",
-            "path": "user/sizing"
-        },
-        "address": {
-            "name": "Dashboard | Addresses",
-            "path": "/user/addresses"
-        },
-        "box": {
-            "name":"Dashboard | Your Box"
+    "/": {
+        "name": "LikeBox | Home",
+        "routes":{
+            "user": {
+                "name": "Dashboard",
+                "routes": {
+                    "profile": {
+                        "name": "Dashboard | Profile"
+                    },
+                    "sizing": {
+                        "name": "Dashboard | Measurements"
+                    },
+                    "addresses": {
+                        "name": "Dashboard | Addresses"
+                    },
+                    "box": {
+                        "name": "Dashboard | Your Box"
+                    },
+                    "orders": {
+                        "name": "Dashboard | Orders"
+                    }
+                }
+            },
+            "your-style": {
+                "name": "Your Style"
+            },
+            "your-style-cards": {
+                "name": "Your Style"
+            },
+            "wishlist": {
+                "name": "Wishlist"
+            },
+            "cart": {
+                "name": "Cart"
+            },
+            "checkout": {
+                "name": "Checkout"
+            },
+            "about": {
+                "name": "About LikeBox"
+            },
+            "error": {
+                "name": "404 | Not found"
+            },
+            "register": {
+                "name": "Sign up"
+            },
+            "login": {
+                "name": "Sign in"
+            },
+            "forgot-password": {
+                "name": "Reset password"
+            },
+            "products": {
+                "name": "LikeBox"
+            }
         }
-    },
-
-    "wishlist": {
-        "name": "Wishlist",
-        "path": "/wishlist"
-    },
-    "cart": {
-        "name": "Cart",
-        "path": "/cart"
-    },
-    "checkout": {
-        "name": "Checkout",
-        "path": "/checkout"
-    },
-    "about": {
-        "name": "About LikeBox",
-        "path": "/about"
+        
     }
 }

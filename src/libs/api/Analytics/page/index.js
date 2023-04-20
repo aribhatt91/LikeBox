@@ -2,18 +2,20 @@ import { sendEvent } from '../GtagHelper';
 import { GAProduct } from '../../firestore/models/GAProduct';
 
 export default {
-    logPageView: (page_title) => {
+    logPageView: () => {
         sendEvent("page_view", {
-            page_title,
-            page_location: window.location.href,
-            page_path: window.location.pathname,
-            language: "en_gb"
+            'page.name': document.title,
+            'page.url': window.location.href,
+            'page.path': window.location.pathname,
+            'site.language': "en_gb"
         });
     },
-    logScreenView: (screen_name) => {
+    logScreenView: (view) => {
         sendEvent("screen_view", {
-            app_name: 'LikeBox',
-            screen_name
+            'page.view': view,
+            'page.name': document.title,
+            'page.url': window.location.href,
+            'page.path': window.location.pathname
         });
     },
     /* 
@@ -21,7 +23,7 @@ export default {
     */
     logSearch: (search_term) => {
         sendEvent("search", {
-            search_term
+            'search.query':search_term
         });
     },
     /* 
@@ -31,8 +33,8 @@ export default {
     logViewSearchResult: (search_term, items=[]) => {
         items = (items || []).map(item => GAProduct(item));
         sendEvent("view_search_result", {
-            search_term,
-            items
+            'search.query':search_term,
+            'search.results': items
         });
     },
     logViewCart: (cart) => {
@@ -44,3 +46,14 @@ export default {
         });
     }
 }
+
+/* @keyframes shine-lines {
+    0% {
+        background-position: -100px;
+    }
+
+    40%, 100% {
+        background-position: 140px;
+    }
+    }
+ */

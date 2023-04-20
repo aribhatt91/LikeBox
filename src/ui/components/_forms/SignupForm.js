@@ -57,7 +57,7 @@ function SignupForm(props){
 
         }catch(error){
             window.logerror("SignupForm::submitForm::error", error);
-            EventTracker.trackEvent(EventTracker.events.user.SIGNUP_ERROR, error.message);
+            EventTracker.trackEvent(EventTracker.events.user.SIGNUP_ERROR, error);
             if(error.message){
                 setError(error.message);
                 setTimeout(() => {
@@ -74,11 +74,11 @@ function SignupForm(props){
     const updateUserInDatabase = async () => {
         if(USER_TEMP){
             try{
-                EventTracker.trackEvent(EventTracker.events.user.SIGNUP_COMPLETE, "password");
                 await addUserProfile(USER_TEMP);
                 await updateName(USER_TEMP.name.fname);
-            }catch(err){
-                EventTracker.trackEvent(EventTracker.events.user.SIGNUP_ERROR);
+                EventTracker.trackEvent(EventTracker.events.user.SIGNUP_COMPLETE, "password");
+            }catch(error){
+                EventTracker.trackEvent(EventTracker.events.user.SIGNUP_ERROR, error);
             }finally {
                 setTimeout(() => {
                     if(USER_TEMP){

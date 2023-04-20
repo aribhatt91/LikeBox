@@ -20,7 +20,7 @@ import Checkoutstatusbar from './components/CheckoutStatusBar';
 import './style.page.css';
 
 const EMPTY_TEXT = "You have no items in your cart!",
-    ERROR_TEXT = "Error occurred! Refresh and try again";
+    ERROR_TEXT = "Something went wrong! Refresh and try again";
 
 function Checkout(props) {
 
@@ -42,6 +42,7 @@ function Checkout(props) {
     const {currentUser} = useContext(AuthContext);
 
     useEffect(()=>{
+        if(!currentUser) return;
         try {
             fetchCart(currentUser.email);
 
@@ -51,7 +52,7 @@ function Checkout(props) {
     }, [currentUser])
 
     useEffect(() => {
-        if(cart && cart.id && !error && !fetch_pending){
+        if(cart && cart.id && cart.count > 0 && !error && !fetch_pending){
             EventTracker.trackEvent(EventTracker.events.transaction.START_CHECKOUT, cart);
         }
     }, [cart, fetch_pending]);
@@ -87,9 +88,9 @@ function Checkout(props) {
                 //Clear Cart
                 clearCart(currentUser.email);
                 setStage(5);
-            }catch(err){
+            }catch(error){
                 setStage(6);
-                window.logerror('Checkout:placeOrder::error', err);
+                window.logerror('Checkout:placeOrder::error', error);
             }
             
         }
@@ -104,10 +105,10 @@ function Checkout(props) {
 
                 <h1 className="mt-2 mb-3 text-center text-uppercase">Checkout</h1>
 
-                <Checkoutstatusbar step={stage} />
+                {!error && (cart && cart.count > 0) && <Checkoutstatusbar step={stage} />}
 
                 {(error || !cart || (cart.products || []).length <= 0) && stage <= 0 && <ErrorModule    
-                    error_text={EMPTY_TEXT}
+                    error={EMPTY_TEXT}
                 />}
 
                 {!error && stage === 5 && <OrderConfirmation />}

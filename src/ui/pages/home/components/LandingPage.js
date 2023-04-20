@@ -4,16 +4,21 @@ import { LazyLoadImage } from 'react-lazy-load-image-component';
 import AppImage from '../../../components/_generic/AppImage';
 import FAQS from '../../../../libs/constants/faqs';
 import Accordion from '../../../components/_generic/Accordion';
-import R1 from '../../../../assets/img/rtb1.png';
+/* import R1 from '../../../../assets/img/rtb1.png';
 import R2 from '../../../../assets/img/rtb2.png';
-import R3 from '../../../../assets/img/rtb3.png';
+import R3 from '../../../../assets/img/rtb3.png'; */
 import BrandCarousel from './BrandCarousel';
 import BlogSection from './BlogSection';
+import ReasonsToBuy from './ReasonsToBuy';
+import HeroBanner, { HeroContent, HeroMedia } from './HeroBanner';
+import AppButton from '../../../components/_generic/AppButton';
+import Features from './Features';
+
 export default function LandingPage({slideIn, slideOut, onComplete, setRegistered}) {
     return (
         <div className={"like-box-home" + (!slideIn && !slideOut ? " slide-hold" : "") + (slideOut ? " slide-out" : "") + (slideIn ? " slide-in" : "")}>
         
-            <section className="like-box-home-section w-100">
+            {/* <section className="like-box-home-section w-100">
                 <LazyLoadImage effect="opacity" className="bg-image" src="https://firebasestorage.googleapis.com/v0/b/webapp-470b3.appspot.com/o/home-page-1166x800.jpg?alt=media&token=12d60918-88a5-4a78-8531-48525a7dcf8a" />
                 <div className="container d-flex flex-column pb-5 pt-5">
                     <h1 className="like-box-header-1 font-weight-bold text-uppercase">Clothes shopping has never been easier</h1>
@@ -36,11 +41,37 @@ export default function LandingPage({slideIn, slideOut, onComplete, setRegistere
                         <SubscriptionComponent onComplete={onComplete} setRegistered={setRegistered} />
                     </div>
                 </div>
+            </section> */}
+            <HeroBanner className='like-box-home-section p-0'>
+                <HeroMedia>
+                    <LazyLoadImage effect="opacity" className="w-100 h-100 top-0 left-0" src="https://firebasestorage.googleapis.com/v0/b/the-likebox.appspot.com/o/Hero_2023_desktop_5120x2880.jpeg?alt=media&token=4fe3d6d3-2c30-41b0-b320-2e162a1f7e05" />
+                </HeroMedia>
+                <HeroContent>
+                    <div className='w-100 h-100 d-flex flex-column justify-content-center align-items-center text-center pr-5 pl-5'>
+                        <h2 className="like-box-header-1 mb-3 text-white text-center font-weight-bold text-uppercase">EFFORTLESSLY UPGRADE YOUR WARDROBE</h2>
+                        <h4 className='text-center text-white mb-5'>Save time and shop smarter with expertly curated outfits tailored to your taste and body type</h4>
+                        <AppButton rounded={false} variant='primary' label={'BUILD YOUR WARDROBE'} className={'mb-3'} href={'/register'} />
+                        <span className='text-center text-white w-100'>On average it only takes 93 seconds to complete</span>
+                    </div>
+                </HeroContent>
+            </HeroBanner>
+            <section className="w-100 p-0 m-0">
+                <ReasonsToBuy />
+            </section>
+            <section className="w-100 p-0 m-0">
+                <Features/>
+            </section>
+            <section className='bg-light w-100'>
+                <div className='container text-center d-flex flex-column align-items-center pt-5 pb-5'>
+                    <h3 className='text-center font-weight-bold mb-4'>FIND THE RIGHT CLOTHES FOR YOU</h3>
+                    <h6 className='text-center mb-5'>Likebox has clothes for everyone’s style and for every occasion. <br className='d-none d-lg-block'/>Answer 1 simple question to save yourself hours shopping.</h6>
+                    <AppButton href={'/register'} rounded={false} label={'Show us your style'}></AppButton>
+                </div>
             </section>
             <section className="brands w-100 p-0 m-0">
                 <BrandCarousel />
             </section>
-            <section className="like-box-reasons w-100">
+            {/* <section className="like-box-reasons w-100">
                 <div className="container">
                     <div className="d-flex col-12 pl-2 pr-2 flex-column flex-lg-row justify-content-lg-between">
                         <div className="col-12 mb-5 mb-lg-0 col-lg-4 d-flex">
@@ -72,8 +103,8 @@ export default function LandingPage({slideIn, slideOut, onComplete, setRegistere
                         </div>
                     </div>
                 </div>
-            </section>
-            <section className="likebox-what-is w-100">
+            </section> */}
+            {/* <section className="likebox-what-is w-100">
                 <div className="container">
                     <div className="like-box-descriptor-container mt-2 mb-2 row m-0">
                         <h1 className="like-box-header-1 font-weight-bold text-center w-100">What is Likebox?</h1>
@@ -100,7 +131,7 @@ export default function LandingPage({slideIn, slideOut, onComplete, setRegistere
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> */}
             <section className="like-box-faq-section w-100">
                 <div className="container">
                     <h1 className="like-box-header-1 font-weight-bold text-center w-100 mt-3 mb-5">Frequently asked questions</h1>

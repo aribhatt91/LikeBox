@@ -1,0 +1,51 @@
+.app-text-input {
+  width: 100%; }
+  .app-text-input label {
+    position: relative;
+    width: 100%; }
+    .app-text-input label input {
+      font-size: 14px;
+      width: 100%;
+      min-height: 44px;
+      border-radius: 1px;
+      background-color: transparent; }
+      .app-text-input label input:-internal-autofill-selected {
+        background-color: transparent !important; }
+      .app-text-input label input:focus, .app-text-input label input:active {
+        box-shadow: none !important;
+        background-color: transparent !important; }
+      .app-text-input label input:disabled {
+        background-color: transparent; }
+      .app-text-input label input::-webkit-outer-spin-button, .app-text-input label input::-webkit-inner-spin-button {
+        -webkit-appearance: none; }
+    .app-text-input label textarea {
+      font-size: 14px;
+      width: 100%;
+      min-height: 96px; }
+      .app-text-input label textarea:focus, .app-text-input label textarea:active {
+        box-shadow: none !important;
+        background-color: transparent; }
+      .app-text-input label textarea:disabled {
+        background-color: transparent; }
+    .app-text-input label .app-text-input__label {
+      position: absolute;
+      font-size: 14px;
+      line-height: 14px;
+      transition: 0.4s all ease-in-out;
+      top: 50%;
+      left: 0.75rem;
+      margin-top: -7px;
+      background-color: #fff;
+      height: auto;
+      z-index: -1; }
+  .app-text-input.edit-mode label .app-text-input__label {
+    font-size: 12px;
+    padding: 0 4px;
+    top: -7px;
+    margin-top: 0;
+    z-index: 1; }
+  .app-text-input.error label .app-text-input__label {
+    color: #cc0000; }
+  .app-text-input.error label input, .app-text-input.error label textarea {
+    border-color: #cc0000;
+    color: #cc0000; }

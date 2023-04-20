@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { HEADER_NAV_MENU } from '../../../libs/constants/header-navs';
 import AppButton from '../_generic/AppButton';
 import AppImage from '../_generic/AppImage';
+import EventTracker from '../../../libs/api/EventTracker';
 
 export default function MainNavigation() {
     const [open, setOpen] = useState(false);
@@ -30,6 +31,7 @@ export default function MainNavigation() {
         }
         setActive(index); 
         setOpen(true);
+        EventTracker.trackEvent(EventTracker.events.ui.NAVIGATION_PANEL_OPEN);
     }
     const closeTab = () => {
         setOpen(false);
@@ -149,6 +151,7 @@ export default function MainNavigation() {
                             open && <span className="nav-background" onClick={() => setOpen(false)}></span>
                         }
                     </div>
+                    
                 }
             })
             

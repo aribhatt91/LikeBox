@@ -22,22 +22,22 @@ export default {
     Landing page
     */
     logClickSubscriptionCTA: () => {
-        sendEvent('click_subscription_cta', {event_category: 'ui-event'});
+        sendEvent('click_subscription_cta', {type: 'ui-event'});
     },
     logOpenFAQAccordion: () => {
-        sendEvent('view_faq', {event_category: 'ui-event'});
+        sendEvent('view_faq', {type: 'ui-event'});
     },
     logOpenTNC: () => {
-        sendEvent('view_tnc', {event_category: 'ui-event'});
+        sendEvent('view_tnc', {type: 'ui-event'});
     },
     /* 
     Your style page
     */
     logVisitYourStyle: () => {
-
+        sendEvent('view_styles', {type: 'ui-event'});
     },
     logVisitYourStyleCards: () => {
-
+        sendEvent('view_swipe_cards', {'type': 'ui-event'});
     },
     /* 
     User dashboard
@@ -50,6 +50,19 @@ export default {
     },
     logUpdateProfile: () => {
 
+    },
+    logFormSubmission: (formId) => {
+        sendEvent('form_submission', {
+            'type': 'form',
+            'form.name': formId
+        })
+    },
+    logFormError: (formId, error) => {
+        sendEvent('form_error', {
+            'type': 'form',
+            'form.name': formId,
+            'form.error': error
+        })
     }
 }
 

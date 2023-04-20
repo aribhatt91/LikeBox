@@ -6,6 +6,7 @@ import AppImage from '../_generic/AppImage';
 import HamburgerIcon from '../_svg-components/HamburgerIcon';
 import logo from '../../../assets/img/logo.png';
 import  './style.component.css';
+import EventTracker from '../../../libs/api/EventTracker';
 
 function MobileNavigation({user, logout}){
   const [open, setOpen] = useState(false);
@@ -22,7 +23,10 @@ function MobileNavigation({user, logout}){
   
   return (
     <div className="d-inline-block nav-mobile-container d-lg-none">
-      <a href="#" onClick={()=>{setOpen(true)}} className="hamburger">
+      <a href="#" onClick={()=>{
+          setOpen(true);
+          EventTracker.trackEvent(EventTracker.events.ui.NAVIGATION_PANEL_OPEN);
+        }} className="hamburger">
         <HamburgerIcon />
       </a>
       <div className={"nav-mobile" + (open ? " nav-mobile--open" : "")} onScroll={(e)=>{e.stopPropagation()}} aria-hidden={!open}>

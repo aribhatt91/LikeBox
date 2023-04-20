@@ -1,31 +1,37 @@
 {
+    "site": {
+        "domain": "likebox.co.uk",
+        "language": "en",
+        "environment": "production"
+    },
     "page": {
         "name": "Home",
         "path": "/",
         "section": "home",
         "server": "localhost",
         "language": "en",
-        "view": "home",
-        "search": {
-            "query": "hoodies",
-            "result": "success"
-        }
+        "view": "home"
+    },
+    "search": {
+        "query": "hoodies",
+        "result": "success",
+        "type": "internal"
     },
     "user": {
         "id": "user0001",
         "email": "user@example.com",
         "name": "User",
         "status": "logged-in",
-        "gender": "m"
+        "method": "google.com",
+        "gender": "m",
+        "styles": ["Classic", "Trendy", "Sporty"]
     },
     "product": {
         "id": "product0001",
         "name": "Product 1",
         "category": "pType > pSubType > pSubSubType",
         "price": 100,
-        "productEvent": {
-            "eventType": "product-view"
-        }
+        "size": "S"
     },
     "products": [],
     "cart": {
@@ -78,6 +84,14 @@
             "delivery_option": "FAST",
             "delivery_charge": 10
         }
+    },
+    "form": {
+        "name": "login",
+        "event": "application-start",
+        "data": {
+            "method": "google.com"
+        },
+        "error": null
     },
     "events": [
         {

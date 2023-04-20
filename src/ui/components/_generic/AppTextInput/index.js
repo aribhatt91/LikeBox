@@ -64,7 +64,7 @@ const AppTextInput = ({name, label, disabled=false, type='text', ...rest}) => {
                     />
                 }
             </label>
-            {errors[name] && touched[name] && <AppMessage type="error" size="sm" text={errors[name]}/>}
+            {errors[name] && touched[name] && <AppMessage type="error" className="app-text-input__error" size="sm" text={errors[name]}/>}
         </div>
     )
 }

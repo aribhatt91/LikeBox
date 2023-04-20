@@ -94,6 +94,8 @@ const placeOrder = async (user, cart) => {
         EventTracker.trackEvent(EventTracker.events.transaction.ORDER_CONFIRM, cart);
         return new Promise((resolve, reject) => resolve(response));
     }catch(error) {
+        window.logerror('CheckoutService::placeOrder::error', error);
+        EventTracker.trackEvent(EventTracker.events.transaction.CHECKOUT_ERROR, error);
         return new Promise((resolve, reject) => reject(error));
     }
 }

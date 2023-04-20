@@ -19,7 +19,6 @@ function Header (props) {
   let history = useHistory();
   const {currentUser, logout} = useContext(AuthContext);
 
-
   const signout = async () => {
     try{
       if(currentUser){
@@ -45,24 +44,31 @@ function Header (props) {
             <Nav className="mr-auto d-none d-lg-flex navbar-nav">
               {currentUser && <MainNavigation/>}
             </Nav>
-            <Nav className="justify-content-end d-none d-lg-flex">
             
-              {/* <SearchBar/> */}
-              {!currentUser && location.pathname === '/' && <AppButton label="Create account" size="sm" className={"d-none create-account-btn-md mr-0 align-items-center pl-5 pr-5 no-anim"} 
-                href="/register">
-              </AppButton>}
-              {!currentUser && location.pathname.indexOf('login') === -1 && <AppButton label="Sign in" size="sm" className={"d-md-flex align-items-center pl-5 pr-5 no-anim"} 
+            <Nav className="justify-content-end d-none d-lg-flex">
+              {!currentUser && location.pathname === '/' && (
+                <React.Fragment>
+                    <AppButton variant='secondary' rounded={false} label="Log in" size="sm" className={"login-btn-md mr-2 align-items-center pl-5 pr-5 no-anim"} 
+                      href="/login"></AppButton>
+                    <AppButton label="Start shopping" rounded={false} size="sm" className={"create-account-btn-md mr-0 align-items-center pl-5 pr-5 no-anim"} 
+                      href="/register"></AppButton>
+                </React.Fragment>
+              )}
+
+              {!currentUser && location.pathname.indexOf('register') > -1 && <AppButton label="Sign in" size="sm" className={"d-md-flex align-items-center pl-5 pr-5 no-anim"} 
                 href="/login">
               </AppButton>}
+
               {!currentUser && location.pathname.indexOf('login') > -1 && <AppButton label="Register" size="sm" className={"d-md-flex align-items-center pl-5 pr-5 no-anim"} 
                 href="/register">
               </AppButton>}
+
               {currentUser && 
               <React.Fragment>
-                
-                <NavLink activeClassName="active" to="/user/sizing">
+                {window.DEV_MODE && <SearchBar/> }
+                {/* <NavLink activeClassName="active" to="/user/sizing">
                   <ScaleIcon size={24} />
-                </NavLink>
+                </NavLink> */}
                 <NavLink activeClassName="active" to="/wishlist">
                   <HeartLineIcon />
                 </NavLink>
@@ -78,12 +84,14 @@ function Header (props) {
                   href="/user">
                 </AppButton>
                 }
+
                 {
                 location.pathname.indexOf('/user') > -1 &&
                 <AppButton label="Log out" size="sm" className={"d-none d-lg-flex no-anim align-items-center pl-5 pr-5 no-anim"} 
                   onClick={signout}>
                 </AppButton>
                 }
+
               </React.Fragment>
               }
 

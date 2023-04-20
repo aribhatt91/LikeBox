@@ -12,6 +12,8 @@ import LoadingModule from './components/LoadingModule';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 
+import UIPlayground from './pages/UIPlayground';
+
 const ProductPageLazy = React.lazy(() => import('./pages/ProductPage/index.js'));
 const CategoryPageLazy = React.lazy(() => import('./pages/CategoryPage/index.js'));
 const AboutPageLazy = React.lazy(() => import('./pages/About'));
@@ -72,6 +74,12 @@ function AppBody (){
         {
           /*  */
           process.env.REACT_APP_ENV === 'dev' && <ProtectedRoute path="/checkout" component={Checkout} />
+        }
+
+        
+        {
+          /*Plyground to test and showcase UI Components*/
+          process.env.REACT_APP_ENV === 'dev' && <Route path='/playground' component={UIPlayground}/>
         }
 
         {/* <Route path='/user/:page?/:topic?' render={(props) => <UserDashboard {...props} pageName="user-dashboard" />}/> */}

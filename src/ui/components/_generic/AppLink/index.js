@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default function AppLink({href, target="_self", className="", clickEvents=[], children, ...rest}) {
-    const click = (e) => {
-        if(!clickEvents.length === 0){
+    const click = function (e) {
+        if(clickEvents.length === 0){
             return true;
         }
         if(target !== "_blank"){
             e.preventDefault();
             clickEvents.forEach(fn => {
-                fn.apply(this, arguments);
+                fn.apply(null, []);
             })
             if(href && href.indexOf('#') !== 0){
                 setTimeout(() => {
@@ -18,7 +18,7 @@ export default function AppLink({href, target="_self", className="", clickEvents
             }
         }else {
             clickEvents.forEach(fn => {
-                fn.apply(this, arguments);
+                fn.apply(null, []);
             })
         }
     }

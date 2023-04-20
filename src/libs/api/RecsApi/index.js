@@ -91,14 +91,14 @@ export default {
         /* 
         https://cloud.google.com/retail/recommendations-ai/docs/user-events#shopping-cart-page-view
          */
-        postProductDetailEvent("shopping-cart-page-view", (DataLayer.getCart().products || []).map(product => {
+        /* postProductDetailEvent("shopping-cart-page-view", (DataLayer.getCart().products || []).map(product => {
             return {
                 "product": {
                     id: product.id
                 },
                 "quantity": product.quantity || 1
             }
-        }));
+        })); */
     },
     addToList: (product) => {
         postProductDetailEvent("add-to-list", [product], "wishlist1");

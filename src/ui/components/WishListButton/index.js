@@ -50,10 +50,10 @@ export default function WishListButton({product, className="", ...rest}) {
 
                 if(inWishList){
                   setInWishList(false);
-                  EventTracker.trackEvent(EventTracker.events.REMOVE_FROM_WISHLIST, product);
+                  EventTracker.trackEvent(EventTracker.events.product.REMOVE_FROM_WISHLIST, product);
                 }else {
                   setInWishList(true);
-                  EventTracker.trackEvent(EventTracker.events.ADD_TO_WISHLIST, product);
+                  EventTracker.trackEvent(EventTracker.events.product.ADD_TO_WISHLIST, product);
                 }
                 
                 dispatch({

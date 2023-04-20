@@ -57,7 +57,7 @@ export default function Order({
 
     order.delivery.delivery_option = delivery_option.title || "FREE";
     order.delivery.delivery_charge = delivery_option.cost || 0;
-    order.payment.value += order.delivery_charge;
+    order.payment.value += (order.delivery.delivery_charge || 0);
 
     order.delivery.delivery_date = (new Date(new Date().getTime()+((delivery_option.time || 7)*24*60*60*1000))).toISOString();
 

@@ -12,6 +12,7 @@ import { updateUserProfile } from '../../../libs/UserService';
 import { useNotification } from '../../../libs/store/contexts/NotificationProvider';
 import AppDateInput from '../_generic/AppDateInput';
 import { LoadingPendulum } from '../LoadingModule';
+import EventTracker from '../../../libs/api/EventTracker';
 
 
 function ProfileUpdateForm({profile={}, onResult}){
@@ -70,6 +71,7 @@ function ProfileUpdateForm({profile={}, onResult}){
     updateProfile = async (userInput, {setSubmitting}) => {
         if(currentUser){
             try {
+                
                 setLoading(true);
                 setSubmitting(true)
                 let update = {}
@@ -110,13 +112,15 @@ function ProfileUpdateForm({profile={}, onResult}){
                 dispatch({
                     type: 'success',
                     message: 'Updated your profile!'
-                })
-            }catch(err){
-                window.logerror('updateProfile: error', err);
+                });
+                EventTracker.trackEvent(EventTracker.events.user.UPDATE_PROFILE);
+            }catch(error){
+                window.logerror('updateProfile: error', error);
                 dispatch({
                     type: 'error',
                     message: 'Uh oh! Something went wrong'
                 })
+                EventTracker.trackEvent(EventTracker.events.user.UPDATE_PROFILE_ERROR, error);
             }finally{
                 setSubmitting(false);
                 setLoading(false);

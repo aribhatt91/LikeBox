@@ -23,6 +23,9 @@
         "RECOMMENDATIONS_CLICK": "recommendations-click"
     },
     "user": {
+        "APPLICATION_START": "application-start",
+        "APPLICATION_COMPLETE": "application-complete",
+        "APPLICATION_ERROR": "application-error",
         "LOGIN_START": "login-start",
         "LOGIN_COMPLETE": "login-complete",
         "LOGIN_ERROR": "login-error",
@@ -31,13 +34,22 @@
         "SIGNUP_ERROR": "signup-error",
         "UPDATE_PROFILE": "update-profile",
         "UPDATE_PROFILE_ERROR": "update-profile-error",
-        "UPDATE_ADDRESS": "update-address",
+        "UPDATE_MEASUREMENTS_SUCCESS": "update-measurements-success",
+        "UPDATE_MEASUREMENTS_ERROR": "update-measurements-error",
+        "UPDATE_ADDRESS_START": "update-address-start",
         "UPDATE_ADDRESS_SUCCESS": "update-address-success",
         "UPDATE_ADDRESS_ERROR": "update-address-error",
         "AUTHENTICATED": "authenticated",
         "AUTHENTICATTION_ERROR": "authentication-error",
-        "UPDATE_STYLE": "update-style",
+        "UPDATE_STYLE": "update-style-success",
+        "UPDATE_STYLE_ERROR": "update-style-error",
         "LOGOUT": "logout"
+    },
+    "auto": {
+        "FETCH_CART": "fetch-cart-error",
+        "FETCH_CART_ERROR": "fetch-cart-error",
+        "AUTHENTICATED": "authenticated",
+        "AUTHENTICATTION_ERROR": "authentication-error"
     },
     "transaction": {
         "FETCH_CART": "fetch-cart-error",
@@ -51,11 +63,12 @@
         "SELECT_DELIVERY_OPTION": "select-delivery-option",
         "CHECKOUT_ERROR": "checkout-error",
         "ORDER_CONFIRM": "order-confirm",
-        "CANCEL_ORDER": "cancel-order",
-        "CANCCEL_ORDER_SUCCESS": "cancel-order-success",
+        "CANCEL_ORDER": "cancel-order-start",
+        "CANCEL_ORDER_SUCCESS": "cancel-order-success",
         "CANCEL_ORDER_ERROR": "cancel-order-error"
     },
     "ui": {
+        "NAVIGATION_PANEL_OPEN": "nav-panel-open",
         "NAVIGATION_ITEM_CLICK": "nav-item-click",
         "HOME_PAGE_SUBSCRIPTION_CTA": "home-page-subscription-cta",
         "HOME_PAGE_TILE_CLICK": "home-page-tile-click",

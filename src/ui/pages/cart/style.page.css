@@ -1,5 +1,5 @@
 .cart-product .container .thumbnail {
-  width: 200px;
+  min-width: 200px;
   height: 200px;
   border: 1px solid #707070;
   background-color: #ececec; }
@@ -12,7 +12,7 @@
   margin-left: 54px; }
   .cart-product .container .desc h4 {
     font-size: 24px;
-    line-height: 36px; }
+    line-height: 1.25; }
 
 .cart-product .container .price-wrapper {
   font-size: 21px;
@@ -42,32 +42,44 @@
 .cart-product:not(:last-child) .container {
   /* border-bottom: 1px solid #ececec; */ }
 
-@media screen and (max-width: 768px) {
-  .cart-product .cart-product .container .desc h4 {
+@media screen and (max-width: 900px) {
+  .cart-product .container .desc {
+    margin-left: 40px; }
+  .cart-product .container .desc h4 {
     font-size: 18px; }
   .cart-product .price-wrapper {
-    font-size: 18px; } }
+    font-size: 18px; }
+  .cart-product .container .thumbnail {
+    min-width: 120px;
+    height: 120px; } }
+
+@media screen and (max-width: 768px) {
+  .cart-product .container .desc {
+    margin-left: 18px; }
+  .cart-product .container .thumbnail {
+    min-width: 96px;
+    height: 96px; } }
 
 .cart-container .cart-body {
   display: flex;
   width: 100%;
   margin: auto; }
-  .cart-container .cart-body .cart-side-panel {
+  .cart-container .cart-body .cart-side-panel > div {
     padding: 24px 16px;
     background-color: #ececec;
     width: 320px; }
-    .cart-container .cart-body .cart-side-panel .align-text-right {
+    .cart-container .cart-body .cart-side-panel > div .align-text-right {
       text-align: right; }
-    .cart-container .cart-body .cart-side-panel h4 {
+    .cart-container .cart-body .cart-side-panel > div h4 {
       line-height: 1.5;
       border-bottom: 1px solid; }
-    .cart-container .cart-body .cart-side-panel h2 {
+    .cart-container .cart-body .cart-side-panel > div h2 {
       font-size: 27px;
       line-height: 36px; }
-    .cart-container .cart-body .cart-side-panel h2, .cart-container .cart-body .cart-side-panel h3 {
+    .cart-container .cart-body .cart-side-panel > div h2, .cart-container .cart-body .cart-side-panel > div h3 {
       color: inherit; }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 900px) {
   .cart-container .cart-body {
     flex-direction: column; }
     .cart-container .cart-body .cart-side-panel {
@@ -75,6 +87,9 @@
       color: #333;
       background-color: #fff;
       border-top: 1px solid #333; }
+      .cart-container .cart-body .cart-side-panel > div {
+        background-color: #fff;
+        width: 100%; }
       .cart-container .cart-body .cart-side-panel h4 {
         display: none; } }
 

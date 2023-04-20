@@ -1,253 +1,139 @@
 const DATA_LAYER_NAME = 'digitalData';
-/* 
-Set only on PDP
-*/
-const PRODUCT_KEY = 'product';
 
-function initDataLayer() {
-    if(!window[DATA_LAYER_NAME]){
-        window[DATA_LAYER_NAME] = {
-            "page": {
-                path: window.location.pathname,
-                server: window.location.hostname
-            },
-            "user": {
-                status: "logged-out"
-            },
-            "product": {},
-            "products": [],
-            "events": []
-        };
-    }
-}
 /* 
-Receives 3 parameters: Object is the 1st level node of the data layer object, eg. page; 
-key is the attribute of the object, eg. page.name
+    @params(base:object, update:object, merge?:boolean)
+    base: base object - required - non-null
+    update: required - not null
+    merge: boolean : optional - if set to false, a shallow override will happen
 */
-function setValue(obj, key, value){
-    initDataLayer();
-    if(!obj || !window[DATA_LAYER_NAME][obj] || !key){
+const deepMerge = (base={}, update, merge=true) => {
+    if(!base || typeof update !== 'object'){
         return;
     }
-    window[DATA_LAYER_NAME][obj][key] = value;
-}
-/* Push to an array */
-function pushValue(key, value){
-    initDataLayer();
-    if(!key || !value){
-        return;
+    /* 
+        A special flag __MERGE__ to combine the best of deep and shallow merge. 
+        If this flag is set to false in a nested object, that object is overriden 
+    */
+    const __MERGE__ = update['__MERGE__'] === false ? false : merge;
+    if(update['__MERGE__'] === false){
+        delete update['__MERGE__'];
     }
-    window[DATA_LAYER_NAME][key] = window[DATA_LAYER_NAME][key] || [];
-    window[DATA_LAYER_NAME][key].push(value);
-}
-function removeKey(obj, key){
     
-    initDataLayer();
-    if(!key){
-        delete window[DATA_LAYER_NAME][obj]
-    }
-    else if(obj && window[DATA_LAYER_NAME][obj]){
-        delete window[DATA_LAYER_NAME][obj][key];
+    for (const [key, value] of Object.entries(update)) {
+        if(!__MERGE__ || !base.hasOwnProperty(key) || typeof base[key] !== 'object' || base[key] === null || base[key] === undefined || Array.isArray(base[key]) || Array.isArray(value) || value === null || typeof value !== 'object' || (value.__proto__.__proto__ !== null) || (base[key].__proto__.__proto__ !== null)) {
+            base[key] = value;
+        }else if(typeof value === 'object' && typeof base[key] === 'object'){
+            deepMerge(base[key], value)
+        }
     }
 }
-const DataLayer = {
-    /* ${DATA_LAYER_NAME}.product */
-    setProduct: function(product) {
-        initDataLayer();
-        if(!product){
-            window.logerror('Product object is not defined');
+class DataLayer {    
+    constructor(name=DATA_LAYER_NAME) {
+        this.name = name;
+        if(!window[this.name]){
+            window[this.name] = window[this.name] || {};
+            window[this.name].events = window[this.name].events || [];
         }
-        window[DATA_LAYER_NAME][PRODUCT_KEY] = product;
-        window[DATA_LAYER_NAME][PRODUCT_KEY]['productEvent'] = {
-            eventType: 'prod-view',
-            productId: product.id
-        }
-    },
-    setProductEvent: function(eventType, product) {
-        initDataLayer();
-        window[DATA_LAYER_NAME][PRODUCT_KEY] = window[DATA_LAYER_NAME][PRODUCT_KEY] || {};
-        window[DATA_LAYER_NAME][PRODUCT_KEY]['productEvent'] = {
-            eventType,
-            productId: product.id
-        }
-    },
-    selectVariant: function(variant) {
-        console.log('selectVariant',variant);
-        if(!variant || !variant.size){
-            return;
-        }
-        initDataLayer();
-        window[DATA_LAYER_NAME][PRODUCT_KEY].size = variant.size || "";
-    },
-    clearProduct: function() {
-        window[DATA_LAYER_NAME][PRODUCT_KEY] = {};
-    },
-    clearProducts: function() {
-        window[DATA_LAYER_NAME]["products"] = [];
-    },
-    addProduct: function(product) {
-        pushValue('products', product);
-    },
-    /* Page */
-    setPage: function(title, section="", search="") {
-        initDataLayer();
-        window[DATA_LAYER_NAME]['page'] = {
-            ...window[DATA_LAYER_NAME]['page'],
-            path: window.location.pathname,
-            server: window.location.hostname,
-            title,
-            url: (window.location.href || "").replace(window.location.search, '').replace('?', '').replace(window.location.hash, ''),
-            language: "en",
-        };
-        if(section){
-            window[DATA_LAYER_NAME]['page']['section'] = section;
-        }
-        if(search){
-            window[DATA_LAYER_NAME]['page']['search'] = search;
-        }
-    },
-    setSearch: function(query, result){
-        initDataLayer();
-        window[DATA_LAYER_NAME]['page']['search'] = {};
+    }
+    /* 
+    Takes a path in dot notation and returns the corresponding value
+    */
+    get (objectPath) {
+        let copy = undefined;
+        if(!objectPath) {
+            copy = Object.assign({}, window[this.name]);
+            delete copy['events'];
+        }else {
+            const nested = objectPath.split('.');
+            let obj = window[this.name];
 
-        if(query){
-            window[DATA_LAYER_NAME]['page']['search'].query = query;
-        }
+            for (let i = 0; i < nested.length; i++) {
+                /* If current value of obj is primitive type or null */
+                if(typeof obj !== 'object' || obj === null) {
+                    //break;
+                    return copy;
+                }
+                
+                if(nested[i].indexOf('[') > -1 && nested[i].indexOf(']') > -1) {
+                    /* Handle arrays */
+                    let array = nested[i].substring(0, nested[i].indexOf('[')),
+                    num = Number((nested[i].substring(nested[i].indexOf('[') + 1, nested[i].indexOf(']'))));
+                    if(Array.isArray(obj[array]) && num) {
+                        obj = obj[array][num];
+                    }else {
+                        return copy;
+                    }
+                }else {
+                    obj = obj[nested[i]];
+                }
+                
+            }
 
-        if(result){
-            window[DATA_LAYER_NAME]['page']['search'].result = result;
+            if(typeof obj !== 'undefined'){
+                if(!Array.isArray(obj) && typeof obj === 'object'){
+                    copy = Object.assign({}, obj);
+                }else {
+                    copy = obj;
+                }   
+            }
+            
+            //delete obj[nested[nested.length - 1]];
         }
+        return copy;
+    }
 
-    },
-    setErrorPage: function() {
-        window[DATA_LAYER_NAME]['page'] = {
-            errorPage: 'errorPage',
-        }
-    },
-    setPageName: function(pageName) {
-        setValue('page', 'name', pageName);
-    },
-    setPageTitle: function() {
-        setValue('page', 'title', document.title);
-    },
-    setPagePath: function() {
-        setValue('page', 'path', window.location.pathname);
-    },
-    setView: function(view) {
-        if(view){
-            setValue('page', 'view', view.toLowerCase());
-        }
-    },
-    setPageSection: function(section) {
-        setValue('page', 'section', section);
-    },
-    setUser: function(user) {
-        window[DATA_LAYER_NAME].user = window[DATA_LAYER_NAME].user || {};
-        if(user && user.uid){
-            window[DATA_LAYER_NAME].user = {id: user.uid, status: 'logged-in'};
-        }
-    },
-    clearUser: function(){
-        delete window[DATA_LAYER_NAME].user;
-    },
-    pushEvent: function(event) {
-        pushValue("events", event);
-    },
-    clearEvents: function() {
-        if(window[DATA_LAYER_NAME]){
-            window[DATA_LAYER_NAME].events = [];
-        }
-    },
-    getState: function() {
-        return window[DATA_LAYER_NAME];
-    },
-    getName: function(){
-        return DATA_LAYER_NAME
-    },
-    getUser: function() {
-        return window[DATA_LAYER_NAME].user || {};
-    },
-    /* Cart */
-    setCart: function({id, count, currency="GBP", total, products=[]}){
-        if(window[DATA_LAYER_NAME]){
-            window[DATA_LAYER_NAME].cart = {id, count, currency, total, products};
-            window[DATA_LAYER_NAME].products = products;
-        }
-    },
-    getCart: function(){
-        let cart = window[DATA_LAYER_NAME].cart || {};
-        return cart;
-    },
-    clearCart: function() {
-        if(window[DATA_LAYER_NAME]){
-            window[DATA_LAYER_NAME].cart = {};
-            window[DATA_LAYER_NAME].products = [];
-        }
-    },
-    /* Transaction */
-    initTransaction: function({id, total, products, currency}) {
-        if(window[DATA_LAYER_NAME] && window[DATA_LAYER_NAME]['cart'] && id && total){
-            window[DATA_LAYER_NAME]['transaction'] = window[DATA_LAYER_NAME]['transaction'] || {
-                'payment': {
-                    'value': total,
-                    currency
-                },
-                'delivery': {},
-                'status': 'in-progress'
-            };
-            window[DATA_LAYER_NAME]['transaction']['order_id'] = id;
-            //window[DATA_LAYER_NAME]['transaction']['items'] = cart.products;
-        }
-    },
-    setPaymentMethod: function(method){
-        if(window[DATA_LAYER_NAME]['transaction'] && method) {
-            window[DATA_LAYER_NAME]['transaction']['payment'] = {
-                ...window[DATA_LAYER_NAME]['transaction']['payment'],
-                method
+    push(arg){
+        let events = [];
+
+        if(Array.isArray(arg)){
+            events = arg;
+        }else {
+            events.push(arg);
+        }  
+
+        window[this.name].events = window[this.name].events || [];
+
+        events.forEach(e => {
+
+            const { event, data, merge=true, update=true } = e;
+            /* unless update flag is set to false, update the data layer */
+            if(update && data) {
+                deepMerge(window[this.name], data, merge);
             }
-        }
-    },
-    setPaymentValue: function(value){
-        if(window[DATA_LAYER_NAME]['transaction'] && value) {
-            window[DATA_LAYER_NAME]['transaction']['payment'] = {
-                ...window[DATA_LAYER_NAME]['transaction']['payment'],
-                value
+            /* unless update flag is set to false, update the data layer */
+            if(event){
+                window[this.name].events.push({event, data});
             }
-        }
-    },
-    setDeliveryOption: function(delivery_option, delivery_charge=0){
-        if(window[DATA_LAYER_NAME]['transaction'] && delivery_option) {
-            window[DATA_LAYER_NAME]['transaction']['delivery'] = {
-                ...window[DATA_LAYER_NAME]['transaction']['delivery'],
-                delivery_option,
-                delivery_charge
-            }
-        }
-        if(window[DATA_LAYER_NAME]['transaction'] && window[DATA_LAYER_NAME]['cart'] && window[DATA_LAYER_NAME]['cart'].total) {
-            window[DATA_LAYER_NAME]['transaction']['payment'] = {
-                ...window[DATA_LAYER_NAME]['transaction']['payment'],
-                value: (window[DATA_LAYER_NAME]['cart'].total + delivery_charge)
-            }
-        }
-    },
-    setDeliveryAddress: function(address){
-        if(window[DATA_LAYER_NAME]['transaction'] && address) {
-            window[DATA_LAYER_NAME]['transaction']['delivery'] = {
-                ...window[DATA_LAYER_NAME]['transaction']['delivery'],
-                address
-            }
-        }
-    },
-    clearTransaction: function (){
-        if(window[DATA_LAYER_NAME]){
-            delete window[DATA_LAYER_NAME]['transaction'];
-            window[DATA_LAYER_NAME].products = [];
-        }
+            
+        });
+    }
+
+    remove(objectPath){
         
-    },
-    get: function() {
-        initDataLayer();
-        return window[DATA_LAYER_NAME];
+        if(objectPath){
+            const nested = objectPath.split('.');
+
+            if(nested.length === 1){
+                delete window[this.name][nested[0]];
+                return;
+            }
+
+            let obj = window[this.name];
+            for (let i = 0; i < nested.length - 1; i++) {
+                if(!obj) {
+                    return;
+                }
+                obj = obj[nested[i]];
+                
+            }
+            delete obj[nested[nested.length - 1]];
+        }
+    }
+
+    clearEvents(){
+        if(window[this.name]){
+            window[this.name].events = [];
+        }
     }
 }
 

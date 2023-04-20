@@ -1,13 +1,31 @@
-import { _debounce } from './Helper';
+import MOCK_DATA from './constants/fake-search-data.json';
 let counter = 0;
-export const fetchSuggestions = (str) => {
-    window.loginfo('Fetching data...', str);
-    return new Promise(res => []);
-}
-export const fetchSearchHistory = (str) => {
 
+class Item {
+    constructor({name, type, product=null, link, thumbnail=""}){
+        this.name = name;
+        this.type = type;
+        if(type === 2 && product){
+            this.product = product;
+            this.thumbnail = thumbnail;
+        }
+    }
 }
-export const saveSeachHistory = (str) => {
 
+export default {
+    fetchSuggestions: (query, limit=100) => {
+        window.loginfo('Fetching data...', query);
+        return new Promise((res, rej) => {
+            const results = [];
+
+        });
+    },
+    fetchSearchHistory: (query) => {
+
+    },
+    updateSearchHistory: (query, response, cacheSize) => {
+
+    },
+    queryCache: (query) => {},
+    invalidateCache: () => {}
 }
-//export const searchSuggestion = _debounce(fetchSuggestions, 300);

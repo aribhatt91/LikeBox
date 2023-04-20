@@ -43,7 +43,7 @@
     top: 48px;
     position: absolute;
     background: #fff; }
-  .app-dropdown.spp-dropdown--open .app-dropdown__label:after {
+  .app-dropdown.app-dropdown--open .app-dropdown__label:after {
     transform: rotate(-90deg); }
-  .app-dropdown.spp-dropdown--open .app-dropdown__items {
+  .app-dropdown.app-dropdown--open .app-dropdown__items {
     display: flex; }

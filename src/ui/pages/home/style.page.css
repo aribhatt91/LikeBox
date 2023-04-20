@@ -32,3 +32,40 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); }
     .app-card:hover *, .app-card:focus * {
       text-decoration: none !important; }
+
+.likeblogs .slick-track {
+  display: flex; }
+
+.reasons .reasons-icon {
+  height: 72px;
+  width: auto;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center; }
+  .reasons .reasons-icon img {
+    max-height: 100%;
+    width: auto; }
+
+.feature {
+  max-width: 850px;
+  margin: auto; }
+  .feature .feature__icon {
+    height: 100px;
+    width: auto; }
+
+.hero__media img, .hero__media video {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  object-fit: cover; }
+
+.hero__media::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.15); }

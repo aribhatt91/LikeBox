@@ -40,7 +40,6 @@ export const addOrder = async (order) => {
             throw new Error('Missing or incorrect information');
         }
         const res = await collection.add(order);
-        window.loginfo('api:firestore:transaction::addOrder', res.data);
         return new Promise( (resolve, reject) => resolve(res.data));
     }catch(error){
         return new Promise( (resolve, reject) => reject(error));
